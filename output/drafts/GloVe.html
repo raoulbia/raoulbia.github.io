@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+    <title>code snippets etc. | GloVe</title>
+    <link rel="shortcut icon" type="image/png" href="../favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="..">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="../archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="..">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Sep 02, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../drafts/GloVe.html" rel="bookmark" title="Permanent Link to &quot;GloVe&quot;">GloVe</a>
+                </h2>
+
+                <h4>Singular Value Decomposition by Gradient Descent</h4>
+<p>As an alternative to a full fledged SVD compuation, the matrices <span class="math">\(U\)</span> and <span class="math">\(V\)</span> can be found using Stochastic Gradient Descent (SGD). This is in many cases preferred because:</p>
+<ul>
+<li>SVD is slow. </li>
+<li>SVD requires care dealing with missing data (<a href="https://www.coursera.org/learn/matrix-factorization/lecture/kVjSo/gradient-descent-techniques">source</a>).</li>
+<li>Gradient Descent is much faster and can deal (i.e. ignores) with missing data.</li>
+<li>In general, Gradient descent is a way to minimize an objective function <span class="math">\(J(\Theta)\)</span>. <a href="http://cs231n.github.io/optimization-1/">Click here to learn more about SGD</a>.</li>
+</ul>
+<p>The key idea behind this approach is to find the best k-rank approximation of the original matrix by searching for the matrices with the least error.</p>
+<ul>
+<li>Look at the squared error of individual predictions i.e. the predictions' contribution to the sum of squared errors (SSE).</li>
+</ul>
+<p><strong>Simplified SVD</strong></p>
+<ul>
+<li>
+<p>Decomposition: <div class="math">$$R = B + PQ^T$$</div>
+</p>
+</li>
+<li>
+<p>Scoring Rule: <div class="math">$$ s(u, i) = b_{ui} + \sum_{f}{p_{uf}q_{if}} $$</div>
+</p>
+</li>
+<li>
+<p>Caveat: This is no longer a true SVD (<span class="math">\(P\)</span> and <span class="math">\(Q\)</span> are not orthogonal)</p>
+</li>
+</ul>
+<p><br></p>
+<p><strong>FunkSVD</strong> (an alternative approach to SGD)</p>
+<ul>
+<li>Train features one at a time</li>
+<li>Train first feature until convergence</li>
+<li>Then train the next</li>
+<li>Ignore missing values (mostly)</li>
+<li>Learn offset from personalized mean</li>
+</ul>
+<p><br></p>
+<p><strong>Update Step</strong></p>
+<div class="math">$$\epsilon_{ui} = r_{ui} - s(u,i)$$</div>
+<div class="math">$$\Delta q_{if} = \lambda(\epsilon_{ui}p_{uf} - \gamma q_{if})$$</div>
+<div class="math">$$\Delta p_{uf} = \lambda(\epsilon_{ui}q_{if} - \gamma p_{uf})$$</div>
+<p>where <span class="math">\(\lambda\)</span> is the learning rate and <span class="math">\(\gamma\)</span> is the regularization (biases against extreme value)</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../drafts/GloVe.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/glove.html" rel="tag">GloVe</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

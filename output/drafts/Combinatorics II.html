@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+    <title>code snippets etc. | Combinatorics II</title>
+    <link rel="shortcut icon" type="image/png" href="../favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="..">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="../archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="..">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Oct 03, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../drafts/Combinatorics II.html" rel="bookmark" title="Permanent Link to &quot;Combinatorics II&quot;">Combinatorics II</a>
+                </h2>
+
+                <p><br></p>
+<p>Notes taken from Lecture 4 from the MIT video series <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/video-lectures/">Probabilistic Systems Analysis and Applied Probability</a></p>
+<hr>
+<h4>6 Independent Coin Tosses</h4>
+<ul>
+<li>Probability of a particular sequence:</li>
+</ul>
+<div class="math">$$P(seq) = P^{\# \ Heads} \cdot {(1-P)}^{\# \ Tails}$$</div>
+<div class="math">$$P(HTTHHH) = P \cdot (1-P) \cdot (1-P) \cdot P \cdot P \cdot P \\ 
+              = P^4 \cdot {(1-P)}^2$$</div>
+<ul>
+<li>Probability of a sequence with k Heads</li>
+</ul>
+<blockquote>
+<blockquote>
+<p>is the sum of individual probabilities that given event can occur</p>
+</blockquote>
+</blockquote>
+<div class="math">$$P(k{-}Heads) = \sum_{k-Head \ seqs} P(seq.)$$</div>
+<blockquote>
+<blockquote>
+<p>So we just need to figure out how many k-Head sequences there are, then multiply by <span class="math">\(P^k  \cdot {(1-P)}^{Pn-k}\)</span>.</p>
+<p>So, how many outcomes are there in which we have exactly k Heads?</p>
+<p># k-Head seqs. = # k-element subsets of set {1, ..., n} = <span class="math">\(\binom{n}{k}\)</span></p>
+<p><span class="math">\(\Rightarrow P(k{-}Heads) = \binom{n}{k} \ P^k \ {(1-P)}^{n-k}\)</span></p>
+<p>this also referred to as <em>Binomial Probablitites</em>.</p>
+<p>Note that <span class="math">\(\sum^n_{k=0} \binom{n}{k} \ P^k \ {(1-P)}^{n-k} = 1\)</span> as we sum all P's for  for zero heads, 
+  one head, ..., n heads.</p>
+</blockquote>
+</blockquote>
+<h4>Flip Coin 10 Times</h4>
+<p>Event B: 3 out of 10 were Heads</p>
+<p>Event A: given that B occurred, what is the <strong>conditional probablity</strong> that the first 2 tossed were Heads?</p>
+<p><img alt="" src="img/conditional_proba.png"></p>
+<ul>
+<li>Inside Event B all outcomes are equally likely e.g. <span class="math">\(P^3 \ {(1-P)}^7\)</span></li>
+<li>The outcomes are the sequences that have exactly 3 Heads</li>
+<li># outcomes in B = # of 3-Head seqs. when you toss 10 times = <span class="math">\(\binom{10}{3}\)</span></li>
+</ul>
+<p>Given that B occurred, how many elements are there in A?</p>
+<blockquote>
+<blockquote>
+<p><span class="math">\(\Rightarrow\)</span> out of the outcomes with 3 Heads (event B), how many start with HH (event A)?</p>
+<p><span class="math">\(\Rightarrow\)</span> if slot 1 and slot 2 is Heads, then there are 8 possibilities for the third Head</p>
+<p>Recall that, in general, P = # of possible events divided by overall sample space i.e. <span class="math">\(\frac{|A|}{|\Omega|}\)</span></p>
+<p><span class="math">\(\Rightarrow \frac{|A \cap B|}{|B|} = \frac{8}{\binom{10}{3}}\)</span></p>
+</blockquote>
+</blockquote>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../drafts/Combinatorics II.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/combinatorics-ii.html" rel="tag">Combinatorics II</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>code snippets etc. | articles in the "PyPi" category</title>
+    <link rel="shortcut icon" type="image/png" href="../favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+
+                <li class="ephemeral selected"><a href="../category/pypi.html">PyPi</a></li>
+                <li><a href="..">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="../archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="..">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Jan 01, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../pypi.html" rel="bookmark" title="Permanent Link to &quot;PyPi&quot;">PyPi</a>
+                </h2>
+
+                <h4>Pre-requisites</h4>
+<ul>
+<li>
+<p><code>pip install -U twine</code></p>
+</li>
+<li>
+<p>in <code>~.pypirc</code> add <code>chmod 600 ~/.pypirc</code></p>
+</li>
+</ul>
+<h4>Deploy on PyPi</h4>
+<hr>
+<p><strong>Note</strong></p>
+<ul>
+<li>Make sure to update version information before deploying. 
+Files to update: <code>__init__.py</code> and <code>setup.py</code>.</li>
+<li>After deploying, don't forget to re-build the documentation at <a href="https://readthedocs.org/projects/shizen-gengo/builds">ReadTheDocs</a>.</li>
+</ul>
+<hr>
+<div class="highlight"><pre><span></span><code><span class="err">rm -rf build dist &amp;&amp; python setup.py sdist</span>
+<span class="err">ls dist/*</span>
+<span class="err">#python setup.py check -r -s (obolete)</span>
+<span class="err">python -m twine check dist/*</span>
+<span class="err">python -m  twine upload dist/*</span>
+</code></pre></div>
+
+
+<h4>Misc.</h4>
+<ul>
+<li><a href="https://help.github.com/en/github/creating-cloning-and-archiving-repositories/licensing-a-repository">Licensing a repository
+</a></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../pypi.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/pypi.html" rel="tag">PyPi</a>
+                </div>
+            </article>
+
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

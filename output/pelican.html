@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+    <title>code snippets etc. | Pelican How To</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href=".">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="./archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href=".">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Mar 01, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./pelican.html" rel="bookmark" title="Permanent Link to &quot;Pelican How To&quot;">Pelican How To</a>
+                </h2>
+
+                <p><a href="https://blog.getpelican.com/">Pelican</a> is a static site generator, written in Python, that requires no database or server-side logic.</p>
+<h3>Environment Setup</h3>
+<ol>
+<li>
+<p>Create a public repository on github e.g. username.github.io</p>
+</li>
+<li>
+<p>Create a project directory for your blog and save the <code>requirements.txt</code> file in that directory. See the links in the
+   Resources section below for examples of what the file should contain.</p>
+</li>
+<li>
+<p>Setup a virtual environment</p>
+<div class="highlight"><pre><span></span><code><span class="err">conda create --name myblog python=3.5</span>
+<span class="err">source activate myblog</span>
+<span class="err">pip install -r requirements.txt</span>
+<span class="err">pelican-quickstart</span>
+<span class="err">git clone https://github.com/getpelican/pelican-plugins.git</span>
+</code></pre></div>
+
+
+</li>
+<li>
+<p>Connect to repo</p>
+<div class="highlight"><pre><span></span><code><span class="err">git remote add origin git@github.com:raoulbia/raoulbia.github.io.git</span>
+</code></pre></div>
+
+
+<p>To test run <code>git remote -v</code>. You should see your repo listed.</p>
+</li>
+<li>
+<p>Create a new branch for hosting the pelican source code.</p>
+<div class="highlight"><pre><span></span><code><span class="err">git checkout -b pelican</span>
+</code></pre></div>
+
+
+</li>
+<li>
+<p>Install IPython notebook</p>
+<div class="highlight"><pre><span></span><code><span class="err">mkdir plugins &amp;&amp; cd plugins</span>
+<span class="err">git submodule add git://github.com/danielfrg/pelican-ipynb.git ipynb</span>
+<span class="err">git submodule add https://github.com/barrysteyn/pelican_plugin-render_math.git render_math</span>
+</code></pre></div>
+
+
+</li>
+<li>
+<p>In order to activate the plugin, add these lines at the bottom of <code>pelicanconf.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="err">MARKUP = (&#39;md&#39;, &#39;ipynb&#39;)</span>
+<span class="err">PLUGIN_PATH = &#39;./plugins&#39;</span>
+<span class="err">PLUGINS = [&#39;ipynb.markup&#39;, &#39;render_math&#39;]</span>
+</code></pre></div>
+
+
+</li>
+<li>
+<p>Fetch <code>`.gitignore</code> from <a href="https://github.com/getpelican/pelican-blog/blob/master/.gitignore">here</a> - save it to root</p>
+</li>
+</ol>
+<h3>Pelican Themes</h3>
+<p>The installation of themes proved to be rather tricky. It is possible to add all existing Pelican themes to your
+development repository. However in my experience they are not straightforward to install or don't work. I may have done
+something wrong when trying to do so but in the end I settled for the <a href="https://github.com/jody-frankowski/blue-penguin">blue-penguin</a>
+theme. It should be noted that the default Pelican theme may suffice to some users in which case this section can be
+skipped.</p>
+<p>To add all existing Pelican themes to your development repository</p>
+<div class="highlight"><pre><span></span><code><span class="err">git clone --recursive https://github.com/getpelican/pelican-themes ./pelican-themes</span>
+</code></pre></div>
+
+
+<p>To install one of the downloaded themes</p>
+<div class="highlight"><pre><span></span><code><span class="err">pelican-themes --install ./pelican-themes/name-of-theme --verbose</span>
+</code></pre></div>
+
+
+<p>Alternatively you can just get the one theme you want to use</p>
+<div class="highlight"><pre><span></span><code><span class="err">git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes</span>
+</code></pre></div>
+
+
+<h4>Config Files</h4>
+<p>Now to the part that took me a while to figure out: 
+the theme of choice must be specified in <strong>both</strong> <code>publishconf.py</code> and <code>pelicanconf.py</code>!</p>
+<ul>
+<li>
+<p>in <code>publishconf.py</code> add the following line: <code>THEME = "blue-penguin"</code></p>
+</li>
+<li>
+<p>in <code>pelicanconf.py</code> add the following line: <code>THEME = "./pelican-themes/blue-penguin"</code></p>
+</li>
+</ul>
+<h3>Local Testing</h3>
+<p>Note: First, activate your virtual environment e.g. <code>$ source activate venv-name</code></p>
+<ol>
+<li>
+<p>start Localhost : <code>make devserver</code></p>
+</li>
+<li>
+<p>add/remove/modify page(s)</p>
+</li>
+<li>
+<p>preview <code>localhost:8000/</code> in your browser</p>
+<p>To stop localhost type <code>Ctrl + c</code> then run below command twice</p>
+<div class="highlight"><pre><span></span><code><span class="err">kill -9 $(lsof -i TCP:8000 | grep LISTEN | awk &#39;{print $2}&#39;)</span>
+</code></pre></div>
+
+
+</li>
+</ol>
+<h3>Deploy to Github</h3>
+<p>Note: First, activate your virtual environment e.g. <code>$ source activate venv-name</code></p>
+<p>There are two sides to Pelican publishing on Github: publishing the blog pages (master branch) and pushing the
+project source code (pelican branch). To publish either run the code below.</p>
+<div class="alert alert-primary" role="alert">
+  IMPORTANT RUN THIS FROM THE PELICAN BRANCH!
+</div>
+
+<h4>Publish Blog pages</h4>
+<div class="highlight"><pre><span></span><code><span class="n">pelican</span> <span class="n">content</span> <span class="o">-</span><span class="n">o</span> <span class="n">output</span> <span class="o">-</span><span class="n">s</span> <span class="n">pelicanconf</span><span class="o">.</span><span class="n">py</span> <span class="o">&amp;&amp;</span>
+<span class="n">ghp</span><span class="o">-</span><span class="kn">import</span> <span class="nn">output</span> <span class="o">-</span><span class="n">r</span> <span class="n">origin</span> <span class="o">-</span><span class="n">b</span> <span class="n">master</span> <span class="o">&amp;&amp;</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>
+</code></pre></div>
+
+
+<h4>Push Source Code</h4>
+<div class="highlight"><pre><span></span><code><span class="err">git add -A &amp;&amp;</span>
+<span class="err">git commit -a -m &quot;Update&quot; &amp;&amp;</span>
+<span class="err">git push -u origin pelican</span>
+</code></pre></div>
+
+
+<h3>Finally ...</h3>
+<p>Try visiting your page e.g. <a href="http://raoulbia.github.io">http://raoulbia.github.io</a> -- you should see your blog!</p>
+<h4>Useful Links</h4>
+<ul>
+<li><a href="http://anotherdatum.com/pelican-and-github-pages-workflow.html">http://anotherdatum.com/pelican-and-github-pages-workflow.html</a> (Excellent!)</li>
+<li><a href="http://www.christianlong.com/blog/more-on-pelican-themes.html">http://www.christianlong.com/blog/more-on-pelican-themes.html</a></li>
+<li><a href="https://rasor.github.io/using-pelican-blog-on-github-pages.html">https://rasor.github.io/using-pelican-blog-on-github-pages.html</a></li>
+<li><a href="http://jamesnewbrain.com/how-to-host-pelican-github-vps-blog.html#ii-use-pelicans-simple-dev-server-to-preview-posts-in-browser-as-you-edit">http://jamesnewbrain.com/how-to-host-pelican-github-vps-blog.html#ii-use-pelicans-simple-dev-server-to-preview-posts-in-browser-as-you-edit</a></li>
+<li><a href="http://docs.getpelican.com/en/3.3.0/getting_started.html">http://docs.getpelican.com/en/3.3.0/getting_started.html</a></li>
+<li><a href="http://docs.getpelican.com/en/3.6.3/content.html#syntax-highlighting">http://docs.getpelican.com/en/3.6.3/content.html#syntax-highlighting</a></li>
+<li><a href="http://jamesgregson.ca/using-the-pelican-static-website-generator.html">http://jamesgregson.ca/using-the-pelican-static-website-generator.html</a> (change CSS)</li>
+</ul>
+<h4>Change Blog CSS</h4>
+<p><code>C:\Users\USER\vmtest\myblog\pelican-themes\blue-penguin\static\css</code></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./pelican.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

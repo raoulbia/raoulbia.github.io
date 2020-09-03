@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+    <title>code snippets etc. | R</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href=".">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="./archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href=".">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Feb 20, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./R.html" rel="bookmark" title="Permanent Link to &quot;R&quot;">R</a>
+                </h2>
+
+                <h4>Useful R snippets</h4>
+<div class="highlight"><pre><span></span><code><span class="err">library(rstudioapi)</span>
+<span class="err">setwd(dirname(rstudioapi::getActiveDocumentContext()$path))</span>
+<span class="err">rm(list=ls())</span>
+</code></pre></div>
+
+
+<h4>Making Objects available to RMarkdown</h4>
+<ul>
+<li>
+<p>in R script</p>
+<ul>
+<li><code>save(all = TRUE, file= "all.rda")</code></li>
+<li><code>save(object1.name, object2.name, file= "all.rda")</code>
+```</li>
+</ul>
+</li>
+<li>
+<p>in RMD file</p>
+<p><code>load("all.rda")</code></p>
+</li>
+</ul>
+<h4>Benchmarking</h4>
+<div class="highlight"><pre><span></span><code><span class="n">libray</span><span class="p">(</span><span class="n">microbenchmark</span><span class="p">)</span>
+<span class="n">microbenchmark</span><span class="p">(</span>
+  <span class="n">bad_cpp</span> <span class="o">=</span> <span class="n">bad_select_positive_values_cpp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+  <span class="n">good_cpp</span> <span class="o">=</span> <span class="n">good_select_positive_values_cpp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+  <span class="n">times</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">library</span><span class="p">(</span><span class="n">rbenchmark</span><span class="p">)</span>
+<span class="n">benchmark</span><span class="p">(</span>
+  <span class="n">bad_select_positive_values_cpp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+  <span class="n">good_select_positive_values_cpp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+  <span class="k">order</span> <span class="o">=</span> <span class="ss">&quot;relative&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+<h4>Profiling</h4>
+<div class="highlight"><pre><span></span><code><span class="err">Rprof(&quot;profile1.out&quot; ) #send profiling to profile1.out</span>
+<span class="err"># &lt;call function here&gt;</span>
+<span class="err">Rprof(NULL)</span>
+<span class="err">summaryRprof(&quot;profile1.out&quot;)</span>
+</code></pre></div>
+
+
+<h4>Sliding Window</h4>
+<p>How sliding window works:</p>
+<ul>
+<li>select subset of x of size 3 using its indices</li>
+<li>1st iter: x[3 - 3 + 1, 3] gives x[1, 3]</li>
+<li>2nd iter: x[4 - 3 + 1, 4] gives x[2, 4]</li>
+<li>...</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">window</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span>
+<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="k">window</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">))</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="n">x_subset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="o">[</span><span class="n">seq(i - window + 1, i)</span><span class="o">]</span><span class="w"></span>
+<span class="n">res</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">x_subset</span><span class="p">)</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</code></pre></div>
+
+
+<h4>R: Useful Links</h4>
+<ul>
+<li><a href="https://www.youtube.com/user/marinstatlectures/playlists">MarinStatsLectures</a></li>
+<li><a href="https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Notebooks-with-R-Markdown">Notebooks with R Markdown</a></li>
+<li><a href="https://towardsdatascience.com/data-cleaning-with-r-and-the-tidyverse-detecting-missing-values-ea23c519bc62">Data Cleaning with R and the Tidyverse: Detecting Missing Values</a></li>
+<li><a href="https://medium.com/x8-the-ai-community/play-with-your-ml-dataset-cheatsheet-in-r-bd8451ec6dd7">Play With Your ML Dataset - Cheatsheet in R</a></li>
+<li><a href="https://towardsdatascience.com/coding-in-r-pivot-painlessly-32e40a0b6c3d">Coding in R: Pivot Painlessly</a></li>
+<li><a href="https://towardsdatascience.com/simple-fast-exploratory-data-analysis-in-r-with-dataexplorer-package-e055348d9619">Simple Fast Exploratory Data Analysis in R with DataExplorer Package</a></li>
+<li><a href="https://community.rstudio.com/t/wrap-column-name-in-pdf-table-from-knitr-kable/3278">Wrap column name in pdf table, from knitr::kable</a></li>
+<li><a href="https://medium.com/analytics-vidhya/a-guide-to-machine-learning-in-r-for-beginners-part-5-4c00f2366b90">A Guide to Machine Learning in R for Beginners: Logistic Regression</a></li>
+<li><a href="https://towardsdatascience.com/tired-of-nested-ifelse-in-dplyr-look-no-further-ebf7166b5289">Clean Up Your R Code! A Secret to Better Feature Engineering</a></li>
+<li><a href="https://medium.com/analytics-vidhya/group-manipulation-in-r-3-5554a0c1b544">Group Manipulation In R</a></li>
+<li><a href="https://medium.com/@moorissa/the-best-resources-for-r-programming-37dbc94e0de6">The Best Resources for R Programming</a></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./R.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/r.html" rel="tag">R</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

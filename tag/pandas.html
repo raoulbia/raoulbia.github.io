@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code repo | articles tagged "pandas"</title>
+    <link rel="shortcut icon" type="image/png" href="../favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="raoulbia" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li class="ephemeral selected"><a href="../tag/pandas.html">pandas</a></li>
+                <li><a href="../">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="https://stackoverflow.com/users/425727/raoulbia">StackOverflow</a></li>
+                <li><a href="../tags">Tags</a></li>
+                <li><a href="../categories">Categories</a></li>
+                <li><a href="../archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="../">code repo</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Dec 03, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../python, pandas.html" rel="bookmark" title="Permanent Link to &quot;pandas: Python Data Analysis Library&quot;">pandas: Python Data Analysis Library</a>
+                </h2>
+
+                
+                
+
+                <p><a href="http://chrisalbon.com/python/pandas_indexing_selecting.html">Indexing and Selecting Data With Pandas</a></p>
+<h5>Selecting Data</h5>
+<ul>
+<li>
+<p>select DF subset</p>
+<div class="highlight"><pre><span></span>self.df_co_occurrences[
+    (self.df_co_occurrences.ent_a == &#39;4040&#39;)
+    (self.df_co_occurrences.ent_b == &#39;5267&#39;)]
+</pre></div>
+
+
+</li>
+<li>
+<p>get two columns for a specific row</p>
+<div class="highlight"><pre><span></span>embeddings_df.ix[[input_entity_uri]][[&#39;transformed_x&#39;, &#39;transformed_y&#39;]]
+</pre></div>
+
+
+</li>
+<li>
+<p>find rows by column index and with condition</p>
+<div class="highlight"><pre><span></span>assign_clusters_df[assign_clusters_df[1]==2]
+</pre></div>
+
+
+</li>
+<li>
+<p>mapping an index column using values from another df</p>
+<div class="highlight"><pre><span></span>embeddings_df.index = embeddings_node_dict_df.uri
+</pre></div>
+
+
+</li>
+<li>
+<p>refer to a specific row in 1-dimensional DF</p>
+<div class="highlight"><pre><span></span>df[0][index]
+</pre></div>
+
+
+</li>
+<li>
+<p>refer to a specific row in 2-dimensional DF</p>
+<div class="highlight"><pre><span></span>df[0][0][index]
+</pre></div>
+
+
+</li>
+<li>
+<p><code>.iloc</code> vs. <code>.ix</code></p>
+<p>iloc:</p>
+<div class="highlight"><pre><span></span>if embeddings_df.iloc[row_id].name == input_entity_uri
+</pre></div>
+
+
+<p>ix:</p>
+<div class="highlight"><pre><span></span>neigh.kneighbors(embeddings_df.ix[[input_entity_uri]]
+</pre></div>
+
+
+</li>
+<li>
+<p>select using <code>.loc</code> and <code>.iloc</code></p>
+<p>def get_pmi(ent_ab, df, count_ab, ent_a_count, ent_b_count):
+    count_ab = df.loc[df['ent_ab'] == ent_ab, 'count_ab'].iloc[0]
+    ent_a_count = df.loc[df['ent_ab'] == ent_ab, 'ent_a_count'].iloc[0]
+    ent_b_count = df.loc[df['ent_ab'] == ent_ab, 'ent_b_count'].iloc[0]
+    return count_ab / (ent_a_count * ent_b_count)</p>
+</li>
+<li>
+<p>concatenate rows from multiple files into one DF</p>
+<div class="highlight"><pre><span></span>def read(input_eval_dp):
+    files = os.listdir(input_eval_dp)
+
+    # add all scores from the various files to one DF
+    eval_df = pd.DataFrame()
+    for file in files:
+        print(files)
+        fp = os.path.join(input_eval_dp, file)
+        print(fp)
+
+        tmp_df = get_eval(fp)
+        eval_df = pd.concat([eval_df, tmp_df])
+        # print(eval_df.shape)
+    # print(eval_df.head())
+    return eval_df
+</pre></div>
+
+
+</li>
+</ul>
+<h5>File Handling</h5>
+<ul>
+<li>write to file<div class="highlight"><pre><span></span>neighbors_df.to_csv(path_or_buf=&quot;./neighbors.csv&quot;, sep=&#39;,&#39;)
+</pre></div>
+
+
+</li>
+</ul>
+<h5>Pandas to List</h5>
+<ul>
+<li>
+<p>convert dataframe column to list</p>
+<div class="highlight"><pre><span></span>entity_list = entity_list_df[&#39;uri&#39;].tolist()
+</pre></div>
+
+
+</li>
+<li>
+<p>create one big list of ID's from two DF columns that contain IDs</p>
+<div class="highlight"><pre><span></span>triples = pandas.read_csv(f, sep=&#39;\t&#39;).ix[:, [0, 2]].as_matrix()
+phosphonetowrk_IDs = set(triples.flatten())
+</pre></div>
+
+
+</li>
+</ul>
+<h5>Console Output</h5>
+<ul>
+<li>
+<p>print a n-dimensional array e.g. [[...],[...]]</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pprint</span>
+<span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Transpose index and columns</p>
+<p>assign_clusters_df = pd.DataFrame([embeddings_bio_df.index, db.labels_]).T</p>
+</li>
+</ul>
+<h5>Drop / Remove Data</h5>
+<ul>
+<li>
+<p>remove elements from a lookup list</p>
+<div class="highlight"><pre><span></span>df = df[~df.uri.isin(list_cluster_entities)]
+</pre></div>
+
+
+</li>
+<li>
+<p>drop any NaN in any column</p>
+<div class="highlight"><pre><span></span>embeddings_bio_df = embeddings_df[~embeddings_df.isin([&#39;NaN&#39;]).any(axis=1)]
+</pre></div>
+
+
+</li>
+<li>
+<p>drop a spcific column</p>
+<div class="highlight"><pre><span></span>neighbors_df = neighbors_df.drop(&#39;uri.1&#39;, 1)
+</pre></div>
+
+
+</li>
+<li>
+<p>Add col with new value based on values in three other cols:</p>
+<div class="highlight"><pre><span></span>df_ab[&#39;pmi&#39;] = df_ab.ent_ab.apply(get_pmi, args=(df_ab, &#39;count_ab&#39;, &#39;ent_a_count&#39;, &#39;ent_b_count&#39;, ))
+</pre></div>
+
+
+</li>
+</ul>
+<h5>Insert Data</h5>
+<ul>
+<li>
+<p>add row by row to df using counter of enumerator</p>
+<p>df.loc[str(counter)] = [other_df.iloc[row_id].name,
+                                    str(round(res[0][0][index], 3))]</p>
+</li>
+</ul>
+<h4>DF to Triples</h4>
+<ul>
+<li>
+<p>reshape rcsi data to triples in the form <code>(coder,item,label)</code></p>
+<p>Input:</p>
+<div class="highlight"><pre><span></span>Unit    obs1    obs2    obs3    obs4    obs5
+1       1       1       2       .       2
+2       1       1       0       1       .
+3       2       3       3       3       .
+4       .       0       0       .       0
+5       0       0       0       .       0
+6       0       0       0       .       0
+7       1       0       2       .       1
+</pre></div>
+
+
+<p>Code:</p>
+<div class="highlight"><pre><span></span>df = pd.DataFrame()
+for index, row in other_df.iterrows():
+    df = df.append({&#39;coder&#39;: &#39;obs_1&#39;, &#39;item&#39;: index, &#39;label&#39;: row[&#39;obs1&#39;]}, ignore_index=True)
+    df = df.append({&#39;coder&#39;: &#39;obs_2&#39;, &#39;item&#39;: index, &#39;label&#39;: row[&#39;obs2&#39;]}, ignore_index=True)
+    df = df.append({&#39;coder&#39;: &#39;obs_3&#39;, &#39;item&#39;: index, &#39;label&#39;: row[&#39;obs3&#39;]}, ignore_index=True)
+    df = df.append({&#39;coder&#39;: &#39;obs_4&#39;, &#39;item&#39;: index, &#39;label&#39;: row[&#39;obs4&#39;]}, ignore_index=True)
+    df = df.append({&#39;coder&#39;: &#39;obs_5&#39;, &#39;item&#39;: index, &#39;label&#39;: row[&#39;obs5&#39;]}, ignore_index=True)
+print(df)
+</pre></div>
+
+
+</li>
+</ul>
+<h5>Pandas to Matrix</h5>
+<ul>
+<li>transforming columns into a matrix for <a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html">scikit learn cohen coefficient</a><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">cohen_kappa_score</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">input_eval_dp</span><span class="p">)</span>
+<span class="k">for</span> <span class="nb">file</span><span class="p">,</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="kp">product</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">type_label_list</span><span class="p">):</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_eval_dp</span><span class="p">,</span> <span class="nb">file</span><span class="p">)</span>
+    <span class="n">eval_df</span> <span class="o">=</span> <span class="n">get_eval</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+    <span class="n">eval_typed_df</span> <span class="o">=</span> <span class="n">eval_df</span><span class="p">[</span><span class="n">eval_df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="nb">type</span><span class="p">]</span>
+
+    <span class="c1"># remove any rows where at least one NA is found</span>
+    <span class="n">eval_typed_df</span> <span class="o">=</span> <span class="n">eval_typed_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;judge_1&#39;</span><span class="p">,</span> <span class="s1">&#39;judge_2&#39;</span><span class="p">])</span>
+
+    <span class="c1"># transform the three columns with scores into a 15 x 3 matrix</span>
+    <span class="n">rankings</span> <span class="o">=</span> <span class="n">eval_typed_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="kp">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">as_matrix</span><span class="p">()</span>
+
+    <span class="n">judge_A_matrix</span> <span class="o">=</span> <span class="n">rankings</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">judge_B_matrix</span> <span class="o">=</span> <span class="n">rankings</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Kappa Cohen 2 annotators</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&#39;{}&#39;</span><span class="se">\t</span><span class="s2">inter annotator agreement between judge A and judge B&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">))</span>
+    <span class="n">cohen_kappa</span><span class="p">(</span><span class="n">judge_A_matrix</span><span class="p">,</span> <span class="n">judge_B_matrix</span><span class="p">)</span>
+</pre></div>
+
+
+</li>
+</ul>
+<h4>pandas.DataFrame.apply (<a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.apply.html">read more</a>)</h4>
+<ul>
+<li>
+<p>pass DF to Apply function pandas as argument (<a href="https://stackoverflow.com/questions/45492306/pass-dataframe-to-apply-function-pandas-as-argument">SO post</a>)</p>
+<p>df_a</p>
+<div class="highlight"><pre><span></span>   ent_a  count
+0   5197    1.0
+1  12766    2.0
+2   3091    2.0
+3   3162    1.0
+4   1956   13.0
+</pre></div>
+
+
+<p>df_ab</p>
+<div class="highlight"><pre><span></span>       ent_ab  count_ab
+0   5197-56744       1.0
+1   12766-5197       1.0
+2  12766-56744       1.0
+3    3091-3162       1.0
+4   3091-54583       1.0
+</pre></div>
+
+
+<p>Add column:</p>
+<div class="highlight"><pre><span></span>df_ab[&#39;ent_a&#39;] = df_ab.ent_ab.apply(lambda x: x.split(&#39;-&#39;)[0])
+</pre></div>
+
+
+<p>df_ab:</p>
+<div class="highlight"><pre><span></span>        ent_ab  count_ab  ent_a
+0   5197-56744       1.0   5197
+1   12766-5197       1.0  12766
+2  12766-56744       1.0  12766
+3    3091-3162       1.0   3091
+4   3091-54583       1.0   3091
+</pre></div>
+
+
+<p>Add column from df_a to df_ab:</p>
+<div class="highlight"><pre><span></span>df_ab[&#39;ent_a_count&#39;] = df_ab.ent_a.apply(get_ent, args=(df_a, &#39;ent_a&#39;, ))
+</pre></div>
+
+
+<p>Apply function:</p>
+<div class="highlight"><pre><span></span>def get_ent(ent_df_a, df_a, colname_df_ab):
+    row_df_a = df_a[df_a[colname_df_ab] == ent_df_a]
+    i = row_df_a.iloc[0][&#39;count&#39;]
+    return i
+</pre></div>
+
+
+<p>df_ab</p>
+<div class="highlight"><pre><span></span>        ent_ab  count_ab  ent_a  ent_b  ent_a_count
+0   5197-56744       1.0   5197  56744          1.0
+1   12766-5197       1.0  12766   5197          2.0
+2  12766-56744       1.0  12766  56744          2.0
+3    3091-3162       1.0   3091   3162          2.0
+4   3091-54583       1.0   3091  54583          2.0
+</pre></div>
+
+
+</li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../python, pandas.html">posted at 10:20</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/python.html" rel="tag">Python</a>
+                    &nbsp;&middot;
+                    &nbsp;<a href="../tag/pandas.html" class="tags selected">pandas</a>
+                </div>
+		<a href="../python, pandas.html#disqus_thread">Click to read and post comments</a>
+            </article>
+
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

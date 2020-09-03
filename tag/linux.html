@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code repo | articles tagged "linux"</title>
+    <link rel="shortcut icon" type="image/png" href="../favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="raoulbia" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li class="ephemeral selected"><a href="../tag/linux.html">linux</a></li>
+                <li><a href="../">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="https://stackoverflow.com/users/425727/raoulbia">StackOverflow</a></li>
+                <li><a href="../tags">Tags</a></li>
+                <li><a href="../categories">Categories</a></li>
+                <li><a href="../archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="../">code repo</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Dec 03, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../linux.html" rel="bookmark" title="Permanent Link to &quot;Linux&quot;">Linux</a>
+                </h2>
+
+                
+                
+
+                <p>On this page I keep snippets of code I have found useful when working in a Linux environment.
+Areas covered:</p>
+<ul>
+<li>File Handling</li>
+<li>File System and Environment</li>
+<li>Software</li>
+<li>Misc.</li>
+</ul>
+<h4>File Handling</h4>
+<ul>
+<li>
+<p>To unzip a compressed file: <code>$ tar -zxvf archive_name.tar.gz</code></p>
+</li>
+<li>
+<p>To print out duplicate lines from file: <code>$ uniq -d file.txt</code></p>
+</li>
+<li>
+<p>To search for file</p>
+<ul>
+<li>
+<p>to search for a file named e.g. <code>rdflib</code>, start at root dir: <code>$ sudo find ~/ -name rdflib</code></p>
+</li>
+<li>
+<p>to search for a file with extension <code>.cls</code>:</p>
+<div class="highlight"><pre><span></span>$ sudo su
+$ find / -name <span class="s2">&quot;*.cls&quot;</span>
+</pre></div>
+
+
+</li>
+</ul>
+</li>
+<li>
+<p>To remove file: <code>$ rm fileNme</code></p>
+</li>
+<li>
+<p>To remove directory: <code>$ rm -r dirName</code></p>
+</li>
+<li>
+<p>To check nature of file: <code>$ file -b buld_kg.sh</code></p>
+<p>output: Bourne-Again shell script, ASCII text executable</p>
+</li>
+<li>
+<p>To open file: <code>$ less fileName</code>, then to close and exit: <code>$ q + enter</code></p>
+</li>
+<li>
+<p>To display file content:</p>
+<div class="highlight"><pre><span></span>$ cat &lt;filename&gt;
+$ cat -vet &lt;filename&gt;  <span class="c1"># to see hidden chars</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>To make a shortcut: <code>$ ln -s /opt/robomongo/bin/robomongo ~/robomongo_lnk</code></p>
+</li>
+</ul>
+<h4>File System and Environment</h4>
+<ul>
+<li>
+<p>To kill process if file busy</p>
+<div class="highlight"><pre><span></span>$ lsof <span class="p">|</span>grep -i path-to-file/filename
+$ <span class="nb">kill</span> -9 &lt;pid&gt;
+</pre></div>
+
+
+</li>
+<li>
+<p>To list installed packages: <code>$ pip freeze</code></p>
+</li>
+<li>
+<p>About the double dash <code>--</code></p>
+<p>Almost all short options have a corresponding long option; <code>rm -f</code> is equivalent to <code>rm --force</code>.</p>
+<p>Many long options, though, have no corresponding short option.</p>
+</li>
+<li>
+<p>To check Ubuntu version: <code>$ lsb_release -a</code></p>
+</li>
+<li>
+<p>To list hidden files</p>
+<div class="highlight"><pre><span></span>$ ls -ld .?*
+$ ls -lA
+</pre></div>
+
+
+</li>
+<li>
+<p>To list files installed by some package: <code>$ dpkg -L package-name</code></p>
+</li>
+<li>
+<p>To find path to a binary (exec) file</p>
+<p><code>which mongod</code> would give you the path to the mongod binary.</p>
+</li>
+<li>
+<p>To check if OS is 32 or 64 bit: <code>$ uname -m</code></p>
+</li>
+</ul>
+<h4>Misc.</h4>
+<ul>
+<li>
+<p>About the usr/bin directory: <a href="http://askubuntu.com/questions/739297/how-to-install-robomongo-ubuntu-system-please-let-me-know/781793">see this SO post</a></p>
+</li>
+<li>
+<p>apt-get vs. pip install vs. conda install:
+   <br><br></p>
+<ul>
+<li><code>apt-get</code> installs a (python) package/module system-wide.</li>
+<li><code>pip</code> installs module in venv only.</li>
+<li>If using <code>pip install</code> after activating the venv, module will be installed into that venv only.</li>
+<li><code>pip</code> installs a package/module within any environment.</li>
+<li><code>conda</code> installs module/package within conda environments.</li>
+</ul>
+</li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../linux.html">posted at 10:20</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/linux.html" rel="tag">Linux</a>
+                    &nbsp;&middot;
+                    &nbsp;<a href="../tag/linux.html" class="tags selected">linux</a>
+                </div>
+		<a href="../linux.html#disqus_thread">Click to read and post comments</a>
+            </article>
+
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

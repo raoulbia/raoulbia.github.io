@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+    <title>code snippets etc. | RDFLib Graph Object</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href=".">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="./archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href=".">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Aug 04, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./python, rdflib.html" rel="bookmark" title="Permanent Link to &quot;RDFLib Graph Object&quot;">RDFLib Graph Object</a>
+                </h2>
+
+                <p>On this page I keep snippets of code I have found useful when working with the
+<a href="https://rdflib.readthedocs.io/en/stable/">RDFLib library</a>. Specifically, the code snippets show how to</p>
+<ul>
+<li>load a triple (.n3) or quad (.nq) file RDFLib graph object</li>
+<li>read from an RDFLib graph object</li>
+</ul>
+<h5>Loading a triple/quad file into an RDFLib object</h5>
+<div class="highlight"><pre><span></span><code><span class="n">g</span> <span class="o">=</span> <span class="n">rdflib</span><span class="o">.</span><span class="n">ConjunctiveGraph</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">input_kg_dir_path</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">f_extension</span><span class="p">)):</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_kg_dir_path</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+        <span class="c1"># read each kg file and build a graph</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;reading </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">rdflib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">guess_format</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">g</span>
+</code></pre></div>
+
+
+<h5>Reading an RDFLib graph object</h5>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entity_list</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">entity_list</span><span class="p">)</span>
+    <span class="n">query_results</span> <span class="o">=</span> <span class="n">angio_kg</span><span class="o">.</span><span class="n">query</span><span class="p">(</span> <span class="c1"># is an rdflib conjunctive raph object which has a parse method</span>
+        <span class="sd">&quot;&quot;&quot;SELECT DISTINCT ?g</span>
+<span class="sd">        {GRAPH ?g {</span>
+<span class="sd">              {&lt;%s&gt; ?p ?o}</span>
+<span class="sd">              UNION {?s ?p &lt;%s&gt;}</span>
+<span class="sd">         }}&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">entity</span><span class="p">))</span>
+</code></pre></div>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./python, rdflib.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

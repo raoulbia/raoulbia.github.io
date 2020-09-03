@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code repo | articles in the "Linux" category | Page 2</title>
+    <link rel="shortcut icon" type="image/png" href="../favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="raoulbia" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+
+                <li class="ephemeral selected"><a href="../category/linux2.html">Linux</a></li>
+                <li><a href="../">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="https://stackoverflow.com/users/425727/raoulbia">StackOverflow</a></li>
+                <li><a href="../tags">Tags</a></li>
+                <li><a href="../categories">Categories</a></li>
+                <li><a href="../archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="../">code repo</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Dec 03, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../virtual machine.html" rel="bookmark" title="Permanent Link to &quot;Vagrant&quot;">Vagrant</a>
+                </h2>
+
+                
+                
+
+                <h4>Setting up a VM</h4>
+<ul>
+<li>
+<p>from downloaded box</p>
+<ol>
+<li>
+<p>get a vagrant box or use one that is already on your local drive. For example I have downloaded the vagrant box
+   <code>npalm-VAGRANTSLASH-mint17-amd64-cinnamon</code> <a href="https://app.vagrantup.com/boxes/search?q=linux+mint&amp;utf8=%E2%9C%93">from here</a> called</p>
+</li>
+<li>
+<p>In Windows (the Host), create a folder in which you want to install this VM</p>
+</li>
+<li>
+<p>cd into the folder</p>
+</li>
+<li>
+<p><code>$ vagrant init npalm-VAGRANTSLASH-mint17-amd64-cinnamon</code></p>
+</li>
+<li>
+<p><code>$ vagrant up</code></p>
+</li>
+</ol>
+<p>The box is now availbale via your <a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> interface.</p>
+</li>
+<li>
+<p>from existing box</p>
+</li>
+</ul>
+<p>If you have already created a box then follow the steps below. In my case I have created some custom boxes which are stored in <code>/home/username/.vagrant.d/boxes</code>.</p>
+<ol>
+<li>
+<p><code>$ mkdir box-name &amp;&amp; cd box-name</code></p>
+</li>
+<li>
+<p>copy the <code>.box</code> file from <code>/home/username/.vagrant.d/boxes</code> to the desired installation directory</p>
+</li>
+<li>
+<p><code>$ vagrant init</code></p>
+</li>
+<li>
+<p><code>$ vagrant box add --name box-name 'box-name.box'</code></p>
+</li>
+<li>
+<p>in Vagrantfile, change <code>config.vm.box = "base"</code> to <code>config.vm.box = "box-name"</code></p>
+</li>
+<li>
+<p><code>$ vagrant up</code></p>
+</li>
+</ol>
+<p>After the vagrant up step, there will be a new directory with the corresponding <code>.vmdk</code> and .vbox files. These files will be used for resizing as described next.</p>
+<h4>Increase Vagrant Box Size</h4>
+<ol>
+<li>
+<p>Clone</p>
+<p>on Windows:</p>
+<div class="highlight"><pre><span></span>    set PATH=%PATH%;&quot;C:\Program Files\Oracle\VirtualBox&quot;
+    VBoxManage clonehd &quot;C:\Users\Baba\VirtualBox VMs\vm_v.1_rcsi_sbi\box-disk001.vmdk&quot; &quot;C:\Users\Baba\VirtualBox VMs\vm_v.1_rcsi_sbi\box-disk001.vdi&quot; --format vdi
+    VBoxManage modifyhd &quot;C:\Users\Baba\VirtualBox VMs\vm_v.1_rcsi_sbi\box-disk001.vdi&quot; --resize 131072
+    VBoxManage clonehd &quot;C:\Users\Baba\VirtualBox VMs\vm_v.1_rcsi_sbi\box-disk001.vdi&quot; &quot;C:\Users\Baba\VirtualBox VMs\vm_v.1_rcsi_sbi\box-disk001-resized.vmdk&quot; --format vmdk
+</pre></div>
+
+
+<p>on Linux</p>
+<div class="highlight"><pre><span></span>VBoxManage clonehd &quot;/home/baba/VirtualBox VMs/rcsi_default_1518912754853_63404/box-disk1.vmdk&quot; &quot;/home/baba/VirtualBox VMs/rcsi_default_1518912754853_63404/box-disk1.vdi&quot; --format vdi
+VBoxManage modifyhd &quot;/home/baba/VirtualBox VMs/rcsi_default_1518912754853_63404/box-disk1.vdi&quot; --resize 131072
+VBoxManage clonehd &quot;/home/baba/VirtualBox VMs/rcsi_default_1518912754853_63404/box-disk1.vdi&quot; &quot;/home/baba/VirtualBox VMs/rcsi_default_1518912754853_63404/box-disk1-resized.vmdk&quot; --format vmdk
+</pre></div>
+
+
+</li>
+<li>
+<p>Resizing</p>
+<p>The newly created disk space is unallocated at this stage. Follow these steps next:</p>
+<ul>
+<li>
+<p><a href="http://www.gitshah.com/2013/05/how-to-fix-out-of-space-problem-for.html?m=1">getting Gparted</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=cDgUwWkvuIY">changing partitions using Gparted (Video)</a></p>
+</li>
+</ul>
+</li>
+</ol>
+<h4>Additional things to do after first-time install</h4>
+<ul>
+<li>
+<p>to check what programs are installed: <code>$ conda list</code></p>
+</li>
+<li>
+<p>install dos2unix</p>
+<div class="highlight"><pre><span></span>$ sudo apt-get update
+$ sudo apt-get install dos2unix
+</pre></div>
+
+
+</li>
+<li>
+<p>where applicable, setup venv(s) from shell script</p>
+<div class="highlight"><pre><span></span>$ dos2unix setup_virtual_environment.sh
+$ bash setup_virtual_environment.sh name-of-venv
+</pre></div>
+
+
+</li>
+<li>
+<p>robomongo</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> /usr/bin
+$ sudo wget https://download.robomongo.org/1.0.0/linux/robomongo-1.0.0-linux-x86_64-89f24ea.tar.gz
+$ sudo tar -zxvf robomongo-1.0.0-linux-x86_64-89f24ea.tar.gz
+$ sudo rm robomongo-1.0.0-linux-x86_64-89f24ea.tar.gz
+</pre></div>
+
+
+</li>
+</ul>
+<p>then right click on bin to create shortcut</p>
+<h4>Make a Custom Box</h4>
+<div class="highlight"><pre><span></span>    $ clear pycharm cache
+    $ clear /tmp dir
+    $ cd C:\vms\name-of-new-box
+    $ vagrant name-of-new-box --base rcsi-pycharm-mongo-desktop-miniconda-mint_default_1495661163973_88135
+    $ vagrant box add name-of-new-box name-of-new-box.box
+    $ vagrant init name-of-new-box
+    $ vagrant up
+</pre></div>
+
+
+<h4>Misc.</h4>
+<ul>
+<li>
+<p>configure Virtual Box <strong>shared folders</strong> etc.</p>
+<div class="highlight"><pre><span></span>$ sudo nano ~/.profile
+</pre></div>
+
+
+<p>add these lines the file:</p>
+<div class="highlight"><pre><span></span>sudo mount -t vboxsf vmtest /home/vagrant/vmtest
+sudo mount -t vboxsf ownCloud /home/vagrant/ownCloud
+export TOMOE_DATA_HOME=/home/vagrant/ownCloud/tomoe-data
+export KG_OUTPUT_DIR=/home/vagrant/vmtest/tomoe/wp-tomoe-angiogenesis/local-data/kg
+</pre></div>
+
+
+</li>
+<li>
+<p>if the host OS is a Linux system you must give the shared Dir on the host system permission to read/write otherwise
+  Pycharm inside the VM won't be able to open the projects!</p>
+<p><code>chmod -R 0777 vmtest/</code></p>
+</li>
+<li>
+<p>setting up <strong>SSH key</strong>: <a href="https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/">see here</a>
+       and <a href="https://stackoverflow.com/questions/16638092/copying-a-rsa-public-key-to-clipboard/22015538">here</a></p>
+</li>
+<li>
+<p>if running into trouble when booting up the VM</p>
+<ol>
+<li>boot + F12</li>
+<li>key arrow down to second option but don't click ; hit 'e'</li>
+<li><code>$sudo nano /etc/hosts</code></li>
+</ol>
+<p><code>127.0.0.1  localhost localhost.localdomain penguin</code></p>
+<p>Replace penguin in the above example by your new hostname as stated in the <code>/etc/hostname</code></p>
+<p><a href="https://askubuntu.com/questions/59458/error-message-when-i-run-sudo-unable-to-resolve-host-none">see</a>
+   and <a href="http://www.kianmeng.org/2014/06/mkdtemp-private-socket-dir-permission.html">maybe this</a></p>
+</li>
+<li>
+<p>Fierfox <strong>VPN</strong></p>
+<p>In order to use Private Internet Access VPN you must upgrade Firefox to v45</p>
+<div class="highlight"><pre><span></span>see [here](https://ftp.mozilla.org/pub/firefox/releases/45.0/linux-x86_64/en-GB/)
+and [here](https://helpdesk.privateinternetaccess.com/hc/en-us/articles/115005520186-Firefox-Proxy)
+and [here](https://help.ubuntu.com/community/FirefoxNewVersion/MozillaBuilds)
+</pre></div>
+
+
+</li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../virtual machine.html">posted at 10:20</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/linux.html" rel="tag">Linux</a>
+                    &nbsp;&middot;
+                    &nbsp;<a href="../tag/virtual-machine.html" class="tags">virtual machine</a>
+                </div>
+		<a href="../virtual machine.html#disqus_thread">Click to read and post comments</a>
+            </article>
+
+                <div class="clear"></div>
+                <div class="pages">
+
+                    <a href="../category/linux.html" class="prev_page">&larr;&nbsp;Previous</a>
+                    <span>Page 2 of 2</span>
+                </div>
+
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>
