@@ -34,7 +34,7 @@
 
                 <p><br></p>
 <p>Notes taken from Lecture 4 from the MIT video series <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/video-lectures/">Probabilistic Systems Analysis and Applied Probability</a></p>
-<hr>
+<hr />
 <h4>6 Independent Coin Tosses</h4>
 <ul>
 <li>Probability of a particular sequence:</li>
@@ -65,7 +65,7 @@
 <h4>Flip Coin 10 Times</h4>
 <p>Event B: 3 out of 10 were Heads</p>
 <p>Event A: given that B occurred, what is the <strong>conditional probablity</strong> that the first 2 tossed were Heads?</p>
-<p><img alt="" src="img/conditional_proba.png"></p>
+<p><img alt="" src="img/conditional_proba.png" /></p>
 <ul>
 <li>Inside Event B all outcomes are equally likely e.g. <span class="math">\(P^3 \ {(1-P)}^7\)</span></li>
 <li>The outcomes are the sequences that have exactly 3 Heads</li>
@@ -92,13 +92,15 @@
     }
 
     var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' && location_protocol !== 'https') location_protocol = 'https:';
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
     mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
     mathjaxscript[(window.opera ? "innerHTML" : "text")] =
         "MathJax.Hub.Config({" +
         "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' }, Macros: {} }," +
         "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
         "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
         "    displayAlign: '"+ align +"'," +

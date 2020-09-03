@@ -34,7 +34,7 @@
                 <p>A collection of <a href="https://en.wikipedia.org/wiki/SPARQL">SPARQL queries</a> I found useful.</p>
 <p>Note that the queries are use case-specific but they should be easy to generalize. Do ignore the fact that lines are
 commented out. In the original setting I used this approach to quickly select the one or other query.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">SPARQLWrapper</span> <span class="kn">import</span> <span class="n">SPARQLWrapper</span><span class="p">,</span> <span class="n">JSON</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">SPARQLWrapper</span> <span class="kn">import</span> <span class="n">SPARQLWrapper</span><span class="p">,</span> <span class="n">JSON</span>
 <span class="n">sparql</span> <span class="o">=</span> <span class="n">SPARQLWrapper</span><span class="p">(</span><span class="s2">&quot;http://localhost:3030/angioexplain3/query&quot;</span><span class="p">)</span>
 <span class="n">sparql</span><span class="o">.</span><span class="n">setQuery</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 
@@ -289,7 +289,7 @@ commented out. In the original setting I used this approach to quickly select th
                 <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">&quot;no data found for query&quot;</span><span class="p">)</span>
-</code></pre></div>
+</pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
@@ -310,7 +310,7 @@ commented out. In the original setting I used this approach to quickly select th
 <li>read from an RDFLib graph object</li>
 </ul>
 <h5>Loading a triple/quad file into an RDFLib object</h5>
-<div class="highlight"><pre><span></span><code><span class="n">g</span> <span class="o">=</span> <span class="n">rdflib</span><span class="o">.</span><span class="n">ConjunctiveGraph</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">rdflib</span><span class="o">.</span><span class="n">ConjunctiveGraph</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">input_kg_dir_path</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">f_extension</span><span class="p">)):</span>
         <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_kg_dir_path</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
@@ -321,11 +321,11 @@ commented out. In the original setting I used this approach to quickly select th
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="k">return</span> <span class="n">g</span>
-</code></pre></div>
+</pre></div>
 
 
 <h5>Reading an RDFLib graph object</h5>
-<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entity_list</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entity_list</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">entity_list</span><span class="p">)</span>
     <span class="n">query_results</span> <span class="o">=</span> <span class="n">angio_kg</span><span class="o">.</span><span class="n">query</span><span class="p">(</span> <span class="c1"># is an rdflib conjunctive raph object which has a parse method</span>
         <span class="sd">&quot;&quot;&quot;SELECT DISTINCT ?g</span>
@@ -333,7 +333,7 @@ commented out. In the original setting I used this approach to quickly select th
 <span class="sd">              {&lt;%s&gt; ?p ?o}</span>
 <span class="sd">              UNION {?s ?p &lt;%s&gt;}</span>
 <span class="sd">         }}&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">entity</span><span class="p">))</span>
-</code></pre></div>
+</pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
