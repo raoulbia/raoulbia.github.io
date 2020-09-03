@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+    <title>code snippets etc. | SSH Keys</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href=".">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="./archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href=".">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Dec 01, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./ssh_keys.html" rel="bookmark" title="Permanent Link to &quot;SSH Keys&quot;">SSH Keys</a>
+                </h2>
+
+                <h4>Checking for existing keys</h4>
+<div class="highlight"><pre><span></span><code><span class="err">ls -al ~/.ssh</span>
+</code></pre></div>
+
+
+<h4>Generating a new key</h4>
+<div class="highlight"><pre><span></span><code><span class="err">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</span>
+</code></pre></div>
+
+
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="err">ssh-keygen -t rsa -C &quot;some name&quot; -b 4096</span>
+</code></pre></div>
+
+
+<h4>Adding a key</h4>
+<div class="highlight"><pre><span></span><code><span class="err">eval $(ssh-agent -s)</span>
+<span class="err">ssh-add ~/.ssh/id_rsa</span>
+</code></pre></div>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./ssh_keys.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

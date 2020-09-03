@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>code snippets etc.</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href=".">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="./archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href=".">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Jan 26, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./python, pandas, nlp.html" rel="bookmark" title="Permanent Link to &quot;Pandas NLP&quot;">Pandas NLP</a>
+                </h2>
+
+                <h4>Useful Links</h4>
+<ul>
+<li><a href="https://stackoverflow.com/questions/39124492/nltk-regexpparser-chunk-phrase-by-matching-exactly-one-item">NLTK RegexpParser, chunk phrase by matching exactly one item</a></li>
+<li><a href="https://towardsdatascience.com/try-texthero-the-absolute-simplest-way-to-clean-and-analyze-text-in-pandas-6db86ed14272">TextHero: The Absolute Simplest way to Clean and Analyze Text in Pandas</a></li>
+<li><a href="https://pypi.org/project/shizen-gengo/">shizen-gengo</a></li>
+</ul>
+<h3>Imports</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">unicodedata</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">RegexpTokenizer</span>
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">WordNetLemmatizer</span><span class="p">,</span> <span class="n">PorterStemmer</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
+<span class="n">stemmer</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span> 
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">RegexpTokenizer</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\w+&#39;</span><span class="p">)</span>
+<span class="n">words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">))</span> <span class="c1"># set() sppeds up stopword removal!!</span>
+</code></pre></div>
+
+
+<h3>SpaCy</h3>
+<p><code>$ python3 -m spacy download en_core_web_sm</code></p>
+<h3>NLTK</h3>
+<p>once off download required. from cmd, launch python and run:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;wordnet&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;averaged_perceptron_tagger&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;maxent_ne_chunker&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;words&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h4>NLTK Grammars</h4>
+<div class="highlight"><pre><span></span><code><span class="n">grammar</span> <span class="o">=</span> <span class="s2">&quot;NP: {(&lt;V\w+&gt;|&lt;NN\w?&gt;)+.*&lt;NN\w?&gt;}&quot;</span> 
+<span class="n">grammar</span> <span class="o">=</span> <span class="s2">&quot;NP: {&lt;DT&gt;?&lt;JJ|NN|V&gt;&lt;V|NN|NNS|NNP&gt;+}&quot;</span>
+<span class="n">grammar</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">  NP: {&lt;DT|PP\$&gt;?&lt;JJ&gt;*&lt;NN&gt;}   # chunk determiner/possessive, adjectives and noun</span>
+<span class="s2">  {&lt;NNP&gt;+}                # chunk sequences of proper nouns</span>
+<span class="s2">  {&lt;NN&gt;+}                 # chunk consecutive nouns</span>
+<span class="s2">  &quot;&quot;&quot;</span>
+</code></pre></div>
+
+
+<h3>Regexp</h3>
+<h4>Regexp String Matching</h4>
+<div class="highlight"><pre><span></span><code><span class="n">col</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;category&#39;</span><span class="w"></span>
+<span class="n">conditions</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">(tmp[col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)ISD&quot;</span><span class="p">)),</span><span class="w"></span>
+<span class="w">               </span><span class="p">(</span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)DST&quot;</span><span class="p">)),</span><span class="w"></span>
+<span class="w">               </span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)IT&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">              </span><span class="err">]</span><span class="w"></span>
+<span class="n">choices</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;ISD&#39;, &#39;DST&#39;, &#39;IT&#39;</span><span class="o">]</span><span class="w"></span>
+
+<span class="n">tmp</span><span class="o">[</span><span class="n">&quot;category_high_level&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="k">select</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span><span class="w"> </span><span class="n">choices</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="o">=</span><span class="n">tmp</span><span class="p">.</span><span class="n">category</span><span class="p">)</span><span class="w"></span>
+<span class="n">tmp</span><span class="p">.</span><span class="n">stb</span><span class="p">.</span><span class="n">freq</span><span class="p">(</span><span class="o">[</span><span class="n">&#39;category_high_level&#39;</span><span class="o">]</span><span class="p">).</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;category_high_level&#39;</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+
+
+<h4>Sentence Fragement by Word Window</h4>
+<div class="highlight"><pre><span></span><code><span class="err">pat = &#39;(?P&lt;before&gt;(?:\w+\W+){,3})products\W+(?P&lt;after&gt;(?:\w+\W+){,3})&#39;</span>
+<span class="err">new = df.text.str.extract(pat, expand=True)</span>
+<span class="err">df.assign(**new)</span>
+</code></pre></div>
+
+
+<h3>Misc.</h3>
+<h4>Extract words from a list</h4>
+<p><code>df['named_entities'] = [','.join(map(str, l)) for l in df['named_entities']]</code></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./python, pandas, nlp.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                </div>
+            </article>            <h4 class="date">Jan 25, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./python, pandas.html" rel="bookmark" title="Permanent Link to &quot;Pandas Applied&quot;">Pandas Applied</a>
+                </h2>
+
+                <h4>Useful Links</h4>
+<ul>
+<li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html">inter-annotator agreement</a></li>
+</ul>
+<h3>Sentence Fragment: Search Window with RegExp</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">search_window</span><span class="p">(</span><span class="n">dataframe_col</span><span class="p">,</span> <span class="n">token</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">dataframe_col</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span> <span class="p">(</span><span class="s2">&quot;not a dataframe&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataframe_col</span><span class="p">))</span>
+    <span class="n">dataframe_col</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">dataframe_col</span> <span class="o">=</span> <span class="n">dataframe_col</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataframe_col</span><span class="p">))</span>
+    <span class="n">pat</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(?P&lt;before&gt;(?:\w+\W+){,8})(?i)&#39;</span> <span class="o">+</span> <span class="n">token</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;\W+(?P&lt;after&gt;(?:\w+\W+){,8})&#39;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">dataframe_col</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">pat</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="c1"># print(len(new))</span>
+    <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)))</span>
+</code></pre></div>
+
+
+<h3>Inter-annotator agreement</h3>
+<div class="highlight"><pre><span></span><code><span class="err">Unit    obs1    obs2    obs3    obs4    obs5</span>
+<span class="err">1       1       1       2       .       2</span>
+<span class="err">2       1       1       0       1       .</span>
+<span class="err">3       2       3       3       3       .</span>
+<span class="err">4       .       0       0       .       0</span>
+<span class="err">5       0       0       0       .       0</span>
+<span class="err">6       0       0       0       .       0</span>
+<span class="err">7       1       0       2       .       1</span>
+</code></pre></div>
+
+
+<h4>Reshape data to triples in the form <code>(coder,item,label)</code></h4>
+<div class="highlight"><pre><span></span><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">other_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_1&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs1&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_2&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs2&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_3&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs3&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_4&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs4&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_5&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs5&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+
+
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">cohen_kappa_score</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">input_eval_dp</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">file</span><span class="p">,</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">type_label_list</span><span class="p">):</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_eval_dp</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">eval_df</span> <span class="o">=</span> <span class="n">get_eval</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+    <span class="n">eval_typed_df</span> <span class="o">=</span> <span class="n">eval_df</span><span class="p">[</span><span class="n">eval_df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="nb">type</span><span class="p">]</span>
+
+    <span class="c1"># remove any rows where at least one NA is found</span>
+    <span class="n">eval_typed_df</span> <span class="o">=</span> <span class="n">eval_typed_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;judge_1&#39;</span><span class="p">,</span> <span class="s1">&#39;judge_2&#39;</span><span class="p">])</span>
+
+    <span class="c1"># transform the three columns with scores into a 15 x 3 matrix</span>
+    <span class="n">rankings</span> <span class="o">=</span> <span class="n">eval_typed_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">as_matrix</span><span class="p">()</span>
+
+    <span class="n">judge_A_matrix</span> <span class="o">=</span> <span class="n">rankings</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">judge_B_matrix</span> <span class="o">=</span> <span class="n">rankings</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Kappa Cohen 2 annotators</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&#39;</span><span class="si">{}</span><span class="s2">&#39;</span><span class="se">\t</span><span class="s2">inter annotator agreement between judge A and judge B&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">))</span>
+    <span class="n">cohen_kappa</span><span class="p">(</span><span class="n">judge_A_matrix</span><span class="p">,</span> <span class="n">judge_B_matrix</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h3>DataFrame.apply</h3>
+<p>df_a</p>
+<div class="highlight"><pre><span></span><code><span class="err">   ent_a  count</span>
+<span class="err">0   5197    1.0</span>
+<span class="err">1  12766    2.0</span>
+<span class="err">2   3091    2.0</span>
+<span class="err">3   3162    1.0</span>
+<span class="err">4   1956   13.0</span>
+</code></pre></div>
+
+
+<p>df_ab</p>
+<div class="highlight"><pre><span></span><code><span class="err">       ent_ab  count_ab</span>
+<span class="err">0   5197-56744       1.0</span>
+<span class="err">1   12766-5197       1.0</span>
+<span class="err">2  12766-56744       1.0</span>
+<span class="err">3    3091-3162       1.0</span>
+<span class="err">4   3091-54583       1.0</span>
+</code></pre></div>
+
+
+<h4>Add column:</h4>
+<p><code>df_ab['ent_a'] = df_ab.ent_ab.apply(lambda x: x.split('-')[0])</code></p>
+<p>df_ab:</p>
+<div class="highlight"><pre><span></span><code><span class="err">        ent_ab  count_ab  ent_a</span>
+<span class="err">0   5197-56744       1.0   5197</span>
+<span class="err">1   12766-5197       1.0  12766</span>
+<span class="err">2  12766-56744       1.0  12766</span>
+<span class="err">3    3091-3162       1.0   3091</span>
+<span class="err">4   3091-54583       1.0   3091</span>
+</code></pre></div>
+
+
+<h4>Add column from df_a to df_ab:</h4>
+<p><code>df_ab['ent_a_count'] = df_ab.ent_a.apply(get_ent, args=(df_a, 'ent_a', ))</code></p>
+<h4>Add column with <code>apply</code>:</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_ent</span><span class="p">(</span><span class="n">ent_df_a</span><span class="p">,</span> <span class="n">df_a</span><span class="p">,</span> <span class="n">colname_df_ab</span><span class="p">):</span>
+    <span class="n">row_df_a</span> <span class="o">=</span> <span class="n">df_a</span><span class="p">[</span><span class="n">df_a</span><span class="p">[</span><span class="n">colname_df_ab</span><span class="p">]</span> <span class="o">==</span> <span class="n">ent_df_a</span><span class="p">]</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">row_df_a</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;count&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">i</span>
+</code></pre></div>
+
+
+<p>df_ab</p>
+<div class="highlight"><pre><span></span><code><span class="err">        ent_ab  count_ab  ent_a  ent_b  ent_a_count</span>
+<span class="err">0   5197-56744       1.0   5197  56744          1.0</span>
+<span class="err">1   12766-5197       1.0  12766   5197          2.0</span>
+<span class="err">2  12766-56744       1.0  12766  56744          2.0</span>
+<span class="err">3    3091-3162       1.0   3091   3162          2.0</span>
+<span class="err">4   3091-54583       1.0   3091  54583          2.0</span>
+</code></pre></div>
+
+
+<h3>Kendall Tau rank correlation coefficient</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_kendall_tau</span><span class="p">(</span><span class="n">df_pop</span><span class="p">):</span>
+    <span class="c1"># testing</span>
+    <span class="c1"># x1 = [12, 2, 1, 12, 2]</span>
+    <span class="c1"># x2 = [1, 4, 7, 1, 0]</span>
+    <span class="c1"># remove random as they don&#39;t have a rank</span>
+    <span class="n">df_pop_kendall</span> <span class="o">=</span> <span class="n">df_pop</span><span class="p">[</span><span class="n">df_pop</span><span class="o">.</span><span class="n">source_tsne</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">df_pop_kendall</span><span class="p">[</span><span class="s1">&#39;rank_tsne&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">df_pop_kendall</span><span class="p">[</span><span class="s1">&#39;rank_avg_relevance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">tau</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">kendalltau</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span> <span class="c1"># scipy implementation scipy.stats.kendalltau</span>
+    <span class="k">return</span> <span class="n">tau</span><span class="p">,</span> <span class="n">p_value</span>
+</code></pre></div>
+
+
+<p><a href="https://en.wikipedia.org/wiki/Kendall_rank_correlation_coefficient">read more</a></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./python, pandas.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                </div>
+            </article>
+
+                <div class="clear"></div>
+                <div class="pages">
+
+                    <a href="./page/3" class="prev_page">&larr;&nbsp;Previous</a>
+                    <a href="./page/5" class="next_page">Next&nbsp;&rarr;</a>
+                    <span>Page 4 of 15</span>
+                </div>
+
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

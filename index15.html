@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>code snippets etc.</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href=".">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="./archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href=".">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Aug 05, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./SPARQL.html" rel="bookmark" title="Permanent Link to &quot;SPARQL&quot;">SPARQL</a>
+                </h2>
+
+                <p>A collection of <a href="https://en.wikipedia.org/wiki/SPARQL">SPARQL queries</a> I found useful.</p>
+<p>Note that the queries are use case-specific but they should be easy to generalize. Do ignore the fact that lines are
+commented out. In the original setting I used this approach to quickly select the one or other query.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">SPARQLWrapper</span> <span class="kn">import</span> <span class="n">SPARQLWrapper</span><span class="p">,</span> <span class="n">JSON</span>
+<span class="n">sparql</span> <span class="o">=</span> <span class="n">SPARQLWrapper</span><span class="p">(</span><span class="s2">&quot;http://localhost:3030/angioexplain3/query&quot;</span><span class="p">)</span>
+<span class="n">sparql</span><span class="o">.</span><span class="n">setQuery</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="s2">                    ### Check for reflexive triples in the quads ############################</span>
+
+<span class="s2">                    # SELECT (count (?s) as ?nb)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #  GRAPH ?g {?s ?p ?s}</span>
+<span class="s2">                    # }</span>
+
+
+<span class="s2">                    ##### COUNT QUADS / TRIPLES BY RELATION #################################</span>
+
+<span class="s2">                    # --- ANY INTERACTION ----------------------------------</span>
+
+<span class="s2">                    # SELECT ?res (COUNT (?res) as ?cnt)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?res ?o} }</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {?s ?res ?o}</span>
+<span class="s2">                    # }</span>
+<span class="s2">                    # GROUP BY ?res ORDER BY DESC (?cnt)  #LIMIT 10</span>
+
+
+<span class="s2">                    # --- WITH SPECIFIC INTERACTION e.g. protein to protein --------</span>
+
+<span class="s2">                    # SELECT ?res (COUNT (?res) as ?cnt)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?res ?o} FILTER regex( str(?s), &quot;protein&quot;) }</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?res ?o} FILTER regex( str(?o), &quot;protein&quot;) }</span>
+<span class="s2">                    #     }</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {</span>
+<span class="s2">                    #     {?s ?res ?o FILTER regex(str(?s), &quot;protein&quot;)}</span>
+<span class="s2">                    #     {?s ?res ?o FILTER regex(str(?o), &quot;protein&quot;)}</span>
+<span class="s2">                    #     }</span>
+<span class="s2">                    # }</span>
+<span class="s2">                    # GROUP BY ?res ORDER BY DESC (?cnt) LIMIT 10</span>
+
+<span class="s2">                    # # --- WITH PROTEIN 2 PROTEIN COUNT ONLY --------</span>
+<span class="s2">                    #</span>
+<span class="s2">                    # SELECT COUNT (?res)  # DOENS&#39;T WORK ON GOZILLA !??</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?res ?o} FILTER regex( str(?s), &quot;protein&quot;) }</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?res ?o} FILTER regex( str(?o), &quot;protein&quot;) }</span>
+<span class="s2">                    #     }</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {</span>
+<span class="s2">                    #     {?s ?res ?o FILTER regex(str(?s), &quot;protein&quot;)}</span>
+<span class="s2">                    #     {?s ?res ?o FILTER regex(str(?o), &quot;protein&quot;)}</span>
+<span class="s2">                    #     }</span>
+<span class="s2">                    # } LIMIT 10</span>
+
+
+<span class="s2">                    ######## QUERYING GRAPHS / QUADS ##################################</span>
+
+<span class="s2">                    ## Example 1: COUNT UNIQUE PATHWAYS</span>
+<span class="s2">                    # Note: pathways are stored as graphs in quads</span>
+
+<span class="s2">                    # SELECT (COUNT (DISTINCT ?res) as ?cnt)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {GRAPH ?res {?s ?p ?o} FILTER regex( str(?res), &quot;/Pathway&quot; ).}</span>
+<span class="s2">                    # }</span>
+<span class="s2">                    # ORDER BY DESC (?cnt)</span>
+
+
+<span class="s2">                    ##### PUBTATOR  ###################################################</span>
+
+<span class="s2">                    #-------- COUNT UNIQUE PUBMEDID&#39;s ------------------------------</span>
+
+<span class="s2">                    # From Quads</span>
+<span class="s2">                    # SELECT COUNT (DISTINCT ?res)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     GRAPH ?res {?s ?p ?o} FILTER (strstarts( str(?res), &quot;http://identifiers.org/pubtator/&quot; )).</span>
+<span class="s2">                    # }</span>
+
+<span class="s2">                    # From Title triples</span>
+<span class="s2">                    # SELECT COUNT (DISTINCT ?res)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     ?res ?p ?o FILTER (strstarts( str(?res), &quot;http://identifiers.org/pubtator/&quot; )).</span>
+<span class="s2">                    # }</span>
+
+
+<span class="s2">                    #--------- PUBTATOR COUNT RELATIONS e.g. Gene_Disease----------------</span>
+
+<span class="s2">                    # SELECT ?res (COUNT (?res) as ?cnt)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?res ?o} FILTER ( regex( str(?g), &quot;pubtator/pubmedid&quot;) ) }</span>
+<span class="s2">                    #</span>
+<span class="s2">                    #     # MINUS</span>
+<span class="s2">                    #     # {GRAPH ?g {?s ?res ?o} FILTER ( regex( str(?s), &quot;species&quot;) ) }</span>
+<span class="s2">                    #     # MINUS</span>
+<span class="s2">                    #     # {GRAPH ?g {?s ?res ?o} FILTER ( regex( str(?o), &quot;species&quot;) ) }</span>
+<span class="s2">                    #</span>
+<span class="s2">                    # }</span>
+<span class="s2">                    # GROUP BY ?res ORDER BY DESC (?cnt)</span>
+
+
+<span class="s2">                    #--------- PUBTATOR SPECIES -----------------------------------------</span>
+
+<span class="s2">                    # Get count of abstracts by species ID</span>
+
+<span class="s2">                    # SELECT COUNT (DISTINCT (?g))</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?p ?o} FILTER regex( str(?p), &quot;Species&quot;) }</span>
+<span class="s2">                    # }</span>
+<span class="s2">                    # GROUP BY ?g ORDER BY DESC (?cnt) LIMIT 5</span>
+
+
+<span class="s2">                    # Get the number of documents without species or with at least mention of human if any specified</span>
+<span class="s2">                    # Pierre-Yves</span>
+
+<span class="s2">                     # SELECT (COUNT( DISTINCT ?g) AS ?nbPubmedDocuments)</span>
+<span class="s2">                     # {</span>
+<span class="s2">                     #    # get only pubtator named graph</span>
+<span class="s2">                     #    GRAPH ?g</span>
+<span class="s2">                     #    {</span>
+<span class="s2">                     #        ?s ?p ?o</span>
+<span class="s2">                     #        FILTER ( strstarts(str(?p), &quot;http://identifiers.org/pubtator/&quot;))</span>
+<span class="s2">                     #        FILTER ( !strstarts(str(?o), &quot;http://identifiers.org/species/&quot;)) .</span>
+<span class="s2">                     #</span>
+<span class="s2">                     #    }</span>
+<span class="s2">                        #</span>
+<span class="s2">                        # MINUS</span>
+<span class="s2">                        #</span>
+<span class="s2">                        # {</span>
+<span class="s2">                        #     # get quads with species</span>
+<span class="s2">                        #     SELECT ?g</span>
+<span class="s2">                        #     {</span>
+<span class="s2">                        #         {</span>
+<span class="s2">                        #             GRAPH ?g</span>
+<span class="s2">                        #             {</span>
+<span class="s2">                        #                  ?s ?p ?o</span>
+<span class="s2">                        #                  FILTER ( strstarts(str(?s), &quot;http://identifiers.org/species/&quot;)) .</span>
+<span class="s2">                        #             }</span>
+<span class="s2">                        #         }</span>
+<span class="s2">                        #         UNION</span>
+<span class="s2">                        #         {</span>
+<span class="s2">                        #             GRAPH ?g</span>
+<span class="s2">                        #             {</span>
+<span class="s2">                        #                  ?s ?p ?o</span>
+<span class="s2">                        #                  FILTER ( strstarts(str(?o), &quot;http://identifiers.org/species/&quot;)) .</span>
+<span class="s2">                        #             }</span>
+<span class="s2">                        #         }</span>
+<span class="s2">                        #     }</span>
+<span class="s2">                        # }</span>
+<span class="s2">                     # }</span>
+
+
+
+
+
+<span class="s2">                    ##### ENTITIES #####################################################</span>
+
+<span class="s2">                    # --- COUNT ENTITIES e.g Entrez#123 (gene), ... -----------------</span>
+
+<span class="s2">                    # SELECT ?res (COUNT (?res) as ?cnt)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {GRAPH ?g {?res ?p ?o} FILTER regex( str(?res), &quot;/gene/&quot; )}</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?p ?res} FILTER regex( str(?res), &quot;/gene/&quot; )}</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {?res ?p ?o FILTER regex(str(?res), &quot;/gene/&quot;)}</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {?s ?p ?res FILTER regex(str(?res), &quot;/gene/&quot;)}</span>
+<span class="s2">                    # }</span>
+<span class="s2">                    # GROUP BY ?res ORDER BY DESC (?cnt) LIMIT 10</span>
+
+
+<span class="s2">                    # --- COUNT ENTITY TYPE e.g. Gene, Drug --------------------------</span>
+
+<span class="s2">                    # SELECT COUNT (DISTINCT ?res)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {GRAPH ?g {?res ?p ?o} FILTER regex( str(?res), &quot;/gene/&quot; )}</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?p ?res} FILTER regex( str(?res), &quot;/gene/&quot; )}</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {?res ?p ?o FILTER regex(str(?res), &quot;/gene/&quot;)}</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {?s ?p ?res FILTER regex(str(?res), &quot;/gene/&quot;)}</span>
+<span class="s2">                    # }</span>
+
+<span class="s2">                    # SELECT COUNT (DISTINCT ?res)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {?res ?p ?o FILTER regex(str(?res), &quot;/disease/&quot;)}</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {?s ?p ?res FILTER regex(str(?res), &quot;/disease/&quot;)}</span>
+<span class="s2">                    # }</span>
+
+<span class="s2">                    # --- QUADS COUNT ENTITY TYPE e.g. Pathways --------------------------</span>
+
+<span class="s2">                    # QUADS</span>
+<span class="s2">                    # SELECT COUNT (DISTINCT ?res)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {GRAPH ?res {?s ?p ?o} FILTER regex( str(?res), &quot;/Pathway_&quot; )}</span>
+<span class="s2">                    #     # UNION</span>
+<span class="s2">                    #     # {GRAPH ?res {?s ?p ?o} FILTER regex( str(?res), &quot;/Pathway_&quot; )}</span>
+<span class="s2">                    # }</span>
+
+<span class="s2">                    # QUADS</span>
+<span class="s2">                    # SELECT ?res (COUNT (?res) as ?cnt)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?res ?o} FILTER ( regex( str(?g), &quot;/Pathway_&quot;) ) }</span>
+<span class="s2">                    # }</span>
+<span class="s2">                    # GROUP BY ?res ORDER BY DESC (?cnt)</span>
+
+<span class="s2">                    # QUADS</span>
+<span class="s2">                    # SELECT COUNT ( ?res)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?res ?o} FILTER regex( str(?res), &quot;/ppi/&quot; )}</span>
+<span class="s2">                    # }</span>
+
+
+<span class="s2">                    &quot;&quot;&quot;</span><span class="p">)</span>
+
+
+
+
+<span class="n">sparql</span><span class="o">.</span><span class="n">setReturnFormat</span><span class="p">(</span><span class="n">JSON</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">sparql</span><span class="o">.</span><span class="n">query</span><span class="p">()</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span> <span class="c1"># is a Dict.</span>
+
+<span class="c1"># print(results)</span>
+<span class="c1"># print(len(results[&quot;results&quot;][&quot;bindings&quot;]))</span>
+<span class="c1"># print(len(results), results)</span>
+<span class="c1"># print(results[&quot;head&quot;].values())</span>
+
+<span class="c1"># establish the type of out pput we get from the query e.g. [&#39;res&#39;, &#39;cnt&#39;]</span>
+<span class="c1"># this is used to shape the if/else statements below</span>
+<span class="nb">vars</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">listOfVars</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;head&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">listOfVars</span><span class="p">:</span>
+        <span class="nb">vars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">]))</span>
+    <span class="k">elif</span> <span class="nb">vars</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;.1&quot;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># print results without prefix</span>
+            <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="c1"># print simple count</span>
+            <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;no data found for query&quot;</span><span class="p">)</span>
+</code></pre></div>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./SPARQL.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/sparql.html" rel="tag">SPARQL</a>
+                </div>
+            </article>            <h4 class="date">Aug 04, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./python, rdflib.html" rel="bookmark" title="Permanent Link to &quot;RDFLib Graph Object&quot;">RDFLib Graph Object</a>
+                </h2>
+
+                <p>On this page I keep snippets of code I have found useful when working with the
+<a href="https://rdflib.readthedocs.io/en/stable/">RDFLib library</a>. Specifically, the code snippets show how to</p>
+<ul>
+<li>load a triple (.n3) or quad (.nq) file RDFLib graph object</li>
+<li>read from an RDFLib graph object</li>
+</ul>
+<h5>Loading a triple/quad file into an RDFLib object</h5>
+<div class="highlight"><pre><span></span><code><span class="n">g</span> <span class="o">=</span> <span class="n">rdflib</span><span class="o">.</span><span class="n">ConjunctiveGraph</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">input_kg_dir_path</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">f_extension</span><span class="p">)):</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_kg_dir_path</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+        <span class="c1"># read each kg file and build a graph</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;reading </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">rdflib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">guess_format</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">g</span>
+</code></pre></div>
+
+
+<h5>Reading an RDFLib graph object</h5>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entity_list</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">entity_list</span><span class="p">)</span>
+    <span class="n">query_results</span> <span class="o">=</span> <span class="n">angio_kg</span><span class="o">.</span><span class="n">query</span><span class="p">(</span> <span class="c1"># is an rdflib conjunctive raph object which has a parse method</span>
+        <span class="sd">&quot;&quot;&quot;SELECT DISTINCT ?g</span>
+<span class="sd">        {GRAPH ?g {</span>
+<span class="sd">              {&lt;%s&gt; ?p ?o}</span>
+<span class="sd">              UNION {?s ?p &lt;%s&gt;}</span>
+<span class="sd">         }}&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">entity</span><span class="p">))</span>
+</code></pre></div>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./python, rdflib.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                </div>
+            </article>
+
+                <div class="clear"></div>
+                <div class="pages">
+
+                    <a href="./page/14" class="prev_page">&larr;&nbsp;Previous</a>
+                    <span>Page 15 of 15</span>
+                </div>
+
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

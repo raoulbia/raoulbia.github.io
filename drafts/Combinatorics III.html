@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+    <title>code snippets etc. | Combinatorics III</title>
+    <link rel="shortcut icon" type="image/png" href="../favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="..">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="../archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="..">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Oct 03, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../drafts/Combinatorics III.html" rel="bookmark" title="Permanent Link to &quot;Combinatorics III&quot;">Combinatorics III</a>
+                </h2>
+
+                <p><br></p>
+<p>Notes taken from Lecture 4 from the MIT video series <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/video-lectures/">Probabilistic Systems Analysis and Applied Probability</a></p>
+<hr>
+<h3>More about n choose k</h3>
+<p><em>The business of n choose k has to do with starting with a set and picking a subset of k elements.</em></p>
+<p>Another way of thinking about it: picking a subset is the same as partitioning the set into 2 pieces:</p>
+<p><img alt="" src="img/nchoosek_1.png"></p>
+<p>Counting partitions in general:</p>
+<p><img alt="" src="img/nchoosek_2.png"></p>
+<p>In how many ways can we do this partitioning?</p>
+<p><em>n choose k</em> is the answer when we partition into 2 pieces...but how de we generalise this?</p>
+<h4>Example: How many hands are there in which every player has exactly one Ace?</h4>
+<ul>
+<li>52 cards deck</li>
+<li>deal: 13 cards to each player</li>
+<li>partition deck into 4 hands i.e. 4 subsets of 13 each</li>
+<li>assuming they are equally likely</li>
+<li>it doesn't matter in which order you get them, only which subset you get</li>
+<li>Event A: every player has exactly one Ace</li>
+</ul>
+<p>Step 1: Cardinality of sample space <span class="math">\(\Omega\)</span> </p>
+<p>How many possible hands are there for each hand ?</p>
+<p>Hand 1: <span class="math">\(\Rightarrow \binom{52}{13} = \frac{52!}{13!39!}\)</span></p>
+<p>Hand 2: <span class="math">\(\Rightarrow \binom{52-13}{13} = \frac{39!}{13!26!}\)</span></p>
+<p>Hand 3: <span class="math">\(\Rightarrow \binom{39-13}{13} = \frac{26!}{13!13!}\)</span></p>
+<p>Hand 4: <span class="math">\(\Rightarrow \binom{26-13}{13} = \frac{13!}{13!}=1\)</span></p>
+<p>After cancellations we have <span class="math">\(\frac{52!}{13!13!13!13!} = \frac{n!}{n1!n2!n3!n4!}\)</span></p>
+<p>Step 2: Event A</p>
+<p><span class="math">\(\Rightarrow\)</span> Take the 4 Aces and distribute them randomly to each player.</p>
+<ul>
+<li>Ace 1 -&gt; 4 choices</li>
+<li>Ace 2 -&gt; 3 choices</li>
+<li>Ace 3 -&gt; 4 choices</li>
+<li>Ace 4 -&gt; 1 choices</li>
+</ul>
+<p>This is the same as paritioning a set of 4 elements into 4 subsets when each subset has 1 element:
+<span class="math">\(\frac{4!}{1! \ 1! \ 1! \ 1!} = 4!\)</span></p>
+<p>Now, distributing the remaining cards...: </p>
+<p>48 cards given to 4 players w/12 each gives us <span class="math">\(\frac{48!}{12!12!12!12!}\)</span></p>
+<p>Putting it all together:</p>
+<p><span class="math">\(\frac{event A}{\Omega} = \frac{4!\frac{48!}{12!12!12!12!}}{\frac{52!}{13!13!13!13!}}\)</span></p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../drafts/Combinatorics III.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/combinatorics-iii.html" rel="tag">Combinatorics III</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>
