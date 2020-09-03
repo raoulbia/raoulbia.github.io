@@ -100,23 +100,23 @@
 <p><br></p>
 <h4>Django2</h4>
 <p>Useful commands</p>
-<div class="highlight"><pre><span></span><code><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">startproject</span> <span class="n">app1</span>
+<div class="highlight"><pre><span></span><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">startproject</span> <span class="n">app1</span>
 <span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
 <span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
 <span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span>
 <span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
-</code></pre></div>
+</pre></div>
 
 
 <p>Django templates</p>
 <p>in <code>settings.py</code></p>
-<div class="highlight"><pre><span></span><code><span class="err"> BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))</span>
+<div class="highlight"><pre><span></span><span class="err"> BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))</span>
 <span class="err"> ...</span>
 <span class="err"> TEMPLATES = [</span>
 <span class="err">   {</span>
 <span class="err">       &#39;DIRS&#39;: [os.path.join(BASE_DIR, &#39;firstwebsite/templates&#39;)]</span>
 <span class="err">   }]</span>
-</code></pre></div>
+</pre></div>
 
 
 <p>in <code>urls.py</code></p>
@@ -161,9 +161,9 @@
 <p><br></p>
 <h4>Node JS</h4>
 <p>Install nodejs:</p>
-<div class="highlight"><pre><span></span><code><span class="err">curl -sL https://deb.nodesource.com/setup_8.x — Node.js 8 LTS &quot;Carbon&quot; | sudo -E bash -</span>
+<div class="highlight"><pre><span></span><span class="err">curl -sL https://deb.nodesource.com/setup_8.x — Node.js 8 LTS &quot;Carbon&quot; | sudo -E bash -</span>
 <span class="err">sudo apt-get install -y nodejs</span>
-</code></pre></div>
+</pre></div>
 
 
 <p>symlink issue with Vagrant VM shared folder:</p>

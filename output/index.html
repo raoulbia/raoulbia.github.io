@@ -67,45 +67,45 @@
 </li>
 <li>
 <p>Setup a virtual environment</p>
-<div class="highlight"><pre><span></span><code><span class="err">conda create --name myblog python=3.5</span>
+<div class="highlight"><pre><span></span><span class="err">conda create --name myblog python=3.5</span>
 <span class="err">source activate myblog</span>
 <span class="err">pip install -r requirements.txt</span>
 <span class="err">pelican-quickstart</span>
 <span class="err">git clone https://github.com/getpelican/pelican-plugins.git</span>
-</code></pre></div>
+</pre></div>
 
 
 </li>
 <li>
 <p>Connect to repo</p>
-<div class="highlight"><pre><span></span><code><span class="err">git remote add origin git@github.com:raoulbia/raoulbia.github.io.git</span>
-</code></pre></div>
+<div class="highlight"><pre><span></span><span class="err">git remote add origin git@github.com:raoulbia/raoulbia.github.io.git</span>
+</pre></div>
 
 
 <p>To test run <code>git remote -v</code>. You should see your repo listed.</p>
 </li>
 <li>
 <p>Create a new branch for hosting the pelican source code.</p>
-<div class="highlight"><pre><span></span><code><span class="err">git checkout -b pelican</span>
-</code></pre></div>
+<div class="highlight"><pre><span></span><span class="err">git checkout -b pelican</span>
+</pre></div>
 
 
 </li>
 <li>
 <p>Install IPython notebook</p>
-<div class="highlight"><pre><span></span><code><span class="err">mkdir plugins &amp;&amp; cd plugins</span>
+<div class="highlight"><pre><span></span><span class="err">mkdir plugins &amp;&amp; cd plugins</span>
 <span class="err">git submodule add git://github.com/danielfrg/pelican-ipynb.git ipynb</span>
 <span class="err">git submodule add https://github.com/barrysteyn/pelican_plugin-render_math.git render_math</span>
-</code></pre></div>
+</pre></div>
 
 
 </li>
 <li>
 <p>In order to activate the plugin, add these lines at the bottom of <code>pelicanconf.py</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="err">MARKUP = (&#39;md&#39;, &#39;ipynb&#39;)</span>
+<div class="highlight"><pre><span></span><span class="err">MARKUP = (&#39;md&#39;, &#39;ipynb&#39;)</span>
 <span class="err">PLUGIN_PATH = &#39;./plugins&#39;</span>
 <span class="err">PLUGINS = [&#39;ipynb.markup&#39;, &#39;render_math&#39;]</span>
-</code></pre></div>
+</pre></div>
 
 
 </li>
@@ -120,18 +120,18 @@ something wrong when trying to do so but in the end I settled for the <a href="h
 theme. It should be noted that the default Pelican theme may suffice to some users in which case this section can be
 skipped.</p>
 <p>To add all existing Pelican themes to your development repository</p>
-<div class="highlight"><pre><span></span><code><span class="err">git clone --recursive https://github.com/getpelican/pelican-themes ./pelican-themes</span>
-</code></pre></div>
+<div class="highlight"><pre><span></span><span class="err">git clone --recursive https://github.com/getpelican/pelican-themes ./pelican-themes</span>
+</pre></div>
 
 
 <p>To install one of the downloaded themes</p>
-<div class="highlight"><pre><span></span><code><span class="err">pelican-themes --install ./pelican-themes/name-of-theme --verbose</span>
-</code></pre></div>
+<div class="highlight"><pre><span></span><span class="err">pelican-themes --install ./pelican-themes/name-of-theme --verbose</span>
+</pre></div>
 
 
 <p>Alternatively you can just get the one theme you want to use</p>
-<div class="highlight"><pre><span></span><code><span class="err">git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes</span>
-</code></pre></div>
+<div class="highlight"><pre><span></span><span class="err">git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes</span>
+</pre></div>
 
 
 <h4>Config Files</h4>
@@ -157,8 +157,8 @@ the theme of choice must be specified in <strong>both</strong> <code>publishconf
 <li>
 <p>preview <code>localhost:8000/</code> in your browser</p>
 <p>To stop localhost type <code>Ctrl + c</code> then run below command twice</p>
-<div class="highlight"><pre><span></span><code><span class="err">kill -9 $(lsof -i TCP:8000 | grep LISTEN | awk &#39;{print $2}&#39;)</span>
-</code></pre></div>
+<div class="highlight"><pre><span></span><span class="err">kill -9 $(lsof -i TCP:8000 | grep LISTEN | awk &#39;{print $2}&#39;)</span>
+</pre></div>
 
 
 </li>
@@ -172,23 +172,24 @@ project source code (pelican branch). To publish either run the code below.</p>
 </div>
 
 <h4>Publish Blog pages</h4>
-<div class="highlight"><pre><span></span><code><span class="n">pelican</span> <span class="n">content</span> <span class="o">-</span><span class="n">o</span> <span class="n">output</span> <span class="o">-</span><span class="n">s</span> <span class="n">pelicanconf</span><span class="o">.</span><span class="n">py</span> <span class="o">&amp;&amp;</span>
+<div class="highlight"><pre><span></span><span class="n">pelican</span> <span class="n">content</span> <span class="o">-</span><span class="n">o</span> <span class="n">output</span> <span class="o">-</span><span class="n">s</span> <span class="n">pelicanconf</span><span class="o">.</span><span class="n">py</span> <span class="o">&amp;&amp;</span>
 <span class="n">ghp</span><span class="o">-</span><span class="kn">import</span> <span class="nn">output</span> <span class="o">-</span><span class="n">r</span> <span class="n">origin</span> <span class="o">-</span><span class="n">b</span> <span class="n">master</span> <span class="o">&amp;&amp;</span>
 <span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>
-</code></pre></div>
+</pre></div>
 
 
 <h4>Push Source Code</h4>
-<div class="highlight"><pre><span></span><code><span class="err">git add -A &amp;&amp;</span>
+<div class="highlight"><pre><span></span><span class="err">git add -A &amp;&amp;</span>
 <span class="err">git commit -a -m &quot;Update&quot; &amp;&amp;</span>
 <span class="err">git push -u origin pelican</span>
-</code></pre></div>
+</pre></div>
 
 
 <h3>Finally ...</h3>
 <p>Try visiting your page e.g. <a href="http://raoulbia.github.io">http://raoulbia.github.io</a> -- you should see your blog!</p>
 <h4>Useful Links</h4>
 <ul>
+<li>(Pelican and ipynb error)[http://marohn-public.site44.com/Marohn-20171011-102214--Pelican-and-ipynb.html]</li>
 <li><a href="http://anotherdatum.com/pelican-and-github-pages-workflow.html">http://anotherdatum.com/pelican-and-github-pages-workflow.html</a> (Excellent!)</li>
 <li><a href="http://www.christianlong.com/blog/more-on-pelican-themes.html">http://www.christianlong.com/blog/more-on-pelican-themes.html</a></li>
 <li><a href="https://rasor.github.io/using-pelican-blog-on-github-pages.html">https://rasor.github.io/using-pelican-blog-on-github-pages.html</a></li>

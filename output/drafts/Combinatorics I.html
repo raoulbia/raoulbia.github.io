@@ -45,7 +45,7 @@
 </ul>
 <p><br></p>
 <p>Notes taken from Lecture 4 from the MIT video series <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/video-lectures/">Probabilistic Systems Analysis and Applied Probability</a></p>
-<hr>
+<hr />
 <ul>
 <li>How many license plates of 3 letters and 4 digits? <div class="math">$$26 \times 26 \times 26 \times 10 \times 10 \times 10 \times 10$$</div>
 </li>
@@ -73,7 +73,7 @@
 </ul>
 </li>
 </ul>
-<hr>
+<hr />
 <h4>Probabilities</h4>
 <p>P = # of possible events divided by overall sample space i.e. <span class="math">\(\frac{|A|}{|\Omega|}\)</span></p>
 <ul>
@@ -90,7 +90,7 @@ For example, given a group of 10 people, find the number of possible 5 people co
 </ul>
 <div class="math">$$\binom{n}{k} = \frac{n!}{k!((n-k)!}$$</div>
 <p><strong>Proof</strong></p>
-<p><img alt="" src="img/n_choose_k.png"></p>
+<p><img alt="" src="img/n_choose_k.png" /></p>
 <p>n choices for person 1</p>
 <p>n-1 choices for person 2</p>
 <p>...</p>
@@ -112,13 +112,15 @@ For example, given a group of 10 people, find the number of possible 5 people co
     }
 
     var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' && location_protocol !== 'https') location_protocol = 'https:';
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
     mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
     mathjaxscript[(window.opera ? "innerHTML" : "text")] =
         "MathJax.Hub.Config({" +
         "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' }, Macros: {} }," +
         "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
         "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
         "    displayAlign: '"+ align +"'," +

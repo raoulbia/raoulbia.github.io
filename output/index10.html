@@ -37,19 +37,19 @@
 and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-14-04">here</a></li>
 </ul>
 <h4>Sample Queries</h4>
-<div class="highlight"><pre><span></span><code><span class="err">select * from PREDICATION where SUBJECT_SEMTYPE in (&#39;gngm&#39;) limit 10;</span>
+<div class="highlight"><pre><span></span><span class="err">select * from PREDICATION where SUBJECT_SEMTYPE in (&#39;gngm&#39;) limit 10;</span>
 <span class="err">select * from ENTITY where SEMTYPE in (&#39;gngm&#39;) and GENE_ID &lt;&gt; &#39;&#39; limit 10;</span>
-</code></pre></div>
+</pre></div>
 
 
 <p><br></p>
 <h3>Useful commands</h3>
 <h4>Determine table column size</h4>
-<div class="highlight"><pre><span></span><code><span class="k">Select</span><span class="w">        </span><span class="nf">max</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="o">[</span><span class="n">number</span><span class="o">]</span><span class="p">))</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">[</span><span class="n">number</span><span class="o">]</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="k">Select</span><span class="w">        </span><span class="nf">max</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="o">[</span><span class="n">number</span><span class="o">]</span><span class="p">))</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">[</span><span class="n">number</span><span class="o">]</span><span class="w"></span>
 <span class="w">              </span><span class="p">,</span><span class="nf">max</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="o">[</span><span class="n">u_opened_date</span><span class="o">]</span><span class="p">))</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">[</span><span class="n">u_opened_date</span><span class="o">]</span><span class="w"></span>
 <span class="w">              </span><span class="p">...</span><span class="w"></span>
 <span class="k">from</span><span class="w">   </span><span class="n">dbo</span><span class="p">.</span><span class="n">mytable</span><span class="w"></span>
-</code></pre></div>
+</pre></div>
 
 
 <h4>Insert from another table</h4>
@@ -58,36 +58,36 @@ and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-mys
 <p>To create the new ENTITY2 table, copy/paste from the above output.</p>
 <p><code>insert into ENTITY2 select * from ENTITY where GENE_ID &lt;&gt; '';</code></p>
 <h4>See table columns and their data types</h4>
-<div class="highlight"><pre><span></span><code><span class="err">SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS </span>
+<div class="highlight"><pre><span></span><span class="err">SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS </span>
 <span class="err">  WHERE table_name = &#39;tbl_name&#39; AND COLUMN_NAME = &#39;col_name&#39;;</span>
-</code></pre></div>
+</pre></div>
 
 
 <h4>Create DB</h4>
-<div class="highlight"><pre><span></span><code><span class="err">GRANT ALL PRIVILEGES ON *.* TO &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;root&#39;;</span>
+<div class="highlight"><pre><span></span><span class="err">GRANT ALL PRIVILEGES ON *.* TO &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;root&#39;;</span>
 <span class="err">CREATE DATABASE dbname;</span>
 <span class="err">USE dbname;</span>
-</code></pre></div>
+</pre></div>
 
 
 <h4>Import from sql.gz file</h4>
-<div class="highlight"><pre><span></span><code><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">pv</span>
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">pv</span>
 <span class="n">zcat</span> <span class="n">filename</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">gz</span> <span class="o">|</span> <span class="n">pv</span> <span class="o">-</span><span class="n">cN</span> <span class="n">zcat</span> <span class="o">|</span> <span class="n">mysql</span> <span class="o">-</span><span class="n">u</span> <span class="n">root</span> <span class="o">-</span><span class="n">p</span> <span class="o">-</span><span class="n">f</span> <span class="o">-</span><span class="n">D</span> <span class="n">dbname</span> <span class="p">;</span>
-</code></pre></div>
+</pre></div>
 
 
 <h4>Get stats</h4>
-<div class="highlight"><pre><span></span><code><span class="n">SELECT</span> <span class="n">table_schema</span> <span class="s2">&quot;dbname&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="n">table_schema</span> <span class="s2">&quot;dbname&quot;</span><span class="p">,</span>
         <span class="n">ROUND</span><span class="p">(</span><span class="n">SUM</span><span class="p">(</span><span class="n">data_length</span> <span class="o">+</span> <span class="n">index_length</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="s2">&quot;DB Size in MB&quot;</span> 
 <span class="n">FROM</span> <span class="n">information_schema</span><span class="o">.</span><span class="n">tables</span> 
 <span class="n">GROUP</span> <span class="n">BY</span> <span class="n">table_schema</span><span class="p">;</span> 
-</code></pre></div>
+</pre></div>
 
 
 <p>or (requires mysql v5.7+)</p>
-<div class="highlight"><pre><span></span><code><span class="err">select table_schema, table_name, rows_fetched, rows_inserted, rows_updated, rows_deleted </span>
+<div class="highlight"><pre><span></span><span class="err">select table_schema, table_name, rows_fetched, rows_inserted, rows_updated, rows_deleted </span>
 <span class="err">    from sys.schema_table_statistics where table_schema=&#39;dbname&#39;;</span>
-</code></pre></div>
+</pre></div>
 
 
 <p>or</p>
@@ -103,28 +103,28 @@ and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-mys
 <li>otherwise, the default location is <code>/var/lib/mysql/</code></li>
 </ul>
 <h4>Partition</h4>
-<div class="highlight"><pre><span></span><code><span class="n">alter</span> <span class="n">table</span> <span class="n">ENTITY</span> <span class="n">partition</span> <span class="n">by</span> <span class="nb">range</span><span class="p">(</span><span class="n">ENTITY_ID</span><span class="p">)(</span>
+<div class="highlight"><pre><span></span><span class="n">alter</span> <span class="n">table</span> <span class="n">ENTITY</span> <span class="n">partition</span> <span class="n">by</span> <span class="nb">range</span><span class="p">(</span><span class="n">ENTITY_ID</span><span class="p">)(</span>
 <span class="n">partition</span> <span class="n">p0</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="p">(</span><span class="mi">250000000</span><span class="p">),</span>
 <span class="n">partition</span> <span class="n">p1</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="p">(</span><span class="mi">500000000</span><span class="p">),</span>
 <span class="n">partition</span> <span class="n">p2</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="p">(</span><span class="mi">750000000</span><span class="p">),</span>
 <span class="n">partition</span> <span class="n">p3</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="n">maxvalue</span>
 <span class="p">);</span>
-</code></pre></div>
+</pre></div>
 
 
 <h4>Drop foreign key</h4>
-<div class="highlight"><pre><span></span><code><span class="n">ALTER</span> <span class="n">TABLE</span> <span class="n">ENTITY</span> <span class="n">DROP</span> <span class="n">FOREIGN</span> <span class="n">KEY</span> <span class="s1">&#39;ENTITY_ibfk_1&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="n">ALTER</span> <span class="n">TABLE</span> <span class="n">ENTITY</span> <span class="n">DROP</span> <span class="n">FOREIGN</span> <span class="n">KEY</span> <span class="s1">&#39;ENTITY_ibfk_1&#39;</span><span class="p">;</span>
 <span class="n">Note</span><span class="p">:</span> <span class="n">would</span> <span class="n">this</span> <span class="n">be</span> <span class="n">better</span><span class="err">??</span>
     <span class="n">ALTER</span> <span class="n">TABLE</span> <span class="n">foo</span> <span class="n">DISABLE</span> <span class="n">KEYS</span><span class="p">;</span>
     <span class="n">do</span> <span class="n">stuff</span>
     <span class="n">ALTER</span> <span class="n">TABLE</span> <span class="n">ENABLE</span> <span class="n">KEYS</span><span class="p">;</span>
-</code></pre></div>
+</pre></div>
 
 
 <h4>Increase buffer size for large import</h4>
-<div class="highlight"><pre><span></span><code><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">nano</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">my</span><span class="p">.</span><span class="n">cnf</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">nano</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">my</span><span class="p">.</span><span class="n">cnf</span><span class="w"></span>
 <span class="o">[</span><span class="n">mysqld</span><span class="o">]</span><span class="w"> </span><span class="n">innodb_buffer_pool_size</span><span class="o">=</span><span class="mi">228</span><span class="n">G</span><span class="w"></span>
-</code></pre></div>
+</pre></div>
 
 
 <h4>Error with MySQL: "The total number of locks exceeds the lock table size"</h4>
@@ -230,23 +230,23 @@ and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-mys
 <p><br></p>
 <h4>Django2</h4>
 <p>Useful commands</p>
-<div class="highlight"><pre><span></span><code><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">startproject</span> <span class="n">app1</span>
+<div class="highlight"><pre><span></span><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">startproject</span> <span class="n">app1</span>
 <span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
 <span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
 <span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span>
 <span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
-</code></pre></div>
+</pre></div>
 
 
 <p>Django templates</p>
 <p>in <code>settings.py</code></p>
-<div class="highlight"><pre><span></span><code><span class="err"> BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))</span>
+<div class="highlight"><pre><span></span><span class="err"> BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))</span>
 <span class="err"> ...</span>
 <span class="err"> TEMPLATES = [</span>
 <span class="err">   {</span>
 <span class="err">       &#39;DIRS&#39;: [os.path.join(BASE_DIR, &#39;firstwebsite/templates&#39;)]</span>
 <span class="err">   }]</span>
-</code></pre></div>
+</pre></div>
 
 
 <p>in <code>urls.py</code></p>
@@ -291,9 +291,9 @@ and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-mys
 <p><br></p>
 <h4>Node JS</h4>
 <p>Install nodejs:</p>
-<div class="highlight"><pre><span></span><code><span class="err">curl -sL https://deb.nodesource.com/setup_8.x — Node.js 8 LTS &quot;Carbon&quot; | sudo -E bash -</span>
+<div class="highlight"><pre><span></span><span class="err">curl -sL https://deb.nodesource.com/setup_8.x — Node.js 8 LTS &quot;Carbon&quot; | sudo -E bash -</span>
 <span class="err">sudo apt-get install -y nodejs</span>
-</code></pre></div>
+</pre></div>
 
 
 <p>symlink issue with Vagrant VM shared folder:</p>

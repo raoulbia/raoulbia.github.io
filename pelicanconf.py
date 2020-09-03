@@ -71,7 +71,7 @@ THEME = "./pelican-themes/blue-penguin"
 
 MARKUP = ('md', 'ipynb')
 
-PLUGIN_PATHS = ['./plugins', 'pelican-plugins']
+PLUGIN_PATHS = ['./pelican-plugins', './plugins']
 PLUGINS = ['ipynb.markup', 'render_math']#, 'i18n_subsites']
 STATIC_PATHS = ['img', 'static']
 

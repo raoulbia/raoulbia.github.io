@@ -84,7 +84,7 @@ and word2vec word embeddings. </p>
   and hence reveals its semantics. </p>
 </li>
 <li>
-<p>Algebraic relationships between word vectors correspond to semantic relationships between words.<br>
+<p>Algebraic relationships between word vectors correspond to semantic relationships between words.<br />
   For example, it is typical to find that </p>
 </li>
 </ul>
@@ -263,7 +263,7 @@ with context words</p>
 </li>
 </ul>
 <p><em>Code Repos</em></p>
-<div class="highlight"><pre><span></span><code><span class="o">*</span> <span class="p">[</span><span class="n">Gensim</span><span class="p">](</span><span class="nl">https</span><span class="p">:</span><span class="c1">//radimrehurek.com/gensim/models/word2vec.html)</span>
+<div class="highlight"><pre><span></span><span class="o">*</span> <span class="p">[</span><span class="n">Gensim</span><span class="p">](</span><span class="nl">https</span><span class="p">:</span><span class="c1">//radimrehurek.com/gensim/models/word2vec.html)</span>
   <span class="p">(</span><span class="n">includes</span> <span class="n">word2vec</span> <span class="n">and</span> <span class="n">GloVe</span><span class="p">)</span>
 <span class="o">*</span> <span class="p">[</span><span class="n">glove</span><span class="o">-</span><span class="n">python</span><span class="p">](</span><span class="nl">https</span><span class="p">:</span><span class="c1">//github.com/maciejkula/glove-python)</span>
   <span class="p">(</span><span class="n">maciejkula</span><span class="p">)</span>
@@ -275,7 +275,7 @@ with context words</p>
 <span class="o">*</span> <span class="p">[</span><span class="n">machine_learning_examples</span><span class="p">](</span><span class="nl">https</span><span class="p">:</span><span class="c1">//github.com/lazyprogrammer/machine_learning_examples/tree/master/nlp_class2)</span>
   <span class="p">(</span><span class="n">lazyprogrammer</span><span class="p">)</span>
 <span class="o">*</span> <span class="p">[</span><span class="n">movie</span> <span class="n">sentiment</span><span class="p">](</span><span class="nl">https</span><span class="p">:</span><span class="c1">//github.com/saurabhmathur96/movie-sentiment)</span>
-</code></pre></div>
+</pre></div>
 
 
 <ul>
@@ -298,13 +298,15 @@ with context words</p>
     }
 
     var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' && location_protocol !== 'https') location_protocol = 'https:';
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
     mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
     mathjaxscript[(window.opera ? "innerHTML" : "text")] =
         "MathJax.Hub.Config({" +
         "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' }, Macros: {} }," +
         "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
         "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
         "    displayAlign: '"+ align +"'," +

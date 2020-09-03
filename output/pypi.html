@@ -42,20 +42,20 @@
 </li>
 </ul>
 <h4>Deploy on PyPi</h4>
-<hr>
+<hr />
 <p><strong>Note</strong></p>
 <ul>
 <li>Make sure to update version information before deploying. 
 Files to update: <code>__init__.py</code> and <code>setup.py</code>.</li>
 <li>After deploying, don't forget to re-build the documentation at <a href="https://readthedocs.org/projects/shizen-gengo/builds">ReadTheDocs</a>.</li>
 </ul>
-<hr>
-<div class="highlight"><pre><span></span><code><span class="err">rm -rf build dist &amp;&amp; python setup.py sdist</span>
+<hr />
+<div class="highlight"><pre><span></span><span class="err">rm -rf build dist &amp;&amp; python setup.py sdist</span>
 <span class="err">ls dist/*</span>
 <span class="err">#python setup.py check -r -s (obolete)</span>
 <span class="err">python -m twine check dist/*</span>
 <span class="err">python -m  twine upload dist/*</span>
-</code></pre></div>
+</pre></div>
 
 
 <h4>Misc.</h4>

@@ -33,24 +33,24 @@
                 </h2>
 
                 <h4>Checking for existing keys</h4>
-<div class="highlight"><pre><span></span><code><span class="err">ls -al ~/.ssh</span>
-</code></pre></div>
+<div class="highlight"><pre><span></span><span class="err">ls -al ~/.ssh</span>
+</pre></div>
 
 
 <h4>Generating a new key</h4>
-<div class="highlight"><pre><span></span><code><span class="err">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</span>
-</code></pre></div>
+<div class="highlight"><pre><span></span><span class="err">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</span>
+</pre></div>
 
 
 <p>or</p>
-<div class="highlight"><pre><span></span><code><span class="err">ssh-keygen -t rsa -C &quot;some name&quot; -b 4096</span>
-</code></pre></div>
+<div class="highlight"><pre><span></span><span class="err">ssh-keygen -t rsa -C &quot;some name&quot; -b 4096</span>
+</pre></div>
 
 
 <h4>Adding a key</h4>
-<div class="highlight"><pre><span></span><code><span class="err">eval $(ssh-agent -s)</span>
+<div class="highlight"><pre><span></span><span class="err">eval $(ssh-agent -s)</span>
 <span class="err">ssh-add ~/.ssh/id_rsa</span>
-</code></pre></div>
+</pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
