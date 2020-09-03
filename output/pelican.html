@@ -144,10 +144,10 @@ the theme of choice must be specified in <strong>both</strong> <code>publishconf
 <p>Note: First, activate your virtual environment e.g. <code>$ source activate venv-name</code></p>
 <p>There are two sides to Pelican publishing on Github: publishing the blog pages (master branch) and pushing the
 project source code (pelican branch). To publish either run the code below.</p>
-<div class="alert alert-primary" role="alert">
-  IMPORTANT RUN THIS FROM THE PELICAN BRANCH!
-</div>
-
+<hr />
+<p><strong>NOTE</strong>
+  IMPORTANT RUN THIS FROM THE PELICAN BRANCH!</p>
+<hr />
 <h4>Publish Blog pages</h4>
 <div class="highlight"><pre><span></span><span class="n">pelican</span> <span class="n">content</span> <span class="o">-</span><span class="n">o</span> <span class="n">output</span> <span class="o">-</span><span class="n">s</span> <span class="n">pelicanconf</span><span class="o">.</span><span class="n">py</span> <span class="o">&amp;&amp;</span>
 <span class="n">ghp</span><span class="o">-</span><span class="kn">import</span> <span class="nn">output</span> <span class="o">-</span><span class="n">r</span> <span class="n">origin</span> <span class="o">-</span><span class="n">b</span> <span class="n">master</span> <span class="o">&amp;&amp;</span>

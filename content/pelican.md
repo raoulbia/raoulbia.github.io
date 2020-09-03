@@ -102,9 +102,10 @@ Note: First, activate your virtual environment e.g. `$ source activate venv-name
 There are two sides to Pelican publishing on Github: publishing the blog pages (master branch) and pushing the
 project source code (pelican branch). To publish either run the code below.
 
-<div class="alert alert-primary" role="alert">
+---
+**NOTE**
   IMPORTANT RUN THIS FROM THE PELICAN BRANCH!
-</div>
+---
 
 #### Publish Blog pages
 
