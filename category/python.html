@@ -222,6 +222,7 @@ project source code (pelican branch). To publish either run the code below.</p>
                  <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;ISO-8859-1&#39;</span><span class="p">,</span> <span class="c1"># to prevent unicode error</span>
                  <span class="n">keep_default_na</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="c1">#infer_datetime_format=True,</span>
                  <span class="n">parse_dates</span> <span class="o">=</span> <span class="n">date_cols</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
@@ -236,7 +237,7 @@ project source code (pelican branch). To publish either run the code below.</p>
                   <span class="n">skip_footer</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
                   <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
                   <span class="n">names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
-                  <span class="n">sheet_name</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+                  <span class="n">sheet_name</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
 
@@ -276,6 +277,19 @@ project source code (pelican branch). To publish either run the code below.</p>
 
 <h4>Write</h4>
 <p><code>df.to_csv("../local-data/output/shuba_data_subset.csv", index=True)</code></p>
+<h3>Pickle</h3>
+<div class="highlight"><pre><span></span><span class="o">#</span> <span class="n">save</span> <span class="k">as</span> <span class="n">pickle</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">open</span><span class="p">(</span><span class="s1">&#39;../local-data/input/filename.pickle&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">pickle</span><span class="p">.</span><span class="n">dump</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="n">f</span><span class="p">.</span><span class="k">close</span><span class="p">()</span>
+
+<span class="o">#</span> <span class="k">read</span> <span class="n">pickle</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;../local-data/input/filename.pickle&#39;</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+
 <h3>Handling Dates</h3>
 <h4>Create Date Features</h4>
 <div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">time</span> <span class="k">conversion</span> <span class="n">helper</span> <span class="n">variables</span>
@@ -308,13 +322,42 @@ project source code (pelican branch). To publish either run the code below.</p>
 
 <h3>Inspect</h3>
 <h4>Duplicate rows</h4>
-<p><code>print('# of duplicate rows:{}'.format(len(df)-len(df.drop_duplicates())))</code></p>
+<p>(see here)[https://thispointer.com/pandas-find-duplicate-rows-in-a-dataframe-based-on-all-or-selected-columns-using-dataframe-duplicated-in-python/#:~:text=To%20find%20%26%20select%20the%20duplicate,argument%20is%20'first').]</p>
+<div class="highlight"><pre><span></span><span class="err"># Select all duplicate rows based on all columns</span>
+<span class="err">df[df.duplicated(keep=False)]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err"># Select all duplicate rows based on one column</span>
+<span class="err">df[df.duplicated([&#39;Name&#39;])]</span>
+</pre></div>
+
+
+<p><code>df[df.duplicated(['IncidentNumber'], keep=False)].sort_values(by='IncidentNumber')</code></p>
 <h4>Duplicates in a column</h4>
 <p><code>df.duplicated(subset='col_name', keep='first').count()</code></p>
+<h4>Create columns from row with same ID</h4>
+<div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">get</span> <span class="n">duplicates</span>
+<span class="n">tmp</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">.</span><span class="n">duplicated</span><span class="p">([</span><span class="s1">&#39;IncidentNumber&#39;</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="k">False</span><span class="p">)].</span><span class="n">sort_values</span><span class="p">(</span><span class="k">by</span><span class="o">=</span><span class="s1">&#39;IncidentNumber&#39;</span><span class="p">)</span>
+<span class="o">#</span> <span class="k">create</span> <span class="k">new</span> <span class="n">colums</span>
+<span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">tmp</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;IncidentNumber&#39;</span><span class="p">,</span> <span class="n">tmp</span><span class="p">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;IncidentNumber&#39;</span><span class="p">])</span>
+                      <span class="p">.</span><span class="n">cumcount</span><span class="p">()])[[</span><span class="s1">&#39;Comments&#39;</span><span class="p">,</span> <span class="s1">&#39;GoodServiceRecoveryEstimate&#39;</span><span class="p">]]</span>
+         <span class="p">.</span><span class="n">unstack</span><span class="p">(</span><span class="n">fill_value</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+         <span class="p">.</span><span class="n">add_prefix</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+      <span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="n">len</span><span class="p">(</span><span class="n">tmp</span><span class="p">))</span>
+
+<span class="o">#</span> <span class="n">flatten</span> <span class="n">multiindex</span> <span class="k">column</span> <span class="n">headers</span>
+<span class="n">tmp</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="k">map</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">.</span><span class="k">join</span><span class="p">)</span>
+<span class="n">tmp</span> 
+</pre></div>
+
+
 <h4>Count missing values</h4>
 <div class="highlight"><pre><span></span><span class="n">missing</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="p">(</span><span class="n">missing</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;cnt&#39;</span><span class="p">)</span>
- <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;cnt&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">missing</span> <span class="o">=</span> <span class="p">(</span><span class="n">missing</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;cnt&#39;</span><span class="p">)</span>
+           <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;cnt&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">missing</span><span class="p">[</span><span class="n">missing</span><span class="p">[</span><span class="s1">&#39;cnt&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
 
@@ -343,6 +386,13 @@ project source code (pelican branch). To publish either run the code below.</p>
                                               <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">k</span> <span class="ow">in</span> <span class="n">x</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kw</span><span class="p">])</span>
                                               <span class="k">else</span> <span class="s1">&#39;Other&#39;</span><span class="p">))</span>
 <span class="n">df</span><span class="o">.</span><span class="n">contact_type2</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+
+<h3>Fill Missing</h3>
+<h4>Fill missing values with median</h4>
+<div class="highlight"><pre><span></span><span class="err"># fill the missing values of Fare</span>
+<span class="err">test_df[&#39;Fare&#39;].fillna(test_df[&#39;Fare&#39;].dropna().median(), inplace=True)</span>
 </pre></div>
 
 
@@ -383,17 +433,19 @@ project source code (pelican branch). To publish either run the code below.</p>
 
 
 <h4>Add column with new value based on values in other cols:</h4>
-<div class="highlight"><pre><span></span><span class="err">conditions = [</span>
-<span class="err">    (data.company == &#39;unknown&#39;) &amp;  (data.is_costa == 1)</span>
-<span class="err">]</span>
+<div class="highlight"><pre><span></span><span class="err">conditions = [(data.company == &#39;unknown&#39;) &amp;  (data.is_costa == 1)]</span>
 <span class="err">outputs = [&#39;costa&#39;]</span>
-<span class="err">data.company = np.select(conditions, outputs, data.company)</span>
+<span class="err">data.company = np.select(conditions, outputs, default=data.company)</span>
 </pre></div>
 
 
 <h3>Merge</h3>
 <h4>Merge on index</h4>
-<div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="p">(</span><span class="n">df1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><span class="c1"># make sure that both indexes are of the same type</span>
+<span class="n">df1</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">df2</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="p">(</span><span class="n">df1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span>
                 <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span>
                 <span class="n">suffixes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_x&#39;</span><span class="p">,</span> <span class="s1">&#39;_y&#39;</span><span class="p">],</span>
                 <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
@@ -404,7 +456,10 @@ project source code (pelican branch). To publish either run the code below.</p>
 
 <h3>groupby</h3>
 <h4>generic groupby</h4>
-<div class="highlight"><pre><span></span>
+<div class="highlight"><pre><span></span><span class="err">(</span><span class="nf">df</span><span class="p">[[</span><span class="err">&#39;</span><span class="no">FamilySize</span><span class="err">&#39;</span><span class="p">,</span> <span class="err">&#39;</span><span class="no">Survived</span><span class="err">&#39;</span><span class="p">]]</span>
+<span class="na">.groupby</span><span class="p">([</span><span class="err">&#39;</span><span class="no">FamilySize</span><span class="err">&#39;</span><span class="p">],</span> <span class="no">as_index</span><span class="err">=</span><span class="no">False</span><span class="p">)</span>
+ <span class="na">.mean</span><span class="p">()</span>
+ <span class="na">.sort_values</span><span class="p">(</span><span class="no">by</span><span class="err">=&#39;</span><span class="no">Survived</span><span class="err">&#39;</span><span class="p">,</span> <span class="no">ascending</span><span class="err">=</span><span class="no">False</span><span class="p">))</span>
 </pre></div>
 
 
@@ -431,6 +486,20 @@ project source code (pelican branch). To publish either run the code below.</p>
 <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">gpd</span><span class="o">.</span><span class="n">caller</span><span class="p">,</span> <span class="n">gpd</span><span class="o">.</span><span class="n">cnt</span><span class="p">))</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;nbr_tickets_opened&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">customer_display_name</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+
+<h3>Pivot</h3>
+<h4>Compute ratio from a binary split for each UID</h4>
+<div class="highlight"><pre><span></span><span class="n">gpd</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;v_incident_uid&#39;</span><span class="p">,</span> <span class="s1">&#39;Incident Number&#39;</span><span class="p">,</span> <span class="s1">&#39;v_role&#39;</span><span class="p">])[</span><span class="s1">&#39;v_role&#39;</span><span class="p">]</span>
+ <span class="p">.</span><span class="k">size</span><span class="p">()</span>
+ <span class="p">.</span><span class="n">to_frame</span><span class="p">()</span>
+ <span class="p">.</span><span class="k">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="err">{</span><span class="s1">&#39;v_role&#39;</span><span class="p">:</span><span class="s1">&#39;cnt&#39;</span><span class="err">}</span><span class="p">)</span>
+<span class="p">).</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="n">gpd</span> <span class="o">=</span> <span class="n">gpd</span><span class="p">.</span><span class="n">pivot</span><span class="p">(</span><span class="k">index</span><span class="o">=</span><span class="s1">&#39;v_incident_uid&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;v_role&#39;</span><span class="p">,</span> <span class="k">values</span><span class="o">=</span><span class="s1">&#39;cnt&#39;</span><span class="p">)</span>
+<span class="n">gpd</span><span class="p">[</span><span class="s1">&#39;ratio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">gpd</span><span class="p">.</span><span class="k">Primary</span> <span class="o">/</span> <span class="p">(</span><span class="n">gpd</span><span class="p">.</span><span class="k">Primary</span> <span class="o">+</span> <span class="n">gpd</span><span class="p">.</span><span class="n">Reactionary</span><span class="p">)).</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">gpd</span><span class="p">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
 </pre></div>
 
 
@@ -599,6 +668,14 @@ project source code (pelican branch). To publish either run the code below.</p>
 </pre></div>
 
 
+<p>```</p>
+<h1>with percentages</h1>
+<p>pd.crosstab(df.FamilySize, # ROWS
+              df.Survived, # COLS
+              values=df.PassengerId, 
+              aggfunc=pd.Series.nunique,
+              normalize='index',
+              dropna=False).round(2)</p>
 <h3>Links to review</h3>
 <ul>
 <li><a href="https://towardsdatascience.com/a-really-simple-way-to-edit-row-by-row-in-a-pandas-dataframe-75d339cbd313">A Really Simple Way to Edit Row by Row in a Pandas DataFrame</a></li>
