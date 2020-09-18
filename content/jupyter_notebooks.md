@@ -20,6 +20,10 @@ Summary: Jupyter Notebooks
 
 `jupyter lab --ip=0.0.0.0`
 
+* [Running Jupyter Notebooks on a Ubuntu Server](https://hackersandslackers.com/running-jupyter-notebooks-on-a-ubuntu-server/)
+* [access jupyter notebook running on vm](https://stackoverflow.com/questions/38545198/access-jupyter-notebook-running-on-vm)
+* [Can't access jupyter notebook in local vagrant virtualbox via local browser](https://stackoverflow.com/questions/47597515/cant-access-jupyter-notebook-in-local-vagrant-virtualbox-via-local-browser)
+
 #### Installing IPywidgets
 
 * **make sure notebook is trusted**

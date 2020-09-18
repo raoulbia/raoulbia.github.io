@@ -259,7 +259,7 @@ print(df['category'].isna().sum())
 ##### Replace empty string with NA then drop NA's
 
 ```python
-df.replace(r'^\s*$', np.nan, regex=True) 
+df = df.replace(r'\s+', np.nan, regex=True).replace('', np.nan) 
 df.dropna()
 ```
 
@@ -587,6 +587,7 @@ pd.crosstab(df.FamilySize, # ROWS
               aggfunc=pd.Series.nunique,
               normalize='index',
               dropna=False).round(2)
+```
 
 ### Links to review
 
