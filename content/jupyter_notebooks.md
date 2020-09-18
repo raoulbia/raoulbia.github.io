@@ -16,6 +16,10 @@ Summary: Jupyter Notebooks
 
 <br>
 
+#### Making Jupyter available on HOST browser
+
+`jupyter lab --ip=0.0.0.0`
+
 #### Installing IPywidgets
 
 * **make sure notebook is trusted**
@@ -30,6 +34,10 @@ python -m ipykernel install --user --name=myEnv
 jupyter nbextension enable --py widgetsnbextension
 jupyter labextension list
 ```
+
+#### Installing Notebook TOC (Jupyter Lab)
+
+`jupyter labextension install @jupyterlab/toc`
 
 #### Alerts
 

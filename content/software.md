@@ -128,6 +128,9 @@ bash Miniconda3-latest-Linux-x86_64.sh
 
 #### Misc. 
 
+`sudo apt-get install terminator`
+
+
 to view a .gv GraphViz file (will crate a pdf)
 
     f = Source.from_file('file-name.gv')

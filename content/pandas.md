@@ -41,6 +41,7 @@ df = pd.read_csv(fp,
                  encoding='ISO-8859-1', # to prevent unicode error
                  keep_default_na=True,
                  dayfirst=True,
+                 #infer_datetime_format=True,
                  parse_dates = date_cols)
 df.shape
 ```
@@ -56,7 +57,7 @@ df = pd.read_excel("../local-data/file.xlsx",
 				  skip_footer=0, 
 				  index_col=None, 
 				  names=None, 
-				  sheet_name=0))
+				  sheet_name=0)
 ```
 
 #### Read tsv.gz
@@ -93,10 +94,25 @@ for filename in all_files:
 df = pd.concat(li, axis=0, ignore_index=True)
 df.shape
 ```
-    
+   
 #### Write
 
 `df.to_csv("../local-data/output/shuba_data_subset.csv", index=True)`
+
+
+### Pickle
+
+```
+# save as pickle
+f = open('../local-data/input/filename.pickle', 'wb')
+pickle.dump(df, f)
+f.close()
+
+# read pickle
+df = pd.read_pickle('../local-data/input/filename.pickle')
+print(df.shape)
+df.head(1)
+```
 
 ### Handling Dates
 
@@ -132,20 +148,50 @@ data['resolution_time_hrs']= (data['resolution_time_hrs']
 
 ### Inspect
 
-#### Duplicate rows
+#### Duplicate rows 
+(see here)[https://thispointer.com/pandas-find-duplicate-rows-in-a-dataframe-based-on-all-or-selected-columns-using-dataframe-duplicated-in-python/#:~:text=To%20find%20%26%20select%20the%20duplicate,argument%20is%20'first').]
 
-`print('# of duplicate rows:{}'.format(len(df)-len(df.drop_duplicates())))`
+```
+# Select all duplicate rows based on all columns
+df[df.duplicated(keep=False)]
+```
+
+```
+# Select all duplicate rows based on one column
+df[df.duplicated(['Name'])]
+```
+
+`df[df.duplicated(['IncidentNumber'], keep=False)].sort_values(by='IncidentNumber')`
 
 #### Duplicates in a column
 
 `df.duplicated(subset='col_name', keep='first').count()`
 
+#### Create columns from row with same ID
+
+```
+# get duplicates
+tmp = df[df.duplicated(['IncidentNumber'], keep=False)].sort_values(by='IncidentNumber')
+# create new colums
+tmp = (tmp.set_index(['IncidentNumber', tmp.groupby(['IncidentNumber'])
+                      .cumcount()])[['Comments', 'GoodServiceRecoveryEstimate']]
+         .unstack(fill_value='')
+         .add_prefix('')
+      )
+print(len(tmp))
+
+# flatten multiindex column headers
+tmp.columns = tmp.columns.map('_'.join)
+tmp	
+```
+
 #### Count missing values
 
 ```python
 missing = df.copy().isna().sum()
-(missing.reset_index(name='cnt')
- .sort_values(by='cnt', ascending=True))
+missing = (missing.reset_index(name='cnt')
+           .sort_values(by='cnt', ascending=False))
+missing[missing['cnt']>0]
 ```
 
 or
@@ -186,6 +232,14 @@ df['contact_type2'] = (df.contact_type.apply(lambda x : x
 df.contact_type2.value_counts(normalize=True)
 ```
 
+### Fill Missing
+
+#### Fill missing values with median
+
+```
+# fill the missing values of Fare
+test_df['Fare'].fillna(test_df['Fare'].dropna().median(), inplace=True)
+```
 
 ### Replace values
 
@@ -238,11 +292,9 @@ len(data[data.is_costa==1])
 #### Add column with new value based on values in other cols:
 
 ```
-conditions = [
-    (data.company == 'unknown') &  (data.is_costa == 1)
-]
+conditions = [(data.company == 'unknown') &  (data.is_costa == 1)]
 outputs = ['costa']
-data.company = np.select(conditions, outputs, data.company)
+data.company = np.select(conditions, outputs, default=data.company)
 ```
 
 ### Merge
@@ -250,6 +302,10 @@ data.company = np.select(conditions, outputs, data.company)
 #### Merge on index
 
 ```python
+# make sure that both indexes are of the same type
+df1.index = df1.index.astype(int)
+df2.index = df2.index.astype(int)
+
 df = (df1.merge(df2,
                 how='left',
                 suffixes = ['_x', '_y'],
@@ -263,7 +319,10 @@ print(df.shape)
 #### generic groupby
 
 ```
-
+(df[['FamilySize', 'Survived']]
+.groupby(['FamilySize'], as_index=False)
+ .mean()
+ .sort_values(by='Survived', ascending=False))
 ```
 
 ```python
@@ -293,6 +352,22 @@ d = dict(zip(gpd.caller, gpd.cnt))
 df['nbr_tickets_opened'] = df.customer_display_name.map(d)
 df.head()
 ```
+### Pivot
+
+#### Compute ratio from a binary split for each UID
+
+```
+gpd = (df.groupby(['v_incident_uid', 'Incident Number', 'v_role'])['v_role']
+ .size()
+ .to_frame()
+ .rename(columns={'v_role':'cnt'})
+).reset_index()
+
+gpd = gpd.pivot(index='v_incident_uid', columns='v_role', values='cnt')
+gpd['ratio'] = (gpd.Primary / (gpd.Primary + gpd.Reactionary)).round(2)
+gpd.reset_index(inplace=True)
+```
+
 
 ### Selecting Data
 
@@ -503,6 +578,15 @@ tmp = pd.crosstab(df.bat_5tc_service.astype(str), # ROWS
                   dropna=False)#.fillna(value=0)
 tmp.sort_values(by='All', ascending=False).head()
 ```
+
+```
+# with percentages
+pd.crosstab(df.FamilySize, # ROWS
+              df.Survived, # COLS
+              values=df.PassengerId, 
+              aggfunc=pd.Series.nunique,
+              normalize='index',
+              dropna=False).round(2)
 
 ### Links to review
 

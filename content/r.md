@@ -5,8 +5,27 @@ Category: R
 Slug: R
 Summary: R
 
+#### Read Data
 
-#### Useful R snippets
+`load("data_project_backpain.RData")`
+
+```
+data  <- import('superstore.csv', setclass = "tibble")
+head(data)
+```
+### Missing Values
+
+#### Count Missing Values
+
+`sapply(gt, function(x) sum(is.na(gt)))`
+
+#### Create vector from column and drop missing values
+
+```
+x <- gt[!is.na(gt$LandAverageTemperature), 2]
+```
+
+#### Misc.
 
 ```
 library(rstudioapi)
@@ -17,13 +36,14 @@ rm(list=ls())
 #### Making Objects available to RMarkdown
 
 * in R script
-     * `save(all = TRUE, file= "all.rda")`
-     * `save(object1.name, object2.name, file= "all.rda")`
-    ```
+
+`save(all = TRUE, file= "all.rda")`
+`save(object1.name, object2.name, file= "all.rda")`
+
 
 * in RMD file
 
-    `load("all.rda")`
+`load("all.rda")`
 
 
 #### Benchmarking
@@ -61,6 +81,7 @@ How sliding window works:
 * 1st iter: x[3 - 3 + 1, 3] gives x[1, 3]
 * 2nd iter: x[4 - 3 + 1, 4] gives x[2, 4]
 * ...
+
 ```
 window <- 3 
 for(i in seq(window, n)) {
@@ -69,8 +90,15 @@ res[i] <- mean(x_subset)
 }
 ```
 
+#### R: Packages
+
+* [caret](https://heartbeat.fritz.ai/using-caret-in-r-to-classify-term-deposit-subscriptions-for-a-bank-bd40ff5cc15)
+* [Using the recipes package for easy pre-processing](http://www.rebeccabarter.com/blog/2019-06-06_pre_processing/)
+* [bestNormalize](https://cran.r-project.org/web/packages/bestNormalize/vignettes/bestNormalize.html)
+
 #### R: Useful Links
 
+* [Populating Missing Dates with Complete and Fill Functions in R and Exploratory](https://blog.exploratory.io/populating-missing-dates-with-complete-and-fill-functions-in-r-and-exploratory-79f2a321e6b5)
 * [MarinStatsLectures](https://www.youtube.com/user/marinstatlectures/playlists)
 * [Notebooks with R Markdown](https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Notebooks-with-R-Markdown)
 * [Data Cleaning with R and the Tidyverse: Detecting Missing Values](https://towardsdatascience.com/data-cleaning-with-r-and-the-tidyverse-detecting-missing-values-ea23c519bc62)
