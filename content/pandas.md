@@ -590,5 +590,5 @@ pd.crosstab(df.FamilySize, # ROWS
 ```
 
 ### Links to review
-
+* [Using iloc, loc, & ix to select rows and columns in Pandas DataFrames](https://www.shanelynn.ie/select-pandas-dataframe-rows-and-columns-using-iloc-loc-and-ix/)
 * [A Really Simple Way to Edit Row by Row in a Pandas DataFrame](https://towardsdatascience.com/a-really-simple-way-to-edit-row-by-row-in-a-pandas-dataframe-75d339cbd313)

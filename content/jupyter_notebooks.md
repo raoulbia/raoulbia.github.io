@@ -43,6 +43,17 @@ jupyter labextension list
 
 `jupyter labextension install @jupyterlab/toc`
 
+#### Converting Notebook to PDF or HTML
+
+Pre-requisites:
+
+`sudo apt-get install texlive texlive-xetex texlive-latex-extra texlive-generic-extra pandoc`
+
+Conversion:
+
+`jupyter nbconvert --to html features_applied.ipynb --TemplateExporter.exclude_input=True`
+
+
 #### Alerts
 
 ```python
