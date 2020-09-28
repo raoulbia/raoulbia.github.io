@@ -116,6 +116,21 @@ df.head(1)
 
 ### Handling Dates
 
+#### Filling missing dates and values within group
+
+```
+# gpd['Date'] = pd.to_datetime(gpd['Date'])
+gpd = \
+gpd.set_index(
+    ['Date', 'Verktitel']
+).unstack(
+    fill_value=0
+).asfreq(
+    'MS', fill_value=0
+).stack().sort_index(level=1).reset_index()
+gpd.head()
+```
+
 #### Create Date Features
 ```
 # time conversion helper variables
@@ -324,6 +339,15 @@ print(df.shape)
  .mean()
  .sort_values(by='Survived', ascending=False))
 ```
+#### groupby and sum two columns
+
+```
+gpd = (df.groupby(['Date', 'Verktitel'])[['Belopp', 'Antal Spelningar']]
+       .agg({'Belopp' : sum, 'Antal Spelningar' : sum})
+      )
+gpd = gpd.reset_index()
+gpd.head()
+```
 
 ```python
 (df.groupby('caller')
@@ -352,7 +376,10 @@ d = dict(zip(gpd.caller, gpd.cnt))
 df['nbr_tickets_opened'] = df.customer_display_name.map(d)
 df.head()
 ```
-### Pivot
+### Melt & Pivot
+
+`gpd.pivot(index='Date', columns='Verktitel', values='Belopp')`
+`tmp = tmp.melt('Date', var_name='cols',  value_name='vals')`
 
 #### Compute ratio from a binary split for each UID
 

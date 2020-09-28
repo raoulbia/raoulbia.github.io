@@ -13,6 +13,7 @@ Summary: Linux
 * `echo $XDG_CURRENT_DESKTOP`
 * `sudo find ~/ -name rdflib`
 * `sudo find / -name "*.cls"`
+* ``` sudo kill -9 `sudo lsof -t -i:8888` ```
 
 #### Handy Tools
 

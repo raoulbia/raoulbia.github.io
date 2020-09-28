@@ -1,7 +1,7 @@
 Title: Logistic Regression
 Date: 2017-09-03
 Category: Logistic Regression
-Slug: logistic_regression
+Slug: Logistic Regression
 Summary: Logistic Regression
 
 On this page I keep some ontes on logistic regression.

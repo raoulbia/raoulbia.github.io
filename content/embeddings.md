@@ -1,7 +1,7 @@
 Title: Embeddings
 Date: 2017-09-01
 Category: Embeddings
-Slug: Embeddings
+Slug: embeddings
 Summary: Some notes about Embeddings
 
 On this page I keep some notes abbout [GloVe]({filename}./embeddings_glove.md)

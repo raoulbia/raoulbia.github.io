@@ -39,9 +39,14 @@ jupyter nbextension enable --py widgetsnbextension
 jupyter labextension list
 ```
 
-#### Installing Notebook TOC (Jupyter Lab)
+#### Installing Jupyter Lab Extensions
 
-`jupyter labextension install @jupyterlab/toc`
+```
+jupyter labextension install @jupyterlab/toc
+jupyter labextension install @jupyterlab/plotly-extension
+```
+for plotly see [here](https://stackoverflow.com/questions/54936125/plotly-gives-an-empty-field-as-output-in-jupyter-lab) for more.
+
 
 #### Converting Notebook to PDF or HTML
 
