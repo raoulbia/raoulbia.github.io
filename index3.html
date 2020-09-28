@@ -131,6 +131,20 @@
 
 
 <h3>Handling Dates</h3>
+<h4>Filling missing dates and values within group</h4>
+<div class="highlight"><pre><span></span><span class="err"># gpd[&#39;Date&#39;] = pd.to_datetime(gpd[&#39;Date&#39;])</span>
+<span class="err">gpd = \</span>
+<span class="err">gpd.set_index(</span>
+<span class="err">    [&#39;Date&#39;, &#39;Verktitel&#39;]</span>
+<span class="err">).unstack(</span>
+<span class="err">    fill_value=0</span>
+<span class="err">).asfreq(</span>
+<span class="err">    &#39;MS&#39;, fill_value=0</span>
+<span class="err">).stack().sort_index(level=1).reset_index()</span>
+<span class="err">gpd.head()</span>
+</pre></div>
+
+
 <h4>Create Date Features</h4>
 <div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">time</span> <span class="k">conversion</span> <span class="n">helper</span> <span class="n">variables</span>
 <span class="n">seconds_in_day</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span>
@@ -303,6 +317,15 @@
 </pre></div>
 
 
+<h4>groupby and sum two columns</h4>
+<div class="highlight"><pre><span></span><span class="err">gpd = (df.groupby([&#39;Date&#39;, &#39;Verktitel&#39;])[[&#39;Belopp&#39;, &#39;Antal Spelningar&#39;]]</span>
+<span class="err">       .agg({&#39;Belopp&#39; : sum, &#39;Antal Spelningar&#39; : sum})</span>
+<span class="err">      )</span>
+<span class="err">gpd = gpd.reset_index()</span>
+<span class="err">gpd.head()</span>
+</pre></div>
+
+
 <div class="highlight"><pre><span></span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;caller&#39;</span><span class="p">)</span>
  <span class="o">.</span><span class="n">size</span><span class="p">()</span>
  <span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
@@ -329,7 +352,9 @@
 </pre></div>
 
 
-<h3>Pivot</h3>
+<h3>Melt &amp; Pivot</h3>
+<p><code>gpd.pivot(index='Date', columns='Verktitel', values='Belopp')</code>
+<code>tmp = tmp.melt('Date', var_name='cols',  value_name='vals')</code></p>
 <h4>Compute ratio from a binary split for each UID</h4>
 <div class="highlight"><pre><span></span><span class="n">gpd</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;v_incident_uid&#39;</span><span class="p">,</span> <span class="s1">&#39;Incident Number&#39;</span><span class="p">,</span> <span class="s1">&#39;v_role&#39;</span><span class="p">])[</span><span class="s1">&#39;v_role&#39;</span><span class="p">]</span>
  <span class="p">.</span><span class="k">size</span><span class="p">()</span>
@@ -566,7 +591,7 @@
 
                     <a href="./page/2" class="prev_page">&larr;&nbsp;Previous</a>
                     <a href="./page/4" class="next_page">Next&nbsp;&rarr;</a>
-                    <span>Page 3 of 15</span>
+                    <span>Page 3 of 16</span>
                 </div>
 
             <div class="clear"></div>
