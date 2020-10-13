@@ -1,5 +1,5 @@
 Title: Graph Problems
-Date: 2017-10-30
+Date: 2017-07-02
 Category: Graph Problems
 Slug: graph_problems
 Summary: Graph Theory

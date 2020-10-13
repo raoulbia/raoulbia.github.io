@@ -32,7 +32,16 @@
                     <a href="./R.html" rel="bookmark" title="Permanent Link to &quot;R&quot;">R</a>
                 </h2>
 
-                <h4>Read Data</h4>
+                <h4>Script Header</h4>
+<div class="highlight"><pre><span></span><span class="n">library</span><span class="p">(</span><span class="n">rstudioapi</span><span class="p">)</span>
+<span class="n">setwd</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">rstudioapi</span><span class="p">::</span><span class="n">getActiveDocumentContext</span><span class="p">()</span><span class="err">$</span><span class="n">path</span><span class="p">))</span>
+<span class="n">rm</span><span class="p">(</span><span class="nb">list</span><span class="o">=</span><span class="n">ls</span><span class="p">())</span>
+
+<span class="n">library</span><span class="p">(</span><span class="n">rio</span><span class="p">)</span> <span class="c1"># import csv</span>
+</pre></div>
+
+
+<h4>Read Data</h4>
 <p><code>load("data_project_backpain.RData")</code></p>
 <div class="highlight"><pre><span></span><span class="n">data</span>  <span class="o">&lt;-</span> <span class="nf">import</span><span class="p">(</span><span class="s">&#39;superstore.csv&#39;</span><span class="p">,</span> <span class="n">setclass</span> <span class="o">=</span> <span class="s">&quot;tibble&quot;</span><span class="p">)</span>
 <span class="nf">head</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -44,13 +53,6 @@
 <p><code>sapply(gt, function(x) sum(is.na(gt)))</code></p>
 <h4>Create vector from column and drop missing values</h4>
 <div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">gt</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">gt</span><span class="o">$</span><span class="n">LandAverageTemperature</span><span class="p">),</span> <span class="m">2</span><span class="p">]</span>
-</pre></div>
-
-
-<h4>Misc.</h4>
-<div class="highlight"><pre><span></span><span class="err">library(rstudioapi)</span>
-<span class="err">setwd(dirname(rstudioapi::getActiveDocumentContext()$path))</span>
-<span class="err">rm(list=ls())</span>
 </pre></div>
 
 
@@ -111,7 +113,11 @@
 <li><a href="http://www.rebeccabarter.com/blog/2019-06-06_pre_processing/">Using the recipes package for easy pre-processing</a></li>
 <li><a href="https://cran.r-project.org/web/packages/bestNormalize/vignettes/bestNormalize.html">bestNormalize</a></li>
 </ul>
-<h4>R: Useful Links</h4>
+<h4>R: Plotting</h4>
+<ul>
+<li><a href="https://stackoverflow.com/questions/1828742/rotating-axis-labels-in-r">SO: Rotating Axis labels</a></li>
+</ul>
+<h4>R: Other Links</h4>
 <ul>
 <li><a href="https://blog.exploratory.io/populating-missing-dates-with-complete-and-fill-functions-in-r-and-exploratory-79f2a321e6b5">Populating Missing Dates with Complete and Fill Functions in R and Exploratory</a></li>
 <li><a href="https://www.youtube.com/user/marinstatlectures/playlists">MarinStatsLectures</a></li>

@@ -1,7 +1,7 @@
 Title: Probabilities
-Date: 2017-10-28
+Date: 2017-10-03
 Category: Probabilities
-Slug: Probabilities
+Slug: probabilities
 Summary: Probabilities
 
 <br>

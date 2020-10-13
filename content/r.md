@@ -5,6 +5,17 @@ Category: R
 Slug: R
 Summary: R
 
+
+#### Script Header
+
+```
+library(rstudioapi)
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+rm(list=ls())
+
+library(rio) # import csv
+```
+
 #### Read Data
 
 `load("data_project_backpain.RData")`
@@ -13,6 +24,7 @@ Summary: R
 data  <- import('superstore.csv', setclass = "tibble")
 head(data)
 ```
+
 ### Missing Values
 
 #### Count Missing Values
@@ -23,14 +35,6 @@ head(data)
 
 ```
 x <- gt[!is.na(gt$LandAverageTemperature), 2]
-```
-
-#### Misc.
-
-```
-library(rstudioapi)
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-rm(list=ls())
 ```
 
 #### Making Objects available to RMarkdown
@@ -96,7 +100,11 @@ res[i] <- mean(x_subset)
 * [Using the recipes package for easy pre-processing](http://www.rebeccabarter.com/blog/2019-06-06_pre_processing/)
 * [bestNormalize](https://cran.r-project.org/web/packages/bestNormalize/vignettes/bestNormalize.html)
 
-#### R: Useful Links
+#### R: Plotting
+
+* [SO: Rotating Axis labels](https://stackoverflow.com/questions/1828742/rotating-axis-labels-in-r)
+
+#### R: Other Links
 
 * [Populating Missing Dates with Complete and Fill Functions in R and Exploratory](https://blog.exploratory.io/populating-missing-dates-with-complete-and-fill-functions-in-r-and-exploratory-79f2a321e6b5)
 * [MarinStatsLectures](https://www.youtube.com/user/marinstatlectures/playlists)

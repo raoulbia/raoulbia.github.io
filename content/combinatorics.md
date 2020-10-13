@@ -1,7 +1,7 @@
 Title: Combinatorics
-Date: 2017-10-29
+Date: 2017-10-04
 Category: Combinatorics
-Slug: Combinatorics
+Slug: combinatorics
 Summary: Combinatorics
 
 

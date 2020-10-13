@@ -1,7 +1,7 @@
 Title: Linear Algebra 
 Date: 2017-10-01
 Category: Linear Algebra
-Slug: Linear Algebra
+Slug: linear_algebra
 Summary: Some notes about Linear Algebra
 
 On this page I keep some notes abbout GloVe and word2vec word embeddings. It's work in progress...

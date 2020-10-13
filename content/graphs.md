@@ -1,5 +1,5 @@
 Title: Graphs
-Date: 2017-10-31
+Date: 2017-07-01
 Category: Graphs
 Slug: graphs
 Summary: Graph Theory

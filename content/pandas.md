@@ -314,6 +314,14 @@ data.company = np.select(conditions, outputs, default=data.company)
 
 ### Merge
 
+#### Stack the DataFrames on top of each other
+
+`vertical_stack = pd.concat([survey_sub, survey_sub_last10], axis=0)`
+
+#### Place the DataFrames side by side
+
+`horizontal_stack = pd.concat([survey_sub, survey_sub_last10], axis=1)`
+
 #### Merge on index
 
 ```python
@@ -604,6 +612,7 @@ tmp = pd.crosstab(df.bat_5tc_service.astype(str), # ROWS
                   margins=True,
                   dropna=False)#.fillna(value=0)
 tmp.sort_values(by='All', ascending=False).head()
+tmp = pd.DataFrame(tmp.to_records()) # flatten
 ```
 
 ```
@@ -619,3 +628,4 @@ pd.crosstab(df.FamilySize, # ROWS
 ### Links to review
 * [Using iloc, loc, & ix to select rows and columns in Pandas DataFrames](https://www.shanelynn.ie/select-pandas-dataframe-rows-and-columns-using-iloc-loc-and-ix/)
 * [A Really Simple Way to Edit Row by Row in a Pandas DataFrame](https://towardsdatascience.com/a-really-simple-way-to-edit-row-by-row-in-a-pandas-dataframe-75d339cbd313)
+* [How to Use MultiIndex in Pandas](https://towardsdatascience.com/how-to-use-multiindex-in-pandas-to-level-up-your-analysis-aeac7f451fce)
