@@ -295,6 +295,10 @@
 
 
 <h3>Merge</h3>
+<h4>Stack the DataFrames on top of each other</h4>
+<p><code>vertical_stack = pd.concat([survey_sub, survey_sub_last10], axis=0)</code></p>
+<h4>Place the DataFrames side by side</h4>
+<p><code>horizontal_stack = pd.concat([survey_sub, survey_sub_last10], axis=1)</code></p>
 <h4>Merge on index</h4>
 <div class="highlight"><pre><span></span><span class="c1"># make sure that both indexes are of the same type</span>
 <span class="n">df1</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
@@ -531,6 +535,7 @@
                   <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                   <span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="c1">#.fillna(value=0)</span>
 <span class="n">tmp</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;All&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">to_records</span><span class="p">())</span> <span class="c1"># flatten</span>
 </pre></div>
 
 
@@ -548,6 +553,7 @@
 <ul>
 <li><a href="https://www.shanelynn.ie/select-pandas-dataframe-rows-and-columns-using-iloc-loc-and-ix/">Using iloc, loc, &amp; ix to select rows and columns in Pandas DataFrames</a></li>
 <li><a href="https://towardsdatascience.com/a-really-simple-way-to-edit-row-by-row-in-a-pandas-dataframe-75d339cbd313">A Really Simple Way to Edit Row by Row in a Pandas DataFrame</a></li>
+<li><a href="https://towardsdatascience.com/how-to-use-multiindex-in-pandas-to-level-up-your-analysis-aeac7f451fce">How to Use MultiIndex in Pandas</a></li>
 </ul>
                 <div class="clear"></div>
 
