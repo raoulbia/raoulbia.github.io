@@ -2,7 +2,7 @@ Title: R
 Date: 2018-02-20
 Modified: 2010-12-04 19:30
 Category: R
-Slug: r
+Slug: R
 Summary: R
 
 #### Useful Snippets
@@ -28,28 +28,26 @@ library(rio) # import csv
 data  <- import('superstore.csv', setclass = "tibble")
 head(data)
 ```
-### select only numeric columns
+#### Select only numeric columns
 
 ```
 nums <- unlist(lapply(df, is.numeric))  
 df[ , nums]
 ```
 
-### Coerce multiple columns to factors at once
+#### Coerce multiple columns to factors at once
 
 ```
 cols <- c("A", "C", "D", "H")
 df[cols] <- lapply(df[cols], factor)  ## as.factor() could also be used
 ```
 
-### Exclude columns by name
+#### Exclude columns by name
 
 ```
 exclude <- c("Neighborhood", "Exterior2nd",)
 df[ , -which(names(df) %in% exclude)]
 ```
-
-### Missing Values
 
 #### Count Missing Values
 
@@ -124,15 +122,10 @@ res[i] <- mean(x_subset)
 * [Using the recipes package for easy pre-processing](http://www.rebeccabarter.com/blog/2019-06-06_pre_processing/)
 * [bestNormalize](https://cran.r-project.org/web/packages/bestNormalize/vignettes/bestNormalize.html)
 
-#### R: Plotting
-
-* [SO: Rotating Axis labels](https://stackoverflow.com/questions/1828742/rotating-axis-labels-in-r)
-
 #### R: Other Links
 
 * [Populating Missing Dates with Complete and Fill Functions in R and Exploratory](https://blog.exploratory.io/populating-missing-dates-with-complete-and-fill-functions-in-r-and-exploratory-79f2a321e6b5)
 * [MarinStatsLectures](https://www.youtube.com/user/marinstatlectures/playlists)
-* [Notebooks with R Markdown](https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Notebooks-with-R-Markdown)
 * [Data Cleaning with R and the Tidyverse: Detecting Missing Values](https://towardsdatascience.com/data-cleaning-with-r-and-the-tidyverse-detecting-missing-values-ea23c519bc62)
 * [Play With Your ML Dataset - Cheatsheet in R](https://medium.com/x8-the-ai-community/play-with-your-ml-dataset-cheatsheet-in-r-bd8451ec6dd7)
 * [Coding in R: Pivot Painlessly](https://towardsdatascience.com/coding-in-r-pivot-painlessly-32e40a0b6c3d)

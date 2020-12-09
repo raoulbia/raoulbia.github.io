@@ -28,7 +28,7 @@
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./r.html" rel="bookmark" title="Permanent Link to &quot;R&quot;">R</a>
+                    <a href="./R.html" rel="bookmark" title="Permanent Link to &quot;R&quot;">R</a>
                 </h2>
 
                 <h4>Useful Snippets</h4>
@@ -52,25 +52,24 @@
 </pre></div>
 
 
-<h3>select only numeric columns</h3>
+<h4>Select only numeric columns</h4>
 <div class="highlight"><pre><span></span><span class="n">nums</span> <span class="o">&lt;-</span> <span class="nf">unlist</span><span class="p">(</span><span class="nf">lapply</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">is.numeric</span><span class="p">))</span>  
 <span class="n">df</span><span class="p">[</span> <span class="p">,</span> <span class="n">nums</span><span class="p">]</span>
 </pre></div>
 
 
-<h3>Coerce multiple columns to factors at once</h3>
+<h4>Coerce multiple columns to factors at once</h4>
 <div class="highlight"><pre><span></span><span class="n">cols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="ss">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;D&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;H&quot;</span><span class="p">)</span><span class="w"></span>
 <span class="n">df</span><span class="o">[</span><span class="n">cols</span><span class="o">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">df</span><span class="o">[</span><span class="n">cols</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">factor</span><span class="p">)</span><span class="w">  </span><span class="err">##</span><span class="w"> </span><span class="k">as</span><span class="p">.</span><span class="n">factor</span><span class="p">()</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">used</span><span class="w"></span>
 </pre></div>
 
 
-<h3>Exclude columns by name</h3>
+<h4>Exclude columns by name</h4>
 <div class="highlight"><pre><span></span><span class="n">exclude</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Neighborhood&quot;</span><span class="p">,</span> <span class="s">&quot;Exterior2nd&quot;</span><span class="p">,)</span>
 <span class="n">df</span><span class="p">[</span> <span class="p">,</span> <span class="o">-</span><span class="nf">which</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">%in%</span> <span class="n">exclude</span><span class="p">)]</span>
 </pre></div>
 
 
-<h3>Missing Values</h3>
 <h4>Count Missing Values</h4>
 <p><code>sapply(df, function(x) sum(is.na(x)))</code></p>
 <h4>Create vector from column and drop missing values</h4>
@@ -135,15 +134,10 @@
 <li><a href="http://www.rebeccabarter.com/blog/2019-06-06_pre_processing/">Using the recipes package for easy pre-processing</a></li>
 <li><a href="https://cran.r-project.org/web/packages/bestNormalize/vignettes/bestNormalize.html">bestNormalize</a></li>
 </ul>
-<h4>R: Plotting</h4>
-<ul>
-<li><a href="https://stackoverflow.com/questions/1828742/rotating-axis-labels-in-r">SO: Rotating Axis labels</a></li>
-</ul>
 <h4>R: Other Links</h4>
 <ul>
 <li><a href="https://blog.exploratory.io/populating-missing-dates-with-complete-and-fill-functions-in-r-and-exploratory-79f2a321e6b5">Populating Missing Dates with Complete and Fill Functions in R and Exploratory</a></li>
 <li><a href="https://www.youtube.com/user/marinstatlectures/playlists">MarinStatsLectures</a></li>
-<li><a href="https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Notebooks-with-R-Markdown">Notebooks with R Markdown</a></li>
 <li><a href="https://towardsdatascience.com/data-cleaning-with-r-and-the-tidyverse-detecting-missing-values-ea23c519bc62">Data Cleaning with R and the Tidyverse: Detecting Missing Values</a></li>
 <li><a href="https://medium.com/x8-the-ai-community/play-with-your-ml-dataset-cheatsheet-in-r-bd8451ec6dd7">Play With Your ML Dataset - Cheatsheet in R</a></li>
 <li><a href="https://towardsdatascience.com/coding-in-r-pivot-painlessly-32e40a0b6c3d">Coding in R: Pivot Painlessly</a></li>
@@ -157,7 +151,7 @@
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./r.html">posted at 00:00</a>
+                    <a href="./R.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/r.html" rel="tag">R</a>
                 </div>
             </article>            <h4 class="date">Feb 20, 2018</h4>
