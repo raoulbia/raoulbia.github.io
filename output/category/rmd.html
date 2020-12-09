@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>code snippets etc. | articles in the "RMD" category</title>
+    <link rel="shortcut icon" type="image/png" href="../favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+
+                <li class="ephemeral selected"><a href="../category/rmd.html">RMD</a></li>
+                <li><a href="..">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="../archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="..">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Feb 20, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../rmd.html" rel="bookmark" title="Permanent Link to &quot;RMD&quot;">RMD</a>
+                </h2>
+
+                <h4>Useful Snippets</h4>
+<ul>
+<li>Footnote: <code>bla bla.^[url]</code></li>
+</ul>
+<h4>Exploring Factor Combinations: Dual Boxplots</h4>
+<div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">SBA_Portion.groups</span><span class="o">:</span><span class="n">New</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">GrAppv</span><span class="p">))</span> <span class="o">+</span> 
+  <span class="nf">geom_boxplot</span><span class="p">(</span><span class="n">lwd</span><span class="o">=</span><span class="m">0.1</span><span class="p">,</span> <span class="n">outlier.size</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">)</span> <span class="o">+</span> 
+  <span class="nf">labs</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s">&quot;SBA Guaranteed Portion : New Business&quot;</span><span class="p">)</span> <span class="o">+</span>
+  <span class="nf">theme</span><span class="p">(</span><span class="n">plot.title</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">10</span><span class="p">),</span>
+        <span class="c1"># axis.ticks.y = element_blank(),</span>
+        <span class="c1"># axis.text.y = element_blank(),</span>
+        <span class="n">axis.title.x</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">8</span><span class="p">),</span>
+        <span class="n">axis.title.y</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">8</span><span class="p">))</span> <span class="o">+</span> 
+  <span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span> <span class="o">=</span> <span class="m">2.5</span><span class="p">,</span> <span class="n">linetype</span><span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="m">0.2</span><span class="p">)</span> <span class="o">+</span>
+  <span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span> <span class="o">=</span> <span class="m">4.5</span><span class="p">,</span> <span class="n">linetype</span><span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="m">0.2</span><span class="p">)</span>
+
+<span class="n">ggrob</span> <span class="o">&lt;-</span> <span class="nf">ggplotGrob</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span>
+<span class="nf">grid.arrange</span><span class="p">(</span><span class="n">ggrob</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+
+
+<h4>Plotting Examples</h4>
+<ul>
+<li><a href="https://rpubs.com/raoulbia/slr">ggplot2 examples</a></li>
+<li><a href="https://stackoverflow.com/questions/1828742/rotating-axis-labels-in-r">SO: Rotating Axis labels</a></li>
+</ul>
+<h4>R: Other Links</h4>
+<ul>
+<li><a href="https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Notebooks-with-R-Markdown">Notebooks with R Markdown</a></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../rmd.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/rmd.html" rel="tag">RMD</a>
+                </div>
+            </article>
+
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

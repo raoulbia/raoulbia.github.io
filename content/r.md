@@ -2,9 +2,13 @@ Title: R
 Date: 2018-02-20
 Modified: 2010-12-04 19:30
 Category: R
-Slug: R
+Slug: r
 Summary: R
 
+#### Useful Snippets
+
+* Footnote: `bla bla.^[url]`
+* Filter: `df %>% filter(., Fare >=500)`
 
 #### Script Header
 
@@ -24,12 +28,32 @@ library(rio) # import csv
 data  <- import('superstore.csv', setclass = "tibble")
 head(data)
 ```
+### select only numeric columns
+
+```
+nums <- unlist(lapply(df, is.numeric))  
+df[ , nums]
+```
+
+### Coerce multiple columns to factors at once
+
+```
+cols <- c("A", "C", "D", "H")
+df[cols] <- lapply(df[cols], factor)  ## as.factor() could also be used
+```
+
+### Exclude columns by name
+
+```
+exclude <- c("Neighborhood", "Exterior2nd",)
+df[ , -which(names(df) %in% exclude)]
+```
 
 ### Missing Values
 
 #### Count Missing Values
 
-`sapply(gt, function(x) sum(is.na(gt)))`
+`sapply(df, function(x) sum(is.na(x)))`
 
 #### Create vector from column and drop missing values
 

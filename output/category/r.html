@@ -30,10 +30,15 @@
 
             <article class="post">
                 <h2 class="title">
-                    <a href="../R.html" rel="bookmark" title="Permanent Link to &quot;R&quot;">R</a>
+                    <a href="../r.html" rel="bookmark" title="Permanent Link to &quot;R&quot;">R</a>
                 </h2>
 
-                <h4>Script Header</h4>
+                <h4>Useful Snippets</h4>
+<ul>
+<li>Footnote: <code>bla bla.^[url]</code></li>
+<li>Filter: <code>df %&gt;% filter(., Fare &gt;=500)</code></li>
+</ul>
+<h4>Script Header</h4>
 <div class="highlight"><pre><span></span><span class="n">library</span><span class="p">(</span><span class="n">rstudioapi</span><span class="p">)</span>
 <span class="n">setwd</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">rstudioapi</span><span class="p">::</span><span class="n">getActiveDocumentContext</span><span class="p">()</span><span class="err">$</span><span class="n">path</span><span class="p">))</span>
 <span class="n">rm</span><span class="p">(</span><span class="nb">list</span><span class="o">=</span><span class="n">ls</span><span class="p">())</span>
@@ -49,9 +54,27 @@
 </pre></div>
 
 
+<h3>select only numeric columns</h3>
+<div class="highlight"><pre><span></span><span class="n">nums</span> <span class="o">&lt;-</span> <span class="nf">unlist</span><span class="p">(</span><span class="nf">lapply</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">is.numeric</span><span class="p">))</span>  
+<span class="n">df</span><span class="p">[</span> <span class="p">,</span> <span class="n">nums</span><span class="p">]</span>
+</pre></div>
+
+
+<h3>Coerce multiple columns to factors at once</h3>
+<div class="highlight"><pre><span></span><span class="n">cols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="ss">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;D&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;H&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="n">df</span><span class="o">[</span><span class="n">cols</span><span class="o">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">df</span><span class="o">[</span><span class="n">cols</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">factor</span><span class="p">)</span><span class="w">  </span><span class="err">##</span><span class="w"> </span><span class="k">as</span><span class="p">.</span><span class="n">factor</span><span class="p">()</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">used</span><span class="w"></span>
+</pre></div>
+
+
+<h3>Exclude columns by name</h3>
+<div class="highlight"><pre><span></span><span class="n">exclude</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Neighborhood&quot;</span><span class="p">,</span> <span class="s">&quot;Exterior2nd&quot;</span><span class="p">,)</span>
+<span class="n">df</span><span class="p">[</span> <span class="p">,</span> <span class="o">-</span><span class="nf">which</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">%in%</span> <span class="n">exclude</span><span class="p">)]</span>
+</pre></div>
+
+
 <h3>Missing Values</h3>
 <h4>Count Missing Values</h4>
-<p><code>sapply(gt, function(x) sum(is.na(gt)))</code></p>
+<p><code>sapply(df, function(x) sum(is.na(x)))</code></p>
 <h4>Create vector from column and drop missing values</h4>
 <div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">gt</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">gt</span><span class="o">$</span><span class="n">LandAverageTemperature</span><span class="p">),</span> <span class="m">2</span><span class="p">]</span>
 </pre></div>
@@ -136,7 +159,7 @@
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="../R.html">posted at 00:00</a>
+                    <a href="../r.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="../category/r.html" rel="tag">R</a>
                 </div>
             </article>

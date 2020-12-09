@@ -7,7 +7,8 @@ Summary: Statistics
 
 #### Variance 
 	
-* is an average i.e. the sum of squared differences (SS) divided by some quantity n.
+* is the mean of some measured variation
+* i.e. the sum of squared differences (SS) divided by some quantity n.
 * in the case of samples, SS is divided by n-1.
   
 #### Standard Deviation

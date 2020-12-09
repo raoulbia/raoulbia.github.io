@@ -43,6 +43,7 @@ df = pd.read_csv(fp,
                  dayfirst=True,
                  #infer_datetime_format=True,
                  parse_dates = date_cols)
+df = df.replace(r'\s+', np.nan, regex=True).replace('', np.nan) 
 df.shape
 ```
 
@@ -113,8 +114,29 @@ df = pd.read_pickle('../local-data/input/filename.pickle')
 print(df.shape)
 df.head(1)
 ```
+### Combine Train / Test
+
+```
+fp_tr = "../local-data/input/train.csv"
+fp_te = "../local-data/input/test.csv"
+
+train = pd.read_csv(fp_tr)
+test = pd.read_csv(fp_te)
+
+dat =  pd.concat(objs=[train, test], axis=0).reset_index(drop=True)
+TestPassengerID = test['PassengerId']
+dat.shape
+```
+
 
 ### Handling Dates
+
+#### Convert Date String
+
+```
+from datetime import datetime
+df['colname'] = df['colname'].apply(lambda x: datetime.strptime(x, '%Y-%m-%d %H:%M:%S'))
+```
 
 #### Filling missing dates and values within group
 
