@@ -224,6 +224,7 @@ project source code (pelican branch). To publish either run the code below.</p>
                  <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="c1">#infer_datetime_format=True,</span>
                  <span class="n">parse_dates</span> <span class="o">=</span> <span class="n">date_cols</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span> 
 <span class="n">df</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 
@@ -290,7 +291,26 @@ project source code (pelican branch). To publish either run the code below.</p>
 </pre></div>
 
 
+<h3>Combine Train / Test</h3>
+<div class="highlight"><pre><span></span><span class="n">fp_tr</span> <span class="o">=</span> <span class="ss">&quot;../local-data/input/train.csv&quot;</span>
+<span class="n">fp_te</span> <span class="o">=</span> <span class="ss">&quot;../local-data/input/test.csv&quot;</span>
+
+<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fp_tr</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fp_te</span><span class="p">)</span>
+
+<span class="n">dat</span> <span class="o">=</span>  <span class="n">pd</span><span class="p">.</span><span class="n">concat</span><span class="p">(</span><span class="n">objs</span><span class="o">=</span><span class="p">[</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">).</span><span class="n">reset_index</span><span class="p">(</span><span class="k">drop</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+<span class="n">TestPassengerID</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">]</span>
+<span class="n">dat</span><span class="p">.</span><span class="n">shape</span>
+</pre></div>
+
+
 <h3>Handling Dates</h3>
+<h4>Convert Date String</h4>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;colname&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;colname&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">))</span>
+</pre></div>
+
+
 <h4>Filling missing dates and values within group</h4>
 <div class="highlight"><pre><span></span><span class="err"># gpd[&#39;Date&#39;] = pd.to_datetime(gpd[&#39;Date&#39;])</span>
 <span class="err">gpd = \</span>
