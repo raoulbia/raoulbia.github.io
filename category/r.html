@@ -35,8 +35,13 @@
 
                 <h4>Useful Snippets</h4>
 <ul>
-<li>Footnote: <code>bla bla.^[url]</code></li>
-<li>Filter: <code>df %&gt;% filter(., Fare &gt;=500)</code></li>
+<li>Filter: <code>df %&gt;% filter(., GrLivArea &gt;=4000 &amp; SalePrice &lt; 200000)</code></li>
+<li>Remove observations: <code>df &lt;- df[-c(524, 1299), ]</code></li>
+<li>Reomve column: <code>df$colname&lt;- NULL</code></li>
+<li>Order columns alphabetically: <code>df &lt;- df[ ,order(colnames(df))]</code></li>
+<li>Convert: <code>df$colname &lt;- as.integer(df$colname)</code></li>
+<li>Make df with only numeric vars: <code>num_df &lt;- df[, sapply(df, is.numeric)]</code></li>
+<li>Correlation: <code>cor(num_df, use="complete.obs")</code></li>
 </ul>
 <h4>Script Header</h4>
 <div class="highlight"><pre><span></span><span class="n">library</span><span class="p">(</span><span class="n">rstudioapi</span><span class="p">)</span>
@@ -136,7 +141,7 @@
 <li><a href="http://www.rebeccabarter.com/blog/2019-06-06_pre_processing/">Using the recipes package for easy pre-processing</a></li>
 <li><a href="https://cran.r-project.org/web/packages/bestNormalize/vignettes/bestNormalize.html">bestNormalize</a></li>
 </ul>
-<h4>R: Other Links</h4>
+<h4>Related Links</h4>
 <ul>
 <li><a href="https://blog.exploratory.io/populating-missing-dates-with-complete-and-fill-functions-in-r-and-exploratory-79f2a321e6b5">Populating Missing Dates with Complete and Fill Functions in R and Exploratory</a></li>
 <li><a href="https://www.youtube.com/user/marinstatlectures/playlists">MarinStatsLectures</a></li>
