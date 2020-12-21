@@ -34,7 +34,7 @@
 
                 <h4>Useful Snippets</h4>
 <ul>
-<li>Footnote: <code>bla bla.^[url]</code></li>
+<li>Footnote: <code>...some text.^[footnote]</code></li>
 </ul>
 <h4>Exploring Factor Combinations: Dual Boxplots</h4>
 <div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">SBA_Portion.groups</span><span class="o">:</span><span class="n">New</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">GrAppv</span><span class="p">))</span> <span class="o">+</span> 
@@ -53,10 +53,27 @@
 </pre></div>
 
 
-<h4>Plotting Examples</h4>
+<h4>Histogram w/Optimum Bin Width</h4>
+<div class="highlight"><pre><span></span><span class="n">binw</span> <span class="o">&lt;-</span> <span class="m">2</span> <span class="o">*</span> <span class="p">(</span> <span class="nf">IQR</span><span class="p">(</span><span class="n">statistic</span><span class="p">)</span> <span class="o">/</span> <span class="nf">length</span><span class="p">(</span><span class="n">statistic</span><span class="p">)</span><span class="o">^</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">3</span><span class="p">)</span> <span class="p">)</span> 
+
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">statistic</span><span class="p">),</span> <span class="nf">aes</span><span class="p">(</span><span class="n">statistic</span><span class="p">))</span> <span class="o">+</span> 
+  <span class="nf">geom_histogram</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">..density..</span><span class="p">),</span>
+                 <span class="n">binwidth</span> <span class="o">=</span> <span class="n">binw</span><span class="p">,</span>
+                 <span class="n">fill</span><span class="o">=</span><span class="s">&quot;darkred&quot;</span><span class="p">,</span>
+                 <span class="n">colour</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span>
+                 <span class="n">size</span><span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="o">+</span> 
+  <span class="nf">geom_density</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">..density..</span><span class="p">),</span>
+               <span class="n">size</span><span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="o">+</span> 
+  <span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span> <span class="s">&quot;Mean&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span> <span class="s">&quot;Density&quot;</span><span class="p">,</span> 
+       <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Distribution of sample means&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<h4>Related Links</h4>
 <ul>
 <li><a href="https://rpubs.com/raoulbia/slr">ggplot2 examples</a></li>
 <li><a href="https://stackoverflow.com/questions/1828742/rotating-axis-labels-in-r">SO: Rotating Axis labels</a></li>
+<li><a href="https://www.xspdf.com/resolution/52805925.html">How to calculate number of bins for a histogram</a></li>
 </ul>
 <h4>R: Other Links</h4>
 <ul>

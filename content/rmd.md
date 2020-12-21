@@ -7,8 +7,7 @@ Summary: RMD
 
 #### Useful Snippets
 
-* Footnote: `bla bla.^[url]`
-
+* Footnote: `...some text.^[footnote]`
 
 #### Exploring Factor Combinations: Dual Boxplots
 
@@ -27,11 +26,28 @@ plot <- ggplot(df, aes(x=SBA_Portion.groups:New, y=GrAppv)) +
 ggrob <- ggplotGrob(plot)
 grid.arrange(ggrob, ncol=1)
 ```
+#### Histogram w/Optimum Bin Width
 
-#### Plotting Examples
+```
+binw <- 2 * ( IQR(statistic) / length(statistic)^(1/3) ) 
+
+ggplot(data.frame(statistic), aes(statistic)) + 
+  geom_histogram(aes(y=..density..),
+                 binwidth = binw,
+                 fill="darkred",
+                 colour="black",
+                 size=1) + 
+  geom_density(aes(y=..density..),
+               size=1) + 
+  labs(x= "Mean", y= "Density", 
+       title = "Distribution of sample means")
+```
+
+#### Related Links
 
 * [ggplot2 examples](https://rpubs.com/raoulbia/slr)
 * [SO: Rotating Axis labels](https://stackoverflow.com/questions/1828742/rotating-axis-labels-in-r)
+* [How to calculate number of bins for a histogram](https://www.xspdf.com/resolution/52805925.html)
 
 #### R: Other Links
 

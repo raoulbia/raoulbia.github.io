@@ -7,8 +7,13 @@ Summary: R
 
 #### Useful Snippets
 
-* Footnote: `bla bla.^[url]`
-* Filter: `df %>% filter(., Fare >=500)`
+* Filter: ```df %>% filter(., GrLivArea >=4000 & SalePrice < 200000)```
+* Remove observations: ```df <- df[-c(524, 1299), ]```
+* Reomve column: ```df$colname<- NULL```
+* Order columns alphabetically: ```df <- df[ ,order(colnames(df))]```
+* Convert: ```df$colname <- as.integer(df$colname)```
+* Make df with only numeric vars: ```num_df <- df[, sapply(df, is.numeric)]```
+* Correlation: ```cor(num_df, use="complete.obs")```
 
 #### Script Header
 
@@ -122,7 +127,7 @@ res[i] <- mean(x_subset)
 * [Using the recipes package for easy pre-processing](http://www.rebeccabarter.com/blog/2019-06-06_pre_processing/)
 * [bestNormalize](https://cran.r-project.org/web/packages/bestNormalize/vignettes/bestNormalize.html)
 
-#### R: Other Links
+#### Related Links
 
 * [Populating Missing Dates with Complete and Fill Functions in R and Exploratory](https://blog.exploratory.io/populating-missing-dates-with-complete-and-fill-functions-in-r-and-exploratory-79f2a321e6b5)
 * [MarinStatsLectures](https://www.youtube.com/user/marinstatlectures/playlists)
