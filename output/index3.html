@@ -217,6 +217,16 @@ an error: <code>Rcpp.h: No such file or directory</code>.</li>
 </pre></div>
 
 
+<h4>Read Multiple files in ZipFile</h4>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">zipfile</span> <span class="kn">import</span> <span class="n">ZipFile</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<span class="k">for</span> <span class="n">text_file</span> <span class="ow">in</span> <span class="n">zip_file</span><span class="o">.</span><span class="n">infolist</span><span class="p">():</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">zip_file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">text_file</span><span class="o">.</span><span class="n">filename</span><span class="p">))</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">to_html</span><span class="p">()))</span>
+</pre></div>
+
+
 <h4>Write</h4>
 <p><code>df.to_csv("../local-data/output/shuba_data_subset.csv", index=True)</code></p>
 <h3>Pickle</h3>

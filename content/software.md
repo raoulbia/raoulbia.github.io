@@ -5,6 +5,55 @@ Slug: linux software
 Summary: Software
 
 
+### PostgreSQL
+
+[Download PostgreSQL](https://www.postgresql.org/download/linux/ubuntu/)
+
+[Install pgAdmin](https://linuxhint.com/best_gui_clients_postgresql_ubuntu/#:~:text=pgAdmin,Windows%20and%20Mac%20OS%20X.)
+
+#### Running multiple versions of PostgreSQL
+
+Check the config files to see which version is on which port:
+
+`grep -H '^port' /etc/postgresql/*/main/postgresql.conf`
+
+sample output:
+
+```
+/etc/postgresql/10/main/postgresql.conf:port = 5432	
+/etc/postgresql/13/main/postgresql.conf:port = 5433	
+
+```
+
+#### Restart Postgres
+
+```
+sudo /etc/init.d/postgresql reload
+sudo /etc/init.d/postgresql start
+```
+#### Hostname
+
+PostgreSQL, what is the hostname address of my default database?
+
+If you're connecting from the same machine, use localhost
+
+#### Connection String
+
+You can provide your username and password directly in the connection URI provided to psql:
+
+`psql postgresql://username:password@localhost:5432/mydb`
+
+#### Useful Commands
+
+* To establish a connection : `sudo su - postgres`
+* To open a postgress prompt using the command: `psql`
+* To see details of the connection: `\conninfo`
+* To view the databases in our PostgreSQL instance: `\list`
+* `CREATE DATABASE dbname;`
+* `DROP DATABASE dbname;`
+
+
+
 ### R and RStudio
 
 #### Install on Ubuntu 20.04 (Focal Fossa)

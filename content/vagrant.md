@@ -6,6 +6,7 @@ Summary: Vagrant VM setup
 
 #### Useful Links
 
+* [OSGeo-Live](https://www.gis-blog.com/osgeo-live-the-best-open-source-gis-ready-to-use-package/)
 * [Ubuntu 20.04 ISO](https://releases.ubuntu.com/20.04/)
 * [Building a Vagrant Box from Start to Finish](https://blog.engineyard.com/building-a-vagrant-box)
 * [Creating a new Vagrant base box from an existing VM](https://www.abhishek-tiwari.com/creating-a-new-vagrant-base-box-from-an-existing-vm/)
@@ -22,17 +23,14 @@ Summary: Vagrant VM setup
 
 Assuming you want to share the directory in which `Vagrantfile` is located and that directory is named `vmtest`. 
 
-* In `Vagrantfile`
+```
+sudo usermod -a -G vboxsf user
+mkdir ~/shared
+sudo mount -t vboxsf vmtest_nta ~/shared
+```
 
-    `config.vm.synced_folder "../vmtest", , "/home/vagrant/vmtest", nfs: true`
-
-* In `~/.profile`add
-
-    `sudo mount -t vboxsf vmtest /home/vagrant/vmtest/`
-
-* Set directory permissions on the **HOST** machine
-
-    `chmod 777 -R vmtest/` 
+* Add to `~/.profile`: `sudo mount -t vboxsf vmtest /home/vagrant/vmtest/`
+* Set directory permissions: `chmod 777 -R vmtest/`
 
 
 #### Increase Vagrant Box Size
@@ -74,9 +72,12 @@ export KG_OUTPUT_DIR=/home/vagrant/vmtest/tomoe/wp-tomoe-playground/local-data/k
    
 #### Useful Vagrant commands
 
+* `config.vm.box = "file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box"`
+* `VBoxClient --clipboard`
 * `vagrant global-status`
 * `set PATH=%PATH%;"C:\Program Files\Oracle\VirtualBox"`
 * `vboxmanage list vms`
+* ```vagrant init file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box```
 
 
 #### Misc. Links

@@ -6,6 +6,11 @@ Summary: Jupyter Notebooks
 
 <br> 
 
+`jupyter lab --ip=0.0.0.0`
+
+`jupyter notebook --ip=0.0.0.0`
+
+
 #### Useful Links
 
 * [Integrate JupyterLab with Google Drive](https://towardsdatascience.com/integrate-jupyterlab-with-google-drive-98d13e340c63)
@@ -13,13 +18,6 @@ Summary: Jupyter Notebooks
 *[Interactive Controls in Jupyter Notebooks](https://towardsdatascience.com/interactive-controls-for-jupyter-notebooks-f5c94829aee6)
 * [Changing JupyterLab to suit your needs](https://www.youtube.com/watch?v=a9P7qv4P5LE)
 * <http://localhost:8888/tree#nbextensions_configurator  >
-
-<br>
-
-#### Making Jupyter available on HOST browser
-
-`jupyter lab --ip=0.0.0.0`
-
 * [Running Jupyter Notebooks on a Ubuntu Server](https://hackersandslackers.com/running-jupyter-notebooks-on-a-ubuntu-server/)
 * [access jupyter notebook running on vm](https://stackoverflow.com/questions/38545198/access-jupyter-notebook-running-on-vm)
 * [Can't access jupyter notebook in local vagrant virtualbox via local browser](https://stackoverflow.com/questions/47597515/cant-access-jupyter-notebook-in-local-vagrant-virtualbox-via-local-browser)

@@ -95,7 +95,17 @@ for filename in all_files:
 df = pd.concat(li, axis=0, ignore_index=True)
 df.shape
 ```
-   
+#### Read Multiple files in ZipFile
+
+```
+from zipfile import ZipFile
+import pandas as pd
+from IPython.core.display import HTML
+for text_file in zip_file.infolist():
+    tmp = pd.read_csv(zip_file.open(text_file.filename))
+    display(HTML(tmp.head().to_html()))
+```
+
 #### Write
 
 `df.to_csv("../local-data/output/shuba_data_subset.csv", index=True)`

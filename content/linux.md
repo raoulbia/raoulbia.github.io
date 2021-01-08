@@ -13,7 +13,8 @@ Summary: Linux
 * `echo $XDG_CURRENT_DESKTOP`
 * `sudo find ~/ -name rdflib`
 * `sudo find / -name "*.cls"`
-* ``` sudo kill -9 `sudo lsof -t -i:8888` ```
+* ```sudo kill -9 `sudo lsof -t -i:8888````
+* make script executable: `sudo chmod +x script.sh`
 
 #### Handy Tools
 

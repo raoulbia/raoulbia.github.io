@@ -31,7 +31,40 @@
                     <a href="./linux software.html" rel="bookmark" title="Permanent Link to &quot;Software&quot;">Software</a>
                 </h2>
 
-                <h3>R and RStudio</h3>
+                <h3>PostgreSQL</h3>
+<p><a href="https://www.postgresql.org/download/linux/ubuntu/">Download PostgreSQL</a></p>
+<p><a href="https://linuxhint.com/best_gui_clients_postgresql_ubuntu/#:~:text=pgAdmin,Windows%20and%20Mac%20OS%20X.">Install pgAdmin</a></p>
+<h4>Running multiple versions of PostgreSQL</h4>
+<p>Check the config files to see which version is on which port:</p>
+<p><code>grep -H '^port' /etc/postgresql/*/main/postgresql.conf</code></p>
+<p>sample output:</p>
+<div class="highlight"><pre><span></span><span class="err">/etc/postgresql/10/main/postgresql.conf:port = 5432 </span>
+<span class="err">/etc/postgresql/13/main/postgresql.conf:port = 5433 </span>
+</pre></div>
+
+
+<h4>Restart Postgres</h4>
+<div class="highlight"><pre><span></span><span class="err">sudo /etc/init.d/postgresql reload</span>
+<span class="err">sudo /etc/init.d/postgresql start</span>
+</pre></div>
+
+
+<h4>Hostname</h4>
+<p>PostgreSQL, what is the hostname address of my default database?</p>
+<p>If you're connecting from the same machine, use localhost</p>
+<h4>Connection String</h4>
+<p>You can provide your username and password directly in the connection URI provided to psql:</p>
+<p><code>psql postgresql://username:password@localhost:5432/mydb</code></p>
+<h4>Useful Commands</h4>
+<ul>
+<li>To establish a connection : <code>sudo su - postgres</code></li>
+<li>To open a postgress prompt using the command: <code>psql</code></li>
+<li>To see details of the connection: <code>\conninfo</code></li>
+<li>To view the databases in our PostgreSQL instance: <code>\list</code></li>
+<li><code>CREATE DATABASE dbname;</code></li>
+<li><code>DROP DATABASE dbname;</code></li>
+</ul>
+<h3>R and RStudio</h3>
 <h4>Install on Ubuntu 20.04 (Focal Fossa)</h4>
 <p>Save and run the script below (<a href="https://gist.github.com/mGalarnyk/41c887e921e712baf86fecc507b3afc7">source</a>).</p>
 <div class="highlight"><pre><span></span><span class="o">#</span> <span class="n">Install</span> <span class="n">R</span> <span class="o">+</span> <span class="n">RStudio</span> <span class="k">on</span> <span class="n">Ubuntu</span> <span class="mi">20</span> <span class="n">Focal</span>
