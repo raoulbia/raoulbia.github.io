@@ -1,4 +1,4 @@
-Title: GTFS
+﻿Title: GTFS
 Date: 2017-06-28
 Category: GTFS
 Slug: gtfs
@@ -41,7 +41,7 @@ Notes:
 
 [github.com/ondata/gtfsreadysetgo](https://github.com/ondata/gtfsreadysetgo)
 
-[GTFS, pronti, partenza, via �](https://medium.com/tantotanto/gtfs-pronti-partenza-via-23aa4a42c48e)
+[GTFS, pronti, partenza, via …](https://medium.com/tantotanto/gtfs-pronti-partenza-via-23aa4a42c48e)
 
 `GTFS ready, set, go` is a **bash script** to 
 
