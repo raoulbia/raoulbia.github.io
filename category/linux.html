@@ -35,6 +35,7 @@
 
                 <h4>Useful Links</h4>
 <ul>
+<li><a href="https://www.gis-blog.com/osgeo-live-the-best-open-source-gis-ready-to-use-package/">OSGeo-Live</a></li>
 <li><a href="https://releases.ubuntu.com/20.04/">Ubuntu 20.04 ISO</a></li>
 <li><a href="https://blog.engineyard.com/building-a-vagrant-box">Building a Vagrant Box from Start to Finish</a></li>
 <li><a href="https://www.abhishek-tiwari.com/creating-a-new-vagrant-base-box-from-an-existing-vm/">Creating a new Vagrant base box from an existing VM</a></li>
@@ -47,19 +48,15 @@
 </ul>
 <h4>Shared Folders</h4>
 <p>Assuming you want to share the directory in which <code>Vagrantfile</code> is located and that directory is named <code>vmtest</code>. </p>
+<div class="highlight"><pre><span></span><span class="err">sudo usermod -a -G vboxsf user</span>
+<span class="err">mkdir ~/shared</span>
+<span class="err">sudo mount -t vboxsf vmtest_nta ~/shared</span>
+</pre></div>
+
+
 <ul>
-<li>
-<p>In <code>Vagrantfile</code></p>
-<p><code>config.vm.synced_folder "../vmtest", , "/home/vagrant/vmtest", nfs: true</code></p>
-</li>
-<li>
-<p>In <code>~/.profile</code>add</p>
-<p><code>sudo mount -t vboxsf vmtest /home/vagrant/vmtest/</code></p>
-</li>
-<li>
-<p>Set directory permissions on the <strong>HOST</strong> machine</p>
-<p><code>chmod 777 -R vmtest/</code> </p>
-</li>
+<li>Add to <code>~/.profile</code>: <code>sudo mount -t vboxsf vmtest /home/vagrant/vmtest/</code></li>
+<li>Set directory permissions: <code>chmod 777 -R vmtest/</code></li>
 </ul>
 <h4>Increase Vagrant Box Size</h4>
 <p>Note: it may be easier to just grab a box that has a large size. See above.</p>
@@ -102,9 +99,12 @@
 
 <h4>Useful Vagrant commands</h4>
 <ul>
+<li><code>config.vm.box = "file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box"</code></li>
+<li><code>VBoxClient --clipboard</code></li>
 <li><code>vagrant global-status</code></li>
 <li><code>set PATH=%PATH%;"C:\Program Files\Oracle\VirtualBox"</code></li>
 <li><code>vboxmanage list vms</code></li>
+<li><code>vagrant init file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box</code></li>
 </ul>
 <h4>Misc. Links</h4>
 <ul>
@@ -133,7 +133,8 @@
 <li><code>echo $XDG_CURRENT_DESKTOP</code></li>
 <li><code>sudo find ~/ -name rdflib</code></li>
 <li><code>sudo find / -name "*.cls"</code></li>
-<li><code>sudo kill -9 `sudo lsof -t -i:8888`</code></li>
+<li><code>``sudo kill -9</code>sudo lsof -t -i:8888````</li>
+<li>make script executable: <code>sudo chmod +x script.sh</code></li>
 </ul>
 <h4>Handy Tools</h4>
 <ul>
