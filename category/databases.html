@@ -30,21 +30,29 @@
 
             <article class="post">
                 <h2 class="title">
-                    <a href="../MYSQL.html" rel="bookmark" title="Permanent Link to &quot;MYSQL&quot;">MYSQL</a>
+                    <a href="../sql.html" rel="bookmark" title="Permanent Link to &quot;SQL&quot;">SQL</a>
                 </h2>
 
-                <h4>Install MySQL</h4>
-<ul>
-<li><a href="https://askubuntu.com/questions/750498/mysql-5-5-update-to-mysql-5-7">see here</a>
-and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-14-04">here</a></li>
-</ul>
-<h4>Sample Queries</h4>
+                <h4>Sample Queries</h4>
 <div class="highlight"><pre><span></span><span class="err">select * from PREDICATION where SUBJECT_SEMTYPE in (&#39;gngm&#39;) limit 10;</span>
 <span class="err">select * from ENTITY where SEMTYPE in (&#39;gngm&#39;) and GENE_ID &lt;&gt; &#39;&#39; limit 10;</span>
 </pre></div>
 
 
 <p><br></p>
+<div class="highlight"><pre><span></span><span class="n">select</span> <span class="n">count</span><span class="p">([</span><span class="n">Incident</span> <span class="n">Type</span><span class="p">]),</span> <span class="p">[</span><span class="n">Incident</span> <span class="n">Type</span><span class="p">]</span>
+<span class="n">FROM</span> <span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">bat_2020</span><span class="p">]</span>
+<span class="n">Group</span> <span class="n">by</span> <span class="p">[</span><span class="n">Incident</span> <span class="n">Type</span><span class="p">]</span>
+</pre></div>
+
+
+<p><br></p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="nf">MIN</span><span class="w"> </span><span class="p">(</span><span class="o">[</span><span class="n">Created Date Time</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="ss">&quot;Min Date&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"></span>
+<span class="w">       </span><span class="nf">MAX</span><span class="w"> </span><span class="p">(</span><span class="o">[</span><span class="n">Created Date Time</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="ss">&quot;Max Date&quot;</span><span class="w">  </span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">[</span><span class="n">dbo</span><span class="o">]</span><span class="p">.</span><span class="o">[</span><span class="n">bat_2020</span><span class="o">]</span><span class="w"></span>
+</pre></div>
+
+
 <h3>Useful commands</h3>
 <h4>Determine table column size</h4>
 <div class="highlight"><pre><span></span><span class="k">Select</span><span class="w">        </span><span class="nf">max</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="o">[</span><span class="n">number</span><span class="o">]</span><span class="p">))</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">[</span><span class="n">number</span><span class="o">]</span><span class="w"></span>
@@ -99,7 +107,7 @@ and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-mys
 <li>start logging: <code>tee ./mylofile.log</code></li>
 <li>stop logging: <code>notee</code></li>
 </ul>
-<h4>where is the table data stored?</h4>
+<h4>Where is the table data stored?</h4>
 <ul>
 <li>it is specified in <code>my.cnf</code></li>
 <li>otherwise, the default location is <code>/var/lib/mysql/</code></li>
@@ -133,13 +141,18 @@ and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-mys
 <ul>
 <li><a href="https://dba.stackexchange.com/questions/27328/how-large-should-be-mysql-innodb-buffer-pool-size">see here</a></li>
 </ul>
-<h4>Misc.</h4>
+<h4>Misc. Mysql</h4>
 <ul>
 <li><code>$ mysql -u root -p</code></li>
 <li><code>$ sudo service mysql restart</code></li>
 <li><code>SHOW ENGINE INNODB STATUS;</code></li>
 <li><code>show table status like 'ENTITY'\G;</code> # number of rows in table</li>
 <li><code>SELECT ENTITY_ID, COUNT(*) c FROM ENTITY_GENE GROUP BY ENTITY_ID HAVING c &gt; 1;</code> # find duplicates</li>
+</ul>
+<h4>Install MySQL</h4>
+<ul>
+<li><a href="https://askubuntu.com/questions/750498/mysql-5-5-update-to-mysql-5-7">see here</a>
+and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-14-04">here</a></li>
 </ul>
 <h4>Resources</h4>
 <ul>
@@ -154,7 +167,7 @@ and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-mys
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="../MYSQL.html">posted at 00:00</a>
+                    <a href="../sql.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="../category/databases.html" rel="tag">Databases</a>
                 </div>
             </article>
