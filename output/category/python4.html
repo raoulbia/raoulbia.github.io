@@ -93,45 +93,25 @@
                 </h2>
 
                 <p><br></p>
-<h4>Logging &amp; Try/Except</h4>
-<ul>
-<li><a href="https://medium.com/better-programming/a-comprehensive-guide-to-handling-exceptions-in-python-7175f0ce81f7">A Comprehensive Guide to Handling Exceptions in Python</a></li>
-</ul>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_pathway_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">list</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__qualname__</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">pathway</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Building Pathway Data Set&#39;</span><span class="p">)</span>
-            <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-            <span class="n">dataset</span> <span class="o">=</span> <span class="n">PathwayDataset</span><span class="p">(</span><span class="nb">list</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">args</span><span class="p">)</span>
-            <span class="n">dataset</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">pathway_limit</span><span class="o">=</span><span class="n">pathway_limit</span><span class="p">)</span>
-            <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;finished in </span><span class="si">%5.2f</span><span class="s1"> s&#39;</span><span class="p">,</span> <span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;dataset will not be built&#39;</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exception</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">e</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">])))</span>
-        <span class="k">raise</span> <span class="n">e</span>
+<h4>limited FOR loop</h4>
+<p><code>for i, elem in zip(range(100), elems[::10])</code> where <code>[::10]</code> is every 10th</p>
+<h4>Query</h4>
+<p><code>pd.read_csv("file.csv").query("year==2000")</code></p>
+<h4>File Handling:</h4>
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">dosomething</span><span class="p">()</span>
 </pre></div>
 
 
-<h4>Create a temporary file for unit tests:</h4>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tomoe.io</span> <span class="kn">import</span> <span class="n">get_tomoe_local_data_dir</span>
-<span class="kn">import</span> <span class="nn">tempfile</span>
-<span class="n">temp_path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;dist-graph-sampling&quot;</span><span class="p">)</span>
-
- <span class="o">...</span>
-
-<span class="n">TOMOE_TEMP_FOLDER</span> <span class="o">=</span> <span class="n">get_tomoe_local_data_dir</span><span class="p">()</span>
-
- <span class="o">...</span>
-<span class="n">triples_hg_csv_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="p">,</span> <span class="s1">&#39;triples.hg.csv.tsv&#39;</span><span class="p">)</span>
-<span class="n">triple_csv_to_hyperedge_csv</span><span class="p">(</span><span class="n">triples_csv_path</span><span class="p">,</span> <span class="n">triples_hg_csv_path</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">triples_hg_csv_path</span><span class="p">)</span><span class="o">.</span><span class="n">st_size</span> <span class="o">!=</span> <span class="mi">0</span>
+<div class="highlight"><pre><span></span><span class="c1"># remove if exists then write df to csv</span>
+<span class="n">f</span> <span class="o">=</span> <span class="s1">&#39;local-data/filename.csv&#39;</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
 
-<h4>File Handling: <code>with open</code></h4>
+<p>Notes:</p>
 <ul>
 <li>Opening a file with this statement will handle file closing for you</li>
 <li>The <code>StringIO</code> and <code>cStringIO</code> modules are gone. </li>
@@ -140,13 +120,6 @@
 <li>Once a file has been read, with <code>read()</code> you can use <code>seek(0)</code> to return the read cursor to the start of the file</li>
 <li>To check if a file exists or to overwrite an existing file:</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="n">filepath</span> <span class="o">=</span> <span class="s1">&#39;local-data/filename.csv&#39;</span>
-<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
-<span class="n">tsne_nn_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path_or_buf</span><span class="o">=</span><span class="n">filepath</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-
-
 <h4>Get index based on values in another column</h4>
 <div class="highlight"><pre><span></span><span class="n">id_in_top5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">df_ranked</span><span class="p">[</span><span class="n">rank_column</span><span class="p">][</span><span class="n">df_ranked</span><span class="p">[</span><span class="n">rank_column</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">])[::]</span>
 </pre></div>
@@ -369,16 +342,6 @@ e.g. <code>python -m cai_pytorch.pytorch</code></li>
 <p>when done, reverse changes made in Steps 1. and 2.</p>
 </li>
 </ol>
-<h4>Convert Python2 to Python3</h4>
-<div class="highlight"><pre><span></span>pip install 2to3
-2to3 -n -w path/to/script/script_namae.py
-</pre></div>
-
-
-<p>Note: <code>-n</code> prevents backup files; <code>-w</code> instructs to write the conversion</p>
-<h4>Pycharm</h4>
-<p>Widen Pycharm console output for pandas dataframes</p>
-<p><code>pd.set_option('display.expand_frame_repr', False)</code></p>
 <h4><code>super()</code> with <code>__init__()</code></h4>
 <p><a href="https://stackoverflow.com/questions/576169/understanding-python-super-with-init-methods">Understanding Python super() with <strong>init</strong>() methods</a></p>
 <h4>About the Python import mechanism</h4>
@@ -415,6 +378,44 @@ e.g. <code>python -m cai_pytorch.pytorch</code></li>
 </ul>
 </li>
 </ul>
+<h4>Logging &amp; Try/Except</h4>
+<ul>
+<li><a href="https://medium.com/better-programming/a-comprehensive-guide-to-handling-exceptions-in-python-7175f0ce81f7">A Comprehensive Guide to Handling Exceptions in Python</a></li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_pathway_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">list</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__qualname__</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pathway</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Building Pathway Data Set&#39;</span><span class="p">)</span>
+            <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">dataset</span> <span class="o">=</span> <span class="n">PathwayDataset</span><span class="p">(</span><span class="nb">list</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">args</span><span class="p">)</span>
+            <span class="n">dataset</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">pathway_limit</span><span class="o">=</span><span class="n">pathway_limit</span><span class="p">)</span>
+            <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;finished in </span><span class="si">%5.2f</span><span class="s1"> s&#39;</span><span class="p">,</span> <span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;dataset will not be built&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exception</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">e</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">])))</span>
+        <span class="k">raise</span> <span class="n">e</span>
+</pre></div>
+
+
+<h4>Create a temporary file for unit tests:</h4>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tomoe.io</span> <span class="kn">import</span> <span class="n">get_tomoe_local_data_dir</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="n">temp_path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;dist-graph-sampling&quot;</span><span class="p">)</span>
+
+ <span class="o">...</span>
+
+<span class="n">TOMOE_TEMP_FOLDER</span> <span class="o">=</span> <span class="n">get_tomoe_local_data_dir</span><span class="p">()</span>
+
+ <span class="o">...</span>
+<span class="n">triples_hg_csv_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="p">,</span> <span class="s1">&#39;triples.hg.csv.tsv&#39;</span><span class="p">)</span>
+<span class="n">triple_csv_to_hyperedge_csv</span><span class="p">(</span><span class="n">triples_csv_path</span><span class="p">,</span> <span class="n">triples_hg_csv_path</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">triples_hg_csv_path</span><span class="p">)</span><span class="o">.</span><span class="n">st_size</span> <span class="o">!=</span> <span class="mi">0</span>
+</pre></div>
+
+
 <h4>Variable assignemnt Gotchas</h4>
 <div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
@@ -434,6 +435,18 @@ sudo apt-get install python3.6
 
 <p>may be needed:</p>
 <p><code>sudo apt-get install python3.6-gdbm</code> </p>
+<h4>Convert Python2 to Python3</h4>
+<div class="highlight"><pre><span></span>pip install 2to3
+2to3 -n -w path/to/script/script_namae.py
+</pre></div>
+
+
+<p>Note: <code>-n</code> prevents backup files; <code>-w</code> instructs to write the conversion</p>
+<h4>Misc</h4>
+<ul>
+<li><code>strip()</code> strips off the new line character</li>
+<li>Widen Pycharm console output for pandas DFs: <code>pd.set_option('display.expand_frame_repr', False)</code></li>
+</ul>
 <h4>Various Links</h4>
 <ul>
 <li><a href="http://zetcode.com/python/regularexpressions/">Python regular expressions</a></li>

@@ -42,6 +42,14 @@
 <li>Convert: <code>df$colname &lt;- as.integer(df$colname)</code></li>
 <li>Make df with only numeric vars: <code>num_df &lt;- df[, sapply(df, is.numeric)]</code></li>
 <li>Correlation: <code>cor(num_df, use="complete.obs")</code></li>
+<li>random sampling from each factor: <code>olive_sample &lt;- ddply(olive,.(region),function(x) x[sample(nrow(x),10),])</code></li>
+<li>to access the 1rst and 3rd elements of a vector: <code>my.vec[c(1,3)]</code></li>
+</ul>
+<h4>Creating vectors and matrices</h4>
+<ul>
+<li><code>my.vec &lt;- c(1:4)</code></li>
+<li><code>my.vec &lt;- c(TRUE, FALSE, FALSE, FALSE, TRUE, TRUE)</code></li>
+<li><code>A &lt;- matrix(c(1,2,2,5), nrow=2, ncol=2, byrow=TRUE)</code></li>
 </ul>
 <h4>Script Header</h4>
 <div class="highlight"><pre><span></span><span class="n">library</span><span class="p">(</span><span class="n">rstudioapi</span><span class="p">)</span>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-    <title>code snippets etc. | GTFS</title>
+    <title>code snippets etc. | General Transit Feed Specification</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/screen.css" type="text/css" />
@@ -29,15 +29,12 @@
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./gtfs.html" rel="bookmark" title="Permanent Link to &quot;GTFS&quot;">GTFS</a>
+                    <a href="./gtfs.html" rel="bookmark" title="Permanent Link to &quot;General Transit Feed Specification&quot;">General Transit Feed Specification</a>
                 </h2>
 
-                <h2>General Transit Feed Specification</h2>
-<p><a href="https://gtfs.org/reference/static/#field-definitions">GTFS Field Definitions</a></p>
-<h2>GTFS Feeds</h2>
-<ul>
-<li><a href="http://transitfeeds.com/p/transport-for-ireland">transitfeeds transport-for-ireland</a></li>
-</ul>
+                <p><a href="https://gtfs.org/reference/static/#field-definitions">GTFS Field Definitions</a></p>
+<p><a href="http://transitfeeds.com/p/transport-for-ireland">Transit Feeds Transport for Ireland</a></p>
+<p><a href="https://data.smartdublin.ie/dataset?category=Transport+and+Infrastructure">Dublinked Transport and Infrastructure</a></p>
 <h2>TransitFeed</h2>
 <p><a href="https://github.com/google/transitfeed">github.com/google/transitfeed</a></p>
 <h3>Feed Validator</h3>
@@ -65,6 +62,7 @@
 </ul>
 <p>The files produced by this script can be imported int QGIS.</p>
 <h2>GTFS Real Time (upcoming)</h2>
+<p><a href="https://gtfs.org/reference/realtime/v2/">GTFS Realtime Reference v2</a></p>
 <p><a href="https://github.com/seanrees/gtfs-upcoming">github.com/seanrees/gtfs-upcoming</a></p>
 <div class="highlight"><pre><span></span><span class="err">sudo kill -9 `sudo lsof -t -i:6824`</span>
 <span class="err">python main.py --config=config.ini --env=prod --port=6824 --promport=800</span>
@@ -83,6 +81,7 @@
 <p>Notes:</p>
 <ul>
 <li>Must git clone inside root directory of VM (not the shared directory!)</li>
+<li>requirements: geoalchemy2, psycopg2, SQLAlchemy, zc.recipe.egg</li>
 <li><a href="https://github.com/OpenTransitTools/gtfsdb#install-and-use-via-the-gtfsdb-source-tree">installation with buildout</a></li>
 <li>the database url must contain <code>username:password</code> e.g. <code>postgres:user</code></li>
 <li>the port number can be found using <code>grep -H '^port' /etc/postgresql/*/main/postgresql.conf</code></li>
@@ -90,6 +89,9 @@
 <h2>Others (to be reviewed)</h2>
 <ul>
 <li><a href="https://github.com/cbick/gtfs_SQL_importer">github.com/cbick/gtfs_SQL_importer</a></li>
+<li><a href="https://bennettgarner.medium.com/parsing-gtfs-format-transit-data-in-real-time-with-python-3a528ba7aab7">Parsing GTFS format transit data in real time with Python</a></li>
+<li><a href="https://github.com/departmentfortransport/Open_NaPTAN">Open_NaPTAN</a></li>
+<li><a href="https://pypi.org/project/transx2gtfs/">transx2gtfs</a></li>
 </ul>
                 <div class="clear"></div>
 

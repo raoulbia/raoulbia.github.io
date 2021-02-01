@@ -1,16 +1,16 @@
-﻿Title: GTFS
+﻿Title: General Transit Feed Specification
 Date: 2017-06-28
 Category: GTFS
 Slug: gtfs
 Summary: General Transit Feed Specification
 
-## General Transit Feed Specification
 
 [GTFS Field Definitions](https://gtfs.org/reference/static/#field-definitions)
 
-## GTFS Feeds
+[Transit Feeds Transport for Ireland](http://transitfeeds.com/p/transport-for-ireland)
 
-* [transitfeeds transport-for-ireland](http://transitfeeds.com/p/transport-for-ireland)
+[Dublinked Transport and Infrastructure](https://data.smartdublin.ie/dataset?category=Transport+and+Infrastructure)
+
 
 ## TransitFeed
 
@@ -54,6 +54,8 @@ The files produced by this script can be imported int QGIS.
 
 ## GTFS Real Time (upcoming)
 
+[GTFS Realtime Reference v2](https://gtfs.org/reference/realtime/v2/)
+
 [github.com/seanrees/gtfs-upcoming](https://github.com/seanrees/gtfs-upcoming)
 
 ```
@@ -77,6 +79,7 @@ Notes:
 Notes:
 
 * Must git clone inside root directory of VM (not the shared directory!)
+* requirements: geoalchemy2, psycopg2, SQLAlchemy, zc.recipe.egg
 * [installation with buildout](https://github.com/OpenTransitTools/gtfsdb#install-and-use-via-the-gtfsdb-source-tree)
 * the database url must contain `username:password` e.g. `postgres:user`
 * the port number can be found using `grep -H '^port' /etc/postgresql/*/main/postgresql.conf`
@@ -85,4 +88,6 @@ Notes:
 ## Others (to be reviewed)
 
 * [github.com/cbick/gtfs_SQL_importer](https://github.com/cbick/gtfs_SQL_importer)
-
+* [Parsing GTFS format transit data in real time with Python](https://bennettgarner.medium.com/parsing-gtfs-format-transit-data-in-real-time-with-python-3a528ba7aab7)
+* [Open_NaPTAN](https://github.com/departmentfortransport/Open_NaPTAN)
+* [transx2gtfs](https://pypi.org/project/transx2gtfs/)

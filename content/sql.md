@@ -1,13 +1,8 @@
-Title: MYSQL
+Title: SQL
 Date: 2017-11-02
 Category: Databases
-Slug: MYSQL
-Summary: MYSQL
-
-#### Install MySQL
-
-* [see here](https://askubuntu.com/questions/750498/mysql-5-5-update-to-mysql-5-7)
-and [here](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-14-04)
+Slug: sql
+Summary: SQL
 
 #### Sample Queries
 
@@ -16,6 +11,20 @@ select * from PREDICATION where SUBJECT_SEMTYPE in ('gngm') limit 10;
 select * from ENTITY where SEMTYPE in ('gngm') and GENE_ID <> '' limit 10;
 ```
 <br>
+
+```
+select count([Incident Type]), [Incident Type]
+FROM [dbo].[bat_2020]
+Group by [Incident Type]
+```
+
+<br>
+
+```
+SELECT MIN ([Created Date Time]) AS "Min Date" ,
+       MAX ([Created Date Time]) AS "Max Date"  
+FROM [dbo].[bat_2020]
+```
 
 ### Useful commands
 
@@ -88,7 +97,7 @@ or
 * stop logging: `notee`
 
 
-#### where is the table data stored?
+#### Where is the table data stored?
 
 * it is specified in `my.cnf`
 * otherwise, the default location is `/var/lib/mysql/`
@@ -125,7 +134,7 @@ Note: would this be better??
 * [see here](https://dba.stackexchange.com/questions/27328/how-large-should-be-mysql-innodb-buffer-pool-size)
 
 
-#### Misc.
+#### Misc. Mysql
 
 * `$ mysql -u root -p`
 * `$ sudo service mysql restart`
@@ -134,6 +143,10 @@ Note: would this be better??
 * `SELECT ENTITY_ID, COUNT(*) c FROM ENTITY_GENE GROUP BY ENTITY_ID HAVING c > 1;` # find duplicates
 
 
+#### Install MySQL
+
+* [see here](https://askubuntu.com/questions/750498/mysql-5-5-update-to-mysql-5-7)
+and [here](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-14-04)
 
 #### Resources
 

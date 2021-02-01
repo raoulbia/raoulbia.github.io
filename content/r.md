@@ -14,6 +14,14 @@ Summary: R
 * Convert: ```df$colname <- as.integer(df$colname)```
 * Make df with only numeric vars: ```num_df <- df[, sapply(df, is.numeric)]```
 * Correlation: ```cor(num_df, use="complete.obs")```
+* random sampling from each factor: ```olive_sample <- ddply(olive,.(region),function(x) x[sample(nrow(x),10),])```
+* to access the 1rst and 3rd elements of a vector: ```my.vec[c(1,3)]```
+
+#### Creating vectors and matrices
+
+* ```my.vec <- c(1:4)```
+* ```my.vec <- c(TRUE, FALSE, FALSE, FALSE, TRUE, TRUE)```
+* ```A <- matrix(c(1,2,2,5), nrow=2, ncol=2, byrow=TRUE)```
 
 #### Script Header
 

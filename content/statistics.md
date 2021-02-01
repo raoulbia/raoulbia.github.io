@@ -19,3 +19,7 @@ Summary: Statistics
 the errors, expressed in the unit of the error being measured.
 * When you see "root" something (e.g. RMSE) or "standard" something (Standard Error) it 
 refers to a standard deviation which itself is a Variance transformed by taking the square root thereof. 
+
+#### Distributions
+
+* [Statistical Distributions Overview](https://www.rocscience.com/help/slide2/slide_model/probability/Statistical_Distributions_Overview.htm)

@@ -6,47 +6,30 @@ Summary: Python Code Snippets
 
 <br>
 
-#### Logging & Try/Except
+#### limited FOR loop
 
-* [A Comprehensive Guide to Handling Exceptions in Python](https://medium.com/better-programming/a-comprehensive-guide-to-handling-exceptions-in-python-7175f0ce81f7)
+`for i, elem in zip(range(100), elems[::10])` where `[::10]` is every 10th
 
-```python
-def build_pathway_dataset(self, list-of-args, **kwargs):
-    logger = logging.getLogger(self.__class__.__qualname__)
-    try:
-        if pathway:
-            logger.info('Building Pathway Data Set')
-            t0 = time.time()
-            dataset = PathwayDataset(list-of-args)
-            dataset.build(pathway_limit=pathway_limit)
-            t1 = time.time()
-            logger.info('finished in %5.2f s', t1-t0)
-        else:
-            logger.info('dataset will not be built')
-    except Exception as e:
-        logger.exception('\n'.join(traceback.format_exception(type(e), e, sys.exc_info()[2])))
-        raise e
-```
+#### Query
+
+`pd.read_csv("file.csv").query("year==2000")`
 
 
-#### Create a temporary file for unit tests:
+#### File Handling: 
 
 ```python
-from tomoe.io import get_tomoe_local_data_dir
-import tempfile
-temp_path = tempfile.mkdtemp(suffix="dist-graph-sampling")
-
- ...
-
-TOMOE_TEMP_FOLDER = get_tomoe_local_data_dir()
-
- ...
-triples_hg_csv_path = os.path.join(temp_path, 'triples.hg.csv.tsv')
-triple_csv_to_hyperedge_csv(triples_csv_path, triples_hg_csv_path)
-assert os.stat(triples_hg_csv_path).st_size != 0
+with open('filename', 'rb') as f:
+    dosomething()
 ```
 
-#### File Handling: `with open`
+```python
+# remove if exists then write df to csv
+f = 'local-data/filename.csv'
+if os.path.isfile(f):
+    os.remove(f)
+df.to_csv(filepath, sep=',', mode='a', header=False)
+```
+Notes:
 
 * Opening a file with this statement will handle file closing for you
 * The `StringIO` and `cStringIO` modules are gone. 
@@ -55,12 +38,7 @@ assert os.stat(triples_hg_csv_path).st_size != 0
 * Once a file has been read, with `read()` you can use `seek(0)` to return the read cursor to the start of the file
 * To check if a file exists or to overwrite an existing file:
 
-```python
-filepath = 'local-data/filename.csv'
-if os.path.isfile(filepath):
-    os.remove(filepath)
-tsne_nn_df.to_csv(path_or_buf=filepath,sep=',', mode='a', header=False)
-```
+
 
 #### Get index based on values in another column
 
@@ -329,21 +307,6 @@ print(installed_packages_list)
   4. when done, reverse changes made in Steps 1. and 2.
 
 
-#### Convert Python2 to Python3
-
-```sh
-pip install 2to3
-2to3 -n -w path/to/script/script_namae.py
-```
-
-Note: `-n` prevents backup files; `-w` instructs to write the conversion
-
-#### Pycharm
-
-Widen Pycharm console output for pandas dataframes
-
-`pd.set_option('display.expand_frame_repr', False)`
-
 #### `super()` with `__init__()`
   
 [Understanding Python super() with __init__() methods](https://stackoverflow.com/questions/576169/understanding-python-super-with-init-methods)
@@ -377,6 +340,45 @@ general timing
     * `PYTHONPATH` is the module search path
     * `PYTHONHOME` is used for the standard libraries,
 
+#### Logging & Try/Except
+
+* [A Comprehensive Guide to Handling Exceptions in Python](https://medium.com/better-programming/a-comprehensive-guide-to-handling-exceptions-in-python-7175f0ce81f7)
+
+```python
+def build_pathway_dataset(self, list-of-args, **kwargs):
+    logger = logging.getLogger(self.__class__.__qualname__)
+    try:
+        if pathway:
+            logger.info('Building Pathway Data Set')
+            t0 = time.time()
+            dataset = PathwayDataset(list-of-args)
+            dataset.build(pathway_limit=pathway_limit)
+            t1 = time.time()
+            logger.info('finished in %5.2f s', t1-t0)
+        else:
+            logger.info('dataset will not be built')
+    except Exception as e:
+        logger.exception('\n'.join(traceback.format_exception(type(e), e, sys.exc_info()[2])))
+        raise e
+```
+
+
+#### Create a temporary file for unit tests:
+
+```python
+from tomoe.io import get_tomoe_local_data_dir
+import tempfile
+temp_path = tempfile.mkdtemp(suffix="dist-graph-sampling")
+
+ ...
+
+TOMOE_TEMP_FOLDER = get_tomoe_local_data_dir()
+
+ ...
+triples_hg_csv_path = os.path.join(temp_path, 'triples.hg.csv.tsv')
+triple_csv_to_hyperedge_csv(triples_csv_path, triples_hg_csv_path)
+assert os.stat(triples_hg_csv_path).st_size != 0
+```
 
 #### Variable assignemnt Gotchas
 
@@ -399,6 +401,21 @@ sudo apt-get install python3.6
 may be needed:
 
 `sudo apt-get install python3.6-gdbm` 
+
+#### Convert Python2 to Python3
+
+```sh
+pip install 2to3
+2to3 -n -w path/to/script/script_namae.py
+```
+
+Note: `-n` prevents backup files; `-w` instructs to write the conversion
+
+#### Misc
+
+* `strip()` strips off the new line character
+* Widen Pycharm console output for pandas DFs: `pd.set_option('display.expand_frame_repr', False)`
+
 
 #### Various Links
 
