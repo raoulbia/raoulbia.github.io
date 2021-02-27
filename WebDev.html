@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>code snippets etc. | Web Development</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
@@ -9,19 +10,21 @@
     <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
     <link rel="stylesheet" href="./theme/css/print.css" type="text/css" media="print" />
     <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href=".">Home</a></li>
+                <li><a href="./">Home</a></li>
                 <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
         <div class="header_box">
-            <h1><a href=".">code snippets etc.</a></h1>
+            <h1><a href="./">code snippets etc.</a></h1>
         </div>
     </header>
     <div id="wrapper">
@@ -31,6 +34,9 @@
                 <h2 class="title">
                     <a href="./WebDev.html" rel="bookmark" title="Permanent Link to &quot;Web Development&quot;">Web Development</a>
                 </h2>
+
+                
+                
 
                 <h4>nginx</h4>
 <ul>
@@ -110,12 +116,12 @@
 
 <p>Django templates</p>
 <p>in <code>settings.py</code></p>
-<div class="highlight"><pre><span></span><span class="err"> BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))</span>
-<span class="err"> ...</span>
-<span class="err"> TEMPLATES = [</span>
-<span class="err">   {</span>
-<span class="err">       &#39;DIRS&#39;: [os.path.join(BASE_DIR, &#39;firstwebsite/templates&#39;)]</span>
-<span class="err">   }]</span>
+<div class="highlight"><pre><span></span> <span class="nv">BASE_DIR</span> <span class="o">=</span> <span class="nv">os</span>.<span class="nv">path</span>.<span class="k">dirname</span><span class="ss">(</span><span class="nv">os</span>.<span class="nv">path</span>.<span class="k">dirname</span><span class="ss">(</span><span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">abspath</span><span class="ss">(</span><span class="nv">__file__</span><span class="ss">)))</span>
+ ...
+ <span class="nv">TEMPLATES</span> <span class="o">=</span> [
+   {
+       <span class="s1">&#39;</span><span class="s">DIRS</span><span class="s1">&#39;</span>: [<span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">join</span><span class="ss">(</span><span class="nv">BASE_DIR</span>, <span class="s1">&#39;</span><span class="s">firstwebsite/templates</span><span class="s1">&#39;</span><span class="ss">)</span>]
+   }]
 </pre></div>
 
 
@@ -161,8 +167,8 @@
 <p><br></p>
 <h4>Node JS</h4>
 <p>Install nodejs:</p>
-<div class="highlight"><pre><span></span><span class="err">curl -sL https://deb.nodesource.com/setup_8.x — Node.js 8 LTS &quot;Carbon&quot; | sudo -E bash -</span>
-<span class="err">sudo apt-get install -y nodejs</span>
+<div class="highlight"><pre><span></span>curl -sL https://deb.nodesource.com/setup_8.x — Node.js 8 LTS &quot;Carbon&quot; | sudo -E bash -
+sudo apt-get install -y nodejs
 </pre></div>
 
 

@@ -2,13 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>code snippets etc. | articles in the "Python" category</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code snippets etc. | articles in the "Python" category | Page 2</title>
     <link rel="shortcut icon" type="image/png" href="../favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
     <link rel="stylesheet" href="../theme/css/screen.css" type="text/css" />
     <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../theme/css/print.css" type="text/css" media="print" />
     <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 </head>
 <body>
     <header>
@@ -16,13 +19,13 @@
             <ul>
 
                 <li class="ephemeral selected"><a href="../category/python2.html">Python</a></li>
-                <li><a href="..">Home</a></li>
+                <li><a href="../">Home</a></li>
                 <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="../archives">Archives</a></li>
             </ul>
         </nav>
         <div class="header_box">
-            <h1><a href="..">code snippets etc.</a></h1>
+            <h1><a href="../">code snippets etc.</a></h1>
         </div>
     </header>
     <div id="wrapper">
@@ -33,9 +36,12 @@
                     <a href="../pandas_regexp.html" rel="bookmark" title="Permanent Link to &quot;Pandas Regular Expressions&quot;">Pandas Regular Expressions</a>
                 </h2>
 
+                
+                
+
                 <h4>Extract Substring</h4>
-<div class="highlight"><pre><span></span><span class="err"># obtain Title from name (Mr, Mrs, Miss etc) by extracting up to but excluding the first dot (.)</span>
-<span class="err">df[&#39;Title&#39;] = df.Name.str.extract(&#39; ([A-Za-z]+)\.&#39;, expand=False)</span>
+<div class="highlight"><pre><span></span># obtain Title from name (Mr, Mrs, Miss etc) by extracting up to but excluding the first dot (.)
+df[&#39;Title&#39;] = df.Name.str.extract(&#39; ([A-Za-z]+)\.&#39;, expand=False)
 </pre></div>
 
 
@@ -62,6 +68,9 @@
                 <h2 class="title">
                     <a href="../python, pandas, nlp.html" rel="bookmark" title="Permanent Link to &quot;Pandas NLP&quot;">Pandas NLP</a>
                 </h2>
+
+                
+                
 
                 <h4>Useful Links</h4>
 <ul>
@@ -126,9 +135,9 @@
 
 
 <h4>Sentence Fragement by Word Window</h4>
-<div class="highlight"><pre><span></span><span class="err">pat = &#39;(?P&lt;before&gt;(?:\w+\W+){,3})products\W+(?P&lt;after&gt;(?:\w+\W+){,3})&#39;</span>
-<span class="err">new = df.text.str.extract(pat, expand=True)</span>
-<span class="err">df.assign(**new)</span>
+<div class="highlight"><pre><span></span><span class="n">pat</span> <span class="o">=</span> <span class="p">&#39;(</span><span class="o">?</span><span class="n">P</span><span class="o">&lt;</span><span class="n">before</span><span class="o">&gt;</span><span class="p">(</span><span class="o">?:</span><span class="n">\w+\W+){,3})products\W+(?P&lt;after&gt;(?:\w+\W+){,3})&#39;</span>
+<span class="n">new</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">str</span><span class="p">.</span><span class="n">extract</span><span class="p">(</span><span class="n">pat</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="n">True</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="k">assign</span><span class="p">(</span><span class="o">**</span><span class="n">new</span><span class="p">)</span>
 </pre></div>
 
 
@@ -146,8 +155,8 @@
                 <div class="clear"></div>
                 <div class="pages">
 
-                    <a href="../" class="prev_page">&larr;&nbsp;Previous</a>
-                    <a href="../page/3" class="next_page">Next&nbsp;&rarr;</a>
+                    <a href="../category/python.html" class="prev_page">&larr;&nbsp;Previous</a>
+                    <a href="../category/python3.html" class="next_page">Next&nbsp;&rarr;</a>
                     <span>Page 2 of 5</span>
                 </div>
 
