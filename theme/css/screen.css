@@ -64,9 +64,7 @@ body {
 }
 
 header, #wrapper {
-    padding: 0 10px;
-    min-width: 500px;
-    max-width: 910px;
+    width: 910px;
     margin: auto;
 }
 
