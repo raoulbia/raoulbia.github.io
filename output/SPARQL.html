@@ -270,26 +270,26 @@ commented out. In the original setting I used this approach to quickly select th
 <span class="k">for</span> <span class="n">listOfVars</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;head&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
     <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">listOfVars</span><span class="p">:</span>
         <span class="nb">vars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">]))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">]))</span>
     <span class="k">elif</span> <span class="nb">vars</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;.1&quot;</span><span class="p">]:</span>
             <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># print results without prefix</span>
             <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="c1"># print simple count</span>
             <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
 <span class="k">except</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;no data found for query&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;no data found for query&quot;</span><span class="p">)</span>
 </pre></div>
                 <div class="clear"></div>
 

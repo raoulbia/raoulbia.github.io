@@ -1,7 +1,7 @@
 Title: Public Transport
-Date: 2017-06-28
+Date: 2017-04-25
 Category: Public Transport
-Slug: nta
+Slug: public_transport
 Summary: Public Transport
 
 

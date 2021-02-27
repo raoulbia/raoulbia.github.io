@@ -28,149 +28,6 @@
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./R.html" rel="bookmark" title="Permanent Link to &quot;R&quot;">R</a>
-                </h2>
-
-                <h4>Useful Snippets</h4>
-<ul>
-<li>Filter: <code>df %&gt;% filter(., GrLivArea &gt;=4000 &amp; SalePrice &lt; 200000)</code></li>
-<li>Remove observations: <code>df &lt;- df[-c(524, 1299), ]</code></li>
-<li>Reomve column: <code>df$colname&lt;- NULL</code></li>
-<li>Order columns alphabetically: <code>df &lt;- df[ ,order(colnames(df))]</code></li>
-<li>Convert: <code>df$colname &lt;- as.integer(df$colname)</code></li>
-<li>Make df with only numeric vars: <code>num_df &lt;- df[, sapply(df, is.numeric)]</code></li>
-<li>Correlation: <code>cor(num_df, use="complete.obs")</code></li>
-<li>random sampling from each factor: <code>olive_sample &lt;- ddply(olive,.(region),function(x) x[sample(nrow(x),10),])</code></li>
-<li>to access the 1rst and 3rd elements of a vector: <code>my.vec[c(1,3)]</code></li>
-</ul>
-<h4>Creating vectors and matrices</h4>
-<ul>
-<li><code>my.vec &lt;- c(1:4)</code></li>
-<li><code>my.vec &lt;- c(TRUE, FALSE, FALSE, FALSE, TRUE, TRUE)</code></li>
-<li><code>A &lt;- matrix(c(1,2,2,5), nrow=2, ncol=2, byrow=TRUE)</code></li>
-</ul>
-<h4>Script Header</h4>
-<div class="highlight"><pre><span></span><span class="n">library</span><span class="p">(</span><span class="n">rstudioapi</span><span class="p">)</span>
-<span class="n">setwd</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">rstudioapi</span><span class="p">::</span><span class="n">getActiveDocumentContext</span><span class="p">()</span><span class="err">$</span><span class="n">path</span><span class="p">))</span>
-<span class="n">rm</span><span class="p">(</span><span class="nb">list</span><span class="o">=</span><span class="n">ls</span><span class="p">())</span>
-
-<span class="n">library</span><span class="p">(</span><span class="n">rio</span><span class="p">)</span> <span class="c1"># import csv</span>
-</pre></div>
-
-
-<h4>Read Data</h4>
-<p><code>load("data_project_backpain.RData")</code></p>
-<div class="highlight"><pre><span></span><span class="n">data</span>  <span class="o">&lt;-</span> <span class="nf">import</span><span class="p">(</span><span class="s">&#39;superstore.csv&#39;</span><span class="p">,</span> <span class="n">setclass</span> <span class="o">=</span> <span class="s">&quot;tibble&quot;</span><span class="p">)</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-</pre></div>
-
-
-<h4>Select only numeric columns</h4>
-<div class="highlight"><pre><span></span><span class="n">nums</span> <span class="o">&lt;-</span> <span class="nf">unlist</span><span class="p">(</span><span class="nf">lapply</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">is.numeric</span><span class="p">))</span>  
-<span class="n">df</span><span class="p">[</span> <span class="p">,</span> <span class="n">nums</span><span class="p">]</span>
-</pre></div>
-
-
-<h4>Coerce multiple columns to factors at once</h4>
-<div class="highlight"><pre><span></span><span class="n">cols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="ss">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;D&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;H&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="n">df</span><span class="o">[</span><span class="n">cols</span><span class="o">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">df</span><span class="o">[</span><span class="n">cols</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">factor</span><span class="p">)</span><span class="w">  </span><span class="err">##</span><span class="w"> </span><span class="k">as</span><span class="p">.</span><span class="n">factor</span><span class="p">()</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">used</span><span class="w"></span>
-</pre></div>
-
-
-<h4>Exclude columns by name</h4>
-<div class="highlight"><pre><span></span><span class="n">exclude</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Neighborhood&quot;</span><span class="p">,</span> <span class="s">&quot;Exterior2nd&quot;</span><span class="p">,)</span>
-<span class="n">df</span><span class="p">[</span> <span class="p">,</span> <span class="o">-</span><span class="nf">which</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">%in%</span> <span class="n">exclude</span><span class="p">)]</span>
-</pre></div>
-
-
-<h4>Count Missing Values</h4>
-<p><code>sapply(df, function(x) sum(is.na(x)))</code></p>
-<h4>Create vector from column and drop missing values</h4>
-<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">gt</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">gt</span><span class="o">$</span><span class="n">LandAverageTemperature</span><span class="p">),</span> <span class="m">2</span><span class="p">]</span>
-</pre></div>
-
-
-<h4>Making Objects available to RMarkdown</h4>
-<ul>
-<li>in R script</li>
-</ul>
-<p><code>save(all = TRUE, file= "all.rda")</code>
-<code>save(object1.name, object2.name, file= "all.rda")</code></p>
-<ul>
-<li>in RMD file</li>
-</ul>
-<p><code>load("all.rda")</code></p>
-<h4>Benchmarking</h4>
-<div class="highlight"><pre><span></span><span class="n">libray</span><span class="p">(</span><span class="n">microbenchmark</span><span class="p">)</span>
-<span class="n">microbenchmark</span><span class="p">(</span>
-  <span class="n">bad_cpp</span> <span class="o">=</span> <span class="n">bad_select_positive_values_cpp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
-  <span class="n">good_cpp</span> <span class="o">=</span> <span class="n">good_select_positive_values_cpp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
-  <span class="n">times</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="p">)</span>
-
-<span class="n">library</span><span class="p">(</span><span class="n">rbenchmark</span><span class="p">)</span>
-<span class="n">benchmark</span><span class="p">(</span>
-  <span class="n">bad_select_positive_values_cpp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
-  <span class="n">good_select_positive_values_cpp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
-  <span class="k">order</span> <span class="o">=</span> <span class="ss">&quot;relative&quot;</span>
-<span class="p">)</span>
-</pre></div>
-
-
-<h4>Profiling</h4>
-<div class="highlight"><pre><span></span><span class="err">Rprof(&quot;profile1.out&quot; ) #send profiling to profile1.out</span>
-<span class="err"># &lt;call function here&gt;</span>
-<span class="err">Rprof(NULL)</span>
-<span class="err">summaryRprof(&quot;profile1.out&quot;)</span>
-</pre></div>
-
-
-<h4>Sliding Window</h4>
-<p>How sliding window works:</p>
-<ul>
-<li>select subset of x of size 3 using its indices</li>
-<li>1st iter: x[3 - 3 + 1, 3] gives x[1, 3]</li>
-<li>2nd iter: x[4 - 3 + 1, 4] gives x[2, 4]</li>
-<li>...</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="k">window</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span>
-<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="k">window</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">))</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="n">x_subset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="o">[</span><span class="n">seq(i - window + 1, i)</span><span class="o">]</span><span class="w"></span>
-<span class="n">res</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">x_subset</span><span class="p">)</span><span class="w"></span>
-<span class="err">}</span><span class="w"></span>
-</pre></div>
-
-
-<h4>R: Packages</h4>
-<ul>
-<li><a href="https://heartbeat.fritz.ai/using-caret-in-r-to-classify-term-deposit-subscriptions-for-a-bank-bd40ff5cc15">caret</a></li>
-<li><a href="http://www.rebeccabarter.com/blog/2019-06-06_pre_processing/">Using the recipes package for easy pre-processing</a></li>
-<li><a href="https://cran.r-project.org/web/packages/bestNormalize/vignettes/bestNormalize.html">bestNormalize</a></li>
-</ul>
-<h4>Related Links</h4>
-<ul>
-<li><a href="https://blog.exploratory.io/populating-missing-dates-with-complete-and-fill-functions-in-r-and-exploratory-79f2a321e6b5">Populating Missing Dates with Complete and Fill Functions in R and Exploratory</a></li>
-<li><a href="https://www.youtube.com/user/marinstatlectures/playlists">MarinStatsLectures</a></li>
-<li><a href="https://towardsdatascience.com/data-cleaning-with-r-and-the-tidyverse-detecting-missing-values-ea23c519bc62">Data Cleaning with R and the Tidyverse: Detecting Missing Values</a></li>
-<li><a href="https://medium.com/x8-the-ai-community/play-with-your-ml-dataset-cheatsheet-in-r-bd8451ec6dd7">Play With Your ML Dataset - Cheatsheet in R</a></li>
-<li><a href="https://towardsdatascience.com/coding-in-r-pivot-painlessly-32e40a0b6c3d">Coding in R: Pivot Painlessly</a></li>
-<li><a href="https://towardsdatascience.com/simple-fast-exploratory-data-analysis-in-r-with-dataexplorer-package-e055348d9619">Simple Fast Exploratory Data Analysis in R with DataExplorer Package</a></li>
-<li><a href="https://community.rstudio.com/t/wrap-column-name-in-pdf-table-from-knitr-kable/3278">Wrap column name in pdf table, from knitr::kable</a></li>
-<li><a href="https://medium.com/analytics-vidhya/a-guide-to-machine-learning-in-r-for-beginners-part-5-4c00f2366b90">A Guide to Machine Learning in R for Beginners: Logistic Regression</a></li>
-<li><a href="https://towardsdatascience.com/tired-of-nested-ifelse-in-dplyr-look-no-further-ebf7166b5289">Clean Up Your R Code! A Secret to Better Feature Engineering</a></li>
-<li><a href="https://medium.com/analytics-vidhya/group-manipulation-in-r-3-5554a0c1b544">Group Manipulation In R</a></li>
-<li><a href="https://medium.com/@moorissa/the-best-resources-for-r-programming-37dbc94e0de6">The Best Resources for R Programming</a></li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./R.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/r.html" rel="tag">R</a>
-                </div>
-            </article>            <h4 class="date">Feb 20, 2018</h4>
-
-            <article class="post">
-                <h2 class="title">
                     <a href="./rmd.html" rel="bookmark" title="Permanent Link to &quot;RMD&quot;">RMD</a>
                 </h2>
 
@@ -227,6 +84,107 @@
                     <a href="./rmd.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/rmd.html" rel="tag">RMD</a>
                 </div>
+            </article>            <h4 class="date">Feb 19, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./C++.html" rel="bookmark" title="Permanent Link to &quot;C++&quot;">C++</a>
+                </h2>
+
+                <h3>Useful C++ snippets</h3>
+<h4>useful headers</h4>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;typeinfo&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;math.h&gt;</span><span class="c1"> # to use fabs() to get the absolute value of a double</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;Rcpp.h&gt;</span><span class="cp"></span>
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">Rcpp</span> <span class="p">;</span>
+<span class="n">using</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="p">;</span>
+</pre></div>
+
+
+<h4>ensure that R Studio console prints out decimals</h4>
+<div class="highlight"><pre><span></span><span class="nt">cout</span><span class="p">.</span><span class="nc">precision</span><span class="o">(</span><span class="nt">4</span><span class="o">)</span> <span class="o">;</span>
+<span class="nt">cout</span><span class="p">.</span><span class="nc">setf</span><span class="o">(</span><span class="nt">std</span><span class="p">::</span><span class="nd">ios</span><span class="p">::</span><span class="nd">fixed</span><span class="o">)</span> <span class="o">;</span>
+</pre></div>
+
+
+<h4>print statement</h4>
+<div class="highlight"><pre><span></span><span class="nt">cout</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;x is of type: &quot;</span><span class="o">&lt;&lt;</span> <span class="nt">typeid</span><span class="o">(</span><span class="nt">x</span><span class="o">)</span><span class="p">.</span><span class="nc">name</span><span class="o">()</span> <span class="o">&lt;&lt;</span> <span class="nt">std</span><span class="p">::</span><span class="nd">endl</span> <span class="o">;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="cm">/*** R </span>
+<span class="cm"># Does the function give the same results as R&#39;s weighted.mean() function?</span>
+<span class="cm">all.equal(weighted_mean_cpp(x, w), weighted.mean(x, w))</span>
+<span class="cm">*/</span><span class="w"></span>
+</pre></div>
+
+
+<h4>Rcpp</h4>
+<ul>
+<li><a href="http://adv-r.had.co.nz/Rcpp.html">High performance functions with Rcpp</a></li>
+<li><a href="http://www.cplusplus.com/reference/stl/">STL Data Structures</a></li>
+<li><a href="http://www.cplusplus.com/reference/algorithm/">C++ <algorithm> header</a></li>
+<li><a href="http://www.cplusplus.com/reference/set/set/">Sets</a></li>
+<li><a href="https://www.boost.org/doc/">Boost C++ libraries</a></li>
+</ul>
+<h3>Rcpp, C++ and Visual Studio Code</h3>
+<ul>
+<li>Including the header Rcpp.h only works if the code is executed / compiled from RStudio</li>
+<li>Compiling a pure cpp file without Rcpp export does NOT require an Rcpp header include. If you do yo will get 
+an error: <code>Rcpp.h: No such file or directory</code>.</li>
+</ul>
+<h4><code>task.json</code></h4>
+<div class="highlight"><pre><span></span>{
+  &quot;version&quot;: &quot;2.0.0&quot;,
+  &quot;tasks&quot;: [
+    {
+      &quot;type&quot;: &quot;shell&quot;,
+      &quot;label&quot;: &quot;build&quot;,
+      &quot;command&quot;: &quot;g++&quot;,
+      &quot;args&quot;: [
+        &quot;./MCQ/mcq1.cpp&quot;,
+        &quot;-o&quot;,
+        &quot;<span class="cp">${</span><span class="n">workspaceFolderBasename</span><span class="cp">}</span>&quot;
+      ],
+      &quot;problemMatcher&quot;: []
+    },
+    {
+      &quot;type&quot;: &quot;shell&quot;,
+      &quot;label&quot;: &quot;run&quot;,
+      &quot;command&quot;: &quot;./<span class="cp">${</span><span class="n">workspaceFolderBasename</span><span class="cp">}</span>&quot;,
+      &quot;dependsOn&quot;: [
+        &quot;build&quot;
+      ],
+      &quot;problemMatcher&quot;: [],
+      &quot;group&quot;: {
+        &quot;kind&quot;: &quot;build&quot;,
+        &quot;isDefault&quot;: true
+      }
+    }
+  ]
+}
+</pre></div>
+
+
+<h4>C++ related Help Files</h4>
+<ul>
+<li><code>?cxxfunction</code></li>
+</ul>
+<h4>Links</h4>
+<ul>
+<li><a href="http://www.cplusplus.com/reference/">C++ Reference</a></li>
+<li><a href="https://stackoverflow.com/questions/31339853/locating-downloading-header-files-r-h-and-rmath-for-c-interfacing-with-r">Locating/downloading header files R.h and Rmath for C interfacing with R</a></li>
+<li><a href="https://medium.com/techie-delight/data-structures-and-algorithms-problems-in-c-using-stl-7900a6ddb1d4">Data structures and algorithms problems in C++ using STL</a></li>
+<li><a href="https://medium.com/sisgrammers/stl-containers-in-c-a95d0b0aa45a">STL Containers in C++</a></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./C++.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/c.html" rel="tag">C++</a>
+                </div>
             </article>
 
                 <div class="clear"></div>
@@ -234,7 +192,7 @@
 
                     <a href="./" class="prev_page">&larr;&nbsp;Previous</a>
                     <a href="./page/3" class="next_page">Next&nbsp;&rarr;</a>
-                    <span>Page 2 of 18</span>
+                    <span>Page 2 of 19</span>
                 </div>
 
             <div class="clear"></div>

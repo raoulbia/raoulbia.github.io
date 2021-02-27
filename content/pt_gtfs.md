@@ -1,8 +1,8 @@
-﻿Title: General Transit Feed Specification
-Date: 2017-06-28
-Category: GTFS
-Slug: gtfs
-Summary: General Transit Feed Specification
+﻿Title: Public Transport Data
+Date: 2017-04-24
+Category: Public Transport Data
+Slug: public_transport_data
+Summary: Public Transport Data
 
 
 [GTFS Field Definitions](https://gtfs.org/reference/static/#field-definitions)
@@ -84,7 +84,11 @@ Notes:
 * the database url must contain `username:password` e.g. `postgres:user`
 * the port number can be found using `grep -H '^port' /etc/postgresql/*/main/postgresql.conf`
 
+## GeoJson
 
+* uses [long, lat]
+
+## 
 ## Others (to be reviewed)
 
 * [github.com/cbick/gtfs_SQL_importer](https://github.com/cbick/gtfs_SQL_importer)

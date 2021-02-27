@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+    <title>code snippets etc. | Scripts</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href=".">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="./archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href=".">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">May 25, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./scripts.html" rel="bookmark" title="Permanent Link to &quot;Scripts&quot;">Scripts</a>
+                </h2>
+
+                <h3>Import GTFS data into postgres</h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># init vars</span>
+<span class="nv">workingFolder</span><span class="o">=</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>
+<span class="nv">unzip_dir</span><span class="o">=</span><span class="s2">&quot;gtfs_files_unzipped&quot;</span>
+<span class="nv">fileName</span><span class="o">=</span><span class="s2">&quot;feed_gtfs&quot;</span> 
+<span class="nv">dbName</span><span class="o">=</span><span class="s2">&quot;gtfs_dublinbus&quot;</span>
+<span class="nv">user</span><span class="o">=</span><span class="s2">&quot;postgres&quot;</span>
+<span class="nv">password</span><span class="o">=</span><span class="s2">&quot;postgres&quot;</span>
+
+<span class="c1"># create dirs</span>
+<span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="se">\r</span>m -Rf <span class="nv">$workingFolder</span>/<span class="nv">$unzip_dir</span><span class="p">;</span> <span class="k">fi</span>
+mkdir <span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span> &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="c1"># mkdir &quot;$workingFolder/output_test&quot; &gt; /dev/null 2&gt;&amp;1    </span>
+
+<span class="c1"># unzip the GTFS file</span>
+rm <span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>/*.csv &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+rm <span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>/*.txt &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+unzip -qq -o <span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$fileName</span><span class="s2">&quot;</span> -d <span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>
+
+<span class="c1"># create a CSV copy of the source txt GTFS files</span>
+<span class="nb">cd</span> <span class="s2">&quot;./</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>
+<span class="k">for</span> file <span class="k">in</span> *.txt
+<span class="k">do</span>
+    cp <span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span> <span class="s2">&quot;../</span><span class="nv">$unzip_dir</span><span class="s2">/</span><span class="si">${</span><span class="nv">file</span><span class="p">%.txt</span><span class="si">}</span><span class="s2">.csv&quot;</span>
+<span class="k">done</span>
+<span class="nb">cd</span> ..
+
+<span class="c1"># import into postgres</span>
+<span class="k">for</span> file <span class="k">in</span> <span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">/&quot;</span>*.csv
+<span class="k">do</span>
+    <span class="nv">filename</span><span class="o">=</span><span class="k">$(</span>basename <span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="k">)</span>
+    <span class="nv">extension</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">filename</span><span class="p">##*.</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="nv">filename</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">filename</span><span class="p">%.*</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    ogr2ogr -f PostgreSQL PG:<span class="s2">&quot;user=</span><span class="nv">$user</span><span class="s2"> dbname=</span><span class="nv">$dbName</span><span class="s2"> password=</span><span class="nv">$password</span><span class="s2">&quot;</span> <span class="se">\</span>
+            <span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">/</span><span class="nv">$filename</span><span class="s2">.csv&quot;</span> -nln <span class="s2">&quot;</span><span class="nv">$filename</span><span class="s2">&quot;</span> 
+<span class="k">done</span>
+
+<span class="se">\r</span>m <span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">/&quot;</span>*.csv
+
+<span class="nb">echo</span> <span class="s2">&quot;Done&quot;</span>
+</pre></div>
+</td></tr></table>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./scripts.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/scripts.html" rel="tag">Scripts</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

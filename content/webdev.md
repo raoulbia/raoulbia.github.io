@@ -1,8 +1,8 @@
 Title: Web Development
 Date: 2017-11-01
-Category: WebDev
-Slug: WebDev
-Summary: WebDev
+Category: Web Development
+Slug: web_development
+Summary: Web Development
 
 #### nginx
 

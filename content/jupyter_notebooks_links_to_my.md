@@ -1,8 +1,8 @@
-Title: R and Jupyter Notebooks
-Date: 2018-03-02
+Title: RMD and Jupyter Notebooks examples
+Date: 2017-05-24
 Category: Python, R
-Slug: R and Jupyter Notebooks
-Summary: R and Jupyter Notebooks
+Slug: notebooks
+Summary: RMD and Jupyter Notebooks examples
 
 <br> 
 

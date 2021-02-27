@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+    <title>code snippets etc. | Databases</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href=".">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="./archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href=".">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Nov 24, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./databases.html" rel="bookmark" title="Permanent Link to &quot;Databases&quot;">Databases</a>
+                </h2>
+
+                <h3>Postgres</h3>
+<h4>install postgres and postgis</h4>
+<p>$  sudo apt install postgis postgresql-13-postgis-3
+$ sudo -u postgres psql
+postgres=# \password postgres
+postgres=# \q</p>
+<p>check installed version(s): <code>dpkg -l | grep postgres</code></p>
+<h4>postgres user authentication error</h4>
+<p><code>sudo nano /etc/postgresql/13/main/pg_hba.conf</code></p>
+<p>CHANGE FROM</p>
+<p><code>local   all     postgres     peer</code></p>
+<p>TO</p>
+<p><code>local   all      postgres    trusted</code></p>
+<p>then 
+sudo service postgresql restart</p>
+<h4>run in pgadmin4</h4>
+<p><code>CREATE EXTENSION postgis;</code></p>
+<ul>
+<li>
+<p>http://www.orbital.co.ke:8080/opengeo-docs/dataadmin/pgGettingStarted/shp2pgsql.html</p>
+</li>
+<li>
+<p>test: <code>psql -U postgres -d &lt;DBNAME&gt; -c "SELECT postgis_version()"</code></p>
+</li>
+<li>
+<p>syntax: <code>shp2pgsql -I -s &lt;SRID&gt; &lt;PATH/TO/SHAPEFILE&gt; &lt;SCHEMA&gt;.&lt;DBTABLE&gt; | psql -U postgres -d &lt;DBNAME&gt;</code></p>
+</li>
+<li>
+<p>example: <code>shp2pgsql -I -s 4326  dublinbus/Dublin_Bus.shp  shp_dublinbus | psql -U postgres -d dublinbus</code></p>
+</li>
+</ul>
+<h3>Utilities: ogr2ogr</h3>
+<ul>
+<li>https://gis.stackexchange.com/questions/65917/can-i-append-to-different-tables-using-ogr2ogr</li>
+<li>https://www.bostongis.com/PrinterFriendly.aspx?content_name=ogr_cheatsheet</li>
+<li>https://www.mankier.com/1/ogr2ogr</li>
+</ul>
+<h4>geojson to shp</h4>
+<p><code>ogr2ogr -f "ESRI Shapefile" destination_data.shp "dcc_public_bin_locations.geojson"</code></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./databases.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

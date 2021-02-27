@@ -54,14 +54,14 @@
 
 
 <h3>Inter-annotator agreement</h3>
-<div class="highlight"><pre><span></span><span class="err">Unit    obs1    obs2    obs3    obs4    obs5</span>
-<span class="err">1       1       1       2       .       2</span>
-<span class="err">2       1       1       0       1       .</span>
-<span class="err">3       2       3       3       3       .</span>
-<span class="err">4       .       0       0       .       0</span>
-<span class="err">5       0       0       0       .       0</span>
-<span class="err">6       0       0       0       .       0</span>
-<span class="err">7       1       0       2       .       1</span>
+<div class="highlight"><pre><span></span>Unit    obs1    obs2    obs3    obs4    obs5
+1       1       1       2       .       2
+2       1       1       0       1       .
+3       2       3       3       3       .
+4       .       0       0       .       0
+5       0       0       0       .       0
+6       0       0       0       .       0
+7       1       0       2       .       1
 </pre></div>
 
 
@@ -105,34 +105,34 @@
 
 <h3>DataFrame.apply</h3>
 <p>df_a</p>
-<div class="highlight"><pre><span></span><span class="err">   ent_a  count</span>
-<span class="err">0   5197    1.0</span>
-<span class="err">1  12766    2.0</span>
-<span class="err">2   3091    2.0</span>
-<span class="err">3   3162    1.0</span>
-<span class="err">4   1956   13.0</span>
+<div class="highlight"><pre><span></span>   ent_a  count
+0   5197    1.0
+1  12766    2.0
+2   3091    2.0
+3   3162    1.0
+4   1956   13.0
 </pre></div>
 
 
 <p>df_ab</p>
-<div class="highlight"><pre><span></span><span class="err">       ent_ab  count_ab</span>
-<span class="err">0   5197-56744       1.0</span>
-<span class="err">1   12766-5197       1.0</span>
-<span class="err">2  12766-56744       1.0</span>
-<span class="err">3    3091-3162       1.0</span>
-<span class="err">4   3091-54583       1.0</span>
+<div class="highlight"><pre><span></span>       ent_ab  count_ab
+0   5197-56744       1.0
+1   12766-5197       1.0
+2  12766-56744       1.0
+3    3091-3162       1.0
+4   3091-54583       1.0
 </pre></div>
 
 
 <h4>Add column:</h4>
 <p><code>df_ab['ent_a'] = df_ab.ent_ab.apply(lambda x: x.split('-')[0])</code></p>
 <p>df_ab:</p>
-<div class="highlight"><pre><span></span><span class="err">        ent_ab  count_ab  ent_a</span>
-<span class="err">0   5197-56744       1.0   5197</span>
-<span class="err">1   12766-5197       1.0  12766</span>
-<span class="err">2  12766-56744       1.0  12766</span>
-<span class="err">3    3091-3162       1.0   3091</span>
-<span class="err">4   3091-54583       1.0   3091</span>
+<div class="highlight"><pre><span></span>        ent_ab  count_ab  ent_a
+0   5197-56744       1.0   5197
+1   12766-5197       1.0  12766
+2  12766-56744       1.0  12766
+3    3091-3162       1.0   3091
+4   3091-54583       1.0   3091
 </pre></div>
 
 
@@ -147,12 +147,12 @@
 
 
 <p>df_ab</p>
-<div class="highlight"><pre><span></span><span class="err">        ent_ab  count_ab  ent_a  ent_b  ent_a_count</span>
-<span class="err">0   5197-56744       1.0   5197  56744          1.0</span>
-<span class="err">1   12766-5197       1.0  12766   5197          2.0</span>
-<span class="err">2  12766-56744       1.0  12766  56744          2.0</span>
-<span class="err">3    3091-3162       1.0   3091   3162          2.0</span>
-<span class="err">4   3091-54583       1.0   3091  54583          2.0</span>
+<div class="highlight"><pre><span></span>        ent_ab  count_ab  ent_a  ent_b  ent_a_count
+0   5197-56744       1.0   5197  56744          1.0
+1   12766-5197       1.0  12766   5197          2.0
+2  12766-56744       1.0  12766  56744          2.0
+3    3091-3162       1.0   3091   3162          2.0
+4   3091-54583       1.0   3091  54583          2.0
 </pre></div>
 
 

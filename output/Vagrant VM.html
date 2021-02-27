@@ -47,9 +47,9 @@
 </ul>
 <h4>Shared Folders</h4>
 <p>Assuming you want to share the directory in which <code>Vagrantfile</code> is located and that directory is named <code>vmtest</code>. </p>
-<div class="highlight"><pre><span></span><span class="err">sudo usermod -a -G vboxsf user</span>
-<span class="err">mkdir ~/shared</span>
-<span class="err">sudo mount -t vboxsf vmtest_nta ~/shared</span>
+<div class="highlight"><pre><span></span>sudo usermod -a -G vboxsf user
+mkdir ~/shared
+sudo mount -t vboxsf vmtest_nta ~/shared
 </pre></div>
 
 
@@ -63,14 +63,14 @@
 <li>
 <p>Clone &amp; Resize</p>
 <p>on Linux</p>
-<div class="highlight"><pre><span></span><span class="err">VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vmdk&quot; &quot;/home/baba/VirtualBox VMs/my_box/box.vdi&quot; --format vdi</span>
-<span class="err">VBoxManage modifyhd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; --resize 131072</span>
-<span class="err">VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/home/baba/VirtualBox VMs/my_box/box-resized.vmdk&quot; --format vmdk</span>
+<div class="highlight"><pre><span></span>VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vmdk&quot; &quot;/home/baba/VirtualBox VMs/my_box/box.vdi&quot; --format vdi
+VBoxManage modifyhd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; --resize 131072
+VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/home/baba/VirtualBox VMs/my_box/box-resized.vmdk&quot; --format vmdk
 </pre></div>
 
 
 <p>on Window: same steps as below but first run this:</p>
-<div class="highlight"><pre><span></span><span class="err">set PATH=%PATH%;&quot;C:\Program Files\Oracle\VirtualBox&quot;</span>
+<div class="highlight"><pre><span></span>set PATH=%PATH%;&quot;C:\Program Files\Oracle\VirtualBox&quot;
 </pre></div>
 
 
@@ -91,8 +91,8 @@
 <p>see also <a href="https://gist.github.com/christopher-hopper/9755310">Resize a Hard Disk for a Virtual Machine</a></p>
 <h4>Create Global Variable for use in Python Scripts</h4>
 <p>In <code>~/.profile</code>add</p>
-<div class="highlight"><pre><span></span><span class="err">export TOMOE_DATA_HOME=/home/vagrant/ownCloud/tomoe-data</span>
-<span class="err">export KG_OUTPUT_DIR=/home/vagrant/vmtest/tomoe/wp-tomoe-playground/local-data/kg</span>
+<div class="highlight"><pre><span></span><span class="k">export</span> <span class="n">TOMOE_DATA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">ownCloud</span><span class="o">/</span><span class="n">tomoe</span><span class="o">-</span><span class="n">data</span>
+<span class="k">export</span> <span class="n">KG_OUTPUT_DIR</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">vmtest</span><span class="o">/</span><span class="n">tomoe</span><span class="o">/</span><span class="n">wp</span><span class="o">-</span><span class="n">tomoe</span><span class="o">-</span><span class="n">playground</span><span class="o">/</span><span class="n">local</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">kg</span>
 </pre></div>
 
 

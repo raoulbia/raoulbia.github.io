@@ -25,7 +25,7 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Mar 01, 2018</h4>
+        <div id="content">            <h4 class="date">Mar 25, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -44,18 +44,18 @@
 </li>
 <li>
 <p>Setup a virtual environment</p>
-<div class="highlight"><pre><span></span><span class="err">conda create --name myblog python=3.5</span>
-<span class="err">source activate myblog</span>
-<span class="err">pip install -r requirements.txt</span>
-<span class="err">pelican-quickstart</span>
-<span class="err">git clone https://github.com/getpelican/pelican-plugins.git</span>
+<div class="highlight"><pre><span></span>conda create --name myblog python=3.5
+source activate myblog
+pip install -r requirements.txt
+pelican-quickstart
+git clone https://github.com/getpelican/pelican-plugins.git
 </pre></div>
 
 
 </li>
 <li>
 <p>Connect to repo</p>
-<div class="highlight"><pre><span></span><span class="err">git remote add origin git@github.com:raoulbia/raoulbia.github.io.git</span>
+<div class="highlight"><pre><span></span><span class="n">git</span><span class="w"> </span><span class="n">remote</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="n">git</span><span class="nv">@github</span><span class="p">.</span><span class="nl">com</span><span class="p">:</span><span class="n">raoulbia</span><span class="o">/</span><span class="n">raoulbia</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">git</span><span class="w"></span>
 </pre></div>
 
 
@@ -63,25 +63,25 @@
 </li>
 <li>
 <p>Create a new branch for hosting the pelican source code.</p>
-<div class="highlight"><pre><span></span><span class="err">git checkout -b pelican</span>
+<div class="highlight"><pre><span></span>git checkout -b pelican
 </pre></div>
 
 
 </li>
 <li>
 <p>Install IPython notebook</p>
-<div class="highlight"><pre><span></span><span class="err">mkdir plugins &amp;&amp; cd plugins</span>
-<span class="err">git submodule add git://github.com/danielfrg/pelican-ipynb.git ipynb</span>
-<span class="err">git submodule add https://github.com/barrysteyn/pelican_plugin-render_math.git render_math</span>
+<div class="highlight"><pre><span></span>mkdir plugins &amp;&amp; cd plugins
+git submodule add git://github.com/danielfrg/pelican-ipynb.git ipynb
+git submodule add https://github.com/barrysteyn/pelican_plugin-render_math.git render_math
 </pre></div>
 
 
 </li>
 <li>
 <p>In order to activate the plugin, add these lines at the bottom of <code>pelicanconf.py</code>:</p>
-<div class="highlight"><pre><span></span><span class="err">MARKUP = (&#39;md&#39;, &#39;ipynb&#39;)</span>
-<span class="err">PLUGIN_PATH = &#39;./plugins&#39;</span>
-<span class="err">PLUGINS = [&#39;ipynb.markup&#39;, &#39;render_math&#39;]</span>
+<div class="highlight"><pre><span></span>MARKUP = (&#39;md&#39;, &#39;ipynb&#39;)
+PLUGIN_PATH = &#39;./plugins&#39;
+PLUGINS = [&#39;ipynb.markup&#39;, &#39;render_math&#39;]
 </pre></div>
 
 
@@ -97,17 +97,17 @@ something wrong when trying to do so but in the end I settled for the <a href="h
 theme. It should be noted that the default Pelican theme may suffice to some users in which case this section can be
 skipped.</p>
 <p>To add all existing Pelican themes to your development repository</p>
-<div class="highlight"><pre><span></span><span class="err">git clone --recursive https://github.com/getpelican/pelican-themes ./pelican-themes</span>
+<div class="highlight"><pre><span></span>git clone --recursive https://github.com/getpelican/pelican-themes ./pelican-themes
 </pre></div>
 
 
 <p>To install one of the downloaded themes</p>
-<div class="highlight"><pre><span></span><span class="err">pelican-themes --install ./pelican-themes/name-of-theme --verbose</span>
+<div class="highlight"><pre><span></span>pelican-themes --install ./pelican-themes/name-of-theme --verbose
 </pre></div>
 
 
 <p>Alternatively you can just get the one theme you want to use</p>
-<div class="highlight"><pre><span></span><span class="err">git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes</span>
+<div class="highlight"><pre><span></span>git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes
 </pre></div>
 
 
@@ -134,7 +134,7 @@ the theme of choice must be specified in <strong>both</strong> <code>publishconf
 <li>
 <p>preview <code>localhost:8000/</code> in your browser</p>
 <p>To stop localhost type <code>Ctrl + c</code> then run below command twice</p>
-<div class="highlight"><pre><span></span><span class="err">kill -9 $(lsof -i TCP:8000 | grep LISTEN | awk &#39;{print $2}&#39;)</span>
+<div class="highlight"><pre><span></span>kill -9 $(lsof -i TCP:8000 | grep LISTEN | awk &#39;{print $2}&#39;)
 </pre></div>
 
 
@@ -156,9 +156,9 @@ project source code (pelican branch). To publish either run the code below.</p>
 
 
 <h4>Push Source Code</h4>
-<div class="highlight"><pre><span></span><span class="err">git add -A &amp;&amp;</span>
-<span class="err">git commit -a -m &quot;Update&quot; &amp;&amp;</span>
-<span class="err">git push -u origin pelican</span>
+<div class="highlight"><pre><span></span>git add -A &amp;&amp;
+git commit -a -m &quot;Update&quot; &amp;&amp;
+git push -u origin pelican
 </pre></div>
 
 

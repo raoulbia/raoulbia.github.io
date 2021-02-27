@@ -24,51 +24,7 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 01, 2018</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./pypi.html" rel="bookmark" title="Permanent Link to &quot;PyPi&quot;">PyPi</a>
-                </h2>
-
-                <h4>Pre-requisites</h4>
-<ul>
-<li>
-<p><code>pip install -U twine</code></p>
-</li>
-<li>
-<p>in <code>~.pypirc</code> add <code>chmod 600 ~/.pypirc</code></p>
-</li>
-</ul>
-<h4>Deploy on PyPi</h4>
-<hr />
-<p><strong>Note</strong></p>
-<ul>
-<li>Make sure to update version information before deploying. 
-Files to update: <code>__init__.py</code> and <code>setup.py</code>.</li>
-<li>After deploying, don't forget to re-build the documentation at <a href="https://readthedocs.org/projects/shizen-gengo/builds">ReadTheDocs</a>.</li>
-</ul>
-<hr />
-<div class="highlight"><pre><span></span><span class="err">rm -rf build dist &amp;&amp; python setup.py sdist</span>
-<span class="err">ls dist/*</span>
-<span class="err">#python setup.py check -r -s (obolete)</span>
-<span class="err">python -m twine check dist/*</span>
-<span class="err">python -m  twine upload dist/*</span>
-</pre></div>
-
-
-<h4>Misc.</h4>
-<ul>
-<li><a href="https://help.github.com/en/github/creating-cloning-and-archiving-repositories/licensing-a-repository">Licensing a repository
-</a></li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./pypi.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/pypi.html" rel="tag">PyPi</a>
-                </div>
-            </article>            <h4 class="date">Dec 05, 2017</h4>
+        <div id="content">            <h4 class="date">Dec 05, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -83,9 +39,9 @@ Files to update: <code>__init__.py</code> and <code>setup.py</code>.</li>
 <li><a href="https://stackoverflow.com/questions/67699/how-to-clone-all-remote-branches-in-git">How to clone all remote branches</a></li>
 </ul>
 <h4>Set / Change remote origin url</h4>
-<div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="k">add</span> <span class="n">origin</span> <span class="o">&lt;</span><span class="n">remote</span> <span class="n">repository</span> <span class="n">URL</span><span class="o">&gt;</span>
+<div class="highlight"><pre><span></span>git remote add origin &lt;remote repository URL&gt;
 
-<span class="n">git</span> <span class="n">remote</span> <span class="k">set</span><span class="o">-</span><span class="n">url</span> <span class="n">origin</span> <span class="o">&lt;</span><span class="n">remote</span> <span class="n">repository</span> <span class="n">url</span><span class="o">&gt;</span>
+git remote set-url origin &lt;remote repository url&gt;
 </pre></div>
 
 
@@ -119,6 +75,47 @@ Files to update: <code>__init__.py</code> and <code>setup.py</code>.</li>
                     <a href="./Git.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/git.html" rel="tag">Git</a>
                 </div>
+            </article>            <h4 class="date">Dec 04, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./Virtual Environemnts.html" rel="bookmark" title="Permanent Link to &quot;Virtual Environemnts&quot;">Virtual Environemnts</a>
+                </h2>
+
+                <h4>Conda</h4>
+<ul>
+<li><code>conda create --name &lt;name&gt; python=3.7 -y</code></li>
+<li><code>conda env remove --name &lt;name&gt;</code></li>
+<li><code>conda env list</code></li>
+<li><code>conda activate &lt;name&gt;</code></li>
+<li><code>conda update</code></li>
+<li><code>conda install --yes --file requirements.txt</code></li>
+<li><code>conda install -c anaconda ipykernel</code></li>
+<li><code>python -m ipykernel install --user --name &lt;name&gt;</code></li>
+</ul>
+<h4>Pipenv</h4>
+<p>Install</p>
+<ul>
+<li><code>sudo apt-get update</code></li>
+<li><code>sudo apt install python3-pip</code></li>
+<li><code>pip3 install pipenv</code></li>
+<li><code>pipenv --python 3.6</code></li>
+</ul>
+<p>Useful commands</p>
+<ul>
+<li><code>pipenv install -r requirements.txt</code></li>
+<li><code>pipenv shell</code> to create new env; load/activate existing env, load .env variables</li>
+<li><code>pipenv update</code> can be used to install base dependencies</li>
+<li><code>pip install ...</code></li>
+<li><code>pipenv sync</code> will use <code>Pipfile</code> if present</li>
+<li><code>pipenv graph</code></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./Virtual Environemnts.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/virtual-environemnts.html" rel="tag">Virtual Environemnts</a>
+                </div>
             </article>
 
                 <div class="clear"></div>
@@ -126,7 +123,7 @@ Files to update: <code>__init__.py</code> and <code>setup.py</code>.</li>
 
                     <a href="./page/6" class="prev_page">&larr;&nbsp;Previous</a>
                     <a href="./page/8" class="next_page">Next&nbsp;&rarr;</a>
-                    <span>Page 7 of 18</span>
+                    <span>Page 7 of 19</span>
                 </div>
 
             <div class="clear"></div>

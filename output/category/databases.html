@@ -26,7 +26,59 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 02, 2017</h4>
+        <div id="content">            <h4 class="date">Nov 24, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../databases.html" rel="bookmark" title="Permanent Link to &quot;Databases&quot;">Databases</a>
+                </h2>
+
+                <h3>Postgres</h3>
+<h4>install postgres and postgis</h4>
+<p>$  sudo apt install postgis postgresql-13-postgis-3
+$ sudo -u postgres psql
+postgres=# \password postgres
+postgres=# \q</p>
+<p>check installed version(s): <code>dpkg -l | grep postgres</code></p>
+<h4>postgres user authentication error</h4>
+<p><code>sudo nano /etc/postgresql/13/main/pg_hba.conf</code></p>
+<p>CHANGE FROM</p>
+<p><code>local   all     postgres     peer</code></p>
+<p>TO</p>
+<p><code>local   all      postgres    trusted</code></p>
+<p>then 
+sudo service postgresql restart</p>
+<h4>run in pgadmin4</h4>
+<p><code>CREATE EXTENSION postgis;</code></p>
+<ul>
+<li>
+<p>http://www.orbital.co.ke:8080/opengeo-docs/dataadmin/pgGettingStarted/shp2pgsql.html</p>
+</li>
+<li>
+<p>test: <code>psql -U postgres -d &lt;DBNAME&gt; -c "SELECT postgis_version()"</code></p>
+</li>
+<li>
+<p>syntax: <code>shp2pgsql -I -s &lt;SRID&gt; &lt;PATH/TO/SHAPEFILE&gt; &lt;SCHEMA&gt;.&lt;DBTABLE&gt; | psql -U postgres -d &lt;DBNAME&gt;</code></p>
+</li>
+<li>
+<p>example: <code>shp2pgsql -I -s 4326  dublinbus/Dublin_Bus.shp  shp_dublinbus | psql -U postgres -d dublinbus</code></p>
+</li>
+</ul>
+<h3>Utilities: ogr2ogr</h3>
+<ul>
+<li>https://gis.stackexchange.com/questions/65917/can-i-append-to-different-tables-using-ogr2ogr</li>
+<li>https://www.bostongis.com/PrinterFriendly.aspx?content_name=ogr_cheatsheet</li>
+<li>https://www.mankier.com/1/ogr2ogr</li>
+</ul>
+<h4>geojson to shp</h4>
+<p><code>ogr2ogr -f "ESRI Shapefile" destination_data.shp "dcc_public_bin_locations.geojson"</code></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../databases.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/databases.html" rel="tag">Databases</a>
+                </div>
+            </article>            <h4 class="date">Nov 19, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -34,8 +86,8 @@
                 </h2>
 
                 <h4>Sample Queries</h4>
-<div class="highlight"><pre><span></span><span class="err">select * from PREDICATION where SUBJECT_SEMTYPE in (&#39;gngm&#39;) limit 10;</span>
-<span class="err">select * from ENTITY where SEMTYPE in (&#39;gngm&#39;) and GENE_ID &lt;&gt; &#39;&#39; limit 10;</span>
+<div class="highlight"><pre><span></span>select * from PREDICATION where SUBJECT_SEMTYPE in (&#39;gngm&#39;) limit 10;
+select * from ENTITY where SEMTYPE in (&#39;gngm&#39;) and GENE_ID &lt;&gt; &#39;&#39; limit 10;
 </pre></div>
 
 
@@ -68,15 +120,15 @@
 <p>To create the new ENTITY2 table, copy/paste from the above output.</p>
 <p><code>insert into ENTITY2 select * from ENTITY where GENE_ID &lt;&gt; '';</code></p>
 <h4>See table columns and their data types</h4>
-<div class="highlight"><pre><span></span><span class="err">SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS </span>
-<span class="err">  WHERE table_name = &#39;tbl_name&#39; AND COLUMN_NAME = &#39;col_name&#39;;</span>
+<div class="highlight"><pre><span></span>SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS 
+  WHERE table_name = &#39;tbl_name&#39; AND COLUMN_NAME = &#39;col_name&#39;;
 </pre></div>
 
 
 <h4>Create DB</h4>
-<div class="highlight"><pre><span></span><span class="err">GRANT ALL PRIVILEGES ON *.* TO &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;root&#39;;</span>
-<span class="err">CREATE DATABASE dbname;</span>
-<span class="err">USE dbname;</span>
+<div class="highlight"><pre><span></span>GRANT ALL PRIVILEGES ON *.* TO &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;root&#39;;
+CREATE DATABASE dbname;
+USE dbname;
 </pre></div>
 
 
@@ -95,8 +147,8 @@
 
 
 <p>or (requires mysql v5.7+)</p>
-<div class="highlight"><pre><span></span><span class="err">select table_schema, table_name, rows_fetched, rows_inserted, rows_updated, rows_deleted </span>
-<span class="err">    from sys.schema_table_statistics where table_schema=&#39;dbname&#39;;</span>
+<div class="highlight"><pre><span></span>select table_schema, table_name, rows_fetched, rows_inserted, rows_updated, rows_deleted 
+    from sys.schema_table_statistics where table_schema=&#39;dbname&#39;;
 </pre></div>
 
 
@@ -122,6 +174,8 @@
 </pre></div>
 
 
+<h4>Set Primary Key</h4>
+<p><code>ALTER TABLE table_name ADD PRIMARY KEY (column_1, column_2);</code></p>
 <h4>Drop foreign key</h4>
 <div class="highlight"><pre><span></span><span class="n">ALTER</span> <span class="n">TABLE</span> <span class="n">ENTITY</span> <span class="n">DROP</span> <span class="n">FOREIGN</span> <span class="n">KEY</span> <span class="s1">&#39;ENTITY_ibfk_1&#39;</span><span class="p">;</span>
 <span class="n">Note</span><span class="p">:</span> <span class="n">would</span> <span class="n">this</span> <span class="n">be</span> <span class="n">better</span><span class="err">??</span>

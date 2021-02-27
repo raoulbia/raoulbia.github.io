@@ -24,31 +24,7 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Mar 02, 2018</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./R and Jupyter Notebooks.html" rel="bookmark" title="Permanent Link to &quot;R and Jupyter Notebooks&quot;">R and Jupyter Notebooks</a>
-                </h2>
-
-                <p><br> </p>
-<p><strong>Jupyter Notebooks</strong></p>
-<ul>
-<li><a href="https://nbviewer.jupyter.org/github/raoulbia/jupyter-notebooks/blob/master/dublin_housing_supply_and_demand.ipynb?flush_cache=true" target="_blank">Telling a Story with Data: Evidence of a Housing Crisis in Ireland</a></li>
-<li><a href="https://nbviewer.jupyter.org/github/raoulbia/jupyter-notebooks/blob/master/phosphonetwork_statistics.ipynb?flush_cache=true" target="_blank">A Quick Reference for Exploratory Graph Analysis with NetworkX</a></li>
-</ul>
-<p><strong>R Notebooks</strong></p>
-<ul>
-<li><a href="https://www.rpubs.com/raoulbia/interpreting_glm_logistic_regression_output" target="_blank">Interpreting the Output of a Logistic Regression Model</a></li>
-<li><a href="https://www.rpubs.com/raoulbia/r-squared" target="_blank">The Effect of Total Variation on the Ability of Independent Variables to Model Linear Relationships.</a></li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./R and Jupyter Notebooks.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/python-r.html" rel="tag">Python, R</a>
-                </div>
-            </article>            <h4 class="date">Mar 01, 2018</h4>
+        <div id="content">            <h4 class="date">Mar 25, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -67,18 +43,18 @@
 </li>
 <li>
 <p>Setup a virtual environment</p>
-<div class="highlight"><pre><span></span><span class="err">conda create --name myblog python=3.5</span>
-<span class="err">source activate myblog</span>
-<span class="err">pip install -r requirements.txt</span>
-<span class="err">pelican-quickstart</span>
-<span class="err">git clone https://github.com/getpelican/pelican-plugins.git</span>
+<div class="highlight"><pre><span></span>conda create --name myblog python=3.5
+source activate myblog
+pip install -r requirements.txt
+pelican-quickstart
+git clone https://github.com/getpelican/pelican-plugins.git
 </pre></div>
 
 
 </li>
 <li>
 <p>Connect to repo</p>
-<div class="highlight"><pre><span></span><span class="err">git remote add origin git@github.com:raoulbia/raoulbia.github.io.git</span>
+<div class="highlight"><pre><span></span><span class="n">git</span><span class="w"> </span><span class="n">remote</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="n">git</span><span class="nv">@github</span><span class="p">.</span><span class="nl">com</span><span class="p">:</span><span class="n">raoulbia</span><span class="o">/</span><span class="n">raoulbia</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">git</span><span class="w"></span>
 </pre></div>
 
 
@@ -86,25 +62,25 @@
 </li>
 <li>
 <p>Create a new branch for hosting the pelican source code.</p>
-<div class="highlight"><pre><span></span><span class="err">git checkout -b pelican</span>
+<div class="highlight"><pre><span></span>git checkout -b pelican
 </pre></div>
 
 
 </li>
 <li>
 <p>Install IPython notebook</p>
-<div class="highlight"><pre><span></span><span class="err">mkdir plugins &amp;&amp; cd plugins</span>
-<span class="err">git submodule add git://github.com/danielfrg/pelican-ipynb.git ipynb</span>
-<span class="err">git submodule add https://github.com/barrysteyn/pelican_plugin-render_math.git render_math</span>
+<div class="highlight"><pre><span></span>mkdir plugins &amp;&amp; cd plugins
+git submodule add git://github.com/danielfrg/pelican-ipynb.git ipynb
+git submodule add https://github.com/barrysteyn/pelican_plugin-render_math.git render_math
 </pre></div>
 
 
 </li>
 <li>
 <p>In order to activate the plugin, add these lines at the bottom of <code>pelicanconf.py</code>:</p>
-<div class="highlight"><pre><span></span><span class="err">MARKUP = (&#39;md&#39;, &#39;ipynb&#39;)</span>
-<span class="err">PLUGIN_PATH = &#39;./plugins&#39;</span>
-<span class="err">PLUGINS = [&#39;ipynb.markup&#39;, &#39;render_math&#39;]</span>
+<div class="highlight"><pre><span></span>MARKUP = (&#39;md&#39;, &#39;ipynb&#39;)
+PLUGIN_PATH = &#39;./plugins&#39;
+PLUGINS = [&#39;ipynb.markup&#39;, &#39;render_math&#39;]
 </pre></div>
 
 
@@ -120,17 +96,17 @@ something wrong when trying to do so but in the end I settled for the <a href="h
 theme. It should be noted that the default Pelican theme may suffice to some users in which case this section can be
 skipped.</p>
 <p>To add all existing Pelican themes to your development repository</p>
-<div class="highlight"><pre><span></span><span class="err">git clone --recursive https://github.com/getpelican/pelican-themes ./pelican-themes</span>
+<div class="highlight"><pre><span></span>git clone --recursive https://github.com/getpelican/pelican-themes ./pelican-themes
 </pre></div>
 
 
 <p>To install one of the downloaded themes</p>
-<div class="highlight"><pre><span></span><span class="err">pelican-themes --install ./pelican-themes/name-of-theme --verbose</span>
+<div class="highlight"><pre><span></span>pelican-themes --install ./pelican-themes/name-of-theme --verbose
 </pre></div>
 
 
 <p>Alternatively you can just get the one theme you want to use</p>
-<div class="highlight"><pre><span></span><span class="err">git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes</span>
+<div class="highlight"><pre><span></span>git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes
 </pre></div>
 
 
@@ -157,7 +133,7 @@ the theme of choice must be specified in <strong>both</strong> <code>publishconf
 <li>
 <p>preview <code>localhost:8000/</code> in your browser</p>
 <p>To stop localhost type <code>Ctrl + c</code> then run below command twice</p>
-<div class="highlight"><pre><span></span><span class="err">kill -9 $(lsof -i TCP:8000 | grep LISTEN | awk &#39;{print $2}&#39;)</span>
+<div class="highlight"><pre><span></span>kill -9 $(lsof -i TCP:8000 | grep LISTEN | awk &#39;{print $2}&#39;)
 </pre></div>
 
 
@@ -179,9 +155,9 @@ project source code (pelican branch). To publish either run the code below.</p>
 
 
 <h4>Push Source Code</h4>
-<div class="highlight"><pre><span></span><span class="err">git add -A &amp;&amp;</span>
-<span class="err">git commit -a -m &quot;Update&quot; &amp;&amp;</span>
-<span class="err">git push -u origin pelican</span>
+<div class="highlight"><pre><span></span>git add -A &amp;&amp;
+git commit -a -m &quot;Update&quot; &amp;&amp;
+git push -u origin pelican
 </pre></div>
 
 
@@ -206,13 +182,156 @@ project source code (pelican branch). To publish either run the code below.</p>
                     <a href="./pelican.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
                 </div>
+            </article>            <h4 class="date">Feb 20, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./R.html" rel="bookmark" title="Permanent Link to &quot;R&quot;">R</a>
+                </h2>
+
+                <h4>Useful Snippets</h4>
+<ul>
+<li>Filter: <code>df %&gt;% filter(., GrLivArea &gt;=4000 &amp; SalePrice &lt; 200000)</code></li>
+<li>Remove observations: <code>df &lt;- df[-c(524, 1299), ]</code></li>
+<li>Reomve column: <code>df$colname&lt;- NULL</code></li>
+<li>Order columns alphabetically: <code>df &lt;- df[ ,order(colnames(df))]</code></li>
+<li>Convert: <code>df$colname &lt;- as.integer(df$colname)</code></li>
+<li>Make df with only numeric vars: <code>num_df &lt;- df[, sapply(df, is.numeric)]</code></li>
+<li>Correlation: <code>cor(num_df, use="complete.obs")</code></li>
+<li>random sampling from each factor: <code>olive_sample &lt;- ddply(olive,.(region),function(x) x[sample(nrow(x),10),])</code></li>
+<li>to access the 1rst and 3rd elements of a vector: <code>my.vec[c(1,3)]</code></li>
+</ul>
+<h4>Creating vectors and matrices</h4>
+<ul>
+<li><code>my.vec &lt;- c(1:4)</code></li>
+<li><code>my.vec &lt;- c(TRUE, FALSE, FALSE, FALSE, TRUE, TRUE)</code></li>
+<li><code>A &lt;- matrix(c(1,2,2,5), nrow=2, ncol=2, byrow=TRUE)</code></li>
+</ul>
+<h4>Script Header</h4>
+<div class="highlight"><pre><span></span><span class="n">library</span><span class="p">(</span><span class="n">rstudioapi</span><span class="p">)</span>
+<span class="n">setwd</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">rstudioapi</span><span class="p">::</span><span class="n">getActiveDocumentContext</span><span class="p">()</span><span class="err">$</span><span class="n">path</span><span class="p">))</span>
+<span class="n">rm</span><span class="p">(</span><span class="nb">list</span><span class="o">=</span><span class="n">ls</span><span class="p">())</span>
+
+<span class="n">library</span><span class="p">(</span><span class="n">rio</span><span class="p">)</span> <span class="c1"># import csv</span>
+</pre></div>
+
+
+<h4>Read Data</h4>
+<p><code>load("data_project_backpain.RData")</code></p>
+<div class="highlight"><pre><span></span><span class="n">data</span>  <span class="o">&lt;-</span> <span class="nf">import</span><span class="p">(</span><span class="s">&#39;superstore.csv&#39;</span><span class="p">,</span> <span class="n">setclass</span> <span class="o">=</span> <span class="s">&quot;tibble&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+
+
+<h4>Select only numeric columns</h4>
+<div class="highlight"><pre><span></span><span class="n">nums</span> <span class="o">&lt;-</span> <span class="nf">unlist</span><span class="p">(</span><span class="nf">lapply</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">is.numeric</span><span class="p">))</span>  
+<span class="n">df</span><span class="p">[</span> <span class="p">,</span> <span class="n">nums</span><span class="p">]</span>
+</pre></div>
+
+
+<h4>Coerce multiple columns to factors at once</h4>
+<div class="highlight"><pre><span></span><span class="n">cols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="ss">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;D&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;H&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="n">df</span><span class="o">[</span><span class="n">cols</span><span class="o">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">df</span><span class="o">[</span><span class="n">cols</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">factor</span><span class="p">)</span><span class="w">  </span><span class="err">##</span><span class="w"> </span><span class="k">as</span><span class="p">.</span><span class="n">factor</span><span class="p">()</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">used</span><span class="w"></span>
+</pre></div>
+
+
+<h4>Exclude columns by name</h4>
+<div class="highlight"><pre><span></span><span class="n">exclude</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Neighborhood&quot;</span><span class="p">,</span> <span class="s">&quot;Exterior2nd&quot;</span><span class="p">,)</span>
+<span class="n">df</span><span class="p">[</span> <span class="p">,</span> <span class="o">-</span><span class="nf">which</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">%in%</span> <span class="n">exclude</span><span class="p">)]</span>
+</pre></div>
+
+
+<h4>Count Missing Values</h4>
+<p><code>sapply(df, function(x) sum(is.na(x)))</code></p>
+<h4>Create vector from column and drop missing values</h4>
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">gt</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">gt</span><span class="o">$</span><span class="n">LandAverageTemperature</span><span class="p">),</span> <span class="m">2</span><span class="p">]</span>
+</pre></div>
+
+
+<h4>Making Objects available to RMarkdown</h4>
+<ul>
+<li>in R script</li>
+</ul>
+<p><code>save(all = TRUE, file= "all.rda")</code>
+<code>save(object1.name, object2.name, file= "all.rda")</code></p>
+<ul>
+<li>in RMD file</li>
+</ul>
+<p><code>load("all.rda")</code></p>
+<h4>Benchmarking</h4>
+<div class="highlight"><pre><span></span>libray(microbenchmark)
+microbenchmark(
+  bad_cpp = bad_select_positive_values_cpp(x),
+  good_cpp = good_select_positive_values_cpp(x),
+  times = 1
+)
+
+library(rbenchmark)
+benchmark(
+  bad_select_positive_values_cpp(x),
+  good_select_positive_values_cpp(x),
+  order = &quot;relative&quot;
+)
+</pre></div>
+
+
+<h4>Profiling</h4>
+<div class="highlight"><pre><span></span><span class="nv">Rprof</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">profile1.out</span><span class="s2">&quot;</span> <span class="ss">)</span> #<span class="k">send</span> <span class="nv">profiling</span> <span class="nv">to</span> <span class="nv">profile1</span>.<span class="nv">out</span>
+# <span class="o">&lt;</span><span class="k">call</span> <span class="nl">function</span> <span class="nv">here</span><span class="o">&gt;</span>
+<span class="nv">Rprof</span><span class="ss">(</span><span class="nv">NULL</span><span class="ss">)</span>
+<span class="nv">summaryRprof</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">profile1.out</span><span class="s2">&quot;</span><span class="ss">)</span>
+</pre></div>
+
+
+<h4>Sliding Window</h4>
+<p>How sliding window works:</p>
+<ul>
+<li>select subset of x of size 3 using its indices</li>
+<li>1st iter: x[3 - 3 + 1, 3] gives x[1, 3]</li>
+<li>2nd iter: x[4 - 3 + 1, 4] gives x[2, 4]</li>
+<li>...</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">window</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span>
+<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="k">window</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">))</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="n">x_subset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="o">[</span><span class="n">seq(i - window + 1, i)</span><span class="o">]</span><span class="w"></span>
+<span class="n">res</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">x_subset</span><span class="p">)</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</pre></div>
+
+
+<h4>R: Packages</h4>
+<ul>
+<li><a href="https://heartbeat.fritz.ai/using-caret-in-r-to-classify-term-deposit-subscriptions-for-a-bank-bd40ff5cc15">caret</a></li>
+<li><a href="http://www.rebeccabarter.com/blog/2019-06-06_pre_processing/">Using the recipes package for easy pre-processing</a></li>
+<li><a href="https://cran.r-project.org/web/packages/bestNormalize/vignettes/bestNormalize.html">bestNormalize</a></li>
+</ul>
+<h4>Related Links</h4>
+<ul>
+<li><a href="https://blog.exploratory.io/populating-missing-dates-with-complete-and-fill-functions-in-r-and-exploratory-79f2a321e6b5">Populating Missing Dates with Complete and Fill Functions in R and Exploratory</a></li>
+<li><a href="https://www.youtube.com/user/marinstatlectures/playlists">MarinStatsLectures</a></li>
+<li><a href="https://towardsdatascience.com/data-cleaning-with-r-and-the-tidyverse-detecting-missing-values-ea23c519bc62">Data Cleaning with R and the Tidyverse: Detecting Missing Values</a></li>
+<li><a href="https://medium.com/x8-the-ai-community/play-with-your-ml-dataset-cheatsheet-in-r-bd8451ec6dd7">Play With Your ML Dataset - Cheatsheet in R</a></li>
+<li><a href="https://towardsdatascience.com/coding-in-r-pivot-painlessly-32e40a0b6c3d">Coding in R: Pivot Painlessly</a></li>
+<li><a href="https://towardsdatascience.com/simple-fast-exploratory-data-analysis-in-r-with-dataexplorer-package-e055348d9619">Simple Fast Exploratory Data Analysis in R with DataExplorer Package</a></li>
+<li><a href="https://community.rstudio.com/t/wrap-column-name-in-pdf-table-from-knitr-kable/3278">Wrap column name in pdf table, from knitr::kable</a></li>
+<li><a href="https://medium.com/analytics-vidhya/a-guide-to-machine-learning-in-r-for-beginners-part-5-4c00f2366b90">A Guide to Machine Learning in R for Beginners: Logistic Regression</a></li>
+<li><a href="https://towardsdatascience.com/tired-of-nested-ifelse-in-dplyr-look-no-further-ebf7166b5289">Clean Up Your R Code! A Secret to Better Feature Engineering</a></li>
+<li><a href="https://medium.com/analytics-vidhya/group-manipulation-in-r-3-5554a0c1b544">Group Manipulation In R</a></li>
+<li><a href="https://medium.com/@moorissa/the-best-resources-for-r-programming-37dbc94e0de6">The Best Resources for R Programming</a></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./R.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/r.html" rel="tag">R</a>
+                </div>
             </article>
 
                 <div class="clear"></div>
                 <div class="pages">
 
                     <a href="./page/2" class="next_page">Next&nbsp;&rarr;</a>
-                    <span>Page 1 of 18</span>
+                    <span>Page 1 of 19</span>
                 </div>
 
             <div class="clear"></div>

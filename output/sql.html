@@ -25,7 +25,7 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 02, 2017</h4>
+        <div id="content">            <h4 class="date">Nov 19, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -33,8 +33,8 @@
                 </h2>
 
                 <h4>Sample Queries</h4>
-<div class="highlight"><pre><span></span><span class="err">select * from PREDICATION where SUBJECT_SEMTYPE in (&#39;gngm&#39;) limit 10;</span>
-<span class="err">select * from ENTITY where SEMTYPE in (&#39;gngm&#39;) and GENE_ID &lt;&gt; &#39;&#39; limit 10;</span>
+<div class="highlight"><pre><span></span>select * from PREDICATION where SUBJECT_SEMTYPE in (&#39;gngm&#39;) limit 10;
+select * from ENTITY where SEMTYPE in (&#39;gngm&#39;) and GENE_ID &lt;&gt; &#39;&#39; limit 10;
 </pre></div>
 
 
@@ -67,15 +67,15 @@
 <p>To create the new ENTITY2 table, copy/paste from the above output.</p>
 <p><code>insert into ENTITY2 select * from ENTITY where GENE_ID &lt;&gt; '';</code></p>
 <h4>See table columns and their data types</h4>
-<div class="highlight"><pre><span></span><span class="err">SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS </span>
-<span class="err">  WHERE table_name = &#39;tbl_name&#39; AND COLUMN_NAME = &#39;col_name&#39;;</span>
+<div class="highlight"><pre><span></span>SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS 
+  WHERE table_name = &#39;tbl_name&#39; AND COLUMN_NAME = &#39;col_name&#39;;
 </pre></div>
 
 
 <h4>Create DB</h4>
-<div class="highlight"><pre><span></span><span class="err">GRANT ALL PRIVILEGES ON *.* TO &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;root&#39;;</span>
-<span class="err">CREATE DATABASE dbname;</span>
-<span class="err">USE dbname;</span>
+<div class="highlight"><pre><span></span>GRANT ALL PRIVILEGES ON *.* TO &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;root&#39;;
+CREATE DATABASE dbname;
+USE dbname;
 </pre></div>
 
 
@@ -94,8 +94,8 @@
 
 
 <p>or (requires mysql v5.7+)</p>
-<div class="highlight"><pre><span></span><span class="err">select table_schema, table_name, rows_fetched, rows_inserted, rows_updated, rows_deleted </span>
-<span class="err">    from sys.schema_table_statistics where table_schema=&#39;dbname&#39;;</span>
+<div class="highlight"><pre><span></span>select table_schema, table_name, rows_fetched, rows_inserted, rows_updated, rows_deleted 
+    from sys.schema_table_statistics where table_schema=&#39;dbname&#39;;
 </pre></div>
 
 
@@ -121,6 +121,8 @@
 </pre></div>
 
 
+<h4>Set Primary Key</h4>
+<p><code>ALTER TABLE table_name ADD PRIMARY KEY (column_1, column_2);</code></p>
 <h4>Drop foreign key</h4>
 <div class="highlight"><pre><span></span><span class="n">ALTER</span> <span class="n">TABLE</span> <span class="n">ENTITY</span> <span class="n">DROP</span> <span class="n">FOREIGN</span> <span class="n">KEY</span> <span class="s1">&#39;ENTITY_ibfk_1&#39;</span><span class="p">;</span>
 <span class="n">Note</span><span class="p">:</span> <span class="n">would</span> <span class="n">this</span> <span class="n">be</span> <span class="n">better</span><span class="err">??</span>

@@ -1,7 +1,7 @@
 Title: Software
-Date: 2017-11-07
+Date: 2017-11-25
 Category: Linux
-Slug: linux software
+Slug: software
 Summary: Software
 
 
@@ -56,6 +56,16 @@ You can provide your username and password directly in the connection URI provid
 
 ### R and RStudio
 
+#### Uninstall previous R installation
+
+```
+sudo R --no-save
+pkgList <- installed.packages(priority='NA')
+remove.packages(pkgList)
+q()
+sudo apt-get remove --purge r-cran* r-base*
+```
+
 #### Install on Ubuntu 20.04 (Focal Fossa)
 
 Save and run the script below ([source](https://gist.github.com/mGalarnyk/41c887e921e712baf86fecc507b3afc7)).
@@ -66,17 +76,20 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DF>
 sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal>
 sudo apt update
 sudo apt -y install r-base r-base-dev gdebi-core
+
 # next line required for kableExtra
 sudo apt -y install libcurl4-openssl-dev openssl libssl-dev openssh-client libxml2-dev 
+
 # next line required for RcppArmadillo
 sudo apt -y install liblapack-dev 
+
 # install Latex for RMarkdown
 sudo apt -y install texlive texstudio texlive-latex-recommended texlive-latex-extra
 
 # Download and Install RStudio
-wget https://download1.rstudio.org/desktop/bionic/amd64/rstudio-1.3.1056-amd64.>
-sudo gdebi rstudio-1.3.1056-amd64.deb
-rm rstudio-1.3.1056-amd64.deb
+wget https://download1.rstudio.org/desktop/bionic/amd64/rstudio-1.4.1103-amd64.deb
+sudo gdebi rstudio-1.4.1103-amd64.deb
+rm rstudio-1.4.1103-amd64.deb
 ```
 #### List of Useful Packages
 
@@ -127,6 +140,51 @@ $ . pycharm.sh
 
 <br>
 
+### RoboMongo
+
+* [Install MongoDB Community Edition on Ubuntu](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
+* [Robo 3T: the hobbyist GUI](https://robomongo.org/download)
+* [Install Robo3t On Ubuntu 18.04](https://gist.github.com/abdallahokasha/37911a64ad289487387e2d1a144604ae)
+* `mongoimport --db naptan --collection naptan --file test.json --jsonArray`
+
+
+### NodeJS
+
+* npm install xml-stream, xml2js
+* node myfile.js
+
+#### NodeJS XML to JSON
+
+```
+var fs = require('fs');
+var xml2js = require('xml2js');
+var util = require('util');
+
+var parser  = new xml2js.Parser();
+
+fs.readFile('NaPTAN_2018_11_08.xml', function(err,data){
+    parser.parseString(data, function(err, result){
+        
+        // console.log(util.inspect(result, false, null, true));
+
+        // fs.writeFile("test", result.toString(), function(err) {
+        //     if(err) {
+        //         return console.log(err);
+        //     }
+        //     console.log("The file was saved!");
+        // });
+
+        // convert it to a JSON string
+        const json = JSON.stringify(result, null, 4);
+
+        // save JSON in a file
+        fs.writeFileSync('test.json', json);
+
+    });
+});
+```
+
+#### 
 ### GloVe for Python
 
 * `-e git+git@github.com:maciejkula/glove-python.git#egg=glove`
@@ -135,13 +193,6 @@ $ . pycharm.sh
 * `sudo apt-get install python3-dev`
 
 
-#### RoboMongo
-
-    cd /opt
-    sudo wget https://download.robomongo.org/1.0.0/linux/robomongo-1.0.0-linux-x86_64-89f24ea.tar.gz
-    sudo tar -zxvf robomongo-1.0.0-linux-x86_64-89f24ea.tar.gz
-    sudo rm robomongo-1.0.0-linux-x86_64-89f24ea.tar.gz
-    robomongo
 
 <br>
 
@@ -175,12 +226,17 @@ wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
 ```
 
+then add below line to `.bashrc`, restart terminal and check installation with `conda -V`.
+
+```export PATH="/home/username/miniconda3/bin:$PATH"```
+
 #### Misc. 
 
-`sudo apt-get install terminator`
+* `sudo apt-get install terminator`
 
+* VSCode Run(Compile): Shit+Ctrl+B 
 
-to view a .gv GraphViz file (will crate a pdf)
+* to view a .gv GraphViz file (will crate a pdf)
 
     f = Source.from_file('file-name.gv')
     f.render()

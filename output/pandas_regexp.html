@@ -33,8 +33,8 @@
                 </h2>
 
                 <h4>Extract Substring</h4>
-<div class="highlight"><pre><span></span><span class="err"># obtain Title from name (Mr, Mrs, Miss etc) by extracting up to but excluding the first dot (.)</span>
-<span class="err">df[&#39;Title&#39;] = df.Name.str.extract(&#39; ([A-Za-z]+)\.&#39;, expand=False)</span>
+<div class="highlight"><pre><span></span># obtain Title from name (Mr, Mrs, Miss etc) by extracting up to but excluding the first dot (.)
+df[&#39;Title&#39;] = df.Name.str.extract(&#39; ([A-Za-z]+)\.&#39;, expand=False)
 </pre></div>
 
 

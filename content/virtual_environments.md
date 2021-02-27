@@ -7,7 +7,7 @@ Summary: Virtual Environemnts
 
 #### Conda
 
-* `conda create --name <name> python=3.7`
+* `conda create --name <name> python=3.7 -y`
 * `conda env remove --name <name>`
 * `conda env list`
 * `conda activate <name>`

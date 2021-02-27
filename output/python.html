@@ -179,10 +179,10 @@
 <li>*args refers to an undetermined number of positional arguments</li>
 <li>**kargs refers to an undetermined number of keyword arguments</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="err">def add_numbers(num0, num1, num2=2, num3=3):</span>
-<span class="err">    outcome = num0 + num1 + num2 + num3</span>
-<span class="err">    print(f&quot;num0={num0}, num1={num1}, num2={num2}, num3={num3}&quot;)</span>
-<span class="err">    return outcome</span>
+<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">add_numbers</span><span class="ss">(</span><span class="nv">num0</span>, <span class="nv">num1</span>, <span class="nv">num2</span><span class="o">=</span><span class="mi">2</span>, <span class="nv">num3</span><span class="o">=</span><span class="mi">3</span><span class="ss">)</span>:
+    <span class="nv">outcome</span> <span class="o">=</span> <span class="nv">num0</span> <span class="o">+</span> <span class="nv">num1</span> <span class="o">+</span> <span class="nv">num2</span> <span class="o">+</span> <span class="nv">num3</span>
+    <span class="nv">print</span><span class="ss">(</span><span class="nv">f</span><span class="s2">&quot;</span><span class="s">num0={num0}, num1={num1}, num2={num2}, num3={num3}</span><span class="s2">&quot;</span><span class="ss">)</span>
+    <span class="k">return</span> <span class="nv">outcome</span>
 </pre></div>
 
 
@@ -263,11 +263,11 @@ e.g. <code>python -m cai_pytorch.pytorch</code></li>
 <ol>
 <li>
 <p>change shell script as follows:</p>
-<div class="highlight"><pre><span></span>   <span class="o">#!/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span> <span class="o">-</span><span class="n">x</span>
+<div class="highlight"><pre><span></span>   #!/bin/bash -x
 
-   <span class="n">kernprof</span> <span class="o">-</span><span class="n">lv</span> <span class="n">my_script</span><span class="p">.</span><span class="n">py</span> <span class="err">\</span>
-   <span class="o">#</span> <span class="k">time</span> <span class="n">python3</span> <span class="n">my_script</span><span class="p">.</span><span class="n">py</span> <span class="err">\</span>
-   <span class="p">...</span>
+   kernprof -lv my_script.py \
+   # time python3 my_script.py \
+   ...
 </pre></div>
 
 
@@ -291,9 +291,9 @@ e.g. <code>python -m cai_pytorch.pytorch</code></li>
 </ul>
 <h4>Time it</h4>
 <p>time a for loop:</p>
-<div class="highlight"><pre><span></span>      <span class="c">%%timeit -n 10</span>
-      <span class="n">for</span> <span class="s">...:</span>
-          <span class="c">...</span>
+<div class="highlight"><pre><span></span><span class="w">      </span><span class="c">%%timeit -n 10</span><span class="w"></span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="k">...</span><span class="c">:</span><span class="w"></span>
+<span class="w">          </span><span class="k">...</span><span class="w"></span>
 </pre></div>
 
 
@@ -302,7 +302,7 @@ e.g. <code>python -m cai_pytorch.pytorch</code></li>
       <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
       <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
       <span class="n">t2r</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span>
-      <span class="k">print</span><span class="p">(</span><span class="s1">&#39;execution time {:.4f} mins&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t2r</span> <span class="o">/</span> <span class="mi">60</span><span class="p">))</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;execution time </span><span class="si">{:.4f}</span><span class="s1"> mins&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t2r</span> <span class="o">/</span> <span class="mi">60</span><span class="p">))</span>
 </pre></div>
 
 
@@ -390,7 +390,7 @@ sudo apt-get install python3.6
 <h4>Various Links</h4>
 <ul>
 <li><a href="http://zetcode.com/python/regularexpressions/">Python regular expressions</a></li>
-<li><a href="https://kate.io/blog/2017/08/22/weird-python-integers/">Weird Python Integers</a>  </li>
+<li><a href="https://kate.io/blog/2017/08/22/weird-python-integers/">Weird Python Integers</a></li>
 <li><a href="https://stackoverflow.com/questions/34229363/converting-json-string-into-python-dictionary">json.dumps vs json.loads</a></li>
 <li><a href="https://joblib.readthedocs.io/en/latest/">py joblib tutorial</a> ( about parallelization )</li>
 <li><a href="https://medium.com/analytics-vidhya/top-10-nice-to-have-data-science-libraries-d155196710ef">Top 10 Nice-To-Have Data Science Libraries</a></li>

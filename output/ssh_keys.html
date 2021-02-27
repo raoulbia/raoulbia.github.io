@@ -33,23 +33,23 @@
                 </h2>
 
                 <h4>Checking for existing keys</h4>
-<div class="highlight"><pre><span></span><span class="err">ls -al ~/.ssh</span>
+<div class="highlight"><pre><span></span>ls -al ~/.ssh
 </pre></div>
 
 
 <h4>Generating a new key</h4>
-<div class="highlight"><pre><span></span><span class="err">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</span>
+<div class="highlight"><pre><span></span><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="n">rsa</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="mi">4096</span><span class="w"> </span><span class="o">-</span><span class="n">C</span><span class="w"> </span><span class="ss">&quot;your_email@example.com&quot;</span><span class="w"></span>
 </pre></div>
 
 
 <p>or</p>
-<div class="highlight"><pre><span></span><span class="err">ssh-keygen -t rsa -C &quot;some name&quot; -b 4096</span>
+<div class="highlight"><pre><span></span>ssh-keygen -t rsa -C &quot;some name&quot; -b 4096
 </pre></div>
 
 
 <h4>Adding a key</h4>
-<div class="highlight"><pre><span></span><span class="err">eval $(ssh-agent -s)</span>
-<span class="err">ssh-add ~/.ssh/id_rsa</span>
+<div class="highlight"><pre><span></span>eval $(ssh-agent -s)
+ssh-add ~/.ssh/id_rsa
 </pre></div>
                 <div class="clear"></div>
 

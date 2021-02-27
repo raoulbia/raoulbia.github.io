@@ -26,7 +26,7 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Mar 01, 2018</h4>
+        <div id="content">            <h4 class="date">Mar 25, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -45,18 +45,18 @@
 </li>
 <li>
 <p>Setup a virtual environment</p>
-<div class="highlight"><pre><span></span><span class="err">conda create --name myblog python=3.5</span>
-<span class="err">source activate myblog</span>
-<span class="err">pip install -r requirements.txt</span>
-<span class="err">pelican-quickstart</span>
-<span class="err">git clone https://github.com/getpelican/pelican-plugins.git</span>
+<div class="highlight"><pre><span></span>conda create --name myblog python=3.5
+source activate myblog
+pip install -r requirements.txt
+pelican-quickstart
+git clone https://github.com/getpelican/pelican-plugins.git
 </pre></div>
 
 
 </li>
 <li>
 <p>Connect to repo</p>
-<div class="highlight"><pre><span></span><span class="err">git remote add origin git@github.com:raoulbia/raoulbia.github.io.git</span>
+<div class="highlight"><pre><span></span><span class="n">git</span><span class="w"> </span><span class="n">remote</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="n">git</span><span class="nv">@github</span><span class="p">.</span><span class="nl">com</span><span class="p">:</span><span class="n">raoulbia</span><span class="o">/</span><span class="n">raoulbia</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">git</span><span class="w"></span>
 </pre></div>
 
 
@@ -64,25 +64,25 @@
 </li>
 <li>
 <p>Create a new branch for hosting the pelican source code.</p>
-<div class="highlight"><pre><span></span><span class="err">git checkout -b pelican</span>
+<div class="highlight"><pre><span></span>git checkout -b pelican
 </pre></div>
 
 
 </li>
 <li>
 <p>Install IPython notebook</p>
-<div class="highlight"><pre><span></span><span class="err">mkdir plugins &amp;&amp; cd plugins</span>
-<span class="err">git submodule add git://github.com/danielfrg/pelican-ipynb.git ipynb</span>
-<span class="err">git submodule add https://github.com/barrysteyn/pelican_plugin-render_math.git render_math</span>
+<div class="highlight"><pre><span></span>mkdir plugins &amp;&amp; cd plugins
+git submodule add git://github.com/danielfrg/pelican-ipynb.git ipynb
+git submodule add https://github.com/barrysteyn/pelican_plugin-render_math.git render_math
 </pre></div>
 
 
 </li>
 <li>
 <p>In order to activate the plugin, add these lines at the bottom of <code>pelicanconf.py</code>:</p>
-<div class="highlight"><pre><span></span><span class="err">MARKUP = (&#39;md&#39;, &#39;ipynb&#39;)</span>
-<span class="err">PLUGIN_PATH = &#39;./plugins&#39;</span>
-<span class="err">PLUGINS = [&#39;ipynb.markup&#39;, &#39;render_math&#39;]</span>
+<div class="highlight"><pre><span></span>MARKUP = (&#39;md&#39;, &#39;ipynb&#39;)
+PLUGIN_PATH = &#39;./plugins&#39;
+PLUGINS = [&#39;ipynb.markup&#39;, &#39;render_math&#39;]
 </pre></div>
 
 
@@ -98,17 +98,17 @@ something wrong when trying to do so but in the end I settled for the <a href="h
 theme. It should be noted that the default Pelican theme may suffice to some users in which case this section can be
 skipped.</p>
 <p>To add all existing Pelican themes to your development repository</p>
-<div class="highlight"><pre><span></span><span class="err">git clone --recursive https://github.com/getpelican/pelican-themes ./pelican-themes</span>
+<div class="highlight"><pre><span></span>git clone --recursive https://github.com/getpelican/pelican-themes ./pelican-themes
 </pre></div>
 
 
 <p>To install one of the downloaded themes</p>
-<div class="highlight"><pre><span></span><span class="err">pelican-themes --install ./pelican-themes/name-of-theme --verbose</span>
+<div class="highlight"><pre><span></span>pelican-themes --install ./pelican-themes/name-of-theme --verbose
 </pre></div>
 
 
 <p>Alternatively you can just get the one theme you want to use</p>
-<div class="highlight"><pre><span></span><span class="err">git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes</span>
+<div class="highlight"><pre><span></span>git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes
 </pre></div>
 
 
@@ -135,7 +135,7 @@ the theme of choice must be specified in <strong>both</strong> <code>publishconf
 <li>
 <p>preview <code>localhost:8000/</code> in your browser</p>
 <p>To stop localhost type <code>Ctrl + c</code> then run below command twice</p>
-<div class="highlight"><pre><span></span><span class="err">kill -9 $(lsof -i TCP:8000 | grep LISTEN | awk &#39;{print $2}&#39;)</span>
+<div class="highlight"><pre><span></span>kill -9 $(lsof -i TCP:8000 | grep LISTEN | awk &#39;{print $2}&#39;)
 </pre></div>
 
 
@@ -157,9 +157,9 @@ project source code (pelican branch). To publish either run the code below.</p>
 
 
 <h4>Push Source Code</h4>
-<div class="highlight"><pre><span></span><span class="err">git add -A &amp;&amp;</span>
-<span class="err">git commit -a -m &quot;Update&quot; &amp;&amp;</span>
-<span class="err">git push -u origin pelican</span>
+<div class="highlight"><pre><span></span>git add -A &amp;&amp;
+git commit -a -m &quot;Update&quot; &amp;&amp;
+git push -u origin pelican
 </pre></div>
 
 
@@ -262,23 +262,23 @@ project source code (pelican branch). To publish either run the code below.</p>
 <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;../local-data/original/new&#39;</span>
 <span class="n">all_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/*&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">all_files</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="n">tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> 
                   <span class="n">dtype</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
                   <span class="n">encoding</span> <span class="o">=</span> <span class="s2">&quot;ISO-8859-1&quot;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
     <span class="n">li</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
     <span class="k">del</span> <span class="n">tmp</span>
 
 <span class="c1"># make a dataframe of all the files combined</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">li</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">li</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 
 
 <h4>Read Multiple files in ZipFile</h4>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">zipfile</span> <span class="kn">import</span> <span class="n">ZipFile</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span>
 <span class="k">for</span> <span class="n">text_file</span> <span class="ow">in</span> <span class="n">zip_file</span><span class="o">.</span><span class="n">infolist</span><span class="p">():</span>
     <span class="n">tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">zip_file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">text_file</span><span class="o">.</span><span class="n">filename</span><span class="p">))</span>
@@ -289,28 +289,28 @@ project source code (pelican branch). To publish either run the code below.</p>
 <h4>Write</h4>
 <p><code>df.to_csv("../local-data/output/shuba_data_subset.csv", index=True)</code></p>
 <h3>Pickle</h3>
-<div class="highlight"><pre><span></span><span class="o">#</span> <span class="n">save</span> <span class="k">as</span> <span class="n">pickle</span>
-<span class="n">f</span> <span class="o">=</span> <span class="k">open</span><span class="p">(</span><span class="s1">&#39;../local-data/input/filename.pickle&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
-<span class="n">pickle</span><span class="p">.</span><span class="n">dump</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-<span class="n">f</span><span class="p">.</span><span class="k">close</span><span class="p">()</span>
+<div class="highlight"><pre><span></span># save as pickle
+f = open(&#39;../local-data/input/filename.pickle&#39;, &#39;wb&#39;)
+pickle.dump(df, f)
+f.close()
 
-<span class="o">#</span> <span class="k">read</span> <span class="n">pickle</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;../local-data/input/filename.pickle&#39;</span><span class="p">)</span>
-<span class="n">print</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+# read pickle
+df = pd.read_pickle(&#39;../local-data/input/filename.pickle&#39;)
+print(df.shape)
+df.head(1)
 </pre></div>
 
 
 <h3>Combine Train / Test</h3>
-<div class="highlight"><pre><span></span><span class="n">fp_tr</span> <span class="o">=</span> <span class="ss">&quot;../local-data/input/train.csv&quot;</span>
-<span class="n">fp_te</span> <span class="o">=</span> <span class="ss">&quot;../local-data/input/test.csv&quot;</span>
+<div class="highlight"><pre><span></span>fp_tr = &quot;../local-data/input/train.csv&quot;
+fp_te = &quot;../local-data/input/test.csv&quot;
 
-<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fp_tr</span><span class="p">)</span>
-<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fp_te</span><span class="p">)</span>
+train = pd.read_csv(fp_tr)
+test = pd.read_csv(fp_te)
 
-<span class="n">dat</span> <span class="o">=</span>  <span class="n">pd</span><span class="p">.</span><span class="n">concat</span><span class="p">(</span><span class="n">objs</span><span class="o">=</span><span class="p">[</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">).</span><span class="n">reset_index</span><span class="p">(</span><span class="k">drop</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
-<span class="n">TestPassengerID</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">]</span>
-<span class="n">dat</span><span class="p">.</span><span class="n">shape</span>
+dat =  pd.concat(objs=[train, test], axis=0).reset_index(drop=True)
+TestPassengerID = test[&#39;PassengerId&#39;]
+dat.shape
 </pre></div>
 
 
@@ -322,58 +322,58 @@ project source code (pelican branch). To publish either run the code below.</p>
 
 
 <h4>Filling missing dates and values within group</h4>
-<div class="highlight"><pre><span></span><span class="err"># gpd[&#39;Date&#39;] = pd.to_datetime(gpd[&#39;Date&#39;])</span>
-<span class="err">gpd = \</span>
-<span class="err">gpd.set_index(</span>
-<span class="err">    [&#39;Date&#39;, &#39;Verktitel&#39;]</span>
-<span class="err">).unstack(</span>
-<span class="err">    fill_value=0</span>
-<span class="err">).asfreq(</span>
-<span class="err">    &#39;MS&#39;, fill_value=0</span>
-<span class="err">).stack().sort_index(level=1).reset_index()</span>
-<span class="err">gpd.head()</span>
+<div class="highlight"><pre><span></span># gpd[&#39;Date&#39;] = pd.to_datetime(gpd[&#39;Date&#39;])
+gpd = \
+gpd.set_index(
+    [&#39;Date&#39;, &#39;Verktitel&#39;]
+).unstack(
+    fill_value=0
+).asfreq(
+    &#39;MS&#39;, fill_value=0
+).stack().sort_index(level=1).reset_index()
+gpd.head()
 </pre></div>
 
 
 <h4>Create Date Features</h4>
-<div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">time</span> <span class="k">conversion</span> <span class="n">helper</span> <span class="n">variables</span>
+<div class="highlight"><pre><span></span><span class="c1"># time conversion helper variables</span>
 <span class="n">seconds_in_day</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span>
 <span class="n">seconds_in_hour</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span>
 
-<span class="o">#</span> <span class="k">Create</span> <span class="k">new</span> <span class="n">feature</span><span class="p">:</span> <span class="n">Resolution</span> <span class="k">Time</span>
-<span class="k">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">data</span><span class="p">.</span><span class="n">resolved_at</span> <span class="o">-</span> <span class="k">data</span><span class="p">.</span><span class="n">opened_at</span>
+<span class="c1"># Create new feature: Resolution Time</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">resolved_at</span> <span class="o">-</span> <span class="n">data</span><span class="o">.</span><span class="n">opened_at</span>
 
-<span class="o">#</span> <span class="k">convert</span> <span class="k">to</span> <span class="n">seconds</span>
-<span class="k">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="k">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">]</span>
-                                <span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="p">.</span><span class="n">total_seconds</span><span class="p">()))</span>
+<span class="c1"># convert to seconds</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">]</span>
+                                <span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()))</span>
 
-<span class="o">#</span> <span class="k">convert</span> <span class="n">resolution</span> <span class="k">time</span> <span class="k">to</span> <span class="n">days</span>
-<span class="k">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_days&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">].</span><span class="k">copy</span><span class="p">()</span>
-<span class="k">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_days&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="k">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_days&#39;</span><span class="p">]</span>
-                                <span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">//</span> <span class="n">seconds_in_day</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="c1"># convert resolution time to days</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_days&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_days&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_days&#39;</span><span class="p">]</span>
+                                <span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">//</span> <span class="n">seconds_in_day</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
 
-<span class="o">#</span> <span class="k">convert</span> <span class="n">resolution</span> <span class="k">time</span> <span class="k">to</span> <span class="n">hours</span>
-<span class="k">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_hrs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">].</span><span class="k">copy</span><span class="p">()</span>
-<span class="k">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_hrs&#39;</span><span class="p">]</span><span class="o">=</span> <span class="p">(</span><span class="k">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_hrs&#39;</span><span class="p">]</span>
-                              <span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">//</span> <span class="n">seconds_in_hour</span><span class="p">))</span>
+<span class="c1"># convert resolution time to hours</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_hrs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_hrs&#39;</span><span class="p">]</span><span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_hrs&#39;</span><span class="p">]</span>
+                              <span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">//</span> <span class="n">seconds_in_hour</span><span class="p">))</span>
 </pre></div>
 
 
 <h4>Select by Year</h4>
-<div class="highlight"><pre><span></span><span class="err"># data = data[data.opened_at.dt.year &gt;= 2019]</span>
+<div class="highlight"><pre><span></span># data = data[data.opened_at.dt.year &gt;= 2019]
 </pre></div>
 
 
 <h3>Inspect</h3>
 <h4>Duplicate rows</h4>
 <p>(see here)[https://thispointer.com/pandas-find-duplicate-rows-in-a-dataframe-based-on-all-or-selected-columns-using-dataframe-duplicated-in-python/#:~:text=To%20find%20%26%20select%20the%20duplicate,argument%20is%20'first').]</p>
-<div class="highlight"><pre><span></span><span class="err"># Select all duplicate rows based on all columns</span>
-<span class="err">df[df.duplicated(keep=False)]</span>
+<div class="highlight"><pre><span></span># Select all duplicate rows based on all columns
+df[df.duplicated(keep=False)]
 </pre></div>
 
 
-<div class="highlight"><pre><span></span><span class="err"># Select all duplicate rows based on one column</span>
-<span class="err">df[df.duplicated([&#39;Name&#39;])]</span>
+<div class="highlight"><pre><span></span># Select all duplicate rows based on one column
+df[df.duplicated([&#39;Name&#39;])]
 </pre></div>
 
 
@@ -381,19 +381,19 @@ project source code (pelican branch). To publish either run the code below.</p>
 <h4>Duplicates in a column</h4>
 <p><code>df.duplicated(subset='col_name', keep='first').count()</code></p>
 <h4>Create columns from row with same ID</h4>
-<div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">get</span> <span class="n">duplicates</span>
-<span class="n">tmp</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">.</span><span class="n">duplicated</span><span class="p">([</span><span class="s1">&#39;IncidentNumber&#39;</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="k">False</span><span class="p">)].</span><span class="n">sort_values</span><span class="p">(</span><span class="k">by</span><span class="o">=</span><span class="s1">&#39;IncidentNumber&#39;</span><span class="p">)</span>
-<span class="o">#</span> <span class="k">create</span> <span class="k">new</span> <span class="n">colums</span>
-<span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">tmp</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;IncidentNumber&#39;</span><span class="p">,</span> <span class="n">tmp</span><span class="p">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;IncidentNumber&#39;</span><span class="p">])</span>
-                      <span class="p">.</span><span class="n">cumcount</span><span class="p">()])[[</span><span class="s1">&#39;Comments&#39;</span><span class="p">,</span> <span class="s1">&#39;GoodServiceRecoveryEstimate&#39;</span><span class="p">]]</span>
-         <span class="p">.</span><span class="n">unstack</span><span class="p">(</span><span class="n">fill_value</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-         <span class="p">.</span><span class="n">add_prefix</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-      <span class="p">)</span>
-<span class="n">print</span><span class="p">(</span><span class="n">len</span><span class="p">(</span><span class="n">tmp</span><span class="p">))</span>
+<div class="highlight"><pre><span></span># get duplicates
+tmp = df[df.duplicated([&#39;IncidentNumber&#39;], keep=False)].sort_values(by=&#39;IncidentNumber&#39;)
+# create new colums
+tmp = (tmp.set_index([&#39;IncidentNumber&#39;, tmp.groupby([&#39;IncidentNumber&#39;])
+                      .cumcount()])[[&#39;Comments&#39;, &#39;GoodServiceRecoveryEstimate&#39;]]
+         .unstack(fill_value=&#39;&#39;)
+         .add_prefix(&#39;&#39;)
+      )
+print(len(tmp))
 
-<span class="o">#</span> <span class="n">flatten</span> <span class="n">multiindex</span> <span class="k">column</span> <span class="n">headers</span>
-<span class="n">tmp</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="k">map</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">.</span><span class="k">join</span><span class="p">)</span>
-<span class="n">tmp</span> 
+# flatten multiindex column headers
+tmp.columns = tmp.columns.map(&#39;_&#39;.join)
+tmp 
 </pre></div>
 
 
@@ -435,8 +435,8 @@ project source code (pelican branch). To publish either run the code below.</p>
 
 <h3>Fill Missing</h3>
 <h4>Fill missing values with median</h4>
-<div class="highlight"><pre><span></span><span class="err"># fill the missing values of Fare</span>
-<span class="err">test_df[&#39;Fare&#39;].fillna(test_df[&#39;Fare&#39;].dropna().median(), inplace=True)</span>
+<div class="highlight"><pre><span></span># fill the missing values of Fare
+test_df[&#39;Fare&#39;].fillna(test_df[&#39;Fare&#39;].dropna().median(), inplace=True)
 </pre></div>
 
 
@@ -462,24 +462,24 @@ project source code (pelican branch). To publish either run the code below.</p>
 <p><code>df['new_col'] = df['B'].isin([3, 2]).astype(int)</code></p>
 <h3>Create New Feature</h3>
 <h4>Create a boolean feature column</h4>
-<div class="highlight"><pre><span></span><span class="err">data[&#39;is_WE&#39;] = (data.opened_at.apply(lambda x : 1 </span>
-<span class="err">                                      if x.strftime(&#39;%A&#39;) in[&#39;Saturday&#39;, &#39;Sunday&#39;]</span>
-<span class="err">                                      else 0)).astype(&#39;category&#39;)</span>
+<div class="highlight"><pre><span></span><span class="nv">data</span>[<span class="s1">&#39;</span><span class="s">is_WE</span><span class="s1">&#39;</span>] <span class="o">=</span> <span class="ss">(</span><span class="nv">data</span>.<span class="nv">opened_at</span>.<span class="nv">apply</span><span class="ss">(</span><span class="nv">lambda</span> <span class="nv">x</span> : <span class="mi">1</span> 
+                                      <span class="k">if</span> <span class="nv">x</span>.<span class="nv">strftime</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">%A</span><span class="s1">&#39;</span><span class="ss">)</span> <span class="nv">in</span>[<span class="s1">&#39;</span><span class="s">Saturday</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">Sunday</span><span class="s1">&#39;</span>]
+                                      <span class="k">else</span> <span class="mi">0</span><span class="ss">))</span>.<span class="nv">astype</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">category</span><span class="s1">&#39;</span><span class="ss">)</span>
 </pre></div>
 
 
 <p>or...using shizen-gengo text search</p>
-<div class="highlight"><pre><span></span><span class="err">data[&#39;is_costa&#39;] = 0</span>
-<span class="err">costa_inc_nbrs = explore_utils.search(data, &#39;description&#39;, &#39;costa&#39;).reset_index().number</span>
-<span class="err">data.loc[costa_inc_nbrs.tolist(), &#39;is_costa&#39;] = 1</span>
-<span class="err">len(data[data.is_costa==1])</span>
+<div class="highlight"><pre><span></span>data[&#39;is_costa&#39;] = 0
+costa_inc_nbrs = explore_utils.search(data, &#39;description&#39;, &#39;costa&#39;).reset_index().number
+data.loc[costa_inc_nbrs.tolist(), &#39;is_costa&#39;] = 1
+len(data[data.is_costa==1])
 </pre></div>
 
 
 <h4>Add column with new value based on values in other cols:</h4>
-<div class="highlight"><pre><span></span><span class="err">conditions = [(data.company == &#39;unknown&#39;) &amp;  (data.is_costa == 1)]</span>
-<span class="err">outputs = [&#39;costa&#39;]</span>
-<span class="err">data.company = np.select(conditions, outputs, default=data.company)</span>
+<div class="highlight"><pre><span></span>conditions = [(data.company == &#39;unknown&#39;) &amp;  (data.is_costa == 1)]
+outputs = [&#39;costa&#39;]
+data.company = np.select(conditions, outputs, default=data.company)
 </pre></div>
 
 
@@ -512,11 +512,11 @@ project source code (pelican branch). To publish either run the code below.</p>
 
 
 <h4>groupby and sum two columns</h4>
-<div class="highlight"><pre><span></span><span class="err">gpd = (df.groupby([&#39;Date&#39;, &#39;Verktitel&#39;])[[&#39;Belopp&#39;, &#39;Antal Spelningar&#39;]]</span>
-<span class="err">       .agg({&#39;Belopp&#39; : sum, &#39;Antal Spelningar&#39; : sum})</span>
-<span class="err">      )</span>
-<span class="err">gpd = gpd.reset_index()</span>
-<span class="err">gpd.head()</span>
+<div class="highlight"><pre><span></span>gpd = (df.groupby([&#39;Date&#39;, &#39;Verktitel&#39;])[[&#39;Belopp&#39;, &#39;Antal Spelningar&#39;]]
+       .agg({&#39;Belopp&#39; : sum, &#39;Antal Spelningar&#39; : sum})
+      )
+gpd = gpd.reset_index()
+gpd.head()
 </pre></div>
 
 
@@ -531,10 +531,10 @@ project source code (pelican branch). To publish either run the code below.</p>
 
 
 <h4>groupby with dates</h4>
-<div class="highlight"><pre><span></span><span class="err">tmp.groupby(tmp[&#39;opened_at&#39;])[&#39;number&#39;]</span>
-<span class="err">         .size()</span>
-<span class="err">         .reset_index(name=&#39;cnt&#39;)</span>
-<span class="err">         .sort_values(by=[&#39;opened_at&#39;, &#39;cnt&#39;], ascending=[True, False]</span>
+<div class="highlight"><pre><span></span>tmp.groupby(tmp[&#39;opened_at&#39;])[&#39;number&#39;]
+         .size()
+         .reset_index(name=&#39;cnt&#39;)
+         .sort_values(by=[&#39;opened_at&#39;, &#39;cnt&#39;], ascending=[True, False]
 </pre></div>
 
 
@@ -550,22 +550,22 @@ project source code (pelican branch). To publish either run the code below.</p>
 <p><code>gpd.pivot(index='Date', columns='Verktitel', values='Belopp')</code>
 <code>tmp = tmp.melt('Date', var_name='cols',  value_name='vals')</code></p>
 <h4>Compute ratio from a binary split for each UID</h4>
-<div class="highlight"><pre><span></span><span class="n">gpd</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;v_incident_uid&#39;</span><span class="p">,</span> <span class="s1">&#39;Incident Number&#39;</span><span class="p">,</span> <span class="s1">&#39;v_role&#39;</span><span class="p">])[</span><span class="s1">&#39;v_role&#39;</span><span class="p">]</span>
- <span class="p">.</span><span class="k">size</span><span class="p">()</span>
- <span class="p">.</span><span class="n">to_frame</span><span class="p">()</span>
- <span class="p">.</span><span class="k">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="err">{</span><span class="s1">&#39;v_role&#39;</span><span class="p">:</span><span class="s1">&#39;cnt&#39;</span><span class="err">}</span><span class="p">)</span>
-<span class="p">).</span><span class="n">reset_index</span><span class="p">()</span>
+<div class="highlight"><pre><span></span>gpd = (df.groupby([&#39;v_incident_uid&#39;, &#39;Incident Number&#39;, &#39;v_role&#39;])[&#39;v_role&#39;]
+ .size()
+ .to_frame()
+ .rename(columns={&#39;v_role&#39;:&#39;cnt&#39;})
+).reset_index()
 
-<span class="n">gpd</span> <span class="o">=</span> <span class="n">gpd</span><span class="p">.</span><span class="n">pivot</span><span class="p">(</span><span class="k">index</span><span class="o">=</span><span class="s1">&#39;v_incident_uid&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;v_role&#39;</span><span class="p">,</span> <span class="k">values</span><span class="o">=</span><span class="s1">&#39;cnt&#39;</span><span class="p">)</span>
-<span class="n">gpd</span><span class="p">[</span><span class="s1">&#39;ratio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">gpd</span><span class="p">.</span><span class="k">Primary</span> <span class="o">/</span> <span class="p">(</span><span class="n">gpd</span><span class="p">.</span><span class="k">Primary</span> <span class="o">+</span> <span class="n">gpd</span><span class="p">.</span><span class="n">Reactionary</span><span class="p">)).</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">gpd</span><span class="p">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+gpd = gpd.pivot(index=&#39;v_incident_uid&#39;, columns=&#39;v_role&#39;, values=&#39;cnt&#39;)
+gpd[&#39;ratio&#39;] = (gpd.Primary / (gpd.Primary + gpd.Reactionary)).round(2)
+gpd.reset_index(inplace=True)
 </pre></div>
 
 
 <h3>Selecting Data</h3>
 <h4>List of column names to select</h4>
-<div class="highlight"><pre><span></span><span class="err">cols = [&#39;colname1&#39;, &#39;colname2]</span>
-<span class="err">df = df2.loc[:, cols]</span>
+<div class="highlight"><pre><span></span>cols = [&#39;colname1&#39;, &#39;colname2]
+df = df2.loc[:, cols]
 </pre></div>
 
 
@@ -668,9 +668,9 @@ project source code (pelican branch). To publish either run the code below.</p>
 
 <h3>Misc.</h3>
 <h4>Create sample dataset</h4>
-<div class="highlight"><pre><span></span><span class="err">tmp = df.sample(10000)</span>
-<span class="err">tmp.to_csv(&quot;../local-data/output/bat_sample2_original_headers.csv&quot;, index=False)</span>
-<span class="err">del tmp</span>
+<div class="highlight"><pre><span></span>tmp = df.sample(10000)
+tmp.to_csv(&quot;../local-data/output/bat_sample2_original_headers.csv&quot;, index=False)
+del tmp
 </pre></div>
 
 
@@ -728,13 +728,13 @@ project source code (pelican branch). To publish either run the code below.</p>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span><span class="err"># with percentages</span>
-<span class="err">pd.crosstab(df.FamilySize, # ROWS</span>
-<span class="err">              df.Survived, # COLS</span>
-<span class="err">              values=df.PassengerId, </span>
-<span class="err">              aggfunc=pd.Series.nunique,</span>
-<span class="err">              normalize=&#39;index&#39;,</span>
-<span class="err">              dropna=False).round(2)</span>
+<div class="highlight"><pre><span></span># with percentages
+pd.crosstab(df.FamilySize, # ROWS
+              df.Survived, # COLS
+              values=df.PassengerId, 
+              aggfunc=pd.Series.nunique,
+              normalize=&#39;index&#39;,
+              dropna=False).round(2)
 </pre></div>
 
 

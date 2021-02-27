@@ -1,5 +1,5 @@
 Title: SQL
-Date: 2017-11-02
+Date: 2017-11-19
 Category: Databases
 Slug: sql
 Summary: SQL
@@ -113,6 +113,9 @@ partition p3 values less than maxvalue
 );
 ```
 
+#### Set Primary Key
+
+```ALTER TABLE table_name ADD PRIMARY KEY (column_1, column_2);```
 
 #### Drop foreign key
 

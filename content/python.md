@@ -420,7 +420,7 @@ Note: `-n` prevents backup files; `-w` instructs to write the conversion
 #### Various Links
 
 * [Python regular expressions](http://zetcode.com/python/regularexpressions/)
-* [Weird Python Integers](https://kate.io/blog/2017/08/22/weird-python-integers/)  
+* [Weird Python Integers](https://kate.io/blog/2017/08/22/weird-python-integers/)
 * [json.dumps vs json.loads](https://stackoverflow.com/questions/34229363/converting-json-string-into-python-dictionary)
 * [py joblib tutorial](https://joblib.readthedocs.io/en/latest/) ( about parallelization )
 * [Top 10 Nice-To-Have Data Science Libraries](https://medium.com/analytics-vidhya/top-10-nice-to-have-data-science-libraries-d155196710ef)

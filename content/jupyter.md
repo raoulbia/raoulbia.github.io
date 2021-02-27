@@ -1,7 +1,7 @@
-Title: Jupyter Notebooks
+Title: Jupyter
 Date: 2018-01-05
 Category: Python
-Slug: Jupyter Notebooks
+Slug: jupyter
 Summary: Jupyter Notebooks
 
 <br> 
