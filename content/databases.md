@@ -9,10 +9,12 @@ Summary: Databases
 
 #### install postgres and postgis
 
+```
 $  sudo apt install postgis postgresql-13-postgis-3
 $ sudo -u postgres psql
 postgres=# \password postgres
 postgres=# \q
+```
 
 check installed version(s): `dpkg -l | grep postgres`
 

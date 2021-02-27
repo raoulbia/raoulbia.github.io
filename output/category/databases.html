@@ -35,10 +35,13 @@
 
                 <h3>Postgres</h3>
 <h4>install postgres and postgis</h4>
-<p>$  sudo apt install postgis postgresql-13-postgis-3
+<div class="highlight"><pre><span></span>$  sudo apt install postgis postgresql-13-postgis-3
 $ sudo -u postgres psql
-postgres=# \password postgres
-postgres=# \q</p>
+<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \password postgres</span>
+<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \q</span>
+</pre></div>
+
+
 <p>check installed version(s): <code>dpkg -l | grep postgres</code></p>
 <h4>postgres user authentication error</h4>
 <p><code>sudo nano /etc/postgresql/13/main/pg_hba.conf</code></p>
