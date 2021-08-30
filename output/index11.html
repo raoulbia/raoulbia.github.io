@@ -24,201 +24,206 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 10, 2017</h4>
+        <div id="content">            <h4 class="date">Nov 24, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./software_gis.html" rel="bookmark" title="Permanent Link to &quot;GIS&quot;">GIS</a>
+                    <a href="./databases.html" rel="bookmark" title="Permanent Link to &quot;Databases&quot;">Databases</a>
                 </h2>
 
-                <h4>QGIS</h4>
-<h4>Codes</h4>
-<p>CRS: 4326</p>
-<p>DUBLIN BUS EPSG CRS 2157
-https://www.scss.tcd.ie/publications/theses/diss/2019/TCD-SCSS-DISSERTATION-2019-016.pdf</p>
-<h3>postgis resources</h3>
-<ul>
-<li>https://postgis.net/docs/manual-1.3/ch03.html</li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./software_gis.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/gis.html" rel="tag">GIS</a>
-                </div>
-            </article>            <h4 class="date">Nov 01, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./web_development.html" rel="bookmark" title="Permanent Link to &quot;Web Development&quot;">Web Development</a>
-                </h2>
-
-                <h4>nginx</h4>
-<ul>
-<li><code>sudo nginx -t</code> to test nginx</li>
-<li><code>sudo /etc/init.d/nginx reload</code> to restart nginx</li>
-<li><code>sudo apt-get remove nginx nginx-common</code> to to remove all but config files</li>
-<li><code>sudo apt-get purge nginx nginx-common</code> to remove everything</li>
-<li><code>find /etc/nginx -name '*.conf' | xargs grep -i log</code></li>
-<li><a href="https://www.youtube.com/watch?v=fpeQlbdRmKI">How To Set Up nginx Virtual Hosts (Server Blocks)</a></li>
-</ul>
-<p><br></p>
-<h4>start ngrok</h4>
-<p><code>./ngrok http 5000</code></p>
-<p><br></p>
-<h4>Heroku</h4>
-<p>Pre-requisite: Heroku Command Line Tool</p>
-<ul>
-<li>needed for <code>heroku login --interactive</code> and <code>heroku create</code></li>
-<li>Option 1: <code>sudo snap install --classic heroku</code></li>
-<li>Option 2: <code>curl https://cli-assets.heroku.com/install.sh | sh</code></li>
-<li><a href="https://devcenter.heroku.com/categories/command-line">read more</a></li>
-</ul>
-<p>Stop/Start Heroku VM</p>
-<ul>
-<li><code>heroku ps:scale web=0</code> wait for a few secs, then <code>heroku ps:scale web=1</code></li>
-</ul>
-<p>General Heroku Deployment Guidelines</p>
-<ul>
-<li><a href="https://devcenter.heroku.com/articles/git">overview</a></li>
-<li>add <code>Pipfile</code> to <code>.gitignore</code> to ensure that dependencies are installed from <code>requirements.txt</code>.</li>
-<li>add <code>.env/</code> to <code>.gitignore</code> to ensure that secret key is hidden on github/gitlab.</li>
-<li>after deployment run <code>heroku ps:scale web=1 --app  name-of-app</code></li>
-<li>view logs:<code>heroku logs --tail --app  name-of-app</code></li>
-<li>Login to Heroku VM:</li>
-<li><code>heroku login</code></li>
-<li><code>heroku run bash</code></li>
-<li><a href="https://help.heroku.com/18PI5RSY/how-do-i-clear-the-build-cache">clear the build cache</a></li>
-<li><a href="https://chatbotslife.com/github-repo-heroku-explained-how-to-host-your-bot-server-python-8b3ec4f071ce">related article</a></li>
-</ul>
-<p>Heroku <strong>Flask</strong> Deployment</p>
-<ul>
-<li><code>heroku create &lt;NAME&gt;</code> to create a Heroku remote</li>
-<li><code>git add . ; git commit -m "update"</code></li>
-<li><code>git push heroku master</code></li>
-<li><code>heroku run python manage.py migrate</code></li>
-<li><code>heroku run python manage.py createsuperuser</code></li>
-</ul>
-<p>Heroku <strong>Dash</strong> Deployment</p>
-<ul>
-<li><a href="https://github.com/plotly/dash-heroku-template">see here</a></li>
-<li>change Step 6 to: <code>git remote add heroku https://git.heroku.com/semmeddb</code></li>
-</ul>
-<p>Heroku <strong>Django</strong> Deployment</p>
-<ul>
-<li><a href="https://github.com/heroku/heroku-django-template">heroku django template</a></li>
-<li><a href="https://devcenter.heroku.com/articles/django-assets">about static assets</a></li>
-<li><code>pipenv install whitenoise</code></li>
-<li><code>python manage.py collectstatic</code></li>
-</ul>
-<p>Procfile, gunicorn, django-heroku</p>
-<ul>
-<li><a href="https://devcenter.heroku.com/articles/django-app-configuration">Django App configuration</a></li>
-<li>in Procfile <code>web: gunicorn myproject.wsgi</code> replace "myproject" by name of dir in which <code>settings.py</code> is located.</li>
-<li>add <code>import django_heroku</code> to <code>settings.py</code> (top)</li>
-<li>add <code>django_heroku.settings(locals())</code> to <code>settings.py</code> (bottom)</li>
-</ul>
-<p><br></p>
-<h4>Django2</h4>
-<p>Useful commands</p>
-<div class="highlight"><pre><span></span><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">startproject</span> <span class="n">app1</span>
-<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
-<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
-<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span>
-<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
+                <h3>Postgres</h3>
+<h4>install postgres and postgis</h4>
+<div class="highlight"><pre><span></span>$  sudo apt install postgis postgresql-13-postgis-3
+$ sudo -u postgres psql
+<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \password postgres</span>
+<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \q</span>
 </pre></div>
 
 
-<p>Django templates</p>
-<p>in <code>settings.py</code></p>
-<div class="highlight"><pre><span></span> <span class="nv">BASE_DIR</span> <span class="o">=</span> <span class="nv">os</span>.<span class="nv">path</span>.<span class="k">dirname</span><span class="ss">(</span><span class="nv">os</span>.<span class="nv">path</span>.<span class="k">dirname</span><span class="ss">(</span><span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">abspath</span><span class="ss">(</span><span class="nv">__file__</span><span class="ss">)))</span>
- ...
- <span class="nv">TEMPLATES</span> <span class="o">=</span> [
-   {
-       <span class="s1">&#39;</span><span class="s">DIRS</span><span class="s1">&#39;</span>: [<span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">join</span><span class="ss">(</span><span class="nv">BASE_DIR</span>, <span class="s1">&#39;</span><span class="s">firstwebsite/templates</span><span class="s1">&#39;</span><span class="ss">)</span>]
-   }]
-</pre></div>
-
-
-<p>in <code>urls.py</code></p>
+<p>check installed version(s): <code>dpkg -l | grep postgres</code></p>
+<h4>postgres user authentication error</h4>
+<p><code>sudo nano /etc/postgresql/13/main/pg_hba.conf</code></p>
+<p>CHANGE FROM</p>
+<p><code>local   all     postgres     peer</code></p>
+<p>TO</p>
+<p><code>local   all      postgres    trusted</code></p>
+<p>then 
+sudo service postgresql restart</p>
+<h4>run in pgadmin4</h4>
+<p><code>CREATE EXTENSION postgis;</code></p>
 <ul>
-<li>...to be completed (Django1 vs Django2 issue)</li>
-<li>try <code>from views import</code> appraoch</li>
-</ul>
-<p>Django Resources</p>
-<ul>
-<li><a href="https://ccbv.co.uk/">Classy Class-Based Views ccbv.co.uk</a></li>
-<li><a href="https://docs.djangoproject.com/en/2.1/ref/models/">docs.djangoproject.com/en/2.1/ref/models</a></li>
-<li><a href="https://docs.djangoproject.com/en/2.1/ref/class-based-views/generic-display/">docs.djangoproject.com/en/2.1/ref/class-based-views/generic-display</a></li>
-<li><a href="https://docs.djangoproject.com/en/2.1/topics/class-based-views/generic-display/">docs.djangoproject.com/en/2.1/topics/class-based-views/generic-display</a></li>
-<li><a href="https://docs.djangoproject.com/en/2.1/ref/templates/builtins/">docs.djangoproject.com/en/2.1/ref/templates/builtins</a></li>
-<li><a href="https://docs.djangoproject.com/en/2.1/topics/db/queries/">docs.djangoproject.com/en/2.1/topics/db/queries</a></li>
-</ul>
-<p><br></p>
-<h4>Apache2</h4>
-<ul>
-<li><code>apachectl -S</code></li>
-<li><code>sudo service apache2 restart</code></li>
-<li><a href="http://flask.pocoo.org/docs/1.0/deploying/mod_wsgi/#configuring-apache">Configure Apache for Flask</a></li>
-<li><a href="http://terokarvinen.com/2016/deploy-flask-python3-on-apache2-ubuntu">Deploy Flask Python3 on Apache2 on Ubuntu</a></li>
-<li><a href="https://www.bogotobogo.com/python/Flask/Python_Flask_HelloWorld_App_with_Apache_WSGI_Ubuntu14.php">Flask HelloWorld App_with_Apache WSGI_Ubuntu14</a></li>
-<li><a href="https://websiteforstudents.com/installing-apache2-mariadb-on-ubuntu-16-04-17-10-18-04-with-php-7-2-support-lamp/">Installing LAMP</a></li>
-</ul>
-<p><br></p>
-<h4>Flask</h4>
-<ul>
-<li><code>import pdb; pdb.set_trace()</code></li>
-<li>error: address already in use<ul>
-<li><code>sudo lsof -i :5000</code></li>
-<li><code>sudo kill-9 PID</code></li>
-</ul>
+<li>
+<p>http://www.orbital.co.ke:8080/opengeo-docs/dataadmin/pgGettingStarted/shp2pgsql.html</p>
 </li>
-<li><code>FLASK_APP=run.py flask run</code></li>
-<li><a href="https://stackoverflow.com/questions/41144565/flask-does-not-see-change-in-js-file">flask does not see change in .js file</a></li>
-<li><a href="https://help.parsehub.com/hc/en-us/articles/217751808-API-Tutorial-How-to-get-run-data-using-Python-Flask">API Tutorial: How to get run data using Python &amp; Flask</a></li>
-<li><a href="https://stackoverflow.com/questions/53258168/gunicorn-wont-start-flask-app-because-application-object-must-be-callable">gunicorn and wsgi configuration</a></li>
-<li><a href="https://coderwall.com/p/pstm1w/deploying-a-flask-app-at-heroku">gunicorn and flask</a></li>
+<li>
+<p>test: <code>psql -U postgres -d &lt;DBNAME&gt; -c "SELECT postgis_version()"</code></p>
+</li>
+<li>
+<p>syntax: <code>shp2pgsql -I -s &lt;SRID&gt; &lt;PATH/TO/SHAPEFILE&gt; &lt;SCHEMA&gt;.&lt;DBTABLE&gt; | psql -U postgres -d &lt;DBNAME&gt;</code></p>
+</li>
+<li>
+<p>example: <code>shp2pgsql -I -s 4326  dublinbus/Dublin_Bus.shp  shp_dublinbus | psql -U postgres -d dublinbus</code></p>
+</li>
 </ul>
-<p><br></p>
-<h4>Node JS</h4>
-<p>Install nodejs:</p>
-<div class="highlight"><pre><span></span>curl -sL https://deb.nodesource.com/setup_8.x — Node.js 8 LTS &quot;Carbon&quot; | sudo -E bash -
-sudo apt-get install -y nodejs
+<h3>Utilities: ogr2ogr</h3>
+<ul>
+<li>https://gis.stackexchange.com/questions/65917/can-i-append-to-different-tables-using-ogr2ogr</li>
+<li>https://www.bostongis.com/PrinterFriendly.aspx?content_name=ogr_cheatsheet</li>
+<li>https://www.mankier.com/1/ogr2ogr</li>
+</ul>
+<h4>geojson to shp</h4>
+<p><code>ogr2ogr -f "ESRI Shapefile" destination_data.shp "dcc_public_bin_locations.geojson"</code></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./databases.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
+                </div>
+            </article>            <h4 class="date">Nov 19, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./sql.html" rel="bookmark" title="Permanent Link to &quot;SQL&quot;">SQL</a>
+                </h2>
+
+                <h4>Sample Queries</h4>
+<div class="highlight"><pre><span></span>select * from PREDICATION where SUBJECT_SEMTYPE in (&#39;gngm&#39;) limit 10;
+select * from ENTITY where SEMTYPE in (&#39;gngm&#39;) and GENE_ID &lt;&gt; &#39;&#39; limit 10;
 </pre></div>
 
 
-<p>symlink issue with Vagrant VM shared folder:</p>
-<p><code>npm install --no-bin-links</code></p>
-<p>port alread in use</p>
-<p><code>ps aux | awk '/node/{print $2}' | xargs kill -9</code></p>
 <p><br></p>
-<h4>Redux</h4>
+<div class="highlight"><pre><span></span><span class="n">select</span><span class="w"> </span><span class="n">count</span><span class="p">([</span><span class="n">Incident</span><span class="w"> </span><span class="n">Type</span><span class="p">]),</span><span class="w"> </span><span class="p">[</span><span class="n">Incident</span><span class="w"> </span><span class="n">Type</span><span class="p">]</span><span class="w"></span>
+<span class="n">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">bat_2020</span><span class="p">]</span><span class="w"></span>
+<span class="n">Group</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="p">[</span><span class="n">Incident</span><span class="w"> </span><span class="n">Type</span><span class="p">]</span><span class="w"></span>
+</pre></div>
+
+
+<p><br></p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="nf">MIN</span><span class="w"> </span><span class="p">(</span><span class="o">[</span><span class="n">Created Date Time</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="ss">&quot;Min Date&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"></span>
+<span class="w">       </span><span class="nf">MAX</span><span class="w"> </span><span class="p">(</span><span class="o">[</span><span class="n">Created Date Time</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="ss">&quot;Max Date&quot;</span><span class="w">  </span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">[</span><span class="n">dbo</span><span class="o">]</span><span class="p">.</span><span class="o">[</span><span class="n">bat_2020</span><span class="o">]</span><span class="w"></span>
+</pre></div>
+
+
+<h3>Useful commands</h3>
+<h4>Determine table column size</h4>
+<div class="highlight"><pre><span></span><span class="k">Select</span><span class="w">        </span><span class="nf">max</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="o">[</span><span class="n">number</span><span class="o">]</span><span class="p">))</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">[</span><span class="n">number</span><span class="o">]</span><span class="w"></span>
+<span class="w">              </span><span class="p">,</span><span class="nf">max</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="o">[</span><span class="n">u_opened_date</span><span class="o">]</span><span class="p">))</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">[</span><span class="n">u_opened_date</span><span class="o">]</span><span class="w"></span>
+<span class="w">              </span><span class="p">...</span><span class="w"></span>
+<span class="k">from</span><span class="w">   </span><span class="n">dbo</span><span class="p">.</span><span class="n">mytable</span><span class="w"></span>
+</pre></div>
+
+
+<h4>Insert from another table</h4>
+<p>To get the table details</p>
+<p><code>show create table ENTITY;</code> </p>
+<p>To create the new ENTITY2 table, copy/paste from the above output.</p>
+<p><code>insert into ENTITY2 select * from ENTITY where GENE_ID &lt;&gt; '';</code></p>
+<h4>See table columns and their data types</h4>
+<div class="highlight"><pre><span></span>SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS 
+  WHERE table_name = &#39;tbl_name&#39; AND COLUMN_NAME = &#39;col_name&#39;;
+</pre></div>
+
+
+<h4>Create DB</h4>
+<div class="highlight"><pre><span></span>GRANT ALL PRIVILEGES ON *.* TO &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;root&#39;;
+CREATE DATABASE dbname;
+USE dbname;
+</pre></div>
+
+
+<h4>Import from sql.gz file</h4>
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">pv</span>
+<span class="n">zcat</span> <span class="n">filename</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">gz</span> <span class="o">|</span> <span class="n">pv</span> <span class="o">-</span><span class="n">cN</span> <span class="n">zcat</span> <span class="o">|</span> <span class="n">mysql</span> <span class="o">-</span><span class="n">u</span> <span class="n">root</span> <span class="o">-</span><span class="n">p</span> <span class="o">-</span><span class="n">f</span> <span class="o">-</span><span class="n">D</span> <span class="n">dbname</span> <span class="p">;</span>
+</pre></div>
+
+
+<h4>Get stats</h4>
+<div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="n">table_schema</span> <span class="s2">&quot;dbname&quot;</span><span class="p">,</span>
+        <span class="n">ROUND</span><span class="p">(</span><span class="n">SUM</span><span class="p">(</span><span class="n">data_length</span> <span class="o">+</span> <span class="n">index_length</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="s2">&quot;DB Size in MB&quot;</span> 
+<span class="n">FROM</span> <span class="n">information_schema</span><span class="o">.</span><span class="n">tables</span> 
+<span class="n">GROUP</span> <span class="n">BY</span> <span class="n">table_schema</span><span class="p">;</span> 
+</pre></div>
+
+
+<p>or (requires mysql v5.7+)</p>
+<div class="highlight"><pre><span></span>select table_schema, table_name, rows_fetched, rows_inserted, rows_updated, rows_deleted 
+    from sys.schema_table_statistics where table_schema=&#39;dbname&#39;;
+</pre></div>
+
+
+<p>or</p>
+<p><code>SHOW TABLE STATUS dbname;</code></p>
+<h4>Logging</h4>
 <ul>
-<li><a href="https://www.bram.us/2016/10/25/plotly-academy-state-management-with-redux/">https://www.bram.us/2016/10/25/plotly-academy-state-management-with-redux/</a></li>
+<li>start logging: <code>tee ./mylofile.log</code></li>
+<li>stop logging: <code>notee</code></li>
 </ul>
-<p><br></p>
-<h4>Ansible</h4>
+<h4>Where is the table data stored?</h4>
 <ul>
-<li><a href="https://blog.jetbrains.com/pycharm/2017/12/developing-in-a-vm-with-vagrant-and-ansible/">Developing a VM-with Vagrant and Ansible</a></li>
+<li>it is specified in <code>my.cnf</code></li>
+<li>otherwise, the default location is <code>/var/lib/mysql/</code></li>
 </ul>
-<p><br></p>
-<h4>SAP Conversational AI</h4>
+<h4>Partition</h4>
+<div class="highlight"><pre><span></span><span class="n">alter</span> <span class="n">table</span> <span class="n">ENTITY</span> <span class="n">partition</span> <span class="n">by</span> <span class="nb">range</span><span class="p">(</span><span class="n">ENTITY_ID</span><span class="p">)(</span>
+<span class="n">partition</span> <span class="n">p0</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="p">(</span><span class="mi">250000000</span><span class="p">),</span>
+<span class="n">partition</span> <span class="n">p1</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="p">(</span><span class="mi">500000000</span><span class="p">),</span>
+<span class="n">partition</span> <span class="n">p2</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="p">(</span><span class="mi">750000000</span><span class="p">),</span>
+<span class="n">partition</span> <span class="n">p3</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="n">maxvalue</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<h4>Set Primary Key</h4>
+<p><code>ALTER TABLE table_name ADD PRIMARY KEY (column_1, column_2);</code></p>
+<h4>Drop foreign key</h4>
+<div class="highlight"><pre><span></span><span class="n">ALTER</span> <span class="n">TABLE</span> <span class="n">ENTITY</span> <span class="n">DROP</span> <span class="n">FOREIGN</span> <span class="n">KEY</span> <span class="s1">&#39;ENTITY_ibfk_1&#39;</span><span class="p">;</span>
+<span class="n">Note</span><span class="p">:</span> <span class="n">would</span> <span class="n">this</span> <span class="n">be</span> <span class="n">better</span><span class="err">??</span>
+    <span class="n">ALTER</span> <span class="n">TABLE</span> <span class="n">foo</span> <span class="n">DISABLE</span> <span class="n">KEYS</span><span class="p">;</span>
+    <span class="n">do</span> <span class="n">stuff</span>
+    <span class="n">ALTER</span> <span class="n">TABLE</span> <span class="n">ENABLE</span> <span class="n">KEYS</span><span class="p">;</span>
+</pre></div>
+
+
+<h4>Increase buffer size for large import</h4>
+<div class="highlight"><pre><span></span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">nano</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">my</span><span class="p">.</span><span class="n">cnf</span><span class="w"></span>
+<span class="o">[</span><span class="n">mysqld</span><span class="o">]</span><span class="w"> </span><span class="n">innodb_buffer_pool_size</span><span class="o">=</span><span class="mi">228</span><span class="n">G</span><span class="w"></span>
+</pre></div>
+
+
+<h4>Error with MySQL: "The total number of locks exceeds the lock table size"</h4>
 <ul>
-<li>markdown URL syntax: <code>[Click Here]({{memory.url}})</code> </li>
+<li><a href="https://dba.stackexchange.com/questions/27328/how-large-should-be-mysql-innodb-buffer-pool-size">see here</a></li>
 </ul>
-<p><br></p>
-<h4>Misc.</h4>
+<h4>Misc. Mysql</h4>
 <ul>
-<li><a href="https://wireframe.cc/">https://wireframe.cc/</a></li>
-<li><a href="https://www.creative-tim.com/product/get-shit-done-kit">https://www.creative-tim.com/product/get-shit-done-kit</a></li>
-<li><a href="https://uxplanet.org/how-the-bootstrap-4-grid-works-a1b04703a3b7">https://uxplanet.org/how-the-bootstrap-4-grid-works-a1b04703a3b7</a></li>
-<li><a href="https://hackerthemes.com/bootstrap-cheatsheet/#col-sm-1">https://hackerthemes.com/bootstrap-cheatsheet/#col-sm-1</a></li>
+<li><code>$ mysql -u root -p</code></li>
+<li><code>$ sudo service mysql restart</code></li>
+<li><code>SHOW ENGINE INNODB STATUS;</code></li>
+<li><code>show table status like 'ENTITY'\G;</code> # number of rows in table</li>
+<li><code>SELECT ENTITY_ID, COUNT(*) c FROM ENTITY_GENE GROUP BY ENTITY_ID HAVING c &gt; 1;</code> # find duplicates</li>
+</ul>
+<h4>Install MySQL</h4>
+<ul>
+<li><a href="https://askubuntu.com/questions/750498/mysql-5-5-update-to-mysql-5-7">see here</a>
+and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-14-04">here</a></li>
+</ul>
+<h4>Resources</h4>
+<ul>
+<li><a href="https://towardsdatascience.com/ten-sql-concepts-you-should-know-for-data-science-interviews-7acf3e428185">Ten SQL Concepts </a></li>
+<li><a href="https://github.com/jamescalam/pysqlplus">pysqlplus</a></li>
+<li><a href="https://stackoverflow.com/questions/5136013/how-to-change-column-datatype-in-sql-database-without-losing-data/5136055">How to change column datatype in SQL</a></li>
+<li><a href="http://www.sqlfiddle.com/#!2/599d0/1">SQL Fiddle</a></li>
+<li><a href="https://www.a2hosting.com/kb/developer-corner/mysql/managing-mysql-databases-and-users-from-the-command-line">How to manage MySQL databases and users from the command line</a></li>
+<li><a href="https://www.linode.com/docs/databases/mysql/install-and-configure-mysql-workbench-on-ubuntu/">Install and Configure MySQL Workbench on Ubuntu 16.04</a></li>
+<li><a href="https://www.youtube.com/watch?v=iUjoPB27-iA">MySQL Partitioning</a></li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./web_development.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/web-development.html" rel="tag">Web Development</a>
+                    <a href="./sql.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
                 </div>
             </article>
 
@@ -227,7 +232,7 @@ sudo apt-get install -y nodejs
 
                     <a href="./page/10" class="prev_page">&larr;&nbsp;Previous</a>
                     <a href="./page/12" class="next_page">Next&nbsp;&rarr;</a>
-                    <span>Page 11 of 19</span>
+                    <span>Page 11 of 21</span>
                 </div>
 
             <div class="clear"></div>

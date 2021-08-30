@@ -35,23 +35,34 @@
                 <p><br> </p>
 <p><code>jupyter lab --ip=0.0.0.0</code></p>
 <p><code>jupyter notebook --ip=0.0.0.0</code></p>
-<h4>Useful Links</h4>
-<ul>
-<li><a href="https://towardsdatascience.com/integrate-jupyterlab-with-google-drive-98d13e340c63">Integrate JupyterLab with Google Drive</a></li>
-<li><a href="https://towardsdatascience.com/how-to-setup-your-jupyterlab-project-environment-74909dade29b">How to Setup Your JupyterLab Project Environment</a>
-*<a href="https://towardsdatascience.com/interactive-controls-for-jupyter-notebooks-f5c94829aee6">Interactive Controls in Jupyter Notebooks</a></li>
-<li><a href="https://www.youtube.com/watch?v=a9P7qv4P5LE">Changing JupyterLab to suit your needs</a></li>
-<li><a href="http://localhost:8888/tree#nbextensions_configurator  ">http://localhost:8888/tree#nbextensions_configurator  </a></li>
-<li><a href="https://hackersandslackers.com/running-jupyter-notebooks-on-a-ubuntu-server/">Running Jupyter Notebooks on a Ubuntu Server</a></li>
-<li><a href="https://stackoverflow.com/questions/38545198/access-jupyter-notebook-running-on-vm">access jupyter notebook running on vm</a></li>
-<li><a href="https://stackoverflow.com/questions/47597515/cant-access-jupyter-notebook-in-local-vagrant-virtualbox-via-local-browser">Can't access jupyter notebook in local vagrant virtualbox via local browser</a></li>
-</ul>
+<h4>Import notebook into another</h4>
+<div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">jupyter</span><span class="o">-</span><span class="n">helpers</span>
+<span class="kn">from</span> <span class="nn">create_gtfs_feed</span> <span class="kn">import</span> <span class="n">Feed</span> <span class="n">where</span> <span class="n">create_gtfs_feed</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">notebook</span>
+</pre></div>
+
+
+<h4>Share variables / objects across notebooks</h4>
+<p>%store G &gt;&gt; to store
+%store -r G &gt;&gt; to load</p>
+<h4>Dill (similar to Pickle)</h4>
+<div class="highlight"><pre><span></span># Dump graph
+with open(&quot;multigraph.p&quot;, &#39;wb&#39;) as f:
+    dill.dump(G, f)
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="c1"># Load graph</span>
+<span class="n">with</span> <span class="n">open</span><span class="p">(</span><span class="s2">&quot;multigraph.p&quot;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  <span class="c1"># notice the r instead of w</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">dill</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+
+
 <h4>Installing IPywidgets</h4>
 <ul>
 <li><strong>make sure notebook is trusted</strong></li>
 </ul>
-<div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">-c</span> <span class="n">conda-forge</span> <span class="n">nodejs</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">jupyterlab</span>
+<div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">-c</span> <span class="n">conda-forge</span> <span class="n">nodejs</span> <span class="n">-y</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">-c</span> <span class="n">conda-forge</span> <span class="n">jupyterlab</span>
 <span class="n">jupyter</span> <span class="n">labextension</span> <span class="n">install</span> <span class="nv">@jupyter</span><span class="n">-widgets</span><span class="p">/</span><span class="n">jupyterlab-manager</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">jupyter_contrib_nbextensions</span>
 <span class="n">jupyter</span> <span class="n">contrib</span> <span class="n">nbextension</span> <span class="n">install</span> <span class="p">-</span><span class="n">-sys-prefix</span>
@@ -78,6 +89,19 @@
 <span class="n">case</span> <span class="n">insensitive</span> <span class="n">regexp</span> <span class="ow">in</span> <span class="nb">str</span><span class="o">.</span><span class="n">contains</span><span class="p">()</span>
 <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 </pre></div>
+
+
+<h4>Useful Links</h4>
+<ul>
+<li><a href="https://towardsdatascience.com/integrate-jupyterlab-with-google-drive-98d13e340c63">Integrate JupyterLab with Google Drive</a></li>
+<li><a href="https://towardsdatascience.com/how-to-setup-your-jupyterlab-project-environment-74909dade29b">How to Setup Your JupyterLab Project Environment</a></li>
+<li><a href="https://towardsdatascience.com/interactive-controls-for-jupyter-notebooks-f5c94829aee6">Interactive Controls in Jupyter Notebooks</a></li>
+<li><a href="https://www.youtube.com/watch?v=a9P7qv4P5LE">Changing JupyterLab to suit your needs</a></li>
+<li><a href="http://localhost:8888/tree#nbextensions_configurator">localhost:8888/tree#nbextensions_configurator</a></li>
+<li><a href="https://hackersandslackers.com/running-jupyter-notebooks-on-a-ubuntu-server/">Running Jupyter Notebooks on a Ubuntu Server</a></li>
+<li><a href="https://stackoverflow.com/questions/38545198/access-jupyter-notebook-running-on-vm">access jupyter notebook running on vm</a></li>
+<li><a href="https://stackoverflow.com/questions/47597515/cant-access-jupyter-notebook-in-local-vagrant-virtualbox-via-local-browser">Can't access jupyter notebook in local vagrant virtualbox via local browser</a></li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">

@@ -28,6 +28,7 @@ pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', None)
 pd.set_option('display.max_colwidth', None)
+pd.set_printoptions(precision=2)
 ```
 
 ### IO
@@ -43,8 +44,6 @@ df = pd.read_csv(fp,
                  dayfirst=True,
                  #infer_datetime_format=True,
                  parse_dates = date_cols)
-df = df.replace(r'\s+', np.nan, regex=True).replace('', np.nan) 
-df.shape
 ```
 
 #### Read XLS
@@ -106,6 +105,14 @@ for text_file in zip_file.infolist():
     display(HTML(tmp.head().to_html()))
 ```
 
+#### [Prevent pandas from interpreting 'NA' as NaN in a string](https://stackoverflow.com/questions/33952142/prevent-pandas-from-interpreting-na-as-nan-in-a-string)
+
+```
+df = pd.read_csv(  'parsed_json.csv'
+                 , dtype=str
+                 , na_filter = False)
+```
+                 
 #### Write
 
 `df.to_csv("../local-data/output/shuba_data_subset.csv", index=True)`
@@ -190,8 +197,15 @@ data['resolution_time_hrs']= (data['resolution_time_hrs']
 
 #### Select by Year
 ```
-# data = data[data.opened_at.dt.year >= 2019]
+data = data[data.opened_at.dt.year >= 2019]
 ```
+
+#### Replace 
+
+* `df = df.replace(r'\s+', np.nan, regex=True).replace('', np.nan)`
+* `df = df.replace(to_replace=np.nan, value="NULL")`
+* `d2 = df.replace(to_replace="", value="unknown").replace(to_replace=np.nan, value="unknown")`
+
 
 ### Inspect
 
@@ -205,14 +219,41 @@ df[df.duplicated(keep=False)]
 
 ```
 # Select all duplicate rows based on one column
-df[df.duplicated(['Name'])]
+df[df.duplicated(['col_name'])]
 ```
 
-`df[df.duplicated(['IncidentNumber'], keep=False)].sort_values(by='IncidentNumber')`
+`df[df.duplicated(['col_name'], keep=False)].sort_values(by='col_name')`
+
+
 
 #### Duplicates in a column
 
-`df.duplicated(subset='col_name', keep='first').count()`
+```
+ids = df["col_name"]
+df[ids.isin(ids[ids.duplicated()])].sort_values(by="col_name")
+```
+
+#### Count missing values
+
+```python
+missing = df.copy().isna().sum()
+missing = (missing.reset_index(name='cnt')
+           .sort_values(by='cnt', ascending=False))
+missing[missing['cnt']>0]
+```
+
+or
+
+```python
+num_avg_rel_isnan = df['avg_relevance'].notnull().sum()`
+```
+
+### Expand Column
+
+`df[['TRID','SRC','RID', 'TESTTIME']] = df.ID.str.split('_', expand=True)`
+
+
+### Create new columns
 
 #### Create columns from row with same ID
 
@@ -232,30 +273,12 @@ tmp.columns = tmp.columns.map('_'.join)
 tmp	
 ```
 
-#### Count missing values
-
-```python
-missing = df.copy().isna().sum()
-missing = (missing.reset_index(name='cnt')
-           .sort_values(by='cnt', ascending=False))
-missing[missing['cnt']>0]
-```
-
-or
-
-```python
-num_avg_rel_isnan = df['avg_relevance'].notnull().sum()`
-```
 
 ### Drop 
 
-#### Drop rows if index is NA
-
-`df = df[df.index.notna()]`
-
-#### Drop rows if value in a specific column is NA
-
-`df = df[df.col_name.notna()]`
+* `df.drop(df.columns[0], axis=1, inplace=True)` # drop column by index
+* `df = df[df.index.notna()]` # Drop rows if index is NA
+* `df = df[df.col_name.notna()]` # Drop rows if value in a specific column is NA
 
 
 ### Consolidate Column Levels
@@ -418,8 +441,8 @@ df.head()
 ```
 ### Melt & Pivot
 
-`gpd.pivot(index='Date', columns='Verktitel', values='Belopp')`
-`tmp = tmp.melt('Date', var_name='cols',  value_name='vals')`
+* `gpd.pivot(index='Date', columns='Verktitel', values='Belopp')`
+* `tmp = tmp.melt('Date', var_name='cols',  value_name='vals')`
 
 #### Compute ratio from a binary split for each UID
 
@@ -571,20 +594,38 @@ cols_to_drop = std[std==0].index
 data = data.drop(cols_to_drop, axis=1)
 ```
 
-### Misc.
 
-#### Create sample dataset
-```
-tmp = df.sample(10000)
-tmp.to_csv("../local-data/output/bat_sample2_original_headers.csv", index=False)
-del tmp
-```
+### np.where
 
 #### np.where()
 
 ```python
 df['is_fujitsu_owned'] = np.where(df['resolvergroup1']=='Fujitsu', True, False)
 df['is_fujitsu_owned'].value_counts(normalize=True)
+```
+
+# np.where with multipe conditions / choices
+```
+col         = 'consumption_energy'
+conditions  = [ df2[col] >= 400, (df2[col] < 400) & (df2[col]> 200), df2[col] <= 200 ]
+choices     = [ "high", 'medium', 'low' ]
+df2["energy_class"] = np.select(conditions, choices, default=np.nan)
+```
+
+### Misc.
+
+#### Add Delta column
+```
+MENTZ = pd.to_datetime(df['DUE_MENTZ'].astype(str))
+DB = pd.to_datetime(df['DUE_DB'].astype(str))
+df['DELTA(MINS)'] = MENTZ.sub(DB).dt.total_seconds().div(60).round()
+```
+
+#### Create sample dataset
+```
+tmp = df.sample(10000)
+tmp.to_csv("../local-data/output/bat_sample2_original_headers.csv", index=False)
+del tmp
 ```
 
 #### Get quick proportions

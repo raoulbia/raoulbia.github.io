@@ -13,6 +13,7 @@ Summary: Linux
 * `echo $XDG_CURRENT_DESKTOP`
 * `sudo find ~/ -name rdflib`
 * `sudo find / -name "*.cls"`
+* `dpkg -L jenkins` will help you find what files does a package install
 * ```sudo kill -9 `sudo lsof -t -i:8888````
 * make script executable: `sudo chmod +x script.sh`
 
@@ -105,6 +106,7 @@ Add this to `.bashrc`:
 
 #### Misc.
 
+* change nvidia gamma settings: `udo nano ~/.nvidia-settings-rc`
 * `df -h` check disk space
 * [kill process](https://itsfoss.com/how-to-find-the-process-id-of-a-program-and-kill-it-quick-tip/)
 * `rm file` to remove file

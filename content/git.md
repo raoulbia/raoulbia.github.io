@@ -28,6 +28,14 @@ git add .gitignore
 git commit -m 'remove dir from remote'
 git push origin master
 ```
+#### Git Tagging
+
+```
+git add GTFSR.py
+git commit -m "GTFSRT script initial commit"
+git tag -a GTFSRT_v1.0 -m "original GTFSRT script"
+git push origin master tag GTFSRT_v1.0
+```
 
 #### Git commands
 

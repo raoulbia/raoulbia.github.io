@@ -24,255 +24,228 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 01, 2017</h4>
+        <div id="content">            <h4 class="date">Dec 03, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./ssh_keys.html" rel="bookmark" title="Permanent Link to &quot;SSH Keys&quot;">SSH Keys</a>
+                    <a href="./Vagrant VM.html" rel="bookmark" title="Permanent Link to &quot;Vagrant VM&quot;">Vagrant VM</a>
                 </h2>
 
-                <h4>Checking for existing keys</h4>
-<div class="highlight"><pre><span></span>ls -al ~/.ssh
+                <h4>Useful Links</h4>
+<ul>
+<li><a href="https://www.gis-blog.com/osgeo-live-the-best-open-source-gis-ready-to-use-package/">OSGeo-Live</a></li>
+<li><a href="https://releases.ubuntu.com/20.04/">Ubuntu 20.04 ISO</a></li>
+<li><a href="https://blog.engineyard.com/building-a-vagrant-box">Building a Vagrant Box from Start to Finish</a></li>
+<li><a href="https://www.abhishek-tiwari.com/creating-a-new-vagrant-base-box-from-an-existing-vm/">Creating a new Vagrant base box from an existing VM</a></li>
+</ul>
+<h4>Pre-requisites</h4>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-16-04">Git</a></li>
+<li><a href="http://docs.vagrantup.com/v2/installation/index.html">Vagrant</a> </li>
+<li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>.</li>
+</ul>
+<h4>Shared Folders</h4>
+<p>Assuming you want to share the directory in which <code>Vagrantfile</code> is located and that directory is named <code>vmtest</code>. </p>
+<div class="highlight"><pre><span></span>sudo usermod -a -G vboxsf user
+mkdir ~/shared
+sudo mount -t vboxsf vmtest_nta ~/shared
 </pre></div>
 
 
-<h4>Generating a new key</h4>
-<div class="highlight"><pre><span></span><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="n">rsa</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="mi">4096</span><span class="w"> </span><span class="o">-</span><span class="n">C</span><span class="w"> </span><span class="ss">&quot;your_email@example.com&quot;</span><span class="w"></span>
+<ul>
+<li>Add to <code>~/.profile</code>: <code>sudo mount -t vboxsf vmtest /home/vagrant/vmtest/</code></li>
+<li>Set directory permissions: <code>chmod 777 -R vmtest/</code></li>
+</ul>
+<h4>Increase Vagrant Box Size</h4>
+<p>Note: it may be easier to just grab a box that has a large size. See above.</p>
+<ol>
+<li>
+<p>Clone &amp; Resize</p>
+<p>on Linux</p>
+<div class="highlight"><pre><span></span>VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vmdk&quot; &quot;/home/baba/VirtualBox VMs/my_box/box.vdi&quot; --format vdi
+VBoxManage modifyhd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; --resize 131072
+VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/home/baba/VirtualBox VMs/my_box/box-resized.vmdk&quot; --format vmdk
 </pre></div>
 
 
-<p>or</p>
-<div class="highlight"><pre><span></span>ssh-keygen -t rsa -C &quot;some name&quot; -b 4096
+<p>on Window: same steps as below but first run this:</p>
+<div class="highlight"><pre><span></span>set PATH=%PATH%;&quot;C:\Program Files\Oracle\VirtualBox&quot;
 </pre></div>
 
 
-<h4>Adding a key</h4>
-<div class="highlight"><pre><span></span>eval $(ssh-agent -s)
-ssh-add ~/.ssh/id_rsa
+</li>
+<li>
+<p>Allocate space</p>
+<p>The newly created disk space is unallocated at this stage. Follow these steps next:</p>
+<ul>
+<li>
+<p><a href="http://www.gitshah.com/2013/05/how-to-fix-out-of-space-problem-for.html?m=1">getting Gparted</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=cDgUwWkvuIY">changing partitions using Gparted (Video)</a></p>
+</li>
+</ul>
+</li>
+</ol>
+<p>see also <a href="https://gist.github.com/christopher-hopper/9755310">Resize a Hard Disk for a Virtual Machine</a></p>
+<h4>Create Global Variable for use in Python Scripts</h4>
+<p>In <code>~/.profile</code>add</p>
+<div class="highlight"><pre><span></span><span class="k">export</span> <span class="n">TOMOE_DATA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">ownCloud</span><span class="o">/</span><span class="n">tomoe</span><span class="o">-</span><span class="n">data</span>
+<span class="k">export</span> <span class="n">KG_OUTPUT_DIR</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">vmtest</span><span class="o">/</span><span class="n">tomoe</span><span class="o">/</span><span class="n">wp</span><span class="o">-</span><span class="n">tomoe</span><span class="o">-</span><span class="n">playground</span><span class="o">/</span><span class="n">local</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">kg</span>
 </pre></div>
+
+
+<h4>Useful Vagrant commands</h4>
+<ul>
+<li><code>config.vm.box = "file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box"</code></li>
+<li><code>VBoxClient --clipboard</code></li>
+<li><code>vagrant global-status</code></li>
+<li><code>set PATH=%PATH%;"C:\Program Files\Oracle\VirtualBox"</code></li>
+<li><code>vboxmanage list vms</code></li>
+<li><code>vagrant init file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box</code></li>
+</ul>
+<h4>Misc. Links</h4>
+<ul>
+<li><a href="https://github.com/hashicorp/vagrant/issues/5186">Warning: Authentication failure. Retrying... " after packaging box</a></li>
+<li><a href="https://jeremykendall.net/2013/08/09/vagrant-synced-folders-permissions/">vagrant-synced-folders-permissions</a></li>
+<li><a href="https://stackoverflow.com/questions/35807568/vagrant-synced-folder-permissions">vagrant-synced-folders-permissions SO</a></li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./ssh_keys.html">posted at 00:00</a>
+                    <a href="./Vagrant VM.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
                 </div>
-            </article>            <h4 class="date">Nov 25, 2017</h4>
+            </article>            <h4 class="date">Dec 02, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./software.html" rel="bookmark" title="Permanent Link to &quot;Software&quot;">Software</a>
+                    <a href="./Linux.html" rel="bookmark" title="Permanent Link to &quot;Linux&quot;">Linux</a>
                 </h2>
 
-                <h3>PostgreSQL</h3>
-<p><a href="https://www.postgresql.org/download/linux/ubuntu/">Download PostgreSQL</a></p>
-<p><a href="https://linuxhint.com/best_gui_clients_postgresql_ubuntu/#:~:text=pgAdmin,Windows%20and%20Mac%20OS%20X.">Install pgAdmin</a></p>
-<h4>Running multiple versions of PostgreSQL</h4>
-<p>Check the config files to see which version is on which port:</p>
-<p><code>grep -H '^port' /etc/postgresql/*/main/postgresql.conf</code></p>
-<p>sample output:</p>
-<div class="highlight"><pre><span></span>/etc/postgresql/10/main/postgresql.conf:port = 5432 
-/etc/postgresql/13/main/postgresql.conf:port = 5433 
+                <h4>Useful Commands</h4>
+<ul>
+<li><code>sudo tar xzvf package_file.tar.gz</code></li>
+<li><code>sudo dpkg -i package_file.deb</code></li>
+<li><code>cat /etc/*release</code></li>
+<li><code>echo $XDG_CURRENT_DESKTOP</code></li>
+<li><code>sudo find ~/ -name rdflib</code></li>
+<li><code>sudo find / -name "*.cls"</code></li>
+<li><code>dpkg -L jenkins</code> will help you find what files does a package install</li>
+<li><code>``sudo kill -9</code>sudo lsof -t -i:8888````</li>
+<li>make script executable: <code>sudo chmod +x script.sh</code></li>
+</ul>
+<h4>Handy Tools</h4>
+<ul>
+<li><a href="https://fishshell.com/">Fish</a>: <code>sudo apt-get install fish</code></li>
+<li><a href="https://linuxize.com/post/getting-started-with-tmux/">Tmux</a>: <code>sudo apt-get install tmux</code></li>
+</ul>
+<h4>Pip install problems</h4>
+<div class="highlight"><pre><span></span>sudo apt-get install aptitude
+sudo aptitude install ...
 </pre></div>
 
 
-<h4>Restart Postgres</h4>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">postgresql</span> <span class="n">reload</span>
-<span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">postgresql</span> <span class="n">start</span>
+<h4>tmux Sessions</h4>
+<ul>
+<li><code>tmux new -s session_name</code> new session</li>
+<li><code>tmux a -t session_name</code> attach</li>
+<li><code>ctrl + b</code> then <code>d</code> detach</li>
+<li><code>ctrl + b</code> then 'x' terminate session</li>
+<li><code>ctrl + b</code> then <code>(</code> move between sessions</li>
+<li><code>ctrl + b</code> the 'c` to make a new tab in an existing session</li>
+<li><code>ctrl + b</code> then the number of the tab e.g. <code>0</code> or <code>1</code> to move between tab</li>
+<li><code>htop</code> + Enter to see running processes (create new tab inside session)</li>
+</ul>
+<h4>File Handling</h4>
+<ul>
+<li><code>tar xzvf archive_name.tar.gz</code> to uncompress tar.gz file</li>
+<li><code>tar xjvf archive_name.tar.bz2</code> to uncompress tar.bz2 file</li>
+<li><code>less file.csv</code> to open file</li>
+<li><code>q + enter</code> to close and exit</li>
+<li><code>zcat file.tsv.gz | more</code> to view fcompressed gz file</li>
+<li><code>zcat file.tsv.gz | grep "pattern match"</code> to find string</li>
+<li><code>cat -vet file</code> to see hidden chars</li>
+<li><code>uniq -d file.txt</code> to get duplicate lines</li>
+<li><code>cat gene2refseq | awk '{if ($1==6239) print $0}' | head</code></li>
+</ul>
+<h4>Packages</h4>
+<ul>
+<li>To see packages and their size <code>conda clean --all</code></li>
+<li>To clean up <code>du -sh */</code></li>
+<li>
+<p>To remove package</p>
+<div class="highlight"><pre><span></span>sudo apt-get remove r-base
+sudo apt-get purge texlive*
 </pre></div>
 
 
-<h4>Hostname</h4>
-<p>PostgreSQL, what is the hostname address of my default database?</p>
-<p>If you're connecting from the same machine, use localhost</p>
-<h4>Connection String</h4>
-<p>You can provide your username and password directly in the connection URI provided to psql:</p>
-<p><code>psql postgresql://username:password@localhost:5432/mydb</code></p>
-<h4>Useful Commands</h4>
-<ul>
-<li>To establish a connection : <code>sudo su - postgres</code></li>
-<li>To open a postgress prompt using the command: <code>psql</code></li>
-<li>To see details of the connection: <code>\conninfo</code></li>
-<li>To view the databases in our PostgreSQL instance: <code>\list</code></li>
-<li><code>CREATE DATABASE dbname;</code></li>
-<li><code>DROP DATABASE dbname;</code></li>
-</ul>
-<h3>R and RStudio</h3>
-<h4>Uninstall previous R installation</h4>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">R</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">save</span>
-<span class="n">pkgList</span> <span class="o">&lt;-</span> <span class="nf">installed.packages</span><span class="p">(</span><span class="n">priority</span><span class="o">=</span><span class="s">&#39;NA&#39;</span><span class="p">)</span>
-<span class="nf">remove.packages</span><span class="p">(</span><span class="n">pkgList</span><span class="p">)</span>
-<span class="nf">q</span><span class="p">()</span>
-<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">remove</span> <span class="o">--</span><span class="n">purge</span> <span class="n">r</span><span class="o">-</span><span class="n">cran</span><span class="o">*</span> <span class="n">r</span><span class="o">-</span><span class="n">base</span><span class="o">*</span>
+</li>
+<li>
+<p>To reinstall package</p>
+<div class="highlight"><pre><span></span>sudo apt-get install --reinstall package_name
 </pre></div>
 
 
-<h4>Install on Ubuntu 20.04 (Focal Fossa)</h4>
-<p>Save and run the script below (<a href="https://gist.github.com/mGalarnyk/41c887e921e712baf86fecc507b3afc7">source</a>).</p>
-<div class="highlight"><pre><span></span><span class="c1"># Install R + RStudio on Ubuntu 20 Focal</span>
-<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">key</span> <span class="n">adv</span> <span class="o">--</span><span class="n">keyserver</span> <span class="n">keyserver</span><span class="o">.</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">com</span> <span class="o">--</span><span class="n">recv</span><span class="o">-</span><span class="n">keys</span> <span class="n">E298A3A825C0D65DF</span><span class="o">&gt;</span>
-<span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="s1">&#39;deb https://cloud.r-project.org/bin/linux/ubuntu focal&gt;</span>
-<span class="n">sudo</span> <span class="n">apt</span> <span class="n">update</span>
-<span class="n">sudo</span> <span class="n">apt</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">r</span><span class="o">-</span><span class="n">base</span> <span class="n">r</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">dev</span> <span class="n">gdebi</span><span class="o">-</span><span class="n">core</span>
-
-<span class="c1"># next line required for kableExtra</span>
-<span class="n">sudo</span> <span class="n">apt</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">libcurl4</span><span class="o">-</span><span class="n">openssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">openssl</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">openssh</span><span class="o">-</span><span class="n">client</span> <span class="n">libxml2</span><span class="o">-</span><span class="n">dev</span> 
-
-<span class="c1"># next line required for RcppArmadillo</span>
-<span class="n">sudo</span> <span class="n">apt</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">liblapack</span><span class="o">-</span><span class="n">dev</span> 
-
-<span class="c1"># install Latex for RMarkdown</span>
-<span class="n">sudo</span> <span class="n">apt</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">texlive</span> <span class="n">texstudio</span> <span class="n">texlive</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">recommended</span> <span class="n">texlive</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">extra</span>
-
-<span class="c1"># Download and Install RStudio</span>
-<span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download1</span><span class="o">.</span><span class="n">rstudio</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">desktop</span><span class="o">/</span><span class="n">bionic</span><span class="o">/</span><span class="n">amd64</span><span class="o">/</span><span class="n">rstudio</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">1103</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span>
-<span class="n">sudo</span> <span class="n">gdebi</span> <span class="n">rstudio</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">1103</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span>
-<span class="n">rm</span> <span class="n">rstudio</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">1103</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span>
-</pre></div>
-
-
-<h4>List of Useful Packages</h4>
-<p><code>install.packages((c("tidyverse", "ggplot2", "ggthemes", "kableExtra", "rbenchmark", "inline", "data.table", "RcppArmadillo"))</code></p>
-<h3>Docker</h3>
-<ul>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04">Install Docker on Ubuntu-16-04</a></li>
-<li><a href="https://www.udemy.com/docker-mastery/">Docker Mastery: The Complete Toolset From a Docker Captain</a>:</li>
+</li>
+<li>
+<p><code>dpkg -l | grep miktex</code> to see what's installed</p>
+</li>
+<li><code>dpkg -L package-name</code> to list files installed by some package</li>
+<li><code>dpkg -l | grep package_name</code> to see if package is installed</li>
 </ul>
-<p>Docker</p>
-<ul>
-<li>get relevant <code>curl</code> line from <a href="https://get.docker.com/">here</a>.
-    Note: this will figure out which version to get for your particular Linux OS</li>
-<li>run shell script (next line in the above link)</li>
-<li><code>sudo usermod -aG docker vagrant</code></li>
-<li><code>docker version</code> to test</li>
-</ul>
-<p>Docker Machine</p>
-<ul>
-<li>get the lines from <a href="https://github.com/docker/machine/releases">https://github.com/docker/machine/releases</a></li>
-</ul>
-<p>Docker Compose</p>
-<ul>
-<li>get lines for latest release <a href="https://github.com/docker/compose/releases">here</a></li>
-<li><code>sudo -i</code> then paste the lines</li>
-<li><code>docker-compse version</code> to test</li>
-</ul>
-<p><br></p>
-<h3>Pycharm</h3>
-<div class="highlight"><pre><span></span><span class="o">$</span> <span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">jetbrains</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">pycharm</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="mf">2018.3</span><span class="o">.</span><span class="mf">4.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
-<span class="o">$</span> <span class="n">tar</span> <span class="n">xvzf</span> <span class="n">pycharm</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="mf">2018.3</span><span class="o">.</span><span class="mf">4.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
-<span class="o">$</span> <span class="n">cd</span> <span class="n">pycharm</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="mf">2018.3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">bin</span>
-<span class="o">$</span> <span class="o">.</span> <span class="n">pycharm</span><span class="o">.</span><span class="n">sh</span>
-</pre></div>
-
-
-<ul>
-<li><a href="https://stackoverflow.com/questions/42708389/how-to-set-environment-variables-in-pycharm">about setting environment variable e.g. DATA_HOME</a></li>
-</ul>
-<p><br></p>
-<h3>Jupyter (via Docker)</h3>
-<ul>
-<li><a href="https://towardsdatascience.com/how-to-setup-your-jupyterlab-project-environment-74909dade29b">How to Setup Your JupyterLab Project Environment</a></li>
-</ul>
-<p><br></p>
-<h3>RoboMongo</h3>
-<ul>
-<li><a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/">Install MongoDB Community Edition on Ubuntu</a></li>
-<li><a href="https://robomongo.org/download">Robo 3T: the hobbyist GUI</a></li>
-<li><a href="https://gist.github.com/abdallahokasha/37911a64ad289487387e2d1a144604ae">Install Robo3t On Ubuntu 18.04</a></li>
-<li><code>mongoimport --db naptan --collection naptan --file test.json --jsonArray</code></li>
-</ul>
-<h3>NodeJS</h3>
-<ul>
-<li>npm install xml-stream, xml2js</li>
-<li>node myfile.js</li>
-</ul>
-<h4>NodeJS XML to JSON</h4>
-<div class="highlight"><pre><span></span><span class="k">var</span> <span class="n">fs</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
-<span class="k">var</span> <span class="n">xml2js</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;xml2js&#39;</span><span class="p">);</span>
-<span class="k">var</span> <span class="n">util</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;util&#39;</span><span class="p">);</span>
-
-<span class="k">var</span> <span class="n">parser</span>  <span class="o">=</span> <span class="n">new</span> <span class="n">xml2js</span><span class="o">.</span><span class="n">Parser</span><span class="p">();</span>
-
-<span class="n">fs</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s1">&#39;NaPTAN_2018_11_08.xml&#39;</span><span class="p">,</span> <span class="n">function</span><span class="p">(</span><span class="n">err</span><span class="p">,</span><span class="n">data</span><span class="p">){</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">parseString</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">function</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">result</span><span class="p">){</span>
-
-        <span class="o">//</span> <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="bp">false</span><span class="p">,</span> <span class="nb nb-Type">null</span><span class="p">,</span> <span class="bp">true</span><span class="p">));</span>
-
-        <span class="o">//</span> <span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">toString</span><span class="p">(),</span> <span class="n">function</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span>
-        <span class="o">//</span>     <span class="k">if</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span>
-        <span class="o">//</span>         <span class="k">return</span> <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">err</span><span class="p">);</span>
-        <span class="o">//</span>     <span class="p">}</span>
-        <span class="o">//</span>     <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;The file was saved!&quot;</span><span class="p">);</span>
-        <span class="o">//</span> <span class="p">});</span>
-
-        <span class="o">//</span> <span class="nb">convert</span> <span class="n">it</span> <span class="n">to</span> <span class="n">a</span> <span class="n">JSON</span> <span class="n">string</span>
-        <span class="k">const</span> <span class="n">json</span> <span class="o">=</span> <span class="n">JSON</span><span class="o">.</span><span class="n">stringify</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb nb-Type">null</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
-
-        <span class="o">//</span> <span class="n">save</span> <span class="n">JSON</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">file</span>
-        <span class="n">fs</span><span class="o">.</span><span class="n">writeFileSync</span><span class="p">(</span><span class="s1">&#39;test.json&#39;</span><span class="p">,</span> <span class="n">json</span><span class="p">);</span>
-
-    <span class="p">});</span>
-<span class="p">});</span>
-</pre></div>
-
-
-<h4></h4>
-<h3>GloVe for Python</h3>
-<ul>
-<li><code>-e git+git@github.com:maciejkula/glove-python.git#egg=glove</code></li>
-<li>dependencies</li>
-<li><code>pip install Cython</code></li>
-<li><code>sudo apt-get install python3-dev</code></li>
-</ul>
-<p><br></p>
-<h4>Jena</h4>
-<div class="highlight"><pre><span></span>wget http://mirrors.whoishostingthis.com/apache/jena/binaries/apache-jena-3.1.1.tar.gz
-tar -zxvf
+<h4>Show git branch name in Terminal</h4>
+<p>Add this to <code>.bashrc</code>:</p>
+<div class="highlight"><pre><span></span><span class="n">force_color_prompt</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">color_prompt</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">parse_git_branch</span><span class="p">()</span> <span class="p">{</span>
+<span class="n">git</span> <span class="n">branch</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;/^[^*]/d&#39;</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;s/* \(.*\)/(</span><span class="se">\1</span><span class="s1">)/&#39;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">[</span> <span class="s2">&quot;$color_prompt&quot;</span> <span class="o">=</span> <span class="n">yes</span> <span class="p">];</span> <span class="n">then</span>
+<span class="n">PS1</span><span class="o">=</span><span class="s1">&#39;${debian_chroot:+($debian_chroot)}\[</span><span class="se">\033</span><span class="s1">[01;32m\]\u@\h\[</span><span class="se">\033</span><span class="s1">[00m\]:\[</span><span class="se">\033</span><span class="s1">[01;34m\]\w\[</span><span class="se">\033</span><span class="s1">[01;31m\]$(parse_git_branch)\[</span><span class="se">\033</span><span class="s1">[00m\]\$ &#39;</span>
+<span class="k">else</span>
+<span class="n">PS1</span><span class="o">=</span><span class="s1">&#39;${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ &#39;</span>
+<span class="n">fi</span>
+<span class="n">unset</span> <span class="n">color_prompt</span> <span class="n">force_color_prompt</span>
 </pre></div>
 
 
 <p><br></p>
-<h4>Fuseki 2 (requires JDK 8)</h4>
-<div class="highlight"><pre><span></span>wget http://mirrors.whoishostingthis.com/apache/jena/binaries/apache-jena-fuseki-2.4.1.tar.gz
-tar -zxvf
-sudo add-apt-repository ppa:webupd8team/java
-sudo apt-get update
-sudo apt-get install oracle-java8-installer
-</pre></div>
-
-
-<p>To test fuseki server</p>
-<div class="highlight"><pre><span></span>~/apache-jena-fuseki-2.4.1/fuseki-server --update --loc=angioexplain /angioexplain
-</pre></div>
-
-
-<p>Open browser and got to <code>localhost:3030</code></p>
-<p><br></p>
-<h4>Miniconda3</h4>
-<div class="highlight"><pre><span></span>wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh
-</pre></div>
-
-
-<p>then add below line to <code>.bashrc</code>, restart terminal and check installation with <code>conda -V</code>.</p>
-<p><code>export PATH="/home/username/miniconda3/bin:$PATH"</code></p>
+<h4><code>apt-get</code> vs. <code>pip install</code> vs. <code>conda install</code></h4>
+<ul>
+<li><code>apt-get</code> installs a (python) package/module system-wide.</li>
+<li><code>pip</code> installs module in venv only.</li>
+<li>If using <code>pip install</code> after activating the venv, module will be installed into that venv only.</li>
+<li><code>pip</code> installs a package/module within any environment.</li>
+<li><code>conda</code> installs module/package within conda environments.</li>
+</ul>
+<h4>Pip Cache</h4>
+<ul>
+<li><code>pip config set global.cache-dir false</code></li>
+<li><code>pip install NAME --no-cache-dir</code> e.g. <code>pip --no-cache-dir install scipy</code></li>
+<li><code>sudo rm -R ~/.cache/pipenv</code> and <code>sudo rm -R ~/.cache/pip</code></li>
+</ul>
 <h4>Misc.</h4>
 <ul>
-<li>
-<p><code>sudo apt-get install terminator</code></p>
+<li>change nvidia gamma settings: <code>udo nano ~/.nvidia-settings-rc</code></li>
+<li><code>df -h</code> check disk space</li>
+<li><a href="https://itsfoss.com/how-to-find-the-process-id-of-a-program-and-kill-it-quick-tip/">kill process</a></li>
+<li><code>rm file</code> to remove file</li>
+<li><code>rm -r dirName</code> to remove directory</li>
+<li><code>ln -s /opt/robomongo/bin/robomongo ~/robomongo_lnk</code> to make a shortcut/alias</li>
+<li><code>pip list --local</code> to list installed packages in a given venv</li>
+<li>about the double dash <code>--</code><ul>
+<li>Almost all short options have a corresponding long option; <code>rm -f</code> is equivalent to <code>rm --force</code>.</li>
+<li>Many long options, though, have no corresponding short option.</li>
+</ul>
 </li>
-<li>
-<p>VSCode Run(Compile): Shit+Ctrl+B </p>
-</li>
-<li>
-<p>to view a .gv GraphViz file (will crate a pdf)</p>
-<p>f = Source.from_file('file-name.gv')
-f.render()</p>
-</li>
+<li><a href="http://askubuntu.com/questions/739297/how-to-install-robomongo-ubuntu-system-please-let-me-know/781793">About the usr/bin directory</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-18-04">Increase Digitalocean memory</a></li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./software.html">posted at 00:00</a>
+                    <a href="./Linux.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
                 </div>
             </article>
@@ -282,7 +255,7 @@ f.render()</p>
 
                     <a href="./page/8" class="prev_page">&larr;&nbsp;Previous</a>
                     <a href="./page/10" class="next_page">Next&nbsp;&rarr;</a>
-                    <span>Page 9 of 19</span>
+                    <span>Page 9 of 21</span>
                 </div>
 
             <div class="clear"></div>

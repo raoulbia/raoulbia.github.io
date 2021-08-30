@@ -1,20 +1,27 @@
-Title: Virtual Environemnts
+Title: Conda
 Date: 2017-12-04
 Category: Virtual Environemnts
-Slug: Virtual Environemnts
-Summary: Virtual Environemnts
+Slug: conda
+Summary: Virtual Environemnts with Conda and Pipenv
 
 
-#### Conda
+### Conda
 
 * `conda create --name <name> python=3.7 -y`
+* `conda activate <name>`
+* `pip install ipykernel`
+* `python -m ipykernel install --user --name=<name>`
 * `conda env remove --name <name>`
 * `conda env list`
-* `conda activate <name>`
 * `conda update`
 * `conda install --yes --file requirements.txt`
-* `conda install -c anaconda ipykernel`
-* `python -m ipykernel install --user --name <name>`
+* `jupyter kernelspec list`
+* `conda install --channel=conda-forge nb_conda_kernels`
+
+#### Specific venvs
+
+* Geopandas: `conda create --name=gtfs_graph python=3.8 geopandas scipy --channel=conda-forge`
+
 
 #### Pipenv
 

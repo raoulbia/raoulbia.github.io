@@ -24,196 +24,211 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Oct 03, 2017</h4>
+        <div id="content">            <h4 class="date">Nov 01, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./probabilities.html" rel="bookmark" title="Permanent Link to &quot;Probabilities&quot;">Probabilities</a>
+                    <a href="./web_development.html" rel="bookmark" title="Permanent Link to &quot;Web Development&quot;">Web Development</a>
                 </h2>
 
-                <p><br></p>
-<h4>Conditional probability refresher</h4>
-<p><span class="math">\(P(A|B) = \frac{P(A \cap B)}{P(B)}\)</span></p>
-<p>likewise</p>
-<p><span class="math">\(P(B|A) = \frac{P(A \cap B)}{P(A)}\)</span></p>
-<p>this implies that:</p>
-<p><span class="math">\(P(A \cap B) = P(A|B)P(B) = P(B|A)P(A)\)</span></p>
-<p>dividing both sides by P(B) gives us Bayes Theorem:</p>
-<p><span class="math">\(P(A|B) = \frac{P(B|A)P(A)}{P(B)}\)</span></p>
-<p><br></p>
-<h4>Events A <strong>and</strong> B occur: <span class="math">\(P(A \cap B)\)</span></h4>
-<p>Rule: Multiplication</p>
-<p>Question: are those events dependent or independent?</p>
-<p><br></p>
-<p><em>Independent Events</em></p>
-<p><span class="math">\(P(A \cap B) = P(A) \ \cdot P(B)\)</span></p>
-<p>Example: Roll two dice and get two Heads</p>
+                <h4>nginx</h4>
 <ul>
-<li><span class="math">\(P(H \cap H)\)</span> = 0.5 * 0.5 = 0.25</li>
+<li><code>sudo nginx -t</code> to test nginx</li>
+<li><code>sudo /etc/init.d/nginx reload</code> to restart nginx</li>
+<li><code>sudo apt-get remove nginx nginx-common</code> to to remove all but config files</li>
+<li><code>sudo apt-get purge nginx nginx-common</code> to remove everything</li>
+<li><code>find /etc/nginx -name '*.conf' | xargs grep -i log</code></li>
+<li><a href="https://www.youtube.com/watch?v=fpeQlbdRmKI">How To Set Up nginx Virtual Hosts (Server Blocks)</a></li>
 </ul>
 <p><br></p>
-<p><em>Dependent Events</em></p>
-<p><span class="math">\(P(A \cap B) = P(B)P(A|B) = P(A)P(B|A)\)</span></p>
-<p>Example: Pick two cards (wo/replacement) and get two Queens</p>
+<h4>start ngrok</h4>
+<p><code>./ngrok http 5000</code></p>
+<p><br></p>
+<h4>Heroku</h4>
+<p>Pre-requisite: Heroku Command Line Tool</p>
 <ul>
-<li><span class="math">\(P(Q1 \cap Q2) = P(Q1)P(Q2|Q1)\)</span> = 4/52 * 3/51  </li>
+<li>needed for <code>heroku login --interactive</code> and <code>heroku create</code></li>
+<li>Option 1: <code>sudo snap install --classic heroku</code></li>
+<li>Option 2: <code>curl https://cli-assets.heroku.com/install.sh | sh</code></li>
+<li><a href="https://devcenter.heroku.com/categories/command-line">read more</a></li>
+</ul>
+<p>Stop/Start Heroku VM</p>
+<ul>
+<li><code>heroku ps:scale web=0</code> wait for a few secs, then <code>heroku ps:scale web=1</code></li>
+</ul>
+<p>General Heroku Deployment Guidelines</p>
+<ul>
+<li><a href="https://devcenter.heroku.com/articles/git">overview</a></li>
+<li>add <code>Pipfile</code> to <code>.gitignore</code> to ensure that dependencies are installed from <code>requirements.txt</code>.</li>
+<li>add <code>.env/</code> to <code>.gitignore</code> to ensure that secret key is hidden on github/gitlab.</li>
+<li>after deployment run <code>heroku ps:scale web=1 --app  name-of-app</code></li>
+<li>view logs:<code>heroku logs --tail --app  name-of-app</code></li>
+<li>Login to Heroku VM:</li>
+<li><code>heroku login</code></li>
+<li><code>heroku run bash</code></li>
+<li><a href="https://help.heroku.com/18PI5RSY/how-do-i-clear-the-build-cache">clear the build cache</a></li>
+<li><a href="https://chatbotslife.com/github-repo-heroku-explained-how-to-host-your-bot-server-python-8b3ec4f071ce">related article</a></li>
+</ul>
+<p>Heroku <strong>Flask</strong> Deployment</p>
+<ul>
+<li><code>heroku create &lt;NAME&gt;</code> to create a Heroku remote</li>
+<li><code>git add . ; git commit -m "update"</code></li>
+<li><code>git push heroku master</code></li>
+<li><code>heroku run python manage.py migrate</code></li>
+<li><code>heroku run python manage.py createsuperuser</code></li>
+</ul>
+<p>Heroku <strong>Dash</strong> Deployment</p>
+<ul>
+<li><a href="https://github.com/plotly/dash-heroku-template">see here</a></li>
+<li>change Step 6 to: <code>git remote add heroku https://git.heroku.com/semmeddb</code></li>
+</ul>
+<p>Heroku <strong>Django</strong> Deployment</p>
+<ul>
+<li><a href="https://github.com/heroku/heroku-django-template">heroku django template</a></li>
+<li><a href="https://devcenter.heroku.com/articles/django-assets">about static assets</a></li>
+<li><code>pipenv install whitenoise</code></li>
+<li><code>python manage.py collectstatic</code></li>
+</ul>
+<p>Procfile, gunicorn, django-heroku</p>
+<ul>
+<li><a href="https://devcenter.heroku.com/articles/django-app-configuration">Django App configuration</a></li>
+<li>in Procfile <code>web: gunicorn myproject.wsgi</code> replace "myproject" by name of dir in which <code>settings.py</code> is located.</li>
+<li>add <code>import django_heroku</code> to <code>settings.py</code> (top)</li>
+<li>add <code>django_heroku.settings(locals())</code> to <code>settings.py</code> (bottom)</li>
 </ul>
 <p><br></p>
-<h4>Either A <strong>or</strong> B or both occur: <span class="math">\(P(A \cup B)\)</span></h4>
-<p>Rule: Addition</p>
-<p>Question: are those events mutually exlusive?</p>
-<p><br></p>
-<p><em>Mutually exclusive events</em></p>
-<p><span class="math">\(P(A \cup B) = P(A) \ + \ P(B)\)</span></p>
-<p>Example: Roll a dice and get a 2 or a 5?</p>
-<ul>
-<li><span class="math">\(P(A \cup B) = P(A) \ + \ P(B)\)</span> = 1/6 +1/6</li>
-</ul>
-<p><br></p>
-<p><em>Events have common outcomes</em></p>
-<p><span class="math">\(P(A \cup B) = P(A) \ + \ P(B) \ - \ P(A \cap B)\)</span></p>
-<p>Example: Pick one card and get a King or Hearts</p>
-<ul>
-<li><span class="math">\(P(A \cup B) = P(K) \ + \ P(Hearts) \ - \ P(K of Hearts)\)</span> = 4/52 + 13/52 - 1/52 </li>
-</ul>
-<p><br></p>
-<h4>Probabilities involving "at least one" success</h4>
-<ul>
-<li>Toss a coin two times: "<em>find the probability of getting at least one head</em>"
-  <br> Note: these are independent events...  </li>
-</ul>
-<div class="math">\begin{align}
-\text{P(at least one H)} &amp;= 1 - \text{P(no Head)} \\
-                       &amp;= 1 - P(T \cap T) \\
-                       &amp;= 1 - P(T) * P(T) \\    
-                       &amp;= 1 - 0.25 = 0.75 
-\end{align}</div>
-<p><br></p>
-<h4>Binomial Probability "At Most" and "At Least"</h4>
-<ul>
-<li>A bag contains 6 red Bingo chips, 4 blue Bingo chips, and 7 white Bingo chips. 
-What is the probability of drawing a red Bingo chip at least 3 out of 5 times? </li>
-</ul>
-<p><br></p>
-<h4>Frechet Bounds</h4>
-<p>Suppose we know the values of Pr(A) and Pr(B), but no information is available regarding 
-the joint event <span class="math">\((A \cap B)\)</span>.</p>
-<p>The Frechet bounds are useful to define an interval for the probability of the
-joint event <span class="math">\((A \cap B)\)</span> when only information about the marginal
-probabilities Pr(A) and Pr(B) is available.</p>
-<div class="math">$$max{Pr(A) + Pr(B) − 1, 0} \geq Pr(A \ B) \leq min{Pr(A), Pr(B)}$$</div>
-<p>Example: Physiotherapists’ know that patients suffering from a particular type of
-low back pain have the following trait probabilities:</p>
-<ul>
-<li>P(Pain at night) = 0.63</li>
-<li>P(Nerve injury) = 0.43</li>
-</ul>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
+<h4>Django2</h4>
+<p>Useful commands</p>
+<div class="highlight"><pre><span></span><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">startproject</span> <span class="n">app1</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
+</pre></div>
 
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
 
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
+<p>Django templates</p>
+<p>in <code>settings.py</code></p>
+<div class="highlight"><pre><span></span> <span class="nv">BASE_DIR</span> <span class="o">=</span> <span class="nv">os</span>.<span class="nv">path</span>.<span class="k">dirname</span><span class="ss">(</span><span class="nv">os</span>.<span class="nv">path</span>.<span class="k">dirname</span><span class="ss">(</span><span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">abspath</span><span class="ss">(</span><span class="nv">__file__</span><span class="ss">)))</span>
+ ...
+ <span class="nv">TEMPLATES</span> <span class="o">=</span> [
+   {
+       <span class="s1">&#39;</span><span class="s">DIRS</span><span class="s1">&#39;</span>: [<span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">join</span><span class="ss">(</span><span class="nv">BASE_DIR</span>, <span class="s1">&#39;</span><span class="s">firstwebsite/templates</span><span class="s1">&#39;</span><span class="ss">)</span>]
+   }]
+</pre></div>
+
+
+<p>in <code>urls.py</code></p>
+<ul>
+<li>...to be completed (Django1 vs Django2 issue)</li>
+<li>try <code>from views import</code> appraoch</li>
+</ul>
+<p>Django Resources</p>
+<ul>
+<li><a href="https://ccbv.co.uk/">Classy Class-Based Views ccbv.co.uk</a></li>
+<li><a href="https://docs.djangoproject.com/en/2.1/ref/models/">docs.djangoproject.com/en/2.1/ref/models</a></li>
+<li><a href="https://docs.djangoproject.com/en/2.1/ref/class-based-views/generic-display/">docs.djangoproject.com/en/2.1/ref/class-based-views/generic-display</a></li>
+<li><a href="https://docs.djangoproject.com/en/2.1/topics/class-based-views/generic-display/">docs.djangoproject.com/en/2.1/topics/class-based-views/generic-display</a></li>
+<li><a href="https://docs.djangoproject.com/en/2.1/ref/templates/builtins/">docs.djangoproject.com/en/2.1/ref/templates/builtins</a></li>
+<li><a href="https://docs.djangoproject.com/en/2.1/topics/db/queries/">docs.djangoproject.com/en/2.1/topics/db/queries</a></li>
+</ul>
+<p><br></p>
+<h4>Apache2</h4>
+<ul>
+<li><code>apachectl -S</code></li>
+<li><code>sudo service apache2 restart</code></li>
+<li><a href="http://flask.pocoo.org/docs/1.0/deploying/mod_wsgi/#configuring-apache">Configure Apache for Flask</a></li>
+<li><a href="http://terokarvinen.com/2016/deploy-flask-python3-on-apache2-ubuntu">Deploy Flask Python3 on Apache2 on Ubuntu</a></li>
+<li><a href="https://www.bogotobogo.com/python/Flask/Python_Flask_HelloWorld_App_with_Apache_WSGI_Ubuntu14.php">Flask HelloWorld App_with_Apache WSGI_Ubuntu14</a></li>
+<li><a href="https://websiteforstudents.com/installing-apache2-mariadb-on-ubuntu-16-04-17-10-18-04-with-php-7-2-support-lamp/">Installing LAMP</a></li>
+</ul>
+<p><br></p>
+<h4>Flask</h4>
+<ul>
+<li><code>import pdb; pdb.set_trace()</code></li>
+<li>error: address already in use<ul>
+<li><code>sudo lsof -i :5000</code></li>
+<li><code>sudo kill-9 PID</code></li>
+</ul>
+</li>
+<li><code>FLASK_APP=run.py flask run</code></li>
+<li><a href="https://stackoverflow.com/questions/41144565/flask-does-not-see-change-in-js-file">flask does not see change in .js file</a></li>
+<li><a href="https://help.parsehub.com/hc/en-us/articles/217751808-API-Tutorial-How-to-get-run-data-using-Python-Flask">API Tutorial: How to get run data using Python &amp; Flask</a></li>
+<li><a href="https://stackoverflow.com/questions/53258168/gunicorn-wont-start-flask-app-because-application-object-must-be-callable">gunicorn and wsgi configuration</a></li>
+<li><a href="https://coderwall.com/p/pstm1w/deploying-a-flask-app-at-heroku">gunicorn and flask</a></li>
+</ul>
+<p><br></p>
+<h4>Node JS</h4>
+<p>Install nodejs:</p>
+<div class="highlight"><pre><span></span>curl -sL https://deb.nodesource.com/setup_8.x — Node.js 8 LTS &quot;Carbon&quot; | sudo -E bash -
+sudo apt-get install -y nodejs
+</pre></div>
+
+
+<p>symlink issue with Vagrant VM shared folder:</p>
+<p><code>npm install --no-bin-links</code></p>
+<p>port alread in use</p>
+<p><code>ps aux | awk '/node/{print $2}' | xargs kill -9</code></p>
+<p><br></p>
+<h4>Redux</h4>
+<ul>
+<li><a href="https://www.bram.us/2016/10/25/plotly-academy-state-management-with-redux/">https://www.bram.us/2016/10/25/plotly-academy-state-management-with-redux/</a></li>
+</ul>
+<p><br></p>
+<h4>Ansible</h4>
+<ul>
+<li><a href="https://blog.jetbrains.com/pycharm/2017/12/developing-in-a-vm-with-vagrant-and-ansible/">Developing a VM-with Vagrant and Ansible</a></li>
+</ul>
+<p><br></p>
+<h4>SAP Conversational AI</h4>
+<ul>
+<li>markdown URL syntax: <code>[Click Here]({{memory.url}})</code> </li>
+</ul>
+<p><br></p>
+<h4>Misc.</h4>
+<ul>
+<li><a href="https://wireframe.cc/">https://wireframe.cc/</a></li>
+<li><a href="https://www.creative-tim.com/product/get-shit-done-kit">https://www.creative-tim.com/product/get-shit-done-kit</a></li>
+<li><a href="https://uxplanet.org/how-the-bootstrap-4-grid-works-a1b04703a3b7">https://uxplanet.org/how-the-bootstrap-4-grid-works-a1b04703a3b7</a></li>
+<li><a href="https://hackerthemes.com/bootstrap-cheatsheet/#col-sm-1">https://hackerthemes.com/bootstrap-cheatsheet/#col-sm-1</a></li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./probabilities.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/probabilities.html" rel="tag">Probabilities</a>
+                    <a href="./web_development.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/web-development.html" rel="tag">Web Development</a>
                 </div>
-            </article>            <h4 class="date">Oct 02, 2017</h4>
+            </article>            <h4 class="date">Oct 05, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./Algorithms.html" rel="bookmark" title="Permanent Link to &quot;Algorithms&quot;">Algorithms</a>
+                    <a href="./statistics.html" rel="bookmark" title="Permanent Link to &quot;Statistics&quot;">Statistics</a>
                 </h2>
 
-                <p>On this page I keep some notes abbout Algorithms. It's work in progress and all might not be 
-accurate. I will improve this page as my grasp of the key differences between the core algorithm 
-families improves. </p>
-<p><strong>Introduction</strong></p>
-<p>Many graph-based problems are of the non-deterministic polynomial time (NP) problem family.<br />
-Specifically this means that graph-based problems can often not be solved efficiently w.r.t. time and 
-space. For example, consider that the optimal solution for a given graph-based problem involves 
-visiting all nodes and vertices in the graph. Such an exhaustive search is unfeasible with large 
-graphs consisting of millions of nodes and vertices.</p>
-<p><strong>Algorithms</strong></p>
-<p>There are several alternative strategies to deal with NP problems that avoid the limitations of 
-exhaustive search. These strategies do not, in general, find optimal solutions, but can find solutions 
-that are reasonably close to being optimal. Such strategies include </p>
+                <h4>Variance</h4>
 <ul>
-<li>greedy algorithms</li>
-<li>heuristic algorithms </li>
-<li>approximation algorithms</li>
-<li>randomized algorithms </li>
+<li>is the mean of some measured variation</li>
+<li>i.e. the sum of squared differences (SS) divided by some quantity n.</li>
+<li>in the case of samples, SS is divided by n-1.</li>
 </ul>
-<p>The idea of greedy algorithm is to solve a problem by making a “locally optimal choice at each stage
-with the hope of finding a global optimum ”. </p>
-<p>Heuristic algorithm try to solve a problem by “proceeding to a solution by trial and error or by 
-rules that are only loosely defined ”. </p>
-<p>The lines between greedy and heuristic algorithms are often blurred and many algorithms exhibit 
-characteristics of both. </p>
-<p>Approximation algorithms are essentially heuristic algorithms with a provable guarantee on the 
-quality of the obtained near-optimal solution.</p>
-<p>Randomized algorithms may be nonintuitive because they lack the control of traditional algorithms.
-Some randomized algorithms are <em>Las Vegas algorithms</em>, which deliver solutions that are guaranteed 
-to be exact, despite the fact that they rely on making random decisions. Yet most randomized 
-algorithms are <em>Monte Carlo algorithms</em>. These algorithms are not guaranteed to return exact solutions,
-but they do quickly find approximate solutions. Because of their speed, they can be run many times, 
-allowing us to choose the best approximation from thousands of runs.</p>
+<h4>Standard Deviation</h4>
+<ul>
+<li>is the square root of a given variance.</li>
+<li>this transformation expresses the value of the variance in the unit of whatever is being measured.</li>
+<li>For example Root Mean Squared Error (RMSE) is a standard deviation. It is the sum of squared differences of 
+the errors, expressed in the unit of the error being measured.</li>
+<li>When you see "root" something (e.g. RMSE) or "standard" something (Standard Error) it 
+refers to a standard deviation which itself is a Variance transformed by taking the square root thereof. </li>
+</ul>
+<h4>Distributions</h4>
+<ul>
+<li><a href="https://www.rocscience.com/help/slide2/slide_model/probability/Statistical_Distributions_Overview.htm">Statistical Distributions Overview</a></li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./Algorithms.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/algorithms.html" rel="tag">Algorithms</a>
+                    <a href="./statistics.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/statistics.html" rel="tag">Statistics</a>
                 </div>
             </article>
 
@@ -222,7 +237,7 @@ allowing us to choose the best approximation from thousands of runs.</p>
 
                     <a href="./page/12" class="prev_page">&larr;&nbsp;Previous</a>
                     <a href="./page/14" class="next_page">Next&nbsp;&rarr;</a>
-                    <span>Page 13 of 19</span>
+                    <span>Page 13 of 21</span>
                 </div>
 
             <div class="clear"></div>

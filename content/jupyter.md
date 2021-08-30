@@ -10,25 +10,38 @@ Summary: Jupyter Notebooks
 
 `jupyter notebook --ip=0.0.0.0`
 
+#### Import notebook into another
+```
+pip install jupyter-helpers
+from create_gtfs_feed import Feed where create_gtfs_feed is a notebook
+```
 
-#### Useful Links
+#### Share variables / objects across notebooks
 
-* [Integrate JupyterLab with Google Drive](https://towardsdatascience.com/integrate-jupyterlab-with-google-drive-98d13e340c63)
-* [How to Setup Your JupyterLab Project Environment](https://towardsdatascience.com/how-to-setup-your-jupyterlab-project-environment-74909dade29b)
-*[Interactive Controls in Jupyter Notebooks](https://towardsdatascience.com/interactive-controls-for-jupyter-notebooks-f5c94829aee6)
-* [Changing JupyterLab to suit your needs](https://www.youtube.com/watch?v=a9P7qv4P5LE)
-* <http://localhost:8888/tree#nbextensions_configurator  >
-* [Running Jupyter Notebooks on a Ubuntu Server](https://hackersandslackers.com/running-jupyter-notebooks-on-a-ubuntu-server/)
-* [access jupyter notebook running on vm](https://stackoverflow.com/questions/38545198/access-jupyter-notebook-running-on-vm)
-* [Can't access jupyter notebook in local vagrant virtualbox via local browser](https://stackoverflow.com/questions/47597515/cant-access-jupyter-notebook-in-local-vagrant-virtualbox-via-local-browser)
+%store G >> to store
+%store -r G >> to load
+
+
+#### Dill (similar to Pickle)
+
+```
+# Dump graph
+with open("multigraph.p", 'wb') as f:
+    dill.dump(G, f)
+```
+```
+# Load graph
+with open("multigraph.p", 'rb') as f:  # notice the r instead of w
+    G = dill.load(f)
+```
 
 #### Installing IPywidgets
 
 * **make sure notebook is trusted**
 
 ```powershell
-conda install -c conda-forge nodejs
-pip install jupyterlab
+conda install -c conda-forge nodejs -y
+conda install -c conda-forge jupyterlab
 jupyter labextension install @jupyter-widgets/jupyterlab-manager
 pip install jupyter_contrib_nbextensions
 jupyter contrib nbextension install --sys-prefix
@@ -64,3 +77,14 @@ Conversion:
 case insensitive regexp in str.contains()
 </div>
 ```
+
+#### Useful Links
+
+* [Integrate JupyterLab with Google Drive](https://towardsdatascience.com/integrate-jupyterlab-with-google-drive-98d13e340c63)
+* [How to Setup Your JupyterLab Project Environment](https://towardsdatascience.com/how-to-setup-your-jupyterlab-project-environment-74909dade29b)
+* [Interactive Controls in Jupyter Notebooks](https://towardsdatascience.com/interactive-controls-for-jupyter-notebooks-f5c94829aee6)
+* [Changing JupyterLab to suit your needs](https://www.youtube.com/watch?v=a9P7qv4P5LE)
+* [localhost:8888/tree#nbextensions_configurator](http://localhost:8888/tree#nbextensions_configurator)
+* [Running Jupyter Notebooks on a Ubuntu Server](https://hackersandslackers.com/running-jupyter-notebooks-on-a-ubuntu-server/)
+* [access jupyter notebook running on vm](https://stackoverflow.com/questions/38545198/access-jupyter-notebook-running-on-vm)
+* [Can't access jupyter notebook in local vagrant virtualbox via local browser](https://stackoverflow.com/questions/47597515/cant-access-jupyter-notebook-in-local-vagrant-virtualbox-via-local-browser)

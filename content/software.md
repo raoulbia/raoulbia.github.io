@@ -123,12 +123,19 @@ Docker Compose
 
 ### Pycharm
 
+#### Install
 ```
 $ wget https://download.jetbrains.com/python/pycharm-community-2018.3.4.tar.gz
 $ tar xvzf pycharm-community-2018.3.4.tar.gz
 $ cd pycharm-community-2018.3.4/bin
 $ . pycharm.sh
 ```
+
+#### pytest
+
+Edit Configuration >> Additional arguments >> `-p no:logging -s`
+
+#### environment variables
 
 * [about setting environment variable e.g. DATA_HOME](https://stackoverflow.com/questions/42708389/how-to-set-environment-variables-in-pycharm)
   

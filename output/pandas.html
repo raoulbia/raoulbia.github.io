@@ -52,6 +52,7 @@
 <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.width&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 
 
@@ -65,8 +66,6 @@
                  <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="c1">#infer_datetime_format=True,</span>
                  <span class="n">parse_dates</span> <span class="o">=</span> <span class="n">date_cols</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span> 
-<span class="n">df</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 
 
@@ -124,6 +123,13 @@
 <span class="k">for</span> <span class="n">text_file</span> <span class="ow">in</span> <span class="n">zip_file</span><span class="o">.</span><span class="n">infolist</span><span class="p">():</span>
     <span class="n">tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">zip_file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">text_file</span><span class="o">.</span><span class="n">filename</span><span class="p">))</span>
     <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">to_html</span><span class="p">()))</span>
+</pre></div>
+
+
+<h4><a href="https://stackoverflow.com/questions/33952142/prevent-pandas-from-interpreting-na-as-nan-in-a-string">Prevent pandas from interpreting 'NA' as NaN in a string</a></h4>
+<div class="highlight"><pre><span></span>df = pd.read_csv(  &#39;parsed_json.csv&#39;
+                 , dtype=str
+                 , na_filter = False)
 </pre></div>
 
 
@@ -201,10 +207,16 @@ gpd.head()
 
 
 <h4>Select by Year</h4>
-<div class="highlight"><pre><span></span># data = data[data.opened_at.dt.year &gt;= 2019]
+<div class="highlight"><pre><span></span>data = data[data.opened_at.dt.year &gt;= 2019]
 </pre></div>
 
 
+<h4>Replace</h4>
+<ul>
+<li><code>df = df.replace(r'\s+', np.nan, regex=True).replace('', np.nan)</code></li>
+<li><code>df = df.replace(to_replace=np.nan, value="NULL")</code></li>
+<li><code>d2 = df.replace(to_replace="", value="unknown").replace(to_replace=np.nan, value="unknown")</code></li>
+</ul>
 <h3>Inspect</h3>
 <h4>Duplicate rows</h4>
 <p>(see here)[https://thispointer.com/pandas-find-duplicate-rows-in-a-dataframe-based-on-all-or-selected-columns-using-dataframe-duplicated-in-python/#:~:text=To%20find%20%26%20select%20the%20duplicate,argument%20is%20'first').]</p>
@@ -214,13 +226,33 @@ df[df.duplicated(keep=False)]
 
 
 <div class="highlight"><pre><span></span># Select all duplicate rows based on one column
-df[df.duplicated([&#39;Name&#39;])]
+df[df.duplicated([&#39;col_name&#39;])]
 </pre></div>
 
 
-<p><code>df[df.duplicated(['IncidentNumber'], keep=False)].sort_values(by='IncidentNumber')</code></p>
+<p><code>df[df.duplicated(['col_name'], keep=False)].sort_values(by='col_name')</code></p>
 <h4>Duplicates in a column</h4>
-<p><code>df.duplicated(subset='col_name', keep='first').count()</code></p>
+<div class="highlight"><pre><span></span>ids = df[&quot;col_name&quot;]
+df[ids.isin(ids[ids.duplicated()])].sort_values(by=&quot;col_name&quot;)
+</pre></div>
+
+
+<h4>Count missing values</h4>
+<div class="highlight"><pre><span></span><span class="n">missing</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">missing</span> <span class="o">=</span> <span class="p">(</span><span class="n">missing</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;cnt&#39;</span><span class="p">)</span>
+           <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;cnt&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">missing</span><span class="p">[</span><span class="n">missing</span><span class="p">[</span><span class="s1">&#39;cnt&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+
+<p>or</p>
+<div class="highlight"><pre><span></span><span class="n">num_avg_rel_isnan</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;avg_relevance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="err">`</span>
+</pre></div>
+
+
+<h3>Expand Column</h3>
+<p><code>df[['TRID','SRC','RID', 'TESTTIME']] = df.ID.str.split('_', expand=True)</code></p>
+<h3>Create new columns</h3>
 <h4>Create columns from row with same ID</h4>
 <div class="highlight"><pre><span></span># get duplicates
 tmp = df[df.duplicated([&#39;IncidentNumber&#39;], keep=False)].sort_values(by=&#39;IncidentNumber&#39;)
@@ -238,24 +270,12 @@ tmp
 </pre></div>
 
 
-<h4>Count missing values</h4>
-<div class="highlight"><pre><span></span><span class="n">missing</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="n">missing</span> <span class="o">=</span> <span class="p">(</span><span class="n">missing</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;cnt&#39;</span><span class="p">)</span>
-           <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;cnt&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-<span class="n">missing</span><span class="p">[</span><span class="n">missing</span><span class="p">[</span><span class="s1">&#39;cnt&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-
-
-<p>or</p>
-<div class="highlight"><pre><span></span><span class="n">num_avg_rel_isnan</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;avg_relevance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="err">`</span>
-</pre></div>
-
-
 <h3>Drop</h3>
-<h4>Drop rows if index is NA</h4>
-<p><code>df = df[df.index.notna()]</code></p>
-<h4>Drop rows if value in a specific column is NA</h4>
-<p><code>df = df[df.col_name.notna()]</code></p>
+<ul>
+<li><code>df.drop(df.columns[0], axis=1, inplace=True)</code> # drop column by index</li>
+<li><code>df = df[df.index.notna()]</code> # Drop rows if index is NA</li>
+<li><code>df = df[df.col_name.notna()]</code> # Drop rows if value in a specific column is NA</li>
+</ul>
 <h3>Consolidate Column Levels</h3>
 <h4>to prevent <code>SettingWithCopyWarning</code></h4>
 <div class="highlight"><pre><span></span><span class="n">kw</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">,</span> <span class="s1">&#39;Phone&#39;</span><span class="p">,</span> <span class="s1">&#39;Self-service&#39;</span><span class="p">]</span>
@@ -388,8 +408,10 @@ gpd.head()
 
 
 <h3>Melt &amp; Pivot</h3>
-<p><code>gpd.pivot(index='Date', columns='Verktitel', values='Belopp')</code>
-<code>tmp = tmp.melt('Date', var_name='cols',  value_name='vals')</code></p>
+<ul>
+<li><code>gpd.pivot(index='Date', columns='Verktitel', values='Belopp')</code></li>
+<li><code>tmp = tmp.melt('Date', var_name='cols',  value_name='vals')</code></li>
+</ul>
 <h4>Compute ratio from a binary split for each UID</h4>
 <div class="highlight"><pre><span></span>gpd = (df.groupby([&#39;v_incident_uid&#39;, &#39;Incident Number&#39;, &#39;v_role&#39;])[&#39;v_role&#39;]
  .size()
@@ -507,17 +529,33 @@ df = df2.loc[:, cols]
 </pre></div>
 
 
+<h3>np.where</h3>
+<h4>np.where()</h4>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;is_fujitsu_owned&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;resolvergroup1&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Fujitsu&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;is_fujitsu_owned&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+
+<h1>np.where with multipe conditions / choices</h1>
+<div class="highlight"><pre><span></span><span class="n">col</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;consumption_energy&#39;</span><span class="w"></span>
+<span class="n">conditions</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n"> df2[col</span><span class="o">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">df2</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">400</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">df2</span><span class="o">[</span><span class="n">col</span><span class="o">]&gt;</span><span class="w"> </span><span class="mi">200</span><span class="p">),</span><span class="w"> </span><span class="n">df2</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="err">]</span><span class="w"></span>
+<span class="n">choices</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n"> &quot;high&quot;, &#39;medium&#39;, &#39;low&#39; </span><span class="o">]</span><span class="w"></span>
+<span class="n">df2</span><span class="o">[</span><span class="n">&quot;energy_class&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="k">select</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span><span class="w"> </span><span class="n">choices</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">nan</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+
+
 <h3>Misc.</h3>
+<h4>Add Delta column</h4>
+<div class="highlight"><pre><span></span>MENTZ = pd.to_datetime(df[&#39;DUE_MENTZ&#39;].astype(str))
+DB = pd.to_datetime(df[&#39;DUE_DB&#39;].astype(str))
+df[&#39;DELTA(MINS)&#39;] = MENTZ.sub(DB).dt.total_seconds().div(60).round()
+</pre></div>
+
+
 <h4>Create sample dataset</h4>
 <div class="highlight"><pre><span></span>tmp = df.sample(10000)
 tmp.to_csv(&quot;../local-data/output/bat_sample2_original_headers.csv&quot;, index=False)
 del tmp
-</pre></div>
-
-
-<h4>np.where()</h4>
-<div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;is_fujitsu_owned&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;resolvergroup1&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Fujitsu&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;is_fujitsu_owned&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
 

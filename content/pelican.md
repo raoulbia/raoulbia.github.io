@@ -16,7 +16,7 @@ Summary: Pelican How To
 3. Setup a virtual environment
 
         conda create --name myblog python=3.5
-        source activate myblog
+        conda activate myblog
         pip install -r requirements.txt
         pelican-quickstart
         git clone https://github.com/getpelican/pelican-plugins.git

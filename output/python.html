@@ -33,10 +33,27 @@
                 </h2>
 
                 <p><br></p>
+<h4>File paths</h4>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">output_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="s1">&#39;data&#39;</span> <span class="o">/</span> <span class="s1">&#39;output&#39;</span><span class="c1">#self.output_dir = Path.cwd() / &#39;data&#39; / &#39;output&#39; / &#39;geojson&#39;</span>
+
+<span class="k">try</span><span class="p">:</span>
+ <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">FileExistsError</span><span class="p">:</span>
+ <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Folder already exists&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+ <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Folder was created: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+
 <h4>limited FOR loop</h4>
 <p><code>for i, elem in zip(range(100), elems[::10])</code> where <code>[::10]</code> is every 10th</p>
 <h4>Query</h4>
-<p><code>pd.read_csv("file.csv").query("year==2000")</code></p>
+<ul>
+<li><code>pd.read_csv("file.csv").query("year==2000")</code></li>
+<li><code>df.query("delay_arrival == 'n/a' | delay_arrival == 'NO_DATA' ")</code></li>
+</ul>
 <h4>File Handling:</h4>
 <div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">dosomething</span><span class="p">()</span>
@@ -83,81 +100,6 @@
 </pre></div>
 
 
-<p><br></p>
-<h3>Lists</h3>
-<h4>itemgetter</h4>
-<p>itemgetter on a list of tuples <code>[('P52564', 61), ('O15169', 44), ...]</code></p>
-<p><code>sorted(list(degrees), key=operator.itemgetter(1), reverse=True)[0:5]</code></p>
-<p>itemgetter on a dict</p>
-<p><code>sorted(pr.items(), key=operator.itemgetter(1), reverse=True)[0:5]</code></p>
-<h4>Compare items in two lists:</h4>
-<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">rank_true</span><span class="p">,</span> <span class="n">rank_pred</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="n">pred</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">rank_true</span> <span class="o">==</span> <span class="n">rank_pred</span><span class="p">:</span>
-</pre></div>
-
-
-<h4>Print list items</h4>
-<p><code>print(*myList, sep='\n')</code></p>
-<h4>Convert a list of chars into proper list:</h4>
-<div class="highlight"><pre><span></span><span class="nb">list</span> <span class="o">=</span> <span class="s1">&#39;123; 456; 887&#39;</span>
-<span class="n">ls</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
-</pre></div>
-
-
-<h4>List Comprehension: If/Else</h4>
-<div class="highlight"><pre><span></span><span class="n">rel_bin</span> <span class="o">=</span> <span class="p">[</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">y</span> <span class="o">==</span> <span class="kc">None</span>
-            <span class="k">else</span> <span class="n">x</span> <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span>
-            <span class="k">else</span> <span class="n">y</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">y</span> <span class="o">==</span> <span class="kc">None</span>
-            <span class="k">else</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">1</span>
-            <span class="k">else</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">2</span>
-            <span class="k">else</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span>
-            <span class="k">else</span> <span class="o">-</span><span class="mi">9</span> <span class="c1"># to catch any issues</span>
-            <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rel_bin_judge_1</span><span class="p">,</span> <span class="n">rel_bin_judge_2</span><span class="p">)]</span>
-</pre></div>
-
-
-<p><br></p>
-<h3>Dictionaries</h3>
-<h4>Counting</h4>
-<div class="highlight"><pre><span></span><span class="n">context_dic</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">query_results</span><span class="p">:</span>
-    <span class="n">context_dic</span><span class="p">[</span><span class="n">res</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-</pre></div>
-
-
-<h4><code>Counter</code> class</h4>
-<div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">co_occurrence_counts</span><span class="p">[</span><span class="s1">&#39;Gene_Gene&#39;</span><span class="p">][</span><span class="s1">&#39;ent_ab&#39;</span><span class="p">])</span>
-    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%i</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
-</pre></div>
-
-
-<p>see also <a href="https://stackoverflow.com/questions/16406329/python-dictionary-count-of-unique-values">dictionary count of unique values</a></p>
-<p><br></p>
-<h3>Named Tuples</h3>
-<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">=</span><span class="si">{1}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">k</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">]))</span>
-
-<span class="bp">self</span><span class="o">.</span><span class="n">Result</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Result&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="s1">&#39;entity&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">,</span>
-                                                       <span class="s1">&#39;precision&#39;</span><span class="p">,</span> <span class="s1">&#39;recall&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">))</span>
-<span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">elf</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Result</span><span class="p">(</span><span class="n">embedding</span><span class="o">=</span><span class="n">source</span><span class="p">,</span>
-                                          <span class="n">entity</span><span class="o">=</span><span class="n">entity</span><span class="p">,</span>
-                                          <span class="nb">type</span><span class="o">=</span><span class="nb">type</span><span class="p">,</span>
-                                          <span class="n">precision</span><span class="o">=</span><span class="n">precision</span><span class="p">,</span>
-                                          <span class="n">recall</span><span class="o">=</span><span class="n">recall</span><span class="p">,</span>
-                                          <span class="o">...</span>
-                                          <span class="p">))</span>
-<span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span>
-<span class="n">t_by_emb</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;embedding&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">t_by_emb_bio</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="s1">&#39;entity&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">t_by_emb_type</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">t_by_emb</span><span class="p">,</span> <span class="n">t_by_emb_bio</span><span class="p">,</span> <span class="n">t_by_emb_type</span> <span class="o">=</span> <span class="n">t_by_emb</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">t_by_emb_bio</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">t_by_emb_type</span><span class="o">.</span><span class="n">T</span>
-</pre></div>
-
-
-<p><strong>Note</strong>: Named tuples are immutable, so you cannot manipulate them. If you want something mutable, you can use recordtype.
-<a href="https://stackoverflow.com/questions/31252939/changing-values-of-a-list-of-namedtuples">read more</a></p>
 <p><br></p>
 <h3>Lambda</h3>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">transform</span><span class="p">():</span>
@@ -291,33 +233,28 @@ e.g. <code>python -m cai_pytorch.pytorch</code></li>
 </ul>
 <h4>Time it</h4>
 <p>time a for loop:</p>
-<div class="highlight"><pre><span></span><span class="w">      </span><span class="c">%%timeit -n 10</span><span class="w"></span>
-<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="k">...</span><span class="c">:</span><span class="w"></span>
-<span class="w">          </span><span class="k">...</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="c">%%timeit -n 10</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="k">...</span><span class="c">:</span><span class="w"></span>
+<span class="w">  </span><span class="k">...</span><span class="w"></span>
 </pre></div>
 
 
 <p>general timing</p>
-<div class="highlight"><pre><span></span>      <span class="kn">import</span> <span class="nn">time</span>
-      <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-      <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-      <span class="n">t2r</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span>
-      <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;execution time </span><span class="si">{:.4f}</span><span class="s1"> mins&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t2r</span> <span class="o">/</span> <span class="mi">60</span><span class="p">))</span>
+<div class="highlight"><pre><span></span>testtime = datetime.now()
+...
+testtime = testtime.strftime(&quot;%H:%M&quot;)
 </pre></div>
 
 
-<ul>
-<li>
-<p>About <code>action="store_true"</code>: <a href="https://docs.python.org/2/howto/argparse.html">see here</a></p>
-</li>
-<li>
-<p>About <code>PYTHONPATH</code></p>
-<ul>
-<li><code>PYTHONPATH</code> is the module search path</li>
-<li><code>PYTHONHOME</code> is used for the standard libraries,</li>
-</ul>
-</li>
-</ul>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="o">...</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">t2r</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;execution time </span><span class="si">{:.4f}</span><span class="s1"> mins&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t2r</span> <span class="o">/</span> <span class="mi">60</span><span class="p">))</span>
+</pre></div>
+
+
 <h4>Logging &amp; Try/Except</h4>
 <ul>
 <li><a href="https://medium.com/better-programming/a-comprehensive-guide-to-handling-exceptions-in-python-7175f0ce81f7">A Comprehensive Guide to Handling Exceptions in Python</a></li>
@@ -386,6 +323,9 @@ sudo apt-get install python3.6
 <ul>
 <li><code>strip()</code> strips off the new line character</li>
 <li>Widen Pycharm console output for pandas DFs: <code>pd.set_option('display.expand_frame_repr', False)</code></li>
+<li>About <code>action="store_true"</code>: <a href="https://docs.python.org/2/howto/argparse.html">see here</a></li>
+<li><code>PYTHONPATH</code> is the module search path.</li>
+<li><code>PYTHONHOME</code> is used for the standard libraries,</li>
 </ul>
 <h4>Various Links</h4>
 <ul>
