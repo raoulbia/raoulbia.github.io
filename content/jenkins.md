@@ -25,7 +25,6 @@ H 10,17 * * 1-5
 ```
 call C:\Users\Raoul.Biagioni\Miniconda3\Scripts\activate.bat C:\Users\Raoul.Biagioni\Miniconda3
 call conda activate gtfsRT
-#pip freeze
 python C:\\Users\\<FirstName.LastName>\\<path-to-file>\\scriptname.py
 ```
 

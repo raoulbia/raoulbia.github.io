@@ -216,6 +216,8 @@ gpd.head()
 <li><code>df = df.replace(to_replace=np.nan, value="NULL")</code></li>
 <li><code>d2 = df.replace(to_replace="", value="unknown").replace(to_replace=np.nan, value="unknown")</code></li>
 </ul>
+<h3>Column subset</h3>
+<p><code>df = df[['col1', 'col2', ...]]</code></p>
 <h3>Inspect</h3>
 <h4>Duplicate rows</h4>
 <p>(see here)[https://thispointer.com/pandas-find-duplicate-rows-in-a-dataframe-based-on-all-or-selected-columns-using-dataframe-duplicated-in-python/#:~:text=To%20find%20%26%20select%20the%20duplicate,argument%20is%20'first').]</p>
@@ -249,9 +251,9 @@ df[ids.isin(ids[ids.duplicated()])].sort_values(by=&quot;col_name&quot;)
 </pre></div>
 
 
+<h3>Create new columns</h3>
 <h3>Expand Column</h3>
 <p><code>df[['TRID','SRC','RID', 'TESTTIME']] = df.ID.str.split('_', expand=True)</code></p>
-<h3>Create new columns</h3>
 <h4>Create columns from row with same ID</h4>
 <div class="highlight"><pre><span></span># get duplicates
 tmp = df[df.duplicated([&#39;IncidentNumber&#39;], keep=False)].sort_values(by=&#39;IncidentNumber&#39;)

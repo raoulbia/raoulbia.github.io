@@ -131,6 +131,7 @@ df = pd.read_pickle('../local-data/input/filename.pickle')
 print(df.shape)
 df.head(1)
 ```
+
 ### Combine Train / Test
 
 ```
@@ -206,6 +207,10 @@ data = data[data.opened_at.dt.year >= 2019]
 * `df = df.replace(to_replace=np.nan, value="NULL")`
 * `d2 = df.replace(to_replace="", value="unknown").replace(to_replace=np.nan, value="unknown")`
 
+### Column subset
+
+`df = df[['col1', 'col2', ...]]`
+
 
 ### Inspect
 
@@ -248,12 +253,12 @@ or
 num_avg_rel_isnan = df['avg_relevance'].notnull().sum()`
 ```
 
+### Create new columns
+
 ### Expand Column
 
 `df[['TRID','SRC','RID', 'TESTTIME']] = df.ID.str.split('_', expand=True)`
 
-
-### Create new columns
 
 #### Create columns from row with same ID
 
