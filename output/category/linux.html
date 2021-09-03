@@ -47,16 +47,21 @@
 <li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>.</li>
 </ul>
 <h4>Shared Folders</h4>
-<p>Assuming you want to share the directory in which <code>Vagrantfile</code> is located and that directory is named <code>vmtest</code>. </p>
+<ul>
+<li>Assuming you want to share the directory in which <code>Vagrantfile</code> is located and that directory is named <code>vmtest_kafka</code>. </li>
+<li>First add your share directory in the VM Box (Devices &gt; Shared Folders).</li>
+<li>Whatever you name your share here will be the name you will need to use when mounting in the vm guest OS e.g. <code>vmtest_kafka</code>. </li>
+<li>Next on the the guset OS make a directory to use for your mount preferably in your home directory e.g. <code>mkdir ~/shared</code>.</li>
+</ul>
 <div class="highlight"><pre><span></span>sudo usermod -a -G vboxsf user
 mkdir ~/shared
-sudo mount -t vboxsf vmtest_nta ~/shared
+sudo mount -t vboxsf vmtest_kafka ~/shared
 </pre></div>
 
 
 <ul>
-<li>Add to <code>~/.profile</code>: <code>sudo mount -t vboxsf vmtest /home/vagrant/vmtest/</code></li>
-<li>Set directory permissions: <code>chmod 777 -R vmtest/</code></li>
+<li><code>sudo nano ~/.profile</code> and add the line: <code>sudo mount -t vboxsf vmtest_kafka ~/shared</code></li>
+<li>Set directory permissions on Host OS: <code>chmod 777 -R vmtest_kafka/</code></li>
 </ul>
 <h4>Increase Vagrant Box Size</h4>
 <p>Note: it may be easier to just grab a box that has a large size. See above.</p>

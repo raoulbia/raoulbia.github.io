@@ -21,16 +21,19 @@ Summary: Vagrant VM setup
 
 #### Shared Folders 
 
-Assuming you want to share the directory in which `Vagrantfile` is located and that directory is named `vmtest`. 
+* Assuming you want to share the directory in which `Vagrantfile` is located and that directory is named `vmtest_kafka`. 
+* First add your share directory in the VM Box (Devices > Shared Folders).
+* Whatever you name your share here will be the name you will need to use when mounting in the vm guest OS e.g. `vmtest_kafka`. 
+* Next on the the guset OS make a directory to use for your mount preferably in your home directory e.g. `mkdir ~/shared`.
 
 ```
 sudo usermod -a -G vboxsf user
 mkdir ~/shared
-sudo mount -t vboxsf vmtest_nta ~/shared
+sudo mount -t vboxsf vmtest_kafka ~/shared
 ```
 
-* Add to `~/.profile`: `sudo mount -t vboxsf vmtest /home/vagrant/vmtest/`
-* Set directory permissions: `chmod 777 -R vmtest/`
+* `sudo nano ~/.profile` and add the line: `sudo mount -t vboxsf vmtest_kafka ~/shared`
+* Set directory permissions on Host OS: `chmod 777 -R vmtest_kafka/`
 
 
 #### Increase Vagrant Box Size
