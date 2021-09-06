@@ -40,10 +40,10 @@ with open("multigraph.p", 'rb') as f:  # notice the r instead of w
 * **make sure notebook is trusted**
 
 ```powershell
-conda install -c conda-forge nodejs -y &
-conda install -c conda-forge jupyterlab &
-jupyter labextension install @jupyter-widgets/jupyterlab-manager &
-pip install jupyter_contrib_nbextensions &
+conda install -c conda-forge nodejs -y &&
+conda install -c conda-forge jupyterlab &&
+jupyter labextension install @jupyter-widgets/jupyterlab-manager &&
+pip install jupyter_contrib_nbextensions &&
 jupyter contrib nbextension install --sys-prefix
 ```
 
