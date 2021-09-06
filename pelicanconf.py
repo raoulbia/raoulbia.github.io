@@ -68,19 +68,8 @@ RELATIVE_URLS = True
 # THEME = "./pelican-themes/blue-penguin"
 #THEME = "./pelican-themes/" # if only blue penguin was installed then it will be in the root (no need to specify)
 THEME = "./pelican-themes/blue-penguin"
-
-MARKUP = ('md', 'ipynb.markup')
-
-PLUGIN_PATHS = ['./plugins']
-PLUGINS = ['ipynb.markup']#, 'render_math']#, 'i18n_subsites']
 STATIC_PATHS = ['img', 'static']
-
-#ARTICLE_URL = '{slug}.html'
-
-#JINJA_ENVIRONMENT = {'extensions': ['jinja2.ext.i18n']}
-#I18N_TEMPLATES_LANG = 'en'
-
-#MARKUP = ('md', 'ipynb')
-#PLUGIN_PATHS = './plugins'
-#PLUGINS = ['ipynb.markup', 'render_math']
+MARKUP = ('md', 'ipynb')
+PLUGIN_PATHS = ['./plugins']
+PLUGINS = ['ipynb.markup']
 IGNORE_FILES = ['.ipynb_checkpoints']
