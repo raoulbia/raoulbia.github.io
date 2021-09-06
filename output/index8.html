@@ -1,154 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>code snippets etc.</title>
-    <link rel="shortcut icon" type="image/png" href="./favicon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
-    <link rel="stylesheet" href="./theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="./theme/css/print.css" type="text/css" media="print" />
-    <meta name="generator" content="Pelican" />
+        <title>code snippets etc.</title>
+        <meta charset="utf-8" />
 </head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href=".">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
-                <li><a href="./archives">Archives</a></li>
-            </ul>
-        </nav>
-        <div class="header_box">
-            <h1><a href=".">code snippets etc.</a></h1>
-        </div>
-    </header>
-    <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 05, 2017</h4>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="./Git.html" rel="bookmark" title="Permanent Link to &quot;Git&quot;">Git</a>
-                </h2>
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="./">code snippets etc. <strong></strong></a></h1>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+            <li><a href="https://github.com/raoulbia">GitHub</a></li>
+        </ul></nav><!-- /#menu -->
+<section id="content">
+<h2>All articles</h2>
 
-                <h4>Useful Links</h4>
-<ul>
-<li><a href="https://stackoverflow.com/questions/33101962/how-to-create-a-new-gitlab-repo-from-my-existing-local-git-repo-using-cli">How to create a new gitlab repo from my existing local git repo</a></li>
-<li><a href="https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/">Adding an existing project to GitHub using the command line</a></li>
-<li><a href="https://techbase.kde.org/Development/Git/Feature_Branch_Workflow">Feature_Branch_Workflow</a></li>
-<li><a href="https://stackoverflow.com/questions/67699/how-to-clone-all-remote-branches-in-git">How to clone all remote branches</a></li>
-</ul>
-<h4>Set / Change remote origin url</h4>
-<div class="highlight"><pre><span></span>git remote add origin &lt;remote repository URL&gt;
-
-git remote set-url origin &lt;remote repository url&gt;
-</pre></div>
-
-
-<h4>Remove dir from remote but keep local</h4>
-<div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s1">&#39;.idea&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">.</span><span class="n">gitignore</span>
-<span class="n">git</span> <span class="n">rm</span> <span class="o">-</span><span class="n">r</span> <span class="o">--</span><span class="n">cached</span> <span class="o">.</span><span class="n">idea</span><span class="o">/</span> <span class="c1"># Remove the file from the repository</span>
-<span class="n">git</span> <span class="n">add</span> <span class="o">.</span><span class="n">gitignore</span>
-<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s1">&#39;remove dir from remote&#39;</span>
-<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>
-</pre></div>
-
-
-<h4>Git Tagging</h4>
-<div class="highlight"><pre><span></span>git add GTFSR.py
-git commit -m &quot;GTFSRT script initial commit&quot;
-git tag -a GTFSRT_v1.0 -m &quot;original GTFSRT script&quot;
-git push origin master tag GTFSRT_v1.0
-</pre></div>
-
-
-<h4>Git commands</h4>
-<ul>
-<li><code>git checkout --theirs PATH/FILE</code> if conflict: If solution is to accept remote/other-branch version</li>
-<li><code>git add -p</code> <a href="https://medium.com/@mc999/git-add-p-is-a-gamechanger-in-file-management-e4c879e89ab">read more</a></li>
-<li><code>git clone -b &lt;branch name&gt; &lt;rep url&gt;</code></li>
-<li><code>git add dir/*</code> to add new files or directories:</li>
-<li><code>git add .</code> to add a new file</li>
-<li><code>git commit -m "update" $$ git push origin &lt;branch name&gt;</code></li>
-<li><code>git pull origin &lt;branch name&gt;</code></li>
-<li><code>git reset --hard origin/master</code></li>
-<li><code>git branch -a</code></li>
-<li><code>git remote show origin</code></li>
-<li><code>git checkout -- .</code> to remove all unstaged files in current working directory</li>
-<li><code>git branch -u origin/master</code> tell git that local branch (master) should compare itself to remote counterpart (origin/master)</li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./Git.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/git.html" rel="tag">Git</a>
-                </div>
-            </article>            <h4 class="date">Dec 04, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./conda.html" rel="bookmark" title="Permanent Link to &quot;Conda&quot;">Conda</a>
-                </h2>
-
-                <h3>Conda</h3>
-<ul>
-<li><code>conda create --name &lt;name&gt; python=3.7 -y</code></li>
-<li><code>conda activate &lt;name&gt;</code></li>
-<li><code>pip install ipykernel</code></li>
-<li><code>python -m ipykernel install --user --name=&lt;name&gt;</code></li>
-<li><code>conda env remove --name &lt;name&gt;</code></li>
-<li><code>conda env list</code></li>
-<li><code>conda update</code></li>
-<li><code>conda install --yes --file requirements.txt</code></li>
-<li><code>jupyter kernelspec list</code></li>
-<li><code>conda install --channel=conda-forge nb_conda_kernels</code></li>
-</ul>
-<h4>Specific venvs</h4>
-<ul>
-<li>Geopandas: <code>conda create --name=gtfs_graph python=3.8 geopandas scipy --channel=conda-forge</code></li>
-</ul>
-<h4>Pipenv</h4>
-<p>Install</p>
-<ul>
-<li><code>sudo apt-get update</code></li>
-<li><code>sudo apt install python3-pip</code></li>
-<li><code>pip3 install pipenv</code></li>
-<li><code>pipenv --python 3.6</code></li>
-</ul>
-<p>Useful commands</p>
-<ul>
-<li><code>pipenv install -r requirements.txt</code></li>
-<li><code>pipenv shell</code> to create new env; load/activate existing env, load .env variables</li>
-<li><code>pipenv update</code> can be used to install base dependencies</li>
-<li><code>pip install ...</code></li>
-<li><code>pipenv sync</code> will use <code>Pipfile</code> if present</li>
-<li><code>pipenv graph</code></li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./conda.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/virtual-environemnts.html" rel="tag">Virtual Environemnts</a>
-                </div>
-            </article>
-
-                <div class="clear"></div>
-                <div class="pages">
-
-                    <a href="./page/7" class="prev_page">&larr;&nbsp;Previous</a>
-                    <a href="./page/9" class="next_page">Next&nbsp;&rarr;</a>
-                    <span>Page 8 of 21</span>
-                </div>
-
-            <div class="clear"></div>
-            <footer>
-                <p>
-                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-            </footer>
-        </div>
-        <div class="clear"></div>
-    </div>
+<ol id="post-list">
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="./Git.html" rel="bookmark" title="Permalink to Git">Git</a></h2> </header>
+                <footer class="post-info">
+                    <abbr class="published" title="2017-12-05T00:00:00+00:00"> Tue 05 December 2017 </abbr>
+                    <address class="vcard author">By
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <p>Git</p> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="./conda.html" rel="bookmark" title="Permalink to Conda">Conda</a></h2> </header>
+                <footer class="post-info">
+                    <abbr class="published" title="2017-12-04T00:00:00+00:00"> Mon 04 December 2017 </abbr>
+                    <address class="vcard author">By
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <p>Virtual Environemnts with Conda and Pipenv</p> </div><!-- /.entry-content -->
+        </article></li>
+</ol><!-- /#posts-list -->
+<p class="paginator">
+        <a href="./index7.html">&laquo;</a>
+    Page 8 / 21
+        <a href="./index9.html">&raquo;</a>
+</p>
+</section><!-- /#content -->
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
 </body>
 </html>

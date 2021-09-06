@@ -28,7 +28,7 @@ Summary: Vagrant VM setup
 
 ```
 sudo usermod -a -G vboxsf user
-mkdir ~/shared
+mkdir -m 0700 ~/shared
 sudo mount -t vboxsf vmtest_kafka ~/shared
 ```
 

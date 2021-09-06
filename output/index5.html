@@ -1,119 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>code snippets etc.</title>
-    <link rel="shortcut icon" type="image/png" href="./favicon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
-    <link rel="stylesheet" href="./theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="./theme/css/print.css" type="text/css" media="print" />
-    <meta name="generator" content="Pelican" />
+        <title>code snippets etc.</title>
+        <meta charset="utf-8" />
 </head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href=".">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
-                <li><a href="./archives">Archives</a></li>
-            </ul>
-        </nav>
-        <div class="header_box">
-            <h1><a href=".">code snippets etc.</a></h1>
-        </div>
-    </header>
-    <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 06, 2018</h4>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="./Matplotlib.html" rel="bookmark" title="Permanent Link to &quot;Matplotlib&quot;">Matplotlib</a>
-                </h2>
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="./">code snippets etc. <strong></strong></a></h1>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+            <li><a href="https://github.com/raoulbia">GitHub</a></li>
+        </ul></nav><!-- /#menu -->
+<section id="content">
+<h2>All articles</h2>
 
-                <p><br> </p>
-<h4>Useful Links</h4>
-<ul>
-<li><a href="https://www.practicaldatascience.org/html/plotting_part2.html">Plotting with plotnine</a></li>
-<li><a href="https://towardsdatascience.com/advanced-histogram-using-python-bceae288e715">Advanced Histogram Using Python</a></li>
-<li><a href="https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149">A Comprehensive Guide to the Grammar of Graphics for Effective Visualization of Multi-dimensional Data</a></li>
-<li><a href="https://towardsdatascience.com/annotating-bar-charts-and-other-matplolib-techniques-cecb54315015">How to Enhance your Matplotlib Plots</a></li>
-<li><a href="https://towardsdatascience.com/visualizing-statistical-plots-with-seaborn-6b6e60ce5e71">Visualizing statistical plots with Seaborn</a></li>
-<li><a href="https://www.drawingfromdata.com/setting-figure-size-using-seaborn-and-matplotlib">DRAWING FROM DATA</a></li>
-<li><a href="https://docs.scipy.org/doc/numpy-1.13.0/reference/routines.polynomials.classes.html">example dynamic label</a></li>
-</ul>
-<h4>Examples</h4>
-<div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="s2">&quot;paper&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="s2">&quot;monospace&quot;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Title&#39;</span><span class="p">);</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">freq_descr</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">freq_descr</span><span class="o">.</span><span class="n">cnt</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">))</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
-</pre></div>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./Matplotlib.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
-                </div>
-            </article>            <h4 class="date">Jan 06, 2018</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./jenkins.html" rel="bookmark" title="Permanent Link to &quot;Jenkins&quot;">Jenkins</a>
-                </h2>
-
-                <p><br> </p>
-<h4>Useful commands</h4>
-<ul>
-<li><code>sudo systemctl restart jenkins</code></li>
-<li><code>dpkg -L jenkins</code> will help you find what files the package installed</li>
-</ul>
-<h4>Build Periodically</h4>
-<div class="highlight"><pre><span></span># MINUTE (0-59), HOUR (0-23), DAY (1-31), MONTH (1-12), DAY OF THE WEEK (0-6)
-# weekday daily build twice a day, at _ and _ , Monday to Friday:
-H 10,17 * * 1-5
-</pre></div>
-
-
-<h4>Build: Execute Windows Batch Command</h4>
-<div class="highlight"><pre><span></span>call C:\Users\Raoul.Biagioni\Miniconda3\Scripts\activate.bat C:\Users\Raoul.Biagioni\Miniconda3
-call conda activate gtfsRT
-python C:\\Users\\&lt;FirstName.LastName&gt;\\&lt;path-to-file&gt;\\scriptname.py
-</pre></div>
-
-
-<h4>Misc.</h4>
-<ul>
-<li><a href="https://phoenixnap.com/kb/install-jenkins-ubuntu">Set up Jenkins</a></li>
-<li><a href="https://stackoverflow.com/a/28906663">Disable Jenkins password</a></li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./jenkins.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/ci.html" rel="tag">CI</a>
-                </div>
-            </article>
-
-                <div class="clear"></div>
-                <div class="pages">
-
-                    <a href="./page/4" class="prev_page">&larr;&nbsp;Previous</a>
-                    <a href="./page/6" class="next_page">Next&nbsp;&rarr;</a>
-                    <span>Page 5 of 21</span>
-                </div>
-
-            <div class="clear"></div>
-            <footer>
-                <p>
-                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-            </footer>
-        </div>
-        <div class="clear"></div>
-    </div>
+<ol id="post-list">
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="./Matplotlib.html" rel="bookmark" title="Permalink to Matplotlib">Matplotlib</a></h2> </header>
+                <footer class="post-info">
+                    <abbr class="published" title="2018-01-06T00:00:00+00:00"> Sat 06 January 2018 </abbr>
+                    <address class="vcard author">By
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <p>Matplotlib</p> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="./jenkins.html" rel="bookmark" title="Permalink to Jenkins">Jenkins</a></h2> </header>
+                <footer class="post-info">
+                    <abbr class="published" title="2018-01-06T00:00:00+00:00"> Sat 06 January 2018 </abbr>
+                    <address class="vcard author">By
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <p>Jenkins</p> </div><!-- /.entry-content -->
+        </article></li>
+</ol><!-- /#posts-list -->
+<p class="paginator">
+        <a href="./index4.html">&laquo;</a>
+    Page 5 / 21
+        <a href="./index6.html">&raquo;</a>
+</p>
+</section><!-- /#content -->
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
 </body>
 </html>
