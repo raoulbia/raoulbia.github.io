@@ -7,7 +7,7 @@ Summary: Linux
 
 #### Useful Commands
 
-* `sudo tar xzvf package_file.tar.gz`
+* `sudo tar -xvf package_file.tar.gz`
 * `sudo dpkg -i package_file.deb`
 * `cat /etc/*release`
 * `echo $XDG_CURRENT_DESKTOP`

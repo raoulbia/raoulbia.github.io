@@ -374,7 +374,7 @@ gpd.head()
 <ul>
 <li><code>df = df.replace(r'\s+', np.nan, regex=True).replace('', np.nan)</code></li>
 <li><code>df = df.replace(to_replace=np.nan, value="NULL")</code></li>
-<li><code>d2 = df.replace(to_replace="", value="unknown").replace(to_replace=np.nan, value="unknown")</code></li>
+<li><code>df = df.replace(to_replace="", value="unknown").replace(to_replace=np.nan, value="unknown")</code></li>
 </ul>
 <h3>Column subset</h3>
 <p><code>df = df[['col1', 'col2', ...]]</code></p>

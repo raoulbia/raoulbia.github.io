@@ -22,7 +22,7 @@ Summary: Vagrant VM setup
 #### Shared Folders 
 
 * Assuming you want to share the directory in which `Vagrantfile` is located and that directory is named `vmtest_kafka`. 
-* First add your share directory in the VM Box (Devices > Shared Folders).
+* First add your share directory in the VM Box (Devices > Shared Folders) under 'Transient Folders`.
 * Whatever you name your share here will be the name you will need to use when mounting in the vm guest OS e.g. `vmtest_kafka`. 
 * Next on the the guset OS make a directory to use for your mount preferably in your home directory e.g. `mkdir ~/shared`.
 

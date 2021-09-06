@@ -205,7 +205,7 @@ data = data[data.opened_at.dt.year >= 2019]
 
 * `df = df.replace(r'\s+', np.nan, regex=True).replace('', np.nan)`
 * `df = df.replace(to_replace=np.nan, value="NULL")`
-* `d2 = df.replace(to_replace="", value="unknown").replace(to_replace=np.nan, value="unknown")`
+* `df = df.replace(to_replace="", value="unknown").replace(to_replace=np.nan, value="unknown")`
 
 ### Column subset
 

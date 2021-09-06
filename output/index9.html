@@ -47,7 +47,7 @@
 <h4>Shared Folders</h4>
 <ul>
 <li>Assuming you want to share the directory in which <code>Vagrantfile</code> is located and that directory is named <code>vmtest_kafka</code>. </li>
-<li>First add your share directory in the VM Box (Devices &gt; Shared Folders).</li>
+<li>First add your share directory in the VM Box (Devices &gt; Shared Folders) under 'Transient Folders`.</li>
 <li>Whatever you name your share here will be the name you will need to use when mounting in the vm guest OS e.g. <code>vmtest_kafka</code>. </li>
 <li>Next on the the guset OS make a directory to use for your mount preferably in your home directory e.g. <code>mkdir ~/shared</code>.</li>
 </ul>
@@ -130,7 +130,7 @@ VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/h
 
                 <h4>Useful Commands</h4>
 <ul>
-<li><code>sudo tar xzvf package_file.tar.gz</code></li>
+<li><code>sudo tar -xvf package_file.tar.gz</code></li>
 <li><code>sudo dpkg -i package_file.deb</code></li>
 <li><code>cat /etc/*release</code></li>
 <li><code>echo $XDG_CURRENT_DESKTOP</code></li>
