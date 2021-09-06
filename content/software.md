@@ -126,7 +126,7 @@ Docker Compose
 #### Install
 ```
 $ wget https://download.jetbrains.com/python/pycharm-community-2018.3.4.tar.gz
-$ tar xvzf pycharm-community-2018.3.4.tar.gz
+$ tar -xvf pycharm-community-2018.3.4.tar.gz
 $ cd pycharm-community-2018.3.4/bin
 $ . pycharm.sh
 ```
