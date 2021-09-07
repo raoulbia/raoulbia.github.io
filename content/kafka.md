@@ -14,8 +14,9 @@ kafka-server-start.sh config/server.properties
 
 #### Topics
 
-* `kafka-topics.sh --create --topic "my-first-topic" --partitions 1 --replication-factor 1 --zookeeper localhost:2181`
-* `kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list`
+`kafka-topics.sh --create --topic "my-first-topic" --partitions 1 --replication-factor 1 --zookeeper localhost:2181`
+
+`kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list`
 
 
 #### Producers

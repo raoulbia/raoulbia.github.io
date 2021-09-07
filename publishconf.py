@@ -28,5 +28,5 @@ DELETE_OUTPUT_DIRECTORY = True
 THEME = "./pelican-themes/blue-penguin"
 #THEME = "blue-penguin"
 # THEME = "blue-idea"
-#PLUGIN_PATHS = ['pelican-themes']
+PLUGIN_PATHS = ['pelican-themes']
 # PLUGINS = ['assets']

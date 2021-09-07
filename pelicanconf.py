@@ -65,9 +65,8 @@ DEFAULT_PAGINATION = 2
 RELATIVE_URLS = True
 
 # THEME = "./themes/pelican-svbtle"
-THEME = "./pelican-themes/blue-penguin"
 #THEME = "./pelican-themes/" # if only blue penguin was installed then it will be in the root (no need to specify)
-#THEME = "./pelican-themes/blue-penguin"
+THEME = "pelican-themes/theme/blue-penguin"
 STATIC_PATHS = ['img', 'static']
 MARKUP = ('md', 'ipynb')
 PLUGIN_PATHS = ['./plugins']

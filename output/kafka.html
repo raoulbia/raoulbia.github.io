@@ -1,45 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-          <title>code snippets etc.</title>
         <meta charset="utf-8" />
-
-
-
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code snippets etc. | Kafka Cheatsheet</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 
 </head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="./">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="./archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="./">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Nov 24, 2017</h4>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="./">code snippets etc. <strong></strong></a></h1>
-        </header><!-- /#banner -->
-        <nav id="menu"><ul>
-            <li><a href="https://github.com/raoulbia">GitHub</a></li>
-        </ul></nav><!-- /#menu -->
-<section id="content" class="body">
-  <header>
-    <h2 class="entry-title">
-      <a href="./kafka.html" rel="bookmark"
-         title="Permalink to Kafka Cheatsheet">Kafka Cheatsheet</a></h2>
- 
-  </header>
-  <footer class="post-info">
-    <abbr class="published" title="2017-11-24T00:00:00+00:00">
-      Fri 24 November 2017
-    </abbr>
-  </footer><!-- /.post-info -->
-  <div class="entry-content">
-    <h4>Start Zookeeper and Kafka</h4>
+            <article class="post">
+                <h2 class="title">
+                    <a href="./kafka.html" rel="bookmark" title="Permanent Link to &quot;Kafka Cheatsheet&quot;">Kafka Cheatsheet</a>
+                </h2>
+
+                
+                
+
+                <h4>Start Zookeeper and Kafka</h4>
 <div class="highlight"><pre><span></span>zookeeper-server-start.sh config/zookeeper.properties
 kafka-server-start.sh config/server.properties
 </pre></div>
 
 
 <h4>Topics</h4>
-<ul>
-<li><code>kafka-topics.sh --create --topic "my-first-topic" --partitions 1 --replication-factor 1 --zookeeper localhost:2181</code></li>
-<li><code>kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list</code></li>
-</ul>
+<p><code>kafka-topics.sh --create --topic "my-first-topic" --partitions 1 --replication-factor 1 --zookeeper localhost:2181</code></p>
+<p><code>kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list</code></p>
 <h4>Producers</h4>
 <ul>
 <li><code>kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic</code></li>
@@ -48,13 +54,22 @@ kafka-server-start.sh config/server.properties
 <ul>
 <li><code>kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --from-beginning</code></li>
 </ul>
-  </div><!-- /.entry-content -->
-</section>
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-        </footer><!-- /#contentinfo -->
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./kafka.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/kafka.html" rel="tag">Kafka</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
 </body>
 </html>

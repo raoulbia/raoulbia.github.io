@@ -1,50 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>code snippets etc.</title>
-        <meta charset="utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code snippets etc. | Page 21</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 </head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="./">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="./archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="./">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Apr 25, 2017</h4>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="./">code snippets etc. <strong></strong></a></h1>
-        </header><!-- /#banner -->
-        <nav id="menu"><ul>
-            <li><a href="https://github.com/raoulbia">GitHub</a></li>
-        </ul></nav><!-- /#menu -->
-<section id="content">
-<h2>All articles</h2>
+            <article class="post">
+                <h2 class="title">
+                    <a href="./public_transport.html" rel="bookmark" title="Permanent Link to &quot;Public Transport&quot;">Public Transport</a>
+                </h2>
 
-<ol id="post-list">
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="./public_transport.html" rel="bookmark" title="Permalink to Public Transport">Public Transport</a></h2> </header>
-                <footer class="post-info">
-                    <abbr class="published" title="2017-04-25T00:00:00+01:00"> Tue 25 April 2017 </abbr>
-                    <address class="vcard author">By
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>Public Transport</p> </div><!-- /.entry-content -->
-        </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="./public_transport_data.html" rel="bookmark" title="Permalink to Public Transport Data">Public Transport Data</a></h2> </header>
-                <footer class="post-info">
-                    <abbr class="published" title="2017-04-24T00:00:00+01:00"> Mon 24 April 2017 </abbr>
-                    <address class="vcard author">By
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>Public Transport Data</p> </div><!-- /.entry-content -->
-        </article></li>
-</ol><!-- /#posts-list -->
-<p class="paginator">
-        <a href="./index20.html">&laquo;</a>
-    Page 21 / 21
-</p>
-</section><!-- /#content -->
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-        </footer><!-- /#contentinfo -->
+                
+                
+
+                <h3>Glossary</h3>
+<ul>
+<li>
+<p>KML: Keyhole Markup Language is a file format used to display geographic data in an Earth browser such as Google Earth.</p>
+</li>
+<li>
+<p>NaPTAN: acronym for National Public Transport Access Nodes, is a national database that contains a unique entry for each point of access to public transport: railway stations, bus stops, airports, ferry terminals, coach terminus, taxi ranks, and so on. In short, it's an index of every place where a passenger can join or leave public transport.
+ <a href="https://dftdigital.blog.gov.uk/2020/07/06/naptan-the-most-popular-dataset-youve-never-heard-of/">source</a></p>
+</li>
+<li>
+<p>A standard for identifying and naming access points to public transport</p>
+</li>
+<li>A database of all the access points in the UK.</li>
+<li>An XML Schema for exchanging stop data as XML documents describing the content. All or part of the database may be exchanged in this format.</li>
+<li>
+<p>An exchange format for exchanging stop data as csv files</p>
+</li>
+<li>
+<p>NeTEx: Network Timetable Exchange</p>
+</li>
+<li>
+<p>Gazeteer: a geographical index or dictionary.</p>
+</li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./public_transport.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/public-transport.html" rel="tag">Public Transport</a>
+                </div>
+            </article>            <h4 class="date">Apr 24, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./public_transport_data.html" rel="bookmark" title="Permanent Link to &quot;Public Transport Data&quot;">Public Transport Data</a>
+                </h2>
+
+                
+                
+
+                <p><a href="https://gtfs.org/reference/static/#field-definitions">GTFS Field Definitions</a></p>
+<p><a href="http://transitfeeds.com/p/transport-for-ireland">Transit Feeds Transport for Ireland</a></p>
+<p><a href="https://data.smartdublin.ie/dataset?category=Transport+and+Infrastructure">Dublinked Transport and Infrastructure</a></p>
+<h2>TransitFeed</h2>
+<p><a href="https://github.com/google/transitfeed">github.com/google/transitfeed</a></p>
+<h3>Feed Validator</h3>
+<p><a href="https://github.com/google/transitfeed/wiki/FeedValidator">/wiki/FeedValidator</a></p>
+<p><code>python feedvalidator.py dublin_bus_gtfs.zip</code></p>
+<p>Note: Written for Python 2. Make sure to create conda env with pyton 2.7!</p>
+<h3>Schedule Viewer (Map)</h3>
+<p><code>python schedule_viewer.py --feed_filename dublin_bus_gtfs.zip</code></p>
+<p>then go to <code>http://localhost:8765/</code></p>
+<p>Notes: </p>
+<ul>
+<li>add API key to <code>/home/user/shared/transitfeed/gtfsscheduleviewer/files/index.html</code></li>
+<li>and to <code>/home/user/shared/transitfeed/schedule_viewer.py</code> (TBC if this can be dropped)</li>
+<li>restrict API key - see <a href="https://stackoverflow.com/questions/46560859/expiredkeymaperror-on-newly-generated-api-key">this SO post</a></li>
+</ul>
+<h2>GTFS Ready Set Go</h2>
+<p><a href="https://github.com/ondata/gtfsreadysetgo">github.com/ondata/gtfsreadysetgo</a></p>
+<p><a href="https://medium.com/tantotanto/gtfs-pronti-partenza-via-23aa4a42c48e">GTFS, pronti, partenza, via …</a></p>
+<p><code>GTFS ready, set, go</code> is a <strong>bash script</strong> to </p>
+<ul>
+<li>download a GTFS file, and </li>
+<li>convert it to a spatialite file (stops and the routes tables)</li>
+<li>create report about the GTFS data</li>
+<li>export the stops and the routes tables in GeoJSON and KML formats</li>
+</ul>
+<p>The files produced by this script can be imported int QGIS.</p>
+<h2>GTFS Real Time (upcoming)</h2>
+<p><a href="https://gtfs.org/reference/realtime/v2/">GTFS Realtime Reference v2</a></p>
+<p><a href="https://github.com/seanrees/gtfs-upcoming">github.com/seanrees/gtfs-upcoming</a></p>
+<div class="highlight"><pre><span></span>sudo kill -9 `sudo lsof -t -i:6824`
+python main.py --config=config.ini --env=prod --port=6824 --promport=800
+http://127.0.0.1:6824/upcoming.json
+</pre></div>
+
+
+<p>Notes:</p>
+<ul>
+<li><a href="https://developer.nationaltransport.ie/">NTA API Developer Portal</a></li>
+<li>add API keys to <code>/home/user/shared/gtfs-upcoming/config.ini</code></li>
+</ul>
+<h2>GTFSDB</h2>
+<p><a href="https://github.com/OpenTransitTools/gtfsdb">github.com/OpenTransitTools/gtfsdb</a></p>
+<p><code>bin/gtfsdb-load --database_url postgresql://postgres:user@localhost:5432 dublin_bus_gtfs.zip</code></p>
+<p>Notes:</p>
+<ul>
+<li>Must git clone inside root directory of VM (not the shared directory!)</li>
+<li>requirements: geoalchemy2, psycopg2, SQLAlchemy, zc.recipe.egg</li>
+<li><a href="https://github.com/OpenTransitTools/gtfsdb#install-and-use-via-the-gtfsdb-source-tree">installation with buildout</a></li>
+<li>the database url must contain <code>username:password</code> e.g. <code>postgres:user</code></li>
+<li>the port number can be found using <code>grep -H '^port' /etc/postgresql/*/main/postgresql.conf</code></li>
+</ul>
+<h2>GeoJson</h2>
+<ul>
+<li>uses [long, lat]</li>
+</ul>
+<h2></h2>
+<h2>Others (to be reviewed)</h2>
+<ul>
+<li><a href="https://github.com/cbick/gtfs_SQL_importer">github.com/cbick/gtfs_SQL_importer</a></li>
+<li><a href="https://bennettgarner.medium.com/parsing-gtfs-format-transit-data-in-real-time-with-python-3a528ba7aab7">Parsing GTFS format transit data in real time with Python</a></li>
+<li><a href="https://github.com/departmentfortransport/Open_NaPTAN">Open_NaPTAN</a></li>
+<li><a href="https://pypi.org/project/transx2gtfs/">transx2gtfs</a></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./public_transport_data.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/public-transport-data.html" rel="tag">Public Transport Data</a>
+                </div>
+            </article>
+
+                <div class="clear"></div>
+                <div class="pages">
+
+                    <a href="./index20.html" class="prev_page">&larr;&nbsp;Previous</a>
+
+
+                    <span>Page 21 of 21</span>
+                </div>
+
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
 </body>
 </html>
