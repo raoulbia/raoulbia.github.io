@@ -38,14 +38,7 @@
                 
                 
 
-                <h4>Useful Links</h4>
-<ul>
-<li><a href="https://stackoverflow.com/questions/33101962/how-to-create-a-new-gitlab-repo-from-my-existing-local-git-repo-using-cli">How to create a new gitlab repo from my existing local git repo</a></li>
-<li><a href="https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/">Adding an existing project to GitHub using the command line</a></li>
-<li><a href="https://techbase.kde.org/Development/Git/Feature_Branch_Workflow">Feature_Branch_Workflow</a></li>
-<li><a href="https://stackoverflow.com/questions/67699/how-to-clone-all-remote-branches-in-git">How to clone all remote branches</a></li>
-</ul>
-<h4>Set / Change remote origin url</h4>
+                <h4>Set / Change remote origin url</h4>
 <div class="highlight"><pre><span></span>git remote add origin &lt;remote repository URL&gt;
 
 git remote set-url origin &lt;remote repository url&gt;
@@ -71,11 +64,12 @@ git push origin master tag GTFSRT_v1.0
 
 <h4>Git commands</h4>
 <ul>
+<li><code>git add -A</code></li>
+<li><code>git add .</code> to add a new file</li>
 <li><code>git checkout --theirs PATH/FILE</code> if conflict: If solution is to accept remote/other-branch version</li>
 <li><code>git add -p</code> <a href="https://medium.com/@mc999/git-add-p-is-a-gamechanger-in-file-management-e4c879e89ab">read more</a></li>
 <li><code>git clone -b &lt;branch name&gt; &lt;rep url&gt;</code></li>
 <li><code>git add dir/*</code> to add new files or directories:</li>
-<li><code>git add .</code> to add a new file</li>
 <li><code>git commit -m "update" $$ git push origin &lt;branch name&gt;</code></li>
 <li><code>git pull origin &lt;branch name&gt;</code></li>
 <li><code>git reset --hard origin/master</code></li>
@@ -83,6 +77,13 @@ git push origin master tag GTFSRT_v1.0
 <li><code>git remote show origin</code></li>
 <li><code>git checkout -- .</code> to remove all unstaged files in current working directory</li>
 <li><code>git branch -u origin/master</code> tell git that local branch (master) should compare itself to remote counterpart (origin/master)</li>
+</ul>
+<h4>Useful Links</h4>
+<ul>
+<li><a href="https://stackoverflow.com/questions/33101962/how-to-create-a-new-gitlab-repo-from-my-existing-local-git-repo-using-cli">How to create a new gitlab repo from my existing local git repo</a></li>
+<li><a href="https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/">Adding an existing project to GitHub using the command line</a></li>
+<li><a href="https://techbase.kde.org/Development/Git/Feature_Branch_Workflow">Feature_Branch_Workflow</a></li>
+<li><a href="https://stackoverflow.com/questions/67699/how-to-clone-all-remote-branches-in-git">How to clone all remote branches</a></li>
 </ul>
                 <div class="clear"></div>
 

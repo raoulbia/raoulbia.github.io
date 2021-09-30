@@ -86,8 +86,8 @@
 </ul>
 <p>or </p>
 <ul>
-<li><code>heroku ps</code> to get current running dynos (e.g. <code>worker.1</code></li>
-<li><code>heroku ps:stop worker.1</code></li>
+<li><code>heroku ps -a APPNAME</code> to get current running dynos (e.g. <code>worker.1</code></li>
+<li><code>heroku ps:stop worker.1 -a APPNAME</code></li>
 <li><code>heroku logs --tail -a APPNAME</code> to see what is going on in the VM.</li>
 </ul>
 <h4>Misc.</h4>
@@ -176,6 +176,7 @@
 <p><br></p>
 <h3>Flask</h3>
 <ul>
+<li>to run a Flask app: <code>python app.py</code></li>
 <li><code>import pdb; pdb.set_trace()</code></li>
 <li>error: address already in use<ul>
 <li><code>sudo lsof -i :5000</code></li>

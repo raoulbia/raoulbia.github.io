@@ -168,7 +168,7 @@ Django Resources
 
 * to run a Flask app: `python app.py`
 * `import pdb; pdb.set_trace()`
-*  error: address already in use
+* error: address already in use
     * `sudo lsof -i :5000`
     * `sudo kill-9 PID`
 * `FLASK_APP=run.py flask run`
