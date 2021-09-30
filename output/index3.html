@@ -187,6 +187,12 @@ gpd.head()
 
 
 <h4>Create Date Features</h4>
+<p>If we already have a column of <code>dtype=datetime64[ns]</code>:</p>
+<div class="highlight"><pre><span></span>df[&#39;date&#39;] = df.feed_timestamp.apply(lambda x:&#39;-&#39;.join([str(x.year), str(x.month), str(x.day)]))
+df[&#39;hour&#39;] = df.feed_timestamp.apply(lambda x:x.hour)
+</pre></div>
+
+
 <div class="highlight"><pre><span></span><span class="c1"># time conversion helper variables</span>
 <span class="n">seconds_in_day</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span>
 <span class="n">seconds_in_hour</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span>
@@ -225,7 +231,7 @@ gpd.head()
 <p><code>df = df[['col1', 'col2', ...]]</code></p>
 <h3>Inspect</h3>
 <h4>Duplicate rows</h4>
-<p>(see here)[https://thispointer.com/pandas-find-duplicate-rows-in-a-dataframe-based-on-all-or-selected-columns-using-dataframe-duplicated-in-python/#:~:text=To%20find%20%26%20select%20the%20duplicate,argument%20is%20'first').]</p>
+<p><a href="https://thispointer.com/pandas-find-duplicate-rows-in-a-dataframe-based-on-all-or-selected-columns-using-dataframe-duplicated-in-python/#:~:text=To%20find%20%26%20select%20the%20duplicate,argument%20is%20" title="first">find duplicate rows in a dataframe based on all or selected columns</a>)</p>
 <div class="highlight"><pre><span></span># Select all duplicate rows based on all columns
 df[df.duplicated(keep=False)]
 </pre></div>
@@ -378,22 +384,28 @@ data.company = np.select(conditions, outputs, default=data.company)
 </pre></div>
 
 
-<h4>groupby and sum two columns</h4>
-<div class="highlight"><pre><span></span>gpd = (df.groupby([&#39;Date&#39;, &#39;Verktitel&#39;])[[&#39;Belopp&#39;, &#39;Antal Spelningar&#39;]]
-       .agg({&#39;Belopp&#39; : sum, &#39;Antal Spelningar&#39; : sum})
-      )
-gpd = gpd.reset_index()
-gpd.head()
+<h4>one column</h4>
+<div class="highlight"><pre><span></span>gpd = (df.groupby([&#39;bmo&#39;])[&#39;last_stop_delay_mins&#39;]
+       .agg(Min = &#39;min&#39;, Max = &#39;max&#39;, Mean = &#39;mean&#39;, Count = &#39;count&#39;))
+gpd
 </pre></div>
 
 
-<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;caller&#39;</span><span class="p">)</span>
- <span class="o">.</span><span class="n">size</span><span class="p">()</span>
- <span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
- <span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
- <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;cnt&#39;</span><span class="p">})</span>
- <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;cnt&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<h4>two or more columns</h4>
+<div class="highlight"><pre><span></span>gpd = (df.groupby([&#39;trip_start_date&#39;, &#39;hour&#39;, &#39;bmo&#39;])[&#39;last_stop_delay_mins&#39;]
+       .agg(Min = &#39;min&#39;, Max = &#39;max&#39;, Mean = &#39;mean&#39;, Count = &#39;count&#39;))
+gpd.reset_index()
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">gpd</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;caller&#39;</span><span class="p">)</span>
+       <span class="o">.</span><span class="n">size</span><span class="p">()</span>
+       <span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+       <span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+       <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;cnt&#39;</span><span class="p">})</span>
+       <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;cnt&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+      <span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">gpd</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>  
 </pre></div>
 
 
@@ -677,7 +689,7 @@ df[&#39;Title&#39;] = df.Name.str.extract(&#39; ([A-Za-z]+)\.&#39;, expand=False
 
                     <a href="./index4.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 3 of 21</span>
+                    <span>Page 3 of 23</span>
                 </div>
 
             <div class="clear"></div>

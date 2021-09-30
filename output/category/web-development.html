@@ -38,7 +38,7 @@
                 
                 
 
-                <h4>nginx</h4>
+                <h3>nginx</h3>
 <ul>
 <li><code>sudo nginx -t</code> to test nginx</li>
 <li><code>sudo /etc/init.d/nginx reload</code> to restart nginx</li>
@@ -48,35 +48,65 @@
 <li><a href="https://www.youtube.com/watch?v=fpeQlbdRmKI">How To Set Up nginx Virtual Hosts (Server Blocks)</a></li>
 </ul>
 <p><br></p>
-<h4>start ngrok</h4>
+<h3>start ngrok</h3>
+<p>To start ngrok:</p>
 <p><code>./ngrok http 5000</code></p>
 <p><br></p>
-<h4>Heroku</h4>
-<p>Pre-requisite: Heroku Command Line Tool</p>
+<h3>Heroku</h3>
+<h4>Deploying a Flask App vs. running a Python script on the VM</h4>
 <ul>
-<li>needed for <code>heroku login --interactive</code> and <code>heroku create</code></li>
-<li>Option 1: <code>sudo snap install --classic heroku</code></li>
-<li>Option 2: <code>curl https://cli-assets.heroku.com/install.sh | sh</code></li>
+<li>The key difference is in how <code>Dynos</code> are configured in the <code>Resources</code> section.</li>
+<li>This is dictated by what is in the Procfile (see below). </li>
+<li>For running a Python script, click <code>Edit dyno formation</code> of <code>web</code> and <code>worker</code> and activate both radio buttons. Note that the <code>worker</code> can also be activate using <code>heroku ps:scale worker=1 -a APPNAME</code>.</li>
+</ul>
+<h4>Procfile</h4>
+<p>Procfile for Flask App</p>
+<ul>
+<li><code>web: gunicorn project_name.wsgi</code> where <code>project_name</code> is name of dir in which <code>settings.py</code> is located.</li>
+</ul>
+<p>Procfile for standalone python script</p>
+<div class="highlight"><pre><span></span><span class="n">web</span><span class="o">:</span> <span class="n">python</span> <span class="n">script</span><span class="o">.</span><span class="na">py</span>
+<span class="n">worker</span><span class="o">:</span> <span class="n">python</span> <span class="n">script</span><span class="o">.</span><span class="na">py</span>
+</pre></div>
+
+
+<h4>Install Heroku CLI</h4>
+<p>Needed for <code>heroku login --interactive</code> and <code>heroku create</code>.</p>
+<ul>
+<li><code>curl https://cli-assets.heroku.com/install.sh | sh</code></li>
 <li><a href="https://devcenter.heroku.com/categories/command-line">read more</a></li>
 </ul>
-<p>Stop/Start Heroku VM</p>
+<h4>Stop/Start Heroku VM</h4>
+<p>Start:</p>
 <ul>
-<li><code>heroku ps:scale web=0</code> wait for a few secs, then <code>heroku ps:scale web=1</code></li>
+<li><code>heroku ps:scale web=1</code> for starting a Flask App</li>
+<li><code>heroku ps:scale worker=1 -a APPNAME</code> for starting a "worker" which will in turn kick off a Python script i.e. will result in the same as logging in with <code>heroku login</code> and running <code>python script.py</code>.</li>
 </ul>
-<p>General Heroku Deployment Guidelines</p>
+<p>Stop:</p>
+<ul>
+<li><code>heroku ps:scale web=0</code> to stop Flask app</li>
+</ul>
+<p>or </p>
+<ul>
+<li><code>heroku ps</code> to get current running dynos (e.g. <code>worker.1</code></li>
+<li><code>heroku ps:stop worker.1</code></li>
+<li><code>heroku logs --tail -a APPNAME</code> to see what is going on in the VM.</li>
+</ul>
+<h4>Misc.</h4>
 <ul>
 <li><a href="https://devcenter.heroku.com/articles/git">overview</a></li>
 <li>add <code>Pipfile</code> to <code>.gitignore</code> to ensure that dependencies are installed from <code>requirements.txt</code>.</li>
 <li>add <code>.env/</code> to <code>.gitignore</code> to ensure that secret key is hidden on github/gitlab.</li>
-<li>after deployment run <code>heroku ps:scale web=1 --app  name-of-app</code></li>
-<li>view logs:<code>heroku logs --tail --app  name-of-app</code></li>
-<li>Login to Heroku VM:</li>
+<li>after deployment run <code>heroku ps:scale web=1 --app APPNAME</code></li>
+</ul>
+<h4>Login to Heroku VM</h4>
+<ul>
 <li><code>heroku login</code></li>
 <li><code>heroku run bash</code></li>
 <li><a href="https://help.heroku.com/18PI5RSY/how-do-i-clear-the-build-cache">clear the build cache</a></li>
 <li><a href="https://chatbotslife.com/github-repo-heroku-explained-how-to-host-your-bot-server-python-8b3ec4f071ce">related article</a></li>
 </ul>
-<p>Heroku <strong>Flask</strong> Deployment</p>
+<h4>Heroku <strong>Flask</strong> Deployment</h4>
 <ul>
 <li><code>heroku create &lt;NAME&gt;</code> to create a Heroku remote</li>
 <li><code>git add . ; git commit -m "update"</code></li>
@@ -95,16 +125,12 @@
 <li><a href="https://devcenter.heroku.com/articles/django-assets">about static assets</a></li>
 <li><code>pipenv install whitenoise</code></li>
 <li><code>python manage.py collectstatic</code></li>
-</ul>
-<p>Procfile, gunicorn, django-heroku</p>
-<ul>
 <li><a href="https://devcenter.heroku.com/articles/django-app-configuration">Django App configuration</a></li>
-<li>in Procfile <code>web: gunicorn myproject.wsgi</code> replace "myproject" by name of dir in which <code>settings.py</code> is located.</li>
 <li>add <code>import django_heroku</code> to <code>settings.py</code> (top)</li>
 <li>add <code>django_heroku.settings(locals())</code> to <code>settings.py</code> (bottom)</li>
 </ul>
 <p><br></p>
-<h4>Django2</h4>
+<h3>Django2</h3>
 <p>Useful commands</p>
 <div class="highlight"><pre><span></span><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">startproject</span> <span class="n">app1</span>
 <span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
@@ -140,7 +166,7 @@
 <li><a href="https://docs.djangoproject.com/en/2.1/topics/db/queries/">docs.djangoproject.com/en/2.1/topics/db/queries</a></li>
 </ul>
 <p><br></p>
-<h4>Apache2</h4>
+<h3>Apache2</h3>
 <ul>
 <li><code>apachectl -S</code></li>
 <li><code>sudo service apache2 restart</code></li>
@@ -150,7 +176,7 @@
 <li><a href="https://websiteforstudents.com/installing-apache2-mariadb-on-ubuntu-16-04-17-10-18-04-with-php-7-2-support-lamp/">Installing LAMP</a></li>
 </ul>
 <p><br></p>
-<h4>Flask</h4>
+<h3>Flask</h3>
 <ul>
 <li><code>import pdb; pdb.set_trace()</code></li>
 <li>error: address already in use<ul>
@@ -165,7 +191,7 @@
 <li><a href="https://coderwall.com/p/pstm1w/deploying-a-flask-app-at-heroku">gunicorn and flask</a></li>
 </ul>
 <p><br></p>
-<h4>Node JS</h4>
+<h3>Node JS</h3>
 <p>Install nodejs:</p>
 <div class="highlight"><pre><span></span>curl -sL https://deb.nodesource.com/setup_8.x — Node.js 8 LTS &quot;Carbon&quot; | sudo -E bash -
 sudo apt-get install -y nodejs
@@ -174,26 +200,27 @@ sudo apt-get install -y nodejs
 
 <p>symlink issue with Vagrant VM shared folder:</p>
 <p><code>npm install --no-bin-links</code></p>
-<p>port alread in use</p>
+<p>port already in use</p>
 <p><code>ps aux | awk '/node/{print $2}' | xargs kill -9</code></p>
 <p><br></p>
-<h4>Redux</h4>
+<h3>Redux</h3>
 <ul>
 <li><a href="https://www.bram.us/2016/10/25/plotly-academy-state-management-with-redux/">https://www.bram.us/2016/10/25/plotly-academy-state-management-with-redux/</a></li>
 </ul>
 <p><br></p>
-<h4>Ansible</h4>
+<h3>Ansible</h3>
 <ul>
 <li><a href="https://blog.jetbrains.com/pycharm/2017/12/developing-in-a-vm-with-vagrant-and-ansible/">Developing a VM-with Vagrant and Ansible</a></li>
 </ul>
 <p><br></p>
-<h4>SAP Conversational AI</h4>
+<h3>SAP Conversational AI</h3>
 <ul>
 <li>markdown URL syntax: <code>[Click Here]({{memory.url}})</code> </li>
 </ul>
 <p><br></p>
-<h4>Misc.</h4>
+<h3>Misc.</h3>
 <ul>
+<li><a href="https://miro.com/">https://miro.com/</a></li>
 <li><a href="https://wireframe.cc/">https://wireframe.cc/</a></li>
 <li><a href="https://www.creative-tim.com/product/get-shit-done-kit">https://www.creative-tim.com/product/get-shit-done-kit</a></li>
 <li><a href="https://uxplanet.org/how-the-bootstrap-4-grid-works-a1b04703a3b7">https://uxplanet.org/how-the-bootstrap-4-grid-works-a1b04703a3b7</a></li>

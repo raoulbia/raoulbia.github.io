@@ -52,21 +52,25 @@
 <li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>.</li>
 </ul>
 <h4>Shared Folders</h4>
-<ul>
-<li>Assuming you want to share the directory in which <code>Vagrantfile</code> is located and that directory is named <code>vmtest_kafka</code>. </li>
-<li>First add your share directory in the VM Box (Devices &gt; Shared Folders) under 'Transient Folders`.</li>
-<li>Whatever you name your share here will be the name you will need to use when mounting in the vm guest OS e.g. <code>vmtest_kafka</code>. </li>
-<li>Next on the the guset OS make a directory to use for your mount preferably in your home directory e.g. <code>mkdir ~/shared</code>.</li>
-</ul>
-<div class="highlight"><pre><span></span>sudo usermod -a -G vboxsf user
-mkdir -m 0700 ~/shared
+<h4>Vagrantfile</h4>
+<div class="highlight"><pre><span></span>config.vm.synced_folder <span class="s2">&quot;.&quot;</span>, <span class="s2">&quot;/vmtest_kafka&quot;</span>
+</pre></div>
+
+
+<h4>Vagrant Box</h4>
+<p>Assuming you want to share the directory in which <code>Vagrantfile</code> is located and that directory is named <code>vmtest_kafka</code>. 
+First add your share directory in the VM Box (Devices &gt; Shared Folders) and click "Make Permanent".
+Whatever you name your share here will be the name you will need to use when mounting in the vm guest OS e.g. <code>vmtest_kafka</code>. 
+Next on the the guset OS make a directory to use for your mount preferably in your home directory e.g. <code>mkdir ~/shared</code>.</p>
+<div class="highlight"><pre><span></span>sudo usermod -a -G vboxsf vagrant
+mkdir ~/shared
 sudo mount -t vboxsf vmtest_kafka ~/shared
 </pre></div>
 
 
 <ul>
 <li><code>sudo nano ~/.profile</code> and add the line: <code>sudo mount -t vboxsf vmtest_kafka ~/shared</code></li>
-<li>Set directory permissions on Host OS: <code>chmod 777 -R vmtest_kafka/</code></li>
+<li>Set directory permissions on HOST: <code>chmod 777 -R vmtest_kafka/</code></li>
 </ul>
 <h4>Increase Vagrant Box Size</h4>
 <p>Note: it may be easier to just grab a box that has a large size. See above.</p>
@@ -147,8 +151,9 @@ VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/h
 <li><code>sudo find ~/ -name rdflib</code></li>
 <li><code>sudo find / -name "*.cls"</code></li>
 <li><code>dpkg -L jenkins</code> will help you find what files does a package install</li>
-<li><code>``sudo kill -9</code>sudo lsof -t -i:8888````</li>
+<li><code>ps -a</code> or <code>sudo lsof -t -i:8888</code> then <code>kill -9 (processID)</code></li>
 <li>make script executable: <code>sudo chmod +x script.sh</code></li>
+<li>symbolic link: <code>sudo ln -s confluent-6.1.1/ confluent</code></li>
 </ul>
 <h4>Handy Tools</h4>
 <ul>

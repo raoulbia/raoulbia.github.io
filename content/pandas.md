@@ -172,6 +172,14 @@ gpd.head()
 ```
 
 #### Create Date Features
+
+If we already have a column of `dtype=datetime64[ns]`:
+
+```
+df['date'] = df.feed_timestamp.apply(lambda x:'-'.join([str(x.year), str(x.month), str(x.day)]))
+df['hour'] = df.feed_timestamp.apply(lambda x:x.hour)
+```
+
 ```
 # time conversion helper variables
 seconds_in_day = 60 * 60 * 24
@@ -215,7 +223,9 @@ data = data[data.opened_at.dt.year >= 2019]
 ### Inspect
 
 #### Duplicate rows 
-(see here)[https://thispointer.com/pandas-find-duplicate-rows-in-a-dataframe-based-on-all-or-selected-columns-using-dataframe-duplicated-in-python/#:~:text=To%20find%20%26%20select%20the%20duplicate,argument%20is%20'first').]
+
+[find duplicate rows in a dataframe based on all or selected columns](https://thispointer.com/pandas-find-duplicate-rows-in-a-dataframe-based-on-all-or-selected-columns-using-dataframe-duplicated-in-python/#:~:text=To%20find%20%26%20select%20the%20duplicate,argument%20is%20'first'))
+
 
 ```
 # Select all duplicate rows based on all columns
@@ -407,24 +417,32 @@ print(df.shape)
  .mean()
  .sort_values(by='Survived', ascending=False))
 ```
-#### groupby and sum two columns
+
+#### one column
 
 ```
-gpd = (df.groupby(['Date', 'Verktitel'])[['Belopp', 'Antal Spelningar']]
-       .agg({'Belopp' : sum, 'Antal Spelningar' : sum})
-      )
-gpd = gpd.reset_index()
-gpd.head()
+gpd = (df.groupby(['bmo'])['last_stop_delay_mins']
+       .agg(Min = 'min', Max = 'max', Mean = 'mean', Count = 'count'))
+gpd
+```
+
+#### two or more columns
+
+```
+gpd = (df.groupby(['trip_start_date', 'hour', 'bmo'])['last_stop_delay_mins']
+       .agg(Min = 'min', Max = 'max', Mean = 'mean', Count = 'count'))
+gpd.reset_index()
 ```
 
 ```python
-(df.groupby('caller')
- .size()
- .to_frame()
- .reset_index()
- .rename(columns={0:'cnt'})
- .sort_values(by='cnt', ascending=False)
-).head()
+gpd = (df.groupby('caller')
+	   .size()
+	   .to_frame()
+	   .reset_index()
+	   .rename(columns={0:'cnt'})
+	   .sort_values(by='cnt', ascending=False)
+	  ).head()
+gpd.head()  
 ```
 
 #### groupby with dates

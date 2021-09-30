@@ -14,8 +14,9 @@ Summary: Linux
 * `sudo find ~/ -name rdflib`
 * `sudo find / -name "*.cls"`
 * `dpkg -L jenkins` will help you find what files does a package install
-* ```sudo kill -9 `sudo lsof -t -i:8888````
+* ```ps -a``` or ```sudo lsof -t -i:8888``` then ```kill -9 (processID) ```
 * make script executable: `sudo chmod +x script.sh`
+*  symbolic link: `sudo ln -s confluent-6.1.1/ confluent`
 
 #### Handy Tools
 

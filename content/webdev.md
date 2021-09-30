@@ -4,7 +4,7 @@ Category: Web Development
 Slug: web_development
 Summary: Web Development
 
-#### nginx
+### nginx
 
 * `sudo nginx -t` to test nginx
 * `sudo /etc/init.d/nginx reload` to restart nginx
@@ -15,39 +15,77 @@ Summary: Web Development
 
 <br>
 
-#### start ngrok
+### start ngrok
+
+To start ngrok:
 
 `./ngrok http 5000`
 
 <br>
 
-#### Heroku
+### Heroku
 
-Pre-requisite: Heroku Command Line Tool
+#### Deploying a Flask App vs. running a Python script on the VM
 
-* needed for `heroku login --interactive` and `heroku create`
-* Option 1: `sudo snap install --classic heroku`
-* Option 2: `curl https://cli-assets.heroku.com/install.sh | sh`
+* The key difference is in how `Dynos` are configured in the `Resources` section.
+* This is dictated by what is in the Procfile (see below). 
+* For running a Python script, click `Edit dyno formation` of `web` and `worker` and activate both radio buttons. Note that the `worker` can also be activate using `heroku ps:scale worker=1 -a APPNAME`.
+
+#### Procfile
+
+Procfile for Flask App
+
+* `web: gunicorn project_name.wsgi` where `project_name` is name of dir in which `settings.py` is located.
+
+  
+Procfile for standalone python script
+
+```
+web: python script.py
+worker: python script.py
+```
+
+#### Install Heroku CLI 
+
+Needed for `heroku login --interactive` and `heroku create`.
+
+* `curl https://cli-assets.heroku.com/install.sh | sh`
 * [read more](https://devcenter.heroku.com/categories/command-line)
 
-Stop/Start Heroku VM
+#### Stop/Start Heroku VM
 
-* `heroku ps:scale web=0` wait for a few secs, then `heroku ps:scale web=1`
+Start:
+
+* `heroku ps:scale web=1` for starting a Flask App
+* `heroku ps:scale worker=1 -a APPNAME` for starting a "worker" which will in turn kick off a Python script i.e. will result in the same as logging in with `heroku login` and running `python script.py`.
+
+Stop:
+
+
+* `heroku ps:scale web=0` to stop Flask app
+
+or 
+
+* `heroku ps -a APPNAME` to get current running dynos (e.g. `worker.1`
+* `heroku ps:stop worker.1 -a APPNAME`
+* `heroku logs --tail -a APPNAME` to see what is going on in the VM.
+
   
-General Heroku Deployment Guidelines
+#### Misc. 
 
 * [overview](https://devcenter.heroku.com/articles/git)
 * add `Pipfile` to `.gitignore` to ensure that dependencies are installed from `requirements.txt`.
 * add `.env/` to `.gitignore` to ensure that secret key is hidden on github/gitlab.
-* after deployment run `heroku ps:scale web=1 --app  name-of-app`
-* view logs:`heroku logs --tail --app  name-of-app`
-* Login to Heroku VM:
+* after deployment run `heroku ps:scale web=1 --app APPNAME`
+
+#### Login to Heroku VM
+
 * `heroku login`
 * `heroku run bash`
 * [clear the build cache](https://help.heroku.com/18PI5RSY/how-do-i-clear-the-build-cache)
 * [related article](https://chatbotslife.com/github-repo-heroku-explained-how-to-host-your-bot-server-python-8b3ec4f071ce)
 
-Heroku **Flask** Deployment
+#### Heroku **Flask** Deployment
 
 * `heroku create <NAME>` to create a Heroku remote
 * `git add . ; git commit -m "update"`
@@ -66,17 +104,15 @@ Heroku **Django** Deployment
 *  [about static assets](https://devcenter.heroku.com/articles/django-assets)
 * `pipenv install whitenoise`
 * `python manage.py collectstatic`
-
-Procfile, gunicorn, django-heroku
-
 * [Django App configuration](https://devcenter.heroku.com/articles/django-app-configuration)
-* in Procfile `web: gunicorn myproject.wsgi` replace "myproject" by name of dir in which `settings.py` is located.
 * add `import django_heroku` to `settings.py` (top)
 * add `django_heroku.settings(locals())` to `settings.py` (bottom)
 
+
+  
 <br>
 
-#### Django2
+### Django2
 
 Useful commands
 
@@ -117,7 +153,7 @@ Django Resources
 
 <br>
 
-#### Apache2
+### Apache2
 
 * `apachectl -S`
 * `sudo service apache2 restart`
@@ -128,8 +164,9 @@ Django Resources
 
 <br>
 
-#### Flask
+### Flask
 
+* to run a Flask app: `python app.py`
 * `import pdb; pdb.set_trace()`
 *  error: address already in use
     * `sudo lsof -i :5000`
@@ -142,7 +179,7 @@ Django Resources
 
 <br>
 
-#### Node JS
+### Node JS
 
 Install nodejs:
 
@@ -155,32 +192,33 @@ symlink issue with Vagrant VM shared folder:
 
 `npm install --no-bin-links`
 
-port alread in use
+port already in use
 
 `ps aux | awk '/node/{print $2}' | xargs kill -9`
 
 <br>
 
-#### Redux
+### Redux
 
 * <https://www.bram.us/2016/10/25/plotly-academy-state-management-with-redux/>
 
 <br>
 
-#### Ansible
+### Ansible
 
 * [Developing a VM-with Vagrant and Ansible](https://blog.jetbrains.com/pycharm/2017/12/developing-in-a-vm-with-vagrant-and-ansible/)
 
 <br>
 
-#### SAP Conversational AI
+### SAP Conversational AI
 
 * markdown URL syntax: `[Click Here]({{memory.url}})` 
 
 <br>
 
-#### Misc.
+### Misc.
 
+* <https://miro.com/>
 * <https://wireframe.cc/>
 * <https://www.creative-tim.com/product/get-shit-done-kit>
 * <https://uxplanet.org/how-the-bootstrap-4-grid-works-a1b04703a3b7>

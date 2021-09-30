@@ -38,6 +38,15 @@
                 
 
                 <h4>Sample Queries</h4>
+<div class="highlight"><pre><span></span>SELECT train, dest, time FROM ( 
+  SELECT train, dest, time, 
+    RANK() OVER (PARTITION BY train ORDER BY time DESC) dest_rank
+    FROM traintable
+  ) where dest_rank = 1
+</pre></div>
+
+
+<p><br></p>
 <div class="highlight"><pre><span></span>select * from PREDICATION where SUBJECT_SEMTYPE in (&#39;gngm&#39;) limit 10;
 select * from ENTITY where SEMTYPE in (&#39;gngm&#39;) and GENE_ID &lt;&gt; &#39;&#39; limit 10;
 </pre></div>

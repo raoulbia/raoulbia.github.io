@@ -125,6 +125,8 @@ Docker Compose
 
 #### Install
 ```
+$ sudo apt install openjdk-8-jdk
+$ java -version
 $ wget https://download.jetbrains.com/python/pycharm-community-2018.3.4.tar.gz
 $ tar -xvf pycharm-community-2018.3.4.tar.gz
 $ cd pycharm-community-2018.3.4/bin

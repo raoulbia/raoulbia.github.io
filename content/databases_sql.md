@@ -7,6 +7,17 @@ Summary: SQL
 #### Sample Queries
 
 ```
+SELECT train, dest, time FROM ( 
+  SELECT train, dest, time, 
+    RANK() OVER (PARTITION BY train ORDER BY time DESC) dest_rank
+    FROM traintable
+  ) where dest_rank = 1
+```
+
+<br>
+
+
+```
 select * from PREDICATION where SUBJECT_SEMTYPE in ('gngm') limit 10;
 select * from ENTITY where SEMTYPE in ('gngm') and GENE_ID <> '' limit 10;
 ```
