@@ -25,6 +25,7 @@ time, mark, audio, video {
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+    font-family: Verdana ; 
 }
 em {
     font-style: italic;
@@ -57,8 +58,8 @@ table {
 }
 
 body {
-    font-family: Verdana ; /*Georgia, serif;*/
-    font-size: 14px;
+    font-family: Georgia, serif;
+    font-size: 16px;
     line-height: 1.5em;
     color: #444;
 }
