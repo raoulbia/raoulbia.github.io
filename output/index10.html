@@ -26,268 +26,386 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 01, 2017</h4>
+        <div id="content">            <h4 class="date">Jan 02, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./ssh_keys.html" rel="bookmark" title="Permanent Link to &quot;SSH Keys&quot;">SSH Keys</a>
+                    <a href="./python.html" rel="bookmark" title="Permanent Link to &quot;Python&quot;">Python</a>
                 </h2>
 
                 
                 
 
-                <h4>Checking for existing keys</h4>
-<div class="highlight"><pre><span></span>ls -al ~/.ssh
+                <p><br></p>
+<h4>File paths</h4>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">output_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="s1">&#39;data&#39;</span> <span class="o">/</span> <span class="s1">&#39;output&#39;</span><span class="c1">#self.output_dir = Path.cwd() / &#39;data&#39; / &#39;output&#39; / &#39;geojson&#39;</span>
+
+<span class="k">try</span><span class="p">:</span>
+ <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">FileExistsError</span><span class="p">:</span>
+ <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Folder already exists&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+ <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Folder was created: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
 
-<h4>Generating a new key</h4>
-<div class="highlight"><pre><span></span><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="n">rsa</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="mi">4096</span><span class="w"> </span><span class="o">-</span><span class="n">C</span><span class="w"> </span><span class="ss">&quot;your_email@example.com&quot;</span><span class="w"></span>
+<h4>limited FOR loop</h4>
+<p><code>for i, elem in zip(range(100), elems[::10])</code> where <code>[::10]</code> is every 10th</p>
+<h4>Query</h4>
+<ul>
+<li><code>pd.read_csv("file.csv").query("year==2000")</code></li>
+<li><code>df.query("delay_arrival == 'n/a' | delay_arrival == 'NO_DATA' ")</code></li>
+</ul>
+<h4>File Handling:</h4>
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">dosomething</span><span class="p">()</span>
 </pre></div>
 
 
-<p>or</p>
-<div class="highlight"><pre><span></span>ssh-keygen -t rsa -C &quot;some name&quot; -b 4096
+<div class="highlight"><pre><span></span><span class="c1"># remove if exists then write df to csv</span>
+<span class="n">f</span> <span class="o">=</span> <span class="s1">&#39;local-data/filename.csv&#39;</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
 
-<h4>Adding a key</h4>
-<div class="highlight"><pre><span></span>eval $(ssh-agent -s)
-ssh-add ~/.ssh/id_rsa
+<p>Notes:</p>
+<ul>
+<li>Opening a file with this statement will handle file closing for you</li>
+<li>The <code>StringIO</code> and <code>cStringIO</code> modules are gone. </li>
+<li>Instead, import the <code>io</code> module and use <code>io.StringIO</code> for <strong>text</strong> and <code>io.BytesIO</code> for <strong>data</strong>.</li>
+<li>Calling <code>read()</code> reads through the entire file and leaves the read cursor at the end of the file (with nothing more to read).</li>
+<li>Once a file has been read, with <code>read()</code> you can use <code>seek(0)</code> to return the read cursor to the start of the file</li>
+<li>To check if a file exists or to overwrite an existing file:</li>
+</ul>
+<h4>Get index based on values in another column</h4>
+<div class="highlight"><pre><span></span><span class="n">id_in_top5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">df_ranked</span><span class="p">[</span><span class="n">rank_column</span><span class="p">][</span><span class="n">df_ranked</span><span class="p">[</span><span class="n">rank_column</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">])[::]</span>
 </pre></div>
+
+
+<p><br></p>
+<h3>Ranking</h3>
+<h4>Create rankings</h4>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;source&#39;</span><span class="p">)[</span><span class="s1">&#39;dist&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+
+<h4>Create a dummy rank</h4>
+<p>This was used for a list of 10 items where 1 to 5 is already ranked and we need to fill the remaining 5 <code>NaN</code> ranks with ranks 6 to 10.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rank2rand</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col_to_modify</span><span class="p">):</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">existing_ranks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="n">col_to_modify</span><span class="p">]])</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;source_random&#39;</span><span class="p">]])</span>
+    <span class="n">updated_ranks</span> <span class="o">=</span> <span class="p">[</span><span class="nb">next</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span> <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">existing_ranks</span><span class="p">,</span> <span class="n">source</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">updated_ranks</span>
+</pre></div>
+
+
+<p><br></p>
+<h3>Lambda</h3>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">transform</span><span class="p">():</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">2</span><span class="o">**</span><span class="n">x</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">transform</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+
+<p>see also <a href="https://www.python-course.eu/python3_lambda.php">Lambda, filter, reduce and map</a></p>
+<h4>Lambda and dataframes: examples</h4>
+<p><code>df = df.apply(lambda x: x.astype(str).str.upper())</code></p>
+<p><code>df['Score'] = df['Score'].apply(lambda x: sigmoid(float(x)))</code></p>
+<p><code>df['string_id'] = df['string_id'].apply(lambda id_string: '9606.' + id_string)</code></p>
+<p><br></p>
+<h3>Misc.</h3>
+<h4><em>args &amp; </em>*kargs</h4>
+<ul>
+<li>*args refers to an undetermined number of positional arguments</li>
+<li>**kargs refers to an undetermined number of keyword arguments</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">add_numbers</span><span class="ss">(</span><span class="nv">num0</span>, <span class="nv">num1</span>, <span class="nv">num2</span><span class="o">=</span><span class="mi">2</span>, <span class="nv">num3</span><span class="o">=</span><span class="mi">3</span><span class="ss">)</span>:
+    <span class="nv">outcome</span> <span class="o">=</span> <span class="nv">num0</span> <span class="o">+</span> <span class="nv">num1</span> <span class="o">+</span> <span class="nv">num2</span> <span class="o">+</span> <span class="nv">num3</span>
+    <span class="nv">print</span><span class="ss">(</span><span class="nv">f</span><span class="s2">&quot;</span><span class="s">num0={num0}, num1={num1}, num2={num2}, num3={num3}</span><span class="s2">&quot;</span><span class="ss">)</span>
+    <span class="k">return</span> <span class="nv">outcome</span>
+</pre></div>
+
+
+<p><a href="https://medium.com/better-programming/top-5-mistakes-you-make-when-declaring-functions-in-python-b7a0747711a4">read more</a></p>
+<h4>Remove zeros from numpy array</h4>
+<div class="highlight"><pre><span></span><span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># print(index)</span>
+    <span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+</pre></div>
+
+
+<p>see also <a href="https://towardsdatascience.com/top-4-numpy-functions-you-dont-know-about-probably-28fcd5d7174f">Top 4 Numpy Functions You Don’t Know About</a></p>
+<h4>double colon e.g. <code>[::3]</code></h4>
+<p><code>[::3]</code> just means that you have not specified any start or end indices for your slice (as in <code>seq[start:end:step]</code>).</p>
+<p>Since you have specified a step, 3, this will take every third entry of something starting at the first index.</p>
+<p>For example: <code>'123123123'[::3] &gt;&gt; '111'</code></p>
+<p>It can also be used to reverse a list using <code>[::-1]</code>:</p>
+<p><code>a[::-1]</code> does not reverse anything, it's just a new view on the same data, more specifically a mirror view.</p>
+<p>The method <code>a[::-1].sort()</code> operates on the mirrored image, implying that when sort moves left a smaller item in its
+ mirrored image, in reality it is moving it to the right in the real memory block of the a array. The mirrored view is
+ sorted in ascending order, the real data is sorted in descending order.
+ <a href="https://stackoverflow.com/questions/26984414/efficiently-sorting-a-numpy-array-in-descending-order">source</a></p>
+<h4>What does selection by <code>[:,None]</code> do?</h4>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">NP</span>
+<span class="o">&gt;&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">NP</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">a</span>
+<span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span>
+<span class="p">(</span><span class="mi">4</span><span class="p">,)</span>
+<span class="o">&gt;&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">a</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">a</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span>
+<span class="p">[[</span><span class="mi">1</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]]</span>
+</pre></div>
+
+
+<p>see also <a href="http://stackoverflow.com/questions/37867354/in-numpy-what-does-selection-by-none-do">here</a></p>
+<h4>About Relative Imports</h4>
+<ul>
+<li>In order to run a script that uses relative imports such as <code>from .build_corpus import BuildCorpus</code>,
+you must run the script from the <strong>parent</strong> directory using <code>-m</code> and <strong>without</strong> the <code>.py</code>
+e.g. <code>python -m cai_pytorch.pytorch</code></li>
+</ul>
+<h4>About Python Modules</h4>
+<ul>
+<li>When getting error: <code>module ... not found</code>: <a href="http://askubuntu.com/questions/470982/how-to-add-a-python-module-to-syspath">see here</a></li>
+<li>To prevent getting error <code>no module named...</code> resp. before importing a module from a different project make sure to run: 
+<code>$ python setup.py install</code></li>
+<li>How to get <code>import</code> of modules to work (<a href="http://stackoverflow.com/questions/36650163/cant-import-from-specific-folder-in-pycharm">source</a>)</li>
+<li>Modules are imported from a Python Package, not from a Directory. Therefore, instead of storing python scripts in a    directory, store them in a Python Package: right-click on your project directory, choose Python Package.</li>
+<li>Alternatively, in the existing directory, create an empty <code>__init__.py</code> file.</li>
+</ul>
+<h4>About Python Packages</h4>
+<p>To list installed packages</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pip</span>
+<span class="n">installed_packages</span> <span class="o">=</span> <span class="n">pip</span><span class="o">.</span><span class="n">get_installed_distributions</span><span class="p">()</span>
+<span class="n">installed_packages_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">==</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">installed_packages</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">installed_packages_list</span><span class="p">)</span>
+</pre></div>
+
+
+<h4>Python Profiler for Debugging</h4>
+<ul>
+<li>
+<p><a href="https://stackoverflow.com/questions/49262187/storing-the-link-prediction-score-in-a-matrix-form-using-networkx">cProfiler</a></p>
+</li>
+<li>
+<p>line profiler</p>
+</li>
+</ul>
+<p>Assumes you are using a shell script to run your program.</p>
+<p>Pre-requiste: <code>pip install line_profiler</code></p>
+<ol>
+<li>
+<p>change shell script as follows:</p>
+<div class="highlight"><pre><span></span>   #!/bin/bash -x
+
+   kernprof -lv my_script.py \
+   # time python3 my_script.py \
+   ...
+</pre></div>
+
+
+</li>
+<li>
+<p>add <code>@profile</code> at the start of each function you want to profile</p>
+</li>
+<li>
+<p>execute shell script</p>
+</li>
+<li>
+<p>when done, reverse changes made in Steps 1. and 2.</p>
+</li>
+</ol>
+<h4><code>super()</code> with <code>__init__()</code></h4>
+<p><a href="https://stackoverflow.com/questions/576169/understanding-python-super-with-init-methods">Understanding Python super() with <strong>init</strong>() methods</a></p>
+<h4>About the Python import mechanism</h4>
+<ul>
+<li><a href="https://stackoverflow.com/questions/11536764/how-to-fix-attempted-relative-import-in-non-package-even-with-init-py">here</a></li>
+<li><a href="https://stackoverflow.com/questions/44834/can-someone-explain-all-in-python">and here</a></li>
+</ul>
+<h4>Time it</h4>
+<p>time a for loop:</p>
+<div class="highlight"><pre><span></span><span class="c">%%timeit -n 10</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="k">...</span><span class="c">:</span><span class="w"></span>
+<span class="w">  </span><span class="k">...</span><span class="w"></span>
+</pre></div>
+
+
+<p>general timing</p>
+<div class="highlight"><pre><span></span>testtime = datetime.now()
+...
+testtime = testtime.strftime(&quot;%H:%M&quot;)
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="o">...</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">t2r</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;execution time </span><span class="si">{:.4f}</span><span class="s1"> mins&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t2r</span> <span class="o">/</span> <span class="mi">60</span><span class="p">))</span>
+</pre></div>
+
+
+<h4>Logging &amp; Try/Except</h4>
+<ul>
+<li><a href="https://medium.com/better-programming/a-comprehensive-guide-to-handling-exceptions-in-python-7175f0ce81f7">A Comprehensive Guide to Handling Exceptions in Python</a></li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_pathway_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">list</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__qualname__</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pathway</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Building Pathway Data Set&#39;</span><span class="p">)</span>
+            <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">dataset</span> <span class="o">=</span> <span class="n">PathwayDataset</span><span class="p">(</span><span class="nb">list</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">args</span><span class="p">)</span>
+            <span class="n">dataset</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">pathway_limit</span><span class="o">=</span><span class="n">pathway_limit</span><span class="p">)</span>
+            <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;finished in </span><span class="si">%5.2f</span><span class="s1"> s&#39;</span><span class="p">,</span> <span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;dataset will not be built&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exception</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">e</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">])))</span>
+        <span class="k">raise</span> <span class="n">e</span>
+</pre></div>
+
+
+<h4>Create a temporary file for unit tests:</h4>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tomoe.io</span> <span class="kn">import</span> <span class="n">get_tomoe_local_data_dir</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="n">temp_path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;dist-graph-sampling&quot;</span><span class="p">)</span>
+
+ <span class="o">...</span>
+
+<span class="n">TOMOE_TEMP_FOLDER</span> <span class="o">=</span> <span class="n">get_tomoe_local_data_dir</span><span class="p">()</span>
+
+ <span class="o">...</span>
+<span class="n">triples_hg_csv_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="p">,</span> <span class="s1">&#39;triples.hg.csv.tsv&#39;</span><span class="p">)</span>
+<span class="n">triple_csv_to_hyperedge_csv</span><span class="p">(</span><span class="n">triples_csv_path</span><span class="p">,</span> <span class="n">triples_hg_csv_path</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">triples_hg_csv_path</span><span class="p">)</span><span class="o">.</span><span class="n">st_size</span> <span class="o">!=</span> <span class="mi">0</span>
+</pre></div>
+
+
+<h4>Variable assignemnt Gotchas</h4>
+<div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">b</span><span class="o">=</span><span class="n">a</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mi">12</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+
+
+<h4>How to install Python 3.6 on Ubuntu 16.04 LTS</h4>
+<div class="highlight"><pre><span></span>sudo add-apt-repository ppa:jonathonf/python-3.6
+sudo apt-get update
+sudo apt-get install python3.6
+</pre></div>
+
+
+<p>may be needed:</p>
+<p><code>sudo apt-get install python3.6-gdbm</code> </p>
+<h4>Convert Python2 to Python3</h4>
+<div class="highlight"><pre><span></span>pip install 2to3
+2to3 -n -w path/to/script/script_namae.py
+</pre></div>
+
+
+<p>Note: <code>-n</code> prevents backup files; <code>-w</code> instructs to write the conversion</p>
+<h4>Misc</h4>
+<ul>
+<li><code>strip()</code> strips off the new line character</li>
+<li>Widen Pycharm console output for pandas DFs: <code>pd.set_option('display.expand_frame_repr', False)</code></li>
+<li>About <code>action="store_true"</code>: <a href="https://docs.python.org/2/howto/argparse.html">see here</a></li>
+<li><code>PYTHONPATH</code> is the module search path.</li>
+<li><code>PYTHONHOME</code> is used for the standard libraries,</li>
+</ul>
+<h4>Various Links</h4>
+<ul>
+<li><a href="http://zetcode.com/python/regularexpressions/">Python regular expressions</a></li>
+<li><a href="https://kate.io/blog/2017/08/22/weird-python-integers/">Weird Python Integers</a></li>
+<li><a href="https://stackoverflow.com/questions/34229363/converting-json-string-into-python-dictionary">json.dumps vs json.loads</a></li>
+<li><a href="https://joblib.readthedocs.io/en/latest/">py joblib tutorial</a> ( about parallelization )</li>
+<li><a href="https://medium.com/analytics-vidhya/top-10-nice-to-have-data-science-libraries-d155196710ef">Top 10 Nice-To-Have Data Science Libraries</a></li>
+<li><a href="https://towardsdatascience.com/how-to-analyse-100s-of-gbs-of-data-on-your-laptop-with-python-f83363dda94">How to analyse 100 GB of data on your laptop with Python</a></li>
+<li><a href="https://www.kaggle.com/learn/overview">Kaggle Learn</a></li>
+<li><a href="https://medium.com/better-programming/tips-and-tricks-for-handling-configuration-files-in-python-a9d7429aa50b">Tips and Tricks for Handling Configuration Files in Python</a></li>
+<li><a href="https://medium.com/better-programming/dont-fear-the-pickle-using-pickle-dump-and-pickle-load-5212f23dbbce">Don’t Fear the Pickle: Using pickle.dump and pickle.load</a></li>
+<li><a href="https://www.youtube.com/channel/UCFxcvyt2Ucq5IL0_1Njzqlg/playlists">Python Videos</a></li>
+<li><a href="https://towardsdatascience.com/15-data-science-books-you-should-read-6f6981e6b3d8">15 Data Science Books You Should Read</a></li>
+<li><a href="https://people.duke.edu/~ccc14/sta-663/index.html">Computational Statistics in Python</a></li>
+<li><a href="https://medium.com/better-programming/what-are-args-and-kwargs-in-python-6aaf9e3cad73">What Are <em>args and </em>*kwargs in Python?</a></li>
+<li><a href="https://medium.com/better-programming/introduction-to-functional-programming-in-python-3d26cd9cbfd7">Introduction to Functional Programming in Python</a> ( about <strong>call</strong>() )</li>
+<li><a href="https://towardsdatascience.com/making-python-programs-blazingly-fast-c1cd79bd1b32">Making Python Programs Blazingly Fast</a></li>
+<li><a href="https://levelup.gitconnected.com/handy-python-features-e33751ef98a8">Decorators and Functions in Python</a></li>
+<li><a href="https://medium.com/better-programming/decorators-in-python-72a1d578eac4">Decorators in Python</a></li>
+<li><a href="https://www.statsmodels.org/stable/index.html">Statistics in Python</a></li>
+<li><a href="https://towardsdatascience.com/reduce-memory-usage-and-make-your-python-code-faster-using-generators-bd79dbfeb4c">create iterators in a very pythonic manner</a></li>
+<li><a href="https://medium.com/dataseries/descriptive-statistics-with-python-75e2b1249e8d">Descriptive Statistics with Python</a></li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./ssh_keys.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
+                    <a href="./python.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
                 </div>
-            </article>            <h4 class="date">Nov 25, 2017</h4>
+            </article>            <h4 class="date">Jan 01, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./software.html" rel="bookmark" title="Permanent Link to &quot;Software&quot;">Software</a>
+                    <a href="./pypi.html" rel="bookmark" title="Permanent Link to &quot;PyPi&quot;">PyPi</a>
                 </h2>
 
                 
                 
 
-                <h3>PostgreSQL</h3>
-<p><a href="https://www.postgresql.org/download/linux/ubuntu/">Download PostgreSQL</a></p>
-<p><a href="https://linuxhint.com/best_gui_clients_postgresql_ubuntu/#:~:text=pgAdmin,Windows%20and%20Mac%20OS%20X.">Install pgAdmin</a></p>
-<h4>Running multiple versions of PostgreSQL</h4>
-<p>Check the config files to see which version is on which port:</p>
-<p><code>grep -H '^port' /etc/postgresql/*/main/postgresql.conf</code></p>
-<p>sample output:</p>
-<div class="highlight"><pre><span></span>/etc/postgresql/10/main/postgresql.conf:port = 5432 
-/etc/postgresql/13/main/postgresql.conf:port = 5433 
+                <h4>Pre-requisites</h4>
+<ul>
+<li>
+<p><code>pip install -U twine</code></p>
+</li>
+<li>
+<p>in <code>~.pypirc</code> add <code>chmod 600 ~/.pypirc</code></p>
+</li>
+</ul>
+<h4>Deploy on PyPi</h4>
+<hr />
+<p><strong>Note</strong></p>
+<ul>
+<li>Make sure to update version information before deploying. 
+Files to update: <code>__init__.py</code> and <code>setup.py</code>.</li>
+<li>After deploying, don't forget to re-build the documentation at <a href="https://readthedocs.org/projects/shizen-gengo/builds">ReadTheDocs</a>.</li>
+</ul>
+<hr />
+<div class="highlight"><pre><span></span><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">build</span> <span class="n">dist</span> <span class="o">&amp;&amp;</span> <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">sdist</span>
+<span class="n">ls</span> <span class="n">dist</span><span class="o">/*</span>
+<span class="c1">#python setup.py check -r -s (obolete)</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">twine</span> <span class="n">check</span> <span class="n">dist</span><span class="o">/*</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span>  <span class="n">twine</span> <span class="n">upload</span> <span class="n">dist</span><span class="o">/*</span>
 </pre></div>
 
 
-<h4>Restart Postgres</h4>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">postgresql</span> <span class="n">reload</span>
-<span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">postgresql</span> <span class="n">start</span>
-</pre></div>
-
-
-<h4>Hostname</h4>
-<p>PostgreSQL, what is the hostname address of my default database?</p>
-<p>If you're connecting from the same machine, use localhost</p>
-<h4>Connection String</h4>
-<p>You can provide your username and password directly in the connection URI provided to psql:</p>
-<p><code>psql postgresql://username:password@localhost:5432/mydb</code></p>
-<h4>Useful Commands</h4>
-<ul>
-<li>To establish a connection : <code>sudo su - postgres</code></li>
-<li>To open a postgress prompt using the command: <code>psql</code></li>
-<li>To see details of the connection: <code>\conninfo</code></li>
-<li>To view the databases in our PostgreSQL instance: <code>\list</code></li>
-<li><code>CREATE DATABASE dbname;</code></li>
-<li><code>DROP DATABASE dbname;</code></li>
-</ul>
-<h3>R and RStudio</h3>
-<h4>Uninstall previous R installation</h4>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">R</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">save</span>
-<span class="n">pkgList</span> <span class="o">&lt;-</span> <span class="nf">installed.packages</span><span class="p">(</span><span class="n">priority</span><span class="o">=</span><span class="s">&#39;NA&#39;</span><span class="p">)</span>
-<span class="nf">remove.packages</span><span class="p">(</span><span class="n">pkgList</span><span class="p">)</span>
-<span class="nf">q</span><span class="p">()</span>
-<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">remove</span> <span class="o">--</span><span class="n">purge</span> <span class="n">r</span><span class="o">-</span><span class="n">cran</span><span class="o">*</span> <span class="n">r</span><span class="o">-</span><span class="n">base</span><span class="o">*</span>
-</pre></div>
-
-
-<h4>Install on Ubuntu 20.04 (Focal Fossa)</h4>
-<p>Save and run the script below (<a href="https://gist.github.com/mGalarnyk/41c887e921e712baf86fecc507b3afc7">source</a>).</p>
-<div class="highlight"><pre><span></span><span class="c1"># Install R + RStudio on Ubuntu 20 Focal</span>
-<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">key</span> <span class="n">adv</span> <span class="o">--</span><span class="n">keyserver</span> <span class="n">keyserver</span><span class="o">.</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">com</span> <span class="o">--</span><span class="n">recv</span><span class="o">-</span><span class="n">keys</span> <span class="n">E298A3A825C0D65DF</span><span class="o">&gt;</span>
-<span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="s1">&#39;deb https://cloud.r-project.org/bin/linux/ubuntu focal&gt;</span>
-<span class="n">sudo</span> <span class="n">apt</span> <span class="n">update</span>
-<span class="n">sudo</span> <span class="n">apt</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">r</span><span class="o">-</span><span class="n">base</span> <span class="n">r</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">dev</span> <span class="n">gdebi</span><span class="o">-</span><span class="n">core</span>
-
-<span class="c1"># next line required for kableExtra</span>
-<span class="n">sudo</span> <span class="n">apt</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">libcurl4</span><span class="o">-</span><span class="n">openssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">openssl</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">openssh</span><span class="o">-</span><span class="n">client</span> <span class="n">libxml2</span><span class="o">-</span><span class="n">dev</span> 
-
-<span class="c1"># next line required for RcppArmadillo</span>
-<span class="n">sudo</span> <span class="n">apt</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">liblapack</span><span class="o">-</span><span class="n">dev</span> 
-
-<span class="c1"># install Latex for RMarkdown</span>
-<span class="n">sudo</span> <span class="n">apt</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">texlive</span> <span class="n">texstudio</span> <span class="n">texlive</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">recommended</span> <span class="n">texlive</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">extra</span>
-
-<span class="c1"># Download and Install RStudio</span>
-<span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download1</span><span class="o">.</span><span class="n">rstudio</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">desktop</span><span class="o">/</span><span class="n">bionic</span><span class="o">/</span><span class="n">amd64</span><span class="o">/</span><span class="n">rstudio</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">1103</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span>
-<span class="n">sudo</span> <span class="n">gdebi</span> <span class="n">rstudio</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">1103</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span>
-<span class="n">rm</span> <span class="n">rstudio</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">1103</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span>
-</pre></div>
-
-
-<h4>List of Useful Packages</h4>
-<p><code>install.packages((c("tidyverse", "ggplot2", "ggthemes", "kableExtra", "rbenchmark", "inline", "data.table", "RcppArmadillo"))</code></p>
-<h3>Docker</h3>
-<ul>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04">Install Docker on Ubuntu-16-04</a></li>
-<li><a href="https://www.udemy.com/docker-mastery/">Docker Mastery: The Complete Toolset From a Docker Captain</a>:</li>
-</ul>
-<p>Docker</p>
-<ul>
-<li>get relevant <code>curl</code> line from <a href="https://get.docker.com/">here</a>.
-    Note: this will figure out which version to get for your particular Linux OS</li>
-<li>run shell script (next line in the above link)</li>
-<li><code>sudo usermod -aG docker vagrant</code></li>
-<li><code>docker version</code> to test</li>
-</ul>
-<p>Docker Machine</p>
-<ul>
-<li>get the lines from <a href="https://github.com/docker/machine/releases">https://github.com/docker/machine/releases</a></li>
-</ul>
-<p>Docker Compose</p>
-<ul>
-<li>get lines for latest release <a href="https://github.com/docker/compose/releases">here</a></li>
-<li><code>sudo -i</code> then paste the lines</li>
-<li><code>docker-compse version</code> to test</li>
-</ul>
-<p><br></p>
-<h3>Pycharm</h3>
-<h4>Install</h4>
-<div class="highlight"><pre><span></span><span class="o">$</span> <span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">openjdk</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="n">jdk</span>
-<span class="o">$</span> <span class="n">java</span> <span class="o">-</span><span class="n">version</span>
-<span class="o">$</span> <span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">jetbrains</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">pycharm</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="mf">2018.3</span><span class="o">.</span><span class="mf">4.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
-<span class="o">$</span> <span class="n">tar</span> <span class="o">-</span><span class="n">xvf</span> <span class="n">pycharm</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="mf">2018.3</span><span class="o">.</span><span class="mf">4.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
-<span class="o">$</span> <span class="n">cd</span> <span class="n">pycharm</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="mf">2018.3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">bin</span>
-<span class="o">$</span> <span class="o">.</span> <span class="n">pycharm</span><span class="o">.</span><span class="n">sh</span>
-</pre></div>
-
-
-<h4>pytest</h4>
-<p>Edit Configuration &gt;&gt; Additional arguments &gt;&gt; <code>-p no:logging -s</code></p>
-<h4>environment variables</h4>
-<ul>
-<li><a href="https://stackoverflow.com/questions/42708389/how-to-set-environment-variables-in-pycharm">about setting environment variable e.g. DATA_HOME</a></li>
-</ul>
-<p><br></p>
-<h3>Jupyter (via Docker)</h3>
-<ul>
-<li><a href="https://towardsdatascience.com/how-to-setup-your-jupyterlab-project-environment-74909dade29b">How to Setup Your JupyterLab Project Environment</a></li>
-</ul>
-<p><br></p>
-<h3>RoboMongo</h3>
-<ul>
-<li><a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/">Install MongoDB Community Edition on Ubuntu</a></li>
-<li><a href="https://robomongo.org/download">Robo 3T: the hobbyist GUI</a></li>
-<li><a href="https://gist.github.com/abdallahokasha/37911a64ad289487387e2d1a144604ae">Install Robo3t On Ubuntu 18.04</a></li>
-<li><code>mongoimport --db naptan --collection naptan --file test.json --jsonArray</code></li>
-</ul>
-<h3>NodeJS</h3>
-<ul>
-<li>npm install xml-stream, xml2js</li>
-<li>node myfile.js</li>
-</ul>
-<h4>NodeJS XML to JSON</h4>
-<div class="highlight"><pre><span></span><span class="k">var</span> <span class="n">fs</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
-<span class="k">var</span> <span class="n">xml2js</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;xml2js&#39;</span><span class="p">);</span>
-<span class="k">var</span> <span class="n">util</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;util&#39;</span><span class="p">);</span>
-
-<span class="k">var</span> <span class="n">parser</span>  <span class="o">=</span> <span class="n">new</span> <span class="n">xml2js</span><span class="o">.</span><span class="n">Parser</span><span class="p">();</span>
-
-<span class="n">fs</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s1">&#39;NaPTAN_2018_11_08.xml&#39;</span><span class="p">,</span> <span class="n">function</span><span class="p">(</span><span class="n">err</span><span class="p">,</span><span class="n">data</span><span class="p">){</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">parseString</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">function</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">result</span><span class="p">){</span>
-
-        <span class="o">//</span> <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="bp">false</span><span class="p">,</span> <span class="nb nb-Type">null</span><span class="p">,</span> <span class="bp">true</span><span class="p">));</span>
-
-        <span class="o">//</span> <span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">toString</span><span class="p">(),</span> <span class="n">function</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span>
-        <span class="o">//</span>     <span class="k">if</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span>
-        <span class="o">//</span>         <span class="k">return</span> <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">err</span><span class="p">);</span>
-        <span class="o">//</span>     <span class="p">}</span>
-        <span class="o">//</span>     <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;The file was saved!&quot;</span><span class="p">);</span>
-        <span class="o">//</span> <span class="p">});</span>
-
-        <span class="o">//</span> <span class="nb">convert</span> <span class="n">it</span> <span class="n">to</span> <span class="n">a</span> <span class="n">JSON</span> <span class="n">string</span>
-        <span class="k">const</span> <span class="n">json</span> <span class="o">=</span> <span class="n">JSON</span><span class="o">.</span><span class="n">stringify</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb nb-Type">null</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
-
-        <span class="o">//</span> <span class="n">save</span> <span class="n">JSON</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">file</span>
-        <span class="n">fs</span><span class="o">.</span><span class="n">writeFileSync</span><span class="p">(</span><span class="s1">&#39;test.json&#39;</span><span class="p">,</span> <span class="n">json</span><span class="p">);</span>
-
-    <span class="p">});</span>
-<span class="p">});</span>
-</pre></div>
-
-
-<h4></h4>
-<h3>GloVe for Python</h3>
-<ul>
-<li><code>-e git+git@github.com:maciejkula/glove-python.git#egg=glove</code></li>
-<li>dependencies</li>
-<li><code>pip install Cython</code></li>
-<li><code>sudo apt-get install python3-dev</code></li>
-</ul>
-<p><br></p>
-<h4>Jena</h4>
-<div class="highlight"><pre><span></span>wget http://mirrors.whoishostingthis.com/apache/jena/binaries/apache-jena-3.1.1.tar.gz
-tar -zxvf
-</pre></div>
-
-
-<p><br></p>
-<h4>Fuseki 2 (requires JDK 8)</h4>
-<div class="highlight"><pre><span></span>wget http://mirrors.whoishostingthis.com/apache/jena/binaries/apache-jena-fuseki-2.4.1.tar.gz
-tar -zxvf
-sudo add-apt-repository ppa:webupd8team/java
-sudo apt-get update
-sudo apt-get install oracle-java8-installer
-</pre></div>
-
-
-<p>To test fuseki server</p>
-<div class="highlight"><pre><span></span>~/apache-jena-fuseki-2.4.1/fuseki-server --update --loc=angioexplain /angioexplain
-</pre></div>
-
-
-<p>Open browser and got to <code>localhost:3030</code></p>
-<p><br></p>
-<h4>Miniconda3</h4>
-<div class="highlight"><pre><span></span>wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh
-</pre></div>
-
-
-<p>then add below line to <code>.bashrc</code>, restart terminal and check installation with <code>conda -V</code>.</p>
-<p><code>export PATH="/home/username/miniconda3/bin:$PATH"</code></p>
 <h4>Misc.</h4>
 <ul>
-<li>
-<p><code>sudo apt-get install terminator</code></p>
-</li>
-<li>
-<p>VSCode Run(Compile): Shit+Ctrl+B </p>
-</li>
-<li>
-<p>to view a .gv GraphViz file (will crate a pdf)</p>
-<p>f = Source.from_file('file-name.gv')
-f.render()</p>
-</li>
+<li><a href="https://help.github.com/en/github/creating-cloning-and-archiving-repositories/licensing-a-repository">Licensing a repository
+</a></li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./software.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
+                    <a href="./pypi.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/pypi.html" rel="tag">PyPi</a>
                 </div>
             </article>
 
@@ -298,7 +416,7 @@ f.render()</p>
 
                     <a href="./index11.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 10 of 23</span>
+                    <span>Page 10 of 26</span>
                 </div>
 
             <div class="clear"></div>

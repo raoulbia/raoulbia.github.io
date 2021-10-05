@@ -26,65 +26,245 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Sep 04, 2017</h4>
+        <div id="content">            <h4 class="date">Nov 01, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./time_series.html" rel="bookmark" title="Permanent Link to &quot;Time Series&quot;">Time Series</a>
+                    <a href="./web_development.html" rel="bookmark" title="Permanent Link to &quot;Web Development&quot;">Web Development</a>
                 </h2>
 
                 
                 
 
-                <h3>Python</h3>
+                <h3>nginx</h3>
 <ul>
-<li><a href="https://gist.github.com/raoulbia/0d6b8bdc06b6abe2959aaefabb59221b">gist: How to group data by time intervals in Python Pandas</a></li>
+<li><code>sudo nginx -t</code> to test nginx</li>
+<li><code>sudo /etc/init.d/nginx reload</code> to restart nginx</li>
+<li><code>sudo apt-get remove nginx nginx-common</code> to to remove all but config files</li>
+<li><code>sudo apt-get purge nginx nginx-common</code> to remove everything</li>
+<li><code>find /etc/nginx -name '*.conf' | xargs grep -i log</code></li>
+<li><a href="https://www.youtube.com/watch?v=fpeQlbdRmKI">How To Set Up nginx Virtual Hosts (Server Blocks)</a></li>
 </ul>
-<h3>R</h3>
+<p><br></p>
+<h3>start ngrok</h3>
+<p>To start ngrok:</p>
+<p><code>./ngrok http 5000</code></p>
+<p><br></p>
+<h3>Heroku</h3>
+<h4>Deploying a Flask App vs. running a Python script on the VM</h4>
+<ul>
+<li>The key difference is in how <code>Dynos</code> are configured in the <code>Resources</code> section.</li>
+<li>This is dictated by what is in the Procfile (see below). </li>
+<li>For running a Python script, click <code>Edit dyno formation</code> of <code>web</code> and <code>worker</code> and activate both radio buttons. Note that the <code>worker</code> can also be activate using <code>heroku ps:scale worker=1 -a APPNAME</code>.</li>
+</ul>
+<h4>Procfile</h4>
+<p>Procfile for Flask App</p>
+<ul>
+<li><code>web: gunicorn project_name.wsgi</code> where <code>project_name</code> is name of dir in which <code>settings.py</code> is located.</li>
+</ul>
+<p>Procfile for standalone python script</p>
+<div class="highlight"><pre><span></span><span class="n">web</span><span class="o">:</span> <span class="n">python</span> <span class="n">script</span><span class="o">.</span><span class="na">py</span>
+<span class="n">worker</span><span class="o">:</span> <span class="n">python</span> <span class="n">script</span><span class="o">.</span><span class="na">py</span>
+</pre></div>
+
+
+<h4>Install Heroku CLI</h4>
+<p>Needed for <code>heroku login --interactive</code> and <code>heroku create</code>.</p>
+<ul>
+<li><code>curl https://cli-assets.heroku.com/install.sh | sh</code></li>
+<li><a href="https://devcenter.heroku.com/categories/command-line">read more</a></li>
+</ul>
+<h4>Stop/Start Heroku VM</h4>
+<p>Start:</p>
+<ul>
+<li><code>heroku ps:scale web=1</code> for starting a Flask App</li>
+<li><code>heroku ps:scale worker=1 -a APPNAME</code> for starting a "worker" which will in turn kick off a Python script i.e. will result in the same as logging in with <code>heroku login</code> and running <code>python script.py</code>.</li>
+</ul>
+<p>Stop:</p>
+<ul>
+<li><code>heroku ps:scale web=0</code> to stop Flask app</li>
+</ul>
+<p>or </p>
+<ul>
+<li><code>heroku ps -a APPNAME</code> to get current running dynos (e.g. <code>worker.1</code></li>
+<li><code>heroku ps:stop worker.1 -a APPNAME</code></li>
+<li><code>heroku logs --tail -a APPNAME</code> to see what is going on in the VM.</li>
+</ul>
+<h4>Misc.</h4>
+<ul>
+<li><a href="https://devcenter.heroku.com/articles/git">overview</a></li>
+<li>add <code>Pipfile</code> to <code>.gitignore</code> to ensure that dependencies are installed from <code>requirements.txt</code>.</li>
+<li>add <code>.env/</code> to <code>.gitignore</code> to ensure that secret key is hidden on github/gitlab.</li>
+<li>after deployment run <code>heroku ps:scale web=1 --app APPNAME</code></li>
+</ul>
+<h4>Login to Heroku VM</h4>
+<ul>
+<li><code>heroku login</code></li>
+<li><code>heroku run bash</code></li>
+<li><a href="https://help.heroku.com/18PI5RSY/how-do-i-clear-the-build-cache">clear the build cache</a></li>
+<li><a href="https://chatbotslife.com/github-repo-heroku-explained-how-to-host-your-bot-server-python-8b3ec4f071ce">related article</a></li>
+</ul>
+<h4>Heroku <strong>Flask</strong> Deployment</h4>
+<ul>
+<li><code>heroku create &lt;NAME&gt;</code> to create a Heroku remote</li>
+<li><code>git add . ; git commit -m "update"</code></li>
+<li><code>git push heroku master</code></li>
+<li><code>heroku run python manage.py migrate</code></li>
+<li><code>heroku run python manage.py createsuperuser</code></li>
+</ul>
+<p>Heroku <strong>Dash</strong> Deployment</p>
+<ul>
+<li><a href="https://github.com/plotly/dash-heroku-template">see here</a></li>
+<li>change Step 6 to: <code>git remote add heroku https://git.heroku.com/semmeddb</code></li>
+</ul>
+<p>Heroku <strong>Django</strong> Deployment</p>
+<ul>
+<li><a href="https://github.com/heroku/heroku-django-template">heroku django template</a></li>
+<li><a href="https://devcenter.heroku.com/articles/django-assets">about static assets</a></li>
+<li><code>pipenv install whitenoise</code></li>
+<li><code>python manage.py collectstatic</code></li>
+<li><a href="https://devcenter.heroku.com/articles/django-app-configuration">Django App configuration</a></li>
+<li>add <code>import django_heroku</code> to <code>settings.py</code> (top)</li>
+<li>add <code>django_heroku.settings(locals())</code> to <code>settings.py</code> (bottom)</li>
+</ul>
+<p><br></p>
+<h3>Django2</h3>
+<p>Useful commands</p>
+<div class="highlight"><pre><span></span><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">startproject</span> <span class="n">app1</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
+</pre></div>
+
+
+<p>Django templates</p>
+<p>in <code>settings.py</code></p>
+<div class="highlight"><pre><span></span> <span class="nv">BASE_DIR</span> <span class="o">=</span> <span class="nv">os</span>.<span class="nv">path</span>.<span class="k">dirname</span><span class="ss">(</span><span class="nv">os</span>.<span class="nv">path</span>.<span class="k">dirname</span><span class="ss">(</span><span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">abspath</span><span class="ss">(</span><span class="nv">__file__</span><span class="ss">)))</span>
+ ...
+ <span class="nv">TEMPLATES</span> <span class="o">=</span> [
+   {
+       <span class="s1">&#39;</span><span class="s">DIRS</span><span class="s1">&#39;</span>: [<span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">join</span><span class="ss">(</span><span class="nv">BASE_DIR</span>, <span class="s1">&#39;</span><span class="s">firstwebsite/templates</span><span class="s1">&#39;</span><span class="ss">)</span>]
+   }]
+</pre></div>
+
+
+<p>in <code>urls.py</code></p>
+<ul>
+<li>...to be completed (Django1 vs Django2 issue)</li>
+<li>try <code>from views import</code> appraoch</li>
+</ul>
+<p>Django Resources</p>
+<ul>
+<li><a href="https://ccbv.co.uk/">Classy Class-Based Views ccbv.co.uk</a></li>
+<li><a href="https://docs.djangoproject.com/en/2.1/ref/models/">docs.djangoproject.com/en/2.1/ref/models</a></li>
+<li><a href="https://docs.djangoproject.com/en/2.1/ref/class-based-views/generic-display/">docs.djangoproject.com/en/2.1/ref/class-based-views/generic-display</a></li>
+<li><a href="https://docs.djangoproject.com/en/2.1/topics/class-based-views/generic-display/">docs.djangoproject.com/en/2.1/topics/class-based-views/generic-display</a></li>
+<li><a href="https://docs.djangoproject.com/en/2.1/ref/templates/builtins/">docs.djangoproject.com/en/2.1/ref/templates/builtins</a></li>
+<li><a href="https://docs.djangoproject.com/en/2.1/topics/db/queries/">docs.djangoproject.com/en/2.1/topics/db/queries</a></li>
+</ul>
+<p><br></p>
+<h3>Apache2</h3>
+<ul>
+<li><code>apachectl -S</code></li>
+<li><code>sudo service apache2 restart</code></li>
+<li><a href="http://flask.pocoo.org/docs/1.0/deploying/mod_wsgi/#configuring-apache">Configure Apache for Flask</a></li>
+<li><a href="http://terokarvinen.com/2016/deploy-flask-python3-on-apache2-ubuntu">Deploy Flask Python3 on Apache2 on Ubuntu</a></li>
+<li><a href="https://www.bogotobogo.com/python/Flask/Python_Flask_HelloWorld_App_with_Apache_WSGI_Ubuntu14.php">Flask HelloWorld App_with_Apache WSGI_Ubuntu14</a></li>
+<li><a href="https://websiteforstudents.com/installing-apache2-mariadb-on-ubuntu-16-04-17-10-18-04-with-php-7-2-support-lamp/">Installing LAMP</a></li>
+</ul>
+<p><br></p>
+<h3>Flask</h3>
+<ul>
+<li>to run a Flask app: <code>python app.py</code></li>
+<li><code>import pdb; pdb.set_trace()</code></li>
+<li>error: address already in use<ul>
+<li><code>sudo lsof -i :5000</code></li>
+<li><code>sudo kill-9 PID</code></li>
+</ul>
+</li>
+<li><code>FLASK_APP=run.py flask run</code></li>
+<li><a href="https://stackoverflow.com/questions/41144565/flask-does-not-see-change-in-js-file">flask does not see change in .js file</a></li>
+<li><a href="https://help.parsehub.com/hc/en-us/articles/217751808-API-Tutorial-How-to-get-run-data-using-Python-Flask">API Tutorial: How to get run data using Python &amp; Flask</a></li>
+<li><a href="https://stackoverflow.com/questions/53258168/gunicorn-wont-start-flask-app-because-application-object-must-be-callable">gunicorn and wsgi configuration</a></li>
+<li><a href="https://coderwall.com/p/pstm1w/deploying-a-flask-app-at-heroku">gunicorn and flask</a></li>
+</ul>
+<p><br></p>
+<h3>Node JS</h3>
+<p>Install nodejs:</p>
+<div class="highlight"><pre><span></span>curl -sL https://deb.nodesource.com/setup_8.x — Node.js 8 LTS &quot;Carbon&quot; | sudo -E bash -
+sudo apt-get install -y nodejs
+</pre></div>
+
+
+<p>symlink issue with Vagrant VM shared folder:</p>
+<p><code>npm install --no-bin-links</code></p>
+<p>port already in use</p>
+<p><code>ps aux | awk '/node/{print $2}' | xargs kill -9</code></p>
+<p><br></p>
+<h3>Redux</h3>
+<ul>
+<li><a href="https://www.bram.us/2016/10/25/plotly-academy-state-management-with-redux/">https://www.bram.us/2016/10/25/plotly-academy-state-management-with-redux/</a></li>
+</ul>
+<p><br></p>
+<h3>Ansible</h3>
+<ul>
+<li><a href="https://blog.jetbrains.com/pycharm/2017/12/developing-in-a-vm-with-vagrant-and-ansible/">Developing a VM-with Vagrant and Ansible</a></li>
+</ul>
+<p><br></p>
+<h3>SAP Conversational AI</h3>
+<ul>
+<li>markdown URL syntax: <code>[Click Here]({{memory.url}})</code> </li>
+</ul>
+<p><br></p>
+<h3>Misc.</h3>
+<ul>
+<li><a href="https://miro.com/">https://miro.com/</a></li>
+<li><a href="https://wireframe.cc/">https://wireframe.cc/</a></li>
+<li><a href="https://www.creative-tim.com/product/get-shit-done-kit">https://www.creative-tim.com/product/get-shit-done-kit</a></li>
+<li><a href="https://uxplanet.org/how-the-bootstrap-4-grid-works-a1b04703a3b7">https://uxplanet.org/how-the-bootstrap-4-grid-works-a1b04703a3b7</a></li>
+<li><a href="https://hackerthemes.com/bootstrap-cheatsheet/#col-sm-1">https://hackerthemes.com/bootstrap-cheatsheet/#col-sm-1</a></li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./time_series.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/time-series.html" rel="tag">Time Series</a>
+                    <a href="./web_development.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/web-development.html" rel="tag">Web Development</a>
                 </div>
-            </article>            <h4 class="date">Sep 03, 2017</h4>
+            </article>            <h4 class="date">Oct 05, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./Logistic Regression.html" rel="bookmark" title="Permanent Link to &quot;Logistic Regression&quot;">Logistic Regression</a>
+                    <a href="./statistics.html" rel="bookmark" title="Permanent Link to &quot;Statistics&quot;">Statistics</a>
                 </h2>
 
                 
                 
 
-                <p>On this page I keep some ontes on logistic regression.</p>
-<h4>Supervised Learning: Regression Techniques</h4>
-<p>Most supervised learning problems can be framed formally 
-in terms of predicting a response, but prediction alone is often not
-the main goal of the analysis. </p>
-<p>For example, many applications of
-linear regression in the sciences are aimed primarily
-at <strong>understanding how the inputs of a system drive the outputs</strong>.</p>
-<p>An extremely complicated "black box" giving pure predictions would not be
-very useful in and of itself.</p>
-<p>(<a href="https://lagunita.stanford.edu/courses/HumanitiesSciences/StatLearning/Winter2016/about">source</a>)</p>
-<p><em>Gradient Descent</em>: iterative computation of adjusted feature weights</p>
-<h4>Linear vs. Logistic Regression: normalizing</h4>
+                <h4>Variance</h4>
 <ul>
-<li>
-<p>linear regression: must normalize features</p>
-</li>
-<li>
-<p>logistic regression: no need to normalize the data. </p>
-</li>
+<li>is the mean of some measured variation</li>
+<li>i.e. the sum of squared differences (SS) divided by some quantity n.</li>
+<li>in the case of samples, SS is divided by n-1.</li>
 </ul>
-<p>see <a href="https://stats.stackexchange.com/questions/29781/when-conducting-multiple-regression-when-should-you-center-your-predictor-varia">here</a> 
-for a good discussion on the topic of data <em>centering</em> and <em>scaling</em> data features.</p>
+<h4>Standard Deviation</h4>
+<ul>
+<li>is the square root of a given variance.</li>
+<li>this transformation expresses the value of the variance in the unit of whatever is being measured.</li>
+<li>For example Root Mean Squared Error (RMSE) is a standard deviation. It is the sum of squared differences of 
+the errors, expressed in the unit of the error being measured.</li>
+<li>When you see "root" something (e.g. RMSE) or "standard" something (Standard Error) it 
+refers to a standard deviation which itself is a Variance transformed by taking the square root thereof. </li>
+</ul>
+<h4>Distributions</h4>
+<ul>
+<li><a href="https://www.rocscience.com/help/slide2/slide_model/probability/Statistical_Distributions_Overview.htm">Statistical Distributions Overview</a></li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./Logistic Regression.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/logistic-regression.html" rel="tag">Logistic Regression</a>
+                    <a href="./statistics.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/statistics.html" rel="tag">Statistics</a>
                 </div>
             </article>
 
@@ -95,7 +275,7 @@ for a good discussion on the topic of data <em>centering</em> and <em>scaling</e
 
                     <a href="./index19.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 18 of 23</span>
+                    <span>Page 18 of 26</span>
                 </div>
 
             <div class="clear"></div>

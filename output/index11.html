@@ -26,158 +26,118 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 24, 2017</h4>
+        <div id="content">            <h4 class="date">Dec 05, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./databases.html" rel="bookmark" title="Permanent Link to &quot;Databases&quot;">Databases</a>
+                    <a href="./Git.html" rel="bookmark" title="Permanent Link to &quot;Git&quot;">Git</a>
                 </h2>
 
                 
                 
 
-                <h3>Postgres</h3>
-<h4>install postgres and postgis</h4>
-<div class="highlight"><pre><span></span>$  sudo apt install postgis postgresql-13-postgis-3
-$ sudo -u postgres psql
-<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \password postgres</span>
-<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \q</span>
+                <h4>Set / Change remote origin url</h4>
+<div class="highlight"><pre><span></span>git remote add origin &lt;remote repository URL&gt;
+
+git remote set-url origin &lt;remote repository url&gt;
 </pre></div>
 
 
-<p>check installed version(s): <code>dpkg -l | grep postgres</code></p>
-<h4>postgres user authentication error</h4>
-<p><code>sudo nano /etc/postgresql/13/main/pg_hba.conf</code></p>
-<p>CHANGE FROM</p>
-<p><code>local   all     postgres     peer</code></p>
-<p>TO</p>
-<p><code>local   all      postgres    trusted</code></p>
-<p>then 
-sudo service postgresql restart</p>
-<h4>run in pgadmin4</h4>
-<p><code>CREATE EXTENSION postgis;</code></p>
+<h4>Remove dir from remote but keep local</h4>
+<div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s1">&#39;.idea&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">.</span><span class="n">gitignore</span>
+<span class="n">git</span> <span class="n">rm</span> <span class="o">-</span><span class="n">r</span> <span class="o">--</span><span class="n">cached</span> <span class="o">.</span><span class="n">idea</span><span class="o">/</span> <span class="c1"># Remove the file from the repository</span>
+<span class="n">git</span> <span class="n">add</span> <span class="o">.</span><span class="n">gitignore</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s1">&#39;remove dir from remote&#39;</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>
+</pre></div>
+
+
+<h4>Git Tagging</h4>
+<div class="highlight"><pre><span></span>git add GTFSR.py
+git commit -m &quot;GTFSRT script initial commit&quot;
+git tag -a GTFSRT_v1.0 -m &quot;original GTFSRT script&quot;
+git push origin master tag GTFSRT_v1.0
+</pre></div>
+
+
+<h4>Git commands</h4>
 <ul>
-<li>
-<p>http://www.orbital.co.ke:8080/opengeo-docs/dataadmin/pgGettingStarted/shp2pgsql.html</p>
-</li>
-<li>
-<p>test: <code>psql -U postgres -d &lt;DBNAME&gt; -c "SELECT postgis_version()"</code></p>
-</li>
-<li>
-<p>syntax: <code>shp2pgsql -I -s &lt;SRID&gt; &lt;PATH/TO/SHAPEFILE&gt; &lt;SCHEMA&gt;.&lt;DBTABLE&gt; | psql -U postgres -d &lt;DBNAME&gt;</code></p>
-</li>
-<li>
-<p>example: <code>shp2pgsql -I -s 4326  dublinbus/Dublin_Bus.shp  shp_dublinbus | psql -U postgres -d dublinbus</code></p>
-</li>
+<li><code>git add -A</code></li>
+<li><code>git add .</code> to add a new file</li>
+<li><code>git checkout --theirs PATH/FILE</code> if conflict: If solution is to accept remote/other-branch version</li>
+<li><code>git add -p</code> <a href="https://medium.com/@mc999/git-add-p-is-a-gamechanger-in-file-management-e4c879e89ab">read more</a></li>
+<li><code>git clone -b &lt;branch name&gt; &lt;rep url&gt;</code></li>
+<li><code>git add dir/*</code> to add new files or directories:</li>
+<li><code>git commit -m "update" $$ git push origin &lt;branch name&gt;</code></li>
+<li><code>git pull origin &lt;branch name&gt;</code></li>
+<li><code>git reset --hard origin/master</code></li>
+<li><code>git branch -a</code></li>
+<li><code>git remote show origin</code></li>
+<li><code>git checkout -- .</code> to remove all unstaged files in current working directory</li>
+<li><code>git branch -u origin/master</code> tell git that local branch (master) should compare itself to remote counterpart (origin/master)</li>
 </ul>
-<h3>Utilities: ogr2ogr</h3>
+<h4>Useful Links</h4>
 <ul>
-<li>https://gis.stackexchange.com/questions/65917/can-i-append-to-different-tables-using-ogr2ogr</li>
-<li>https://www.bostongis.com/PrinterFriendly.aspx?content_name=ogr_cheatsheet</li>
-<li>https://www.mankier.com/1/ogr2ogr</li>
+<li><a href="https://stackoverflow.com/questions/33101962/how-to-create-a-new-gitlab-repo-from-my-existing-local-git-repo-using-cli">How to create a new gitlab repo from my existing local git repo</a></li>
+<li><a href="https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/">Adding an existing project to GitHub using the command line</a></li>
+<li><a href="https://techbase.kde.org/Development/Git/Feature_Branch_Workflow">Feature_Branch_Workflow</a></li>
+<li><a href="https://stackoverflow.com/questions/67699/how-to-clone-all-remote-branches-in-git">How to clone all remote branches</a></li>
 </ul>
-<h4>geojson to shp</h4>
-<p><code>ogr2ogr -f "ESRI Shapefile" destination_data.shp "dcc_public_bin_locations.geojson"</code></p>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./databases.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
+                    <a href="./Git.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/git.html" rel="tag">Git</a>
                 </div>
-            </article>            <h4 class="date">Nov 24, 2017</h4>
+            </article>            <h4 class="date">Dec 04, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./kafka.html" rel="bookmark" title="Permanent Link to &quot;Kafka Cheatsheet&quot;">Kafka Cheatsheet</a>
+                    <a href="./conda.html" rel="bookmark" title="Permanent Link to &quot;Conda&quot;">Conda</a>
                 </h2>
 
                 
                 
 
-                <h3>Terminology</h3>
+                <h3>Conda</h3>
 <ul>
-<li>A Kafka cluster is a group of Kafka brokers.</li>
-<li>A Kafka broker allows consumers to fetch messages by topic, partition and offset.</li>
-<li>Kafka brokers can create a Kafka cluster by sharing information between each other directly or indirectly using Zookeeper.</li>
+<li><code>conda create --name &lt;name&gt; python=3.7 -y</code></li>
+<li><code>conda activate &lt;name&gt;</code></li>
+<li><code>pip install ipykernel</code></li>
+<li><code>python -m ipykernel install --user --name=&lt;name&gt;</code></li>
+<li><code>conda env remove --name &lt;name&gt;</code></li>
+<li><code>conda env list</code></li>
+<li><code>conda update</code></li>
+<li><code>conda install --yes --file requirements.txt</code></li>
+<li><code>jupyter kernelspec list</code></li>
+<li><code>conda install --channel=conda-forge nb_conda_kernels</code></li>
 </ul>
-<h3>Installation</h3>
+<h4>Specific venvs</h4>
 <ul>
-<li>
-<p>Download and Setup Java 8 JDK: <code>sudo apt install openjdk-8-jdk</code></p>
-</li>
-<li>
-<p>Download &amp; Extract the Kafka binaries from https://kafka.apache.org/downloads</p>
-</li>
-<li>
-<p>Try Kafka commands using bin/kafka-topics.sh (for example)</p>
-</li>
-<li>
-<p>add to <code>~/.bashrc</code>:  <code>export PATH=/home/vagrant/kafka_2.12-2.8.0/bin:$PATH</code></p>
-</li>
-<li>
-<p>Edit Zookeeper &amp; Kafka configs in <code>kafka_2.12-2.8.0/config</code></p>
-<ul>
-<li>
-<p>zookeeper.properties: <code>dataDir=/home/vagrant/kafka_2.12-2.8.0/data/zookeeper</code></p>
-</li>
-<li>
-<p>server.properties: <code>log.dirs=/home/vagrant/kafka_2.12-2.8.0/data/kafka</code></p>
-</li>
+<li>Geopandas: <code>conda create --name=gtfs_graph python=3.8 geopandas scipy --channel=conda-forge</code></li>
 </ul>
-</li>
-</ul>
-<h3>Start Zookeeper, Kafka Server and Kafka Connect</h3>
+<h4>Pipenv</h4>
+<p>Install</p>
 <ul>
-<li>Pre-requisite: Kafka aded to PATH</li>
-<li>Only when Zookeeper is up and running you can start a Kafka server (that will connect to Zookeeper).</li>
+<li><code>sudo apt-get update</code></li>
+<li><code>sudo apt install python3-pip</code></li>
+<li><code>pip3 install pipenv</code></li>
+<li><code>pipenv --python 3.6</code></li>
 </ul>
-<div class="highlight"><pre><span></span>zookeeper-server-start.sh config/zookeeper.properties
-kafka-server-start.sh config/server.properties
-connect-distributed.sh config/connect-distributed.properties
-</pre></div>
-
-
-<h3>Topics</h3>
-<div class="highlight"><pre><span></span>kafka-topics.sh --zookeeper localhost:2181 --create --topic &quot;gtfs&quot; --partitions 1 --replication-factor 1
-kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list
-kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;g.*&#39;
-kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;.*ksql.*&#39;
-</pre></div>
-
-
-<h3>Producers</h3>
-<div class="highlight"><pre><span></span>kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic topic_name
-</pre></div>
-
-
-<p>Piping a JSON file into a Topic:</p>
-<div class="highlight"><pre><span></span>file_name.json | kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic topic_name
-</pre></div>
-
-
-<h3>Consumers</h3>
-<p>This tool helps to read data from Kafka topics and outputs it to standard output.</p>
-<div class="highlight"><pre><span></span>kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --from-beginning --property print.key=true --property key.separator=&quot;-&quot; --property print.timestamp=true
-</pre></div>
-
-
-<h3>Faust</h3>
-<p>Note: append -p 6067 to the line below to use a different port.</p>
-<div class="highlight"><pre><span></span>$ python script.py worker 
-</pre></div>
-
-
-<h3>Other Useful Commands</h3>
+<p>Useful commands</p>
 <ul>
-<li><code>kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list</code></li>
-<li><code>kafka-consumer-groups.sh  --list --bootstrap-server localhost:9092</code></li>
-<li><code>zookeeper-shell.sh localhost:2181 ls /brokers/ids</code> to list active brokers. </li>
+<li><code>pipenv install -r requirements.txt</code></li>
+<li><code>pipenv shell</code> to create new env; load/activate existing env, load .env variables</li>
+<li><code>pipenv update</code> can be used to install base dependencies</li>
+<li><code>pip install ...</code></li>
+<li><code>pipenv sync</code> will use <code>Pipfile</code> if present</li>
+<li><code>pipenv graph</code></li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./kafka.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/kafka.html" rel="tag">Kafka</a>
+                    <a href="./conda.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/virtual-environemnts.html" rel="tag">Virtual Environemnts</a>
                 </div>
             </article>
 
@@ -188,7 +148,7 @@ kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;.*ksql.*&#39;
 
                     <a href="./index12.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 11 of 23</span>
+                    <span>Page 11 of 26</span>
                 </div>
 
             <div class="clear"></div>

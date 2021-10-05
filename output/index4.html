@@ -26,247 +26,168 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 26, 2018</h4>
+        <div id="content">            <h4 class="date">Mar 01, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./python, pandas, nlp.html" rel="bookmark" title="Permanent Link to &quot;Pandas NLP&quot;">Pandas NLP</a>
+                    <a href="./azure_cloud_concepts.html" rel="bookmark" title="Permanent Link to &quot;Azure Cloud Concepts&quot;">Azure Cloud Concepts</a>
                 </h2>
 
                 
                 
 
-                <h4>Useful Links</h4>
-<ul>
-<li><a href="https://stackoverflow.com/questions/39124492/nltk-regexpparser-chunk-phrase-by-matching-exactly-one-item">NLTK RegexpParser, chunk phrase by matching exactly one item</a></li>
-<li><a href="https://towardsdatascience.com/try-texthero-the-absolute-simplest-way-to-clean-and-analyze-text-in-pandas-6db86ed14272">TextHero: The Absolute Simplest way to Clean and Analyze Text in Pandas</a></li>
-<li><a href="https://pypi.org/project/shizen-gengo/">shizen-gengo</a></li>
-</ul>
-<h3>Imports</h3>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">io</span>
-<span class="kn">import</span> <span class="nn">unicodedata</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
-
-<span class="kn">import</span> <span class="nn">nltk</span>
-<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">RegexpTokenizer</span>
-<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">WordNetLemmatizer</span><span class="p">,</span> <span class="n">PorterStemmer</span>
-<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
-<span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
-<span class="n">stemmer</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span> 
-<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">RegexpTokenizer</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\w+&#39;</span><span class="p">)</span>
-<span class="n">words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">))</span> <span class="c1"># set() sppeds up stopword removal!!</span>
-</pre></div>
-
-
-<h3>SpaCy</h3>
-<p><code>$ python3 -m spacy download en_core_web_sm</code></p>
-<h3>NLTK</h3>
-<p>once off download required. from cmd, launch python and run:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;wordnet&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;averaged_perceptron_tagger&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;maxent_ne_chunker&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;words&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-
-
-<h4>NLTK Grammars</h4>
-<div class="highlight"><pre><span></span><span class="n">grammar</span> <span class="o">=</span> <span class="s2">&quot;NP: {(&lt;V\w+&gt;|&lt;NN\w?&gt;)+.*&lt;NN\w?&gt;}&quot;</span> 
-<span class="n">grammar</span> <span class="o">=</span> <span class="s2">&quot;NP: {&lt;DT&gt;?&lt;JJ|NN|V&gt;&lt;V|NN|NNS|NNP&gt;+}&quot;</span>
-<span class="n">grammar</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">  NP: {&lt;DT|PP\$&gt;?&lt;JJ&gt;*&lt;NN&gt;}   # chunk determiner/possessive, adjectives and noun</span>
-<span class="s2">  {&lt;NNP&gt;+}                # chunk sequences of proper nouns</span>
-<span class="s2">  {&lt;NN&gt;+}                 # chunk consecutive nouns</span>
-<span class="s2">  &quot;&quot;&quot;</span>
-</pre></div>
-
-
-<h3>Regexp</h3>
-<h4>Regexp String Matching</h4>
-<div class="highlight"><pre><span></span><span class="n">col</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;category&#39;</span><span class="w"></span>
-<span class="n">conditions</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">(tmp[col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)ISD&quot;</span><span class="p">)),</span><span class="w"></span>
-<span class="w">               </span><span class="p">(</span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)DST&quot;</span><span class="p">)),</span><span class="w"></span>
-<span class="w">               </span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)IT&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">              </span><span class="err">]</span><span class="w"></span>
-<span class="n">choices</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;ISD&#39;, &#39;DST&#39;, &#39;IT&#39;</span><span class="o">]</span><span class="w"></span>
-
-<span class="n">tmp</span><span class="o">[</span><span class="n">&quot;category_high_level&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="k">select</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span><span class="w"> </span><span class="n">choices</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="o">=</span><span class="n">tmp</span><span class="p">.</span><span class="n">category</span><span class="p">)</span><span class="w"></span>
-<span class="n">tmp</span><span class="p">.</span><span class="n">stb</span><span class="p">.</span><span class="n">freq</span><span class="p">(</span><span class="o">[</span><span class="n">&#39;category_high_level&#39;</span><span class="o">]</span><span class="p">).</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;category_high_level&#39;</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-
-
-<h4>Sentence Fragement by Word Window</h4>
-<div class="highlight"><pre><span></span><span class="n">pat</span> <span class="o">=</span> <span class="p">&#39;(</span><span class="o">?</span><span class="n">P</span><span class="o">&lt;</span><span class="n">before</span><span class="o">&gt;</span><span class="p">(</span><span class="o">?:</span><span class="n">\w+\W+){,3})products\W+(?P&lt;after&gt;(?:\w+\W+){,3})&#39;</span>
-<span class="n">new</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">str</span><span class="p">.</span><span class="n">extract</span><span class="p">(</span><span class="n">pat</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="n">True</span><span class="p">)</span>
-<span class="n">df</span><span class="p">.</span><span class="k">assign</span><span class="p">(</span><span class="o">**</span><span class="n">new</span><span class="p">)</span>
-</pre></div>
-
-
-<h3>Misc.</h3>
-<h4>Extract words from a list</h4>
-<p><code>df['named_entities'] = [','.join(map(str, l)) for l in df['named_entities']]</code></p>
+                <p>ffgfd</p>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./python, pandas, nlp.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                    <a href="./azure_cloud_concepts.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/cloud.html" rel="tag">Cloud</a>
                 </div>
-            </article>            <h4 class="date">Jan 25, 2018</h4>
+            </article>            <h4 class="date">Feb 20, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./python, pandas.html" rel="bookmark" title="Permanent Link to &quot;Pandas Applied&quot;">Pandas Applied</a>
+                    <a href="./R.html" rel="bookmark" title="Permanent Link to &quot;R&quot;">R</a>
                 </h2>
 
                 
                 
 
-                <h4>Useful Links</h4>
+                <h4>Useful Snippets</h4>
 <ul>
-<li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html">inter-annotator agreement</a></li>
+<li>Filter: <code>df %&gt;% filter(., GrLivArea &gt;=4000 &amp; SalePrice &lt; 200000)</code></li>
+<li>Remove observations: <code>df &lt;- df[-c(524, 1299), ]</code></li>
+<li>Reomve column: <code>df$colname&lt;- NULL</code></li>
+<li>Order columns alphabetically: <code>df &lt;- df[ ,order(colnames(df))]</code></li>
+<li>Convert: <code>df$colname &lt;- as.integer(df$colname)</code></li>
+<li>Make df with only numeric vars: <code>num_df &lt;- df[, sapply(df, is.numeric)]</code></li>
+<li>Correlation: <code>cor(num_df, use="complete.obs")</code></li>
+<li>random sampling from each factor: <code>olive_sample &lt;- ddply(olive,.(region),function(x) x[sample(nrow(x),10),])</code></li>
+<li>to access the 1rst and 3rd elements of a vector: <code>my.vec[c(1,3)]</code></li>
 </ul>
-<h3>Sentence Fragment: Search Window with RegExp</h3>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">search_window</span><span class="p">(</span><span class="n">dataframe_col</span><span class="p">,</span> <span class="n">token</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">dataframe_col</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span> <span class="p">(</span><span class="s2">&quot;not a dataframe&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataframe_col</span><span class="p">))</span>
-    <span class="n">dataframe_col</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">dataframe_col</span> <span class="o">=</span> <span class="n">dataframe_col</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataframe_col</span><span class="p">))</span>
-    <span class="n">pat</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(?P&lt;before&gt;(?:\w+\W+){,8})(?i)&#39;</span> <span class="o">+</span> <span class="n">token</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;\W+(?P&lt;after&gt;(?:\w+\W+){,8})&#39;</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">dataframe_col</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">pat</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-    <span class="c1"># print(len(new))</span>
-    <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)))</span>
+<h4>Creating vectors and matrices</h4>
+<ul>
+<li><code>my.vec &lt;- c(1:4)</code></li>
+<li><code>my.vec &lt;- c(TRUE, FALSE, FALSE, FALSE, TRUE, TRUE)</code></li>
+<li><code>A &lt;- matrix(c(1,2,2,5), nrow=2, ncol=2, byrow=TRUE)</code></li>
+</ul>
+<h4>Script Header</h4>
+<div class="highlight"><pre><span></span><span class="n">library</span><span class="p">(</span><span class="n">rstudioapi</span><span class="p">)</span>
+<span class="n">setwd</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">rstudioapi</span><span class="p">::</span><span class="n">getActiveDocumentContext</span><span class="p">()</span><span class="err">$</span><span class="n">path</span><span class="p">))</span>
+<span class="n">rm</span><span class="p">(</span><span class="nb">list</span><span class="o">=</span><span class="n">ls</span><span class="p">())</span>
+
+<span class="n">library</span><span class="p">(</span><span class="n">rio</span><span class="p">)</span> <span class="c1"># import csv</span>
 </pre></div>
 
 
-<h3>Inter-annotator agreement</h3>
-<div class="highlight"><pre><span></span>Unit    obs1    obs2    obs3    obs4    obs5
-1       1       1       2       .       2
-2       1       1       0       1       .
-3       2       3       3       3       .
-4       .       0       0       .       0
-5       0       0       0       .       0
-6       0       0       0       .       0
-7       1       0       2       .       1
+<h4>Read Data</h4>
+<p><code>load("data_project_backpain.RData")</code></p>
+<div class="highlight"><pre><span></span><span class="n">data</span>  <span class="o">&lt;-</span> <span class="nf">import</span><span class="p">(</span><span class="s">&#39;superstore.csv&#39;</span><span class="p">,</span> <span class="n">setclass</span> <span class="o">=</span> <span class="s">&quot;tibble&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 
 
-<h4>Reshape data to triples in the form <code>(coder,item,label)</code></h4>
-<div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">other_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_1&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs1&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_2&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs2&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_3&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs3&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_4&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs4&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_5&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs5&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<h4>Select only numeric columns</h4>
+<div class="highlight"><pre><span></span><span class="n">nums</span> <span class="o">&lt;-</span> <span class="nf">unlist</span><span class="p">(</span><span class="nf">lapply</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">is.numeric</span><span class="p">))</span>  
+<span class="n">df</span><span class="p">[</span> <span class="p">,</span> <span class="n">nums</span><span class="p">]</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">itertools</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">cohen_kappa_score</span>
-<span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">input_eval_dp</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">file</span><span class="p">,</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">type_label_list</span><span class="p">):</span>
-    <span class="n">fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_eval_dp</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
-    <span class="n">eval_df</span> <span class="o">=</span> <span class="n">get_eval</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
-    <span class="n">eval_typed_df</span> <span class="o">=</span> <span class="n">eval_df</span><span class="p">[</span><span class="n">eval_df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="nb">type</span><span class="p">]</span>
-
-    <span class="c1"># remove any rows where at least one NA is found</span>
-    <span class="n">eval_typed_df</span> <span class="o">=</span> <span class="n">eval_typed_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;judge_1&#39;</span><span class="p">,</span> <span class="s1">&#39;judge_2&#39;</span><span class="p">])</span>
-
-    <span class="c1"># transform the three columns with scores into a 15 x 3 matrix</span>
-    <span class="n">rankings</span> <span class="o">=</span> <span class="n">eval_typed_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">as_matrix</span><span class="p">()</span>
-
-    <span class="n">judge_A_matrix</span> <span class="o">=</span> <span class="n">rankings</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
-    <span class="n">judge_B_matrix</span> <span class="o">=</span> <span class="n">rankings</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
-
-    <span class="c1"># Kappa Cohen 2 annotators</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&#39;</span><span class="si">{}</span><span class="s2">&#39;</span><span class="se">\t</span><span class="s2">inter annotator agreement between judge A and judge B&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">))</span>
-    <span class="n">cohen_kappa</span><span class="p">(</span><span class="n">judge_A_matrix</span><span class="p">,</span> <span class="n">judge_B_matrix</span><span class="p">)</span>
+<h4>Coerce multiple columns to factors at once</h4>
+<div class="highlight"><pre><span></span><span class="n">cols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="ss">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;D&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;H&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="n">df</span><span class="o">[</span><span class="n">cols</span><span class="o">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">df</span><span class="o">[</span><span class="n">cols</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">factor</span><span class="p">)</span><span class="w">  </span><span class="err">##</span><span class="w"> </span><span class="k">as</span><span class="p">.</span><span class="n">factor</span><span class="p">()</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">used</span><span class="w"></span>
 </pre></div>
 
 
-<h3>DataFrame.apply</h3>
-<p>df_a</p>
-<div class="highlight"><pre><span></span>   ent_a  count
-0   5197    1.0
-1  12766    2.0
-2   3091    2.0
-3   3162    1.0
-4   1956   13.0
+<h4>Exclude columns by name</h4>
+<div class="highlight"><pre><span></span><span class="n">exclude</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Neighborhood&quot;</span><span class="p">,</span> <span class="s">&quot;Exterior2nd&quot;</span><span class="p">,)</span>
+<span class="n">df</span><span class="p">[</span> <span class="p">,</span> <span class="o">-</span><span class="nf">which</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">%in%</span> <span class="n">exclude</span><span class="p">)]</span>
 </pre></div>
 
 
-<p>df_ab</p>
-<div class="highlight"><pre><span></span>       ent_ab  count_ab
-0   5197-56744       1.0
-1   12766-5197       1.0
-2  12766-56744       1.0
-3    3091-3162       1.0
-4   3091-54583       1.0
+<h4>Count Missing Values</h4>
+<p><code>sapply(df, function(x) sum(is.na(x)))</code></p>
+<h4>Create vector from column and drop missing values</h4>
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">gt</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">gt</span><span class="o">$</span><span class="n">LandAverageTemperature</span><span class="p">),</span> <span class="m">2</span><span class="p">]</span>
 </pre></div>
 
 
-<h4>Add column:</h4>
-<p><code>df_ab['ent_a'] = df_ab.ent_ab.apply(lambda x: x.split('-')[0])</code></p>
-<p>df_ab:</p>
-<div class="highlight"><pre><span></span>        ent_ab  count_ab  ent_a
-0   5197-56744       1.0   5197
-1   12766-5197       1.0  12766
-2  12766-56744       1.0  12766
-3    3091-3162       1.0   3091
-4   3091-54583       1.0   3091
+<h4>Making Objects available to RMarkdown</h4>
+<ul>
+<li>in R script</li>
+</ul>
+<p><code>save(all = TRUE, file= "all.rda")</code>
+<code>save(object1.name, object2.name, file= "all.rda")</code></p>
+<ul>
+<li>in RMD file</li>
+</ul>
+<p><code>load("all.rda")</code></p>
+<h4>Benchmarking</h4>
+<div class="highlight"><pre><span></span>libray(microbenchmark)
+microbenchmark(
+  bad_cpp = bad_select_positive_values_cpp(x),
+  good_cpp = good_select_positive_values_cpp(x),
+  times = 1
+)
+
+library(rbenchmark)
+benchmark(
+  bad_select_positive_values_cpp(x),
+  good_select_positive_values_cpp(x),
+  order = &quot;relative&quot;
+)
 </pre></div>
 
 
-<h4>Add column from df_a to df_ab:</h4>
-<p><code>df_ab['ent_a_count'] = df_ab.ent_a.apply(get_ent, args=(df_a, 'ent_a', ))</code></p>
-<h4>Add column with <code>apply</code>:</h4>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_ent</span><span class="p">(</span><span class="n">ent_df_a</span><span class="p">,</span> <span class="n">df_a</span><span class="p">,</span> <span class="n">colname_df_ab</span><span class="p">):</span>
-    <span class="n">row_df_a</span> <span class="o">=</span> <span class="n">df_a</span><span class="p">[</span><span class="n">df_a</span><span class="p">[</span><span class="n">colname_df_ab</span><span class="p">]</span> <span class="o">==</span> <span class="n">ent_df_a</span><span class="p">]</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="n">row_df_a</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;count&#39;</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">i</span>
+<h4>Profiling</h4>
+<div class="highlight"><pre><span></span><span class="nv">Rprof</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">profile1.out</span><span class="s2">&quot;</span> <span class="ss">)</span> #<span class="k">send</span> <span class="nv">profiling</span> <span class="nv">to</span> <span class="nv">profile1</span>.<span class="nv">out</span>
+# <span class="o">&lt;</span><span class="k">call</span> <span class="nl">function</span> <span class="nv">here</span><span class="o">&gt;</span>
+<span class="nv">Rprof</span><span class="ss">(</span><span class="nv">NULL</span><span class="ss">)</span>
+<span class="nv">summaryRprof</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">profile1.out</span><span class="s2">&quot;</span><span class="ss">)</span>
 </pre></div>
 
 
-<p>df_ab</p>
-<div class="highlight"><pre><span></span>        ent_ab  count_ab  ent_a  ent_b  ent_a_count
-0   5197-56744       1.0   5197  56744          1.0
-1   12766-5197       1.0  12766   5197          2.0
-2  12766-56744       1.0  12766  56744          2.0
-3    3091-3162       1.0   3091   3162          2.0
-4   3091-54583       1.0   3091  54583          2.0
+<h4>Sliding Window</h4>
+<p>How sliding window works:</p>
+<ul>
+<li>select subset of x of size 3 using its indices</li>
+<li>1st iter: x[3 - 3 + 1, 3] gives x[1, 3]</li>
+<li>2nd iter: x[4 - 3 + 1, 4] gives x[2, 4]</li>
+<li>...</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">window</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span>
+<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="k">window</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">))</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="n">x_subset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="o">[</span><span class="n">seq(i - window + 1, i)</span><span class="o">]</span><span class="w"></span>
+<span class="n">res</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">x_subset</span><span class="p">)</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
 </pre></div>
 
 
-<h3>Kendall Tau rank correlation coefficient</h3>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_kendall_tau</span><span class="p">(</span><span class="n">df_pop</span><span class="p">):</span>
-    <span class="c1"># testing</span>
-    <span class="c1"># x1 = [12, 2, 1, 12, 2]</span>
-    <span class="c1"># x2 = [1, 4, 7, 1, 0]</span>
-    <span class="c1"># remove random as they don&#39;t have a rank</span>
-    <span class="n">df_pop_kendall</span> <span class="o">=</span> <span class="n">df_pop</span><span class="p">[</span><span class="n">df_pop</span><span class="o">.</span><span class="n">source_tsne</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
-    <span class="n">x1</span> <span class="o">=</span> <span class="n">df_pop_kendall</span><span class="p">[</span><span class="s1">&#39;rank_tsne&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-    <span class="n">x2</span> <span class="o">=</span> <span class="n">df_pop_kendall</span><span class="p">[</span><span class="s1">&#39;rank_avg_relevance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-    <span class="n">tau</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">kendalltau</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span> <span class="c1"># scipy implementation scipy.stats.kendalltau</span>
-    <span class="k">return</span> <span class="n">tau</span><span class="p">,</span> <span class="n">p_value</span>
-</pre></div>
-
-
-<p><a href="https://en.wikipedia.org/wiki/Kendall_rank_correlation_coefficient">read more</a></p>
+<h4>R: Packages</h4>
+<ul>
+<li><a href="https://heartbeat.fritz.ai/using-caret-in-r-to-classify-term-deposit-subscriptions-for-a-bank-bd40ff5cc15">caret</a></li>
+<li><a href="http://www.rebeccabarter.com/blog/2019-06-06_pre_processing/">Using the recipes package for easy pre-processing</a></li>
+<li><a href="https://cran.r-project.org/web/packages/bestNormalize/vignettes/bestNormalize.html">bestNormalize</a></li>
+</ul>
+<h4>Related Links</h4>
+<ul>
+<li><a href="https://blog.exploratory.io/populating-missing-dates-with-complete-and-fill-functions-in-r-and-exploratory-79f2a321e6b5">Populating Missing Dates with Complete and Fill Functions in R and Exploratory</a></li>
+<li><a href="https://www.youtube.com/user/marinstatlectures/playlists">MarinStatsLectures</a></li>
+<li><a href="https://towardsdatascience.com/data-cleaning-with-r-and-the-tidyverse-detecting-missing-values-ea23c519bc62">Data Cleaning with R and the Tidyverse: Detecting Missing Values</a></li>
+<li><a href="https://medium.com/x8-the-ai-community/play-with-your-ml-dataset-cheatsheet-in-r-bd8451ec6dd7">Play With Your ML Dataset - Cheatsheet in R</a></li>
+<li><a href="https://towardsdatascience.com/coding-in-r-pivot-painlessly-32e40a0b6c3d">Coding in R: Pivot Painlessly</a></li>
+<li><a href="https://towardsdatascience.com/simple-fast-exploratory-data-analysis-in-r-with-dataexplorer-package-e055348d9619">Simple Fast Exploratory Data Analysis in R with DataExplorer Package</a></li>
+<li><a href="https://community.rstudio.com/t/wrap-column-name-in-pdf-table-from-knitr-kable/3278">Wrap column name in pdf table, from knitr::kable</a></li>
+<li><a href="https://medium.com/analytics-vidhya/a-guide-to-machine-learning-in-r-for-beginners-part-5-4c00f2366b90">A Guide to Machine Learning in R for Beginners: Logistic Regression</a></li>
+<li><a href="https://towardsdatascience.com/tired-of-nested-ifelse-in-dplyr-look-no-further-ebf7166b5289">Clean Up Your R Code! A Secret to Better Feature Engineering</a></li>
+<li><a href="https://medium.com/analytics-vidhya/group-manipulation-in-r-3-5554a0c1b544">Group Manipulation In R</a></li>
+<li><a href="https://medium.com/@moorissa/the-best-resources-for-r-programming-37dbc94e0de6">The Best Resources for R Programming</a></li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./python, pandas.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                    <a href="./R.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/r.html" rel="tag">R</a>
                 </div>
             </article>
 
@@ -277,7 +198,7 @@
 
                     <a href="./index5.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 4 of 23</span>
+                    <span>Page 4 of 26</span>
                 </div>
 
             <div class="clear"></div>
