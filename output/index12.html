@@ -26,245 +26,179 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 03, 2017</h4>
+        <div id="content">            <h4 class="date">Nov 24, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./Vagrant VM.html" rel="bookmark" title="Permanent Link to &quot;Vagrant VM&quot;">Vagrant VM</a>
+                    <a href="./kafka.html" rel="bookmark" title="Permanent Link to &quot;Kafka Cheatsheet&quot;">Kafka Cheatsheet</a>
                 </h2>
 
                 
                 
 
-                <h4>Useful Links</h4>
+                <h3>Terminology</h3>
 <ul>
-<li><a href="https://www.gis-blog.com/osgeo-live-the-best-open-source-gis-ready-to-use-package/">OSGeo-Live</a></li>
-<li><a href="https://releases.ubuntu.com/20.04/">Ubuntu 20.04 ISO</a></li>
-<li><a href="https://blog.engineyard.com/building-a-vagrant-box">Building a Vagrant Box from Start to Finish</a></li>
-<li><a href="https://www.abhishek-tiwari.com/creating-a-new-vagrant-base-box-from-an-existing-vm/">Creating a new Vagrant base box from an existing VM</a></li>
+<li>A Kafka cluster is a group of Kafka brokers.</li>
+<li>A Kafka broker allows consumers to fetch messages by topic, partition and offset.</li>
+<li>Kafka brokers can create a Kafka cluster by sharing information between each other directly or indirectly using Zookeeper.</li>
 </ul>
-<h4>Pre-requisites</h4>
+<h3>Installation</h3>
 <ul>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-16-04">Git</a></li>
-<li><a href="http://docs.vagrantup.com/v2/installation/index.html">Vagrant</a> </li>
-<li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>.</li>
-</ul>
-<h4>Shared Folders</h4>
-<h4>Vagrantfile</h4>
-<div class="highlight"><pre><span></span>config.vm.synced_folder <span class="s2">&quot;.&quot;</span>, <span class="s2">&quot;/vmtest_kafka&quot;</span>
-</pre></div>
-
-
-<h4>Vagrant Box</h4>
-<p>Assuming you want to share the directory in which <code>Vagrantfile</code> is located and that directory is named <code>vmtest_kafka</code>. 
-First add your share directory in the VM Box (Devices &gt; Shared Folders) and click "Make Permanent".
-Whatever you name your share here will be the name you will need to use when mounting in the vm guest OS e.g. <code>vmtest_kafka</code>. 
-Next on the the guset OS make a directory to use for your mount preferably in your home directory e.g. <code>mkdir ~/shared</code>.</p>
-<div class="highlight"><pre><span></span>sudo usermod -a -G vboxsf vagrant
-mkdir ~/shared
-sudo mount -t vboxsf vmtest_kafka ~/shared
-</pre></div>
-
-
-<ul>
-<li><code>sudo nano ~/.profile</code> and add the line: <code>sudo mount -t vboxsf vmtest_kafka ~/shared</code></li>
-<li>Set directory permissions on HOST: <code>chmod 777 -R vmtest_kafka/</code></li>
-</ul>
-<h4>Increase Vagrant Box Size</h4>
-<p>Note: it may be easier to just grab a box that has a large size. See above.</p>
-<ol>
 <li>
-<p>Clone &amp; Resize</p>
-<p>on Linux</p>
-<div class="highlight"><pre><span></span>VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vmdk&quot; &quot;/home/baba/VirtualBox VMs/my_box/box.vdi&quot; --format vdi
-VBoxManage modifyhd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; --resize 131072
-VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/home/baba/VirtualBox VMs/my_box/box-resized.vmdk&quot; --format vmdk
-</pre></div>
-
-
-<p>on Window: same steps as below but first run this:</p>
-<div class="highlight"><pre><span></span>set PATH=%PATH%;&quot;C:\Program Files\Oracle\VirtualBox&quot;
-</pre></div>
-
-
+<p>Download and Setup Java 8 JDK: <code>sudo apt install openjdk-8-jdk</code></p>
 </li>
 <li>
-<p>Allocate space</p>
-<p>The newly created disk space is unallocated at this stage. Follow these steps next:</p>
-<ul>
-<li>
-<p><a href="http://www.gitshah.com/2013/05/how-to-fix-out-of-space-problem-for.html?m=1">getting Gparted</a></p>
+<p>Download &amp; Extract the Kafka binaries from https://kafka.apache.org/downloads</p>
 </li>
 <li>
-<p><a href="https://www.youtube.com/watch?v=cDgUwWkvuIY">changing partitions using Gparted (Video)</a></p>
+<p>Try Kafka commands using bin/kafka-topics.sh (for example)</p>
+</li>
+<li>
+<p>add to <code>~/.bashrc</code>:  <code>export PATH=/home/vagrant/kafka_2.12-2.8.0/bin:$PATH</code></p>
+</li>
+<li>
+<p>Edit Zookeeper &amp; Kafka configs in <code>kafka_2.12-2.8.0/config</code></p>
+<ul>
+<li>
+<p>zookeeper.properties: <code>dataDir=/home/vagrant/kafka_2.12-2.8.0/data/zookeeper</code></p>
+</li>
+<li>
+<p>server.properties: <code>log.dirs=/home/vagrant/kafka_2.12-2.8.0/data/kafka</code></p>
 </li>
 </ul>
 </li>
-</ol>
-<p>see also <a href="https://gist.github.com/christopher-hopper/9755310">Resize a Hard Disk for a Virtual Machine</a></p>
-<h4>Create Global Variable for use in Python Scripts</h4>
-<p>In <code>~/.profile</code>add</p>
-<div class="highlight"><pre><span></span><span class="k">export</span> <span class="n">TOMOE_DATA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">ownCloud</span><span class="o">/</span><span class="n">tomoe</span><span class="o">-</span><span class="n">data</span>
-<span class="k">export</span> <span class="n">KG_OUTPUT_DIR</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">vmtest</span><span class="o">/</span><span class="n">tomoe</span><span class="o">/</span><span class="n">wp</span><span class="o">-</span><span class="n">tomoe</span><span class="o">-</span><span class="n">playground</span><span class="o">/</span><span class="n">local</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">kg</span>
+</ul>
+<h3>Start Zookeeper, Kafka Server and Kafka Connect</h3>
+<ul>
+<li>Pre-requisite: Kafka aded to PATH</li>
+<li>Only when Zookeeper is up and running you can start a Kafka server (that will connect to Zookeeper).</li>
+</ul>
+<div class="highlight"><pre><span></span>zookeeper-server-start.sh config/zookeeper.properties
+kafka-server-start.sh config/server.properties
+connect-distributed.sh config/connect-distributed.properties
 </pre></div>
 
 
-<h4>Useful Vagrant commands</h4>
+<h3>Topics</h3>
+<div class="highlight"><pre><span></span>kafka-topics.sh --zookeeper localhost:2181 --create --topic &quot;gtfs&quot; --partitions 1 --replication-factor 1
+kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list
+kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;g.*&#39;
+kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;.*ksql.*&#39;
+</pre></div>
+
+
+<h3>Producers</h3>
+<div class="highlight"><pre><span></span>kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic topic_name
+</pre></div>
+
+
+<p>Piping a JSON file into a Topic:</p>
+<div class="highlight"><pre><span></span>file_name.json | kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic topic_name
+</pre></div>
+
+
+<h3>Consumers</h3>
+<p>This tool helps to read data from Kafka topics and outputs it to standard output.</p>
+<div class="highlight"><pre><span></span>kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --from-beginning --property print.key=true --property key.separator=&quot;-&quot; --property print.timestamp=true
+</pre></div>
+
+
+<h3>Faust</h3>
+<p>Note: append -p 6067 to the line below to use a different port.</p>
+<div class="highlight"><pre><span></span>$ python script.py worker 
+</pre></div>
+
+
+<h3>Other Useful Commands</h3>
 <ul>
-<li><code>config.vm.box = "file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box"</code></li>
-<li><code>VBoxClient --clipboard</code></li>
-<li><code>vagrant global-status</code></li>
-<li><code>set PATH=%PATH%;"C:\Program Files\Oracle\VirtualBox"</code></li>
-<li><code>vboxmanage list vms</code></li>
-<li><code>vagrant init file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box</code></li>
-</ul>
-<h4>Misc. Links</h4>
-<ul>
-<li><a href="https://github.com/hashicorp/vagrant/issues/5186">Warning: Authentication failure. Retrying... " after packaging box</a></li>
-<li><a href="https://jeremykendall.net/2013/08/09/vagrant-synced-folders-permissions/">vagrant-synced-folders-permissions</a></li>
-<li><a href="https://stackoverflow.com/questions/35807568/vagrant-synced-folder-permissions">vagrant-synced-folders-permissions SO</a></li>
+<li><code>kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list</code></li>
+<li><code>kafka-consumer-groups.sh  --list --bootstrap-server localhost:9092</code></li>
+<li><code>zookeeper-shell.sh localhost:2181 ls /brokers/ids</code> to list active brokers. </li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./Vagrant VM.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
+                    <a href="./kafka.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/kafka.html" rel="tag">Kafka</a>
                 </div>
-            </article>            <h4 class="date">Dec 02, 2017</h4>
+            </article>            <h4 class="date">Nov 23, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./Linux.html" rel="bookmark" title="Permanent Link to &quot;Linux&quot;">Linux</a>
+                    <a href="./kafka_connect.html" rel="bookmark" title="Permanent Link to &quot;Kafka Connect Cheatsheet&quot;">Kafka Connect Cheatsheet</a>
                 </h2>
 
                 
                 
 
-                <h4>Useful Commands</h4>
-<ul>
-<li><code>sudo tar -xvf package_file.tar.gz</code></li>
-<li><code>sudo dpkg -i package_file.deb</code></li>
-<li><code>cat /etc/*release</code></li>
-<li><code>echo $XDG_CURRENT_DESKTOP</code></li>
-<li><code>sudo find ~/ -name rdflib</code></li>
-<li><code>sudo find / -name "*.cls"</code></li>
-<li><code>dpkg -L jenkins</code> will help you find what files does a package install</li>
-<li><code>ps -a</code> or <code>sudo lsof -t -i:8888</code> then <code>kill -9 (processID)</code></li>
-<li>make script executable: <code>sudo chmod +x script.sh</code></li>
-<li>symbolic link: <code>sudo ln -s confluent-6.1.1/ confluent</code></li>
-</ul>
-<h4>Handy Tools</h4>
-<ul>
-<li><a href="https://fishshell.com/">Fish</a>: <code>sudo apt-get install fish</code></li>
-<li><a href="https://linuxize.com/post/getting-started-with-tmux/">Tmux</a>: <code>sudo apt-get install tmux</code></li>
-</ul>
-<h4>Pip install problems</h4>
-<div class="highlight"><pre><span></span>sudo apt-get install aptitude
-sudo aptitude install ...
+                <h3>Connectors</h3>
+<p>In this demonstration we're going to make use of the Kafka Connect API.</p>
+<p><a href="https://docs.confluent.io/current/connect/references/restapi.html">See the documentation for more information on any of these actions</a>.</p>
+<p>To get a list of connectors that are loaded in to the Kafka Connect cluster</p>
+<div class="highlight"><pre><span></span><span class="n">curl</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8083</span><span class="o">/</span><span class="n">connector</span><span class="o">-</span><span class="n">plugins</span> <span class="o">|</span> <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">json</span><span class="o">.</span><span class="k">tool</span>
 </pre></div>
 
 
-<h4>tmux Sessions</h4>
-<ul>
-<li><code>tmux new -s session_name</code> new session</li>
-<li><code>tmux a -t session_name</code> attach</li>
-<li><code>ctrl + b</code> then <code>d</code> detach</li>
-<li><code>ctrl + b</code> then 'x' terminate session</li>
-<li><code>ctrl + b</code> then <code>(</code> move between sessions</li>
-<li><code>ctrl + b</code> the 'c` to make a new tab in an existing session</li>
-<li><code>ctrl + b</code> then the number of the tab e.g. <code>0</code> or <code>1</code> to move between tab</li>
-<li><code>htop</code> + Enter to see running processes (create new tab inside session)</li>
-</ul>
-<h4>File Handling</h4>
-<ul>
-<li><code>tar xzvf archive_name.tar.gz</code> to uncompress tar.gz file</li>
-<li><code>tar xjvf archive_name.tar.bz2</code> to uncompress tar.bz2 file</li>
-<li><code>less file.csv</code> to open file</li>
-<li><code>q + enter</code> to close and exit</li>
-<li><code>zcat file.tsv.gz | more</code> to view fcompressed gz file</li>
-<li><code>zcat file.tsv.gz | grep "pattern match"</code> to find string</li>
-<li><code>cat -vet file</code> to see hidden chars</li>
-<li><code>uniq -d file.txt</code> to get duplicate lines</li>
-<li><code>cat gene2refseq | awk '{if ($1==6239) print $0}' | head</code></li>
-</ul>
-<h4>Packages</h4>
-<ul>
-<li>To see packages and their size <code>conda clean --all</code></li>
-<li>To clean up <code>du -sh */</code></li>
-<li>
-<p>To remove package</p>
-<div class="highlight"><pre><span></span>sudo apt-get remove r-base
-sudo apt-get purge texlive*
+<h4>Viewing Connectors</h4>
+<p>First, we can view connector-plugins:</p>
+<div class="highlight"><pre><span></span>curl http://localhost:8083/connector-plugins <span class="p">|</span> python -m json.tool
 </pre></div>
 
 
-</li>
-<li>
-<p>To reinstall package</p>
-<div class="highlight"><pre><span></span>sudo apt-get install --reinstall package_name
+<h4>Create a Connector</h4>
+<p>Lets create a connector. We'll dive into more details on how this works later.</p>
+<div class="highlight"><pre><span></span>curl -X POST -H <span class="s1">&#39;Content-Type: application/json&#39;</span> -d <span class="s1">&#39;{</span>
+<span class="s1">    &quot;name&quot;: &quot;first-connector&quot;,</span>
+<span class="s1">    &quot;config&quot;: {</span>
+<span class="s1">        &quot;connector.class&quot;: &quot;FileStreamSource&quot;,</span>
+<span class="s1">        &quot;tasks.max&quot;: 1,</span>
+<span class="s1">        &quot;file&quot;: &quot;/var/log/journal/confluent-kafka-connect.service.log&quot;,</span>
+<span class="s1">        &quot;topic&quot;: &quot;kafka-connect-logs&quot;</span>
+<span class="s1">    }</span>
+<span class="s1">  }&#39;</span> <span class="se">\</span>
+  http://localhost:8083/connectors
 </pre></div>
 
 
-</li>
-<li>
-<p><code>dpkg -l | grep miktex</code> to see what's installed</p>
-</li>
-<li><code>dpkg -L package-name</code> to list files installed by some package</li>
-<li><code>dpkg -l | grep package_name</code> to see if package is installed</li>
-</ul>
-<h4>Show git branch name in Terminal</h4>
-<p>Add this to <code>.bashrc</code>:</p>
-<div class="highlight"><pre><span></span><span class="n">force_color_prompt</span><span class="o">=</span><span class="n">yes</span>
-<span class="n">color_prompt</span><span class="o">=</span><span class="n">yes</span>
-<span class="n">parse_git_branch</span><span class="p">()</span> <span class="p">{</span>
-<span class="n">git</span> <span class="n">branch</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;/^[^*]/d&#39;</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;s/* \(.*\)/(</span><span class="se">\1</span><span class="s1">)/&#39;</span>
-<span class="p">}</span>
-<span class="k">if</span> <span class="p">[</span> <span class="s2">&quot;$color_prompt&quot;</span> <span class="o">=</span> <span class="n">yes</span> <span class="p">];</span> <span class="n">then</span>
-<span class="n">PS1</span><span class="o">=</span><span class="s1">&#39;${debian_chroot:+($debian_chroot)}\[</span><span class="se">\033</span><span class="s1">[01;32m\]\u@\h\[</span><span class="se">\033</span><span class="s1">[00m\]:\[</span><span class="se">\033</span><span class="s1">[01;34m\]\w\[</span><span class="se">\033</span><span class="s1">[01;31m\]$(parse_git_branch)\[</span><span class="se">\033</span><span class="s1">[00m\]\$ &#39;</span>
-<span class="k">else</span>
-<span class="n">PS1</span><span class="o">=</span><span class="s1">&#39;${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ &#39;</span>
-<span class="n">fi</span>
-<span class="n">unset</span> <span class="n">color_prompt</span> <span class="n">force_color_prompt</span>
+<h4>List connectors</h4>
+<p>We can list all configured connectors with:</p>
+<div class="highlight"><pre><span></span>curl http://localhost:8083/connectors <span class="p">|</span> python -m json.tool
 </pre></div>
 
 
-<p><br></p>
-<h4><code>apt-get</code> vs. <code>pip install</code> vs. <code>conda install</code></h4>
-<ul>
-<li><code>apt-get</code> installs a (python) package/module system-wide.</li>
-<li><code>pip</code> installs module in venv only.</li>
-<li>If using <code>pip install</code> after activating the venv, module will be installed into that venv only.</li>
-<li><code>pip</code> installs a package/module within any environment.</li>
-<li><code>conda</code> installs module/package within conda environments.</li>
-</ul>
-<h4>Pip Cache</h4>
-<ul>
-<li><code>pip config set global.cache-dir false</code></li>
-<li><code>pip install NAME --no-cache-dir</code> e.g. <code>pip --no-cache-dir install scipy</code></li>
-<li><code>sudo rm -R ~/.cache/pipenv</code> and <code>sudo rm -R ~/.cache/pip</code></li>
-</ul>
-<h4>Misc.</h4>
-<ul>
-<li>change nvidia gamma settings: <code>udo nano ~/.nvidia-settings-rc</code></li>
-<li><code>df -h</code> check disk space</li>
-<li><a href="https://itsfoss.com/how-to-find-the-process-id-of-a-program-and-kill-it-quick-tip/">kill process</a></li>
-<li><code>rm file</code> to remove file</li>
-<li><code>rm -r dirName</code> to remove directory</li>
-<li><code>ln -s /opt/robomongo/bin/robomongo ~/robomongo_lnk</code> to make a shortcut/alias</li>
-<li><code>pip list --local</code> to list installed packages in a given venv</li>
-<li>about the double dash <code>--</code><ul>
-<li>Almost all short options have a corresponding long option; <code>rm -f</code> is equivalent to <code>rm --force</code>.</li>
-<li>Many long options, though, have no corresponding short option.</li>
-</ul>
-</li>
-<li><a href="http://askubuntu.com/questions/739297/how-to-install-robomongo-ubuntu-system-please-let-me-know/781793">About the usr/bin directory</a></li>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-18-04">Increase Digitalocean memory</a></li>
-</ul>
+<p>You can see our connector in the list.</p>
+<h4>Detailing connectors</h4>
+<p>Let's list details on our connector:</p>
+<div class="highlight"><pre><span></span>curl http://localhost:8083/connectors/first-connector <span class="p">|</span> python -m json.tool
+</pre></div>
+
+
+<h4>Pausing connectors</h4>
+<p>Sometimes its desirable to pause or restart connectors:</p>
+<p>To view status:</p>
+<div class="highlight"><pre><span></span>curl http://localhost:8083/connectors/first-connector/status <span class="p">|</span> python -m json.tool
+</pre></div>
+
+
+<p>To pause:</p>
+<div class="highlight"><pre><span></span>curl -X PUT http://localhost:8083/connectors/first-connector/pause 
+</pre></div>
+
+
+<p>To restart (note this is a POST command!):</p>
+<div class="highlight"><pre><span></span>curl -X POST http://localhost:8083/connectors/first-connector/restart
+</pre></div>
+
+
+<h4>Deleting connectors</h4>
+<p>Finally, to delete your connector:</p>
+<div class="highlight"><pre><span></span>curl -X DELETE http://localhost:8083/connectors/first-connector
+</pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./Linux.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
+                    <a href="./kafka_connect.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/kafka.html" rel="tag">Kafka</a>
                 </div>
             </article>
 
@@ -275,7 +209,7 @@ sudo apt-get purge texlive*
 
                     <a href="./index13.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 12 of 26</span>
+                    <span>Page 12 of 24</span>
                 </div>
 
             <div class="clear"></div>

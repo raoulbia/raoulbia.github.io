@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code snippets etc. | Azure General Security Features</title>
+    <link rel="shortcut icon" type="image/png" href="../favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="../archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="../">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Mar 25, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../drafts/azure_general_security.html" rel="bookmark" title="Permanent Link to &quot;Azure General Security Features&quot;">Azure General Security Features</a>
+                </h2>
+
+                
+                
+
+                <p><br></p>
+<h2>General Security</h2>
+<p>also see <a href="https://raoulbia.github.io/azure_general_and_network_security.html">Azure General and Network Security</a></p>
+<ul>
+<li>
+<p>Azure Security Centre</p>
+<ul>
+<li>monitors and protects<ul>
+<li>Policy compliance of <strong>your</strong> resources</li>
+<li>Security alerts (as opposed to alerts for say new VM created)</li>
+<li>Secure score</li>
+<li>Resource hygiene</li>
+</ul>
+</li>
+<li>ties in with Azure Advisor</li>
+<li>Can be installed on-prem as “security agents”</li>
+</ul>
+</li>
+<li>
+<p>Key Vault</p>
+<ul>
+<li>Centrally store your secrets, keys, certificates, DB password</li>
+<li><strong>NOT security token</strong> (which is related to AD authentication)</li>
+<li>Grant access to a program at run time</li>
+<li>Can generate keys within Key Vault</li>
+</ul>
+</li>
+<li>
+<p>Azure Sentinel</p>
+<ul>
+<li>for deeper investigation into security incidents</li>
+<li>Centralises all the <strong>log files</strong> from various resources</li>
+<li>Analyses them to detect threats</li>
+<li>Allows you to <strong>run queries on those logs</strong></li>
+<li>Investigate an incident</li>
+<li>Orchestration and automation to fix issues</li>
+</ul>
+</li>
+<li>
+<p>Azure Dedicated Host</p>
+<ul>
+<li>Hardware that is dedicated only to you e.g. I want the computer or network that my VMs are running not to be shared with any other customer</li>
+</ul>
+</li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../drafts/azure_general_security.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/cloud.html" rel="tag">Cloud</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

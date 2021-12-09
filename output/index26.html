@@ -26,87 +26,134 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Apr 24, 2017</h4>
+        <div id="content">            <h4 class="date">May 25, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./public_transport_data.html" rel="bookmark" title="Permanent Link to &quot;Public Transport Data&quot;">Public Transport Data</a>
+                    <a href="./scripts.html" rel="bookmark" title="Permanent Link to &quot;Scripts&quot;">Scripts</a>
                 </h2>
 
                 
                 
 
-                <p><a href="https://gtfs.org/reference/static/#field-definitions">GTFS Field Definitions</a></p>
-<p><a href="http://transitfeeds.com/p/transport-for-ireland">Transit Feeds Transport for Ireland</a></p>
-<p><a href="https://data.smartdublin.ie/dataset?category=Transport+and+Infrastructure">Dublinked Transport and Infrastructure</a></p>
-<h2>TransitFeed</h2>
-<p><a href="https://github.com/google/transitfeed">github.com/google/transitfeed</a></p>
-<h3>Feed Validator</h3>
-<p><a href="https://github.com/google/transitfeed/wiki/FeedValidator">/wiki/FeedValidator</a></p>
-<p><code>python feedvalidator.py dublin_bus_gtfs.zip</code></p>
-<p>Note: Written for Python 2. Make sure to create conda env with pyton 2.7!</p>
-<h3>Schedule Viewer (Map)</h3>
-<p><code>python schedule_viewer.py --feed_filename dublin_bus_gtfs.zip</code></p>
-<p>then go to <code>http://localhost:8765/</code></p>
-<p>Notes: </p>
-<ul>
-<li>add API key to <code>/home/user/shared/transitfeed/gtfsscheduleviewer/files/index.html</code></li>
-<li>and to <code>/home/user/shared/transitfeed/schedule_viewer.py</code> (TBC if this can be dropped)</li>
-<li>restrict API key - see <a href="https://stackoverflow.com/questions/46560859/expiredkeymaperror-on-newly-generated-api-key">this SO post</a></li>
-</ul>
-<h2>GTFS Ready Set Go</h2>
-<p><a href="https://github.com/ondata/gtfsreadysetgo">github.com/ondata/gtfsreadysetgo</a></p>
-<p><a href="https://medium.com/tantotanto/gtfs-pronti-partenza-via-23aa4a42c48e">GTFS, pronti, partenza, via …</a></p>
-<p><code>GTFS ready, set, go</code> is a <strong>bash script</strong> to </p>
-<ul>
-<li>download a GTFS file, and </li>
-<li>convert it to a spatialite file (stops and the routes tables)</li>
-<li>create report about the GTFS data</li>
-<li>export the stops and the routes tables in GeoJSON and KML formats</li>
-</ul>
-<p>The files produced by this script can be imported int QGIS.</p>
-<h2>GTFS Real Time (upcoming)</h2>
-<p><a href="https://gtfs.org/reference/realtime/v2/">GTFS Realtime Reference v2</a></p>
-<p><a href="https://github.com/seanrees/gtfs-upcoming">github.com/seanrees/gtfs-upcoming</a></p>
-<div class="highlight"><pre><span></span>sudo kill -9 `sudo lsof -t -i:6824`
-python main.py --config=config.ini --env=prod --port=6824 --promport=800
-http://127.0.0.1:6824/upcoming.json
+                <h3>Import GTFS data into postgres</h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># init vars</span>
+<span class="nv">workingFolder</span><span class="o">=</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>
+<span class="nv">unzip_dir</span><span class="o">=</span><span class="s2">&quot;gtfs_files_unzipped&quot;</span>
+<span class="nv">fileName</span><span class="o">=</span><span class="s2">&quot;feed_gtfs&quot;</span> 
+<span class="nv">dbName</span><span class="o">=</span><span class="s2">&quot;gtfs_dublinbus&quot;</span>
+<span class="nv">user</span><span class="o">=</span><span class="s2">&quot;postgres&quot;</span>
+<span class="nv">password</span><span class="o">=</span><span class="s2">&quot;postgres&quot;</span>
+
+<span class="c1"># create dirs</span>
+<span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="se">\r</span>m -Rf <span class="nv">$workingFolder</span>/<span class="nv">$unzip_dir</span><span class="p">;</span> <span class="k">fi</span>
+mkdir <span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span> &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="c1"># mkdir &quot;$workingFolder/output_test&quot; &gt; /dev/null 2&gt;&amp;1    </span>
+
+<span class="c1"># unzip the GTFS file</span>
+rm <span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>/*.csv &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+rm <span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>/*.txt &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+unzip -qq -o <span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$fileName</span><span class="s2">&quot;</span> -d <span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>
+
+<span class="c1"># create a CSV copy of the source txt GTFS files</span>
+<span class="nb">cd</span> <span class="s2">&quot;./</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>
+<span class="k">for</span> file <span class="k">in</span> *.txt
+<span class="k">do</span>
+    cp <span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span> <span class="s2">&quot;../</span><span class="nv">$unzip_dir</span><span class="s2">/</span><span class="si">${</span><span class="nv">file</span><span class="p">%.txt</span><span class="si">}</span><span class="s2">.csv&quot;</span>
+<span class="k">done</span>
+<span class="nb">cd</span> ..
+
+<span class="c1"># import into postgres</span>
+<span class="k">for</span> file <span class="k">in</span> <span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">/&quot;</span>*.csv
+<span class="k">do</span>
+    <span class="nv">filename</span><span class="o">=</span><span class="k">$(</span>basename <span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="k">)</span>
+    <span class="nv">extension</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">filename</span><span class="p">##*.</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="nv">filename</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">filename</span><span class="p">%.*</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    ogr2ogr -f PostgreSQL PG:<span class="s2">&quot;user=</span><span class="nv">$user</span><span class="s2"> dbname=</span><span class="nv">$dbName</span><span class="s2"> password=</span><span class="nv">$password</span><span class="s2">&quot;</span> <span class="se">\</span>
+            <span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">/</span><span class="nv">$filename</span><span class="s2">.csv&quot;</span> -nln <span class="s2">&quot;</span><span class="nv">$filename</span><span class="s2">&quot;</span> 
+<span class="k">done</span>
+
+<span class="se">\r</span>m <span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">/&quot;</span>*.csv
+
+<span class="nb">echo</span> <span class="s2">&quot;Done&quot;</span>
 </pre></div>
+</td></tr></table>
+                <div class="clear"></div>
 
+                <div class="info">
+                    <a href="./scripts.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/scripts.html" rel="tag">Scripts</a>
+                </div>
+            </article>            <h4 class="date">May 24, 2017</h4>
 
-<p>Notes:</p>
+            <article class="post">
+                <h2 class="title">
+                    <a href="./notebooks.html" rel="bookmark" title="Permanent Link to &quot;RMD and Jupyter Notebooks examples&quot;">RMD and Jupyter Notebooks examples</a>
+                </h2>
+
+                
+                
+
+                <p><br> </p>
+<p><strong>Jupyter Notebooks</strong></p>
 <ul>
-<li><a href="https://developer.nationaltransport.ie/">NTA API Developer Portal</a></li>
-<li>add API keys to <code>/home/user/shared/gtfs-upcoming/config.ini</code></li>
+<li><a href="https://nbviewer.jupyter.org/github/raoulbia/jupyter-notebooks/blob/master/dublin_housing_supply_and_demand.ipynb?flush_cache=true" target="_blank">Telling a Story with Data: Evidence of a Housing Crisis in Ireland</a></li>
+<li><a href="https://nbviewer.jupyter.org/github/raoulbia/jupyter-notebooks/blob/master/phosphonetwork_statistics.ipynb?flush_cache=true" target="_blank">A Quick Reference for Exploratory Graph Analysis with NetworkX</a></li>
 </ul>
-<h2>GTFSDB</h2>
-<p><a href="https://github.com/OpenTransitTools/gtfsdb">github.com/OpenTransitTools/gtfsdb</a></p>
-<p><code>bin/gtfsdb-load --database_url postgresql://postgres:user@localhost:5432 dublin_bus_gtfs.zip</code></p>
-<p>Notes:</p>
+<p><strong>R Notebooks</strong></p>
 <ul>
-<li>Must git clone inside root directory of VM (not the shared directory!)</li>
-<li>requirements: geoalchemy2, psycopg2, SQLAlchemy, zc.recipe.egg</li>
-<li><a href="https://github.com/OpenTransitTools/gtfsdb#install-and-use-via-the-gtfsdb-source-tree">installation with buildout</a></li>
-<li>the database url must contain <code>username:password</code> e.g. <code>postgres:user</code></li>
-<li>the port number can be found using <code>grep -H '^port' /etc/postgresql/*/main/postgresql.conf</code></li>
-</ul>
-<h2>GeoJson</h2>
-<ul>
-<li>uses [long, lat]</li>
-</ul>
-<h2></h2>
-<h2>Others (to be reviewed)</h2>
-<ul>
-<li><a href="https://github.com/cbick/gtfs_SQL_importer">github.com/cbick/gtfs_SQL_importer</a></li>
-<li><a href="https://bennettgarner.medium.com/parsing-gtfs-format-transit-data-in-real-time-with-python-3a528ba7aab7">Parsing GTFS format transit data in real time with Python</a></li>
-<li><a href="https://github.com/departmentfortransport/Open_NaPTAN">Open_NaPTAN</a></li>
-<li><a href="https://pypi.org/project/transx2gtfs/">transx2gtfs</a></li>
+<li><a href="https://www.rpubs.com/raoulbia/interpreting_glm_logistic_regression_output" target="_blank">Interpreting the Output of a Logistic Regression Model</a></li>
+<li><a href="https://www.rpubs.com/raoulbia/r-squared" target="_blank">The Effect of Total Variation on the Ability of Independent Variables to Model Linear Relationships.</a></li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./public_transport_data.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/public-transport-data.html" rel="tag">Public Transport Data</a>
+                    <a href="./notebooks.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python-r.html" rel="tag">Python, R</a>
                 </div>
             </article>
 
@@ -115,8 +162,9 @@ http://127.0.0.1:6824/upcoming.json
 
                     <a href="./index25.html" class="prev_page">&larr;&nbsp;Previous</a>
 
+                    <a href="./index27.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 26 of 26</span>
+                    <span>Page 26 of 27</span>
                 </div>
 
             <div class="clear"></div>

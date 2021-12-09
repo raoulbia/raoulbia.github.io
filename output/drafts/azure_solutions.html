@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code snippets etc. | Azure Solutions</title>
+    <link rel="shortcut icon" type="image/png" href="../favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="../archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="../">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Mar 27, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../drafts/azure_solutions.html" rel="bookmark" title="Permanent Link to &quot;Azure Solutions&quot;">Azure Solutions</a>
+                </h2>
+
+                
+                
+
+                <p><br></p>
+<h2>IoT</h2>
+<ul>
+<li>is SaaS</li>
+<li>
+<p>Azure IoT Hub </p>
+<ul>
+<li>a managed service</li>
+<li>acts as a message center for bi-directional communication between your IoT application and the devices it manages. </li>
+</ul>
+</li>
+<li>
+<p>Azure IoT Central </p>
+<ul>
+<li>a dashboard that allows you to connect, monitor, and manage your IoT devices </li>
+</ul>
+</li>
+<li>
+<p>Azure Sphere </p>
+<ul>
+<li>both a chip AND and OS</li>
+<li>security protocol for IoT devices</li>
+</ul>
+</li>
+<li>
+<p>Azure Time Series Insights</p>
+<ul>
+<li>exploration and telemetry<ul>
+<li>Note: telemetry is the in situ collection of measurements or other data at remote points and their automatic transmission to receiving equipment </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h4>Big Data and Analytics Solutions</h4>
+<ul>
+<li>
+<p>Azure Synapse Analytics</p>
+<ul>
+<li>formerly SQL Data Warehouse</li>
+<li>brings together Enterprise Data Warehouse and Big Data Analytics</li>
+<li>analytics service for BI and machine learning </li>
+<li>automatic scaling and high availability</li>
+<li>Azure SQL Data Warehouse is a cloud-based service that leverages massively parallel processing (MPP) to quickly run complex queries across petabytes of data in a relational database </li>
+<li>either serverless or provisioned</li>
+</ul>
+</li>
+<li>
+<p>HD Insight</p>
+<ul>
+<li>Hadoop family open source analytics service for entreprises</li>
+<li>Umbrella for all Apache big data solutions</li>
+<li>fully managed Hadoop services</li>
+<li>interact with them in a SaaS or PaaS way</li>
+<li>Hadoop Apache Spark, Hive, Kafka, Storm</li>
+</ul>
+</li>
+<li>
+<p>Azure Databricks</p>
+<ul>
+<li>open-source data analytics platform</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h4>AI Solutions</h4>
+<ul>
+<li>Azure Machine Learning<ul>
+<li>build, test, and deploy predictive analytics solutions</li>
+</ul>
+</li>
+<li>Cognitive Services<ul>
+<li>recommender system, ...</li>
+</ul>
+</li>
+<li>Azure Bot Service</li>
+</ul>
+<p><br></p>
+<h4>Serverless computing</h4>
+<ul>
+<li>
+<p>Azure Functions  (see video 31 @ 1:40 for DEMO)</p>
+<ul>
+<li>Small pieces of code hosted in Azure that run after some trigger e.g. timer, data change, file being stored</li>
+<li>valid azure function triggers<ul>
+<li>Queue trigger</li>
+<li>Blob trigger</li>
+</ul>
+</li>
+<li>Called serverless because no instance involved<ul>
+<li>you don’t define nbr of CPUs, size of RAM, storage</li>
+<li>you don’t chose a hosting plan like you do in a web app</li>
+</ul>
+</li>
+<li>
+<p>Consumption-based billing</p>
+</li>
+<li>
+<p>see “Functions Editor” </p>
+</li>
+<li>Search “Function” in marketplace</li>
+</ul>
+</li>
+<li>
+<p>Logic Apps </p>
+<ul>
+<li>Is a <strong>workflow service</strong></li>
+<li>A logic app can call an Azure Function we created!</li>
+<li>e.g. <em>when a new file is created in dropbox, copy it to one drive</em> or <em>get daily reminders emailed to you</em> or
+<em>after executing function, store file on Azure Blob file storage</em> …</li>
+<li>Has lots of “external connectors”</li>
+<li>Consumption-based billing</li>
+<li>Search “logic” in marketplace</li>
+<li>see video 32 @ 0:50 for DEMO</li>
+</ul>
+</li>
+<li>
+<p>Event Grid</p>
+<ul>
+<li>Messaging communication with the outside world </li>
+<li>Configurable but not programmable</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h4>DevOps Solutions</h4>
+<ul>
+<li>
+<p>Azure DevOps</p>
+<ul>
+<li>Tie in development functions (scripts, automation) into your company’s operations (IT infrastructure) e.g. CI/CD </li>
+<li>See DevOps pipelines, Agile development processes</li>
+</ul>
+</li>
+<li>
+<p>Github</p>
+<ul>
+<li>See Github Actions: </li>
+<li>allows to push code from Github into Azure automatically when source code changes (CI) </li>
+<li>check for errors (similar to pre-commit)</li>
+</ul>
+</li>
+<li>
+<p>Azure DevTest Labs: ??</p>
+</li>
+</ul>
+<p><br></p>
+<h4>Entreprise MEssaging Solutions</h4>
+<ul>
+<li>Service Bus</li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../drafts/azure_solutions.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/cloud.html" rel="tag">Cloud</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

@@ -27,7 +27,7 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Mar 28, 2018</h4>
+        <div id="content">            <h4 class="date">Mar 23, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -37,7 +37,152 @@
                 
                 
 
-                <p>dfdf</p>
+                <p><br></p>
+<h2>Availability SLA</h2>
+<ul>
+<li>
+<p>99.99% for all PaaS services </p>
+<ul>
+<li>Daily: 8s</li>
+<li>Weekly: 1m</li>
+<li>Monthly: 4m</li>
+<li>Yearly: 50m</li>
+</ul>
+</li>
+<li>
+<p>99.95% for Availability Sets of two or more VMs</p>
+</li>
+</ul>
+<p><br></p>
+<h2>Account Types</h2>
+<ul>
+<li>
+<p>Free </p>
+<ul>
+<li>can be used for Prod!</li>
+<li>Azure Free account has a limit for the amount of data that can be uploaded to Azure</li>
+<li>A basic support plan is included in an Azure free account</li>
+<li>All Azure free accounts expire after a certain period</li>
+</ul>
+</li>
+<li>
+<p>Pay-as-you-Go</p>
+</li>
+</ul>
+<h2>Support Plans</h2>
+<ul>
+<li>Basic</li>
+<li>Developer</li>
+<li>Standard</li>
+<li>Professional Direct: Microst provides regular architectural reviews</li>
+</ul>
+<p><br></p>
+<h2>Factors that affect cost</h2>
+<ul>
+<li>
+<p>Resource types</p>
+<ul>
+<li>
+<p>Different services are billed based on different factors</p>
+</li>
+<li>
+<p>to see service costs, go to "Subscription" &gt; "Invoices"</p>
+</li>
+<li>
+<p>Free resource types</p>
+<ul>
+<li><strong>Private IP address</strong></li>
+<li>Resource groups</li>
+<li>Virtual network (up to 50)</li>
+<li>Load balancer (basic)</li>
+<li>Azure AD (basic)</li>
+<li>Network Security Groups (NSG) ; recall also aka “access control list”</li>
+<li>Free-tier web-apps (up to 10)</li>
+<li>Azure functions <ul>
+<li><strong>opportunity for cost savings</strong></li>
+<li>1M executions free per month</li>
+<li>0.20$ per million executions</li>
+<li>Compare that to Cheapest VM is 20$ per month…</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Metered costs: time, GB, CPU utilisation, nbr of executions            </p>
+<ul>
+<li>Pay per usage (consumption model) e.g. 1M function runs<ul>
+<li>Functions</li>
+<li>Logic apps</li>
+<li>Storage (per </li>
+<li>Ingress and egress traffic<ul>
+<li>Outbound bandwidth (5GB free)</li>
+<li>Inbound data is free</li>
+</ul>
+</li>
+<li>Cognitive Services API        </li>
+</ul>
+</li>
+<li>Pay for time<ul>
+<li>VMs: pay per second + pay for storage    </li>
+</ul>
+</li>
+<li>Location</li>
+</ul>
+</li>
+<li>
+<p>Stability in pricing
+    • Pay fixed price per month for computing power or storage, whether you use it or not
+    • Discount for reserved VM instance (1yr, 3yr)
+    • Multi-tenant or isolated environment </p>
+</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h2>Factors that can reduce costs</h2>
+<ul>
+<li>Azure Adisor (see settings &gt; cost tab)</li>
+<li>Alerts when billing exceeds a certain level (doesn’t stop the services)</li>
+<li>Auto shutdown of resources when not being used</li>
+<li>Utilise cool/archive storage where possible<ul>
+<li>E.g. for backup files</li>
+</ul>
+</li>
+<li>Reserved instances<ul>
+<li>If you know you are going to use your VM for the coming year</li>
+<li>20%+ savings</li>
+</ul>
+</li>
+<li>Use policy to restrict access to certain expensive resources</li>
+<li>Auto scaling</li>
+<li>Ensure every resource has an owner (tags) ; all resources are accounted for</li>
+<li>Spot pricing<ul>
+<li>Ability to use VMs for discounted price when nobody is using them</li>
+<li>Bidding on low-priced VM time</li>
+</ul>
+</li>
+<li>Hybrid use benefit: related to on-prem</li>
+</ul>
+<p><br></p>
+<h2>Pricing calculator <a href="https://azure.microsoft.com/en-us/pricing/calculator/">link</a></h2>
+<ul>
+<li>Configurable options<ul>
+<li>Region,</li>
+<li>Tier,</li>
+<li>Subscription type</li>
+<li>Support options</li>
+<li>Dev/test pricing</li>
+</ul>
+</li>
+<li>Can save and share</li>
+</ul>
+<p><br></p>
+<h2>Azure Cost Management</h2>
+<ul>
+<li><a href="https://azure.microsoft.com/en-ca/pricing/tco/calculator/">Total Cost of Ownership calculator</a></li>
+<li>Cost management and billing section</li>
+<li>Track spending over time</li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">

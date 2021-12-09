@@ -34,6 +34,7 @@ git push origin master tag GTFSRT_v1.0
 
 * `git add -A`
 * `git add .` to add a new file
+* `git remote -v`
 * `git checkout --theirs PATH/FILE` if conflict: If solution is to accept remote/other-branch version
 * `git add -p` [read more](https://medium.com/@mc999/git-add-p-is-a-gamechanger-in-file-management-e4c879e89ab)
 * `git clone -b <branch name> <rep url>`
@@ -48,6 +49,7 @@ git push origin master tag GTFSRT_v1.0
 
 #### Useful Links
 
+* [Create a branch in Git from another branch](https://stackoverflow.com/questions/4470523/create-a-branch-in-git-from-another-branch)
 * [How to create a new gitlab repo from my existing local git repo](https://stackoverflow.com/questions/33101962/how-to-create-a-new-gitlab-repo-from-my-existing-local-git-repo-using-cli)
 * [Adding an existing project to GitHub using the command line](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/)
 * [Feature_Branch_Workflow](https://techbase.kde.org/Development/Git/Feature_Branch_Workflow)

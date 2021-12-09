@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code snippets etc. | Azure Architectural Components</title>
+    <link rel="shortcut icon" type="image/png" href="../favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="../archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="../">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Mar 28, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../drafts/azure_architectural_components.html" rel="bookmark" title="Permanent Link to &quot;Azure Architectural Components&quot;">Azure Architectural Components</a>
+                </h2>
+
+                
+                
+
+                <p><br></p>
+<h3>Architectural componets</h3>
+<ul>
+<li>
+<p>Regions and Region Pairs</p>
+<ul>
+<li>Microsoft Azure datacenters are organized and made available by <em>Regions</em></li>
+<li>(geo) regions (60+) and region pairs</li>
+<li>Pairs are in same geography</li>
+<li>Data connection btw pairs is fastest speed available i.e. lowest latency</li>
+<li>SW rollouts are deployed to one region of a pair and the other is not touched</li>
+<li>If multiple regions go down, one region of each pair is treated as a priority </li>
+<li>Put your backups into the paired region!</li>
+</ul>
+</li>
+<li>
+<p>Availability Zones</p>
+<ul>
+<li>attached to the concept of <strong>data centre failure</strong><ul>
+<li>Physically separated from each other, running on its own power, its own heating and cooling and on its own network</li>
+<li>same land, different building</li>
+</ul>
+</li>
+<li>NOT available in all regions: if you have VMs in all regions doesn't mean you can avail of availability zones for all VMs</li>
+<li>two or more availability zones within one region!</li>
+<li>An application can be deployed to multiple availability zones </li>
+</ul>
+</li>
+<li>
+<p>Availability Sets</p>
+<ul>
+<li>it is recommended availability sets for two or more VMs</li>
+<li>logical grouping of VMs that allow Azure to understand how your application is built to provide
+for redundancy and resilience.</li>
+<li>no cost</li>
+</ul>
+</li>
+<li>
+<p>Azure Subscriptions</p>
+<ul>
+<li>billing unit</li>
+<li>is an object that represents a "folder" that you can put resources in</li>
+<li>Azure subscriptions provide you with authenticated and authorized access to Azure products and services and allows you to provision resources. An account can have multiple subscriptions, one for each department, that have different billing models and to which you apply different access-management policies.</li>
+<li>can be transferred but to merged</li>
+<li>only one admin per subscription</li>
+<li>Micrososft account (email) only</li>
+<li>support plans<ul>
+<li>basic support plan with free account</li>
+<li>standard support plan gives access to support engineer phone / email</li>
+</ul>
+</li>
+<li>one account holder can have multiple subscriptions</li>
+<li>ability to have different levels of access to different subscriptions e.g. owner or global admin vs. contributor</li>
+<li><strong>a resource must be associated with a subscription</strong></li>
+<li>Gold is highest subscription tier,</li>
+<li>subscription templates: Azure Blueprints; have pre-defined roles and policies</li>
+</ul>
+</li>
+<li>
+<p>Resource </p>
+<ul>
+<li>is an instance of some azure service</li>
+<li><strong>inherits permissions configured at the resource group level</strong></li>
+<li>if you delete a resource group, all the resources in the group will be deleted</li>
+<li>if VM has a read-only lock applied, you can add a Delete lock as well</li>
+<li>do NOT inherit tag applied at resource level</li>
+</ul>
+</li>
+<li>
+<p>Resource groups</p>
+<ul>
+<li><strong>logical groupings of related things</strong> e.g. by subscriptions, project, people who work on a project, ...</li>
+<li>from here can contro RBAC and compliance (policies)</li>
+<li>can manage compliance of resources across multiple subscriptions</li>
+<li>can be used to delegate RBAC permissions to several VMs simultaneously</li>
+<li>Respurce groups provide organizations with the ability to <strong>manage the compliance</strong> of Azure resources across multiple subscriptions</li>
+</ul>
+</li>
+<li>
+<p>Management groups</p>
+<ul>
+<li>a hierarchy of subscriptions;</li>
+<li>used to organise subscriptions</li>
+<li>can be nested</li>
+<li>good for setting varying <strong>policies</strong> depending on the users of the subscription </li>
+<li>i.e. apply rules to groups rather each individual subscription</li>
+<li>can be viewed as a <strong>governance model</strong></li>
+</ul>
+</li>
+<li>
+<p>Tags</p>
+<ul>
+<li>let you organise resources and resource grousps </li>
+<li>name:value pairs</li>
+<li>is metadata</li>
+</ul>
+</li>
+<li>
+<p>Azure Resource Manager (ARM)</p>
+<ul>
+<li>resource deployment model that underlies all resource creation or modification</li>
+<li>no matter whether you use, the portal, PowerShell, or the SDK, ARM takes those commands and executes them</li>
+</ul>
+</li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../drafts/azure_architectural_components.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/cloud.html" rel="tag">Cloud</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

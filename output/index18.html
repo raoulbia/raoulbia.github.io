@@ -26,245 +26,88 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 01, 2017</h4>
+        <div id="content">            <h4 class="date">Oct 02, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./web_development.html" rel="bookmark" title="Permanent Link to &quot;Web Development&quot;">Web Development</a>
+                    <a href="./Algorithms.html" rel="bookmark" title="Permanent Link to &quot;Algorithms&quot;">Algorithms</a>
                 </h2>
 
                 
                 
 
-                <h3>nginx</h3>
+                <p>On this page I keep some notes abbout Algorithms. It's work in progress and all might not be 
+accurate. I will improve this page as my grasp of the key differences between the core algorithm 
+families improves. </p>
+<p><strong>Introduction</strong></p>
+<p>Many graph-based problems are of the non-deterministic polynomial time (NP) problem family.<br />
+Specifically this means that graph-based problems can often not be solved efficiently w.r.t. time and 
+space. For example, consider that the optimal solution for a given graph-based problem involves 
+visiting all nodes and vertices in the graph. Such an exhaustive search is unfeasible with large 
+graphs consisting of millions of nodes and vertices.</p>
+<p><strong>Algorithms</strong></p>
+<p>There are several alternative strategies to deal with NP problems that avoid the limitations of 
+exhaustive search. These strategies do not, in general, find optimal solutions, but can find solutions 
+that are reasonably close to being optimal. Such strategies include </p>
 <ul>
-<li><code>sudo nginx -t</code> to test nginx</li>
-<li><code>sudo /etc/init.d/nginx reload</code> to restart nginx</li>
-<li><code>sudo apt-get remove nginx nginx-common</code> to to remove all but config files</li>
-<li><code>sudo apt-get purge nginx nginx-common</code> to remove everything</li>
-<li><code>find /etc/nginx -name '*.conf' | xargs grep -i log</code></li>
-<li><a href="https://www.youtube.com/watch?v=fpeQlbdRmKI">How To Set Up nginx Virtual Hosts (Server Blocks)</a></li>
+<li>greedy algorithms</li>
+<li>heuristic algorithms </li>
+<li>approximation algorithms</li>
+<li>randomized algorithms </li>
 </ul>
-<p><br></p>
-<h3>start ngrok</h3>
-<p>To start ngrok:</p>
-<p><code>./ngrok http 5000</code></p>
-<p><br></p>
-<h3>Heroku</h3>
-<h4>Deploying a Flask App vs. running a Python script on the VM</h4>
-<ul>
-<li>The key difference is in how <code>Dynos</code> are configured in the <code>Resources</code> section.</li>
-<li>This is dictated by what is in the Procfile (see below). </li>
-<li>For running a Python script, click <code>Edit dyno formation</code> of <code>web</code> and <code>worker</code> and activate both radio buttons. Note that the <code>worker</code> can also be activate using <code>heroku ps:scale worker=1 -a APPNAME</code>.</li>
-</ul>
-<h4>Procfile</h4>
-<p>Procfile for Flask App</p>
-<ul>
-<li><code>web: gunicorn project_name.wsgi</code> where <code>project_name</code> is name of dir in which <code>settings.py</code> is located.</li>
-</ul>
-<p>Procfile for standalone python script</p>
-<div class="highlight"><pre><span></span><span class="n">web</span><span class="o">:</span> <span class="n">python</span> <span class="n">script</span><span class="o">.</span><span class="na">py</span>
-<span class="n">worker</span><span class="o">:</span> <span class="n">python</span> <span class="n">script</span><span class="o">.</span><span class="na">py</span>
-</pre></div>
-
-
-<h4>Install Heroku CLI</h4>
-<p>Needed for <code>heroku login --interactive</code> and <code>heroku create</code>.</p>
-<ul>
-<li><code>curl https://cli-assets.heroku.com/install.sh | sh</code></li>
-<li><a href="https://devcenter.heroku.com/categories/command-line">read more</a></li>
-</ul>
-<h4>Stop/Start Heroku VM</h4>
-<p>Start:</p>
-<ul>
-<li><code>heroku ps:scale web=1</code> for starting a Flask App</li>
-<li><code>heroku ps:scale worker=1 -a APPNAME</code> for starting a "worker" which will in turn kick off a Python script i.e. will result in the same as logging in with <code>heroku login</code> and running <code>python script.py</code>.</li>
-</ul>
-<p>Stop:</p>
-<ul>
-<li><code>heroku ps:scale web=0</code> to stop Flask app</li>
-</ul>
-<p>or </p>
-<ul>
-<li><code>heroku ps -a APPNAME</code> to get current running dynos (e.g. <code>worker.1</code></li>
-<li><code>heroku ps:stop worker.1 -a APPNAME</code></li>
-<li><code>heroku logs --tail -a APPNAME</code> to see what is going on in the VM.</li>
-</ul>
-<h4>Misc.</h4>
-<ul>
-<li><a href="https://devcenter.heroku.com/articles/git">overview</a></li>
-<li>add <code>Pipfile</code> to <code>.gitignore</code> to ensure that dependencies are installed from <code>requirements.txt</code>.</li>
-<li>add <code>.env/</code> to <code>.gitignore</code> to ensure that secret key is hidden on github/gitlab.</li>
-<li>after deployment run <code>heroku ps:scale web=1 --app APPNAME</code></li>
-</ul>
-<h4>Login to Heroku VM</h4>
-<ul>
-<li><code>heroku login</code></li>
-<li><code>heroku run bash</code></li>
-<li><a href="https://help.heroku.com/18PI5RSY/how-do-i-clear-the-build-cache">clear the build cache</a></li>
-<li><a href="https://chatbotslife.com/github-repo-heroku-explained-how-to-host-your-bot-server-python-8b3ec4f071ce">related article</a></li>
-</ul>
-<h4>Heroku <strong>Flask</strong> Deployment</h4>
-<ul>
-<li><code>heroku create &lt;NAME&gt;</code> to create a Heroku remote</li>
-<li><code>git add . ; git commit -m "update"</code></li>
-<li><code>git push heroku master</code></li>
-<li><code>heroku run python manage.py migrate</code></li>
-<li><code>heroku run python manage.py createsuperuser</code></li>
-</ul>
-<p>Heroku <strong>Dash</strong> Deployment</p>
-<ul>
-<li><a href="https://github.com/plotly/dash-heroku-template">see here</a></li>
-<li>change Step 6 to: <code>git remote add heroku https://git.heroku.com/semmeddb</code></li>
-</ul>
-<p>Heroku <strong>Django</strong> Deployment</p>
-<ul>
-<li><a href="https://github.com/heroku/heroku-django-template">heroku django template</a></li>
-<li><a href="https://devcenter.heroku.com/articles/django-assets">about static assets</a></li>
-<li><code>pipenv install whitenoise</code></li>
-<li><code>python manage.py collectstatic</code></li>
-<li><a href="https://devcenter.heroku.com/articles/django-app-configuration">Django App configuration</a></li>
-<li>add <code>import django_heroku</code> to <code>settings.py</code> (top)</li>
-<li>add <code>django_heroku.settings(locals())</code> to <code>settings.py</code> (bottom)</li>
-</ul>
-<p><br></p>
-<h3>Django2</h3>
-<p>Useful commands</p>
-<div class="highlight"><pre><span></span><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">startproject</span> <span class="n">app1</span>
-<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
-<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
-<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span>
-<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
-</pre></div>
-
-
-<p>Django templates</p>
-<p>in <code>settings.py</code></p>
-<div class="highlight"><pre><span></span> <span class="nv">BASE_DIR</span> <span class="o">=</span> <span class="nv">os</span>.<span class="nv">path</span>.<span class="k">dirname</span><span class="ss">(</span><span class="nv">os</span>.<span class="nv">path</span>.<span class="k">dirname</span><span class="ss">(</span><span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">abspath</span><span class="ss">(</span><span class="nv">__file__</span><span class="ss">)))</span>
- ...
- <span class="nv">TEMPLATES</span> <span class="o">=</span> [
-   {
-       <span class="s1">&#39;</span><span class="s">DIRS</span><span class="s1">&#39;</span>: [<span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">join</span><span class="ss">(</span><span class="nv">BASE_DIR</span>, <span class="s1">&#39;</span><span class="s">firstwebsite/templates</span><span class="s1">&#39;</span><span class="ss">)</span>]
-   }]
-</pre></div>
-
-
-<p>in <code>urls.py</code></p>
-<ul>
-<li>...to be completed (Django1 vs Django2 issue)</li>
-<li>try <code>from views import</code> appraoch</li>
-</ul>
-<p>Django Resources</p>
-<ul>
-<li><a href="https://ccbv.co.uk/">Classy Class-Based Views ccbv.co.uk</a></li>
-<li><a href="https://docs.djangoproject.com/en/2.1/ref/models/">docs.djangoproject.com/en/2.1/ref/models</a></li>
-<li><a href="https://docs.djangoproject.com/en/2.1/ref/class-based-views/generic-display/">docs.djangoproject.com/en/2.1/ref/class-based-views/generic-display</a></li>
-<li><a href="https://docs.djangoproject.com/en/2.1/topics/class-based-views/generic-display/">docs.djangoproject.com/en/2.1/topics/class-based-views/generic-display</a></li>
-<li><a href="https://docs.djangoproject.com/en/2.1/ref/templates/builtins/">docs.djangoproject.com/en/2.1/ref/templates/builtins</a></li>
-<li><a href="https://docs.djangoproject.com/en/2.1/topics/db/queries/">docs.djangoproject.com/en/2.1/topics/db/queries</a></li>
-</ul>
-<p><br></p>
-<h3>Apache2</h3>
-<ul>
-<li><code>apachectl -S</code></li>
-<li><code>sudo service apache2 restart</code></li>
-<li><a href="http://flask.pocoo.org/docs/1.0/deploying/mod_wsgi/#configuring-apache">Configure Apache for Flask</a></li>
-<li><a href="http://terokarvinen.com/2016/deploy-flask-python3-on-apache2-ubuntu">Deploy Flask Python3 on Apache2 on Ubuntu</a></li>
-<li><a href="https://www.bogotobogo.com/python/Flask/Python_Flask_HelloWorld_App_with_Apache_WSGI_Ubuntu14.php">Flask HelloWorld App_with_Apache WSGI_Ubuntu14</a></li>
-<li><a href="https://websiteforstudents.com/installing-apache2-mariadb-on-ubuntu-16-04-17-10-18-04-with-php-7-2-support-lamp/">Installing LAMP</a></li>
-</ul>
-<p><br></p>
-<h3>Flask</h3>
-<ul>
-<li>to run a Flask app: <code>python app.py</code></li>
-<li><code>import pdb; pdb.set_trace()</code></li>
-<li>error: address already in use<ul>
-<li><code>sudo lsof -i :5000</code></li>
-<li><code>sudo kill-9 PID</code></li>
-</ul>
-</li>
-<li><code>FLASK_APP=run.py flask run</code></li>
-<li><a href="https://stackoverflow.com/questions/41144565/flask-does-not-see-change-in-js-file">flask does not see change in .js file</a></li>
-<li><a href="https://help.parsehub.com/hc/en-us/articles/217751808-API-Tutorial-How-to-get-run-data-using-Python-Flask">API Tutorial: How to get run data using Python &amp; Flask</a></li>
-<li><a href="https://stackoverflow.com/questions/53258168/gunicorn-wont-start-flask-app-because-application-object-must-be-callable">gunicorn and wsgi configuration</a></li>
-<li><a href="https://coderwall.com/p/pstm1w/deploying-a-flask-app-at-heroku">gunicorn and flask</a></li>
-</ul>
-<p><br></p>
-<h3>Node JS</h3>
-<p>Install nodejs:</p>
-<div class="highlight"><pre><span></span>curl -sL https://deb.nodesource.com/setup_8.x — Node.js 8 LTS &quot;Carbon&quot; | sudo -E bash -
-sudo apt-get install -y nodejs
-</pre></div>
-
-
-<p>symlink issue with Vagrant VM shared folder:</p>
-<p><code>npm install --no-bin-links</code></p>
-<p>port already in use</p>
-<p><code>ps aux | awk '/node/{print $2}' | xargs kill -9</code></p>
-<p><br></p>
-<h3>Redux</h3>
-<ul>
-<li><a href="https://www.bram.us/2016/10/25/plotly-academy-state-management-with-redux/">https://www.bram.us/2016/10/25/plotly-academy-state-management-with-redux/</a></li>
-</ul>
-<p><br></p>
-<h3>Ansible</h3>
-<ul>
-<li><a href="https://blog.jetbrains.com/pycharm/2017/12/developing-in-a-vm-with-vagrant-and-ansible/">Developing a VM-with Vagrant and Ansible</a></li>
-</ul>
-<p><br></p>
-<h3>SAP Conversational AI</h3>
-<ul>
-<li>markdown URL syntax: <code>[Click Here]({{memory.url}})</code> </li>
-</ul>
-<p><br></p>
-<h3>Misc.</h3>
-<ul>
-<li><a href="https://miro.com/">https://miro.com/</a></li>
-<li><a href="https://wireframe.cc/">https://wireframe.cc/</a></li>
-<li><a href="https://www.creative-tim.com/product/get-shit-done-kit">https://www.creative-tim.com/product/get-shit-done-kit</a></li>
-<li><a href="https://uxplanet.org/how-the-bootstrap-4-grid-works-a1b04703a3b7">https://uxplanet.org/how-the-bootstrap-4-grid-works-a1b04703a3b7</a></li>
-<li><a href="https://hackerthemes.com/bootstrap-cheatsheet/#col-sm-1">https://hackerthemes.com/bootstrap-cheatsheet/#col-sm-1</a></li>
-</ul>
+<p>The idea of greedy algorithm is to solve a problem by making a “locally optimal choice at each stage
+with the hope of finding a global optimum ”. </p>
+<p>Heuristic algorithm try to solve a problem by “proceeding to a solution by trial and error or by 
+rules that are only loosely defined ”. </p>
+<p>The lines between greedy and heuristic algorithms are often blurred and many algorithms exhibit 
+characteristics of both. </p>
+<p>Approximation algorithms are essentially heuristic algorithms with a provable guarantee on the 
+quality of the obtained near-optimal solution.</p>
+<p>Randomized algorithms may be nonintuitive because they lack the control of traditional algorithms.
+Some randomized algorithms are <em>Las Vegas algorithms</em>, which deliver solutions that are guaranteed 
+to be exact, despite the fact that they rely on making random decisions. Yet most randomized 
+algorithms are <em>Monte Carlo algorithms</em>. These algorithms are not guaranteed to return exact solutions,
+but they do quickly find approximate solutions. Because of their speed, they can be run many times, 
+allowing us to choose the best approximation from thousands of runs.</p>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./web_development.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/web-development.html" rel="tag">Web Development</a>
+                    <a href="./Algorithms.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/algorithms.html" rel="tag">Algorithms</a>
                 </div>
-            </article>            <h4 class="date">Oct 05, 2017</h4>
+            </article>            <h4 class="date">Oct 01, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./statistics.html" rel="bookmark" title="Permanent Link to &quot;Statistics&quot;">Statistics</a>
+                    <a href="./linear_algebra.html" rel="bookmark" title="Permanent Link to &quot;Linear Algebra&quot;">Linear Algebra</a>
                 </h2>
 
                 
                 
 
-                <h4>Variance</h4>
+                <p>On this page I keep some notes abbout GloVe and word2vec word embeddings. It's work in progress...</p>
+<h4>Matrix Factorization</h4>
 <ul>
-<li>is the mean of some measured variation</li>
-<li>i.e. the sum of squared differences (SS) divided by some quantity n.</li>
-<li>in the case of samples, SS is divided by n-1.</li>
+<li>refers to decomposing matrices into their constituent parts</li>
+<li>makes it easier to calculate more complex matrix operations</li>
+<li>A common analogy for matrix decomposition is the factoring of numbers, such as the factoring of 10 into 2 x 5. 
+  For this reason, matrix decomposition is also called matrix factorization. Like factoring real values, there are many 
+  ways to decompose a matrix, hence there are a range of different matrix decomposition techniques.</li>
+<li>Matrix factorization methods such as Latent Semantic Analysis (LSA) use low-rank approximations to decompose large 
+  matrices capturing statistical information about a corpus. 
+  (<a href="">source</a>https://blog.acolyer.org/2016/04/22/glove-global-vectors-for-word-representation/)</li>
+<li>Common methods: QR, SVD, LU (see Resources below)</li>
 </ul>
-<h4>Standard Deviation</h4>
+<h4>Resources</h4>
 <ul>
-<li>is the square root of a given variance.</li>
-<li>this transformation expresses the value of the variance in the unit of whatever is being measured.</li>
-<li>For example Root Mean Squared Error (RMSE) is a standard deviation. It is the sum of squared differences of 
-the errors, expressed in the unit of the error being measured.</li>
-<li>When you see "root" something (e.g. RMSE) or "standard" something (Standard Error) it 
-refers to a standard deviation which itself is a Variance transformed by taking the square root thereof. </li>
-</ul>
-<h4>Distributions</h4>
-<ul>
-<li><a href="https://www.rocscience.com/help/slide2/slide_model/probability/Statistical_Distributions_Overview.htm">Statistical Distributions Overview</a></li>
+<li><a href="https://machinelearningmastery.com/introduction-to-matrix-decompositions-for-machine-learning/">A Gentle Introduction to Matrix Factorization for Machine Learning</a></li>
+<li><a href="https://stepik.org/lesson/8513/step/1?unit=1609">Linear Algebra: Problems and Methods (Stepik)</a></li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./statistics.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/statistics.html" rel="tag">Statistics</a>
+                    <a href="./linear_algebra.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linear-algebra.html" rel="tag">Linear Algebra</a>
                 </div>
             </article>
 
@@ -275,7 +118,7 @@ refers to a standard deviation which itself is a Variance transformed by taking 
 
                     <a href="./index19.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 18 of 26</span>
+                    <span>Page 18 of 24</span>
                 </div>
 
             <div class="clear"></div>

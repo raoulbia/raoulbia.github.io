@@ -26,74 +26,119 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 10, 2017</h4>
+        <div id="content">            <h4 class="date">Oct 04, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./posygis.html" rel="bookmark" title="Permanent Link to &quot;PostGIS&quot;">PostGIS</a>
+                    <a href="./combinatorics.html" rel="bookmark" title="Permanent Link to &quot;Combinatorics&quot;">Combinatorics</a>
                 </h2>
 
                 
                 
 
-                <h4>QGIS</h4>
-<h4>Codes</h4>
-<p>CRS: 4326</p>
-<p>DUBLIN BUS EPSG CRS 2157
-https://www.scss.tcd.ie/publications/theses/diss/2019/TCD-SCSS-DISSERTATION-2019-016.pdf</p>
-<h3>postgis resources</h3>
-<ul>
-<li><a href="https://postgis.net/docs/manual-1.3/ch03.html">PostGIS FAQs</a></li>
+                <ul>
+<li><a href="./drafts/Combinatorics I.html">Combinatorics I</a></li>
+<li><a href="./drafts/Combinatorics II.html">Combinatorics II</a></li>
+<li><a href="./drafts/Combinatorics III.html">Combinatorics III</a></li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./posygis.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/gis.html" rel="tag">GIS</a>
+                    <a href="./combinatorics.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/combinatorics.html" rel="tag">Combinatorics</a>
                 </div>
-            </article>            <h4 class="date">Nov 01, 2017</h4>
+            </article>            <h4 class="date">Oct 03, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./s3.html" rel="bookmark" title="Permanent Link to &quot;s3&quot;">s3</a>
+                    <a href="./probabilities.html" rel="bookmark" title="Permanent Link to &quot;Probabilities&quot;">Probabilities</a>
                 </h2>
 
                 
                 
 
-                <p><a href="https://medium.com/bilesanmiahmad/how-to-upload-a-file-to-amazon-s3-in-python-68757a1867c6">How to upload a file to Amazon S3 in Python</a></p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
-<span class="kn">from</span> <span class="nn">botocore.exceptions</span> <span class="kn">import</span> <span class="n">NoCredentialsError</span>
-
-<span class="n">ACCESS_KEY</span> <span class="o">=</span> <span class="s1">&#39;xxxx&#39;</span>
-<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="s1">&#39;xxxx&#39;</span>
-
-
-<span class="k">def</span> <span class="nf">upload_to_aws</span><span class="p">(</span><span class="n">local_file</span><span class="p">,</span> <span class="n">bucket</span><span class="p">,</span> <span class="n">s3_file</span><span class="p">):</span>
-    <span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">,</span> <span class="n">aws_access_key_id</span><span class="o">=</span><span class="n">ACCESS_KEY</span><span class="p">,</span>
-                      <span class="n">aws_secret_access_key</span><span class="o">=</span><span class="n">SECRET_KEY</span><span class="p">)</span>
-
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">s3</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="n">local_file</span><span class="p">,</span> <span class="n">bucket</span><span class="p">,</span> <span class="n">s3_file</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Upload Successful&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">True</span>
-    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The file was not found&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">False</span>
-    <span class="k">except</span> <span class="n">NoCredentialsError</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Credentials not available&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">False</span>
-
-
-<span class="n">uploaded</span> <span class="o">=</span> <span class="n">upload_to_aws</span><span class="p">(</span><span class="s1">&#39;filename.csv&#39;</span><span class="p">,</span> 
-                         <span class="s1">&#39;bucket.name&#39;</span><span class="p">,</span> 
-                         <span class="s1">&#39;filename.csv&#39;</span><span class="p">)</span>
-</pre></div>
+                <p><br></p>
+<h4>Conditional probability refresher</h4>
+<p>$P(A|B) = \frac{P(A \cap B)}{P(B)}$</p>
+<p>likewise</p>
+<p>$P(B|A) = \frac{P(A \cap B)}{P(A)}$</p>
+<p>this implies that:</p>
+<p>$P(A \cap B) = P(A|B)P(B) = P(B|A)P(A)$</p>
+<p>dividing both sides by P(B) gives us Bayes Theorem:</p>
+<p>$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$</p>
+<p><br></p>
+<h4>Events A <strong>and</strong> B occur: $P(A \cap B)$</h4>
+<p>Rule: Multiplication</p>
+<p>Question: are those events dependent or independent?</p>
+<p><br></p>
+<p><em>Independent Events</em></p>
+<p>$P(A \cap B) = P(A) \ \cdot P(B)$</p>
+<p>Example: Roll two dice and get two Heads</p>
+<ul>
+<li>$P(H \cap H)$ = 0.5 * 0.5 = 0.25</li>
+</ul>
+<p><br></p>
+<p><em>Dependent Events</em></p>
+<p>$P(A \cap B) = P(B)P(A|B) = P(A)P(B|A)$</p>
+<p>Example: Pick two cards (wo/replacement) and get two Queens</p>
+<ul>
+<li>$P(Q1 \cap Q2) = P(Q1)P(Q2|Q1)$ = 4/52 * 3/51  </li>
+</ul>
+<p><br></p>
+<h4>Either A <strong>or</strong> B or both occur: $P(A \cup B)$</h4>
+<p>Rule: Addition</p>
+<p>Question: are those events mutually exlusive?</p>
+<p><br></p>
+<p><em>Mutually exclusive events</em></p>
+<p>$P(A \cup B) = P(A) \ + \ P(B)$</p>
+<p>Example: Roll a dice and get a 2 or a 5?</p>
+<ul>
+<li>$P(A \cup B) = P(A) \ + \ P(B)$ = 1/6 +1/6</li>
+</ul>
+<p><br></p>
+<p><em>Events have common outcomes</em></p>
+<p>$P(A \cup B) = P(A) \ + \ P(B) \ - \ P(A \cap B)$</p>
+<p>Example: Pick one card and get a King or Hearts</p>
+<ul>
+<li>$P(A \cup B) = P(K) \ + \ P(Hearts) \ - \ P(K of Hearts)$ = 4/52 + 13/52 - 1/52 </li>
+</ul>
+<p><br></p>
+<h4>Probabilities involving "at least one" success</h4>
+<ul>
+<li>Toss a coin two times: "<em>find the probability of getting at least one head</em>"
+  <br> Note: these are independent events...  </li>
+</ul>
+<p>\begin{align}
+\text{P(at least one H)} &amp;= 1 - \text{P(no Head)} \
+                       &amp;= 1 - P(T \cap T) \
+                       &amp;= 1 - P(T) * P(T) \  <br />
+                       &amp;= 1 - 0.25 = 0.75 
+\end{align}</p>
+<p><br></p>
+<h4>Binomial Probability "At Most" and "At Least"</h4>
+<ul>
+<li>A bag contains 6 red Bingo chips, 4 blue Bingo chips, and 7 white Bingo chips. 
+What is the probability of drawing a red Bingo chip at least 3 out of 5 times? </li>
+</ul>
+<p><br></p>
+<h4>Frechet Bounds</h4>
+<p>Suppose we know the values of Pr(A) and Pr(B), but no information is available regarding 
+the joint event $(A \cap B)$.</p>
+<p>The Frechet bounds are useful to define an interval for the probability of the
+joint event $(A \cap B)$ when only information about the marginal
+probabilities Pr(A) and Pr(B) is available.</p>
+<p>$$max{Pr(A) + Pr(B) − 1, 0} \geq Pr(A \ B) \leq min{Pr(A), Pr(B)}$$</p>
+<p>Example: Physiotherapists’ know that patients suffering from a particular type of
+low back pain have the following trait probabilities:</p>
+<ul>
+<li>P(Pain at night) = 0.63</li>
+<li>P(Nerve injury) = 0.43</li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./s3.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/s3.html" rel="tag">s3</a>
+                    <a href="./probabilities.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/probabilities.html" rel="tag">Probabilities</a>
                 </div>
             </article>
 
@@ -104,7 +149,7 @@ https://www.scss.tcd.ie/publications/theses/diss/2019/TCD-SCSS-DISSERTATION-2019
 
                     <a href="./index18.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 17 of 26</span>
+                    <span>Page 17 of 24</span>
                 </div>
 
             <div class="clear"></div>

@@ -26,386 +26,176 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 02, 2018</h4>
+        <div id="content">            <h4 class="date">Dec 02, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./python.html" rel="bookmark" title="Permanent Link to &quot;Python&quot;">Python</a>
+                    <a href="./Linux.html" rel="bookmark" title="Permanent Link to &quot;Linux&quot;">Linux</a>
                 </h2>
 
                 
                 
 
-                <p><br></p>
-<h4>File paths</h4>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-
-<span class="n">output_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="s1">&#39;data&#39;</span> <span class="o">/</span> <span class="s1">&#39;output&#39;</span><span class="c1">#self.output_dir = Path.cwd() / &#39;data&#39; / &#39;output&#39; / &#39;geojson&#39;</span>
-
-<span class="k">try</span><span class="p">:</span>
- <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">FileExistsError</span><span class="p">:</span>
- <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Folder already exists&#39;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
- <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Folder was created: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-
-
-<h4>limited FOR loop</h4>
-<p><code>for i, elem in zip(range(100), elems[::10])</code> where <code>[::10]</code> is every 10th</p>
-<h4>Query</h4>
+                <h4>Useful Commands</h4>
 <ul>
-<li><code>pd.read_csv("file.csv").query("year==2000")</code></li>
-<li><code>df.query("delay_arrival == 'n/a' | delay_arrival == 'NO_DATA' ")</code></li>
+<li><code>sudo tar -xvf package_file.tar.gz</code></li>
+<li><code>sudo dpkg -i package_file.deb</code></li>
+<li><code>cat /etc/*release</code></li>
+<li><code>echo $XDG_CURRENT_DESKTOP</code></li>
+<li><code>sudo find ~/ -name rdflib</code></li>
+<li><code>sudo find / -name "*.cls"</code></li>
+<li><code>dpkg -L jenkins</code> will help you find what files does a package install</li>
+<li><code>ps -a</code> or <code>sudo lsof -t -i:8888</code> then <code>kill -9 (processID)</code></li>
+<li>make script executable: <code>sudo chmod +x script.sh</code></li>
+<li>symbolic link: <code>sudo ln -s confluent-6.1.1/ confluent</code></li>
 </ul>
-<h4>File Handling:</h4>
-<div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">dosomething</span><span class="p">()</span>
-</pre></div>
-
-
-<div class="highlight"><pre><span></span><span class="c1"># remove if exists then write df to csv</span>
-<span class="n">f</span> <span class="o">=</span> <span class="s1">&#39;local-data/filename.csv&#39;</span>
-<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-
-
-<p>Notes:</p>
+<h4>Handy Tools</h4>
 <ul>
-<li>Opening a file with this statement will handle file closing for you</li>
-<li>The <code>StringIO</code> and <code>cStringIO</code> modules are gone. </li>
-<li>Instead, import the <code>io</code> module and use <code>io.StringIO</code> for <strong>text</strong> and <code>io.BytesIO</code> for <strong>data</strong>.</li>
-<li>Calling <code>read()</code> reads through the entire file and leaves the read cursor at the end of the file (with nothing more to read).</li>
-<li>Once a file has been read, with <code>read()</code> you can use <code>seek(0)</code> to return the read cursor to the start of the file</li>
-<li>To check if a file exists or to overwrite an existing file:</li>
+<li><a href="https://fishshell.com/">Fish</a>: <code>sudo apt-get install fish</code></li>
+<li><a href="https://linuxize.com/post/getting-started-with-tmux/">Tmux</a>: <code>sudo apt-get install tmux</code></li>
 </ul>
-<h4>Get index based on values in another column</h4>
-<div class="highlight"><pre><span></span><span class="n">id_in_top5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">df_ranked</span><span class="p">[</span><span class="n">rank_column</span><span class="p">][</span><span class="n">df_ranked</span><span class="p">[</span><span class="n">rank_column</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">])[::]</span>
+<h4>Pip install problems</h4>
+<div class="highlight"><pre><span></span>sudo apt-get install aptitude
+sudo aptitude install ...
+</pre></div>
+
+
+<h4>tmux Sessions</h4>
+<ul>
+<li><code>tmux new -s session_name</code> new session</li>
+<li><code>tmux a -t session_name</code> attach</li>
+<li><code>ctrl + b</code> then <code>d</code> detach</li>
+<li><code>ctrl + b</code> then 'x' terminate session</li>
+<li><code>ctrl + b</code> then <code>(</code> move between sessions</li>
+<li><code>ctrl + b</code> the 'c` to make a new tab in an existing session</li>
+<li><code>ctrl + b</code> then the number of the tab e.g. <code>0</code> or <code>1</code> to move between tab</li>
+<li><code>htop</code> + Enter to see running processes (create new tab inside session)</li>
+</ul>
+<h4>File Handling</h4>
+<ul>
+<li><code>tar xzvf archive_name.tar.gz</code> to uncompress tar.gz file</li>
+<li><code>tar xjvf archive_name.tar.bz2</code> to uncompress tar.bz2 file</li>
+<li><code>less file.csv</code> to open file</li>
+<li><code>q + enter</code> to close and exit</li>
+<li><code>zcat file.tsv.gz | more</code> to view fcompressed gz file</li>
+<li><code>zcat file.tsv.gz | grep "pattern match"</code> to find string</li>
+<li><code>cat -vet file</code> to see hidden chars</li>
+<li><code>uniq -d file.txt</code> to get duplicate lines</li>
+<li><code>cat gene2refseq | awk '{if ($1==6239) print $0}' | head</code></li>
+</ul>
+<h4>Packages</h4>
+<ul>
+<li>To see packages and their size <code>conda clean --all</code></li>
+<li>To clean up <code>du -sh */</code></li>
+<li>
+<p>To remove package</p>
+<div class="highlight"><pre><span></span>sudo apt-get remove r-base
+sudo apt-get purge texlive*
+</pre></div>
+
+
+</li>
+<li>
+<p>To reinstall package</p>
+<div class="highlight"><pre><span></span>sudo apt-get install --reinstall package_name
+</pre></div>
+
+
+</li>
+<li>
+<p><code>dpkg -l | grep miktex</code> to see what's installed</p>
+</li>
+<li><code>dpkg -L package-name</code> to list files installed by some package</li>
+<li><code>dpkg -l | grep package_name</code> to see if package is installed</li>
+</ul>
+<h4>Show git branch name in Terminal</h4>
+<p>Add this to <code>.bashrc</code>:</p>
+<div class="highlight"><pre><span></span><span class="n">force_color_prompt</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">color_prompt</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">parse_git_branch</span><span class="p">()</span> <span class="p">{</span>
+<span class="n">git</span> <span class="n">branch</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;/^[^*]/d&#39;</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;s/* \(.*\)/(</span><span class="se">\1</span><span class="s1">)/&#39;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">[</span> <span class="s2">&quot;$color_prompt&quot;</span> <span class="o">=</span> <span class="n">yes</span> <span class="p">];</span> <span class="n">then</span>
+<span class="n">PS1</span><span class="o">=</span><span class="s1">&#39;${debian_chroot:+($debian_chroot)}\[</span><span class="se">\033</span><span class="s1">[01;32m\]\u@\h\[</span><span class="se">\033</span><span class="s1">[00m\]:\[</span><span class="se">\033</span><span class="s1">[01;34m\]\w\[</span><span class="se">\033</span><span class="s1">[01;31m\]$(parse_git_branch)\[</span><span class="se">\033</span><span class="s1">[00m\]\$ &#39;</span>
+<span class="k">else</span>
+<span class="n">PS1</span><span class="o">=</span><span class="s1">&#39;${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ &#39;</span>
+<span class="n">fi</span>
+<span class="n">unset</span> <span class="n">color_prompt</span> <span class="n">force_color_prompt</span>
 </pre></div>
 
 
 <p><br></p>
-<h3>Ranking</h3>
-<h4>Create rankings</h4>
-<div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;source&#39;</span><span class="p">)[</span><span class="s1">&#39;dist&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-
-
-<h4>Create a dummy rank</h4>
-<p>This was used for a list of 10 items where 1 to 5 is already ranked and we need to fill the remaining 5 <code>NaN</code> ranks with ranks 6 to 10.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rank2rand</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col_to_modify</span><span class="p">):</span>
-    <span class="n">counter</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
-    <span class="n">existing_ranks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="n">col_to_modify</span><span class="p">]])</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;source_random&#39;</span><span class="p">]])</span>
-    <span class="n">updated_ranks</span> <span class="o">=</span> <span class="p">[</span><span class="nb">next</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span> <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">existing_ranks</span><span class="p">,</span> <span class="n">source</span><span class="p">)]</span>
-    <span class="k">return</span> <span class="n">updated_ranks</span>
-</pre></div>
-
-
-<p><br></p>
-<h3>Lambda</h3>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">transform</span><span class="p">():</span>
-    <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">2</span><span class="o">**</span><span class="n">x</span>
-<span class="n">f</span> <span class="o">=</span> <span class="n">transform</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
-</pre></div>
-
-
-<p>see also <a href="https://www.python-course.eu/python3_lambda.php">Lambda, filter, reduce and map</a></p>
-<h4>Lambda and dataframes: examples</h4>
-<p><code>df = df.apply(lambda x: x.astype(str).str.upper())</code></p>
-<p><code>df['Score'] = df['Score'].apply(lambda x: sigmoid(float(x)))</code></p>
-<p><code>df['string_id'] = df['string_id'].apply(lambda id_string: '9606.' + id_string)</code></p>
-<p><br></p>
-<h3>Misc.</h3>
-<h4><em>args &amp; </em>*kargs</h4>
+<h4><code>apt-get</code> vs. <code>pip install</code> vs. <code>conda install</code></h4>
 <ul>
-<li>*args refers to an undetermined number of positional arguments</li>
-<li>**kargs refers to an undetermined number of keyword arguments</li>
+<li><code>apt-get</code> installs a (python) package/module system-wide.</li>
+<li><code>pip</code> installs module in venv only.</li>
+<li>If using <code>pip install</code> after activating the venv, module will be installed into that venv only.</li>
+<li><code>pip</code> installs a package/module within any environment.</li>
+<li><code>conda</code> installs module/package within conda environments.</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">add_numbers</span><span class="ss">(</span><span class="nv">num0</span>, <span class="nv">num1</span>, <span class="nv">num2</span><span class="o">=</span><span class="mi">2</span>, <span class="nv">num3</span><span class="o">=</span><span class="mi">3</span><span class="ss">)</span>:
-    <span class="nv">outcome</span> <span class="o">=</span> <span class="nv">num0</span> <span class="o">+</span> <span class="nv">num1</span> <span class="o">+</span> <span class="nv">num2</span> <span class="o">+</span> <span class="nv">num3</span>
-    <span class="nv">print</span><span class="ss">(</span><span class="nv">f</span><span class="s2">&quot;</span><span class="s">num0={num0}, num1={num1}, num2={num2}, num3={num3}</span><span class="s2">&quot;</span><span class="ss">)</span>
-    <span class="k">return</span> <span class="nv">outcome</span>
-</pre></div>
-
-
-<p><a href="https://medium.com/better-programming/top-5-mistakes-you-make-when-declaring-functions-in-python-b7a0747711a4">read more</a></p>
-<h4>Remove zeros from numpy array</h4>
-<div class="highlight"><pre><span></span><span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="c1"># print(index)</span>
-    <span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
-</pre></div>
-
-
-<p>see also <a href="https://towardsdatascience.com/top-4-numpy-functions-you-dont-know-about-probably-28fcd5d7174f">Top 4 Numpy Functions You Don’t Know About</a></p>
-<h4>double colon e.g. <code>[::3]</code></h4>
-<p><code>[::3]</code> just means that you have not specified any start or end indices for your slice (as in <code>seq[start:end:step]</code>).</p>
-<p>Since you have specified a step, 3, this will take every third entry of something starting at the first index.</p>
-<p>For example: <code>'123123123'[::3] &gt;&gt; '111'</code></p>
-<p>It can also be used to reverse a list using <code>[::-1]</code>:</p>
-<p><code>a[::-1]</code> does not reverse anything, it's just a new view on the same data, more specifically a mirror view.</p>
-<p>The method <code>a[::-1].sort()</code> operates on the mirrored image, implying that when sort moves left a smaller item in its
- mirrored image, in reality it is moving it to the right in the real memory block of the a array. The mirrored view is
- sorted in ascending order, the real data is sorted in descending order.
- <a href="https://stackoverflow.com/questions/26984414/efficiently-sorting-a-numpy-array-in-descending-order">source</a></p>
-<h4>What does selection by <code>[:,None]</code> do?</h4>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">NP</span>
-<span class="o">&gt;&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">NP</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">a</span>
-<span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span>
-<span class="o">&gt;&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span>
-<span class="p">(</span><span class="mi">4</span><span class="p">,)</span>
-<span class="o">&gt;&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">a</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
-<span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">a</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span>
-<span class="p">[[</span><span class="mi">1</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">4</span><span class="p">]]</span>
-</pre></div>
-
-
-<p>see also <a href="http://stackoverflow.com/questions/37867354/in-numpy-what-does-selection-by-none-do">here</a></p>
-<h4>About Relative Imports</h4>
+<h4>Pip Cache</h4>
 <ul>
-<li>In order to run a script that uses relative imports such as <code>from .build_corpus import BuildCorpus</code>,
-you must run the script from the <strong>parent</strong> directory using <code>-m</code> and <strong>without</strong> the <code>.py</code>
-e.g. <code>python -m cai_pytorch.pytorch</code></li>
+<li><code>pip config set global.cache-dir false</code></li>
+<li><code>pip install NAME --no-cache-dir</code> e.g. <code>pip --no-cache-dir install scipy</code></li>
+<li><code>sudo rm -R ~/.cache/pipenv</code> and <code>sudo rm -R ~/.cache/pip</code></li>
 </ul>
-<h4>About Python Modules</h4>
-<ul>
-<li>When getting error: <code>module ... not found</code>: <a href="http://askubuntu.com/questions/470982/how-to-add-a-python-module-to-syspath">see here</a></li>
-<li>To prevent getting error <code>no module named...</code> resp. before importing a module from a different project make sure to run: 
-<code>$ python setup.py install</code></li>
-<li>How to get <code>import</code> of modules to work (<a href="http://stackoverflow.com/questions/36650163/cant-import-from-specific-folder-in-pycharm">source</a>)</li>
-<li>Modules are imported from a Python Package, not from a Directory. Therefore, instead of storing python scripts in a    directory, store them in a Python Package: right-click on your project directory, choose Python Package.</li>
-<li>Alternatively, in the existing directory, create an empty <code>__init__.py</code> file.</li>
-</ul>
-<h4>About Python Packages</h4>
-<p>To list installed packages</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pip</span>
-<span class="n">installed_packages</span> <span class="o">=</span> <span class="n">pip</span><span class="o">.</span><span class="n">get_installed_distributions</span><span class="p">()</span>
-<span class="n">installed_packages_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">==</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
-     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">installed_packages</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">installed_packages_list</span><span class="p">)</span>
-</pre></div>
-
-
-<h4>Python Profiler for Debugging</h4>
-<ul>
-<li>
-<p><a href="https://stackoverflow.com/questions/49262187/storing-the-link-prediction-score-in-a-matrix-form-using-networkx">cProfiler</a></p>
-</li>
-<li>
-<p>line profiler</p>
-</li>
-</ul>
-<p>Assumes you are using a shell script to run your program.</p>
-<p>Pre-requiste: <code>pip install line_profiler</code></p>
-<ol>
-<li>
-<p>change shell script as follows:</p>
-<div class="highlight"><pre><span></span>   #!/bin/bash -x
-
-   kernprof -lv my_script.py \
-   # time python3 my_script.py \
-   ...
-</pre></div>
-
-
-</li>
-<li>
-<p>add <code>@profile</code> at the start of each function you want to profile</p>
-</li>
-<li>
-<p>execute shell script</p>
-</li>
-<li>
-<p>when done, reverse changes made in Steps 1. and 2.</p>
-</li>
-</ol>
-<h4><code>super()</code> with <code>__init__()</code></h4>
-<p><a href="https://stackoverflow.com/questions/576169/understanding-python-super-with-init-methods">Understanding Python super() with <strong>init</strong>() methods</a></p>
-<h4>About the Python import mechanism</h4>
-<ul>
-<li><a href="https://stackoverflow.com/questions/11536764/how-to-fix-attempted-relative-import-in-non-package-even-with-init-py">here</a></li>
-<li><a href="https://stackoverflow.com/questions/44834/can-someone-explain-all-in-python">and here</a></li>
-</ul>
-<h4>Time it</h4>
-<p>time a for loop:</p>
-<div class="highlight"><pre><span></span><span class="c">%%timeit -n 10</span><span class="w"></span>
-<span class="k">for</span><span class="w"> </span><span class="k">...</span><span class="c">:</span><span class="w"></span>
-<span class="w">  </span><span class="k">...</span><span class="w"></span>
-</pre></div>
-
-
-<p>general timing</p>
-<div class="highlight"><pre><span></span>testtime = datetime.now()
-...
-testtime = testtime.strftime(&quot;%H:%M&quot;)
-</pre></div>
-
-
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
-<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="o">...</span>
-<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">t2r</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;execution time </span><span class="si">{:.4f}</span><span class="s1"> mins&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t2r</span> <span class="o">/</span> <span class="mi">60</span><span class="p">))</span>
-</pre></div>
-
-
-<h4>Logging &amp; Try/Except</h4>
-<ul>
-<li><a href="https://medium.com/better-programming/a-comprehensive-guide-to-handling-exceptions-in-python-7175f0ce81f7">A Comprehensive Guide to Handling Exceptions in Python</a></li>
-</ul>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_pathway_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">list</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__qualname__</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">pathway</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Building Pathway Data Set&#39;</span><span class="p">)</span>
-            <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-            <span class="n">dataset</span> <span class="o">=</span> <span class="n">PathwayDataset</span><span class="p">(</span><span class="nb">list</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">args</span><span class="p">)</span>
-            <span class="n">dataset</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">pathway_limit</span><span class="o">=</span><span class="n">pathway_limit</span><span class="p">)</span>
-            <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;finished in </span><span class="si">%5.2f</span><span class="s1"> s&#39;</span><span class="p">,</span> <span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;dataset will not be built&#39;</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exception</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">e</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">])))</span>
-        <span class="k">raise</span> <span class="n">e</span>
-</pre></div>
-
-
-<h4>Create a temporary file for unit tests:</h4>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tomoe.io</span> <span class="kn">import</span> <span class="n">get_tomoe_local_data_dir</span>
-<span class="kn">import</span> <span class="nn">tempfile</span>
-<span class="n">temp_path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;dist-graph-sampling&quot;</span><span class="p">)</span>
-
- <span class="o">...</span>
-
-<span class="n">TOMOE_TEMP_FOLDER</span> <span class="o">=</span> <span class="n">get_tomoe_local_data_dir</span><span class="p">()</span>
-
- <span class="o">...</span>
-<span class="n">triples_hg_csv_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="p">,</span> <span class="s1">&#39;triples.hg.csv.tsv&#39;</span><span class="p">)</span>
-<span class="n">triple_csv_to_hyperedge_csv</span><span class="p">(</span><span class="n">triples_csv_path</span><span class="p">,</span> <span class="n">triples_hg_csv_path</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">triples_hg_csv_path</span><span class="p">)</span><span class="o">.</span><span class="n">st_size</span> <span class="o">!=</span> <span class="mi">0</span>
-</pre></div>
-
-
-<h4>Variable assignemnt Gotchas</h4>
-<div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="n">b</span><span class="o">=</span><span class="n">a</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-<span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mi">12</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-</pre></div>
-
-
-<h4>How to install Python 3.6 on Ubuntu 16.04 LTS</h4>
-<div class="highlight"><pre><span></span>sudo add-apt-repository ppa:jonathonf/python-3.6
-sudo apt-get update
-sudo apt-get install python3.6
-</pre></div>
-
-
-<p>may be needed:</p>
-<p><code>sudo apt-get install python3.6-gdbm</code> </p>
-<h4>Convert Python2 to Python3</h4>
-<div class="highlight"><pre><span></span>pip install 2to3
-2to3 -n -w path/to/script/script_namae.py
-</pre></div>
-
-
-<p>Note: <code>-n</code> prevents backup files; <code>-w</code> instructs to write the conversion</p>
-<h4>Misc</h4>
-<ul>
-<li><code>strip()</code> strips off the new line character</li>
-<li>Widen Pycharm console output for pandas DFs: <code>pd.set_option('display.expand_frame_repr', False)</code></li>
-<li>About <code>action="store_true"</code>: <a href="https://docs.python.org/2/howto/argparse.html">see here</a></li>
-<li><code>PYTHONPATH</code> is the module search path.</li>
-<li><code>PYTHONHOME</code> is used for the standard libraries,</li>
-</ul>
-<h4>Various Links</h4>
-<ul>
-<li><a href="http://zetcode.com/python/regularexpressions/">Python regular expressions</a></li>
-<li><a href="https://kate.io/blog/2017/08/22/weird-python-integers/">Weird Python Integers</a></li>
-<li><a href="https://stackoverflow.com/questions/34229363/converting-json-string-into-python-dictionary">json.dumps vs json.loads</a></li>
-<li><a href="https://joblib.readthedocs.io/en/latest/">py joblib tutorial</a> ( about parallelization )</li>
-<li><a href="https://medium.com/analytics-vidhya/top-10-nice-to-have-data-science-libraries-d155196710ef">Top 10 Nice-To-Have Data Science Libraries</a></li>
-<li><a href="https://towardsdatascience.com/how-to-analyse-100s-of-gbs-of-data-on-your-laptop-with-python-f83363dda94">How to analyse 100 GB of data on your laptop with Python</a></li>
-<li><a href="https://www.kaggle.com/learn/overview">Kaggle Learn</a></li>
-<li><a href="https://medium.com/better-programming/tips-and-tricks-for-handling-configuration-files-in-python-a9d7429aa50b">Tips and Tricks for Handling Configuration Files in Python</a></li>
-<li><a href="https://medium.com/better-programming/dont-fear-the-pickle-using-pickle-dump-and-pickle-load-5212f23dbbce">Don’t Fear the Pickle: Using pickle.dump and pickle.load</a></li>
-<li><a href="https://www.youtube.com/channel/UCFxcvyt2Ucq5IL0_1Njzqlg/playlists">Python Videos</a></li>
-<li><a href="https://towardsdatascience.com/15-data-science-books-you-should-read-6f6981e6b3d8">15 Data Science Books You Should Read</a></li>
-<li><a href="https://people.duke.edu/~ccc14/sta-663/index.html">Computational Statistics in Python</a></li>
-<li><a href="https://medium.com/better-programming/what-are-args-and-kwargs-in-python-6aaf9e3cad73">What Are <em>args and </em>*kwargs in Python?</a></li>
-<li><a href="https://medium.com/better-programming/introduction-to-functional-programming-in-python-3d26cd9cbfd7">Introduction to Functional Programming in Python</a> ( about <strong>call</strong>() )</li>
-<li><a href="https://towardsdatascience.com/making-python-programs-blazingly-fast-c1cd79bd1b32">Making Python Programs Blazingly Fast</a></li>
-<li><a href="https://levelup.gitconnected.com/handy-python-features-e33751ef98a8">Decorators and Functions in Python</a></li>
-<li><a href="https://medium.com/better-programming/decorators-in-python-72a1d578eac4">Decorators in Python</a></li>
-<li><a href="https://www.statsmodels.org/stable/index.html">Statistics in Python</a></li>
-<li><a href="https://towardsdatascience.com/reduce-memory-usage-and-make-your-python-code-faster-using-generators-bd79dbfeb4c">create iterators in a very pythonic manner</a></li>
-<li><a href="https://medium.com/dataseries/descriptive-statistics-with-python-75e2b1249e8d">Descriptive Statistics with Python</a></li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./python.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
-                </div>
-            </article>            <h4 class="date">Jan 01, 2018</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./pypi.html" rel="bookmark" title="Permanent Link to &quot;PyPi&quot;">PyPi</a>
-                </h2>
-
-                
-                
-
-                <h4>Pre-requisites</h4>
-<ul>
-<li>
-<p><code>pip install -U twine</code></p>
-</li>
-<li>
-<p>in <code>~.pypirc</code> add <code>chmod 600 ~/.pypirc</code></p>
-</li>
-</ul>
-<h4>Deploy on PyPi</h4>
-<hr />
-<p><strong>Note</strong></p>
-<ul>
-<li>Make sure to update version information before deploying. 
-Files to update: <code>__init__.py</code> and <code>setup.py</code>.</li>
-<li>After deploying, don't forget to re-build the documentation at <a href="https://readthedocs.org/projects/shizen-gengo/builds">ReadTheDocs</a>.</li>
-</ul>
-<hr />
-<div class="highlight"><pre><span></span><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">build</span> <span class="n">dist</span> <span class="o">&amp;&amp;</span> <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">sdist</span>
-<span class="n">ls</span> <span class="n">dist</span><span class="o">/*</span>
-<span class="c1">#python setup.py check -r -s (obolete)</span>
-<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">twine</span> <span class="n">check</span> <span class="n">dist</span><span class="o">/*</span>
-<span class="n">python</span> <span class="o">-</span><span class="n">m</span>  <span class="n">twine</span> <span class="n">upload</span> <span class="n">dist</span><span class="o">/*</span>
-</pre></div>
-
-
 <h4>Misc.</h4>
 <ul>
-<li><a href="https://help.github.com/en/github/creating-cloning-and-archiving-repositories/licensing-a-repository">Licensing a repository
-</a></li>
+<li>change nvidia gamma settings: <code>udo nano ~/.nvidia-settings-rc</code></li>
+<li><code>df -h</code> check disk space</li>
+<li><a href="https://itsfoss.com/how-to-find-the-process-id-of-a-program-and-kill-it-quick-tip/">kill process</a></li>
+<li><code>rm file</code> to remove file</li>
+<li><code>rm -r dirName</code> to remove directory</li>
+<li><code>ln -s /opt/robomongo/bin/robomongo ~/robomongo_lnk</code> to make a shortcut/alias</li>
+<li><code>pip list --local</code> to list installed packages in a given venv</li>
+<li>about the double dash <code>--</code><ul>
+<li>Almost all short options have a corresponding long option; <code>rm -f</code> is equivalent to <code>rm --force</code>.</li>
+<li>Many long options, though, have no corresponding short option.</li>
+</ul>
+</li>
+<li><a href="http://askubuntu.com/questions/739297/how-to-install-robomongo-ubuntu-system-please-let-me-know/781793">About the usr/bin directory</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-18-04">Increase Digitalocean memory</a></li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./pypi.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/pypi.html" rel="tag">PyPi</a>
+                    <a href="./Linux.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
+                </div>
+            </article>            <h4 class="date">Dec 01, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./ssh_keys.html" rel="bookmark" title="Permanent Link to &quot;SSH Keys&quot;">SSH Keys</a>
+                </h2>
+
+                
+                
+
+                <h4>Checking for existing keys</h4>
+<div class="highlight"><pre><span></span>ls -al ~/.ssh
+</pre></div>
+
+
+<h4>Generating a new key</h4>
+<div class="highlight"><pre><span></span><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="n">rsa</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="mi">4096</span><span class="w"> </span><span class="o">-</span><span class="n">C</span><span class="w"> </span><span class="ss">&quot;your_email@example.com&quot;</span><span class="w"></span>
+</pre></div>
+
+
+<p>or</p>
+<div class="highlight"><pre><span></span>ssh-keygen -t rsa -C &quot;some name&quot; -b 4096
+</pre></div>
+
+
+<h4>Adding a key</h4>
+<div class="highlight"><pre><span></span>eval $(ssh-agent -s)
+ssh-add ~/.ssh/id_rsa
+</pre></div>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./ssh_keys.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
                 </div>
             </article>
 
@@ -416,7 +206,7 @@ Files to update: <code>__init__.py</code> and <code>setup.py</code>.</li>
 
                     <a href="./index11.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 10 of 26</span>
+                    <span>Page 10 of 24</span>
                 </div>
 
             <div class="clear"></div>

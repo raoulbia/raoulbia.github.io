@@ -170,7 +170,7 @@ Django Resources
 * `import pdb; pdb.set_trace()`
 * error: address already in use
     * `sudo lsof -i :5000`
-    * `sudo kill-9 PID`
+    * `sudo kill PID`
 * `FLASK_APP=run.py flask run`
 * [flask does not see change in .js file](https://stackoverflow.com/questions/41144565/flask-does-not-see-change-in-js-file)
 * [API Tutorial: How to get run data using Python & Flask](https://help.parsehub.com/hc/en-us/articles/217751808-API-Tutorial-How-to-get-run-data-using-Python-Flask)

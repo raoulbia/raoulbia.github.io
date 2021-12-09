@@ -26,189 +26,159 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 05, 2018</h4>
+        <div id="content">            <h4 class="date">Dec 04, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./jupyter.html" rel="bookmark" title="Permanent Link to &quot;Jupyter&quot;">Jupyter</a>
+                    <a href="./conda.html" rel="bookmark" title="Permanent Link to &quot;Conda&quot;">Conda</a>
                 </h2>
 
                 
                 
 
-                <p><br> </p>
-<p><code>jupyter lab --ip=0.0.0.0</code></p>
-<p><code>jupyter notebook --ip=0.0.0.0</code></p>
-<h4>Import notebook into another</h4>
-<div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">jupyter</span><span class="o">-</span><span class="n">helpers</span>
-<span class="kn">from</span> <span class="nn">create_gtfs_feed</span> <span class="kn">import</span> <span class="n">Feed</span> <span class="n">where</span> <span class="n">create_gtfs_feed</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">notebook</span>
-</pre></div>
-
-
-<h4>Share variables / objects across notebooks</h4>
-<p>%store G &gt;&gt; to store
-%store -r G &gt;&gt; to load</p>
-<h4>Dill (similar to Pickle)</h4>
-<div class="highlight"><pre><span></span># Dump graph
-with open(&quot;multigraph.p&quot;, &#39;wb&#39;) as f:
-    dill.dump(G, f)
-</pre></div>
-
-
-<div class="highlight"><pre><span></span><span class="c1"># Load graph</span>
-<span class="n">with</span> <span class="n">open</span><span class="p">(</span><span class="s2">&quot;multigraph.p&quot;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  <span class="c1"># notice the r instead of w</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">dill</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</pre></div>
-
-
-<h4>Installing IPywidgets</h4>
+                <h3>Conda</h3>
 <ul>
-<li><strong>make sure notebook is trusted</strong></li>
+<li><code>conda create --name &lt;name&gt; python=3.7 -y</code></li>
+<li><code>conda activate &lt;name&gt;</code></li>
+<li><code>pip install ipykernel</code></li>
+<li><code>python -m ipykernel install --user --name=&lt;name&gt;</code></li>
+<li><code>conda env remove --name &lt;name&gt;</code></li>
+<li><code>conda env list</code></li>
+<li><code>conda update</code></li>
+<li><code>conda install --yes --file requirements.txt</code></li>
+<li><code>jupyter kernelspec list</code></li>
+<li><code>conda install --channel=conda-forge nb_conda_kernels</code></li>
 </ul>
-<div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">-c</span> <span class="n">conda-forge</span> <span class="n">nodejs</span> <span class="n">-y</span> <span class="p">&amp;&amp;</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="n">-c</span> <span class="n">conda-forge</span> <span class="n">jupyterlab</span> <span class="n">-y</span> <span class="p">&amp;&amp;</span>
-<span class="n">jupyter</span> <span class="n">labextension</span> <span class="n">install</span> <span class="nv">@jupyter</span><span class="n">-widgets</span><span class="p">/</span><span class="n">jupyterlab-manager</span> <span class="p">&amp;&amp;</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">jupyter_contrib_nbextensions</span> <span class="p">&amp;&amp;</span>
-<span class="n">jupyter</span> <span class="n">contrib</span> <span class="n">nbextension</span> <span class="n">install</span> <span class="p">-</span><span class="n">-sys-prefix</span>
-</pre></div>
-
-
+<h4>Specific venvs</h4>
 <ul>
-<li><code>python -m ipykernel install --user --name=myEnv</code></li>
-<li><code>jupyter nbextension enable --py widgetsnbextension</code></li>
-<li><code>jupyter labextension list</code></li>
+<li>Geopandas: <code>conda create --name=gtfs_graph python=3.8 geopandas scipy --channel=conda-forge</code></li>
 </ul>
-<h4>Installing Jupyter Lab Extensions</h4>
-<div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="w"> </span><span class="n">labextension</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="nv">@jupyterlab</span><span class="o">/</span><span class="n">toc</span><span class="w"></span>
-<span class="n">jupyter</span><span class="w"> </span><span class="n">labextension</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="nv">@jupyterlab</span><span class="o">/</span><span class="n">plotly</span><span class="o">-</span><span class="n">extension</span><span class="w"></span>
-</pre></div>
-
-
-<p>for plotly see <a href="https://stackoverflow.com/questions/54936125/plotly-gives-an-empty-field-as-output-in-jupyter-lab">here</a> for more.</p>
-<h4>Converting Notebook to PDF or HTML</h4>
-<p>Pre-requisites:</p>
-<p><code>sudo apt-get install texlive texlive-xetex texlive-latex-extra texlive-generic-extra pandoc</code></p>
-<p>Conversion:</p>
-<p><code>jupyter nbconvert --to html features_applied.ipynb --TemplateExporter.exclude_input=True</code></p>
-<h4>Alerts</h4>
-<div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;alert alert-block alert-info&quot;</span><span class="o">&gt;</span>
-<span class="n">case</span> <span class="n">insensitive</span> <span class="n">regexp</span> <span class="ow">in</span> <span class="nb">str</span><span class="o">.</span><span class="n">contains</span><span class="p">()</span>
-<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
-</pre></div>
-
-
-<h4>Useful Links</h4>
+<h4>Pipenv</h4>
+<p>Install</p>
 <ul>
-<li><a href="https://towardsdatascience.com/integrate-jupyterlab-with-google-drive-98d13e340c63">Integrate JupyterLab with Google Drive</a></li>
-<li><a href="https://towardsdatascience.com/how-to-setup-your-jupyterlab-project-environment-74909dade29b">How to Setup Your JupyterLab Project Environment</a></li>
-<li><a href="https://towardsdatascience.com/interactive-controls-for-jupyter-notebooks-f5c94829aee6">Interactive Controls in Jupyter Notebooks</a></li>
-<li><a href="https://www.youtube.com/watch?v=a9P7qv4P5LE">Changing JupyterLab to suit your needs</a></li>
-<li><a href="http://localhost:8888/tree#nbextensions_configurator">localhost:8888/tree#nbextensions_configurator</a></li>
-<li><a href="https://hackersandslackers.com/running-jupyter-notebooks-on-a-ubuntu-server/">Running Jupyter Notebooks on a Ubuntu Server</a></li>
-<li><a href="https://stackoverflow.com/questions/38545198/access-jupyter-notebook-running-on-vm">access jupyter notebook running on vm</a></li>
-<li><a href="https://stackoverflow.com/questions/47597515/cant-access-jupyter-notebook-in-local-vagrant-virtualbox-via-local-browser">Can't access jupyter notebook in local vagrant virtualbox via local browser</a></li>
+<li><code>sudo apt-get update</code></li>
+<li><code>sudo apt install python3-pip</code></li>
+<li><code>pip3 install pipenv</code></li>
+<li><code>pipenv --python 3.6</code></li>
+</ul>
+<p>Useful commands</p>
+<ul>
+<li><code>pipenv install -r requirements.txt</code></li>
+<li><code>pipenv shell</code> to create new env; load/activate existing env, load .env variables</li>
+<li><code>pipenv update</code> can be used to install base dependencies</li>
+<li><code>pip install ...</code></li>
+<li><code>pipenv sync</code> will use <code>Pipfile</code> if present</li>
+<li><code>pipenv graph</code></li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./jupyter.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                    <a href="./conda.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/virtual-environemnts.html" rel="tag">Virtual Environemnts</a>
                 </div>
-            </article>            <h4 class="date">Jan 03, 2018</h4>
+            </article>            <h4 class="date">Dec 03, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./python_data_structures.html" rel="bookmark" title="Permanent Link to &quot;Python Data Structures&quot;">Python Data Structures</a>
+                    <a href="./Vagrant VM.html" rel="bookmark" title="Permanent Link to &quot;Vagrant VM&quot;">Vagrant VM</a>
                 </h2>
 
                 
                 
 
-                <p><br></p>
-<h3>Lists</h3>
-<h4>itemgetter</h4>
-<p>itemgetter on a list of tuples <code>[('P52564', 61), ('O15169', 44), ...]</code></p>
-<p><code>sorted(list(degrees), key=operator.itemgetter(1), reverse=True)[0:5]</code></p>
-<p>itemgetter on a dict</p>
-<p><code>sorted(pr.items(), key=operator.itemgetter(1), reverse=True)[0:5]</code></p>
-<h4>Compare items in two lists:</h4>
-<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">rank_true</span><span class="p">,</span> <span class="n">rank_pred</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="n">pred</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">rank_true</span> <span class="o">==</span> <span class="n">rank_pred</span><span class="p">:</span>
-</pre></div>
-
-
-<h4>Print list items</h4>
-<p><code>print(*myList, sep='\n')</code></p>
-<h4>Convert a list of chars into proper list:</h4>
-<div class="highlight"><pre><span></span><span class="nb">list</span> <span class="o">=</span> <span class="s1">&#39;123; 456; 887&#39;</span>
-<span class="n">ls</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
-</pre></div>
-
-
-<h4>List Comprehension: If/Else</h4>
-<div class="highlight"><pre><span></span><span class="n">rel_bin</span> <span class="o">=</span> <span class="p">[</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">y</span> <span class="o">==</span> <span class="kc">None</span>
-            <span class="k">else</span> <span class="n">x</span> <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span>
-            <span class="k">else</span> <span class="n">y</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">y</span> <span class="o">==</span> <span class="kc">None</span>
-            <span class="k">else</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">1</span>
-            <span class="k">else</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">2</span>
-            <span class="k">else</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span>
-            <span class="k">else</span> <span class="o">-</span><span class="mi">9</span> <span class="c1"># to catch any issues</span>
-            <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rel_bin_judge_1</span><span class="p">,</span> <span class="n">rel_bin_judge_2</span><span class="p">)]</span>
-</pre></div>
-
-
-<p><br></p>
-<h3>Dictionaries</h3>
-<h4>Counting</h4>
-<div class="highlight"><pre><span></span><span class="n">context_dic</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">query_results</span><span class="p">:</span>
-    <span class="n">context_dic</span><span class="p">[</span><span class="n">res</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-</pre></div>
-
-
-<h4>Count distinct values in a dict key</h4>
+                <h4>Useful Links</h4>
 <ul>
-<li><code>{value: len(list(freq)) for value, freq in groupby(sorted(schedule_rel_types))}</code></li>
+<li><a href="https://www.gis-blog.com/osgeo-live-the-best-open-source-gis-ready-to-use-package/">OSGeo-Live</a></li>
+<li><a href="https://releases.ubuntu.com/20.04/">Ubuntu 20.04 ISO</a></li>
+<li><a href="https://blog.engineyard.com/building-a-vagrant-box">Building a Vagrant Box from Start to Finish</a></li>
+<li><a href="https://www.abhishek-tiwari.com/creating-a-new-vagrant-base-box-from-an-existing-vm/">Creating a new Vagrant base box from an existing VM</a></li>
 </ul>
-<h4>Count unique values using <code>Counter</code> class</h4>
-<div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">co_occurrence_counts</span><span class="p">[</span><span class="s1">&#39;Gene_Gene&#39;</span><span class="p">][</span><span class="s1">&#39;ent_ab&#39;</span><span class="p">])</span>
-    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%i</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+<h4>Pre-requisites</h4>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-16-04">Git</a></li>
+<li><a href="http://docs.vagrantup.com/v2/installation/index.html">Vagrant</a> </li>
+<li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>.</li>
+</ul>
+<h4>Shared Folders</h4>
+<h4>Vagrantfile</h4>
+<div class="highlight"><pre><span></span>config.vm.synced_folder <span class="s2">&quot;.&quot;</span>, <span class="s2">&quot;/vmtest_kafka&quot;</span>
 </pre></div>
 
 
-<p>see also <a href="https://stackoverflow.com/questions/16406329/python-dictionary-count-of-unique-values">dictionary count of unique values</a></p>
-<p><br></p>
-<h3>Named Tuples</h3>
-<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">=</span><span class="si">{1}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">k</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">]))</span>
-
-<span class="bp">self</span><span class="o">.</span><span class="n">Result</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Result&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="s1">&#39;entity&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">,</span>
-                                                       <span class="s1">&#39;precision&#39;</span><span class="p">,</span> <span class="s1">&#39;recall&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">))</span>
-<span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">elf</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Result</span><span class="p">(</span><span class="n">embedding</span><span class="o">=</span><span class="n">source</span><span class="p">,</span>
-                                          <span class="n">entity</span><span class="o">=</span><span class="n">entity</span><span class="p">,</span>
-                                          <span class="nb">type</span><span class="o">=</span><span class="nb">type</span><span class="p">,</span>
-                                          <span class="n">precision</span><span class="o">=</span><span class="n">precision</span><span class="p">,</span>
-                                          <span class="n">recall</span><span class="o">=</span><span class="n">recall</span><span class="p">,</span>
-                                          <span class="o">...</span>
-                                          <span class="p">))</span>
-<span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span>
-<span class="n">t_by_emb</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;embedding&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">t_by_emb_bio</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="s1">&#39;entity&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">t_by_emb_type</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">t_by_emb</span><span class="p">,</span> <span class="n">t_by_emb_bio</span><span class="p">,</span> <span class="n">t_by_emb_type</span> <span class="o">=</span> <span class="n">t_by_emb</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">t_by_emb_bio</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">t_by_emb_type</span><span class="o">.</span><span class="n">T</span>
+<h4>Vagrant Box</h4>
+<p>Assuming you want to share the directory in which <code>Vagrantfile</code> is located and that directory is named <code>vmtest_kafka</code>. 
+First add your share directory in the VM Box (Devices &gt; Shared Folders) and click "Make Permanent".
+Whatever you name your share here will be the name you will need to use when mounting in the vm guest OS e.g. <code>vmtest_kafka</code>. 
+Next on the the guset OS make a directory to use for your mount preferably in your home directory e.g. <code>mkdir ~/shared</code>.</p>
+<div class="highlight"><pre><span></span>sudo usermod -a -G vboxsf vagrant
+mkdir ~/shared
+sudo mount -t vboxsf vmtest_kafka ~/shared
 </pre></div>
 
 
-<p><strong>Note</strong>: Named tuples are immutable, so you cannot manipulate them. If you want something mutable, you can use recordtype.
-<a href="https://stackoverflow.com/questions/31252939/changing-values-of-a-list-of-namedtuples">read more</a></p>
-<p><br></p>
+<ul>
+<li><code>sudo nano ~/.profile</code> and add the line: <code>sudo mount -t vboxsf vmtest_kafka ~/shared</code></li>
+<li>Set directory permissions on HOST: <code>chmod 777 -R vmtest_kafka/</code></li>
+</ul>
+<h4>Increase Vagrant Box Size</h4>
+<p>Note: it may be easier to just grab a box that has a large size. See above.</p>
+<ol>
+<li>
+<p>Clone &amp; Resize</p>
+<p>on Linux</p>
+<div class="highlight"><pre><span></span>VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vmdk&quot; &quot;/home/baba/VirtualBox VMs/my_box/box.vdi&quot; --format vdi
+VBoxManage modifyhd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; --resize 131072
+VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/home/baba/VirtualBox VMs/my_box/box-resized.vmdk&quot; --format vmdk
+</pre></div>
+
+
+<p>on Window: same steps as below but first run this:</p>
+<div class="highlight"><pre><span></span>set PATH=%PATH%;&quot;C:\Program Files\Oracle\VirtualBox&quot;
+</pre></div>
+
+
+</li>
+<li>
+<p>Allocate space</p>
+<p>The newly created disk space is unallocated at this stage. Follow these steps next:</p>
+<ul>
+<li>
+<p><a href="http://www.gitshah.com/2013/05/how-to-fix-out-of-space-problem-for.html?m=1">getting Gparted</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=cDgUwWkvuIY">changing partitions using Gparted (Video)</a></p>
+</li>
+</ul>
+</li>
+</ol>
+<p>see also <a href="https://gist.github.com/christopher-hopper/9755310">Resize a Hard Disk for a Virtual Machine</a></p>
+<h4>Create Global Variable for use in Python Scripts</h4>
+<p>In <code>~/.profile</code>add</p>
+<div class="highlight"><pre><span></span><span class="k">export</span> <span class="n">TOMOE_DATA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">ownCloud</span><span class="o">/</span><span class="n">tomoe</span><span class="o">-</span><span class="n">data</span>
+<span class="k">export</span> <span class="n">KG_OUTPUT_DIR</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">vmtest</span><span class="o">/</span><span class="n">tomoe</span><span class="o">/</span><span class="n">wp</span><span class="o">-</span><span class="n">tomoe</span><span class="o">-</span><span class="n">playground</span><span class="o">/</span><span class="n">local</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">kg</span>
+</pre></div>
+
+
+<h4>Useful Vagrant commands</h4>
+<ul>
+<li><code>config.vm.box = "file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box"</code></li>
+<li><code>VBoxClient --clipboard</code></li>
+<li><code>vagrant global-status</code></li>
+<li><code>set PATH=%PATH%;"C:\Program Files\Oracle\VirtualBox"</code></li>
+<li><code>vboxmanage list vms</code></li>
+<li><code>vagrant init file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box</code></li>
+</ul>
+<h4>Misc. Links</h4>
+<ul>
+<li><a href="https://github.com/hashicorp/vagrant/issues/5186">Warning: Authentication failure. Retrying... " after packaging box</a></li>
+<li><a href="https://jeremykendall.net/2013/08/09/vagrant-synced-folders-permissions/">vagrant-synced-folders-permissions</a></li>
+<li><a href="https://stackoverflow.com/questions/35807568/vagrant-synced-folder-permissions">vagrant-synced-folders-permissions SO</a></li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./python_data_structures.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                    <a href="./Vagrant VM.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
                 </div>
             </article>
 
@@ -219,7 +189,7 @@ with open(&quot;multigraph.p&quot;, &#39;wb&#39;) as f:
 
                     <a href="./index10.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 9 of 26</span>
+                    <span>Page 9 of 24</span>
                 </div>
 
             <div class="clear"></div>

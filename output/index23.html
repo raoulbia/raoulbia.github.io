@@ -26,116 +26,72 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Aug 04, 2017</h4>
+        <div id="content">            <h4 class="date">May 24, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./python, rdflib.html" rel="bookmark" title="Permanent Link to &quot;RDFLib Graph Object&quot;">RDFLib Graph Object</a>
+                    <a href="./notebooks.html" rel="bookmark" title="Permanent Link to &quot;RMD and Jupyter Notebooks examples&quot;">RMD and Jupyter Notebooks examples</a>
                 </h2>
 
                 
                 
 
-                <p>On this page I keep snippets of code I have found useful when working with the
-<a href="https://rdflib.readthedocs.io/en/stable/">RDFLib library</a>. Specifically, the code snippets show how to</p>
+                <p><br> </p>
+<p><strong>Jupyter Notebooks</strong></p>
 <ul>
-<li>load a triple (.n3) or quad (.nq) file RDFLib graph object</li>
-<li>read from an RDFLib graph object</li>
+<li><a href="https://nbviewer.jupyter.org/github/raoulbia/jupyter-notebooks/blob/master/dublin_housing_supply_and_demand.ipynb?flush_cache=true" target="_blank">Telling a Story with Data: Evidence of a Housing Crisis in Ireland</a></li>
+<li><a href="https://nbviewer.jupyter.org/github/raoulbia/jupyter-notebooks/blob/master/phosphonetwork_statistics.ipynb?flush_cache=true" target="_blank">A Quick Reference for Exploratory Graph Analysis with NetworkX</a></li>
 </ul>
-<h5>Loading a triple/quad file into an RDFLib object</h5>
-<div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">rdflib</span><span class="o">.</span><span class="n">ConjunctiveGraph</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">input_kg_dir_path</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">f_extension</span><span class="p">)):</span>
-        <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_kg_dir_path</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
-        <span class="c1"># read each kg file and build a graph</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;reading </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">g</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">rdflib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">guess_format</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-<span class="k">return</span> <span class="n">g</span>
-</pre></div>
-
-
-<h5>Reading an RDFLib graph object</h5>
-<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entity_list</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">entity_list</span><span class="p">)</span>
-    <span class="n">query_results</span> <span class="o">=</span> <span class="n">angio_kg</span><span class="o">.</span><span class="n">query</span><span class="p">(</span> <span class="c1"># is an rdflib conjunctive raph object which has a parse method</span>
-        <span class="sd">&quot;&quot;&quot;SELECT DISTINCT ?g</span>
-<span class="sd">        {GRAPH ?g {</span>
-<span class="sd">              {&lt;%s&gt; ?p ?o}</span>
-<span class="sd">              UNION {?s ?p &lt;%s&gt;}</span>
-<span class="sd">         }}&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">entity</span><span class="p">))</span>
-</pre></div>
+<p><strong>R Notebooks</strong></p>
+<ul>
+<li><a href="https://www.rpubs.com/raoulbia/interpreting_glm_logistic_regression_output" target="_blank">Interpreting the Output of a Logistic Regression Model</a></li>
+<li><a href="https://www.rpubs.com/raoulbia/r-squared" target="_blank">The Effect of Total Variation on the Ability of Independent Variables to Model Linear Relationships.</a></li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./python, rdflib.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                    <a href="./notebooks.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python-r.html" rel="tag">Python, R</a>
                 </div>
-            </article>            <h4 class="date">Jul 02, 2017</h4>
+            </article>            <h4 class="date">Apr 25, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./graph_problems.html" rel="bookmark" title="Permanent Link to &quot;Graph Problems&quot;">Graph Problems</a>
+                    <a href="./public_transport.html" rel="bookmark" title="Permanent Link to &quot;Public Transport&quot;">Public Transport</a>
                 </h2>
 
                 
                 
 
-                <h4>Vertex Cover</h4>
-<ul>
-<li>A vertex cover is a <strong>subset of the vertices</strong> such that
-each edge in the graph is incident to at least one vertex in
-the subset. </li>
-</ul>
-<p><img alt="" src="img/vertex-cover.png" /></p>
-<ul>
-<li>The Minimum Vertex Cover problem seeks to
-find a cover with a <strong>minimum number of vertices in the
-subset</strong>.</li>
-</ul>
-<p><img alt="" src="img/min-vertex-cover.png" /></p>
-<p><br></p>
+                <h3>Glossary</h3>
 <ul>
 <li>
-<p>Approximation Algorithm</p>
-<div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">&lt;-</span> <span class="n">empty</span> <span class="n">set</span>
-<span class="n">While</span> <span class="n">E</span> <span class="n">is</span> <span class="n">not</span> <span class="n">empty</span>
-    <span class="p">{</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">}</span> <span class="o">&lt;-</span> <span class="n">any</span> <span class="n">edge</span> <span class="n">from</span> <span class="n">E</span>
-    <span class="n">add</span> <span class="p">{</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">}</span> <span class="n">to</span> <span class="n">C</span>
-    <span class="n">remove</span> <span class="n">from</span> <span class="n">E</span> <span class="n">all</span> <span class="n">edges</span> <span class="n">incident</span> <span class="n">to</span> <span class="n">u</span><span class="p">,</span><span class="n">v</span>
-<span class="n">return</span> <span class="n">C</span>
-</pre></div>
-
-
+<p>KML: Keyhole Markup Language is a file format used to display geographic data in an Earth browser such as Google Earth.</p>
 </li>
 <li>
-<p><a href="https://nbviewer.jupyter.org/github/raoulbia/jupyter-notebooks/blob/master/vertex_cover_linear-programming_and_approximation-algorithm.ipynb?flush_cache=true" title=" target=&quot;_blank">Solving Vertex Cover with Linear Programming and with Approximation Algorithm</a></p>
-</li>
-</ul>
-<p><br></p>
-<h4>Max Cut</h4>
-<ul>
-<li>
-<p>Partition set of vertices into two sets such that the number of edges between the two sets
-(considered to be severed by the cut), is a large as possible. </p>
+<p>NaPTAN: acronym for National Public Transport Access Nodes, is a national database that contains a unique entry for each point of access to public transport: railway stations, bus stops, airports, ferry terminals, coach terminus, taxi ranks, and so on. In short, it's an index of every place where a passenger can join or leave public transport.
+ <a href="https://dftdigital.blog.gov.uk/2020/07/06/naptan-the-most-popular-dataset-youve-never-heard-of/">source</a></p>
 </li>
 <li>
-<p>In the example below vertices 2 and 3 are in one set and
-vertices 1, 4, and 5 are in the other, with a maximum cut value of 5. </p>
+<p>A standard for identifying and naming access points to public transport</p>
 </li>
-</ul>
-<p><img alt="" src="img/max-cut.png" /></p>
-<h4>Travelling Salesman problem</h4>
-<ul>
-<li><a href="https://nbviewer.jupyter.org/github/raoulbia/jupyter-notebooks/blob/master/Graph_Traversal_TSP_Approximation_Warehouse.ipynb?flush_cache=true" title=" target=&quot;_blank">TSP_Approximation_Warehouse.ipynb</a></li>
+<li>A database of all the access points in the UK.</li>
+<li>An XML Schema for exchanging stop data as XML documents describing the content. All or part of the database may be exchanged in this format.</li>
+<li>
+<p>An exchange format for exchanging stop data as csv files</p>
+</li>
+<li>
+<p>NeTEx: Network Timetable Exchange</p>
+</li>
+<li>
+<p>Gazeteer: a geographical index or dictionary.</p>
+</li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./graph_problems.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/graph-problems.html" rel="tag">Graph Problems</a>
+                    <a href="./public_transport.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/public-transport.html" rel="tag">Public Transport</a>
                 </div>
             </article>
 
@@ -146,7 +102,7 @@ vertices 1, 4, and 5 are in the other, with a maximum cut value of 5. </p>
 
                     <a href="./index24.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 23 of 26</span>
+                    <span>Page 23 of 24</span>
                 </div>
 
             <div class="clear"></div>

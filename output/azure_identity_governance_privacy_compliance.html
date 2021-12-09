@@ -27,7 +27,7 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Mar 27, 2018</h4>
+        <div id="content">            <h4 class="date">Mar 24, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -37,7 +37,193 @@
                 
                 
 
-                <p>dfdf</p>
+                <p><br></p>
+<h2>Identity Services</h2>
+<p>Who people are and what access they have.</p>
+<p>Identity IS A digital representation of a person, applications or device (e.g. printer).</p>
+<p>Authenticated does not mean authorised for everything.</p>
+<ul>
+<li>
+<p>MF Authentication</p>
+<ul>
+<li>is an Azure AD feature</li>
+<li>Authentication items must be distinct i.e. sth you know (password), sth you have (SMS code) or sth you are (fingerprint)</li>
+<li>deployment options<ul>
+<li>Conditional Access Policies (only approved devices)</li>
+<li>MFA Settings</li>
+</ul>
+</li>
+<li>NO need to sync on-prem identity to the cloud </li>
+<li>NO need to deploy federation solution</li>
+</ul>
+</li>
+<li>
+<p>Privileged Identity Management: </p>
+<ul>
+<li>MFA for admins but not regular users.</li>
+</ul>
+</li>
+<li>
+<p>Azure Active Directory</p>
+<ul>
+<li>Azure Tenant: represents an organisation in Active Directory (AD)</li>
+<li><strong>is NOT related to authorisation based on roles</strong></li>
+<li>has built-in capability for securing authentication AND authorisation</li>
+<li><strong>Identity as a Service</strong> i.e. don’t have to write any code<ul>
+<li>e.g. Comes with feature such as pw reset etc</li>
+</ul>
+</li>
+<li>Azure AD is NOT the same as Windows AD (there is some overlap)<ul>
+<li>Traditional AD does not work with internet protocols</li>
+</ul>
+</li>
+<li>Authentication open standards: SAML, OpenID, WS Federation</li>
+<li>AD powers other micrososft services: outlook, skype, onedrive, xbox, office365</li>
+</ul>
+</li>
+<li>
+<p>Benefits of Azure AD</p>
+<ul>
+<li>Security, tested and proven</li>
+<li>Reduced development time, easier support</li>
+<li>More features besides basic authentication e.g. MFA, just-in-time elevation of privileges, conditional access</li>
+<li>Centralised administration, API’s</li>
+<li><strong>SSO</strong><ul>
+<li>Integration with Windows AD allowing for single sign on using <strong>AD Connect</strong>. </li>
+<li>SSO is Free for up to 10 Apps</li>
+</ul>
+</li>
+<li>Note SSO is how you disable leavers.</li>
+<li>Integrates with other Azure services e.g. can grant access to storage accounts and SQL DB’s using their windows sign on credentials</li>
+</ul>
+</li>
+<li>
+<p>Azure AD Conditional Access</p>
+<ul>
+<li>allow access only from approved devices</li>
+<li>Can detect unusual activity and require extra authentication from user</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h2>Governance Features</h2>
+<p>Governance is a set of policies and procedures of your company that protect your account and your data.</p>
+<ul>
+<li>
+<p>Role-based access control</p>
+<ul>
+<li>What privileges the user gets </li>
+<li>Roles = common tasks e.g. accounting, developer</li>
+<li>Predefined roles: reader, contributor, owner</li>
+<li>allow some users to control the virtual machines in each environment but prevent them from modifying networking and other resources in the same resource group or Azure subscription</li>
+</ul>
+</li>
+<li>
+<p>Resource locks </p>
+<ul>
+<li>prevent accidental deletion</li>
+</ul>
+</li>
+<li>
+<p>Tags</p>
+<ul>
+<li>Metadata associated with the resource</li>
+<li>Helps with billing and support issues</li>
+</ul>
+</li>
+<li>
+<p>Azure Policy</p>
+<ul>
+<li>Implement standards for your organization across Azure.</li>
+<li>a set of policies is called <em>Initiative</em></li>
+<li>provide organizations with the ability to manage the compliance of Azure resources <strong>across multiple subscriptions</strong>.</li>
+</ul>
+</li>
+<li>
+<p>Governance </p>
+<ul>
+<li>create rules across all of your Azure resources</li>
+<li>e.g. Creating groups and subscriptions and associate rules that way</li>
+</ul>
+</li>
+<li>
+<p>Built-in policies:</p>
+<ul>
+<li>Require SQL Server 12.0</li>
+<li>Allowed storage accounts (nbr units)</li>
+<li>Allowed locations</li>
+<li>Allowed VMs (nbr units, types)</li>
+<li>Apply tag and its default value</li>
+<li>Not allowed resource types</li>
+</ul>
+</li>
+<li>
+<p>Azure Blueprints</p>
+<ul>
+<li>subscription templates with <strong>Roles and Policies</strong> already defined</li>
+</ul>
+</li>
+<li>
+<p>Cloud Adoption Framework (CAF) for Azure</p>
+<ul>
+<li><strong>For migrating to the cloud</strong></li>
+<li>Set of docs and tools to help you on your journey from on-prem apps, and self-hosted, into the cloud</li>
+<li>Best practices for organisations who are looking to make this move</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h2>Privacy and Compliance Resources</h2>
+<ul>
+<li><strong>Resource groups</strong> provide organizations with the ability to <strong>manage the compliance of Azure resources</strong> across multiple subscriptions.</li>
+<li>
+<p>Security Centre vs. Trust Center</p>
+<ul>
+<li>Security Centre: check compliance for a specified environment</li>
+<li>Trust Centre<ul>
+<li>is about Microsoft's compliance</li>
+<li>Has info about the standards MS complies with: GDPR. ISO,…</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>The trusted Cloud initiative</p>
+<ul>
+<li>Security: encryption, security tools,…</li>
+<li>Privacy: you own your data, MS will not mine the data, you control where data is located … </li>
+<li>Compliance: international standards, MS has compliance certificates, follows regional standards</li>
+<li>Resiliency: always available, backups, high availability, disaster recovery</li>
+<li>Intellectual Property protection: Azure offers protection against frivolous infringement claims</li>
+</ul>
+</li>
+<li>
+<p>Online Service Terms (OST) and Data Protection Addendum (DPA)</p>
+<ul>
+<li>MS Privacy Terms: personal we collect, why we collect it</li>
+<li>OST: level of service we promise you …</li>
+<li>DPA: how they handle data, where they store it, what they do if there is a security incident, how data is retained </li>
+</ul>
+</li>
+<li>
+<p>Compliance documentation</p>
+<ul>
+<li>assigning policy compliance responsibilities</li>
+</ul>
+</li>
+<li>
+<p>Azure Sovereign regions (US government and China)`</p>
+<ul>
+<li>Isolated, not connected to public cloud</li>
+</ul>
+</li>
+<li>
+<p>Azure Information Protection</p>
+<ul>
+<li>document processing and adding labels</li>
+</ul>
+</li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
