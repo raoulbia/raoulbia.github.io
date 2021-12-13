@@ -37,15 +37,161 @@
                 
                 
 
-                <h4>config file</h4>
-<p>config file is located here: <code>/home/&lt;user&gt;/.snowsql</code></p>
+                <h4>SnowSQL CLI Config file</h4>
+<p>The onfig file is located here: <code>/home/&lt;user&gt;/.snowsql</code>. This is where you configure custom connection parameters.</p>
 <p>In your config file you need to modify this line:</p>
-<p><code>log_file = ../snowsql_rt.log</code></p>
-<p>to this:</p>
-<p><code>log_file = ~/.snowsql/snowsql_rt.log</code></p>
-<h4>Useful commands</h4>
-<div class="highlight"><pre><span></span>snowsql --accountname 123.north-europe.azure --username &lt;username&gt;
-snowsql -c my_connection
+<p><code>log_file = ../snowsql_rt.log</code> to this <code>log_file = ~/.snowsql/snowsql_rt.log</code></p>
+<h4>Connect to Snowflake account with SnowSQL CLI</h4>
+<p><code>snowsql --accountname 123.north-europe.azure --username &lt;username&gt;</code></p>
+<p><code>snowsql -c my_connection</code></p>
+<h4>Bulk Loading from Local Source</h4>
+<p>Create the Employee table</p>
+<div class="highlight"><pre><span></span><span class="n">create</span> <span class="ow">or</span> <span class="n">replace</span> <span class="n">table</span> <span class="n">Employee</span> <span class="p">(</span>
+    <span class="n">row_id</span> <span class="n">integer</span><span class="p">,</span>
+    <span class="n">first_name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+    <span class="n">last_name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+    <span class="n">city</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+    <span class="n">state</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+    <span class="n">hire_date</span> <span class="n">date</span><span class="p">,</span>
+    <span class="n">salary</span> <span class="n">integer</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<p>Some Employee queries</p>
+<div class="highlight"><pre><span></span>select * From Public.Employee
+drop table Employee
+truncate table Employee
+</pre></div>
+
+
+<p>Create a File Format Object</p>
+<div class="highlight"><pre><span></span>create or replace file format employee_csv
+  type = &#39;CSV&#39;
+  field_delimiter = &#39;,&#39;
+  skip_header = 1;
+</pre></div>
+
+
+<p>Create an internal Stage object</p>
+<div class="highlight"><pre><span></span>create or replace stage employee_stage
+  file_format = employee_csv;
+</pre></div>
+
+
+<p>Display the stages we have created</p>
+<div class="highlight"><pre><span></span><span class="k">show</span> <span class="nv">stages</span>
+</pre></div>
+
+
+<p>See what's in the employee_stage</p>
+<div class="highlight"><pre><span></span><span class="n">list</span><span class="w"> </span><span class="nv">@employee_stage</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+
+
+<p>Move the data in employee_stage to the employee table. Skip the entire file on any errors</p>
+<div class="highlight"><pre><span></span><span class="n">copy</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">employee</span><span class="w"></span>
+<span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="nv">@employee_stage</span><span class="w"></span>
+<span class="w">  </span><span class="n">on_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;skip_file&#39;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+
+
+<p>Move the data in employee_stage to the employee table. Skip just the rows causing any errors</p>
+<div class="highlight"><pre><span></span><span class="n">copy</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">employee</span><span class="w"></span>
+<span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="nv">@employee_stage</span><span class="w"></span>
+<span class="w">  </span><span class="n">on_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;continue&#39;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+
+
+<p>Remove file from stage</p>
+<div class="highlight"><pre><span></span><span class="n">remove</span><span class="w"> </span><span class="nv">@employee_stage</span><span class="w"> </span><span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;.*.csv.gz&#39;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+
+
+<p>Create a table to hold all errors during ingestion (VIDEO 21 8:00)</p>
+<div class="highlight"><pre><span></span>create or replace table employee_errors as 
+select * from table(validate(employee, job_id =&gt; &#39;019b04c4-0c52-f649-0001-3d6e0002d14e&#39;));
+select * from employee_errors
+</pre></div>
+
+
+<p>Describe file format</p>
+<div class="highlight"><pre><span></span>describe file format employee_csv
+</pre></div>
+
+
+<h4>Storage Integration: Bulk Loading from External Source</h4>
+<p>Notes:</p>
+<ul>
+<li>
+<p>to verify STORAGE INTEGRATION made it to Azure, go to Azure AAD &gt; Entreprise applications &gt; you should see Snowflake </p>
+</li>
+<li>
+<p>after creating STORAGE INTEGRATION, must authorize Snowflake in Access Control (IAM)
+  go to Storage Account &gt; Access Control (IAM) &gt; Add a role assignment &gt; "Storage Blob Data Contributor"
+  click +Select Members and search for Snowflake principal described above &gt; Select &gt; Review+Assign</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="nv">FILE</span> <span class="nv">FORMATS</span>
+<span class="k">SHOW</span> <span class="nv">TABLES</span>
+<span class="k">SHOW</span> <span class="nv">STAGES</span>
+
+<span class="o">//</span> <span class="nv">CLEAN</span> <span class="nv">UP</span>
+<span class="nv">USE</span> <span class="nv">ROLE</span> <span class="nv">ACCOUNTADMIN</span> <span class="c1">;</span>
+<span class="nv">DROP</span> <span class="nv">INTEGRATION</span> <span class="k">IF</span> <span class="nv">EXISTS</span> <span class="nv">AZURE_STORAGE</span> <span class="c1">;</span>
+<span class="nv">DROP</span> <span class="nv">FILE</span> <span class="nv">FORMAT</span> <span class="k">IF</span> <span class="nv">EXISTS</span> <span class="nv">CSV_FORMAT</span> <span class="c1">;</span>
+<span class="nv">DROP</span> <span class="nv">STAGE</span> <span class="k">IF</span> <span class="nv">EXISTS</span> <span class="nv">GTFS</span> <span class="c1">;</span>
+</pre></div>
+
+
+<p>Step 1: Create Table</p>
+<div class="highlight"><pre><span></span><span class="n">create</span> <span class="ow">or</span> <span class="n">replace</span> <span class="n">table</span> <span class="n">agency</span><span class="p">(</span>
+  <span class="n">agency_id</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> 
+  <span class="n">agency_name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>  
+  <span class="n">agency_url</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> 
+  <span class="n">agency_timezone</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+
+
+<p>Step 2: Setup Storage Integration</p>
+<div class="highlight"><pre><span></span>USE ROLE ACCOUNTADMIN ;
+CREATE OR REPLACE STORAGE INTEGRATION AZURE_STORAGE
+  TYPE = EXTERNAL_STAGE
+  STORAGE_PROVIDER = AZURE
+  ENABLED = TRUE
+  AZURE_TENANT_ID = &lt; tenant id &gt;
+  STORAGE_ALLOWED_LOCATIONS = (&#39;*&#39;) ;
+
+GRANT USAGE ON INTEGRATION AZURE_STORAGE TO SYSADMIN ;
+
+DESCRIBE STORAGE INTEGRATION AZURE_STORAGE ;
+
+USE ROLE SYSADMIN ; -- De-esclate the role
+</pre></div>
+
+
+<p>Step 3: Setup File Format</p>
+<div class="highlight"><pre><span></span>create or replace file format csv_format
+  type = &#39;CSV&#39;
+  field_delimiter = &#39;,&#39;
+  skip_header = 1
+  null_if = (&#39;NULL&#39;, &#39;null&#39;)
+  empty_field_as_null = TRUE
+  compression = gzip ;
+</pre></div>
+
+
+<p>Step 4: Set up Stage</p>
+<div class="highlight"><pre><span></span><span class="nt">create</span> <span class="nt">or</span> <span class="nt">replace</span> <span class="nt">stage</span> <span class="nt">gtfs</span>
+  <span class="nt">storage_integration</span> <span class="o">=</span> <span class="nt">AZURE_STORAGE</span>
+  <span class="nt">url</span> <span class="o">=</span> <span class="s1">&#39;azure://&lt;container_name&gt;.blob.core.windows.net/gtfs &#39;</span>
+  <span class="nt">file_format</span> <span class="o">=</span> <span class="nt">CSV_FORMAT</span> <span class="o">;</span>
+</pre></div>
+
+
+<p>Note: it can take an hour or two for Azure to create objects necessary for the integration</p>
+<div class="highlight"><pre><span></span><span class="n">list</span><span class="w"> </span><span class="nv">@gtfs</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 </pre></div>
                 <div class="clear"></div>
 
