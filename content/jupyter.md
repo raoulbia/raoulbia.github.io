@@ -35,21 +35,32 @@ with open("multigraph.p", 'rb') as f:  # notice the r instead of w
     G = dill.load(f)
 ```
 
+#### Installing Jupyterlab
+
+```powershell
+pip install jupyterlab
+pip install jupyterlab-widgets
+```
+
 #### Installing IPywidgets
 
-* **make sure notebook is trusted**
-
+With Conda
 ```powershell
 conda install -c conda-forge nodejs -y &&
 conda install -c conda-forge jupyterlab -y &&
 jupyter labextension install @jupyter-widgets/jupyterlab-manager &&
-pip install jupyter_contrib_nbextensions &&
 jupyter contrib nbextension install --sys-prefix
+```
+
+With Pip
+```
+pip install jupyter_contrib_nbextensions
 ```
 
 * `python -m ipykernel install --user --name=myEnv`
 * `jupyter nbextension enable --py widgetsnbextension`
 * `jupyter labextension list`
+* to launch: `jupyter-lab`
 
 
 #### Installing Jupyter Lab Extensions
