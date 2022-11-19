@@ -135,7 +135,7 @@ kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;.*ksql.*&#39;
 <p>In this demonstration we're going to make use of the Kafka Connect API.</p>
 <p><a href="https://docs.confluent.io/current/connect/references/restapi.html">See the documentation for more information on any of these actions</a>.</p>
 <p>To get a list of connectors that are loaded in to the Kafka Connect cluster</p>
-<div class="highlight"><pre><span></span><span class="n">curl</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8083</span><span class="o">/</span><span class="n">connector</span><span class="o">-</span><span class="n">plugins</span> <span class="o">|</span> <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">json</span><span class="o">.</span><span class="k">tool</span>
+<div class="highlight"><pre><span></span><span class="n">curl</span><span class="w"> </span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8083</span><span class="o">/</span><span class="n">connector</span><span class="o">-</span><span class="n">plugins</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="k">tool</span><span class="w"></span>
 </pre></div>
 
 

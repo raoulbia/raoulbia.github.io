@@ -127,9 +127,9 @@ trip_update_stop_time_update_arrival_delay INT <span class="se">\</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span><span class="nt">create</span> <span class="nt">stream</span> <span class="nt">gtfs_delays_stream</span> <span class="o">(</span><span class="nt">id</span> <span class="nt">VARCHAR</span><span class="o">,</span> <span class="nt">delay</span> <span class="nt">INT</span><span class="o">,</span> <span class="nt">timestamp</span> <span class="nt">INT</span><span class="o">)</span> <span class="nt">WITH</span> <span class="o">(</span><span class="nt">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;gtfs-delays&#39;</span><span class="o">,</span> <span class="nt">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="o">)</span> <span class="o">;</span>
-<span class="nt">describe</span> <span class="nt">gtfs_delays_stream</span> <span class="o">;</span>
-<span class="nt">select</span> <span class="nt">TIMESTAMPTOSTRING</span><span class="o">(</span><span class="nt">rowtime</span><span class="o">,</span> <span class="s1">&#39;dd/MMM HH:mm&#39;</span><span class="o">)</span> <span class="nt">as</span> <span class="nt">createtime</span><span class="o">,</span> <span class="o">*</span> <span class="nt">from</span> <span class="nt">gtfs_delays_stream</span> <span class="nt">emit</span> <span class="nt">changes</span> <span class="nt">limit</span> <span class="nt">5</span><span class="o">;</span>
+<div class="highlight"><pre><span></span><span class="nt">create</span><span class="w"> </span><span class="nt">stream</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="o">(</span><span class="nt">id</span><span class="w"> </span><span class="nt">VARCHAR</span><span class="o">,</span><span class="w"> </span><span class="nt">delay</span><span class="w"> </span><span class="nt">INT</span><span class="o">,</span><span class="w"> </span><span class="nt">timestamp</span><span class="w"> </span><span class="nt">INT</span><span class="o">)</span><span class="w"> </span><span class="nt">WITH</span><span class="w"> </span><span class="o">(</span><span class="nt">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;gtfs-delays&#39;</span><span class="o">,</span><span class="w"> </span><span class="nt">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
+<span class="nt">describe</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
+<span class="nt">select</span><span class="w"> </span><span class="nt">TIMESTAMPTOSTRING</span><span class="o">(</span><span class="nt">rowtime</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;dd/MMM HH:mm&#39;</span><span class="o">)</span><span class="w"> </span><span class="nt">as</span><span class="w"> </span><span class="nt">createtime</span><span class="o">,</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nt">from</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="nt">emit</span><span class="w"> </span><span class="nt">changes</span><span class="w"> </span><span class="nt">limit</span><span class="w"> </span><span class="nt">5</span><span class="o">;</span><span class="w"></span>
 </pre></div>
 
 
@@ -176,15 +176,15 @@ select * from GTFS_STREAM emit changes ;
 <p><code>snowsql -c my_connection</code></p>
 <h4>Bulk Loading from Local Source</h4>
 <p>Create the Employee table</p>
-<div class="highlight"><pre><span></span><span class="n">create</span> <span class="ow">or</span> <span class="n">replace</span> <span class="n">table</span> <span class="n">Employee</span> <span class="p">(</span>
-    <span class="n">row_id</span> <span class="n">integer</span><span class="p">,</span>
-    <span class="n">first_name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
-    <span class="n">last_name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
-    <span class="n">city</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
-    <span class="n">state</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
-    <span class="n">hire_date</span> <span class="n">date</span><span class="p">,</span>
-    <span class="n">salary</span> <span class="n">integer</span>
-<span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">create</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">Employee</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">row_id</span><span class="w"> </span><span class="n">integer</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">first_name</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">last_name</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">city</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">state</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">hire_date</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">salary</span><span class="w"> </span><span class="n">integer</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
 </pre></div>
 
 
@@ -275,12 +275,12 @@ select * from employee_errors
 
 
 <p>Step 1: Create Table</p>
-<div class="highlight"><pre><span></span><span class="n">create</span> <span class="ow">or</span> <span class="n">replace</span> <span class="n">table</span> <span class="n">agency</span><span class="p">(</span>
-  <span class="n">agency_id</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> 
-  <span class="n">agency_name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>  
-  <span class="n">agency_url</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> 
-  <span class="n">agency_timezone</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-<span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="n">create</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">agency</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="n">agency_id</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span>
+<span class="w">  </span><span class="n">agency_name</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w">  </span>
+<span class="w">  </span><span class="n">agency_url</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span>
+<span class="w">  </span><span class="n">agency_timezone</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"></span>
+<span class="p">);</span><span class="w"></span>
 </pre></div>
 
 
@@ -313,10 +313,10 @@ USE ROLE SYSADMIN ; -- De-esclate the role
 
 
 <p>Step 4: Set up Stage</p>
-<div class="highlight"><pre><span></span><span class="nt">create</span> <span class="nt">or</span> <span class="nt">replace</span> <span class="nt">stage</span> <span class="nt">gtfs</span>
-  <span class="nt">storage_integration</span> <span class="o">=</span> <span class="nt">AZURE_STORAGE</span>
-  <span class="nt">url</span> <span class="o">=</span> <span class="s1">&#39;azure://&lt;container_name&gt;.blob.core.windows.net/gtfs &#39;</span>
-  <span class="nt">file_format</span> <span class="o">=</span> <span class="nt">CSV_FORMAT</span> <span class="o">;</span>
+<div class="highlight"><pre><span></span><span class="nt">create</span><span class="w"> </span><span class="nt">or</span><span class="w"> </span><span class="nt">replace</span><span class="w"> </span><span class="nt">stage</span><span class="w"> </span><span class="nt">gtfs</span><span class="w"></span>
+<span class="w">  </span><span class="nt">storage_integration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">AZURE_STORAGE</span><span class="w"></span>
+<span class="w">  </span><span class="nt">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;azure://&lt;container_name&gt;.blob.core.windows.net/gtfs &#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">file_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">CSV_FORMAT</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
 </pre></div>
 
 

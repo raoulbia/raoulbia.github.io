@@ -56,11 +56,11 @@ Files to update: <code>__init__.py</code> and <code>setup.py</code>.</li>
 <li>After deploying, don't forget to re-build the documentation at <a href="https://readthedocs.org/projects/shizen-gengo/builds">ReadTheDocs</a>.</li>
 </ul>
 <hr />
-<div class="highlight"><pre><span></span><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">build</span> <span class="n">dist</span> <span class="o">&amp;&amp;</span> <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">sdist</span>
-<span class="n">ls</span> <span class="n">dist</span><span class="o">/*</span>
-<span class="c1">#python setup.py check -r -s (obolete)</span>
-<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">twine</span> <span class="n">check</span> <span class="n">dist</span><span class="o">/*</span>
-<span class="n">python</span> <span class="o">-</span><span class="n">m</span>  <span class="n">twine</span> <span class="n">upload</span> <span class="n">dist</span><span class="o">/*</span>
+<div class="highlight"><pre><span></span><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">rf</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">dist</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">setup</span><span class="o">.</span><span class="n">py</span><span class="w"> </span><span class="n">sdist</span><span class="w"></span>
+<span class="n">ls</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span><span class="w"></span>
+<span class="c1">#python setup.py check -r -s (obolete)</span><span class="w"></span>
+<span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">twine</span><span class="w"> </span><span class="n">check</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span><span class="w"></span>
+<span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w">  </span><span class="n">twine</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span><span class="w"></span>
 </pre></div>
 
 

@@ -49,13 +49,13 @@
 
 
 <h4>ensure that R Studio console prints out decimals</h4>
-<div class="highlight"><pre><span></span><span class="nt">cout</span><span class="p">.</span><span class="nc">precision</span><span class="o">(</span><span class="nt">4</span><span class="o">)</span> <span class="o">;</span>
-<span class="nt">cout</span><span class="p">.</span><span class="nc">setf</span><span class="o">(</span><span class="nt">std</span><span class="p">::</span><span class="nd">ios</span><span class="p">::</span><span class="nd">fixed</span><span class="o">)</span> <span class="o">;</span>
+<div class="highlight"><pre><span></span><span class="nt">cout</span><span class="p">.</span><span class="nc">precision</span><span class="o">(</span><span class="nt">4</span><span class="o">)</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
+<span class="nt">cout</span><span class="p">.</span><span class="nc">setf</span><span class="o">(</span><span class="nt">std</span><span class="p">::</span><span class="nd">ios</span><span class="p">::</span><span class="nd">fixed</span><span class="o">)</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
 </pre></div>
 
 
 <h4>print statement</h4>
-<div class="highlight"><pre><span></span><span class="nt">cout</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;x is of type: &quot;</span><span class="o">&lt;&lt;</span> <span class="nt">typeid</span><span class="o">(</span><span class="nt">x</span><span class="o">)</span><span class="p">.</span><span class="nc">name</span><span class="o">()</span> <span class="o">&lt;&lt;</span> <span class="nt">std</span><span class="p">::</span><span class="nd">endl</span> <span class="o">;</span>
+<div class="highlight"><pre><span></span><span class="nt">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s2">&quot;x is of type: &quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="nt">typeid</span><span class="o">(</span><span class="nt">x</span><span class="o">)</span><span class="p">.</span><span class="nc">name</span><span class="o">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="nt">std</span><span class="p">::</span><span class="nd">endl</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
 </pre></div>
 
 
@@ -297,26 +297,26 @@ df[&#39;hour&#39;] = df.feed_timestamp.apply(lambda x:x.hour)
 </pre></div>
 
 
-<div class="highlight"><pre><span></span><span class="c1"># time conversion helper variables</span>
-<span class="n">seconds_in_day</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span>
-<span class="n">seconds_in_hour</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span>
+<div class="highlight"><pre><span></span><span class="c1"># time conversion helper variables</span><span class="w"></span>
+<span class="n">seconds_in_day</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">24</span><span class="w"></span>
+<span class="n">seconds_in_hour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">60</span><span class="w"></span>
 
-<span class="c1"># Create new feature: Resolution Time</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">resolved_at</span> <span class="o">-</span> <span class="n">data</span><span class="o">.</span><span class="n">opened_at</span>
+<span class="c1"># Create new feature: Resolution Time</span><span class="w"></span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">resolved_at</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">opened_at</span><span class="w"></span>
 
-<span class="c1"># convert to seconds</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">]</span>
-                                <span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()))</span>
+<span class="c1"># convert to seconds</span><span class="w"></span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">]</span><span class="w"></span>
+<span class="w">                                </span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()))</span><span class="w"></span>
 
-<span class="c1"># convert resolution time to days</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_days&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_days&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_days&#39;</span><span class="p">]</span>
-                                <span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">//</span> <span class="n">seconds_in_day</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="c1"># convert resolution time to days</span><span class="w"></span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_days&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="w"></span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_days&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_days&#39;</span><span class="p">]</span><span class="w"></span>
+<span class="w">                                </span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="n">seconds_in_day</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w"></span>
 
-<span class="c1"># convert resolution time to hours</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_hrs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_hrs&#39;</span><span class="p">]</span><span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_hrs&#39;</span><span class="p">]</span>
-                              <span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">//</span> <span class="n">seconds_in_hour</span><span class="p">))</span>
+<span class="c1"># convert resolution time to hours</span><span class="w"></span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_hrs&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_secs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="w"></span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_hrs&#39;</span><span class="p">]</span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;resolution_time_hrs&#39;</span><span class="p">]</span><span class="w"></span>
+<span class="w">                              </span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="n">seconds_in_hour</span><span class="p">))</span><span class="w"></span>
 </pre></div>
 
 
@@ -481,10 +481,10 @@ data.company = np.select(conditions, outputs, default=data.company)
 
 <h3>groupby</h3>
 <h4>generic groupby</h4>
-<div class="highlight"><pre><span></span><span class="err">(</span><span class="nf">df</span><span class="p">[[</span><span class="err">&#39;</span><span class="no">FamilySize</span><span class="err">&#39;</span><span class="p">,</span> <span class="err">&#39;</span><span class="no">Survived</span><span class="err">&#39;</span><span class="p">]]</span>
-<span class="na">.groupby</span><span class="p">([</span><span class="err">&#39;</span><span class="no">FamilySize</span><span class="err">&#39;</span><span class="p">],</span> <span class="no">as_index</span><span class="err">=</span><span class="no">False</span><span class="p">)</span>
- <span class="na">.mean</span><span class="p">()</span>
- <span class="na">.sort_values</span><span class="p">(</span><span class="no">by</span><span class="err">=&#39;</span><span class="no">Survived</span><span class="err">&#39;</span><span class="p">,</span> <span class="no">ascending</span><span class="err">=</span><span class="no">False</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="err">(</span><span class="nf">df</span><span class="p">[[</span><span class="err">&#39;</span><span class="no">FamilySize</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="no">Survived</span><span class="err">&#39;</span><span class="p">]]</span><span class="w"></span>
+<span class="na">.groupby</span><span class="p">([</span><span class="err">&#39;</span><span class="no">FamilySize</span><span class="err">&#39;</span><span class="p">],</span><span class="w"> </span><span class="no">as_index</span><span class="err">=</span><span class="no">False</span><span class="p">)</span><span class="w"></span>
+<span class="w"> </span><span class="na">.mean</span><span class="p">()</span><span class="w"></span>
+<span class="w"> </span><span class="na">.sort_values</span><span class="p">(</span><span class="no">by</span><span class="err">=&#39;</span><span class="no">Survived</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="no">ascending</span><span class="err">=</span><span class="no">False</span><span class="p">))</span><span class="w"></span>
 </pre></div>
 
 
