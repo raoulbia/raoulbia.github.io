@@ -5,3 +5,5 @@ ipython>=4.0
 nbconvert>=4.0
 beautifulsoup4
 ghp-import==0.4.1
+jinja2==3.0
+
