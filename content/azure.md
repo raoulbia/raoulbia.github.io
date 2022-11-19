@@ -15,3 +15,4 @@ Summary: Azure
 * [Azure Network Security]({filename}./azure_network_security.md)
 * [Azure Identity, Governance, Privacy and Compliance Features]({filename}./azure_identity_governance_privacy_compliance.md)
 * [Azure Cost Management and SLA]({filename}./azure_cost_management_and_sla.md)
+* TEST
