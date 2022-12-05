@@ -1,8 +1,8 @@
 Title: Conda
 Date: 2017-12-04
-Category: Virtual Environemnts
+Category: Virtual Environments
 Slug: conda
-Summary: Virtual Environemnts with Conda and Pipenv
+Summary: Virtual Environments
 
 
 ### Conda
@@ -22,6 +22,12 @@ Summary: Virtual Environemnts with Conda and Pipenv
 
 * Geopandas: `conda create --name=gtfs_graph python=3.8 geopandas scipy --channel=conda-forge`
 
+#### Venv
+```
+apt-get install python3-venv
+python -m venv .env
+source .env/bin/activate
+```
 
 #### Pipenv
 
