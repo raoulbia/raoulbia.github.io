@@ -1,5 +1,5 @@
 Title: Azure
-Date: 2023-01-24
+Date: 2022-12-24
 Category: Azure
 Slug: azure
 Summary: Azure

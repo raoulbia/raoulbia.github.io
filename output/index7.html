@@ -26,48 +26,7 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 06, 2018</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./jenkins.html" rel="bookmark" title="Permanent Link to &quot;Jenkins&quot;">Jenkins</a>
-                </h2>
-
-                
-                
-
-                <p><br> </p>
-<h4>Useful commands</h4>
-<ul>
-<li><code>sudo systemctl restart jenkins</code></li>
-<li><code>dpkg -L jenkins</code> will help you find what files the package installed</li>
-</ul>
-<h4>Build Periodically</h4>
-<div class="highlight"><pre><span></span># MINUTE (0-59), HOUR (0-23), DAY (1-31), MONTH (1-12), DAY OF THE WEEK (0-6)
-# weekday daily build twice a day, at _ and _ , Monday to Friday:
-H 10,17 * * 1-5
-</pre></div>
-
-
-<h4>Build: Execute Windows Batch Command</h4>
-<div class="highlight"><pre><span></span>call C:\Users\Raoul.Biagioni\Miniconda3\Scripts\activate.bat C:\Users\Raoul.Biagioni\Miniconda3
-call conda activate gtfsRT
-python C:\\Users\\&lt;FirstName.LastName&gt;\\&lt;path-to-file&gt;\\scriptname.py
-</pre></div>
-
-
-<h4>Misc.</h4>
-<ul>
-<li><a href="https://phoenixnap.com/kb/install-jenkins-ubuntu">Set up Jenkins</a></li>
-<li><a href="https://stackoverflow.com/a/28906663">Disable Jenkins password</a></li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./jenkins.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/ci.html" rel="tag">CI</a>
-                </div>
-            </article>            <h4 class="date">Jan 05, 2018</h4>
+        <div id="content">            <h4 class="date">Jan 05, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -162,6 +121,102 @@ with open(&quot;multigraph.p&quot;, &#39;wb&#39;) as f:
 
                 <div class="info">
                     <a href="./jupyter.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                </div>
+            </article>            <h4 class="date">Jan 03, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./python_data_structures.html" rel="bookmark" title="Permanent Link to &quot;Python Data Structures&quot;">Python Data Structures</a>
+                </h2>
+
+                
+                
+
+                <p><br></p>
+<h3>Lists</h3>
+<h4>itemgetter</h4>
+<p>itemgetter on a list of tuples <code>[('P52564', 61), ('O15169', 44), ...]</code></p>
+<p><code>sorted(list(degrees), key=operator.itemgetter(1), reverse=True)[0:5]</code></p>
+<p>itemgetter on a dict</p>
+<p><code>sorted(pr.items(), key=operator.itemgetter(1), reverse=True)[0:5]</code></p>
+<h4>Compare items in two lists:</h4>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">rank_true</span><span class="p">,</span> <span class="n">rank_pred</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="n">pred</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">rank_true</span> <span class="o">==</span> <span class="n">rank_pred</span><span class="p">:</span>
+</pre></div>
+
+
+<h4>Print list items</h4>
+<p><code>print(*myList, sep='\n')</code></p>
+<h4>Convert a list of chars into proper list:</h4>
+<div class="highlight"><pre><span></span><span class="nb">list</span> <span class="o">=</span> <span class="s1">&#39;123; 456; 887&#39;</span>
+<span class="n">ls</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h4>List Comprehension: If/Else</h4>
+<div class="highlight"><pre><span></span><span class="n">rel_bin</span> <span class="o">=</span> <span class="p">[</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">y</span> <span class="o">==</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="n">x</span> <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="n">y</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">y</span> <span class="o">==</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">1</span>
+            <span class="k">else</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">2</span>
+            <span class="k">else</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span>
+            <span class="k">else</span> <span class="o">-</span><span class="mi">9</span> <span class="c1"># to catch any issues</span>
+            <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rel_bin_judge_1</span><span class="p">,</span> <span class="n">rel_bin_judge_2</span><span class="p">)]</span>
+</pre></div>
+
+
+<p><br></p>
+<h3>Dictionaries</h3>
+<h4>Counting</h4>
+<div class="highlight"><pre><span></span><span class="n">context_dic</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">query_results</span><span class="p">:</span>
+    <span class="n">context_dic</span><span class="p">[</span><span class="n">res</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+
+
+<h4>Count distinct values in a dict key</h4>
+<ul>
+<li><code>{value: len(list(freq)) for value, freq in groupby(sorted(schedule_rel_types))}</code></li>
+</ul>
+<h4>Count unique values using <code>Counter</code> class</h4>
+<div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">co_occurrence_counts</span><span class="p">[</span><span class="s1">&#39;Gene_Gene&#39;</span><span class="p">][</span><span class="s1">&#39;ent_ab&#39;</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%i</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+</pre></div>
+
+
+<p>see also <a href="https://stackoverflow.com/questions/16406329/python-dictionary-count-of-unique-values">dictionary count of unique values</a></p>
+<p><br></p>
+<h3>Named Tuples</h3>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">=</span><span class="si">{1}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">k</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">]))</span>
+
+<span class="bp">self</span><span class="o">.</span><span class="n">Result</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Result&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="s1">&#39;entity&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">,</span>
+                                                       <span class="s1">&#39;precision&#39;</span><span class="p">,</span> <span class="s1">&#39;recall&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">))</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">elf</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Result</span><span class="p">(</span><span class="n">embedding</span><span class="o">=</span><span class="n">source</span><span class="p">,</span>
+                                          <span class="n">entity</span><span class="o">=</span><span class="n">entity</span><span class="p">,</span>
+                                          <span class="nb">type</span><span class="o">=</span><span class="nb">type</span><span class="p">,</span>
+                                          <span class="n">precision</span><span class="o">=</span><span class="n">precision</span><span class="p">,</span>
+                                          <span class="n">recall</span><span class="o">=</span><span class="n">recall</span><span class="p">,</span>
+                                          <span class="o">...</span>
+                                          <span class="p">))</span>
+<span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span>
+<span class="n">t_by_emb</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;embedding&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">t_by_emb_bio</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="s1">&#39;entity&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">t_by_emb_type</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">t_by_emb</span><span class="p">,</span> <span class="n">t_by_emb_bio</span><span class="p">,</span> <span class="n">t_by_emb_type</span> <span class="o">=</span> <span class="n">t_by_emb</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">t_by_emb_bio</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">t_by_emb_type</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+
+
+<p><strong>Note</strong>: Named tuples are immutable, so you cannot manipulate them. If you want something mutable, you can use recordtype.
+<a href="https://stackoverflow.com/questions/31252939/changing-values-of-a-list-of-namedtuples">read more</a></p>
+<p><br></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./python_data_structures.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
                 </div>
             </article>

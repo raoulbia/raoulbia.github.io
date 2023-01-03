@@ -26,102 +26,7 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 24, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./kafka.html" rel="bookmark" title="Permanent Link to &quot;Kafka Cheatsheet&quot;">Kafka Cheatsheet</a>
-                </h2>
-
-                
-                
-
-                <h3>Terminology</h3>
-<ul>
-<li>A Kafka cluster is a group of Kafka brokers.</li>
-<li>A Kafka broker allows consumers to fetch messages by topic, partition and offset.</li>
-<li>Kafka brokers can create a Kafka cluster by sharing information between each other directly or indirectly using Zookeeper.</li>
-</ul>
-<h3>Installation</h3>
-<ul>
-<li>
-<p>Download and Setup Java 8 JDK: <code>sudo apt install openjdk-8-jdk</code></p>
-</li>
-<li>
-<p>Download &amp; Extract the Kafka binaries from https://kafka.apache.org/downloads</p>
-</li>
-<li>
-<p>Try Kafka commands using bin/kafka-topics.sh (for example)</p>
-</li>
-<li>
-<p>add to <code>~/.bashrc</code>:  <code>export PATH=/home/vagrant/kafka_2.12-2.8.0/bin:$PATH</code></p>
-</li>
-<li>
-<p>Edit Zookeeper &amp; Kafka configs in <code>kafka_2.12-2.8.0/config</code></p>
-<ul>
-<li>
-<p>zookeeper.properties: <code>dataDir=/home/vagrant/kafka_2.12-2.8.0/data/zookeeper</code></p>
-</li>
-<li>
-<p>server.properties: <code>log.dirs=/home/vagrant/kafka_2.12-2.8.0/data/kafka</code></p>
-</li>
-</ul>
-</li>
-</ul>
-<h3>Start Zookeeper, Kafka Server and Kafka Connect</h3>
-<ul>
-<li>Pre-requisite: Kafka aded to PATH</li>
-<li>Only when Zookeeper is up and running you can start a Kafka server (that will connect to Zookeeper).</li>
-</ul>
-<div class="highlight"><pre><span></span>zookeeper-server-start.sh config/zookeeper.properties
-kafka-server-start.sh config/server.properties
-connect-distributed.sh config/connect-distributed.properties
-</pre></div>
-
-
-<h3>Topics</h3>
-<div class="highlight"><pre><span></span>kafka-topics.sh --zookeeper localhost:2181 --create --topic &quot;gtfs&quot; --partitions 1 --replication-factor 1
-kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list
-kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;g.*&#39;
-kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;.*ksql.*&#39;
-</pre></div>
-
-
-<h3>Producers</h3>
-<div class="highlight"><pre><span></span>kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic topic_name
-</pre></div>
-
-
-<p>Piping a JSON file into a Topic:</p>
-<div class="highlight"><pre><span></span>file_name.json | kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic topic_name
-</pre></div>
-
-
-<h3>Consumers</h3>
-<p>This tool helps to read data from Kafka topics and outputs it to standard output.</p>
-<div class="highlight"><pre><span></span>kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --from-beginning --property print.key=true --property key.separator=&quot;-&quot; --property print.timestamp=true
-</pre></div>
-
-
-<h3>Faust</h3>
-<p>Note: append -p 6067 to the line below to use a different port.</p>
-<div class="highlight"><pre><span></span>$ python script.py worker 
-</pre></div>
-
-
-<h3>Other Useful Commands</h3>
-<ul>
-<li><code>kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list</code></li>
-<li><code>kafka-consumer-groups.sh  --list --bootstrap-server localhost:9092</code></li>
-<li><code>zookeeper-shell.sh localhost:2181 ls /brokers/ids</code> to list active brokers. </li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./kafka.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/kafka.html" rel="tag">Kafka</a>
-                </div>
-            </article>            <h4 class="date">Nov 23, 2017</h4>
+        <div id="content">            <h4 class="date">Nov 23, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -199,6 +104,137 @@ kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;.*ksql.*&#39;
                 <div class="info">
                     <a href="./kafka_connect.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/kafka.html" rel="tag">Kafka</a>
+                </div>
+            </article>            <h4 class="date">Nov 23, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./ksql.html" rel="bookmark" title="Permanent Link to &quot;KSql Cheatsheet&quot;">KSql Cheatsheet</a>
+                </h2>
+
+                
+                
+
+                <h3>Installation</h3>
+<ul>
+<li>Download and Setup Java 8 JDK: <code>sudo apt install openjdk-8-jdk</code></li>
+<li>wget https://packages.confluent.io/archive/6.2/confluent-6.2.0.tar.gz</li>
+<li>tar -xvf confluent-6.2.0</li>
+<li><code>sudo ln -s confluent-6.2.0/ confluent</code></li>
+<li>add to <code>~/.bashrc</code>:</li>
+<li><code>export  export PATH=/opt/confluent/bin:$PATH</code> (or where ever the tar has been unzipped to.</li>
+<li><code>export CONFLUENT_HOME=/opt/confluent</code></li>
+</ul>
+<h3>Start KSql</h3>
+<div class="highlight"><pre><span></span>confluent <span class="nb">local</span> services ksql-server start
+confluent <span class="nb">local</span> services ksql-server status
+</pre></div>
+
+
+<h4>Topics</h4>
+<p>Note: By default KSql will show only new arriving data.</p>
+<p>Use <code>FROM BEGINNING</code> to see all existing data AND keep listening for new data.</p>
+<p>Also useful for checking that topic has a KEY!!</p>
+<ul>
+<li><code>print 'topic_name' FROM BEGINNING LIMIT 1;</code></li>
+</ul>
+<h4>auto.offset.reset</h4>
+<p>By default KSql <code>select</code> only shows new incoming data aka <code>current offset</code>. </p>
+<p>Must run command below (Only valid for current KSql session! Must re-issue each tme entering KSql prompt).</p>
+<div class="highlight"><pre><span></span>SET &#39;auto.offset.reset&#39;=&#39;earliest&#39; ;
+</pre></div>
+
+
+<p>to reset this setting:</p>
+<div class="highlight"><pre><span></span>UNSET &#39;auto.offset.reset&#39;;
+</pre></div>
+
+
+<h4>KSql CREATE TABLE (<a href="https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-table/">KSQL Syntax Reference</a> )</h4>
+<div class="highlight"><pre><span></span><span class="nv">create</span> <span class="nv">table</span> <span class="nv">GTFS_DELAYS_TABLE</span> <span class="ss">(</span><span class="nv">id</span> <span class="nv">VARCHAR</span> <span class="nv">PRMARY</span> <span class="nv">KEY</span>, <span class="nv">delay</span> <span class="nv">INT</span>, <span class="nv">timestamp</span> <span class="nv">INT</span><span class="ss">)</span> <span class="nv">WITH</span> <span class="ss">(</span><span class="nv">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">gtfs-delays</span><span class="s1">&#39;</span>, <span class="nv">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">JSON</span><span class="s1">&#39;</span><span class="ss">)</span> <span class="c1">;</span>
+<span class="k">show</span> <span class="nv">tables</span> <span class="c1">;</span>
+<span class="nv">describe</span> <span class="nv">GTFS_DELAYS_TABLE</span> <span class="c1">;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>create table GTFS_TABLE <span class="o">(</span> <span class="se">\</span>
+id VARCHAR PRIMARY KEY, <span class="se">\</span>
+trip_update_trip_trip_id VARCHAR, <span class="se">\</span>
+trip_update_trip_start_time VARCHAR, <span class="se">\</span>
+trip_update_trip_start_date VARCHAR,<span class="se">\</span>
+trip_update_trip_schedule_relationship VARCHAR, <span class="se">\</span>
+trip_update_trip_route_id VARCHAR, <span class="se">\</span>
+trip_update_stop_time_update_stop_sequence INT, <span class="se">\</span>
+trip_update_stop_time_update_departure_delay INT, <span class="se">\</span>
+trip_update_stop_time_update_stop_id VARCHAR, <span class="se">\</span>
+trip_update_stop_time_update_schedule_relationship VARCHAR, <span class="se">\</span>
+trip_update_stop_time_update_arrival_delay INT <span class="se">\</span>
+<span class="o">)</span> WITH <span class="o">(</span><span class="nv">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;GTFS_TOPIC&#39;</span>, <span class="nv">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="o">)</span> <span class="p">;</span>
+</pre></div>
+
+
+<p>To persist the above table see below. </p>
+<div class="highlight"><pre><span></span>create table GTFS_TABLE2 AS select * from GTFS_TABLE ;
+</pre></div>
+
+
+<p>Before terminating a persistent table we must first terminate that query!</p>
+<div class="highlight"><pre><span></span><span class="k">show</span> <span class="nv">queries</span> <span class="c1">;</span>
+<span class="nv">terminate</span> <span class="o">&lt;</span><span class="nv">query_name</span><span class="o">&gt;</span> <span class="c1">;</span>
+<span class="nv">drop</span> <span class="nv">table</span> <span class="o">&lt;</span><span class="nv">table_name</span><span class="o">&gt;</span> <span class="c1">;</span>
+</pre></div>
+
+
+<h4>KSql SELECT</h4>
+<div class="highlight"><pre><span></span>select trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence, trip_update_stop_time_update_departure_delay from GTFS_TABLE emit changes ;
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>select trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence, sum(trip_update_stop_time_update_departure_delay) from GTFS_TABLE group by trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence emit changes ;
+</pre></div>
+
+
+<h4>KSql streams</h4>
+<p>KSql streams are used to interrogate the underlying data.</p>
+<div class="highlight"><pre><span></span><span class="nv">create</span> <span class="nv">stream</span> <span class="nv">users_stream</span> <span class="ss">(</span><span class="nv">name</span> <span class="nv">VARCHAR</span>, <span class="nv">countrycode</span> <span class="nv">VARCHAR</span><span class="ss">)</span> <span class="nv">WITH</span> <span class="ss">(</span><span class="nv">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">USERS</span><span class="s1">&#39;</span>, <span class="nv">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">DELIMITED</span><span class="s1">&#39;</span><span class="ss">)</span> <span class="c1">;</span>
+<span class="nv">list</span> <span class="nv">streams</span> <span class="c1">;</span>
+<span class="nv">select</span> <span class="nv">name</span>, <span class="nv">countrycode</span> <span class="nv">from</span> <span class="nv">users_stream</span> <span class="nv">emit</span> <span class="nv">changes</span><span class="c1">;</span>
+<span class="nv">select</span> <span class="nv">name</span>, <span class="nv">countrycode</span> <span class="nv">from</span> <span class="nv">users_stream</span> <span class="nv">emit</span> <span class="nv">changes</span> <span class="nv">limit</span> <span class="mi">5</span><span class="c1">;</span>
+<span class="nv">select</span> <span class="nv">countrycode</span>, <span class="nv">count</span><span class="ss">(</span><span class="o">*</span><span class="ss">)</span> <span class="nv">from</span> <span class="nv">users_stream</span> <span class="nv">group</span> <span class="nv">by</span> <span class="nv">countrycode</span><span class="c1">;</span>
+<span class="nv">drop</span> <span class="nv">stream</span> <span class="k">if</span> <span class="nv">exists</span> <span class="nv">users_stream</span> <span class="c1">;</span>
+<span class="nv">drop</span> <span class="nv">stream</span> <span class="k">if</span> <span class="nv">exists</span> <span class="nv">users_stream</span> <span class="nv">delete</span> <span class="nv">topic</span> <span class="c1">;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="nt">create</span><span class="w"> </span><span class="nt">stream</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="o">(</span><span class="nt">id</span><span class="w"> </span><span class="nt">VARCHAR</span><span class="o">,</span><span class="w"> </span><span class="nt">delay</span><span class="w"> </span><span class="nt">INT</span><span class="o">,</span><span class="w"> </span><span class="nt">timestamp</span><span class="w"> </span><span class="nt">INT</span><span class="o">)</span><span class="w"> </span><span class="nt">WITH</span><span class="w"> </span><span class="o">(</span><span class="nt">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;gtfs-delays&#39;</span><span class="o">,</span><span class="w"> </span><span class="nt">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
+<span class="nt">describe</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
+<span class="nt">select</span><span class="w"> </span><span class="nt">TIMESTAMPTOSTRING</span><span class="o">(</span><span class="nt">rowtime</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;dd/MMM HH:mm&#39;</span><span class="o">)</span><span class="w"> </span><span class="nt">as</span><span class="w"> </span><span class="nt">createtime</span><span class="o">,</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nt">from</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="nt">emit</span><span class="w"> </span><span class="nt">changes</span><span class="w"> </span><span class="nt">limit</span><span class="w"> </span><span class="nt">5</span><span class="o">;</span><span class="w"></span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>create stream GTFS_STREAM ( \
+id VARCHAR, \
+trip_update STRUCT \
+    &lt; trip STRUCT \
+        &lt; trip_id VARCHAR, start_time VARCHAR, start_date VARCHAR, schedule_relationship VARCHAR, route_id VARCHAR&gt; \
+    &gt;,  \
+stop_time_update STRUCT &lt; stop_sequence INT, arrival STRUCT &lt; delay INT &gt;, stop_id VARCHAR, schedule_relationship VARCHAR &gt;
+) WITH (KAFKA_TOPIC=&#39;GTFS_TOPIC&#39;, VALUE_FORMAT=&#39;JSON&#39;) ;
+
+select * from GTFS_STREAM emit changes ;
+</pre></div>
+
+
+<h3>Other Useful Commands</h3>
+<ul>
+<li><code>kafka-consumer-groups.sh  --list --bootstrap-server localhost:9092</code></li>
+<li><code>zookeeper-shell.sh localhost:2181 ls /brokers/ids</code> to list active brokers. </li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./ksql.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/ksql.html" rel="tag">KSql</a>
                 </div>
             </article>
 
