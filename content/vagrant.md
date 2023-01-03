@@ -21,7 +21,11 @@ Summary: Vagrant VM setup
 
 #### Shared Folders 
 
-#### Vagrantfile
+Vagrantfile: `config.vm.synced_folder HOST GUEST`
+
+where HOST = `"/home/raoulbia/DEV/vagrant_mint"` and GUEST = `"/vagrant"`
+
+e.g.   `config.vm.synced_folder "/home/raoulbia/DEV/vagrant_ubuntu", "/vagrant"`
 
 ```bash
 config.vm.synced_folder ".", "/vmtest_kafka"
