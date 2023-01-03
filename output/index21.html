@@ -26,116 +26,549 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Aug 04, 2017</h4>
+        <div id="content">            <h4 class="date">Sep 01, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./python, rdflib.html" rel="bookmark" title="Permanent Link to &quot;RDFLib Graph Object&quot;">RDFLib Graph Object</a>
+                    <a href="./embeddings.html" rel="bookmark" title="Permanent Link to &quot;Embeddings&quot;">Embeddings</a>
                 </h2>
 
                 
                 
 
-                <p>On this page I keep snippets of code I have found useful when working with the
-<a href="https://rdflib.readthedocs.io/en/stable/">RDFLib library</a>. Specifically, the code snippets show how to</p>
+                <p>On this page I keep some notes abbout <a href="./drafts/GloVe.html">GloVe</a>
+and word2vec word embeddings. </p>
+<h4>various notes</h4>
 <ul>
-<li>load a triple (.n3) or quad (.nq) file RDFLib graph object</li>
-<li>read from an RDFLib graph object</li>
+<li>
+<p>Word embeddings are based on the <strong>distributional hypothesis</strong>:</p>
+<p>A word’s meaning is encoded in the 
+  frequencies with which other words 
+  occur near it in natural text.</p>
+</li>
 </ul>
-<h5>Loading a triple/quad file into an RDFLib object</h5>
-<div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">rdflib</span><span class="o">.</span><span class="n">ConjunctiveGraph</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">input_kg_dir_path</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">f_extension</span><span class="p">)):</span>
-        <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_kg_dir_path</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
-        <span class="c1"># read each kg file and build a graph</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;reading </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">g</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">rdflib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">guess_format</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-<span class="k">return</span> <span class="n">g</span>
+<p>In other words, a word’s environment encodes a great deal of semantic information. 
+  For example, we can infer that <em>oculist</em> and <em>eye-doctor</em> are synonyms from the fact that they are found 
+  near the same words in a given corpus.  </p>
+<ul>
+<li>Algorithms like singular value decomposition (SVD) or principle components analysis (PCA)
+  can be used to compress an <code>n × m</code> feature matrix M to an <code>n × k</code> matrix M' (where k &lt;&lt; m) 
+  in such a way that M' retains most of the information of M. </li>
+</ul>
+<p><a href="https://universalflowuniversity.com/Books/Computer%20Programming/Data%20Mining%20and%20Data%20Science/The%20Data%20Science%20Design%20Manual.pdf">source</a></p>
+<ul>
+<li>
+<p>Word representations can be obtained using </p>
+</li>
+<li>
+<p>co-occurrence counts (derived directly from corpus counts</p>
+</li>
+<li>using association measures such as Point-wise Mutual Information (PMI)</li>
+<li>lower-rank representations such as PPMI-SVD and GloVe (<a href="https://arxiv.org/pdf/1606.00819.pdf">source</a>) </li>
+<li>
+<p>predictive methods e.g. skip-gram (word2vec)</p>
+</li>
+<li>
+<p>A co-occurrence matrix by itself provides word vectors which can in principle be used to compute 
+  similarities between words. These vectors are how ever high-dimensional and sparse. </p>
+</li>
+<li>
+<p>There are two approaches to converting high-dimensional and sparse word vectors to low-dimensional and 
+  dense vectors:</p>
+</li>
+<li>
+<p>dimensionality reduction e.g. SVD</p>
+</li>
+<li>
+<p>direct learning e.g. word2vec, GloVe</p>
+</li>
+<li>
+<p>For each unique word, word embedding methods aim to find a vector that summarizes its environment 
+  and hence reveals its semantics. </p>
+</li>
+<li>
+<p>Algebraic relationships between word vectors correspond to semantic relationships between words.<br />
+  For example, it is typical to find that </p>
+</li>
+</ul>
+<p><code>f(France) ≈ f(England) + f(Paris) − f(London)</code></p>
+<p>i.e. “France is to England as Paris is to London”. 
+  (<a href="https://uwaterloo.ca/scholar/sites/ca.scholar/files/pa2forsy/files/project_dec_3.pdf">source</a>) </p>
+<ul>
+<li>You can check how good a word embedding is by finding the top 10 nearest neighbors of a word.</li>
+</ul>
+<h4>word2vec</h4>
+<ul>
+<li>
+<p>word2vec consist of two functions:</p>
+</li>
+<li>
+<p><em>f</em>, which maps words to a word vector</p>
+</li>
+<li><em>g</em>, which, given a word’s vector, produces an estimate of the probability of finding each other 
+    word in vocabulary $V$ near that word in the corpus.</li>
+</ul>
+<p>where 
+   * the values of a given word vector are the parameters we determine when learning g.
+   * <em>f</em> and <em>g</em> are trained by stochastic gradient descent so that each predicted word is probable, given
+     its predictor word</p>
+<h4>GloVe</h4>
+<ul>
+<li>
+<p>GloVe produces embeddings by factorizing the logarithm of the corpus word co-occurrence matrix.</p>
+</li>
+<li>
+<p><em>We tokenize and lowercase each corpus with the Stanford tokenizer, build a vocabulary of the 400,000 most frequent 
+ words, and then construct a matrix of co-occurence counts… we use a decreasing weighting function so that word pairs 
+ that are d words apart contribute 1/d to the total count.</em></p>
+</li>
+<li>
+<p><code>#TODO</code> look up 1st order vs. 2nd order co-occurrences &gt; see Coursera video</p>
+</li>
+<li>
+<p>While this produces embeddings which are similar to <a href="https://code.google.com/p/word2vec/">word2vec</a>
+(which has a great python implementation in <a href="http://radimrehurek.com/gensim/models/word2vec.html">gensim</a>), 
+the method is different!</p>
+</li>
+<li>
+<p>co-occurrence: underlying assumption that the meaning of each word can be captured through its co-occurrence pattern 
+with context words</p>
+</li>
+</ul>
+<h4>Glossary</h4>
+<ul>
+<li>
+<p>skip-bigram: count how many times a pair of words occurs together in sentences irrespective of their 
+  positions in sentences.</p>
+</li>
+<li>
+<p>Word vector dimension: Actually the word vector dimension does not reflect the vocabulary size. 
+  What Word2Vec is doing is mapping the words to their representation in a vector space and you can 
+  make this space of any dimension you want. 
+  <a href="https://stackoverflow.com/questions/38137551/what-is-word-vector-dimension">source</a></p>
+</li>
+</ul>
+<h4>Resources</h4>
+<p><strong>Resources covering both word2vec and Glove</strong></p>
+<ul>
+<li><a href="https://www.csie.ntu.edu.tw/~yvchen/f105-adl/doc/161013_WordVector2.pdf">Applied Deep Learning</a>(slides)</li>
+<li><a href="https://uwaterloo.ca/scholar/sites/ca.scholar/files/pa2forsy/files/project_dec_3.pdf">Word vectors and the distributional hypothesis</a>
+(focus is on word2vec; good description of the underlying theory)</li>
+<li><a href="https://arxiv.org/pdf/1606.00819.pdf">Matrix Factorization using Window Sampling and Negative Sampling for Improved Word Representations</a></li>
+<li><a href="https://towardsdatascience.com/word-embeddings-exploration-explanation-and-exploitation-with-code-in-python-5dac99d5d795">Word embeddings: exploration, explanation, and exploitation</a>
+  (uses GloVe via Gensim)  </li>
+<li><a href="https://machinelearningmastery.com/develop-word-embeddings-python-gensim/">How to Develop Word Embeddings in Python with Gensim</a>
+  (discusses pre-trained embeddings)</li>
+<li><a href="https://becominghuman.ai/word-embeddings-with-gensim-68e6322afdca">Word Embeddings with Gensim</a>
+  (discusses pre-trained embeddings)</li>
+<li><a href="https://textminingonline.com/getting-started-with-word2vec-and-glove-in-python">Getting Started with Word2Vec and GloVe in Python</a>
+  (uses Gensim)</li>
+</ul>
+<p><strong>Resources covering word2vec</strong></p>
+<ul>
+<li><a href="https://datawarrior.wordpress.com/2016/10/12/short-text-categorization-using-deep-neural-networks-and-word-embedding-models/">Short Text Categorization using Deep Neural Networks and Word-Embedding Models</a> 
+  (uses Gensim) </li>
+<li><a href="https://towardsdatascience.com/learn-word2vec-by-implementing-it-in-tensorflow-45641adaf2ac">Learn Word2Vec by implementing it in tensorflow</a>
+  (discusses query word embedding vectors)</li>
+<li><a href="https://medium.com/@shubhamagarwal328/playing-around-with-word2vec-natural-language-processing-ccd10a044b1">Playing around with Word2Vec</a>
+  (discusses vector similarity, k-means clustering of similar words, uses Gensim)</li>
+<li><a href="https://rare-technologies.com/making-sense-of-word2vec/">Making sense of word2vec</a></li>
+<li><a href="">Word Embeddings in Python with Spacy and Gensim</a>https://www.shanelynn.ie/word-embeddings-in-python-with-spacy-and-gensim/)</li>
+<li><a href="https://recurrentnull.wordpress.com/2016/10/21/sentiment-analysis-of-movie-reviews-2-word2vec/">Sentiment Analysis of Movie Reviews: word2vec</a></li>
+<li><a href="http://adventuresinmachinelearning.com/word2vec-tutorial-tensorflow/">word2vec tutorial tensorflow</a></li>
+</ul>
+<p><strong>Resources covering Glove</strong></p>
+<ul>
+<li><a href="http://www-nlp.stanford.edu/projects/glove/">Glove Stanford NLP</a></li>
+<li>(video) <a href="https://www.youtube.com/watch?v=Y8gKX5zMRyQ">GloVe - Python for Word Representation - PyCon APAC 2018</a></li>
+<li><a href="https://medium.com/ai-society/jkljlj-7d6e699895c4">A Comprehensive Introduction to Word Vector Representations</a>
+  (discusses SVD)</li>
+<li><a href="https://blog.acolyer.org/2016/04/22/glove-global-vectors-for-word-representation/">GloVe: Global Vectors for Word Representation</a>
+  (discusses Matrix factorization vs shallow-window methods)</li>
+<li><a href="https://medium.com/@japneet121/word-vectorization-using-glove-76919685ee0b">Word vectorization using Glove</a>
+  (print the embeddings for the word “samsung”)</li>
+<li><a href="https://iksinc.online/tag/co-occurrence-matrix/">How to Use Words Co-Occurrence Statistics to Map Words to Vectors</a> 
+  (with a vectors example <a href="https://iksinc.online/2015/06/23/how-to-use-words-co-occurrence-statistics-to-map-words-to-vectors/#comment-395">here</a>)</li>
+<li><a href="https://towardsdatascience.com/emnlp-what-is-glove-part-i-3b6ce6a7f970">What is GloVe?</a></li>
+</ul>
+<h4>Related</h4>
+<ul>
+<li>
+<p>General Overview of Word Embedding techniques</p>
+<ul>
+<li><a href="https://www.gavagai.se/blog/2015/09/30/a-brief-history-of-word-embeddings/">A Brief History of Word Embeddings (and some clarifications)</a> 
+  (includes links to frameworks)</li>
+<li><a href="https://freecontent.manning.com/deep-learning-for-text/">Deep Learning for Text</a></li>
+<li><a href="https://nlpforhackers.io/word-embeddings/">Complete Guide to Word Embeddings</a> 
+  (mentions t-SNE)</li>
+<li><a href="http://blog.aylien.com/overview-word-embeddings-history-word2vec-cbow-glove/">An overview of word embeddings and their connection to distributional semantic models</a></li>
+<li><a href="https://jjallaire.github.io/deep-learning-with-r-notebooks/notebooks/6.1-using-word-embeddings.nb.html">Using word embeddings</a></li>
+<li><a href="https://arxiv.org/ftp/arxiv/papers/1708/1708.03994.pdf">Data Sets: Word Embeddings Learned from Tweets and General Data</a></li>
+<li><a href="">Learning Word Vectors for Sentiment Analysis</a>http://ai.stanford.edu/~ang/papers/acl11-WordVectorsSentimentAnalysis.pdf)</li>
+<li><a href="https://multithreaded.stitchfix.com/blog/2017/10/18/stop-using-word2vec/">Stop Using word2vec</a></li>
+<li><a href="https://radimrehurek.com/gensim/models/keyedvectors.html">What can I do with word vectors?</a> (scroll down)</li>
+</ul>
+</li>
+<li>
+<p>Misc. </p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/37793118/load-pretrained-glove-vectors-in-python">Load Pretrained glove vectors in python</a></li>
+<li><a href="https://github.com/OpenNMT/OpenNMT-py/issues/210">How to use pretrained embeddings from Glove?</a>
+  (discusses initialisation of word vector when using pre-trained word vecs)</li>
+<li><a href="http://text2vec.org/glove-cli.html">text2vec R package</a></li>
+<li><a href="http://dsnotes.com/post/glove-enwiki/">GloVe vs word2vec revisited</a>
+  (uses text2vec R package)</li>
+<li><a href="https://dh2017.adho.org/abstracts/582/582.pdf">Word Vectors in the Eighteenth Century</a></li>
+</ul>
+</li>
+<li>
+<p>Books</p>
+<ul>
+<li><a href="https://www.safaribooksonline.com/library/view/practical-machine-learning/9781491915707/ch04.html">Co-occurrence and Recommendation</a>
+  (Practical Machine Learning: Innovations in Recommendation Chapter 4)</li>
+<li><a href="http://www.charuaggarwal.net/Text-Learning.pdf">Machine Learning for Text</a>
+  (discusses Glove gradient descent optimization in Chapter 10.4)</li>
+</ul>
+</li>
+<li>
+<p>Papers</p>
+<ul>
+<li><a href="https://web.stanford.edu/class/cs224n/reports/2758144.pdf">Extending the Scope of Co-occurrence Embedding</a></li>
+<li><a href="http://www.aclweb.org/anthology/Q15-1016">Improving Distributional Similarity with Lessons Learned from Word Embeddings</a></li>
+<li><a href="https://arxiv.org/pdf/1602.02215.pdf">Swivel: Improving Embeddings by Noticing What’s Missing</a>
+  (good description of optimization pseudocode)</li>
+</ul>
+</li>
+<li>
+<p>Algorithms</p>
+<ul>
+<li><a href="http://ruder.io/optimizing-gradient-descent/index.html#challenges">An overview of gradient descent optimization algorithms</a></li>
+<li><a href="https://am207.github.io/2017/wiki/gradientdescent.html#stochastic-gradient-descent">Stochastic gradient descent</a></li>
+</ul>
+</li>
+<li>
+<p>Slides</p>
+<ul>
+<li><a href="https://pdfs.semanticscholar.org/presentation/548c/0412f63ab096c89892d663c34f36da678c10.pdf">Simple   Word    Vector  representa2ons: word2vec,   GloVe</a></li>
+<li><a href="http://www.cs.virginia.edu/~kc2wc/teaching/NLP16/slides/07-WordEmbedding.pdf">Word Embeddings</a></li>
+<li><a href="https://cs224d.stanford.edu/lectures/CS224d-Lecture3.pdf">Richard Socher slides</a></li>
+</ul>
+</li>
+<li>
+<p>Videos</p>
+<ul>
+<li><a href="https://www.coursera.org/lecture/language-processing/distributional-semantics-bee-and-honey-vs-bee-an-bumblebee-PtRav">Coursera NLP</a></li>
+<li><a href="https://www.coursera.org/lecture/nlp-sequence-models/glove-word-vectors-IxDTG">Coursera NLP (Andrew Ng)</a></li>
+<li><a href="https://www.coursera.org/lecture/intro-to-deep-learning/word-embeddings-dhzl5">Coursera Intro to Deep Learning</a>
+  (word2vec)</li>
+<li><a href="http://u.cs.biu.ac.il/~yogo/cvsc2015.pdf">word embeddings: what, how and whither</a></li>
+</ul>
+</li>
+</ul>
+<p><em>Code Repos</em></p>
+<div class="highlight"><pre><span></span><span class="o">*</span><span class="w"> </span><span class="p">[</span><span class="n">Gensim</span><span class="p">](</span><span class="n">https</span><span class="o">:</span><span class="c1">//radimrehurek.com/gensim/models/word2vec.html)</span>
+<span class="w">  </span><span class="p">(</span><span class="n">includes</span><span class="w"> </span><span class="n">word2vec</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">GloVe</span><span class="p">)</span><span class="w"></span>
+<span class="o">*</span><span class="w"> </span><span class="p">[</span><span class="n">glove</span><span class="o">-</span><span class="n">python</span><span class="p">](</span><span class="n">https</span><span class="o">:</span><span class="c1">//github.com/maciejkula/glove-python)</span>
+<span class="w">  </span><span class="p">(</span><span class="n">maciejkula</span><span class="p">)</span><span class="w"></span>
+<span class="o">*</span><span class="w"> </span><span class="p">[</span><span class="n">tf</span><span class="o">-</span><span class="n">glove</span><span class="p">](</span><span class="n">https</span><span class="o">:</span><span class="c1">//github.com/eschorn0/tf-glove)</span>
+<span class="w">  </span><span class="p">(</span><span class="n">Glove</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Python</span><span class="p">,</span><span class="w"> </span><span class="n">Cython</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Tensorflow</span><span class="w"> </span><span class="n">r1</span><span class="mf">.0</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">Ubuntu</span><span class="p">)</span><span class="w"></span>
+<span class="o">*</span><span class="w"> </span><span class="p">[</span><span class="n">glovepy</span><span class="p">](</span><span class="n">https</span><span class="o">:</span><span class="c1">//pypi.org/project/glovepy/)</span>
+<span class="w">  </span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="n">Python</span><span class="w"> </span><span class="n">implementation</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">Cython</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">GloVe</span><span class="p">)</span><span class="w"></span>
+<span class="o">*</span><span class="w"> </span><span class="p">[</span><span class="n">A</span><span class="w"> </span><span class="n">GloVe</span><span class="w"> </span><span class="n">implementation</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">Python</span><span class="p">](</span><span class="n">http</span><span class="o">:</span><span class="c1">//www.foldl.me/2014/glove-python/) (foldl)</span>
+<span class="o">*</span><span class="w"> </span><span class="p">[</span><span class="n">machine_learning_examples</span><span class="p">](</span><span class="n">https</span><span class="o">:</span><span class="c1">//github.com/lazyprogrammer/machine_learning_examples/tree/master/nlp_class2)</span>
+<span class="w">  </span><span class="p">(</span><span class="n">lazyprogrammer</span><span class="p">)</span><span class="w"></span>
+<span class="o">*</span><span class="w"> </span><span class="p">[</span><span class="n">movie</span><span class="w"> </span><span class="n">sentiment</span><span class="p">](</span><span class="n">https</span><span class="o">:</span><span class="c1">//github.com/saurabhmathur96/movie-sentiment)</span>
 </pre></div>
 
 
-<h5>Reading an RDFLib graph object</h5>
-<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entity_list</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">entity_list</span><span class="p">)</span>
-    <span class="n">query_results</span> <span class="o">=</span> <span class="n">angio_kg</span><span class="o">.</span><span class="n">query</span><span class="p">(</span> <span class="c1"># is an rdflib conjunctive raph object which has a parse method</span>
-        <span class="sd">&quot;&quot;&quot;SELECT DISTINCT ?g</span>
-<span class="sd">        {GRAPH ?g {</span>
-<span class="sd">              {&lt;%s&gt; ?p ?o}</span>
-<span class="sd">              UNION {?s ?p &lt;%s&gt;}</span>
-<span class="sd">         }}&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">entity</span><span class="p">))</span>
-</pre></div>
+<ul>
+<li>
+<p>Datasets</p>
+<ul>
+<li><a href="https://github.com/3Top/word2vec-api#where-to-get-a-pretrained-models">Where to get pretrained models</a></li>
+</ul>
+</li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./python, rdflib.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                    <a href="./embeddings.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/embeddings.html" rel="tag">Embeddings</a>
                 </div>
-            </article>            <h4 class="date">Jul 02, 2017</h4>
+            </article>            <h4 class="date">Aug 05, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./graph_problems.html" rel="bookmark" title="Permanent Link to &quot;Graph Problems&quot;">Graph Problems</a>
+                    <a href="./SPARQL.html" rel="bookmark" title="Permanent Link to &quot;SPARQL&quot;">SPARQL</a>
                 </h2>
 
                 
                 
 
-                <h4>Vertex Cover</h4>
-<ul>
-<li>A vertex cover is a <strong>subset of the vertices</strong> such that
-each edge in the graph is incident to at least one vertex in
-the subset. </li>
-</ul>
-<p><img alt="" src="img/vertex-cover.png" /></p>
-<ul>
-<li>The Minimum Vertex Cover problem seeks to
-find a cover with a <strong>minimum number of vertices in the
-subset</strong>.</li>
-</ul>
-<p><img alt="" src="img/min-vertex-cover.png" /></p>
-<p><br></p>
-<ul>
-<li>
-<p>Approximation Algorithm</p>
-<div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">&lt;-</span> <span class="n">empty</span> <span class="n">set</span>
-<span class="n">While</span> <span class="n">E</span> <span class="n">is</span> <span class="n">not</span> <span class="n">empty</span>
-    <span class="p">{</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">}</span> <span class="o">&lt;-</span> <span class="n">any</span> <span class="n">edge</span> <span class="n">from</span> <span class="n">E</span>
-    <span class="n">add</span> <span class="p">{</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">}</span> <span class="n">to</span> <span class="n">C</span>
-    <span class="n">remove</span> <span class="n">from</span> <span class="n">E</span> <span class="n">all</span> <span class="n">edges</span> <span class="n">incident</span> <span class="n">to</span> <span class="n">u</span><span class="p">,</span><span class="n">v</span>
-<span class="n">return</span> <span class="n">C</span>
+                <p>A collection of <a href="https://en.wikipedia.org/wiki/SPARQL">SPARQL queries</a> I found useful.</p>
+<p>Note that the queries are use case-specific but they should be easy to generalize. Do ignore the fact that lines are
+commented out. In the original setting I used this approach to quickly select the one or other query.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">SPARQLWrapper</span> <span class="kn">import</span> <span class="n">SPARQLWrapper</span><span class="p">,</span> <span class="n">JSON</span>
+<span class="n">sparql</span> <span class="o">=</span> <span class="n">SPARQLWrapper</span><span class="p">(</span><span class="s2">&quot;http://localhost:3030/angioexplain3/query&quot;</span><span class="p">)</span>
+<span class="n">sparql</span><span class="o">.</span><span class="n">setQuery</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="s2">                    ### Check for reflexive triples in the quads ############################</span>
+
+<span class="s2">                    # SELECT (count (?s) as ?nb)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #  GRAPH ?g {?s ?p ?s}</span>
+<span class="s2">                    # }</span>
+
+
+<span class="s2">                    ##### COUNT QUADS / TRIPLES BY RELATION #################################</span>
+
+<span class="s2">                    # --- ANY INTERACTION ----------------------------------</span>
+
+<span class="s2">                    # SELECT ?res (COUNT (?res) as ?cnt)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?res ?o} }</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {?s ?res ?o}</span>
+<span class="s2">                    # }</span>
+<span class="s2">                    # GROUP BY ?res ORDER BY DESC (?cnt)  #LIMIT 10</span>
+
+
+<span class="s2">                    # --- WITH SPECIFIC INTERACTION e.g. protein to protein --------</span>
+
+<span class="s2">                    # SELECT ?res (COUNT (?res) as ?cnt)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?res ?o} FILTER regex( str(?s), &quot;protein&quot;) }</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?res ?o} FILTER regex( str(?o), &quot;protein&quot;) }</span>
+<span class="s2">                    #     }</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {</span>
+<span class="s2">                    #     {?s ?res ?o FILTER regex(str(?s), &quot;protein&quot;)}</span>
+<span class="s2">                    #     {?s ?res ?o FILTER regex(str(?o), &quot;protein&quot;)}</span>
+<span class="s2">                    #     }</span>
+<span class="s2">                    # }</span>
+<span class="s2">                    # GROUP BY ?res ORDER BY DESC (?cnt) LIMIT 10</span>
+
+<span class="s2">                    # # --- WITH PROTEIN 2 PROTEIN COUNT ONLY --------</span>
+<span class="s2">                    #</span>
+<span class="s2">                    # SELECT COUNT (?res)  # DOENS&#39;T WORK ON GOZILLA !??</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?res ?o} FILTER regex( str(?s), &quot;protein&quot;) }</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?res ?o} FILTER regex( str(?o), &quot;protein&quot;) }</span>
+<span class="s2">                    #     }</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {</span>
+<span class="s2">                    #     {?s ?res ?o FILTER regex(str(?s), &quot;protein&quot;)}</span>
+<span class="s2">                    #     {?s ?res ?o FILTER regex(str(?o), &quot;protein&quot;)}</span>
+<span class="s2">                    #     }</span>
+<span class="s2">                    # } LIMIT 10</span>
+
+
+<span class="s2">                    ######## QUERYING GRAPHS / QUADS ##################################</span>
+
+<span class="s2">                    ## Example 1: COUNT UNIQUE PATHWAYS</span>
+<span class="s2">                    # Note: pathways are stored as graphs in quads</span>
+
+<span class="s2">                    # SELECT (COUNT (DISTINCT ?res) as ?cnt)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {GRAPH ?res {?s ?p ?o} FILTER regex( str(?res), &quot;/Pathway&quot; ).}</span>
+<span class="s2">                    # }</span>
+<span class="s2">                    # ORDER BY DESC (?cnt)</span>
+
+
+<span class="s2">                    ##### PUBTATOR  ###################################################</span>
+
+<span class="s2">                    #-------- COUNT UNIQUE PUBMEDID&#39;s ------------------------------</span>
+
+<span class="s2">                    # From Quads</span>
+<span class="s2">                    # SELECT COUNT (DISTINCT ?res)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     GRAPH ?res {?s ?p ?o} FILTER (strstarts( str(?res), &quot;http://identifiers.org/pubtator/&quot; )).</span>
+<span class="s2">                    # }</span>
+
+<span class="s2">                    # From Title triples</span>
+<span class="s2">                    # SELECT COUNT (DISTINCT ?res)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     ?res ?p ?o FILTER (strstarts( str(?res), &quot;http://identifiers.org/pubtator/&quot; )).</span>
+<span class="s2">                    # }</span>
+
+
+<span class="s2">                    #--------- PUBTATOR COUNT RELATIONS e.g. Gene_Disease----------------</span>
+
+<span class="s2">                    # SELECT ?res (COUNT (?res) as ?cnt)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?res ?o} FILTER ( regex( str(?g), &quot;pubtator/pubmedid&quot;) ) }</span>
+<span class="s2">                    #</span>
+<span class="s2">                    #     # MINUS</span>
+<span class="s2">                    #     # {GRAPH ?g {?s ?res ?o} FILTER ( regex( str(?s), &quot;species&quot;) ) }</span>
+<span class="s2">                    #     # MINUS</span>
+<span class="s2">                    #     # {GRAPH ?g {?s ?res ?o} FILTER ( regex( str(?o), &quot;species&quot;) ) }</span>
+<span class="s2">                    #</span>
+<span class="s2">                    # }</span>
+<span class="s2">                    # GROUP BY ?res ORDER BY DESC (?cnt)</span>
+
+
+<span class="s2">                    #--------- PUBTATOR SPECIES -----------------------------------------</span>
+
+<span class="s2">                    # Get count of abstracts by species ID</span>
+
+<span class="s2">                    # SELECT COUNT (DISTINCT (?g))</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?p ?o} FILTER regex( str(?p), &quot;Species&quot;) }</span>
+<span class="s2">                    # }</span>
+<span class="s2">                    # GROUP BY ?g ORDER BY DESC (?cnt) LIMIT 5</span>
+
+
+<span class="s2">                    # Get the number of documents without species or with at least mention of human if any specified</span>
+<span class="s2">                    # Pierre-Yves</span>
+
+<span class="s2">                     # SELECT (COUNT( DISTINCT ?g) AS ?nbPubmedDocuments)</span>
+<span class="s2">                     # {</span>
+<span class="s2">                     #    # get only pubtator named graph</span>
+<span class="s2">                     #    GRAPH ?g</span>
+<span class="s2">                     #    {</span>
+<span class="s2">                     #        ?s ?p ?o</span>
+<span class="s2">                     #        FILTER ( strstarts(str(?p), &quot;http://identifiers.org/pubtator/&quot;))</span>
+<span class="s2">                     #        FILTER ( !strstarts(str(?o), &quot;http://identifiers.org/species/&quot;)) .</span>
+<span class="s2">                     #</span>
+<span class="s2">                     #    }</span>
+<span class="s2">                        #</span>
+<span class="s2">                        # MINUS</span>
+<span class="s2">                        #</span>
+<span class="s2">                        # {</span>
+<span class="s2">                        #     # get quads with species</span>
+<span class="s2">                        #     SELECT ?g</span>
+<span class="s2">                        #     {</span>
+<span class="s2">                        #         {</span>
+<span class="s2">                        #             GRAPH ?g</span>
+<span class="s2">                        #             {</span>
+<span class="s2">                        #                  ?s ?p ?o</span>
+<span class="s2">                        #                  FILTER ( strstarts(str(?s), &quot;http://identifiers.org/species/&quot;)) .</span>
+<span class="s2">                        #             }</span>
+<span class="s2">                        #         }</span>
+<span class="s2">                        #         UNION</span>
+<span class="s2">                        #         {</span>
+<span class="s2">                        #             GRAPH ?g</span>
+<span class="s2">                        #             {</span>
+<span class="s2">                        #                  ?s ?p ?o</span>
+<span class="s2">                        #                  FILTER ( strstarts(str(?o), &quot;http://identifiers.org/species/&quot;)) .</span>
+<span class="s2">                        #             }</span>
+<span class="s2">                        #         }</span>
+<span class="s2">                        #     }</span>
+<span class="s2">                        # }</span>
+<span class="s2">                     # }</span>
+
+
+
+
+
+<span class="s2">                    ##### ENTITIES #####################################################</span>
+
+<span class="s2">                    # --- COUNT ENTITIES e.g Entrez#123 (gene), ... -----------------</span>
+
+<span class="s2">                    # SELECT ?res (COUNT (?res) as ?cnt)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {GRAPH ?g {?res ?p ?o} FILTER regex( str(?res), &quot;/gene/&quot; )}</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?p ?res} FILTER regex( str(?res), &quot;/gene/&quot; )}</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {?res ?p ?o FILTER regex(str(?res), &quot;/gene/&quot;)}</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {?s ?p ?res FILTER regex(str(?res), &quot;/gene/&quot;)}</span>
+<span class="s2">                    # }</span>
+<span class="s2">                    # GROUP BY ?res ORDER BY DESC (?cnt) LIMIT 10</span>
+
+
+<span class="s2">                    # --- COUNT ENTITY TYPE e.g. Gene, Drug --------------------------</span>
+
+<span class="s2">                    # SELECT COUNT (DISTINCT ?res)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {GRAPH ?g {?res ?p ?o} FILTER regex( str(?res), &quot;/gene/&quot; )}</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?p ?res} FILTER regex( str(?res), &quot;/gene/&quot; )}</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {?res ?p ?o FILTER regex(str(?res), &quot;/gene/&quot;)}</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {?s ?p ?res FILTER regex(str(?res), &quot;/gene/&quot;)}</span>
+<span class="s2">                    # }</span>
+
+<span class="s2">                    # SELECT COUNT (DISTINCT ?res)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {?res ?p ?o FILTER regex(str(?res), &quot;/disease/&quot;)}</span>
+<span class="s2">                    #     UNION</span>
+<span class="s2">                    #     {?s ?p ?res FILTER regex(str(?res), &quot;/disease/&quot;)}</span>
+<span class="s2">                    # }</span>
+
+<span class="s2">                    # --- QUADS COUNT ENTITY TYPE e.g. Pathways --------------------------</span>
+
+<span class="s2">                    # QUADS</span>
+<span class="s2">                    # SELECT COUNT (DISTINCT ?res)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {GRAPH ?res {?s ?p ?o} FILTER regex( str(?res), &quot;/Pathway_&quot; )}</span>
+<span class="s2">                    #     # UNION</span>
+<span class="s2">                    #     # {GRAPH ?res {?s ?p ?o} FILTER regex( str(?res), &quot;/Pathway_&quot; )}</span>
+<span class="s2">                    # }</span>
+
+<span class="s2">                    # QUADS</span>
+<span class="s2">                    # SELECT ?res (COUNT (?res) as ?cnt)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?res ?o} FILTER ( regex( str(?g), &quot;/Pathway_&quot;) ) }</span>
+<span class="s2">                    # }</span>
+<span class="s2">                    # GROUP BY ?res ORDER BY DESC (?cnt)</span>
+
+<span class="s2">                    # QUADS</span>
+<span class="s2">                    # SELECT COUNT ( ?res)</span>
+<span class="s2">                    # {</span>
+<span class="s2">                    #     {GRAPH ?g {?s ?res ?o} FILTER regex( str(?res), &quot;/ppi/&quot; )}</span>
+<span class="s2">                    # }</span>
+
+
+<span class="s2">                    &quot;&quot;&quot;</span><span class="p">)</span>
+
+
+
+
+<span class="n">sparql</span><span class="o">.</span><span class="n">setReturnFormat</span><span class="p">(</span><span class="n">JSON</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">sparql</span><span class="o">.</span><span class="n">query</span><span class="p">()</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span> <span class="c1"># is a Dict.</span>
+
+<span class="c1"># print(results)</span>
+<span class="c1"># print(len(results[&quot;results&quot;][&quot;bindings&quot;]))</span>
+<span class="c1"># print(len(results), results)</span>
+<span class="c1"># print(results[&quot;head&quot;].values())</span>
+
+<span class="c1"># establish the type of out pput we get from the query e.g. [&#39;res&#39;, &#39;cnt&#39;]</span>
+<span class="c1"># this is used to shape the if/else statements below</span>
+<span class="nb">vars</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">listOfVars</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;head&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">listOfVars</span><span class="p">:</span>
+        <span class="nb">vars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">]))</span>
+    <span class="k">elif</span> <span class="nb">vars</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;.1&quot;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># print results without prefix</span>
+            <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="c1"># print simple count</span>
+            <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;no data found for query&quot;</span><span class="p">)</span>
 </pre></div>
-
-
-</li>
-<li>
-<p><a href="https://nbviewer.jupyter.org/github/raoulbia/jupyter-notebooks/blob/master/vertex_cover_linear-programming_and_approximation-algorithm.ipynb?flush_cache=true" title=" target=&quot;_blank">Solving Vertex Cover with Linear Programming and with Approximation Algorithm</a></p>
-</li>
-</ul>
-<p><br></p>
-<h4>Max Cut</h4>
-<ul>
-<li>
-<p>Partition set of vertices into two sets such that the number of edges between the two sets
-(considered to be severed by the cut), is a large as possible. </p>
-</li>
-<li>
-<p>In the example below vertices 2 and 3 are in one set and
-vertices 1, 4, and 5 are in the other, with a maximum cut value of 5. </p>
-</li>
-</ul>
-<p><img alt="" src="img/max-cut.png" /></p>
-<h4>Travelling Salesman problem</h4>
-<ul>
-<li><a href="https://nbviewer.jupyter.org/github/raoulbia/jupyter-notebooks/blob/master/Graph_Traversal_TSP_Approximation_Warehouse.ipynb?flush_cache=true" title=" target=&quot;_blank">TSP_Approximation_Warehouse.ipynb</a></li>
-</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./graph_problems.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/graph-problems.html" rel="tag">Graph Problems</a>
+                    <a href="./SPARQL.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/sparql.html" rel="tag">SPARQL</a>
                 </div>
             </article>
 
@@ -146,7 +579,7 @@ vertices 1, 4, and 5 are in the other, with a maximum cut value of 5. </p>
 
                     <a href="./index22.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 21 of 24</span>
+                    <span>Page 21 of 25</span>
                 </div>
 
             <div class="clear"></div>

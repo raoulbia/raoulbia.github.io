@@ -1,5 +1,5 @@
 Title: Pelican How To
-Date: 2018-04-25
+Date: 2023-01-25
 Category: Python
 Slug: pelican
 Summary: Pelican How To

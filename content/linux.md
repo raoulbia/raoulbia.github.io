@@ -107,6 +107,7 @@ Add this to `.bashrc`:
 
 #### Misc.
 
+* [100 Linux commands](https://acethecloud.com/blog/linux-commands-for-sre/)
 * change nvidia gamma settings: `udo nano ~/.nvidia-settings-rc`
 * `df -h` check disk space
 * [kill process](https://itsfoss.com/how-to-find-the-process-id-of-a-program-and-kill-it-quick-tip/)

@@ -52,7 +52,9 @@
 <li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>.</li>
 </ul>
 <h4>Shared Folders</h4>
-<h4>Vagrantfile</h4>
+<p>Vagrantfile: <code>config.vm.synced_folder HOST GUEST</code></p>
+<p>where HOST = <code>"/home/raoulbia/DEV/vagrant_mint"</code> and GUEST = <code>"/vagrant"</code></p>
+<p>e.g.   <code>config.vm.synced_folder "/home/raoulbia/DEV/vagrant_ubuntu", "/vagrant"</code></p>
 <div class="highlight"><pre><span></span>config.vm.synced_folder <span class="s2">&quot;.&quot;</span>, <span class="s2">&quot;/vmtest_kafka&quot;</span>
 </pre></div>
 
@@ -247,6 +249,7 @@ sudo apt-get purge texlive*
 </ul>
 <h4>Misc.</h4>
 <ul>
+<li><a href="https://acethecloud.com/blog/linux-commands-for-sre/">100 Linux commands</a></li>
 <li>change nvidia gamma settings: <code>udo nano ~/.nvidia-settings-rc</code></li>
 <li><code>df -h</code> check disk space</li>
 <li><a href="https://itsfoss.com/how-to-find-the-process-id-of-a-program-and-kill-it-quick-tip/">kill process</a></li>
