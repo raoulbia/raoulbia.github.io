@@ -21,6 +21,43 @@ spark.sql("CREATE OR REPLACE TABLE team_data.bob_tbl(GPI_NO STRING,
                                                      MBR INT)")
 ```
 
+#### Save DataFrame as XLS
+```python
+(df.write
+ .mode("overwrite")
+ .format("com.crealytics.spark.excel")
+ .option("header", "true")
+ .save("/mnt/userspace/custom_dataset/path-to-dir/filename.xlsx"))
+ ```
+
+#### Save DataFrame as CSV
+
+To save a DataFrame as CSV requires three steps. 
+
+1. Use `coalesce()` to create a parquet file, Note, here the path points to a directory, NOT a file.
+2. Read the parquet file into a Pandas DataFrame: `pd.read_parquet()`
+3. save the Pandas DataFrame e.g. `df.to_csv('...', index=False)`
+
+```python
+(res
+ .coalesce(1)
+ .write
+ .save("/mnt/userspace/custom_dataset/path-to-dir/"))
+```
+
+#### Parameterised Query
+
+```python
+SCHEMA_A = dbutils.widgets.get("<Azure Data Factory Base parameter name 1>")
+SCHEMA_B = dbutils.widgets.get("<Azure Data Factory Base parameter name 2>")
+
+df = spark.sql("""SELECT c.claim_nbr 
+                  FROM {0}.TABLE1 c
+                  LEFT JOIN {1}.TABLE2 p
+                         ON (c.claim_nbr = p.claim_nbr 
+               """.format(SCHEMA_A, SCHEMA_B))
+```
+
 #### Create Table from DataFrame with overwriteSchema
 
 About overwriteSchema: if any new column is added the command will not fail but overwrite the delta table with new schema. 
@@ -56,31 +93,6 @@ def persist_dataframe(dataframe: object, path: str, schema_name: str, table: str
 
     # Do we want to partition? if so parse the partition key from the config
     print("\n- Dataframe successfully persisted in Delta Lake\n")
-```
-
-
-#### Save DataFrame as XLS
-```python
-(df.write
- .mode("overwrite")
- .format("com.crealytics.spark.excel")
- .option("header", "true")
- .save("/mnt/userspace/custom_dataset/path-to-dir/filename.xlsx"))
- ```
-
-#### Save DataFrame as CSV
-
-To save a DataFrame as CSV requires three steps. 
-
-1. Use `coalesce()` to create a parquet file, Note, here the path points to a directory, NOT a file.
-2. Read the parquet file into a Pandas DataFrame: `pd.read_parquet()`
-3. save the Pandas DataFrame e.g. `df.to_csv('...', index=False)`
-
-```python
-(res
- .coalesce(1)
- .write
- .save("/mnt/userspace/custom_dataset/path-to-dir/"))
 ```
 
 #### Misc.
