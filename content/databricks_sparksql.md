@@ -5,7 +5,9 @@ Slug: databricks_sparksql
 Summary: Databricks SparkSQL
 
 #### Pandas to Spark
-`df_spark = spark.createDataFrame(df_pandas)`
+```
+df_spark = spark.createDataFrame(df_pandas)
+```
 
 #### Pandas to Spark with Schema
 ```python
@@ -21,7 +23,9 @@ df = spark.createDataFrame(pandas_df, schema=schema)
 ```
 
 #### Create temp View
-`df.createOrReplaceTempView("tmp_vw")`
+```python
+df.createOrReplaceTempView("tmp_vw")
+```
 
 #### Pandas to Spark to Table
 ```python
@@ -60,14 +64,15 @@ OPTIONS(header=True, inferSchema=True)
 
 
 #### Misc.
-```
+```python
 SHOW COLUMNS IN schema_name.table_name
 ```
 
-```
+```python
 DESCRIBE TABLE EXTENDED schema_name.table_name
 ```
 
-```
+Only for tables, NOT views:
+```python
 DESCRIBE DETAIL schema_name.table_name` 
-```(only for tables, NOT views)
+```
