@@ -37,7 +37,59 @@
                 
                 
 
-                
+                <h4>Pandas to Spark</h4>
+<p><code>df_spark = spark.createDataFrame(df_pandas)</code></p>
+<h4>Pandas to Spark with Schema</h4>
+<div class="highlight"><pre><span></span># <span class="nv">create</span> <span class="nv">schema</span> <span class="k">for</span> <span class="nv">your</span> <span class="nv">dataframe</span>
+<span class="nv">schema</span> <span class="o">=</span> <span class="nv">StructType</span><span class="ss">(</span>[<span class="nv">StructField</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">CONTRACT_ID</span><span class="s2">&quot;</span>, <span class="nv">StringType</span><span class="ss">()</span>, <span class="nv">True</span><span class="ss">)</span> \
+                    ,<span class="nv">StructField</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">CONTRACT_NAME</span><span class="s2">&quot;</span>, <span class="nv">StringType</span><span class="ss">()</span>, <span class="nv">True</span><span class="ss">)</span> \
+                    ,<span class="nv">StructField</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">ACCOUNT</span><span class="s2">&quot;</span>, <span class="nv">StringType</span><span class="ss">()</span>, <span class="nv">True</span><span class="ss">)</span> \
+                    ,<span class="nv">StructField</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">LINE_OF_BUSINESS</span><span class="s2">&quot;</span>, <span class="nv">StringType</span><span class="ss">()</span>, <span class="nv">True</span><span class="ss">)</span> \
+                    ,<span class="nv">StructField</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">CLIENT_SHAREPOINT</span><span class="s2">&quot;</span>, <span class="nv">StringType</span><span class="ss">()</span>, <span class="nv">True</span><span class="ss">)</span>]<span class="ss">)</span>
+
+# <span class="nv">Convert</span> <span class="nv">Pandas</span> <span class="nv">DataFrame</span> <span class="nv">to</span> <span class="nv">Spark</span> <span class="nv">DataFrame</span>
+<span class="nv">df</span> <span class="o">=</span> <span class="nv">spark</span>.<span class="nv">createDataFrame</span><span class="ss">(</span><span class="nv">pandas_df</span>, <span class="nv">schema</span><span class="o">=</span><span class="nv">schema</span><span class="ss">)</span>
+</pre></div>
+
+
+<h4>Create temp View</h4>
+<p><code>df.createOrReplaceTempView("tmp_vw")</code></p>
+<h4>Pandas to Spark to Table</h4>
+<div class="highlight"><pre><span></span>(spark.createDataFrame(df, StringType())
+ .write
+ .format(&quot;delta&quot;)
+ .mode(&quot;overwrite&quot;)
+ .saveAsTable(&quot;schema_name.table_name&quot;))
+</pre></div>
+
+
+<h4>Read CSV File</h4>
+<p>fpath = """/mnt/userspace/custom_dataset/path-to-file/filename.csv"""
+<code>df = (spark.read.format('csv').option('header', 'true').load(fpath))</code></p>
+<h4>Read Parquet File</h4>
+<div class="highlight"><pre><span></span><span class="n">fpath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;&quot;/mnt/userspace/custom_dataset/path-to-file/filename.parquet&quot;&quot;&quot;</span><span class="w"></span>
+<span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;parquet&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+
+
+<h4>Create Table from CSV File</h4>
+<div class="highlight"><pre><span></span><span class="nv">DROP</span> <span class="nv">TABLE</span> <span class="k">IF</span> <span class="nv">EXISTS</span> <span class="nv">schema_name</span>.<span class="nv">table_name</span> <span class="c1">;</span>
+<span class="nv">CREATE</span> <span class="nv">TABLE</span> <span class="nv">schema_name</span>.<span class="nv">table_name</span>
+<span class="nv">USING</span> <span class="nv">csv</span>
+<span class="nv">LOCATION</span> <span class="s2">&quot;</span><span class="s">/mnt/userspace/custom_dataset/bboggava/outbound_data/MACTOOLS/mac_config.csv</span><span class="s2">&quot;</span>
+<span class="nv">OPTIONS</span><span class="ss">(</span><span class="nv">header</span><span class="o">=</span><span class="nv">True</span>, <span class="nv">inferSchema</span><span class="o">=</span><span class="nv">True</span><span class="ss">)</span>
+</pre></div>
+
+
+<h4>sUBSETTING</h4>
+<ul>
+<li>Spark DataFrame: <code>df.where(df.GPI_NO == '12345').display()</code></li>
+<li>Pandas DataFrame: <code>df[df.GPI_NO == '12345'].sort_values(by='DAY_SPLY', ascending=False)</code></li>
+</ul>
+<h4>Misc.</h4>
+<p><code>SHOW COLUMNS IN schema_name.table_name</code>
+<code>DESCRIBE TABLE EXTENDED schema_name.table_name</code>
+<code>DESCRIBE DETAIL schema_name.table_name</code> (only for tables, NOT views)</p>
                 <div class="clear"></div>
 
                 <div class="info">
