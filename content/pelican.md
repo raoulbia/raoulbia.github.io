@@ -127,7 +127,8 @@ Try visiting your page e.g. <http://raoulbia.github.io> -- you should see your b
 
 #### Useful Links
 
-* (Pelican and ipynb error)[http://marohn-public.site44.com/Marohn-20171011-102214--Pelican-and-ipynb.html]
+* [Add a Table of Contents using Markdown in Pelican](https://cloudbytes.dev/snippets/add-a-table-of-contents-using-markdown-in-pelican)
+* Pelican and ipynb error: <http://marohn-public.site44.com/Marohn-20171011-102214--Pelican-and-ipynb.html>
 * <http://anotherdatum.com/pelican-and-github-pages-workflow.html> (Excellent!)
 * <http://www.christianlong.com/blog/more-on-pelican-themes.html>
 * <https://rasor.github.io/using-pelican-blog-on-github-pages.html>
