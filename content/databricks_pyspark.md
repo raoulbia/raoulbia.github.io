@@ -23,11 +23,10 @@ spark.sql("CREATE OR REPLACE TABLE team_data.bob_tbl(GPI_NO STRING,
 
 #### Create Table from DataFrame with overwriteSchema
 
-About overwriteSchema: if any new column is added the command will not fail but overwrite the delta table with new schema
-
+About overwriteSchema: if any new column is added the command will not fail but overwrite the delta table with new schema. 
 [Read More](https://mungingdata.com/delta-lake/schema-enforcement-evolution-mergeschema-overwriteschema/)
 
-```
+```python
 def persist_dataframe(dataframe: object, path: str, schema_name: str, table: str, evolution: bool = False) -> None :
     """
     function to persist the dataframe to parquet and/or delta lake
@@ -61,7 +60,7 @@ def persist_dataframe(dataframe: object, path: str, schema_name: str, table: str
 
 
 #### Save DataFrame as XLS
-```
+```python
 (df.write
  .mode("overwrite")
  .format("com.crealytics.spark.excel")
@@ -70,11 +69,14 @@ def persist_dataframe(dataframe: object, path: str, schema_name: str, table: str
  ```
 
 #### Save DataFrame as CSV
+
 To save a DataFrame as CSV requires three steps. 
+
 1. Use `coalesce()` to create a parquet file, Note, here the path points to a directory, NOT a file.
 2. Read the parquet file into a Pandas DataFrame: `pd.read_parquet()`
 3. save the Pandas DataFrame e.g. `df.to_csv('...', index=False)`
-```
+
+```python
 (res
  .coalesce(1)
  .write
@@ -82,7 +84,9 @@ To save a DataFrame as CSV requires three steps.
 ```
 
 #### Misc.
-`spark.sql("""desc formatted <table name>""").show(100, truncate=False)`
+```
+spark.sql("""desc formatted <table name>""").show(100, truncate=False)
+```
 
 #### Useful Links
 * https://learn.microsoft.com/en-us/azure/databricks/spark/latest/spark-sql/spark-pandas
