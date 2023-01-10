@@ -53,6 +53,42 @@
 </pre></div>
 
 
+<h4>Save DataFrame as XLS</h4>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">write</span>
+ <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;com.crealytics.spark.excel&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;/mnt/userspace/custom_dataset/path-to-dir/filename.xlsx&quot;</span><span class="p">))</span>
+ <span class="err">```</span>
+
+<span class="c1">#### Save DataFrame as CSV</span>
+
+<span class="n">To</span> <span class="n">save</span> <span class="n">a</span> <span class="n">DataFrame</span> <span class="k">as</span> <span class="n">CSV</span> <span class="n">requires</span> <span class="n">three</span> <span class="n">steps</span><span class="o">.</span> 
+
+<span class="mf">1.</span> <span class="n">Use</span> <span class="err">`</span><span class="n">coalesce</span><span class="p">()</span><span class="err">`</span> <span class="n">to</span> <span class="n">create</span> <span class="n">a</span> <span class="n">parquet</span> <span class="n">file</span><span class="p">,</span> <span class="n">Note</span><span class="p">,</span> <span class="n">here</span> <span class="n">the</span> <span class="n">path</span> <span class="n">points</span> <span class="n">to</span> <span class="n">a</span> <span class="n">directory</span><span class="p">,</span> <span class="n">NOT</span> <span class="n">a</span> <span class="n">file</span><span class="o">.</span>
+<span class="mf">2.</span> <span class="n">Read</span> <span class="n">the</span> <span class="n">parquet</span> <span class="n">file</span> <span class="n">into</span> <span class="n">a</span> <span class="n">Pandas</span> <span class="n">DataFrame</span><span class="p">:</span> <span class="err">`</span><span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">()</span><span class="err">`</span>
+<span class="mf">3.</span> <span class="n">save</span> <span class="n">the</span> <span class="n">Pandas</span> <span class="n">DataFrame</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="err">`</span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="err">`</span>
+
+<span class="err">```</span><span class="n">python</span>
+<span class="p">(</span><span class="n">res</span>
+ <span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">write</span>
+ <span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;/mnt/userspace/custom_dataset/path-to-dir/&quot;</span><span class="p">))</span>
+</pre></div>
+
+
+<h4>Parameterised Query</h4>
+<div class="highlight"><pre><span></span><span class="n">SCHEMA_A</span> <span class="o">=</span> <span class="n">dbutils</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;&lt;Azure Data Factory Base parameter name 1&gt;&quot;</span><span class="p">)</span>
+<span class="n">SCHEMA_B</span> <span class="o">=</span> <span class="n">dbutils</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;&lt;Azure Data Factory Base parameter name 2&gt;&quot;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT c.claim_nbr </span>
+<span class="s2">                  FROM </span><span class="si">{0}</span><span class="s2">.TABLE1 c</span>
+<span class="s2">                  LEFT JOIN </span><span class="si">{1}</span><span class="s2">.TABLE2 p</span>
+<span class="s2">                         ON (c.claim_nbr = p.claim_nbr </span>
+<span class="s2">               &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">SCHEMA_A</span><span class="p">,</span> <span class="n">SCHEMA_B</span><span class="p">))</span>
+</pre></div>
+
+
 <h4>Create Table from DataFrame with overwriteSchema</h4>
 <p>About overwriteSchema: if any new column is added the command will not fail but overwrite the delta table with new schema. 
 <a href="https://mungingdata.com/delta-lake/schema-enforcement-evolution-mergeschema-overwriteschema/">Read More</a></p>
@@ -85,30 +121,6 @@
 
     <span class="c1"># Do we want to partition? if so parse the partition key from the config</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">- Dataframe successfully persisted in Delta Lake</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-
-
-<h4>Save DataFrame as XLS</h4>
-<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">write</span>
- <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span>
- <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;com.crealytics.spark.excel&quot;</span><span class="p">)</span>
- <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span>
- <span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;/mnt/userspace/custom_dataset/path-to-dir/filename.xlsx&quot;</span><span class="p">))</span>
- <span class="err">```</span>
-
-<span class="c1">#### Save DataFrame as CSV</span>
-
-<span class="n">To</span> <span class="n">save</span> <span class="n">a</span> <span class="n">DataFrame</span> <span class="k">as</span> <span class="n">CSV</span> <span class="n">requires</span> <span class="n">three</span> <span class="n">steps</span><span class="o">.</span> 
-
-<span class="mf">1.</span> <span class="n">Use</span> <span class="err">`</span><span class="n">coalesce</span><span class="p">()</span><span class="err">`</span> <span class="n">to</span> <span class="n">create</span> <span class="n">a</span> <span class="n">parquet</span> <span class="n">file</span><span class="p">,</span> <span class="n">Note</span><span class="p">,</span> <span class="n">here</span> <span class="n">the</span> <span class="n">path</span> <span class="n">points</span> <span class="n">to</span> <span class="n">a</span> <span class="n">directory</span><span class="p">,</span> <span class="n">NOT</span> <span class="n">a</span> <span class="n">file</span><span class="o">.</span>
-<span class="mf">2.</span> <span class="n">Read</span> <span class="n">the</span> <span class="n">parquet</span> <span class="n">file</span> <span class="n">into</span> <span class="n">a</span> <span class="n">Pandas</span> <span class="n">DataFrame</span><span class="p">:</span> <span class="err">`</span><span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">()</span><span class="err">`</span>
-<span class="mf">3.</span> <span class="n">save</span> <span class="n">the</span> <span class="n">Pandas</span> <span class="n">DataFrame</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="err">`</span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="err">`</span>
-
-<span class="err">```</span><span class="n">python</span>
-<span class="p">(</span><span class="n">res</span>
- <span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
- <span class="o">.</span><span class="n">write</span>
- <span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;/mnt/userspace/custom_dataset/path-to-dir/&quot;</span><span class="p">))</span>
 </pre></div>
 
 
