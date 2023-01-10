@@ -53,63 +53,69 @@
 
 
 <h4>Create Table from DataFrame with overwriteSchema</h4>
-<p>About overwriteSchema: if any new column is added the command will not fail but overwrite the delta table with new schema</p>
-<p><a href="https://mungingdata.com/delta-lake/schema-enforcement-evolution-mergeschema-overwriteschema/">Read More</a></p>
-<div class="highlight"><pre><span></span><span class="n">def</span><span class="w"> </span><span class="n">persist_dataframe</span><span class="p">(</span><span class="n">dataframe</span><span class="o">:</span><span class="w"> </span><span class="n">object</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="o">:</span><span class="w"> </span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">schema_name</span><span class="o">:</span><span class="w"> </span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="nf">table</span><span class="o">:</span><span class="w"> </span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">evolution</span><span class="o">:</span><span class="w"> </span><span class="n">bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">False</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">None</span><span class="w"> </span><span class="o">:</span><span class="w"></span>
-<span class="w">    </span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">    function to persist the dataframe to parquet and/or delta lake</span>
-<span class="s">    return: success/error message</span>
+<p>About overwriteSchema: if any new column is added the command will not fail but overwrite the delta table with new schema. 
+<a href="https://mungingdata.com/delta-lake/schema-enforcement-evolution-mergeschema-overwriteschema/">Read More</a></p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">persist_dataframe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">schema_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">evolution</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span> <span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    function to persist the dataframe to parquet and/or delta lake</span>
+<span class="sd">    return: success/error message</span>
 
-<span class="s">    Evolution = True will mergeSchema - This is for  incremental schema changes.</span>
-<span class="s">    Evolution = False will OverwriteSchema - This is for wiping out old schema for new schema</span>
-<span class="s">    &quot;&quot;&quot;</span><span class="w"></span>
+<span class="sd">    Evolution = True will mergeSchema - This is for  incremental schema changes.</span>
+<span class="sd">    Evolution = False will OverwriteSchema - This is for wiping out old schema for new schema</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">Check</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="nf">table</span><span class="w"> </span><span class="nf">exists</span><span class="w"></span>
-<span class="w">    </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">table_exist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">validate_table_source</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="n">schema_name</span><span class="o">=</span><span class="n">schema_name</span><span class="p">,</span><span class="w"> </span><span class="nf">table</span><span class="o">=</span><span class="nf">table</span><span class="p">)</span><span class="w"></span>
+    <span class="c1"># Check if table exists</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">table_exist</span> <span class="o">=</span> <span class="n">validate_table_source</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">schema_name</span><span class="o">=</span><span class="n">schema_name</span><span class="p">,</span> <span class="n">table</span><span class="o">=</span><span class="n">table</span><span class="p">)</span>
 
-<span class="w">    </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;{0}.{1}&quot;</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="n">schema_name</span><span class="p">,</span><span class="w"> </span><span class="nf">table</span><span class="p">)</span><span class="w"></span>
+    <span class="n">target</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">schema_name</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span>
 
-<span class="w">    </span><span class="nf">if</span><span class="w"> </span><span class="n">table_exist</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="kr">True</span><span class="w"> </span><span class="o">:</span><span class="w"></span>
-<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="n">schema</span><span class="w"> </span><span class="n">evolution</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="nf">set</span><span class="w"> </span><span class="nf">merge</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">schemas</span><span class="w"></span>
-<span class="w">        </span><span class="nf">if</span><span class="w"> </span><span class="n">evolution</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="kr">True</span><span class="w"> </span><span class="o">:</span><span class="w"></span>
-<span class="w">            </span><span class="n">dataframe</span><span class="p">.</span><span class="n">write</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;delta&quot;</span><span class="p">).</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;mergeSchema&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="p">).</span><span class="n">mode</span><span class="p">(</span><span class="s">&quot;overwrite&quot;</span><span class="p">).</span><span class="n">saveAsTable</span><span class="p">(</span><span class="n">target</span><span class="p">)</span><span class="w"></span>
-<span class="w">            </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Data overwritten and Schema evolved for table {0} in database&quot;</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">))</span><span class="w"></span>
-<span class="w">        </span><span class="n">else</span><span class="w"> </span><span class="o">:</span><span class="w"></span>
-<span class="w">            </span><span class="n">dataframe</span><span class="p">.</span><span class="n">write</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;delta&quot;</span><span class="p">).</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;overwriteSchema&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="p">).</span><span class="n">mode</span><span class="p">(</span><span class="s">&quot;overwrite&quot;</span><span class="p">).</span><span class="n">saveAsTable</span><span class="p">(</span><span class="n">target</span><span class="p">)</span><span class="w"></span>
-<span class="w">            </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Data and Schema overwritten. New Schema in place for table {0} in database&quot;</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">))</span><span class="w"></span>
-<span class="w">    </span><span class="n">else</span><span class="w"> </span><span class="o">:</span><span class="w"></span>
-<span class="w">        </span><span class="n">dataframe</span><span class="p">.</span><span class="n">write</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;delta&quot;</span><span class="p">).</span><span class="n">saveAsTable</span><span class="p">(</span><span class="n">target</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Table {0} added to database&quot;</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">))</span><span class="w"></span>
+    <span class="k">if</span> <span class="n">table_exist</span> <span class="ow">is</span> <span class="kc">True</span> <span class="p">:</span>
+        <span class="c1"># if schema evolution is set merge the schemas</span>
+        <span class="k">if</span> <span class="n">evolution</span> <span class="ow">is</span> <span class="kc">True</span> <span class="p">:</span>
+            <span class="n">dataframe</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;mergeSchema&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data overwritten and Schema evolved for table </span><span class="si">{0}</span><span class="s2"> in database&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
+        <span class="k">else</span> <span class="p">:</span>
+            <span class="n">dataframe</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;overwriteSchema&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data and Schema overwritten. New Schema in place for table </span><span class="si">{0}</span><span class="s2"> in database&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">dataframe</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Table </span><span class="si">{0}</span><span class="s2"> added to database&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
 
 
-<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">we</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="kr">partition</span><span class="o">?</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="n">so</span><span class="w"> </span><span class="nf">parse</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="kr">partition</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">config</span><span class="w"></span>
-<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;\n- Dataframe successfully persisted in Delta Lake\n&quot;</span><span class="p">)</span><span class="w"></span>
+    <span class="c1"># Do we want to partition? if so parse the partition key from the config</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">- Dataframe successfully persisted in Delta Lake</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
 
 <h4>Save DataFrame as XLS</h4>
-<div class="highlight"><pre><span></span>(df.write
- .mode(&quot;overwrite&quot;)
- .format(&quot;com.crealytics.spark.excel&quot;)
- .option(&quot;header&quot;, &quot;true&quot;)
- .save(&quot;/mnt/userspace/custom_dataset/path-to-dir/filename.xlsx&quot;))
- ```
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">write</span>
+ <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;com.crealytics.spark.excel&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;/mnt/userspace/custom_dataset/path-to-dir/filename.xlsx&quot;</span><span class="p">))</span>
+ <span class="err">```</span>
 
-#### Save DataFrame as CSV
-To save a DataFrame as CSV requires three steps. 
-1. Use `coalesce()` to create a parquet file, Note, here the path points to a directory, NOT a file.
-2. Read the parquet file into a Pandas DataFrame: `pd.read_parquet()`
-3. save the Pandas DataFrame e.g. `df.to_csv(&#39;...&#39;, index=False)`
+<span class="c1">#### Save DataFrame as CSV</span>
+
+<span class="n">To</span> <span class="n">save</span> <span class="n">a</span> <span class="n">DataFrame</span> <span class="k">as</span> <span class="n">CSV</span> <span class="n">requires</span> <span class="n">three</span> <span class="n">steps</span><span class="o">.</span> 
+
+<span class="mf">1.</span> <span class="n">Use</span> <span class="err">`</span><span class="n">coalesce</span><span class="p">()</span><span class="err">`</span> <span class="n">to</span> <span class="n">create</span> <span class="n">a</span> <span class="n">parquet</span> <span class="n">file</span><span class="p">,</span> <span class="n">Note</span><span class="p">,</span> <span class="n">here</span> <span class="n">the</span> <span class="n">path</span> <span class="n">points</span> <span class="n">to</span> <span class="n">a</span> <span class="n">directory</span><span class="p">,</span> <span class="n">NOT</span> <span class="n">a</span> <span class="n">file</span><span class="o">.</span>
+<span class="mf">2.</span> <span class="n">Read</span> <span class="n">the</span> <span class="n">parquet</span> <span class="n">file</span> <span class="n">into</span> <span class="n">a</span> <span class="n">Pandas</span> <span class="n">DataFrame</span><span class="p">:</span> <span class="err">`</span><span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">()</span><span class="err">`</span>
+<span class="mf">3.</span> <span class="n">save</span> <span class="n">the</span> <span class="n">Pandas</span> <span class="n">DataFrame</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="err">`</span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="err">`</span>
+
+<span class="err">```</span><span class="n">python</span>
+<span class="p">(</span><span class="n">res</span>
+ <span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">write</span>
+ <span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;/mnt/userspace/custom_dataset/path-to-dir/&quot;</span><span class="p">))</span>
 </pre></div>
 
 
-<p>(res
- .coalesce(1)
- .write
- .save("/mnt/userspace/custom_dataset/path-to-dir/"))
-```</p>
 <h4>Misc.</h4>
-<p><code>spark.sql("""desc formatted &lt;table name&gt;""").show(100, truncate=False)</code></p>
+<div class="highlight"><pre><span></span><span class="nv">spark</span>.<span class="nv">sql</span><span class="ss">(</span><span class="s2">&quot;&quot;&quot;</span><span class="s">desc formatted &lt;table name&gt;</span><span class="s2">&quot;&quot;&quot;</span><span class="ss">)</span>.<span class="k">show</span><span class="ss">(</span><span class="mi">100</span>, <span class="nv">truncate</span><span class="o">=</span><span class="nv">False</span><span class="ss">)</span>
+</pre></div>
+
+
 <h4>Useful Links</h4>
 <ul>
 <li>https://learn.microsoft.com/en-us/azure/databricks/spark/latest/spark-sql/spark-pandas</li>
@@ -134,56 +140,65 @@ To save a DataFrame as CSV requires three steps.
                 <h4>Pandas to Spark</h4>
 <p><code>df_spark = spark.createDataFrame(df_pandas)</code></p>
 <h4>Pandas to Spark with Schema</h4>
-<div class="highlight"><pre><span></span># <span class="nv">create</span> <span class="nv">schema</span> <span class="k">for</span> <span class="nv">your</span> <span class="nv">dataframe</span>
-<span class="nv">schema</span> <span class="o">=</span> <span class="nv">StructType</span><span class="ss">(</span>[<span class="nv">StructField</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">CONTRACT_ID</span><span class="s2">&quot;</span>, <span class="nv">StringType</span><span class="ss">()</span>, <span class="nv">True</span><span class="ss">)</span> \
-                    ,<span class="nv">StructField</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">CONTRACT_NAME</span><span class="s2">&quot;</span>, <span class="nv">StringType</span><span class="ss">()</span>, <span class="nv">True</span><span class="ss">)</span> \
-                    ,<span class="nv">StructField</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">ACCOUNT</span><span class="s2">&quot;</span>, <span class="nv">StringType</span><span class="ss">()</span>, <span class="nv">True</span><span class="ss">)</span> \
-                    ,<span class="nv">StructField</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">LINE_OF_BUSINESS</span><span class="s2">&quot;</span>, <span class="nv">StringType</span><span class="ss">()</span>, <span class="nv">True</span><span class="ss">)</span> \
-                    ,<span class="nv">StructField</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">CLIENT_SHAREPOINT</span><span class="s2">&quot;</span>, <span class="nv">StringType</span><span class="ss">()</span>, <span class="nv">True</span><span class="ss">)</span>]<span class="ss">)</span>
+<div class="highlight"><pre><span></span><span class="c1"># create schema for your dataframe</span>
+<span class="n">schema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">([</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;CONTRACT_ID&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span> \
+                    <span class="p">,</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;CONTRACT_NAME&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span> \
+                    <span class="p">,</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;ACCOUNT&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span> \
+                    <span class="p">,</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;LINE_OF_BUSINESS&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span> \
+                    <span class="p">,</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;CLIENT_SHAREPOINT&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)])</span>
 
-# <span class="nv">Convert</span> <span class="nv">Pandas</span> <span class="nv">DataFrame</span> <span class="nv">to</span> <span class="nv">Spark</span> <span class="nv">DataFrame</span>
-<span class="nv">df</span> <span class="o">=</span> <span class="nv">spark</span>.<span class="nv">createDataFrame</span><span class="ss">(</span><span class="nv">pandas_df</span>, <span class="nv">schema</span><span class="o">=</span><span class="nv">schema</span><span class="ss">)</span>
+<span class="c1"># Convert Pandas DataFrame to Spark DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">pandas_df</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">)</span>
 </pre></div>
 
 
 <h4>Create temp View</h4>
 <p><code>df.createOrReplaceTempView("tmp_vw")</code></p>
 <h4>Pandas to Spark to Table</h4>
-<div class="highlight"><pre><span></span>(spark.createDataFrame(df, StringType())
- .write
- .format(&quot;delta&quot;)
- .mode(&quot;overwrite&quot;)
- .saveAsTable(&quot;schema_name.table_name&quot;))
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">StringType</span><span class="p">())</span>
+ <span class="o">.</span><span class="n">write</span>
+ <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="s2">&quot;schema_name.table_name&quot;</span><span class="p">))</span>
 </pre></div>
 
 
 <h4>Read CSV File</h4>
-<p>fpath = """/mnt/userspace/custom_dataset/path-to-file/filename.csv"""
-<code>df = (spark.read.format('csv').option('header', 'true').load(fpath))</code></p>
+<div class="highlight"><pre><span></span><span class="n">fpath</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;/mnt/userspace/custom_dataset/path-to-file/filename.csv&quot;&quot;&quot;</span>
+<span class="err">`</span><span class="n">df</span> <span class="o">=</span> <span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;header&#39;</span><span class="p">,</span> <span class="s1">&#39;true&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fpath</span><span class="p">))</span><span class="err">`</span>
+</pre></div>
+
+
 <h4>Read Parquet File</h4>
-<div class="highlight"><pre><span></span><span class="n">fpath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;&quot;/mnt/userspace/custom_dataset/path-to-file/filename.parquet&quot;&quot;&quot;</span><span class="w"></span>
-<span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;parquet&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="n">fpath</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;/mnt/userspace/custom_dataset/path-to-file/filename.parquet&quot;&quot;&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;parquet&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
 </pre></div>
 
 
 <h4>Create Table from CSV File</h4>
-<div class="highlight"><pre><span></span><span class="nv">DROP</span> <span class="nv">TABLE</span> <span class="k">IF</span> <span class="nv">EXISTS</span> <span class="nv">schema_name</span>.<span class="nv">table_name</span> <span class="c1">;</span>
-<span class="nv">CREATE</span> <span class="nv">TABLE</span> <span class="nv">schema_name</span>.<span class="nv">table_name</span>
-<span class="nv">USING</span> <span class="nv">csv</span>
-<span class="nv">LOCATION</span> <span class="s2">&quot;</span><span class="s">/mnt/userspace/custom_dataset/bboggava/outbound_data/MACTOOLS/mac_config.csv</span><span class="s2">&quot;</span>
-<span class="nv">OPTIONS</span><span class="ss">(</span><span class="nv">header</span><span class="o">=</span><span class="nv">True</span>, <span class="nv">inferSchema</span><span class="o">=</span><span class="nv">True</span><span class="ss">)</span>
+<div class="highlight"><pre><span></span><span class="n">DROP</span> <span class="n">TABLE</span> <span class="n">IF</span> <span class="n">EXISTS</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span> <span class="p">;</span>
+<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span>
+<span class="n">USING</span> <span class="n">csv</span>
+<span class="n">LOCATION</span> <span class="s2">&quot;/mnt/userspace/custom_dataset/bboggava/outbound_data/MACTOOLS/mac_config.csv&quot;</span>
+<span class="n">OPTIONS</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inferSchema</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
 
-<h4>sUBSETTING</h4>
+<h4>Subsetting DataFrame</h4>
 <ul>
 <li>Spark DataFrame: <code>df.where(df.GPI_NO == '12345').display()</code></li>
 <li>Pandas DataFrame: <code>df[df.GPI_NO == '12345'].sort_values(by='DAY_SPLY', ascending=False)</code></li>
 </ul>
 <h4>Misc.</h4>
-<p><code>SHOW COLUMNS IN schema_name.table_name</code>
-<code>DESCRIBE TABLE EXTENDED schema_name.table_name</code>
-<code>DESCRIBE DETAIL schema_name.table_name</code> (only for tables, NOT views)</p>
+<div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="nv">COLUMNS</span> <span class="nv">IN</span> <span class="nv">schema_name</span>.<span class="nv">table_name</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">DESCRIBE</span> <span class="n">TABLE</span> <span class="n">EXTENDED</span> <span class="n">schema_name</span><span class="p">.</span><span class="n">table_name</span>
+</pre></div>
+
+
+<p><code>DESCRIBE DETAIL schema_name.table_name`</code>(only for tables, NOT views)</p>
                 <div class="clear"></div>
 
                 <div class="info">
