@@ -8,7 +8,7 @@ Summary: Databricks SparkSQL
 `df_spark = spark.createDataFrame(df_pandas)`
 
 #### Pandas to Spark with Schema
-```
+```python
 # create schema for your dataframe
 schema = StructType([StructField("CONTRACT_ID", StringType(), True) \
                     ,StructField("CONTRACT_NAME", StringType(), True) \
@@ -24,7 +24,7 @@ df = spark.createDataFrame(pandas_df, schema=schema)
 `df.createOrReplaceTempView("tmp_vw")`
 
 #### Pandas to Spark to Table
-```
+```python
 (spark.createDataFrame(df, StringType())
  .write
  .format("delta")
@@ -33,17 +33,19 @@ df = spark.createDataFrame(pandas_df, schema=schema)
 ```
 
 #### Read CSV File
+```python
 fpath = """/mnt/userspace/custom_dataset/path-to-file/filename.csv"""
 `df = (spark.read.format('csv').option('header', 'true').load(fpath))`
+```
 
 #### Read Parquet File
-```
+```python
 fpath = """/mnt/userspace/custom_dataset/path-to-file/filename.parquet"""
 df = spark.read.format("parquet").load(fpath)
 ```
 
 #### Create Table from CSV File
-```
+```python
 DROP TABLE IF EXISTS schema_name.table_name ;
 CREATE TABLE schema_name.table_name
 USING csv
@@ -51,13 +53,21 @@ LOCATION "/mnt/userspace/custom_dataset/bboggava/outbound_data/MACTOOLS/mac_conf
 OPTIONS(header=True, inferSchema=True)
 ```
 
-#### sUBSETTING
+#### Subsetting DataFrame
 
 * Spark DataFrame: `df.where(df.GPI_NO == '12345').display()`
 * Pandas DataFrame: `df[df.GPI_NO == '12345'].sort_values(by='DAY_SPLY', ascending=False)`
 
 
 #### Misc.
-`SHOW COLUMNS IN schema_name.table_name`
-`DESCRIBE TABLE EXTENDED schema_name.table_name`
-`DESCRIBE DETAIL schema_name.table_name` (only for tables, NOT views)
+```
+SHOW COLUMNS IN schema_name.table_name
+```
+
+```
+DESCRIBE TABLE EXTENDED schema_name.table_name
+```
+
+```
+DESCRIBE DETAIL schema_name.table_name` 
+```(only for tables, NOT views)
