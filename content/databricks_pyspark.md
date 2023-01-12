@@ -23,7 +23,7 @@ spark.sql("CREATE OR REPLACE TABLE team_data.bob_tbl(GPI_NO STRING,
 
 #### Save DataFrame as XLS
 ```python
-(df.write
+(spark.createDataFrame(df).write
  .mode("overwrite")
  .format("com.crealytics.spark.excel")
  .option("header", "true")
