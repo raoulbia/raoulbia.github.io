@@ -9,3 +9,9 @@ Summary: Databricks Misc.
 ```
 %run "../../schemas/master_config"
 ```
+
+#### Fitler DatFrame rows by Column values
+```
+df = df.filter( (tb.COL_A == i) & (tb.COL_B.isin(['R','S'])) )
+```
+
