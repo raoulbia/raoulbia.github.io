@@ -27,6 +27,7 @@ spark.sql("CREATE OR REPLACE TABLE team_data.bob_tbl(GPI_NO STRING,
  .mode("overwrite")
  .format("com.crealytics.spark.excel")
  .option("header", "true")
+ .option("dataAddress", "'Sheet Name'!A1")
  .save("/mnt/userspace/custom_dataset/path-to-dir/filename.xlsx"))
  ```
 
