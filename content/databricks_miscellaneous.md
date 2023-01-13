@@ -12,6 +12,6 @@ Summary: Databricks Misc.
 
 #### Fitler DatFrame rows by Column values
 ```
-df = df.filter( (tb.COL_A == i) & (tb.COL_B.isin(['R','S'])) )
+df = df.filter( (df.COL_A == i) & (df.COL_B.isin(['R','S'])) )
 ```
 
