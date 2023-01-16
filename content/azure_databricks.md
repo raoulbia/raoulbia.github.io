@@ -47,7 +47,8 @@ Detailed
 storageAccount="[name-of-storage-account]"
 storageKey = dbutils.secrets.get(scope = "[name-of-databricks-secret-scope]", 
                                  key = "[name-of-AKV-secret]")
-mountpoint = "/mnt/KeyVaultBlob"                                 
+mountpoint = "/mnt/KeyVaultBlob"
+storageEndpoint = 'wasbs://[container-name]@{}.blob.core.windows.net'.format(storageAccount)
 ```
 
 
