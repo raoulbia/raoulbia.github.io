@@ -42,19 +42,11 @@ Detailed
    * DNS name is "Vault URI" in Key Vault **Overview** page
    * Reosurce ID can be found in Key Vault **Properties** page
    
-3. Notebook implementation: 
-      
-   ```
-   storageAccount='[name-of-storage-account]'
+3. Notebook implementation:
+```
+storageAccount="[name-of-storage-account]"
+```
 
-   try:
-      dbutils.fs.mount(
-      source = storageEndpoint,
-      mount_point = mountpoint,
-      extra_configs = {storageConnSting:storageKey})
-   except:
-      print(\"Already mounted....\" + mountpoint)
-   ```
 
 <br>
 
