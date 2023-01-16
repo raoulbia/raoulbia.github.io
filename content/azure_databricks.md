@@ -43,14 +43,11 @@ Detailed
    * Reosurce ID can be found in Key Vault **Properties** page
    
 3. Notebook implementation: 
-
-   Storage account key is stored in Azure Key-Vault as a sceret. 
-   KeyVaultScope is the name of the scope we have created
       
    ```
-   storageAccount="<name of storage account>"
-   storageKey = dbutils.secrets.get(scope = "KeyVaultScope", 
-                                    key = "<name of secret in KeyVault>")
+   storageAccount="[name of storage account]"
+   storageKey = dbutils.secrets.get(scope = "[name of databricks secret scope]", 
+                                    key = "[name of AKV secret]")
    mountpoint = "/mnt/KeyVaultBlob"
    storageEndpoint = "wasbs://marketbasket@{}.blob.core.windows.net".format(storageAccount)
    storageConnSting = "fs.azure.account.key.{}.blob.core.windows.net".format(storageAccount)
