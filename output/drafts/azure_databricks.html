@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code snippets etc. | Azure Databricks</title>
+    <link rel="shortcut icon" type="image/png" href="../favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="../archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="../">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Mar 28, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../drafts/azure_databricks.html" rel="bookmark" title="Permanent Link to &quot;Azure Databricks&quot;">Azure Databricks</a>
+                </h2>
+
+                
+                
+
+                <p><br></p>
+<h3>Connecting Databricks to Azure Storage Account</h3>
+<p><br></p>
+<h4>Key Vault Approach</h4>
+<ol>
+<li>Create Key Vault resource </li>
+<li>go to resource &gt; Secrets<ul>
+<li>under settings &gt; +Generate/Import</li>
+<li>provide recognisable secret name e.g. StorageAccountSecret</li>
+<li>provide storage key for the Azure Blob storage account</li>
+<li>NOTE: secret value must be changed every 3 months </li>
+</ul>
+</li>
+<li>To use Azure Key Vault in Databricks notebooks, a <strong>Secret scope</strong> must be created in Databricks. The Secret scope can be used in Databricks notebook to retrieve secret values from Azure Key Vault. </li>
+<li>go to <code>&lt;Databricks URL&gt;/#secrets/createScope</code></li>
+<li>create a new scope and name it e.g. KeyVaultScope</li>
+<li>Manage Principal &gt; All USers</li>
+<li>DNS name is "Vault URI" in Key Vault <strong>Overview</strong> page</li>
+<li>Reosurce ID can be found in Key Vault <strong>Properties</strong> page</li>
+<li>Notebook implementation: </li>
+</ol>
+<p>```
+   """Storage account key is stored in Azure Key-Vault as a sceret. 
+      secret name is blobstoragesecret 
+      KeyVaultScope is the name of the scope we have created.
+      """
+      storageAccount="<name of storage account>"
+      storageKey = dbutils.secrets.get(scope="KeyVaultScope",key="<name of secret in KeyVault>")
+      mountpoint = "/mnt/KeyVaultBlob"
+      storageEndpoint = "wasbs://marketbasket@{}.blob.core.windows.net".format(storageAccount)
+      storageConnSting = "fs.azure.account.key.{}.blob.core.windows.net".format(storageAccount)</p>
+<div class="highlight"><pre><span></span>  try:
+    dbutils.fs.mount(
+    source = storageEndpoint,
+    mount_point = mountpoint,
+    extra_configs = {storageConnSting:storageKey})
+  except:
+      print(&quot;Already mounted....&quot;+mountpoint)
+</pre></div>
+
+
+<p>```</p>
+<p><br></p>
+<h4>Service Principal for DBFS</h4>
+<ol>
+<li>Azure Active Directory &gt; App Registration</li>
+<li>give recognisable name e.g. ADLSApp</li>
+<li>leave defaults</li>
+<li>Note: this IS the service principal</li>
+<li>click on the newly registered app</li>
+<li>get Application ID (1)</li>
+<li>get Directory (Tenant) ID (2)</li>
+<li>click on Certificates and Secrets<ul>
+<li>create new secret</li>
+<li>give it a name e.g. ADLSAppSecret</li>
+<li>copy secret value (3)</li>
+</ul>
+</li>
+<li>go to storage account &gt; Access Control (IAM)</li>
+<li>add role assignment<ul>
+<li>select "Storage Blob Data Contributor"</li>
+<li>select Service Principal created in step 1</li>
+</ul>
+</li>
+<li>(1), (2), and (3) can be used hardcoded in Databricks notebook</li>
+</ol>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../drafts/azure_databricks.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/cloud.html" rel="tag">Cloud</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
         <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | Azure</title>
+    <title>code snippets etc. | Databricks Misc.</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
@@ -27,38 +27,29 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 24, 2022</h4>
+        <div id="content">            <h4 class="date">Jan 24, 2023</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./azure.html" rel="bookmark" title="Permanent Link to &quot;Azure&quot;">Azure</a>
+                    <a href="./databricks_miscellaneous.html" rel="bookmark" title="Permanent Link to &quot;Databricks Misc.&quot;">Databricks Misc.</a>
                 </h2>
 
                 
                 
 
-                <p><br></p>
-<h4>Key Vault and Service Principal</h4>
-<ul>
-<li><a href="./drafts/azure_databricks.html">Connecting Databricks to Azure Blob storage</a></li>
-</ul>
-<h4>AZ-900</h4>
-<ul>
-<li><a href="./drafts/azure_cloud_benefits_and_categories.html">Azure Cloud: Benefits and Categories</a></li>
-<li><a href="./drafts/azure_architectural_components.html">Azure Architectural Components</a></li>
-<li><a href="./drafts/azure_services.html">Azure Services</a></li>
-<li><a href="./drafts/azure_solutions.html">Azure Solutions</a></li>
-<li><a href="./drafts/azure_management_tools.html">Azure Management Tools</a></li>
-<li><a href="./drafts/azure_general_security.html">Azure General Security Features</a></li>
-<li><a href="./drafts/azure_network_security.html">Azure Network Security</a></li>
-<li><a href="./drafts/azure_identity_governance_privacy_compliance.html">Azure Identity, Governance, Privacy and Compliance Features</a></li>
-<li><a href="./drafts/azure_cost_management_and_sla.html">Azure Cost Management and SLA</a></li>
-</ul>
+                <h4>Import another notebook</h4>
+<div class="highlight"><pre><span></span><span class="nf">%run</span><span class="w"> </span><span class="s">&quot;../../schemas/master_config&quot;</span><span class="w"></span>
+</pre></div>
+
+
+<h4>Fitler DatFrame rows by Column values</h4>
+<div class="highlight"><pre><span></span>df = df.filter( (df.COL_A == i) &amp; (df.COL_B.isin([&#39;R&#39;,&#39;S&#39;])) )
+</pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./azure.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/azure.html" rel="tag">Azure</a>
+                    <a href="./databricks_miscellaneous.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/databricks.html" rel="tag">Databricks</a>
                 </div>
             </article>
             <div class="clear"></div>

@@ -54,10 +54,11 @@
 
 
 <h4>Save DataFrame as XLS</h4>
-<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">write</span>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">write</span>
  <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span>
  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;com.crealytics.spark.excel&quot;</span><span class="p">)</span>
  <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;dataAddress&quot;</span><span class="p">,</span> <span class="s2">&quot;&#39;Sheet Name&#39;!A1&quot;</span><span class="p">)</span>
  <span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;/mnt/userspace/custom_dataset/path-to-dir/filename.xlsx&quot;</span><span class="p">))</span>
  <span class="err">```</span>
 
