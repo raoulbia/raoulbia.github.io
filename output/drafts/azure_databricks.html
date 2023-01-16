@@ -78,24 +78,20 @@
 <p>Notebook implementation: </p>
 </li>
 </ol>
-<p>```python
+<p><code>python
        storageAccount='[name of storage account]'
        storageKey = dbutils.secrets.get(scope = '[name of databricks secret scope]', 
                                         key = '[name of AKV secret]')
        mountpoint = '/mnt/KeyVaultBlob'
        storageEndpoint = 'wasbs://marketbasket@{}.blob.core.windows.net'.format(storageAccount)
-       storageConnSting = 'fs.azure.account.key.{}.blob.core.windows.net'.format(storageAccount)</p>
-<div class="highlight"><pre><span></span>   try:
-      dbutils.fs.mount(
-      source = storageEndpoint,
-      mount_point = mountpoint,
-      extra_configs = {storageConnSting:storageKey})
-   except:
-     print(\&quot;Already mounted....\&quot; + mountpoint)
-</pre></div>
-
-
-<p>```</p>
+       storageConnSting = 'fs.azure.account.key.{}.blob.core.windows.net'.format(storageAccount)
+       try:
+          dbutils.fs.mount(
+          source = storageEndpoint,
+          mount_point = mountpoint,
+          extra_configs = {storageConnSting:storageKey})
+       except:
+         print(\"Already mounted....\" + mountpoint)</code></p>
 <p><br></p>
 <h4>Service Principal for DBFS</h4>
 <ol>
