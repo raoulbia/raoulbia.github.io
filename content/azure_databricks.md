@@ -45,6 +45,8 @@ Detailed
 3. Notebook implementation:
 ```
 storageAccount="[name-of-storage-account]"
+storageKey = dbutils.secrets.get(scope = "[name-of-databricks-secret-scope]", 
+                                 key = "[name-of-AKV-secret]")
 ```
 
 
