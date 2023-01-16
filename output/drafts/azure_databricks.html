@@ -41,7 +41,7 @@
 <h3>Connecting Databricks to Azure Storage Account</h3>
 <p><br></p>
 <h4>Key Vault Approach</h4>
-<h2>High Level</h2>
+<p>High Level</p>
 <ul>
 <li>in AKV we create a secret </li>
 <li>in ADB we create a secret scope</li>
@@ -51,7 +51,8 @@
 <li>the name of the ADB secret scope</li>
 <li>the name of the AKV secret     </li>
 </ul>
-<h2>Detailed</h2>
+<p><br></p>
+<p>Detailed</p>
 <ol>
 <li>Create Key Vault resource</li>
 <li>
@@ -78,19 +79,19 @@
 </li>
 </ol>
 <p>```
-   storageAccount="[name of storage account]"
-   storageKey = dbutils.secrets.get(scope = "[name of databricks secret scope]", 
-                                    key = "[name of AKV secret]")
-   mountpoint = "/mnt/KeyVaultBlob"
-   storageEndpoint = "wasbs://marketbasket@{}.blob.core.windows.net".format(storageAccount)
-   storageConnSting = "fs.azure.account.key.{}.blob.core.windows.net".format(storageAccount)</p>
+   storageAccount=\"[name of storage account]\"
+   storageKey = dbutils.secrets.get(scope = \"[name of databricks secret scope]\", 
+                                    key = \"[name of AKV secret]\")
+   mountpoint = \"/mnt/KeyVaultBlob\"
+   storageEndpoint = \"wasbs://marketbasket@{}.blob.core.windows.net\".format(storageAccount)
+   storageConnSting = \"fs.azure.account.key.{}.blob.core.windows.net\".format(storageAccount)</p>
 <p>try:
       dbutils.fs.mount(
       source = storageEndpoint,
       mount_point = mountpoint,
       extra_configs = {storageConnSting:storageKey})
    except:
-      print("Already mounted...."+mountpoint)
+      print(\"Already mounted....\" + mountpoint)
    ```</p>
 <p><br></p>
 <h4>Service Principal for DBFS</h4>
