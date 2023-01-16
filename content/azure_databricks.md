@@ -15,7 +15,6 @@ Status: draft
 #### Key Vault Approach
 
 High Level
-----------
 
 * in AKV we create a secret 
 * in ADB we create a secret scope
@@ -25,8 +24,9 @@ High Level
   * the name of the ADB secret scope
   * the name of the AKV secret     
 
+<br>
+
 Detailed
---------
 
 1. Create Key Vault resource
    * go to resource > Secrets
@@ -45,12 +45,12 @@ Detailed
 3. Notebook implementation: 
       
    ```
-   storageAccount="[name of storage account]"
-   storageKey = dbutils.secrets.get(scope = "[name of databricks secret scope]", 
-                                    key = "[name of AKV secret]")
-   mountpoint = "/mnt/KeyVaultBlob"
-   storageEndpoint = "wasbs://marketbasket@{}.blob.core.windows.net".format(storageAccount)
-   storageConnSting = "fs.azure.account.key.{}.blob.core.windows.net".format(storageAccount)
+   storageAccount=\"[name of storage account]\"
+   storageKey = dbutils.secrets.get(scope = \"[name of databricks secret scope]\", 
+                                    key = \"[name of AKV secret]\")
+   mountpoint = \"/mnt/KeyVaultBlob\"
+   storageEndpoint = \"wasbs://marketbasket@{}.blob.core.windows.net\".format(storageAccount)
+   storageConnSting = \"fs.azure.account.key.{}.blob.core.windows.net\".format(storageAccount)
 
    try:
       dbutils.fs.mount(
@@ -58,11 +58,11 @@ Detailed
       mount_point = mountpoint,
       extra_configs = {storageConnSting:storageKey})
    except:
-      print("Already mounted...."+mountpoint)
+      print(\"Already mounted....\" + mountpoint)
    ```
 
-
 <br>
+
 #### Service Principal for DBFS
 1. Azure Active Directory > App Registration
    * give recognisable name e.g. ADLSApp
