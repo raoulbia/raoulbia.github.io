@@ -15,3 +15,8 @@ Summary: Databricks Misc.
 df = df.filter( (df.COL_A == i) & (df.COL_B.isin(['R','S'])) )
 ```
 
+#### Databricks CLI
+
+* List existing secret scopes: `databricks secrets list-scopes`
+
+
