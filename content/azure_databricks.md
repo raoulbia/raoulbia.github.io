@@ -45,10 +45,10 @@ Detailed
 3. Notebook implementation: 
       
     ```
-         storageAccount='[name of storage account]'
-         storageKey = dbutils.secrets.get(scope = '[name of databricks secret scope]', key = '[name of AKV secret]')
+         storageAccount='[name-of-storage-account]'
+         storageKey = dbutils.secrets.get(scope = '[name-of-databricks-secret-scope]', key = '[name-of-AKV-secret]')
          mountpoint = '/mnt/KeyVaultBlob'
-         storageEndpoint = 'wasbs://[container name]@{}.blob.core.windows.net'.format(storageAccount)
+         storageEndpoint = 'wasbs://[container-name]@{}.blob.core.windows.net'.format(storageAccount)
          storageConnSting = 'fs.azure.account.key.{}.blob.core.windows.net'.format(storageAccount)
 
          try:
