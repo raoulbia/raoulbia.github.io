@@ -45,6 +45,15 @@
 <h4>Fitler DatFrame rows by Column values</h4>
 <div class="highlight"><pre><span></span>df = df.filter( (df.COL_A == i) &amp; (df.COL_B.isin([&#39;R&#39;,&#39;S&#39;])) )
 </pre></div>
+
+
+<h4>Databricks CLI</h4>
+<ul>
+<li><code>pip install databricks-cli</code></li>
+<li><code>export PATH="$HOME/.local/bin:$PATH"</code></li>
+<li><code>/home/username/.local/bin/databricks configure</code></li>
+<li>List existing secret scopes: <code>databricks secrets list-scopes</code></li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
