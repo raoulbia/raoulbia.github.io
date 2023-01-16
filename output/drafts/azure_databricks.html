@@ -41,44 +41,59 @@
 <h3>Connecting Databricks to Azure Storage Account</h3>
 <p><br></p>
 <h4>Key Vault Approach</h4>
+<h2>High Level</h2>
+<ul>
+<li>in AKV we create a secret </li>
+<li>in ADB we create a secret scope</li>
+<li>the secet scope points to the AKV URI abd Resource ID</li>
+<li>in ADB notebook re reference</li>
+<li>the stoage account name</li>
+<li>the name of the ADB secret scope</li>
+<li>the name of the AKV secret     </li>
+</ul>
+<h2>Detailed</h2>
 <ol>
-<li>Create Key Vault resource </li>
-<li>go to resource &gt; Secrets<ul>
+<li>Create Key Vault resource</li>
+<li>
+<p>go to resource &gt; Secrets</p>
+<ul>
 <li>under settings &gt; +Generate/Import</li>
-<li>provide recognisable secret name e.g. StorageAccountSecret</li>
+<li>provide recognisable <strong>key vault secret name</strong> e.g. StorageAccountSecret</li>
 <li>provide storage key for the Azure Blob storage account</li>
 <li>NOTE: secret value must be changed every 3 months </li>
 </ul>
 </li>
-<li>To use Azure Key Vault in Databricks notebooks, a <strong>Secret scope</strong> must be created in Databricks. The Secret scope can be used in Databricks notebook to retrieve secret values from Azure Key Vault. </li>
+<li>
+<p>To use Azure Key Vault in Databricks notebooks, a <strong>Secret scope</strong> must be created in Databricks. The Secret scope can be used in Databricks notebook to retrieve secret values from Azure Key Vault. </p>
+</li>
 <li>go to <code>&lt;Databricks URL&gt;/#secrets/createScope</code></li>
 <li>create a new scope and name it e.g. KeyVaultScope</li>
 <li>Manage Principal &gt; All USers</li>
 <li>DNS name is "Vault URI" in Key Vault <strong>Overview</strong> page</li>
-<li>Reosurce ID can be found in Key Vault <strong>Properties</strong> page</li>
-<li>Notebook implementation: </li>
+<li>
+<p>Reosurce ID can be found in Key Vault <strong>Properties</strong> page</p>
+</li>
+<li>
+<p>Notebook implementation: </p>
+</li>
 </ol>
+<p>Storage account key is stored in Azure Key-Vault as a sceret. 
+   KeyVaultScope is the name of the scope we have created</p>
 <p>```
-   """Storage account key is stored in Azure Key-Vault as a sceret. 
-      secret name is blobstoragesecret 
-      KeyVaultScope is the name of the scope we have created.
-      """
-      storageAccount="<name of storage account>"
-      storageKey = dbutils.secrets.get(scope="KeyVaultScope",key="<name of secret in KeyVault>")
-      mountpoint = "/mnt/KeyVaultBlob"
-      storageEndpoint = "wasbs://marketbasket@{}.blob.core.windows.net".format(storageAccount)
-      storageConnSting = "fs.azure.account.key.{}.blob.core.windows.net".format(storageAccount)</p>
-<div class="highlight"><pre><span></span>  try:
-    dbutils.fs.mount(
-    source = storageEndpoint,
-    mount_point = mountpoint,
-    extra_configs = {storageConnSting:storageKey})
-  except:
-      print(&quot;Already mounted....&quot;+mountpoint)
-</pre></div>
-
-
-<p>```</p>
+   storageAccount="<name of storage account>"
+   storageKey = dbutils.secrets.get(scope = "KeyVaultScope", 
+                                    key = "<name of secret in KeyVault>")
+   mountpoint = "/mnt/KeyVaultBlob"
+   storageEndpoint = "wasbs://marketbasket@{}.blob.core.windows.net".format(storageAccount)
+   storageConnSting = "fs.azure.account.key.{}.blob.core.windows.net".format(storageAccount)</p>
+<p>try:
+      dbutils.fs.mount(
+      source = storageEndpoint,
+      mount_point = mountpoint,
+      extra_configs = {storageConnSting:storageKey})
+   except:
+      print("Already mounted...."+mountpoint)
+   ```</p>
 <p><br></p>
 <h4>Service Principal for DBFS</h4>
 <ol>
