@@ -51,7 +51,6 @@ Detailed
        mountpoint = '/mnt/KeyVaultBlob'
        storageEndpoint = 'wasbs://marketbasket@{}.blob.core.windows.net'.format(storageAccount)
        storageConnSting = 'fs.azure.account.key.{}.blob.core.windows.net'.format(storageAccount)
-
        try:
           dbutils.fs.mount(
           source = storageEndpoint,
