@@ -7,14 +7,12 @@ Status: draft
 
 
 <br>
+
 ### Connecting Databricks to Azure Storage Account
 
 <br>
   
 #### Key Vault Approach
-
-* A Key Vault holds secrets.
-* Key Vaults have a pricing plan
 
 1. Create Key Vault resource 
    * go to resource > Secrets
@@ -22,7 +20,34 @@ Status: draft
      * provide recognisable secret name e.g. StorageAccountSecret
      * provide storage key for the Azure Blob storage account
      * NOTE: secret value must be changed every 3 months 
-2. 
+2. To use Azure Key Vault in Databricks notebooks, a **Secret scope** must be created in Databricks. The Secret scope can be used in Databricks notebook to retrieve secret values from Azure Key Vault. 
+   * go to `<Databricks URL>/#secrets/createScope`
+   * create a new scope and name it e.g. KeyVaultScope
+   * Manage Principal > All USers
+   * DNS name is "Vault URI" in Key Vault **Overview** page
+   * Reosurce ID can be found in Key Vault **Properties** page
+3. Notebook implementation: 
+
+   ```
+   """Storage account key is stored in Azure Key-Vault as a sceret. 
+      secret name is blobstoragesecret 
+      KeyVaultScope is the name of the scope we have created.
+      """
+      storageAccount="<name of storage account>"
+      storageKey = dbutils.secrets.get(scope="KeyVaultScope",key="<name of secret in KeyVault>")
+      mountpoint = "/mnt/KeyVaultBlob"
+      storageEndpoint = "wasbs://marketbasket@{}.blob.core.windows.net".format(storageAccount)
+      storageConnSting = "fs.azure.account.key.{}.blob.core.windows.net".format(storageAccount)
+
+      try:
+        dbutils.fs.mount(
+        source = storageEndpoint,
+        mount_point = mountpoint,
+        extra_configs = {storageConnSting:storageKey})
+      except:
+          print("Already mounted...."+mountpoint)
+   ```
+
 
 <br>
 #### Service Principal for DBFS
