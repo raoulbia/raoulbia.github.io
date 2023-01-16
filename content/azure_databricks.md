@@ -45,20 +45,20 @@ Detailed
 3. Notebook implementation: 
       
     ```
-     storageAccount='[name of storage account]'
-     storageKey = dbutils.secrets.get(scope = '[name of databricks secret scope]', 
-                                      key = '[name of AKV secret]')
-     mountpoint = '/mnt/KeyVaultBlob'
-     storageEndpoint = 'wasbs://marketbasket@{}.blob.core.windows.net'.format(storageAccount)
-     storageConnSting = 'fs.azure.account.key.{}.blob.core.windows.net'.format(storageAccount)
-    
-     try:
-        dbutils.fs.mount(
-        source = storageEndpoint,
-        mount_point = mountpoint,
-        extra_configs = {storageConnSting:storageKey})
-     except:
-       print(\"Already mounted....\" + mountpoint)
+         storageAccount='[name of storage account]'
+         storageKey = dbutils.secrets.get(scope = '[name of databricks secret scope]', 
+                                          key = '[name of AKV secret]')
+         mountpoint = '/mnt/KeyVaultBlob'
+         storageEndpoint = 'wasbs://marketbasket@{}.blob.core.windows.net'.format(storageAccount)
+         storageConnSting = 'fs.azure.account.key.{}.blob.core.windows.net'.format(storageAccount)
+
+         try:
+            dbutils.fs.mount(
+            source = storageEndpoint,
+            mount_point = mountpoint,
+            extra_configs = {storageConnSting:storageKey})
+         except:
+           print(\"Already mounted....\" + mountpoint)
     ```
 
 <br>
