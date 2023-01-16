@@ -17,6 +17,9 @@ df = df.filter( (df.COL_A == i) & (df.COL_B.isin(['R','S'])) )
 
 #### Databricks CLI
 
+* `pip install databricks-cli`
+* `export PATH="$HOME/.local/bin:$PATH"`
+* `/home/username/.local/bin/databricks configure`
 * List existing secret scopes: `databricks secrets list-scopes`
 
 
