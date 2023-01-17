@@ -11,7 +11,9 @@ Summary: Azure Data Factory
 
 Create a Linked Service to connect ADF to Databricks using Key Vault
 
-* Pre-requisite: an existing Key Vault resource with a secret holding the Databricks PAT
+* Pre-requisite: an existing Key Vault resource with 
+    * in section *Secrets*, a secret holding the Databricks PAT 
+    * in section *Access policies*, an access policy with *Get* and *List*
 * This requires two linked services
   * Databrick ls > get it from 'Compute' tab
   * within this ls you are asked to specify an AKV linked service > click on 'New'
