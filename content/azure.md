@@ -8,7 +8,7 @@ Summary: Azure
 
 #### Parameterization
 
-* create folder name for COPY activity sink egress: `@concat('Azure/CG/static_output_files/', formatDateTime(utcnow(),'yyyy'), '-' ,formatDateTime(utcnow(),'MM'), '-', formatDateTime(utcnow(),'dd'))`
+* create folder name for COPY activity sink egress: `@concat('Azure/CG/static_output_files/', formatDateTime(utcNow(),'yyyy'), '-' ,formatDateTime(utcNow(),'MM'), '-', formatDateTime(utcNow(),'dd'))`
 
 
 #### Key Vault and Service Principal
