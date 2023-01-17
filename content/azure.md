@@ -6,6 +6,11 @@ Summary: Azure
 
 <br>
 
+#### Parameterization
+
+* create folder name for COPY activity sink egress: `@concat('Azure/CG/static_output_files/', formatDateTime(utcnow(),'yyyy'), '-' ,formatDateTime(utcnow(),'MM'), '-', formatDateTime(utcnow(),'dd'))`
+
+
 #### Key Vault and Service Principal
 
 * [Connecting Databricks to Azure Blob storage]({filename}./azure_databricks.md)
