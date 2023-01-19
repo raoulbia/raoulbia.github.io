@@ -6,6 +6,7 @@ Summary: Azure
 
 <br>
 
+
 #### AZ-900
 
 * [Azure Cloud: Benefits and Categories]({filename}./azure_cloud_concepts.md)
