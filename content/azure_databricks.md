@@ -28,16 +28,17 @@ High Level
 Detailed
 
 1. Create a **Key Vault** resource (or use existing one)
+
    * go to Key Vault > Secrets
      * under settings > +Generate/Import
      * provide recognisable **key vault secret name** e.g. StorageAccountSecret
      * provide storage key for the Azure Blob storage account
      * NOTE: secret value must be changed every 3 months 
 
-  * go to Key Vault ***Access policies***
-    * click *Create*
-    * select *Get* and *List* for *Key permissions* and *Secret permissions*
-    * in the search box enter *"AzureDatabricks"*, select it when it shows up and click next and create all the way
+   * go to Key Vault ***Access policies***
+     * click *Create*
+     * select *Get* and *List* for *Key permissions* and *Secret permissions*
+     * in the search box enter *"AzureDatabricks"*, select it when it shows up and click next and create all the way
      
 2. To use Azure Key Vault in Databricks notebooks, a **Secret scope** must be created in Databricks. The Secret scope can be used in Databricks notebook to retrieve secret values from Azure Key Vault. 
    * go to `<Databricks URL>/#secrets/createScope`
@@ -47,6 +48,7 @@ Detailed
    * Reosurce ID can be found in Key Vault **Properties** page
    
 3. Notebook implementation:
+
 ```
 storageAccount="[name-of-storage-account]"
 storageKey = dbutils.secrets.get(scope = "[name-of-databricks-secret-scope]", 
@@ -67,7 +69,8 @@ except:
 
 <br>
 
-#### Service Principal for DBFS
+#### Service Principal Approach
+
 1. Azure Active Directory > App Registration
    * give recognisable name e.g. ADLSApp
    * leave defaults
