@@ -65,7 +65,9 @@ try:
 except:
    print(\"Already mounted....\" + mountpoint)
 ```
+<br>
 
+Useful link: [Creating a Secret Scope in Databricks backed by Azure Key Vault fails](https://stackoverflow.com/questions/56537214/creating-a-secret-scope-in-databricks-backed-by-azure-key-vault-fails)
 
 <br>
 
