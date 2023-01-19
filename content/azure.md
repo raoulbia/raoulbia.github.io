@@ -6,11 +6,6 @@ Summary: Azure
 
 <br>
 
-#### Key Vault and Service Principal
-
-* [Connecting Databricks to Azure Blob storage]({filename}./azure_databricks.md)
-
-
 #### AZ-900
 
 * [Azure Cloud: Benefits and Categories]({filename}./azure_cloud_concepts.md)
