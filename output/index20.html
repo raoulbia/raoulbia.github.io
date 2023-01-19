@@ -26,65 +26,88 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Sep 04, 2017</h4>
+        <div id="content">            <h4 class="date">Oct 02, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./time_series.html" rel="bookmark" title="Permanent Link to &quot;Time Series&quot;">Time Series</a>
+                    <a href="./Algorithms.html" rel="bookmark" title="Permanent Link to &quot;Algorithms&quot;">Algorithms</a>
                 </h2>
 
                 
                 
 
-                <h3>Python</h3>
+                <p>On this page I keep some notes abbout Algorithms. It's work in progress and all might not be 
+accurate. I will improve this page as my grasp of the key differences between the core algorithm 
+families improves. </p>
+<p><strong>Introduction</strong></p>
+<p>Many graph-based problems are of the non-deterministic polynomial time (NP) problem family.<br />
+Specifically this means that graph-based problems can often not be solved efficiently w.r.t. time and 
+space. For example, consider that the optimal solution for a given graph-based problem involves 
+visiting all nodes and vertices in the graph. Such an exhaustive search is unfeasible with large 
+graphs consisting of millions of nodes and vertices.</p>
+<p><strong>Algorithms</strong></p>
+<p>There are several alternative strategies to deal with NP problems that avoid the limitations of 
+exhaustive search. These strategies do not, in general, find optimal solutions, but can find solutions 
+that are reasonably close to being optimal. Such strategies include </p>
 <ul>
-<li><a href="https://gist.github.com/raoulbia/0d6b8bdc06b6abe2959aaefabb59221b">gist: How to group data by time intervals in Python Pandas</a></li>
+<li>greedy algorithms</li>
+<li>heuristic algorithms </li>
+<li>approximation algorithms</li>
+<li>randomized algorithms </li>
 </ul>
-<h3>R</h3>
+<p>The idea of greedy algorithm is to solve a problem by making a “locally optimal choice at each stage
+with the hope of finding a global optimum ”. </p>
+<p>Heuristic algorithm try to solve a problem by “proceeding to a solution by trial and error or by 
+rules that are only loosely defined ”. </p>
+<p>The lines between greedy and heuristic algorithms are often blurred and many algorithms exhibit 
+characteristics of both. </p>
+<p>Approximation algorithms are essentially heuristic algorithms with a provable guarantee on the 
+quality of the obtained near-optimal solution.</p>
+<p>Randomized algorithms may be nonintuitive because they lack the control of traditional algorithms.
+Some randomized algorithms are <em>Las Vegas algorithms</em>, which deliver solutions that are guaranteed 
+to be exact, despite the fact that they rely on making random decisions. Yet most randomized 
+algorithms are <em>Monte Carlo algorithms</em>. These algorithms are not guaranteed to return exact solutions,
+but they do quickly find approximate solutions. Because of their speed, they can be run many times, 
+allowing us to choose the best approximation from thousands of runs.</p>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./time_series.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/time-series.html" rel="tag">Time Series</a>
+                    <a href="./Algorithms.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/algorithms.html" rel="tag">Algorithms</a>
                 </div>
-            </article>            <h4 class="date">Sep 03, 2017</h4>
+            </article>            <h4 class="date">Oct 01, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./Logistic Regression.html" rel="bookmark" title="Permanent Link to &quot;Logistic Regression&quot;">Logistic Regression</a>
+                    <a href="./linear_algebra.html" rel="bookmark" title="Permanent Link to &quot;Linear Algebra&quot;">Linear Algebra</a>
                 </h2>
 
                 
                 
 
-                <p>On this page I keep some ontes on logistic regression.</p>
-<h4>Supervised Learning: Regression Techniques</h4>
-<p>Most supervised learning problems can be framed formally 
-in terms of predicting a response, but prediction alone is often not
-the main goal of the analysis. </p>
-<p>For example, many applications of
-linear regression in the sciences are aimed primarily
-at <strong>understanding how the inputs of a system drive the outputs</strong>.</p>
-<p>An extremely complicated "black box" giving pure predictions would not be
-very useful in and of itself.</p>
-<p>(<a href="https://lagunita.stanford.edu/courses/HumanitiesSciences/StatLearning/Winter2016/about">source</a>)</p>
-<p><em>Gradient Descent</em>: iterative computation of adjusted feature weights</p>
-<h4>Linear vs. Logistic Regression: normalizing</h4>
+                <p>On this page I keep some notes abbout GloVe and word2vec word embeddings. It's work in progress...</p>
+<h4>Matrix Factorization</h4>
 <ul>
-<li>
-<p>linear regression: must normalize features</p>
-</li>
-<li>
-<p>logistic regression: no need to normalize the data. </p>
-</li>
+<li>refers to decomposing matrices into their constituent parts</li>
+<li>makes it easier to calculate more complex matrix operations</li>
+<li>A common analogy for matrix decomposition is the factoring of numbers, such as the factoring of 10 into 2 x 5. 
+  For this reason, matrix decomposition is also called matrix factorization. Like factoring real values, there are many 
+  ways to decompose a matrix, hence there are a range of different matrix decomposition techniques.</li>
+<li>Matrix factorization methods such as Latent Semantic Analysis (LSA) use low-rank approximations to decompose large 
+  matrices capturing statistical information about a corpus. 
+  (<a href="">source</a>https://blog.acolyer.org/2016/04/22/glove-global-vectors-for-word-representation/)</li>
+<li>Common methods: QR, SVD, LU (see Resources below)</li>
 </ul>
-<p>see <a href="https://stats.stackexchange.com/questions/29781/when-conducting-multiple-regression-when-should-you-center-your-predictor-varia">here</a> 
-for a good discussion on the topic of data <em>centering</em> and <em>scaling</em> data features.</p>
+<h4>Resources</h4>
+<ul>
+<li><a href="https://machinelearningmastery.com/introduction-to-matrix-decompositions-for-machine-learning/">A Gentle Introduction to Matrix Factorization for Machine Learning</a></li>
+<li><a href="https://stepik.org/lesson/8513/step/1?unit=1609">Linear Algebra: Problems and Methods (Stepik)</a></li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./Logistic Regression.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/logistic-regression.html" rel="tag">Logistic Regression</a>
+                    <a href="./linear_algebra.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linear-algebra.html" rel="tag">Linear Algebra</a>
                 </div>
             </article>
 
@@ -95,7 +118,7 @@ for a good discussion on the topic of data <em>centering</em> and <em>scaling</e
 
                     <a href="./index21.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 20 of 25</span>
+                    <span>Page 20 of 26</span>
                 </div>
 
             <div class="clear"></div>

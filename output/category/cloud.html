@@ -28,111 +28,114 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Mar 26, 2018</h4>
+        <div id="content">            <h4 class="date">Mar 28, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="../azure_management_tools.html" rel="bookmark" title="Permanent Link to &quot;Azure Management Tools&quot;">Azure Management Tools</a>
+                    <a href="../azure_databricks.html" rel="bookmark" title="Permanent Link to &quot;Azure Databricks&quot;">Azure Databricks</a>
                 </h2>
 
                 
                 
 
                 <p><br></p>
-<h2>Azure Management Tools</h2>
+<h3>Connecting Databricks to Azure Storage Account</h3>
+<p><br></p>
+<h4>Key Vault Approach</h4>
+<p>High Level</p>
 <ul>
+<li>in AKV we create a secret </li>
+<li>in ADB we create a secret scope</li>
+<li>the secet scope points to the AKV URI abd Resource ID</li>
+<li>in ADB notebook we reference</li>
+<li>the storage account name</li>
+<li>the name of the ADB secret scope</li>
+<li>the name of the AKV secret     </li>
+</ul>
+<p><br></p>
+<p>Detailed</p>
+<ol>
 <li>
-<p>portal.azure.com</p>
+<p>Create a <strong>Key Vault</strong> resource (or use existing one)</p>
 </li>
 <li>
-<p>Command Line Tools</p>
+<p>go to Key Vault &gt; Secrets</p>
 <ul>
-<li>Cloud  Shell<ul>
-<li>Brower-based</li>
-<li>on Linux, user can opt to run bash, on Windows user can opt to run Powershell</li>
-</ul>
-</li>
-<li>Azure PowerShell<ul>
-<li>available on all platforms</li>
-<li>on Mac it's called <em>macOS Powershell Core</em></li>
-</ul>
-</li>
-<li>Azure CLI<ul>
-<li>not supported on iPhone</li>
-<li>cannot run Powershell</li>
-<li>can run in Docker container</li>
-</ul>
-</li>
-<li>see video 34 @ 2:00 for DEMO</li>
+<li>under settings &gt; +Generate/Import</li>
+<li>provide recognisable <strong>key vault secret name</strong> e.g. StorageAccountSecret</li>
+<li>provide storage key for the Azure Blob storage account</li>
+<li>NOTE: secret value must be changed every 3 months </li>
 </ul>
 </li>
 <li>
-<p>Azure Advisor </p>
+<p>go to Key Vault <strong><em>Access policies</em></strong></p>
 <ul>
-<li>can be configured to only generate recommendations for specified subscriptions and resource groups</li>
-<li>covers:<ul>
-<li>Cost </li>
-<li>High availability</li>
-<li>Security</li>
-<li>Performance</li>
-<li>Operational excellence e.g. recommendation on VMs that are not backed up (and allows to do it in a few clicks)</li>
-</ul>
-</li>
-<li>NOT network-related recommendations!</li>
-<li>see video 35 @ 1:20 for DEMO</li>
+<li>click <em>Create</em></li>
+<li>select <em>Get</em> and <em>List</em> for <em>Key permissions</em> and <em>Secret permissions</em></li>
+<li>in the search box enter <em>"AzureDatabricks"</em>, select it when it shows up and click next and create all the way</li>
 </ul>
 </li>
 <li>
-<p>Azure Monitor</p>
-<ul>
-<li>to monitor <strong>individual</strong> resources</li>
-<li>must select a region</li>
-<li>Useful if you have hundreds of resources</li>
-<li>Centralised dashboard for (most of) your resources / services</li>
-<li>Respond: can produce <strong>alerts</strong> e.g. when new VM is created</li>
-<li>Integrate: can collect and query data from various sources e.g. Apps, logs </li>
-<li>Visualise</li>
-<li>Insights</li>
-<li>Analyse    </li>
-</ul>
+<p>To use Azure Key Vault in Databricks notebooks, a <strong>Secret scope</strong> must be created in Databricks. The Secret scope can be used in Databricks notebook to retrieve secret values from Azure Key Vault. </p>
+</li>
+<li>go to <code>&lt;Databricks URL&gt;/#secrets/createScope</code></li>
+<li>create a new scope and name it e.g. KeyVaultScope</li>
+<li>Manage Principal &gt; All USers</li>
+<li>DNS name is "Vault URI" in Key Vault <strong>Overview</strong> page</li>
+<li>
+<p>Reosurce ID can be found in Key Vault <strong>Properties</strong> page</p>
 </li>
 <li>
-<p>Azure Service Health</p>
-<ul>
-<li>Azure Monitor for <strong>Azure infrastructure as a whole</strong> i.e. for regions or services etc</li>
-<li>Issues that affect all regions or all services / resources (that you also happen to be using)</li>
-<li>Can add it to your dashboard</li>
-<li>Has past issues</li>
-<li>Ability to do <strong>alerts</strong> (SMS, Email, …)</li>
+<p>Notebook implementation:</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span>storageAccount=&quot;[name-of-storage-account]&quot;
+storageKey = dbutils.secrets.get(scope = &quot;[name-of-databricks-secret-scope]&quot;, 
+                                 key = &quot;[name-of-AKV-secret]&quot;)
+mountpoint = &quot;/mnt/KeyVaultBlob&quot;
+storageEndpoint = &quot;wasbs://[container-name]@{}.blob.core.windows.net&quot;.format(storageAccount)
+storageConnSting = &quot;fs.azure.account.key.{}.blob.core.windows.net&quot;.format(storageAccount)
+
+try:
+   dbutils.fs.mount(
+   source = storageEndpoint,
+   mount_point = mountpoint,
+   extra_configs = {storageConnSting:storageKey})
+except:
+   print(\&quot;Already mounted....\&quot; + mountpoint)
+</pre></div>
+
+
+<p><br></p>
+<p>Useful link: <a href="https://stackoverflow.com/questions/56537214/creating-a-secret-scope-in-databricks-backed-by-azure-key-vault-fails">Creating a Secret Scope in Databricks backed by Azure Key Vault fails</a></p>
+<p><br></p>
+<h4>Service Principal Approach</h4>
+<ol>
+<li>Azure Active Directory &gt; App Registration</li>
+<li>give recognisable name e.g. ADLSApp</li>
+<li>leave defaults</li>
+<li>Note: this IS the service principal</li>
+<li>click on the newly registered app</li>
+<li>get Application ID (1)</li>
+<li>get Directory (Tenant) ID (2)</li>
+<li>click on Certificates and Secrets<ul>
+<li>create new secret</li>
+<li>give it a name e.g. ADLSAppSecret</li>
+<li>copy secret value (3)</li>
 </ul>
 </li>
-<li>
-<p>Azure Resource Manager (ARM) templates</p>
-<ul>
-<li>automate the simultaneous creation of multiple resources if they are of the same type</li>
-<li>aka Infrastructure as Code</li>
-<li>IS A JSON file</li>
-<li>All actions that you take to manage your Azure resources goes through the ARM layer</li>
-<li>store all of the infrastructure information in a JSON file as an ARM template and store it within github ()</li>
-<li>Every time someone wants to change the infrastructure they have to change the template, then re-deploy</li>
-<li>It’s a way of documenting your infrastructure and how it changes</li>
-<li>see video 36 @2:50</li>
+<li>go to storage account &gt; Access Control (IAM)</li>
+<li>add role assignment<ul>
+<li>select "Storage Blob Data Contributor"</li>
+<li>select Service Principal created in step 1</li>
 </ul>
 </li>
-<li>
-<p>Compliance Manager</p>
-<ul>
-<li>track <strong>your company's compliance</strong> with regulatory standards and regulations</li>
-</ul>
-</li>
-<li>
-<p>Azure Mobile App to check resource status, stop/start resources etc</p>
-</li>
-</ul>
+<li>(1), (2), and (3) can be used hardcoded in Databricks notebook</li>
+</ol>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="../azure_management_tools.html">posted at 00:00</a>
+                    <a href="../azure_databricks.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="../category/cloud.html" rel="tag">Cloud</a>
                 </div>
             </article>

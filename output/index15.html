@@ -26,179 +26,307 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 19, 2017</h4>
+        <div id="content">            <h4 class="date">Nov 23, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./sql.html" rel="bookmark" title="Permanent Link to &quot;SQL&quot;">SQL</a>
+                    <a href="./ksql.html" rel="bookmark" title="Permanent Link to &quot;KSql Cheatsheet&quot;">KSql Cheatsheet</a>
                 </h2>
 
                 
                 
 
-                <h4>Sample Queries</h4>
-<div class="highlight"><pre><span></span>SELECT train, dest, time FROM ( 
-  SELECT train, dest, time, 
-    RANK() OVER (PARTITION BY train ORDER BY time DESC) dest_rank
-    FROM traintable
-  ) where dest_rank = 1
-</pre></div>
-
-
-<p><br></p>
-<div class="highlight"><pre><span></span>select * from PREDICATION where SUBJECT_SEMTYPE in (&#39;gngm&#39;) limit 10;
-select * from ENTITY where SEMTYPE in (&#39;gngm&#39;) and GENE_ID &lt;&gt; &#39;&#39; limit 10;
-</pre></div>
-
-
-<p><br></p>
-<div class="highlight"><pre><span></span><span class="n">select</span><span class="w"> </span><span class="n">count</span><span class="p">([</span><span class="n">Incident</span><span class="w"> </span><span class="n">Type</span><span class="p">]),</span><span class="w"> </span><span class="p">[</span><span class="n">Incident</span><span class="w"> </span><span class="n">Type</span><span class="p">]</span><span class="w"></span>
-<span class="n">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">bat_2020</span><span class="p">]</span><span class="w"></span>
-<span class="n">Group</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="p">[</span><span class="n">Incident</span><span class="w"> </span><span class="n">Type</span><span class="p">]</span><span class="w"></span>
-</pre></div>
-
-
-<p><br></p>
-<div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="nf">MIN</span><span class="w"> </span><span class="p">(</span><span class="o">[</span><span class="n">Created Date Time</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="ss">&quot;Min Date&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"></span>
-<span class="w">       </span><span class="nf">MAX</span><span class="w"> </span><span class="p">(</span><span class="o">[</span><span class="n">Created Date Time</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="ss">&quot;Max Date&quot;</span><span class="w">  </span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">[</span><span class="n">dbo</span><span class="o">]</span><span class="p">.</span><span class="o">[</span><span class="n">bat_2020</span><span class="o">]</span><span class="w"></span>
-</pre></div>
-
-
-<h3>Useful commands</h3>
-<h4>Determine table column size</h4>
-<div class="highlight"><pre><span></span><span class="k">Select</span><span class="w">        </span><span class="nf">max</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="o">[</span><span class="n">number</span><span class="o">]</span><span class="p">))</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">[</span><span class="n">number</span><span class="o">]</span><span class="w"></span>
-<span class="w">              </span><span class="p">,</span><span class="nf">max</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="o">[</span><span class="n">u_opened_date</span><span class="o">]</span><span class="p">))</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">[</span><span class="n">u_opened_date</span><span class="o">]</span><span class="w"></span>
-<span class="w">              </span><span class="p">...</span><span class="w"></span>
-<span class="k">from</span><span class="w">   </span><span class="n">dbo</span><span class="p">.</span><span class="n">mytable</span><span class="w"></span>
-</pre></div>
-
-
-<h4>Insert from another table</h4>
-<p>To get the table details</p>
-<p><code>show create table ENTITY;</code> </p>
-<p>To create the new ENTITY2 table, copy/paste from the above output.</p>
-<p><code>insert into ENTITY2 select * from ENTITY where GENE_ID &lt;&gt; '';</code></p>
-<h4>See table columns and their data types</h4>
-<div class="highlight"><pre><span></span>SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS 
-  WHERE table_name = &#39;tbl_name&#39; AND COLUMN_NAME = &#39;col_name&#39;;
-</pre></div>
-
-
-<h4>Create DB</h4>
-<div class="highlight"><pre><span></span>GRANT ALL PRIVILEGES ON *.* TO &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;root&#39;;
-CREATE DATABASE dbname;
-USE dbname;
-</pre></div>
-
-
-<h4>Import from sql.gz file</h4>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">pv</span>
-<span class="n">zcat</span> <span class="n">filename</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">gz</span> <span class="o">|</span> <span class="n">pv</span> <span class="o">-</span><span class="n">cN</span> <span class="n">zcat</span> <span class="o">|</span> <span class="n">mysql</span> <span class="o">-</span><span class="n">u</span> <span class="n">root</span> <span class="o">-</span><span class="n">p</span> <span class="o">-</span><span class="n">f</span> <span class="o">-</span><span class="n">D</span> <span class="n">dbname</span> <span class="p">;</span>
-</pre></div>
-
-
-<h4>Get stats</h4>
-<div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="n">table_schema</span> <span class="s2">&quot;dbname&quot;</span><span class="p">,</span>
-        <span class="n">ROUND</span><span class="p">(</span><span class="n">SUM</span><span class="p">(</span><span class="n">data_length</span> <span class="o">+</span> <span class="n">index_length</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="s2">&quot;DB Size in MB&quot;</span> 
-<span class="n">FROM</span> <span class="n">information_schema</span><span class="o">.</span><span class="n">tables</span> 
-<span class="n">GROUP</span> <span class="n">BY</span> <span class="n">table_schema</span><span class="p">;</span> 
-</pre></div>
-
-
-<p>or (requires mysql v5.7+)</p>
-<div class="highlight"><pre><span></span>select table_schema, table_name, rows_fetched, rows_inserted, rows_updated, rows_deleted 
-    from sys.schema_table_statistics where table_schema=&#39;dbname&#39;;
-</pre></div>
-
-
-<p>or</p>
-<p><code>SHOW TABLE STATUS dbname;</code></p>
-<h4>Logging</h4>
+                <h3>Installation</h3>
 <ul>
-<li>start logging: <code>tee ./mylofile.log</code></li>
-<li>stop logging: <code>notee</code></li>
+<li>Download and Setup Java 8 JDK: <code>sudo apt install openjdk-8-jdk</code></li>
+<li>wget https://packages.confluent.io/archive/6.2/confluent-6.2.0.tar.gz</li>
+<li>tar -xvf confluent-6.2.0</li>
+<li><code>sudo ln -s confluent-6.2.0/ confluent</code></li>
+<li>add to <code>~/.bashrc</code>:</li>
+<li><code>export  export PATH=/opt/confluent/bin:$PATH</code> (or where ever the tar has been unzipped to.</li>
+<li><code>export CONFLUENT_HOME=/opt/confluent</code></li>
 </ul>
-<h4>Where is the table data stored?</h4>
-<ul>
-<li>it is specified in <code>my.cnf</code></li>
-<li>otherwise, the default location is <code>/var/lib/mysql/</code></li>
-</ul>
-<h4>Partition</h4>
-<div class="highlight"><pre><span></span><span class="n">alter</span> <span class="n">table</span> <span class="n">ENTITY</span> <span class="n">partition</span> <span class="n">by</span> <span class="nb">range</span><span class="p">(</span><span class="n">ENTITY_ID</span><span class="p">)(</span>
-<span class="n">partition</span> <span class="n">p0</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="p">(</span><span class="mi">250000000</span><span class="p">),</span>
-<span class="n">partition</span> <span class="n">p1</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="p">(</span><span class="mi">500000000</span><span class="p">),</span>
-<span class="n">partition</span> <span class="n">p2</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="p">(</span><span class="mi">750000000</span><span class="p">),</span>
-<span class="n">partition</span> <span class="n">p3</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="n">maxvalue</span>
-<span class="p">);</span>
+<h3>Start KSql</h3>
+<div class="highlight"><pre><span></span>confluent <span class="nb">local</span> services ksql-server start
+confluent <span class="nb">local</span> services ksql-server status
 </pre></div>
 
 
-<h4>Set Primary Key</h4>
-<p><code>ALTER TABLE table_name ADD PRIMARY KEY (column_1, column_2);</code></p>
-<h4>Drop foreign key</h4>
-<div class="highlight"><pre><span></span><span class="n">ALTER</span> <span class="n">TABLE</span> <span class="n">ENTITY</span> <span class="n">DROP</span> <span class="n">FOREIGN</span> <span class="n">KEY</span> <span class="s1">&#39;ENTITY_ibfk_1&#39;</span><span class="p">;</span>
-<span class="n">Note</span><span class="p">:</span> <span class="n">would</span> <span class="n">this</span> <span class="n">be</span> <span class="n">better</span><span class="err">??</span>
-    <span class="n">ALTER</span> <span class="n">TABLE</span> <span class="n">foo</span> <span class="n">DISABLE</span> <span class="n">KEYS</span><span class="p">;</span>
-    <span class="n">do</span> <span class="n">stuff</span>
-    <span class="n">ALTER</span> <span class="n">TABLE</span> <span class="n">ENABLE</span> <span class="n">KEYS</span><span class="p">;</span>
+<h4>Topics</h4>
+<p>Note: By default KSql will show only new arriving data.</p>
+<p>Use <code>FROM BEGINNING</code> to see all existing data AND keep listening for new data.</p>
+<p>Also useful for checking that topic has a KEY!!</p>
+<ul>
+<li><code>print 'topic_name' FROM BEGINNING LIMIT 1;</code></li>
+</ul>
+<h4>auto.offset.reset</h4>
+<p>By default KSql <code>select</code> only shows new incoming data aka <code>current offset</code>. </p>
+<p>Must run command below (Only valid for current KSql session! Must re-issue each tme entering KSql prompt).</p>
+<div class="highlight"><pre><span></span>SET &#39;auto.offset.reset&#39;=&#39;earliest&#39; ;
 </pre></div>
 
 
-<h4>Increase buffer size for large import</h4>
-<div class="highlight"><pre><span></span><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">nano</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">my</span><span class="p">.</span><span class="n">cnf</span><span class="w"></span>
-<span class="o">[</span><span class="n">mysqld</span><span class="o">]</span><span class="w"> </span><span class="n">innodb_buffer_pool_size</span><span class="o">=</span><span class="mi">228</span><span class="n">G</span><span class="w"></span>
+<p>to reset this setting:</p>
+<div class="highlight"><pre><span></span>UNSET &#39;auto.offset.reset&#39;;
 </pre></div>
 
 
-<h4>Error with MySQL: "The total number of locks exceeds the lock table size"</h4>
+<h4>KSql CREATE TABLE (<a href="https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-table/">KSQL Syntax Reference</a> )</h4>
+<div class="highlight"><pre><span></span><span class="nv">create</span> <span class="nv">table</span> <span class="nv">GTFS_DELAYS_TABLE</span> <span class="ss">(</span><span class="nv">id</span> <span class="nv">VARCHAR</span> <span class="nv">PRMARY</span> <span class="nv">KEY</span>, <span class="nv">delay</span> <span class="nv">INT</span>, <span class="nv">timestamp</span> <span class="nv">INT</span><span class="ss">)</span> <span class="nv">WITH</span> <span class="ss">(</span><span class="nv">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">gtfs-delays</span><span class="s1">&#39;</span>, <span class="nv">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">JSON</span><span class="s1">&#39;</span><span class="ss">)</span> <span class="c1">;</span>
+<span class="k">show</span> <span class="nv">tables</span> <span class="c1">;</span>
+<span class="nv">describe</span> <span class="nv">GTFS_DELAYS_TABLE</span> <span class="c1">;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>create table GTFS_TABLE <span class="o">(</span> <span class="se">\</span>
+id VARCHAR PRIMARY KEY, <span class="se">\</span>
+trip_update_trip_trip_id VARCHAR, <span class="se">\</span>
+trip_update_trip_start_time VARCHAR, <span class="se">\</span>
+trip_update_trip_start_date VARCHAR,<span class="se">\</span>
+trip_update_trip_schedule_relationship VARCHAR, <span class="se">\</span>
+trip_update_trip_route_id VARCHAR, <span class="se">\</span>
+trip_update_stop_time_update_stop_sequence INT, <span class="se">\</span>
+trip_update_stop_time_update_departure_delay INT, <span class="se">\</span>
+trip_update_stop_time_update_stop_id VARCHAR, <span class="se">\</span>
+trip_update_stop_time_update_schedule_relationship VARCHAR, <span class="se">\</span>
+trip_update_stop_time_update_arrival_delay INT <span class="se">\</span>
+<span class="o">)</span> WITH <span class="o">(</span><span class="nv">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;GTFS_TOPIC&#39;</span>, <span class="nv">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="o">)</span> <span class="p">;</span>
+</pre></div>
+
+
+<p>To persist the above table see below. </p>
+<div class="highlight"><pre><span></span>create table GTFS_TABLE2 AS select * from GTFS_TABLE ;
+</pre></div>
+
+
+<p>Before terminating a persistent table we must first terminate that query!</p>
+<div class="highlight"><pre><span></span><span class="k">show</span> <span class="nv">queries</span> <span class="c1">;</span>
+<span class="nv">terminate</span> <span class="o">&lt;</span><span class="nv">query_name</span><span class="o">&gt;</span> <span class="c1">;</span>
+<span class="nv">drop</span> <span class="nv">table</span> <span class="o">&lt;</span><span class="nv">table_name</span><span class="o">&gt;</span> <span class="c1">;</span>
+</pre></div>
+
+
+<h4>KSql SELECT</h4>
+<div class="highlight"><pre><span></span>select trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence, trip_update_stop_time_update_departure_delay from GTFS_TABLE emit changes ;
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>select trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence, sum(trip_update_stop_time_update_departure_delay) from GTFS_TABLE group by trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence emit changes ;
+</pre></div>
+
+
+<h4>KSql streams</h4>
+<p>KSql streams are used to interrogate the underlying data.</p>
+<div class="highlight"><pre><span></span><span class="nv">create</span> <span class="nv">stream</span> <span class="nv">users_stream</span> <span class="ss">(</span><span class="nv">name</span> <span class="nv">VARCHAR</span>, <span class="nv">countrycode</span> <span class="nv">VARCHAR</span><span class="ss">)</span> <span class="nv">WITH</span> <span class="ss">(</span><span class="nv">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">USERS</span><span class="s1">&#39;</span>, <span class="nv">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">DELIMITED</span><span class="s1">&#39;</span><span class="ss">)</span> <span class="c1">;</span>
+<span class="nv">list</span> <span class="nv">streams</span> <span class="c1">;</span>
+<span class="nv">select</span> <span class="nv">name</span>, <span class="nv">countrycode</span> <span class="nv">from</span> <span class="nv">users_stream</span> <span class="nv">emit</span> <span class="nv">changes</span><span class="c1">;</span>
+<span class="nv">select</span> <span class="nv">name</span>, <span class="nv">countrycode</span> <span class="nv">from</span> <span class="nv">users_stream</span> <span class="nv">emit</span> <span class="nv">changes</span> <span class="nv">limit</span> <span class="mi">5</span><span class="c1">;</span>
+<span class="nv">select</span> <span class="nv">countrycode</span>, <span class="nv">count</span><span class="ss">(</span><span class="o">*</span><span class="ss">)</span> <span class="nv">from</span> <span class="nv">users_stream</span> <span class="nv">group</span> <span class="nv">by</span> <span class="nv">countrycode</span><span class="c1">;</span>
+<span class="nv">drop</span> <span class="nv">stream</span> <span class="k">if</span> <span class="nv">exists</span> <span class="nv">users_stream</span> <span class="c1">;</span>
+<span class="nv">drop</span> <span class="nv">stream</span> <span class="k">if</span> <span class="nv">exists</span> <span class="nv">users_stream</span> <span class="nv">delete</span> <span class="nv">topic</span> <span class="c1">;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="nt">create</span><span class="w"> </span><span class="nt">stream</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="o">(</span><span class="nt">id</span><span class="w"> </span><span class="nt">VARCHAR</span><span class="o">,</span><span class="w"> </span><span class="nt">delay</span><span class="w"> </span><span class="nt">INT</span><span class="o">,</span><span class="w"> </span><span class="nt">timestamp</span><span class="w"> </span><span class="nt">INT</span><span class="o">)</span><span class="w"> </span><span class="nt">WITH</span><span class="w"> </span><span class="o">(</span><span class="nt">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;gtfs-delays&#39;</span><span class="o">,</span><span class="w"> </span><span class="nt">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
+<span class="nt">describe</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
+<span class="nt">select</span><span class="w"> </span><span class="nt">TIMESTAMPTOSTRING</span><span class="o">(</span><span class="nt">rowtime</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;dd/MMM HH:mm&#39;</span><span class="o">)</span><span class="w"> </span><span class="nt">as</span><span class="w"> </span><span class="nt">createtime</span><span class="o">,</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nt">from</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="nt">emit</span><span class="w"> </span><span class="nt">changes</span><span class="w"> </span><span class="nt">limit</span><span class="w"> </span><span class="nt">5</span><span class="o">;</span><span class="w"></span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>create stream GTFS_STREAM ( \
+id VARCHAR, \
+trip_update STRUCT \
+    &lt; trip STRUCT \
+        &lt; trip_id VARCHAR, start_time VARCHAR, start_date VARCHAR, schedule_relationship VARCHAR, route_id VARCHAR&gt; \
+    &gt;,  \
+stop_time_update STRUCT &lt; stop_sequence INT, arrival STRUCT &lt; delay INT &gt;, stop_id VARCHAR, schedule_relationship VARCHAR &gt;
+) WITH (KAFKA_TOPIC=&#39;GTFS_TOPIC&#39;, VALUE_FORMAT=&#39;JSON&#39;) ;
+
+select * from GTFS_STREAM emit changes ;
+</pre></div>
+
+
+<h3>Other Useful Commands</h3>
 <ul>
-<li><a href="https://dba.stackexchange.com/questions/27328/how-large-should-be-mysql-innodb-buffer-pool-size">see here</a></li>
-</ul>
-<h4>Misc. Mysql</h4>
-<ul>
-<li><code>$ mysql -u root -p</code></li>
-<li><code>$ sudo service mysql restart</code></li>
-<li><code>SHOW ENGINE INNODB STATUS;</code></li>
-<li><code>show table status like 'ENTITY'\G;</code> # number of rows in table</li>
-<li><code>SELECT ENTITY_ID, COUNT(*) c FROM ENTITY_GENE GROUP BY ENTITY_ID HAVING c &gt; 1;</code> # find duplicates</li>
-</ul>
-<h4>Install MySQL</h4>
-<ul>
-<li><a href="https://askubuntu.com/questions/750498/mysql-5-5-update-to-mysql-5-7">see here</a>
-and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-14-04">here</a></li>
-</ul>
-<h4>Resources</h4>
-<ul>
-<li><a href="https://towardsdatascience.com/ten-sql-concepts-you-should-know-for-data-science-interviews-7acf3e428185">Ten SQL Concepts </a></li>
-<li><a href="https://github.com/jamescalam/pysqlplus">pysqlplus</a></li>
-<li><a href="https://stackoverflow.com/questions/5136013/how-to-change-column-datatype-in-sql-database-without-losing-data/5136055">How to change column datatype in SQL</a></li>
-<li><a href="http://www.sqlfiddle.com/#!2/599d0/1">SQL Fiddle</a></li>
-<li><a href="https://www.a2hosting.com/kb/developer-corner/mysql/managing-mysql-databases-and-users-from-the-command-line">How to manage MySQL databases and users from the command line</a></li>
-<li><a href="https://www.linode.com/docs/databases/mysql/install-and-configure-mysql-workbench-on-ubuntu/">Install and Configure MySQL Workbench on Ubuntu 16.04</a></li>
-<li><a href="https://www.youtube.com/watch?v=iUjoPB27-iA">MySQL Partitioning</a></li>
+<li><code>kafka-consumer-groups.sh  --list --bootstrap-server localhost:9092</code></li>
+<li><code>zookeeper-shell.sh localhost:2181 ls /brokers/ids</code> to list active brokers. </li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./sql.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
+                    <a href="./ksql.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/ksql.html" rel="tag">KSql</a>
                 </div>
-            </article>            <h4 class="date">Nov 19, 2017</h4>
+            </article>            <h4 class="date">Nov 23, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./sql_reference_queries.html" rel="bookmark" title="Permanent Link to &quot;SQL Reference Queries&quot;">SQL Reference Queries</a>
+                    <a href="./snowsql.html" rel="bookmark" title="Permanent Link to &quot;SnowSQL Cheatsheet&quot;">SnowSQL Cheatsheet</a>
                 </h2>
 
                 
                 
 
-                <h3>Flavour: TSQL</h3>
+                <h4>SnowSQL CLI Config file</h4>
+<p>The onfig file is located here: <code>/home/&lt;user&gt;/.snowsql</code>. This is where you configure custom connection parameters.</p>
+<p>In your config file you need to modify this line:</p>
+<p><code>log_file = ../snowsql_rt.log</code> to this <code>log_file = ~/.snowsql/snowsql_rt.log</code></p>
+<h4>Connect to Snowflake account with SnowSQL CLI</h4>
+<p><code>snowsql --accountname 123.north-europe.azure --username &lt;username&gt;</code></p>
+<p><code>snowsql -c my_connection</code></p>
+<h4>Bulk Loading from Local Source</h4>
+<p>Create the Employee table</p>
+<div class="highlight"><pre><span></span><span class="n">create</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">Employee</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">row_id</span><span class="w"> </span><span class="n">integer</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">first_name</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">last_name</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">city</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">state</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">hire_date</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">salary</span><span class="w"> </span><span class="n">integer</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+</pre></div>
+
+
+<p>Some Employee queries</p>
+<div class="highlight"><pre><span></span>select * From Public.Employee
+drop table Employee
+truncate table Employee
+</pre></div>
+
+
+<p>Create a File Format Object</p>
+<div class="highlight"><pre><span></span>create or replace file format employee_csv
+  type = &#39;CSV&#39;
+  field_delimiter = &#39;,&#39;
+  skip_header = 1;
+</pre></div>
+
+
+<p>Create an internal Stage object</p>
+<div class="highlight"><pre><span></span>create or replace stage employee_stage
+  file_format = employee_csv;
+</pre></div>
+
+
+<p>Display the stages we have created</p>
+<div class="highlight"><pre><span></span><span class="k">show</span> <span class="nv">stages</span>
+</pre></div>
+
+
+<p>See what's in the employee_stage</p>
+<div class="highlight"><pre><span></span><span class="n">list</span><span class="w"> </span><span class="nv">@employee_stage</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+
+
+<p>Move the data in employee_stage to the employee table. Skip the entire file on any errors</p>
+<div class="highlight"><pre><span></span><span class="n">copy</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">employee</span><span class="w"></span>
+<span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="nv">@employee_stage</span><span class="w"></span>
+<span class="w">  </span><span class="n">on_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;skip_file&#39;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+
+
+<p>Move the data in employee_stage to the employee table. Skip just the rows causing any errors</p>
+<div class="highlight"><pre><span></span><span class="n">copy</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">employee</span><span class="w"></span>
+<span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="nv">@employee_stage</span><span class="w"></span>
+<span class="w">  </span><span class="n">on_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;continue&#39;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+
+
+<p>Remove file from stage</p>
+<div class="highlight"><pre><span></span><span class="n">remove</span><span class="w"> </span><span class="nv">@employee_stage</span><span class="w"> </span><span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;.*.csv.gz&#39;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+
+
+<p>Create a table to hold all errors during ingestion (VIDEO 21 8:00)</p>
+<div class="highlight"><pre><span></span>create or replace table employee_errors as 
+select * from table(validate(employee, job_id =&gt; &#39;019b04c4-0c52-f649-0001-3d6e0002d14e&#39;));
+select * from employee_errors
+</pre></div>
+
+
+<p>Describe file format</p>
+<div class="highlight"><pre><span></span>describe file format employee_csv
+</pre></div>
+
+
+<h4>Storage Integration: Bulk Loading from External Source</h4>
+<p>Notes:</p>
+<ul>
+<li>
+<p>to verify STORAGE INTEGRATION made it to Azure, go to Azure AAD &gt; Entreprise applications &gt; you should see Snowflake </p>
+</li>
+<li>
+<p>after creating STORAGE INTEGRATION, must authorize Snowflake in Access Control (IAM)
+  go to Storage Account &gt; Access Control (IAM) &gt; Add a role assignment &gt; "Storage Blob Data Contributor"
+  click +Select Members and search for Snowflake principal described above &gt; Select &gt; Review+Assign</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="nv">FILE</span> <span class="nv">FORMATS</span>
+<span class="k">SHOW</span> <span class="nv">TABLES</span>
+<span class="k">SHOW</span> <span class="nv">STAGES</span>
+
+<span class="o">//</span> <span class="nv">CLEAN</span> <span class="nv">UP</span>
+<span class="nv">USE</span> <span class="nv">ROLE</span> <span class="nv">ACCOUNTADMIN</span> <span class="c1">;</span>
+<span class="nv">DROP</span> <span class="nv">INTEGRATION</span> <span class="k">IF</span> <span class="nv">EXISTS</span> <span class="nv">AZURE_STORAGE</span> <span class="c1">;</span>
+<span class="nv">DROP</span> <span class="nv">FILE</span> <span class="nv">FORMAT</span> <span class="k">IF</span> <span class="nv">EXISTS</span> <span class="nv">CSV_FORMAT</span> <span class="c1">;</span>
+<span class="nv">DROP</span> <span class="nv">STAGE</span> <span class="k">IF</span> <span class="nv">EXISTS</span> <span class="nv">GTFS</span> <span class="c1">;</span>
+</pre></div>
+
+
+<p>Step 1: Create Table</p>
+<div class="highlight"><pre><span></span><span class="n">create</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">agency</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="n">agency_id</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span>
+<span class="w">  </span><span class="n">agency_name</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w">  </span>
+<span class="w">  </span><span class="n">agency_url</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span>
+<span class="w">  </span><span class="n">agency_timezone</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"></span>
+<span class="p">);</span><span class="w"></span>
+</pre></div>
+
+
+<p>Step 2: Setup Storage Integration</p>
+<div class="highlight"><pre><span></span>USE ROLE ACCOUNTADMIN ;
+CREATE OR REPLACE STORAGE INTEGRATION AZURE_STORAGE
+  TYPE = EXTERNAL_STAGE
+  STORAGE_PROVIDER = AZURE
+  ENABLED = TRUE
+  AZURE_TENANT_ID = &lt; tenant id &gt;
+  STORAGE_ALLOWED_LOCATIONS = (&#39;*&#39;) ;
+
+GRANT USAGE ON INTEGRATION AZURE_STORAGE TO SYSADMIN ;
+
+DESCRIBE STORAGE INTEGRATION AZURE_STORAGE ;
+
+USE ROLE SYSADMIN ; -- De-esclate the role
+</pre></div>
+
+
+<p>Step 3: Setup File Format</p>
+<div class="highlight"><pre><span></span>create or replace file format csv_format
+  type = &#39;CSV&#39;
+  field_delimiter = &#39;,&#39;
+  skip_header = 1
+  null_if = (&#39;NULL&#39;, &#39;null&#39;)
+  empty_field_as_null = TRUE
+  compression = gzip ;
+</pre></div>
+
+
+<p>Step 4: Set up Stage</p>
+<div class="highlight"><pre><span></span><span class="nt">create</span><span class="w"> </span><span class="nt">or</span><span class="w"> </span><span class="nt">replace</span><span class="w"> </span><span class="nt">stage</span><span class="w"> </span><span class="nt">gtfs</span><span class="w"></span>
+<span class="w">  </span><span class="nt">storage_integration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">AZURE_STORAGE</span><span class="w"></span>
+<span class="w">  </span><span class="nt">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;azure://&lt;container_name&gt;.blob.core.windows.net/gtfs &#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">file_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">CSV_FORMAT</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
+</pre></div>
+
+
+<p>Note: it can take an hour or two for Azure to create objects necessary for the integration</p>
+<div class="highlight"><pre><span></span><span class="n">list</span><span class="w"> </span><span class="nv">@gtfs</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+</pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./sql_reference_queries.html">posted at 00:00</a>
+                    <a href="./snowsql.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
                 </div>
             </article>
@@ -210,7 +338,7 @@ and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-mys
 
                     <a href="./index16.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 15 of 25</span>
+                    <span>Page 15 of 26</span>
                 </div>
 
             <div class="clear"></div>

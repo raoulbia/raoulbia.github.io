@@ -26,168 +26,117 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 04, 2017</h4>
+        <div id="content">            <h4 class="date">Jan 01, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./conda.html" rel="bookmark" title="Permanent Link to &quot;Conda&quot;">Conda</a>
+                    <a href="./pypi.html" rel="bookmark" title="Permanent Link to &quot;PyPi&quot;">PyPi</a>
                 </h2>
 
                 
                 
 
-                <h3>Conda</h3>
+                <h4>Pre-requisites</h4>
 <ul>
-<li><code>conda create --name &lt;name&gt; python=3.7 -y</code></li>
-<li><code>conda activate &lt;name&gt;</code></li>
-<li><code>pip install ipykernel</code></li>
-<li><code>python -m ipykernel install --user --name=&lt;name&gt;</code></li>
-<li><code>conda env remove --name &lt;name&gt;</code></li>
-<li><code>conda env list</code></li>
-<li><code>conda update</code></li>
-<li><code>conda install --yes --file requirements.txt</code></li>
-<li><code>jupyter kernelspec list</code></li>
-<li><code>conda install --channel=conda-forge nb_conda_kernels</code></li>
+<li>
+<p><code>pip install -U twine</code></p>
+</li>
+<li>
+<p>in <code>~.pypirc</code> add <code>chmod 600 ~/.pypirc</code></p>
+</li>
 </ul>
-<h4>Specific venvs</h4>
+<h4>Deploy on PyPi</h4>
+<hr />
+<p><strong>Note</strong></p>
 <ul>
-<li>Geopandas: <code>conda create --name=gtfs_graph python=3.8 geopandas scipy --channel=conda-forge</code></li>
+<li>Make sure to update version information before deploying. 
+Files to update: <code>__init__.py</code> and <code>setup.py</code>.</li>
+<li>After deploying, don't forget to re-build the documentation at <a href="https://readthedocs.org/projects/shizen-gengo/builds">ReadTheDocs</a>.</li>
 </ul>
-<h4>Venv</h4>
-<div class="highlight"><pre><span></span>apt-get install python3-venv
-python -m venv .env
-source .env/bin/activate
+<hr />
+<div class="highlight"><pre><span></span><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">rf</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">dist</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">setup</span><span class="o">.</span><span class="n">py</span><span class="w"> </span><span class="n">sdist</span><span class="w"></span>
+<span class="n">ls</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span><span class="w"></span>
+<span class="c1">#python setup.py check -r -s (obolete)</span><span class="w"></span>
+<span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">twine</span><span class="w"> </span><span class="n">check</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span><span class="w"></span>
+<span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w">  </span><span class="n">twine</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span><span class="w"></span>
 </pre></div>
 
 
-<h4>Pipenv</h4>
-<p>Install</p>
+<h4>Misc.</h4>
 <ul>
-<li><code>sudo apt-get update</code></li>
-<li><code>sudo apt install python3-pip</code></li>
-<li><code>pip3 install pipenv</code></li>
-<li><code>pipenv --python 3.6</code></li>
-</ul>
-<p>Useful commands</p>
-<ul>
-<li><code>pipenv install -r requirements.txt</code></li>
-<li><code>pipenv shell</code> to create new env; load/activate existing env, load .env variables</li>
-<li><code>pipenv update</code> can be used to install base dependencies</li>
-<li><code>pip install ...</code></li>
-<li><code>pipenv sync</code> will use <code>Pipfile</code> if present</li>
-<li><code>pipenv graph</code></li>
+<li><a href="https://help.github.com/en/github/creating-cloning-and-archiving-repositories/licensing-a-repository">Licensing a repository
+</a></li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./conda.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/virtual-environments.html" rel="tag">Virtual Environments</a>
+                    <a href="./pypi.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/pypi.html" rel="tag">PyPi</a>
                 </div>
-            </article>            <h4 class="date">Dec 03, 2017</h4>
+            </article>            <h4 class="date">Dec 05, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./Vagrant VM.html" rel="bookmark" title="Permanent Link to &quot;Vagrant VM&quot;">Vagrant VM</a>
+                    <a href="./Git.html" rel="bookmark" title="Permanent Link to &quot;Git&quot;">Git</a>
                 </h2>
 
                 
                 
 
-                <h4>Useful Links</h4>
-<ul>
-<li><a href="https://www.gis-blog.com/osgeo-live-the-best-open-source-gis-ready-to-use-package/">OSGeo-Live</a></li>
-<li><a href="https://releases.ubuntu.com/20.04/">Ubuntu 20.04 ISO</a></li>
-<li><a href="https://blog.engineyard.com/building-a-vagrant-box">Building a Vagrant Box from Start to Finish</a></li>
-<li><a href="https://www.abhishek-tiwari.com/creating-a-new-vagrant-base-box-from-an-existing-vm/">Creating a new Vagrant base box from an existing VM</a></li>
-</ul>
-<h4>Pre-requisites</h4>
-<ul>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-16-04">Git</a></li>
-<li><a href="http://docs.vagrantup.com/v2/installation/index.html">Vagrant</a> </li>
-<li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>.</li>
-</ul>
-<h4>Shared Folders</h4>
-<p>Vagrantfile: <code>config.vm.synced_folder HOST GUEST</code></p>
-<p>where HOST = <code>"/home/raoulbia/DEV/vagrant_mint"</code> and GUEST = <code>"/vagrant"</code></p>
-<p>e.g.   <code>config.vm.synced_folder "/home/raoulbia/DEV/vagrant_ubuntu", "/vagrant"</code></p>
-<div class="highlight"><pre><span></span>config.vm.synced_folder <span class="s2">&quot;.&quot;</span>, <span class="s2">&quot;/vmtest_kafka&quot;</span>
+                <h4>Set / Change remote origin url</h4>
+<div class="highlight"><pre><span></span>git remote add origin &lt;remote repository URL&gt;
+
+git remote set-url origin &lt;remote repository url&gt;
 </pre></div>
 
 
-<h4>Vagrant Box</h4>
-<p>Assuming you want to share the directory in which <code>Vagrantfile</code> is located and that directory is named <code>vmtest_kafka</code>. 
-First add your share directory in the VM Box (Devices &gt; Shared Folders) and click "Make Permanent".
-Whatever you name your share here will be the name you will need to use when mounting in the vm guest OS e.g. <code>vmtest_kafka</code>. 
-Next on the the guset OS make a directory to use for your mount preferably in your home directory e.g. <code>mkdir ~/shared</code>.</p>
-<div class="highlight"><pre><span></span>sudo usermod -a -G vboxsf vagrant
-mkdir ~/shared
-sudo mount -t vboxsf vmtest_kafka ~/shared
+<h4>Remove dir from remote but keep local</h4>
+<div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s1">&#39;.idea&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">.</span><span class="n">gitignore</span>
+<span class="n">git</span> <span class="n">rm</span> <span class="o">-</span><span class="n">r</span> <span class="o">--</span><span class="n">cached</span> <span class="o">.</span><span class="n">idea</span><span class="o">/</span> <span class="c1"># Remove the file from the repository</span>
+<span class="n">git</span> <span class="n">add</span> <span class="o">.</span><span class="n">gitignore</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s1">&#39;remove dir from remote&#39;</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>
 </pre></div>
 
 
+<h4>Git Tagging</h4>
+<div class="highlight"><pre><span></span>git add GTFSR.py
+git commit -m &quot;GTFSRT script initial commit&quot;
+git tag -a GTFSRT_v1.0 -m &quot;original GTFSRT script&quot;
+git push origin master tag GTFSRT_v1.0
+</pre></div>
+
+
+<h4>Git commands</h4>
 <ul>
-<li><code>sudo nano ~/.profile</code> and add the line: <code>sudo mount -t vboxsf vmtest_kafka ~/shared</code></li>
-<li>Set directory permissions on HOST: <code>chmod 777 -R vmtest_kafka/</code></li>
+<li><code>git add -A</code></li>
+<li><code>git add .</code> to add a new file</li>
+<li><code>git remote -v</code></li>
+<li><code>git checkout --theirs PATH/FILE</code> if conflict: If solution is to accept remote/other-branch version</li>
+<li><code>git add -p</code> <a href="https://medium.com/@mc999/git-add-p-is-a-gamechanger-in-file-management-e4c879e89ab">read more</a></li>
+<li><code>git clone -b &lt;branch name&gt; &lt;rep url&gt;</code></li>
+<li><code>git add dir/*</code> to add new files or directories:</li>
+<li><code>git commit -m "update" $$ git push origin &lt;branch name&gt;</code></li>
+<li><code>git pull origin &lt;branch name&gt;</code></li>
+<li><code>git reset --hard origin/master</code></li>
+<li><code>git branch -a</code></li>
+<li><code>git remote show origin</code></li>
+<li><code>git checkout -- .</code> to remove all unstaged files in current working directory</li>
+<li><code>git branch -u origin/master</code> tell git that local branch (master) should compare itself to remote counterpart (origin/master)</li>
 </ul>
-<h4>Increase Vagrant Box Size</h4>
-<p>Note: it may be easier to just grab a box that has a large size. See above.</p>
-<ol>
-<li>
-<p>Clone &amp; Resize</p>
-<p>on Linux</p>
-<div class="highlight"><pre><span></span>VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vmdk&quot; &quot;/home/baba/VirtualBox VMs/my_box/box.vdi&quot; --format vdi
-VBoxManage modifyhd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; --resize 131072
-VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/home/baba/VirtualBox VMs/my_box/box-resized.vmdk&quot; --format vmdk
-</pre></div>
-
-
-<p>on Window: same steps as below but first run this:</p>
-<div class="highlight"><pre><span></span>set PATH=%PATH%;&quot;C:\Program Files\Oracle\VirtualBox&quot;
-</pre></div>
-
-
-</li>
-<li>
-<p>Allocate space</p>
-<p>The newly created disk space is unallocated at this stage. Follow these steps next:</p>
+<h4>Useful Links</h4>
 <ul>
-<li>
-<p><a href="http://www.gitshah.com/2013/05/how-to-fix-out-of-space-problem-for.html?m=1">getting Gparted</a></p>
-</li>
-<li>
-<p><a href="https://www.youtube.com/watch?v=cDgUwWkvuIY">changing partitions using Gparted (Video)</a></p>
-</li>
-</ul>
-</li>
-</ol>
-<p>see also <a href="https://gist.github.com/christopher-hopper/9755310">Resize a Hard Disk for a Virtual Machine</a></p>
-<h4>Create Global Variable for use in Python Scripts</h4>
-<p>In <code>~/.profile</code>add</p>
-<div class="highlight"><pre><span></span><span class="k">export</span><span class="w"> </span><span class="n">TOMOE_DATA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">ownCloud</span><span class="o">/</span><span class="n">tomoe</span><span class="o">-</span><span class="n">data</span><span class="w"></span>
-<span class="k">export</span><span class="w"> </span><span class="n">KG_OUTPUT_DIR</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">vmtest</span><span class="o">/</span><span class="n">tomoe</span><span class="o">/</span><span class="n">wp</span><span class="o">-</span><span class="n">tomoe</span><span class="o">-</span><span class="n">playground</span><span class="o">/</span><span class="n">local</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">kg</span><span class="w"></span>
-</pre></div>
-
-
-<h4>Useful Vagrant commands</h4>
-<ul>
-<li><code>config.vm.box = "file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box"</code></li>
-<li><code>VBoxClient --clipboard</code></li>
-<li><code>vagrant global-status</code></li>
-<li><code>set PATH=%PATH%;"C:\Program Files\Oracle\VirtualBox"</code></li>
-<li><code>vboxmanage list vms</code></li>
-<li><code>vagrant init file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box</code></li>
-</ul>
-<h4>Misc. Links</h4>
-<ul>
-<li><a href="https://github.com/hashicorp/vagrant/issues/5186">Warning: Authentication failure. Retrying... " after packaging box</a></li>
-<li><a href="https://jeremykendall.net/2013/08/09/vagrant-synced-folders-permissions/">vagrant-synced-folders-permissions</a></li>
-<li><a href="https://stackoverflow.com/questions/35807568/vagrant-synced-folder-permissions">vagrant-synced-folders-permissions SO</a></li>
+<li><a href="https://stackoverflow.com/questions/4470523/create-a-branch-in-git-from-another-branch">Create a branch in Git from another branch</a></li>
+<li><a href="https://stackoverflow.com/questions/33101962/how-to-create-a-new-gitlab-repo-from-my-existing-local-git-repo-using-cli">How to create a new gitlab repo from my existing local git repo</a></li>
+<li><a href="https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/">Adding an existing project to GitHub using the command line</a></li>
+<li><a href="https://techbase.kde.org/Development/Git/Feature_Branch_Workflow">Feature_Branch_Workflow</a></li>
+<li><a href="https://stackoverflow.com/questions/67699/how-to-clone-all-remote-branches-in-git">How to clone all remote branches</a></li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./Vagrant VM.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
+                    <a href="./Git.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/git.html" rel="tag">Git</a>
                 </div>
             </article>
 
@@ -198,7 +147,7 @@ VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/h
 
                     <a href="./index11.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 10 of 25</span>
+                    <span>Page 10 of 26</span>
                 </div>
 
             <div class="clear"></div>

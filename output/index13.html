@@ -26,179 +26,291 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 24, 2017</h4>
+        <div id="content">            <h4 class="date">Nov 25, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./kafka.html" rel="bookmark" title="Permanent Link to &quot;Kafka Cheatsheet&quot;">Kafka Cheatsheet</a>
+                    <a href="./software.html" rel="bookmark" title="Permanent Link to &quot;Software&quot;">Software</a>
                 </h2>
 
                 
                 
 
-                <h3>Terminology</h3>
+                <h3>PostgreSQL</h3>
+<p><a href="https://www.postgresql.org/download/linux/ubuntu/">Download PostgreSQL</a></p>
+<p><a href="https://linuxhint.com/best_gui_clients_postgresql_ubuntu/#:~:text=pgAdmin,Windows%20and%20Mac%20OS%20X.">Install pgAdmin</a></p>
+<h4>Running multiple versions of PostgreSQL</h4>
+<p>Check the config files to see which version is on which port:</p>
+<p><code>grep -H '^port' /etc/postgresql/*/main/postgresql.conf</code></p>
+<p>sample output:</p>
+<div class="highlight"><pre><span></span>/etc/postgresql/10/main/postgresql.conf:port = 5432 
+/etc/postgresql/13/main/postgresql.conf:port = 5433 
+</pre></div>
+
+
+<h4>Restart Postgres</h4>
+<div class="highlight"><pre><span></span><span class="n">sudo</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">postgresql</span><span class="w"> </span><span class="n">reload</span><span class="w"></span>
+<span class="n">sudo</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">postgresql</span><span class="w"> </span><span class="n">start</span><span class="w"></span>
+</pre></div>
+
+
+<h4>Hostname</h4>
+<p>PostgreSQL, what is the hostname address of my default database?</p>
+<p>If you're connecting from the same machine, use localhost</p>
+<h4>Connection String</h4>
+<p>You can provide your username and password directly in the connection URI provided to psql:</p>
+<p><code>psql postgresql://username:password@localhost:5432/mydb</code></p>
+<h4>Useful Commands</h4>
 <ul>
-<li>A Kafka cluster is a group of Kafka brokers.</li>
-<li>A Kafka broker allows consumers to fetch messages by topic, partition and offset.</li>
-<li>Kafka brokers can create a Kafka cluster by sharing information between each other directly or indirectly using Zookeeper.</li>
+<li>To establish a connection : <code>sudo su - postgres</code></li>
+<li>To open a postgress prompt using the command: <code>psql</code></li>
+<li>To see details of the connection: <code>\conninfo</code></li>
+<li>To view the databases in our PostgreSQL instance: <code>\list</code></li>
+<li><code>CREATE DATABASE dbname;</code></li>
+<li><code>DROP DATABASE dbname;</code></li>
 </ul>
-<h3>Installation</h3>
+<h3>R and RStudio</h3>
+<h4>Uninstall previous R installation</h4>
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">R</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">save</span>
+<span class="n">pkgList</span> <span class="o">&lt;-</span> <span class="nf">installed.packages</span><span class="p">(</span><span class="n">priority</span><span class="o">=</span><span class="s">&#39;NA&#39;</span><span class="p">)</span>
+<span class="nf">remove.packages</span><span class="p">(</span><span class="n">pkgList</span><span class="p">)</span>
+<span class="nf">q</span><span class="p">()</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">remove</span> <span class="o">--</span><span class="n">purge</span> <span class="n">r</span><span class="o">-</span><span class="n">cran</span><span class="o">*</span> <span class="n">r</span><span class="o">-</span><span class="n">base</span><span class="o">*</span>
+</pre></div>
+
+
+<h4>Install on Ubuntu 20.04 (Focal Fossa)</h4>
+<p>Save and run the script below (<a href="https://gist.github.com/mGalarnyk/41c887e921e712baf86fecc507b3afc7">source</a>).</p>
+<div class="highlight"><pre><span></span><span class="c1"># Install R + RStudio on Ubuntu 20 Focal</span><span class="w"></span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="o">-</span><span class="n">key</span><span class="w"> </span><span class="n">adv</span><span class="w"> </span><span class="o">--</span><span class="n">keyserver</span><span class="w"> </span><span class="n">keyserver</span><span class="o">.</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">com</span><span class="w"> </span><span class="o">--</span><span class="n">recv</span><span class="o">-</span><span class="n">keys</span><span class="w"> </span><span class="n">E298A3A825C0D65DF</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span><span class="w"> </span><span class="s1">&#39;deb https://cloud.r-project.org/bin/linux/ubuntu focal&gt;</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="n">update</span><span class="w"></span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">r</span><span class="o">-</span><span class="n">base</span><span class="w"> </span><span class="n">r</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span><span class="n">gdebi</span><span class="o">-</span><span class="n">core</span><span class="w"></span>
+
+<span class="c1"># next line required for kableExtra</span><span class="w"></span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">libcurl4</span><span class="o">-</span><span class="n">openssl</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span><span class="n">openssl</span><span class="w"> </span><span class="n">libssl</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span><span class="n">openssh</span><span class="o">-</span><span class="n">client</span><span class="w"> </span><span class="n">libxml2</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span>
+
+<span class="c1"># next line required for RcppArmadillo</span><span class="w"></span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">liblapack</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span>
+
+<span class="c1"># install Latex for RMarkdown</span><span class="w"></span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">texlive</span><span class="w"> </span><span class="n">texstudio</span><span class="w"> </span><span class="n">texlive</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">recommended</span><span class="w"> </span><span class="n">texlive</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">extra</span><span class="w"></span>
+
+<span class="c1"># Download and Install RStudio</span><span class="w"></span>
+<span class="n">wget</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download1</span><span class="o">.</span><span class="n">rstudio</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">desktop</span><span class="o">/</span><span class="n">bionic</span><span class="o">/</span><span class="n">amd64</span><span class="o">/</span><span class="n">rstudio</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">1103</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span><span class="w"></span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">gdebi</span><span class="w"> </span><span class="n">rstudio</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">1103</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span><span class="w"></span>
+<span class="n">rm</span><span class="w"> </span><span class="n">rstudio</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">1103</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span><span class="w"></span>
+</pre></div>
+
+
+<h4>List of Useful Packages</h4>
+<p><code>install.packages((c("tidyverse", "ggplot2", "ggthemes", "kableExtra", "rbenchmark", "inline", "data.table", "RcppArmadillo"))</code></p>
+<h3>Docker</h3>
 <ul>
-<li>
-<p>Download and Setup Java 8 JDK: <code>sudo apt install openjdk-8-jdk</code></p>
-</li>
-<li>
-<p>Download &amp; Extract the Kafka binaries from https://kafka.apache.org/downloads</p>
-</li>
-<li>
-<p>Try Kafka commands using bin/kafka-topics.sh (for example)</p>
-</li>
-<li>
-<p>add to <code>~/.bashrc</code>:  <code>export PATH=/home/vagrant/kafka_2.12-2.8.0/bin:$PATH</code></p>
-</li>
-<li>
-<p>Edit Zookeeper &amp; Kafka configs in <code>kafka_2.12-2.8.0/config</code></p>
-<ul>
-<li>
-<p>zookeeper.properties: <code>dataDir=/home/vagrant/kafka_2.12-2.8.0/data/zookeeper</code></p>
-</li>
-<li>
-<p>server.properties: <code>log.dirs=/home/vagrant/kafka_2.12-2.8.0/data/kafka</code></p>
-</li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04">Install Docker on Ubuntu-16-04</a></li>
+<li><a href="https://www.udemy.com/docker-mastery/">Docker Mastery: The Complete Toolset From a Docker Captain</a>:</li>
 </ul>
+<p>Docker</p>
+<ul>
+<li>get relevant <code>curl</code> line from <a href="https://get.docker.com/">here</a>.
+    Note: this will figure out which version to get for your particular Linux OS</li>
+<li>run shell script (next line in the above link)</li>
+<li><code>sudo usermod -aG docker vagrant</code></li>
+<li><code>docker version</code> to test</li>
+</ul>
+<p>Docker Machine</p>
+<ul>
+<li>get the lines from <a href="https://github.com/docker/machine/releases">https://github.com/docker/machine/releases</a></li>
+</ul>
+<p>Docker Compose</p>
+<ul>
+<li>get lines for latest release <a href="https://github.com/docker/compose/releases">here</a></li>
+<li><code>sudo -i</code> then paste the lines</li>
+<li><code>docker-compse version</code> to test</li>
+</ul>
+<p><br></p>
+<h3>Pycharm</h3>
+<h4>Install</h4>
+<div class="highlight"><pre><span></span><span class="o">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">openjdk</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="n">jdk</span><span class="w"></span>
+<span class="o">$</span><span class="w"> </span><span class="n">java</span><span class="w"> </span><span class="o">-</span><span class="n">version</span><span class="w"></span>
+<span class="o">$</span><span class="w"> </span><span class="n">wget</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">jetbrains</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">pycharm</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="mf">2018.3</span><span class="o">.</span><span class="mf">4.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span><span class="w"></span>
+<span class="o">$</span><span class="w"> </span><span class="n">tar</span><span class="w"> </span><span class="o">-</span><span class="n">xvf</span><span class="w"> </span><span class="n">pycharm</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="mf">2018.3</span><span class="o">.</span><span class="mf">4.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span><span class="w"></span>
+<span class="o">$</span><span class="w"> </span><span class="n">cd</span><span class="w"> </span><span class="n">pycharm</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="mf">2018.3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">bin</span><span class="w"></span>
+<span class="o">$</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="n">pycharm</span><span class="o">.</span><span class="n">sh</span><span class="w"></span>
+</pre></div>
+
+
+<h4>pytest</h4>
+<p>Edit Configuration &gt;&gt; Additional arguments &gt;&gt; <code>-p no:logging -s</code></p>
+<h4>environment variables</h4>
+<ul>
+<li><a href="https://stackoverflow.com/questions/42708389/how-to-set-environment-variables-in-pycharm">about setting environment variable e.g. DATA_HOME</a></li>
+</ul>
+<p><br></p>
+<h3>Jupyter (via Docker)</h3>
+<ul>
+<li><a href="https://towardsdatascience.com/how-to-setup-your-jupyterlab-project-environment-74909dade29b">How to Setup Your JupyterLab Project Environment</a></li>
+</ul>
+<p><br></p>
+<h3>RoboMongo</h3>
+<ul>
+<li><a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/">Install MongoDB Community Edition on Ubuntu</a></li>
+<li><a href="https://robomongo.org/download">Robo 3T: the hobbyist GUI</a></li>
+<li><a href="https://gist.github.com/abdallahokasha/37911a64ad289487387e2d1a144604ae">Install Robo3t On Ubuntu 18.04</a></li>
+<li><code>mongoimport --db naptan --collection naptan --file test.json --jsonArray</code></li>
+</ul>
+<h3>NodeJS</h3>
+<ul>
+<li>npm install xml-stream, xml2js</li>
+<li>node myfile.js</li>
+</ul>
+<h4>NodeJS XML to JSON</h4>
+<div class="highlight"><pre><span></span><span class="k">var</span><span class="w"> </span><span class="n">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="k">var</span><span class="w"> </span><span class="n">xml2js</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;xml2js&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="k">var</span><span class="w"> </span><span class="n">util</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;util&#39;</span><span class="p">);</span><span class="w"></span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">parser</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">xml2js</span><span class="o">.</span><span class="n">Parser</span><span class="p">();</span><span class="w"></span>
+
+<span class="n">fs</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s1">&#39;NaPTAN_2018_11_08.xml&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">function</span><span class="p">(</span><span class="n">err</span><span class="p">,</span><span class="n">data</span><span class="p">){</span><span class="w"></span>
+<span class="w">    </span><span class="n">parser</span><span class="o">.</span><span class="n">parseString</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">function</span><span class="p">(</span><span class="n">err</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">){</span><span class="w"></span>
+
+<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"> </span><span class="bp">true</span><span class="p">));</span><span class="w"></span>
+
+<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">toString</span><span class="p">(),</span><span class="w"> </span><span class="n">function</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="o">//</span><span class="w">     </span><span class="k">if</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="o">//</span><span class="w">         </span><span class="k">return</span><span class="w"> </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">err</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="o">//</span><span class="w">     </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="o">//</span><span class="w">     </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;The file was saved!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
+
+<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="nb">convert</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">JSON</span><span class="w"> </span><span class="n">string</span><span class="w"></span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JSON</span><span class="o">.</span><span class="n">stringify</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="n">save</span><span class="w"> </span><span class="n">JSON</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">file</span><span class="w"></span>
+<span class="w">        </span><span class="n">fs</span><span class="o">.</span><span class="n">writeFileSync</span><span class="p">(</span><span class="s1">&#39;test.json&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">json</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="p">});</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+</pre></div>
+
+
+<h4></h4>
+<h3>GloVe for Python</h3>
+<ul>
+<li><code>-e git+git@github.com:maciejkula/glove-python.git#egg=glove</code></li>
+<li>dependencies</li>
+<li><code>pip install Cython</code></li>
+<li><code>sudo apt-get install python3-dev</code></li>
+</ul>
+<p><br></p>
+<h4>Jena</h4>
+<div class="highlight"><pre><span></span>wget http://mirrors.whoishostingthis.com/apache/jena/binaries/apache-jena-3.1.1.tar.gz
+tar -zxvf
+</pre></div>
+
+
+<p><br></p>
+<h4>Fuseki 2 (requires JDK 8)</h4>
+<div class="highlight"><pre><span></span>wget http://mirrors.whoishostingthis.com/apache/jena/binaries/apache-jena-fuseki-2.4.1.tar.gz
+tar -zxvf
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+</pre></div>
+
+
+<p>To test fuseki server</p>
+<div class="highlight"><pre><span></span>~/apache-jena-fuseki-2.4.1/fuseki-server --update --loc=angioexplain /angioexplain
+</pre></div>
+
+
+<p>Open browser and got to <code>localhost:3030</code></p>
+<p><br></p>
+<h4>Miniconda3</h4>
+<div class="highlight"><pre><span></span>wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+</pre></div>
+
+
+<p>then add below line to <code>.bashrc</code>, restart terminal and check installation with <code>conda -V</code>.</p>
+<p><code>export PATH="/home/username/miniconda3/bin:$PATH"</code></p>
+<h4>Misc.</h4>
+<ul>
+<li>
+<p><code>sudo apt-get install terminator</code></p>
 </li>
-</ul>
-<h3>Start Zookeeper, Kafka Server and Kafka Connect</h3>
-<ul>
-<li>Pre-requisite: Kafka aded to PATH</li>
-<li>Only when Zookeeper is up and running you can start a Kafka server (that will connect to Zookeeper).</li>
-</ul>
-<div class="highlight"><pre><span></span>zookeeper-server-start.sh config/zookeeper.properties
-kafka-server-start.sh config/server.properties
-connect-distributed.sh config/connect-distributed.properties
-</pre></div>
-
-
-<h3>Topics</h3>
-<div class="highlight"><pre><span></span>kafka-topics.sh --zookeeper localhost:2181 --create --topic &quot;gtfs&quot; --partitions 1 --replication-factor 1
-kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list
-kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;g.*&#39;
-kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;.*ksql.*&#39;
-</pre></div>
-
-
-<h3>Producers</h3>
-<div class="highlight"><pre><span></span>kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic topic_name
-</pre></div>
-
-
-<p>Piping a JSON file into a Topic:</p>
-<div class="highlight"><pre><span></span>file_name.json | kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic topic_name
-</pre></div>
-
-
-<h3>Consumers</h3>
-<p>This tool helps to read data from Kafka topics and outputs it to standard output.</p>
-<div class="highlight"><pre><span></span>kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --from-beginning --property print.key=true --property key.separator=&quot;-&quot; --property print.timestamp=true
-</pre></div>
-
-
-<h3>Faust</h3>
-<p>Note: append -p 6067 to the line below to use a different port.</p>
-<div class="highlight"><pre><span></span>$ python script.py worker 
-</pre></div>
-
-
-<h3>Other Useful Commands</h3>
-<ul>
-<li><code>kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list</code></li>
-<li><code>kafka-consumer-groups.sh  --list --bootstrap-server localhost:9092</code></li>
-<li><code>zookeeper-shell.sh localhost:2181 ls /brokers/ids</code> to list active brokers. </li>
+<li>
+<p>VSCode Run(Compile): Shit+Ctrl+B </p>
+</li>
+<li>
+<p>to view a .gv GraphViz file (will crate a pdf)</p>
+<p>f = Source.from_file('file-name.gv')
+f.render()</p>
+</li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./kafka.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/kafka.html" rel="tag">Kafka</a>
+                    <a href="./software.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
                 </div>
-            </article>            <h4 class="date">Nov 23, 2017</h4>
+            </article>            <h4 class="date">Nov 24, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./kafka_connect.html" rel="bookmark" title="Permanent Link to &quot;Kafka Connect Cheatsheet&quot;">Kafka Connect Cheatsheet</a>
+                    <a href="./databases.html" rel="bookmark" title="Permanent Link to &quot;Databases&quot;">Databases</a>
                 </h2>
 
                 
                 
 
-                <h3>Connectors</h3>
-<p>In this demonstration we're going to make use of the Kafka Connect API.</p>
-<p><a href="https://docs.confluent.io/current/connect/references/restapi.html">See the documentation for more information on any of these actions</a>.</p>
-<p>To get a list of connectors that are loaded in to the Kafka Connect cluster</p>
-<div class="highlight"><pre><span></span><span class="n">curl</span><span class="w"> </span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8083</span><span class="o">/</span><span class="n">connector</span><span class="o">-</span><span class="n">plugins</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="k">tool</span><span class="w"></span>
+                <h3>Postgres</h3>
+<h4>install postgres and postgis</h4>
+<div class="highlight"><pre><span></span>$  sudo apt install postgis postgresql-13-postgis-3
+$ sudo -u postgres psql
+<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \password postgres</span>
+<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \q</span>
 </pre></div>
 
 
-<h4>Viewing Connectors</h4>
-<p>First, we can view connector-plugins:</p>
-<div class="highlight"><pre><span></span>curl http://localhost:8083/connector-plugins <span class="p">|</span> python -m json.tool
-</pre></div>
-
-
-<h4>Create a Connector</h4>
-<p>Lets create a connector. We'll dive into more details on how this works later.</p>
-<div class="highlight"><pre><span></span>curl -X POST -H <span class="s1">&#39;Content-Type: application/json&#39;</span> -d <span class="s1">&#39;{</span>
-<span class="s1">    &quot;name&quot;: &quot;first-connector&quot;,</span>
-<span class="s1">    &quot;config&quot;: {</span>
-<span class="s1">        &quot;connector.class&quot;: &quot;FileStreamSource&quot;,</span>
-<span class="s1">        &quot;tasks.max&quot;: 1,</span>
-<span class="s1">        &quot;file&quot;: &quot;/var/log/journal/confluent-kafka-connect.service.log&quot;,</span>
-<span class="s1">        &quot;topic&quot;: &quot;kafka-connect-logs&quot;</span>
-<span class="s1">    }</span>
-<span class="s1">  }&#39;</span> <span class="se">\</span>
-  http://localhost:8083/connectors
-</pre></div>
-
-
-<h4>List connectors</h4>
-<p>We can list all configured connectors with:</p>
-<div class="highlight"><pre><span></span>curl http://localhost:8083/connectors <span class="p">|</span> python -m json.tool
-</pre></div>
-
-
-<p>You can see our connector in the list.</p>
-<h4>Detailing connectors</h4>
-<p>Let's list details on our connector:</p>
-<div class="highlight"><pre><span></span>curl http://localhost:8083/connectors/first-connector <span class="p">|</span> python -m json.tool
-</pre></div>
-
-
-<h4>Pausing connectors</h4>
-<p>Sometimes its desirable to pause or restart connectors:</p>
-<p>To view status:</p>
-<div class="highlight"><pre><span></span>curl http://localhost:8083/connectors/first-connector/status <span class="p">|</span> python -m json.tool
-</pre></div>
-
-
-<p>To pause:</p>
-<div class="highlight"><pre><span></span>curl -X PUT http://localhost:8083/connectors/first-connector/pause 
-</pre></div>
-
-
-<p>To restart (note this is a POST command!):</p>
-<div class="highlight"><pre><span></span>curl -X POST http://localhost:8083/connectors/first-connector/restart
-</pre></div>
-
-
-<h4>Deleting connectors</h4>
-<p>Finally, to delete your connector:</p>
-<div class="highlight"><pre><span></span>curl -X DELETE http://localhost:8083/connectors/first-connector
-</pre></div>
+<p>check installed version(s): <code>dpkg -l | grep postgres</code></p>
+<h4>postgres user authentication error</h4>
+<p><code>sudo nano /etc/postgresql/13/main/pg_hba.conf</code></p>
+<p>CHANGE FROM</p>
+<p><code>local   all     postgres     peer</code></p>
+<p>TO</p>
+<p><code>local   all      postgres    trusted</code></p>
+<p>then 
+sudo service postgresql restart</p>
+<h4>run in pgadmin4</h4>
+<p><code>CREATE EXTENSION postgis;</code></p>
+<ul>
+<li>
+<p>http://www.orbital.co.ke:8080/opengeo-docs/dataadmin/pgGettingStarted/shp2pgsql.html</p>
+</li>
+<li>
+<p>test: <code>psql -U postgres -d &lt;DBNAME&gt; -c "SELECT postgis_version()"</code></p>
+</li>
+<li>
+<p>syntax: <code>shp2pgsql -I -s &lt;SRID&gt; &lt;PATH/TO/SHAPEFILE&gt; &lt;SCHEMA&gt;.&lt;DBTABLE&gt; | psql -U postgres -d &lt;DBNAME&gt;</code></p>
+</li>
+<li>
+<p>example: <code>shp2pgsql -I -s 4326  dublinbus/Dublin_Bus.shp  shp_dublinbus | psql -U postgres -d dublinbus</code></p>
+</li>
+</ul>
+<h3>Utilities: ogr2ogr</h3>
+<ul>
+<li>https://gis.stackexchange.com/questions/65917/can-i-append-to-different-tables-using-ogr2ogr</li>
+<li>https://www.bostongis.com/PrinterFriendly.aspx?content_name=ogr_cheatsheet</li>
+<li>https://www.mankier.com/1/ogr2ogr</li>
+</ul>
+<h4>geojson to shp</h4>
+<p><code>ogr2ogr -f "ESRI Shapefile" destination_data.shp "dcc_public_bin_locations.geojson"</code></p>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./kafka_connect.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/kafka.html" rel="tag">Kafka</a>
+                    <a href="./databases.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
                 </div>
             </article>
 
@@ -209,7 +321,7 @@ kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;.*ksql.*&#39;
 
                     <a href="./index14.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 13 of 25</span>
+                    <span>Page 13 of 26</span>
                 </div>
 
             <div class="clear"></div>

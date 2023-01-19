@@ -4,10 +4,10 @@
         <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>code snippets etc. | Azure Databricks</title>
-    <link rel="shortcut icon" type="image/png" href="../favicon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
-    <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
-    <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
@@ -17,13 +17,13 @@
     <header>
         <nav>
             <ul>
-                <li><a href="../">Home</a></li>
+                <li><a href="./">Home</a></li>
                 <li><a href="https://github.com/raoulbia">GitHub</a></li>
-                <li><a href="../archives">Archives</a></li>
+                <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
         <div class="header_box">
-            <h1><a href="../">code snippets etc.</a></h1>
+            <h1><a href="./">code snippets etc.</a></h1>
         </div>
     </header>
     <div id="wrapper">
@@ -31,7 +31,7 @@
 
             <article class="post">
                 <h2 class="title">
-                    <a href="../drafts/azure_databricks.html" rel="bookmark" title="Permanent Link to &quot;Azure Databricks&quot;">Azure Databricks</a>
+                    <a href="./azure_databricks.html" rel="bookmark" title="Permanent Link to &quot;Azure Databricks&quot;">Azure Databricks</a>
                 </h2>
 
                 
@@ -46,22 +46,32 @@
 <li>in AKV we create a secret </li>
 <li>in ADB we create a secret scope</li>
 <li>the secet scope points to the AKV URI abd Resource ID</li>
-<li>in ADB notebook re reference</li>
-<li>the stoage account name</li>
+<li>in ADB notebook we reference</li>
+<li>the storage account name</li>
 <li>the name of the ADB secret scope</li>
 <li>the name of the AKV secret     </li>
 </ul>
 <p><br></p>
 <p>Detailed</p>
 <ol>
-<li>Create Key Vault resource</li>
 <li>
-<p>go to resource &gt; Secrets</p>
+<p>Create a <strong>Key Vault</strong> resource (or use existing one)</p>
+</li>
+<li>
+<p>go to Key Vault &gt; Secrets</p>
 <ul>
 <li>under settings &gt; +Generate/Import</li>
 <li>provide recognisable <strong>key vault secret name</strong> e.g. StorageAccountSecret</li>
 <li>provide storage key for the Azure Blob storage account</li>
 <li>NOTE: secret value must be changed every 3 months </li>
+</ul>
+</li>
+<li>
+<p>go to Key Vault <strong><em>Access policies</em></strong></p>
+<ul>
+<li>click <em>Create</em></li>
+<li>select <em>Get</em> and <em>List</em> for <em>Key permissions</em> and <em>Secret permissions</em></li>
+<li>in the search box enter <em>"AzureDatabricks"</em>, select it when it shows up and click next and create all the way</li>
 </ul>
 </li>
 <li>
@@ -96,7 +106,9 @@ except:
 
 
 <p><br></p>
-<h4>Service Principal for DBFS</h4>
+<p>Useful link: <a href="https://stackoverflow.com/questions/56537214/creating-a-secret-scope-in-databricks-backed-by-azure-key-vault-fails">Creating a Secret Scope in Databricks backed by Azure Key Vault fails</a></p>
+<p><br></p>
+<h4>Service Principal Approach</h4>
 <ol>
 <li>Azure Active Directory &gt; App Registration</li>
 <li>give recognisable name e.g. ADLSApp</li>
@@ -122,8 +134,8 @@ except:
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="../drafts/azure_databricks.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="../category/cloud.html" rel="tag">Cloud</a>
+                    <a href="./azure_databricks.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/cloud.html" rel="tag">Cloud</a>
                 </div>
             </article>
             <div class="clear"></div>
