@@ -4,7 +4,6 @@ Category: Cloud
 Slug: azure_cost_management_and_sla
 Summary: Azure Cost Management and SLA
 Status: draft
-Status: draft
 
 <br>
 
