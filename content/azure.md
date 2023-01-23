@@ -6,8 +6,20 @@ Summary: Azure
 
 <br>
 
+### Misc.
 
-#### AZ-900
+#### Resouce Groups
+
+* When creating a Databricks resource, Databricks will itself create a separate resource group (RG) with a storage account. This RG cannot be deleted via the porta;. See here for more: https://stackoverflow.com/questions/60694149/unable-to-remove-azure-databricks-managed-resource-group
+
+### Azure ARM
+
+#### Deploy via Powershell
+
+* `New-AzResourceGroup RG01 "South Central US"`
+* `New-AzResourceGroupDeployment` adds a deployment to an existing resource group. (https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-9.3.0)
+
+### AZ-900
 
 * [Azure Cloud: Benefits and Categories]({filename}./azure_cloud_concepts.md)
 * [Azure Architectural Components]({filename}./azure_architectural_components.md)
