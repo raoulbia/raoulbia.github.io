@@ -19,6 +19,12 @@ Summary: Azure
 * `New-AzResourceGroup RG01 "South Central US"`
 * `New-AzResourceGroupDeployment` adds a deployment to an existing resource group. (https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-9.3.0)
 
+#### Useful Links
+
+* https://samcogan.com/deploying-resource-groups-with-arm-templates/
+
+<br>
+
 ### AZ-900
 
 * [Azure Cloud: Benefits and Categories]({filename}./azure_cloud_concepts.md)
