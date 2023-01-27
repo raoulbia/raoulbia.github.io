@@ -21,6 +21,20 @@ else:
  logger.info(f'Folder was created: {self.output_dir}')
 ```
 
+#### mkdir if not exists
+
+```
+from pathlib import Path
+
+TODAY = date.today()
+outdir = Path.cwd() / f"outputs/{str(TODAY)}"#.replace('-', '')
+
+if not os.path.exists(outdir):  
+  os.makedirs(outdir)
+  print("The new directory is created!")
+outdir
+```
+
 #### limited FOR loop
 
 `for i, elem in zip(range(100), elems[::10])` where `[::10]` is every 10th
