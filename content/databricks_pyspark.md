@@ -5,21 +5,29 @@ Slug: databricks_pyspark
 Summary: Databricks PySpark
 
 
-#### Create Table from DataFrame
+#### Create Delta Table from DataFrame
 ```
 df.write.format("delta").mode("overwrite").saveAsTable("schema_name.table_name")
 ```
 
+<br>
+
+
+#### Create Temp View
+```
+df.createOrReplaceTempView("my_temp_view")
+```
+
+<br>
+
 #### Create Empty Table 
 ```
-spark.sql("CREATE OR REPLACE TABLE team_data.bob_tbl(GPI_NO STRING, 
-                                                     DAY_SPLY STRING, 
-                                                     RX INT, 
-                                                     QTY Decimal(10,3), 
-                                                     IC Decimal(10,2), 
-                                                     AWP Decimal(15,8), 
-                                                     MBR INT)")
+spark.sql("CREATE OR REPLACE TABLE team_data.bob_tbl(COL1 STRING, 
+                                                     COL2 INT, 
+                                                     COL3 Decimal(10,3)")
 ```
+
+<br>
 
 #### Save DataFrame as XLS
 ```python
@@ -29,7 +37,9 @@ spark.sql("CREATE OR REPLACE TABLE team_data.bob_tbl(GPI_NO STRING,
  .option("header", "true")
  .option("dataAddress", "'Sheet Name'!A1")
  .save("/mnt/userspace/custom_dataset/path-to-dir/filename.xlsx"))
- ```
+```
+
+<br>
 
 #### Save DataFrame as CSV
 
@@ -46,6 +56,38 @@ To save a DataFrame as CSV requires three steps.
  .save("/mnt/userspace/custom_dataset/path-to-dir/"))
 ```
 
+<br>
+
+#### Load CSV Then Save As Parquet
+```
+from pyspark.sql.types import *
+
+# Define Schema
+schema = StructType([StructField('COL1', LongType(), True) \
+                    ,StructField('COL2',StringType(), True) \
+                    ,StructField('COL3', TimestampType(), True) ])
+
+# File location and type
+file_location = "/mnt/userspace/custom_dataset/username/file.csv"
+file_type = "csv"
+
+# Make DF from CSV file
+df = spark.read.format(file_type) \
+  .schema(schema) \
+  .option("header", "true") \
+  .option("sep", ",") \
+  .load(file_location)
+  
+# Save DF as Parquet
+(df.write
+ .mode("overwrite")
+ .format("parquet")
+ .option("header", "true")
+ .save("/mnt/userspace/custom_dataset/username/file.parquet"))
+```
+
+<br>
+
 #### Parameterised Query
 
 ```python
@@ -59,7 +101,7 @@ df = spark.sql("""SELECT c.claim_nbr
                """.format(SCHEMA_A, SCHEMA_B))
 ```
 
-#### Create Table from DataFrame with overwriteSchema
+#### Create Table from DataFrame with *overwriteSchema*
 
 About overwriteSchema: if any new column is added the command will not fail but overwrite the delta table with new schema. 
 [Read More](https://mungingdata.com/delta-lake/schema-enforcement-evolution-mergeschema-overwriteschema/)
