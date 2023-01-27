@@ -5,7 +5,7 @@ Slug: databricks_miscellaneous
 Summary: Databricks Misc.
 
 
-a#### Import another notebook
+a#### Import Notebook
 ```
 %run "../../schemas/master_config"
 ```
