@@ -5,12 +5,12 @@ Slug: databricks_miscellaneous
 Summary: Databricks Misc.
 
 
-#### Import another notebook
+a#### Import another notebook
 ```
 %run "../../schemas/master_config"
 ```
 
-#### Fitler DatFrame rows by Column values
+#### Fitler DataFrame rows by Column values
 ```
 df = df.filter( (df.COL_A == i) & (df.COL_B.isin(['R','S'])) )
 ```
