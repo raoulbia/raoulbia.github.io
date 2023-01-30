@@ -37,8 +37,9 @@ steps:
     # mkdir ./pelican-themes/blue-penguin
     git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes/theme/blue-penguin
     pelican-themes --install ./pelican-themes/theme/blue-penguin
-    pelican content -o output -s pelicanconf.py &&
-    ghp-import output -r origin -b master &&
+    pelican content -o output -s pelicanconf.py
+    ghp-import output -r origin -b master
+    git config --global pull.ff only
     git pull https://raoulbia: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@github.com/raoulbia/raoulbia.github.io master
     git push https://raoulbia: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@github.com/raoulbia/raoulbia.github.io master
   displayName: 'Run a multi-line script'
