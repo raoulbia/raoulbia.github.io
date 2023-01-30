@@ -34,7 +34,7 @@ steps:
     pip install jinja2==3.0
     # mkdir ./pelican-themes/blue-penguin
     git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes
-    pelican-themes --install ./pelican-themes/blue-penguin --verbose
+    pelican-themes --install ./pelican-themes/blue-penguin
     pelican content -o output -s pelicanconf.py &&
     ghp-import output -r origin -b master &&
     git push origin master
