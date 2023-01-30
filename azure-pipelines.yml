@@ -16,9 +16,11 @@ steps:
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
-    virtualenv .venv
-    .\.venv\Scripts\activate
+    virtualenv ~/virtualenvs/pelican
+    cd ~/virtualenvs/pelican
+    . bin/activate
     pip install pelican
+    pip install Markdown
     mkdir ./pelican-themes/blue-penguin
     git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes
     pelican-themes --install ./pelican-themes/blue-penguin --verbose
