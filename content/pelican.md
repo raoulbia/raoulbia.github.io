@@ -162,7 +162,7 @@ steps:
     pelican-themes --install ./pelican-themes/theme/blue-penguin
     pelican content -o output -s pelicanconf.py
     ghp-import output -r origin -b master
-    git push https://raoulbia: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@github.com/raoulbia/raoulbia.github.io master --force
+    git push https://<usernbame>:<PAT Token>@github.com/username/repo.git master --force
   displayName: 'Run a multi-line script'
 ```
 
