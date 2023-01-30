@@ -18,8 +18,9 @@ steps:
     echo See https://aka.ms/yaml
     virtualenv .venv
     .\.venv\Scripts\activate
-    python -m pip install -U pip
     pip install pelican
+    git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes
+    pelican-themes --install ./pelican-themes/blue-penguin --verbose
     pelican content -o output -s pelicanconf.py &&
     ghp-import output -r origin -b master &&
     git push origin master
