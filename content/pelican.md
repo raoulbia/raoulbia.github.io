@@ -124,6 +124,49 @@ project source code (pelican branch). To publish either run the code below.
 
 Try visiting your page e.g. <http://raoulbia.github.io> -- you should see your blog!
 
+<br>
+
+### DevOps YAML File
+```
+trigger:
+- pelican
+
+pool:
+  vmImage: ubuntu-latest
+strategy:
+  matrix:
+    Python37:
+      python.version: '3.7'
+  maxParallel: 2
+steps:
+- checkout: self
+  persistCredentials: true
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(python.version)'
+
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+    virtualenv ~/virtualenvs/pelican
+    cd ~/virtualenvs/pelican
+    . bin/activate
+    pip install Markdown==2.6.6
+    pip install pelican==3.6.3
+    pip install ghp-import==0.4.1
+    pip install jinja2==3.0
+    git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes/theme/blue-penguin
+    pelican-themes --install ./pelican-themes/theme/blue-penguin
+    pelican content -o output -s pelicanconf.py
+    ghp-import output -r origin -b master
+    git push https://raoulbia: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@github.com/raoulbia/raoulbia.github.io master --force
+  displayName: 'Run a multi-line script'
+```
+
+<br>
 
 #### Useful Links
 
