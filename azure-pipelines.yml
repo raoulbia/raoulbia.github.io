@@ -23,8 +23,8 @@ steps:
     pip install pelican==3.6.3
     pip install ghp-import==0.4.1
     pip install Markdown
-    mkdir ./pelican-themes/blue-penguin
-    git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes
+    # mkdir ./pelican-themes/blue-penguin
+    # git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes
     pelican-themes --install ./pelican-themes/blue-penguin --verbose
     pelican -m content -o output -s pelicanconf.py &&
     ghp-import output -r origin -b master &&
