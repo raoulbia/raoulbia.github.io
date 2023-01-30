@@ -8,7 +8,7 @@ Summary: Azure
 
 ### Misc.
 
-#### Resouce Groups
+#### Resource Groups
 
 * When creating a Databricks resource, Databricks will itself create a separate resource group (RG) with a storage account. This RG cannot be deleted via the porta;. See here for more: https://stackoverflow.com/questions/60694149/unable-to-remove-azure-databricks-managed-resource-group
 
