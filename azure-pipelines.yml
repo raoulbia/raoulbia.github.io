@@ -19,12 +19,14 @@ steps:
     virtualenv ~/virtualenvs/pelican
     cd ~/virtualenvs/pelican
     . bin/activate
-    pip install pelican
+    pip install Markdown==2.6.6
+    pip install pelican==3.6.3
+    pip install ghp-import==0.4.1
     pip install Markdown
     mkdir ./pelican-themes/blue-penguin
     git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes
     pelican-themes --install ./pelican-themes/blue-penguin --verbose
-    pelican content -o output -s pelicanconf.py &&
+    pelican -m content -o output -s pelicanconf.py &&
     ghp-import output -r origin -b master &&
     git push origin master
   displayName: 'Run a multi-line script'
