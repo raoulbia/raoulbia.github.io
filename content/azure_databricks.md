@@ -1,5 +1,5 @@
 Title: Azure Databricks
-Date: 2018-03-28
+Date: 2022-12-24
 Category: Cloud
 Slug: azure_databricks
 Summary: Azure Databricks
