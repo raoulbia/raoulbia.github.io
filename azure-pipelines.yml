@@ -40,7 +40,4 @@ steps:
     git config --global user.email "raoulbia@gmail.com"
     git config --global user.name "raoulbia"
     git push https://raoulbia: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@github.com/raoulbia/raoulbia.github.io master --force
-    git add -A &&
-    git commit -a -m "Update" &&
-    git push -u https://raoulbia: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@github.com/raoulbia/raoulbia.github.io pelican
   displayName: 'Run a multi-line script'
