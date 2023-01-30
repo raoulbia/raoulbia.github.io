@@ -29,17 +29,13 @@ steps:
     virtualenv ~/virtualenvs/pelican
     cd ~/virtualenvs/pelican
     . bin/activate
-    # rm -r /usr/local/lib/python3.10/site-packages
     pip install Markdown==2.6.6
     pip install pelican==3.6.3
     pip install ghp-import==0.4.1
     pip install jinja2==3.0
-    # mkdir ./pelican-themes/blue-penguin
     git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes/theme/blue-penguin
     pelican-themes --install ./pelican-themes/theme/blue-penguin
     pelican content -o output -s pelicanconf.py
     ghp-import output -r origin -b master
-    # git config --global pull.ff only
-    # git pull https://raoulbia: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@github.com/raoulbia/raoulbia.github.io rebase
     git push https://raoulbia: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@github.com/raoulbia/raoulbia.github.io master --force
   displayName: 'Run a multi-line script'
