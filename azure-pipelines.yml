@@ -19,6 +19,7 @@ steps:
     virtualenv ~/virtualenvs/pelican
     cd ~/virtualenvs/pelican
     . bin/activate
+    rm -r /usr/local/lib/python3.10/site-packages
     pip install Markdown==2.6.6
     pip install pelican==3.6.3
     pip install ghp-import==0.4.1
