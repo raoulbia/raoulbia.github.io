@@ -10,7 +10,7 @@ Summary: Databricks Misc.
 %run "../../schemas/master_config"
 ```
 
-#### Filter DataFrame Rows by Column Values
+#### Filter Dataframe Rows by Column Values
 ```
 df = df.filter( (df.COL_A == i) & (df.COL_B.isin(['R','S'])) )
 ```
