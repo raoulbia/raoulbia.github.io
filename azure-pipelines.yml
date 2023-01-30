@@ -14,6 +14,8 @@ strategy:
       python.version: '3.7'
   maxParallel: 2
 steps:
+- checkout: self
+  persistCredentials: true
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '$(python.version)'
@@ -34,8 +36,8 @@ steps:
     pip install jinja2==3.0
     # mkdir ./pelican-themes/blue-penguin
     git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes/theme/blue-penguin
-    pelican-themes --install ./pelican-themes/blue-penguin
+    pelican-themes --install ./pelican-themes/theme/blue-penguin
     pelican content -o output -s pelicanconf.py &&
     ghp-import output -r origin -b master &&
-    git push origin master
+    git push https://raoulbia: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@github.com/raoulbia/raoulbia.github.io master
   displayName: 'Run a multi-line script'
