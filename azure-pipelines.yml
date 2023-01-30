@@ -10,8 +10,6 @@ pool:
   vmImage: ubuntu-latest
 strategy:
   matrix:
-    Python36:
-      python.version: '3.6'
     Python37:
       python.version: '3.7'
   maxParallel: 2
@@ -37,7 +35,7 @@ steps:
     # mkdir ./pelican-themes/blue-penguin
     # git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes
     pelican-themes --install ./pelican-themes/blue-penguin --verbose
-    pelican -m content -o output -s pelicanconf.py &&
+    pelican content -o output -s pelicanconf.py &&
     ghp-import output -r origin -b master &&
     git push origin master
   displayName: 'Run a multi-line script'
