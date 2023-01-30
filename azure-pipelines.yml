@@ -16,6 +16,7 @@ steps:
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
+    pip install pelican
     pelican content -o output -s pelicanconf.py &&
     ghp-import output -r origin -b master &&
     git push origin master
