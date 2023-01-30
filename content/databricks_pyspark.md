@@ -29,7 +29,7 @@ spark.sql("CREATE OR REPLACE TABLE team_data.bob_tbl(COL1 STRING,
 
 <br>
 
-#### Save DataFrame as XLS
+#### Save Dataframe as XLS
 ```python
 (spark.createDataFrame(df).write
  .mode("overwrite")
