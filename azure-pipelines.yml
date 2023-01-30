@@ -19,6 +19,7 @@ steps:
     virtualenv .venv
     .\.venv\Scripts\activate
     pip install pelican
+    mkdir ./pelican-themes/blue-penguin
     git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes
     pelican-themes --install ./pelican-themes/blue-penguin --verbose
     pelican content -o output -s pelicanconf.py &&
