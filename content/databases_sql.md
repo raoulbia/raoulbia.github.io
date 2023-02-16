@@ -4,7 +4,86 @@ Category: Databases
 Slug: sql
 Summary: SQL
 
-#### Sample Queries
+
+
+### Advanced SQL – Window Functions (LinkedIn Learning)
+
+#### Blank OVER()
+
+* Blank OVER() clause will make the window consider the whole set
+
+
+#### Filtering data
+
+* when using a subquery in a SELECT statement, and the sub-query contains a WHERE clause, then the WHERE clause must be duplicated in the main query (see 2.2 3:25)
+* with WINDOW functions, it's enough to filter in the main query WHERE clause, and that data is all that the WINDOW funtions sees!
+
+#### Non-correlated Subquery Example
+
+* Example of non-correlated subquery i.e. which will be executed only once - see 2.3 3:20
+
+#### Dual Purpose of ORDER BY clause 
+
+* see 2.3 3:45
+* Aggregate and frame offset window functions are inherently order agnostic. For these, ORDER BY is used for defining frames that further limit the rows visible to the function 
+* For rank, row offset, and distribution window functions, ORDER BY defines how the function is evaluated.
+  
+#### Framing Rows and Ranging
+
+* UNBOUNDED PRECEDING, UNBOUNDED FOLLOWING, CURRENT ROW, 1 PRECEDING, 1 FOLLOWING etc
+* can be applied to ROWS, RANGES and GROUPS
+
+* ROWS frame boundaries are specified using row position count
+	* e.g. one row, 20 row, or all the rows that either precede or follow the current one
+	* Row frames don't care what values are in these rows, they just count rows
+	* N PRECEDING and N FOLLOWING, point to any number of rows before or after the current one
+
+* RANGE frames are specified using value ranges that either precede or follow the current row 
+	* regardless of how many rows they cover
+	* RANGE frames are data type dependent. 
+	* Example: an integer range of 10 represents all rows that have a sorting value which is plus or minus 10 from the current rows value
+	* Value, NOT position
+	* CUREENT ROW for RANGE frames doesn't refer to the current row's position like it did with the ROWS frame. 
+	* For RANGE, it refers to the current row's value, and that includes all rows that share the same value. 
+
+* GROUPS frames are defined using the number of peer groups following or preceding the current row's group. - see 3.1 05:51
+	* A peer group is a set of rows that share the same sorting values. 
+	* So when evaluated for the second row in this partition, a group frame that begins with one PRECEDING and ends with one FOLLOWING, will cover all partition rows 
+	
+#### The Window Clause
+
+![](img/the_window_clause.png)
+
+#### Windows vs Group Aggregate Functions
+
+* Aggregate Window Functions are defined with the OVER clause. 
+  * They see all the rows or row groups as defined by their window specification. 
+  * They don't see individual rows within each row group. 
+* Aggregate Grouped Functions 
+  * can be used in the HAVING, SELECT, and ORDER BY clauses. 
+  * They see individual rows within each group, but they can't see any row groups other than their own
+  
+![](img/windows_vs_group_aggregate_functions.png)
+
+
+#### RANK Window Functions
+
+* ORDER BY determines the basis for the rank and is mandatory. 
+* a rank of an expression is always relative to others within its partition
+* Framing doesn't make sense for Rank functions
+
+#### RANK vs DENSE_RANK
+
+![](img/rank_vs_dense_rank.png)
+
+#### Ntile
+
+* Ntile segments a partition into as equal as possible n or less segments. 
+* Each segment is called a tile. Ntile assigns each row an integer number out of a monotonically increasing sequence
+  starting with one and ending either at N or the number of rows within the partition in case there are fewer of those.
+
+
+### Some Sample Queries
 
 ```
 SELECT train, dest, time FROM ( 
