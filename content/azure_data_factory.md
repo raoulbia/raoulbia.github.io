@@ -9,9 +9,10 @@ Summary: Azure Data Factory
 ### Data Ingress
 
 * Excel File with one or more Sheets 
-  * New Dataset > File tab > File System > Excel > select linked service to NAS drive > browse to NAS drive file > select a Sheet name if applicable
+    * New Dataset > File tab > File System > Excel > select linked service to NAS drive > browse to NAS drive file > select a Sheet name if applicable
+  
 * Netezza Table
-  * New Dataset > Database tab > Netezza > select linked service to Netezza > select table
+    * New Dataset > Database tab > Netezza > select linked service to Netezza > select table
 
 
 ### Linked Services
@@ -21,19 +22,19 @@ Summary: Azure Data Factory
 Pre-requisites: 
 
 * Create a **Key Vault** resource
-  * *Secrets* > add a secret holding the Databricks PAT 
-  * ***Access policies***
-    * click *Create*
-    * select *Get* and *List* for *Key permissions* and *Secret permissions*
-    * in the search box enter the name of your Azure Data Factory, select it when it shows up and click next and create all the way
+    * *Secrets* > add a secret holding the Databricks PAT 
+    * ***Access policies***
+        * click *Create*
+        * select *Get* and *List* for *Key permissions* and *Secret permissions*
+        * in the search box enter the name of your Azure Data Factory, select it when it shows up and click next and create all the way
     
 * This requires two linked services
-  * Databrick ls > get it from 'Compute' tab
-  * within this ls you are asked to specify an AKV linked service > click on 'New'
+    * Databrick ls > get it from 'Compute' tab
+    * within this ls you are asked to specify an AKV linked service > click on 'New'
   
 * AKV linked Service
-  * Base URL should be prefilled
-  * Authentication Method: *System Assigned Managed Identity*
+    * Base URL should be prefilled
+    * Authentication Method: *System Assigned Managed Identity*
 
 <br>
 
