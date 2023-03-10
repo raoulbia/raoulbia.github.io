@@ -69,12 +69,12 @@ The *ForEach* activity
 * the source of the *Copy Data* activity uses the following query: *@concat('select * from ', item().table_name,' ', item().where_filter)*. 
 * in the sink of the *Copy Data* activity we pass a dynamic value to parameter *parFile* of the sink Parquet dataset: *@concat(item().table_name,'_NTZ.parquet')*
 
-![](img/ForEach_activity_all.PNG.png)
+![](img/ForEach_activity_all.PNG)
 
 
 The dynamic filename passed to the Parquet dataset is shown below:
 
-![](img/ds_parquet_params_config.PNG.png)
+![](img/ds_parquet_params_config.PNG)
 
 
 
