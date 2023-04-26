@@ -6,31 +6,31 @@ Summary: Interview Prep
 Status: draft
 
 
-![](img/whiteboard_interview_competency_areas.png)
+![](img/whiteboard_interview_competency_areas.jpg)
 
 <br>
 
-![](img/whiteboard_business_knowledge.png)
+![](img/whiteboard_business_knowledge.jpg)
 
 <br>
 
-![](img/whiteboard_confusion_matrix.png)
+![](img/whiteboard_confusion_matrix.jpg)
 
 <br>
 
-![](img/whiteboard_statistical_learning_prediction_inference.png)
+![](img/whiteboard_statistical_learning_prediction_inference.jpg)
 
 <br>
 
-![](img/whiteboard_unbalanced_classes_v2.png)
+![](img/whiteboard_unbalanced_classes_v2.jpg)
 
 <br>
 
-![](img/whiteboard_bias_and_variance.png)
+![](img/whiteboard_bias_and_variance.jpg)
 
 <br>
 
-![](img/whiteboard_bootstrap_x-validation.png)
+![](img/whiteboard_bootstrap_x-validation.jpg)
 
 <br>
 
