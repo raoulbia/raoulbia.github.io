@@ -7,7 +7,7 @@ Status: draft
 
 #### Whiteboard Screenshots
 
-![](img/whiteboard_interview_competency_areas.png)
+![]({static}img/whiteboard_interview_competency_areas.png)
 
 <br>
 
