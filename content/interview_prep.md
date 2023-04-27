@@ -5,6 +5,7 @@ Slug: interview_prep
 Summary: Interview Prep
 Status: draft
 
+#### Whiteboard Screenshots
 
 ![](img/whiteboard_interview_competency_areas.jpg)
 
