@@ -23,7 +23,9 @@ AUTHOR_FEED_RSS = None
 DISPLAY_HEADER = True
 DISPLAY_FOOTER = True
 DISPLAY_HOME   = False
-DISPLAY_MENU   = True
+DISPLAY_MENU   = False
+DISPLAY_PAGES_ON_MENU = False
+DISPLAY_CATEGORIES_ON_MENU = False
 
 # provided as examples, they make ‘clean’ urls. used by MENU_INTERNAL_PAGES.
 #TAGS_URL           = 'tags'
