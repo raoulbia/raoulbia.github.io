@@ -7,31 +7,31 @@ Status: draft
 
 #### Whiteboard Screenshots
 
-![]({static}img/whiteboard_interview_competency_areas.png)
+![](img/whiteboard_interview_competency_areas.PNG)
 
 <br>
 
-![](img/whiteboard_business_knowledge.png)
+![](img/whiteboard_business_knowledge.PNG)
 
 <br>
 
-![](img/whiteboard_confusion_matrix.png)
+![](img/whiteboard_confusion_matrix.PNG)
 
 <br>
 
-![](img/whiteboard_statistical_learning_prediction_inference.png)
+![](img/whiteboard_statistical_learning_prediction_inference.PNG)
 
 <br>
 
-![](img/whiteboard_unbalanced_classes_v2.png)
+![](img/whiteboard_unbalanced_classes_v2.PNG)
 
 <br>
 
-![](img/whiteboard_bias_and_variance.png)
+![](img/whiteboard_bias_and_variance.PNG)
 
 <br>
 
-![](img/whiteboard_bootstrap_x-validation.jpg)
+![](img/whiteboard_bootstrap_x-validation.PNG)
 
 <br>
 
