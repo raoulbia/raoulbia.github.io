@@ -36,7 +36,7 @@ DISPLAY_CATEGORIES_ON_MENU = False
 #CATEGORIES_SAVE_AS = 'categories/index.html'
 ARCHIVES_URL       = 'archives'
 ARCHIVES_SAVE_AS   = 'archives/index.html'
-HOMEPAGE_URL       = 'homepage'
+HOMEPAGE_URL       = 'homepage/index.html'
 HOMEPAGE_SAVE_AS   = 'homepage/index.html'
 
 # use those if you want pelican standard pages to appear in your menu
