@@ -40,7 +40,7 @@ MENU_INTERNAL_PAGES = (
     #('Tags', TAGS_URL, TAGS_SAVE_AS),
     # ('Authors', AUTHORS_URL, AUTHORS_SAVE_AS),
     #('Categories', CATEGORIES_URL, CATEGORIES_SAVE_AS),
-    ('Home', '/homepage'),
+    ('Home', '/homepage/inedx.html'),
     ('Archives', ARCHIVES_URL, ARCHIVES_SAVE_AS),
 )
 # additional menu items
