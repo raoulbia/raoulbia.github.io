@@ -7,7 +7,7 @@ Summary: Azure Databricks
 
 <br>
 
-### Connecting Databricks to Azure Storage Account
+### Connecting Azure Storage Account and Databricks
 
 <br>
   
@@ -15,13 +15,13 @@ Summary: Azure Databricks
 
 High Level
 
-* in AKV we create a secret 
-* in ADB we create a secret scope
-  * the secet scope points to the AKV URI abd Resource ID
-* in ADB notebook we reference
+* in KV we create a secret ;  take note of the KV URI and Resource ID
+* in Databricks we create a secret scope
+  * the secet scope points to the KV URI and Resource ID
+* in Databricks notebook we reference
   * the storage account name
-  * the name of the ADB secret scope
-  * the name of the AKV secret     
+  * the name of the Databricks secret scope
+  * the name of the KV secret     
 
 <br>
 
