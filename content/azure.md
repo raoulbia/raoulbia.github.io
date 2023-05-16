@@ -1,4 +1,4 @@
-Title: Azure
+Title: Azure Fundamental (Notes from AZ-900)
 Date: 2022-12-24
 Category: Azure
 Slug: azure
