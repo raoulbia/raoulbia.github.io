@@ -6,7 +6,23 @@ Summary: Azure
 
 <br>
 
-### Misc.
+### Using Key Vault Secrets in Azure Data Factory
+Key Vault secrets can be used to securely manage connections to services such as NAS drives or Databricks.
+
+#### NAS Drive Linked Service
+* Create a Service Account with priviliges to access a NAS drive
+* create a new secret in KV with the password of the above Service Account
+* use the secret, and the Service Account user name, in ADF when configuring a linked service for NAS drive
+* use the linked service in an ADF Copy data activity
+
+### Databricks Linked Service
+* Generate a token in Databricks and take note of it
+* create a new secret in KV with the above token
+* use the secret in ADF when configuring a linked service for databricks
+* use the linked service in an ADF Databricks notebook activity
+
+
+### Databricks
 
 #### Resource Groups
 
