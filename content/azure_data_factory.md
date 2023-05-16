@@ -1,6 +1,6 @@
 Title: Azure Data Factory
 Date: 2022-12-24
-Category: Azure Data Factory
+Category: Azure Cloud
 Slug: azure_data_factory
 Summary: Azure Data Factory
 
