@@ -1,4 +1,4 @@
-Title: Azure Fundamental (Notes from AZ-900)
+Title: Azure
 Date: 2022-12-24
 Category: Azure
 Slug: azure
@@ -41,7 +41,7 @@ Key Vault secrets can be used to securely manage connections to services such as
 
 <br>
 
-### AZ-900
+### Azure Fundamentals Exam (AZ-900)
 
 * [Azure Cloud: Benefits and Categories]({filename}./azure_cloud_concepts.md)
 * [Azure Architectural Components]({filename}./azure_architectural_components.md)
