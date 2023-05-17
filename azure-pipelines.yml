@@ -29,10 +29,10 @@ steps:
     #virtualenv ~/virtualenvs/pelican
     #cd ~/virtualenvs/pelican
     #. bin/activate
-    pip install pelican-jupyter
+    pip install --upgrade pip
     pip install IPython
     pip install Markdown==2.6.6
-    pip install pelican #==3.6.3
+    pip install pelican ==3.6.3
     pip install ghp-import==0.4.1
     pip install jinja2==3.0
     git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes/theme/blue-penguin
