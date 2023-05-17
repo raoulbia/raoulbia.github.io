@@ -144,5 +144,5 @@ spark.sql("""desc formatted <table name>""").show(100, truncate=False)
 ```
 
 #### Useful Links
-* https://learn.microsoft.com/en-us/azure/databricks/spark/latest/spark-sql/spark-pandas
-* https://www.educba.com/pyspark-withcolumn/
+* [Spark-Pandas](https://learn.microsoft.com/en-us/azure/databricks/spark/latest/spark-sql/spark-pandas)
+* [PySpark withColumn](https://www.educba.com/pyspark-withcolumn/)
