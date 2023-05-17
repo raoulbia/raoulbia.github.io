@@ -15,18 +15,11 @@ Key Vault secrets can be used to securely manage connections to services such as
 * use the secret, and the Service Account user name, in ADF when configuring a linked service for NAS drive
 * use the linked service in an ADF Copy data activity
 
-### Databricks Linked Service
+#### Databricks Linked Service
 * Generate a token in Databricks and take note of it
 * create a new secret in KV with the above token
 * use the secret in ADF when configuring a linked service for databricks
 * use the linked service in an ADF Databricks notebook activity
-
-
-### Databricks
-
-#### Resource Groups
-
-* When creating a Databricks resource, Databricks will itself create a separate resource group (RG) with a storage account. This RG cannot be deleted via the porta;. See here for more: https://stackoverflow.com/questions/60694149/unable-to-remove-azure-databricks-managed-resource-group
 
 ### Azure ARM
 
@@ -52,3 +45,7 @@ Key Vault secrets can be used to securely manage connections to services such as
 * [Azure Network Security]({filename}./azure_network_security.md)
 * [Azure Identity, Governance, Privacy and Compliance Features]({filename}./azure_identity_governance_privacy_compliance.md)
 * [Azure Cost Management and SLA]({filename}./azure_cost_management_and_sla.md)
+
+### Note about creating a Databricks Resource in Azure Portal
+
+* When creating a Databricks resource, Databricks will itself create a separate resource group (RG) with a storage account. This RG cannot be deleted via the porta;. See here for more: https://stackoverflow.com/questions/60694149/unable-to-remove-azure-databricks-managed-resource-group
