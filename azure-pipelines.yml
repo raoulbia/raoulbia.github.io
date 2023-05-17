@@ -25,11 +25,11 @@ steps:
   displayName: 'Run a one-line script'
 
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-    virtualenv ~/virtualenvs/pelican
-    cd ~/virtualenvs/pelican
-    . bin/activate
+    echo Publish myblog changes
+    #virtualenv ~/virtualenvs/pelican
+    #cd ~/virtualenvs/pelican
+    #. bin/activate
+    pip install IPython
     pip install Markdown==2.6.6
     pip install pelican==3.6.3
     pip install ghp-import==0.4.1
