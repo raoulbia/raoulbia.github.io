@@ -44,20 +44,19 @@ MENU_INTERNAL_PAGES = (
 )
 # additional menu items
 MENUITEMS = (
-    ('GitHub', 'https://github.com/raoulbia'),
+    ('GitHub', 'https://github.com/raoulbia')
     # ('StackOverflow', 'https://stackoverflow.com/users/425727/raoulbia')
-)
+    )
 
 
 # Blogroll
-LINKS = (('Pelican', 'http://getpelican.com/'),
-         ('Python.org', 'http://python.org/'),
-         ('Jinja2', 'http://jinja.pocoo.org/'),
-         ('You can modify those links in your config file', '#'),)
+#LINKS = (('Pelican', 'http://getpelican.com/'),
+#         ('Python.org', 'http://python.org/'),
+#         ('Jinja2', 'http://jinja.pocoo.org/'))
 
 # Social widget
-SOCIAL = (('You can add links in your config file', '#'),
-          ('Another social link', '#'),)
+#SOCIAL = (('You can add links in your config file', '#'),
+#          ('Another social link', '#'),)
 
 DEFAULT_PAGINATION = 2
 
