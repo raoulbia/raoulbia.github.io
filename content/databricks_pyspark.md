@@ -5,6 +5,43 @@ Slug: databricks_pyspark
 Summary: Databricks PySpark
 
 
+#### Exporting as CSV from Data Factory
+
+```
+-- save as CSV 
+
+-- step 1 create parquet file
+
+df.coalesce(1).write
+.format("parquet")
+.option("header", "true")
+.mode("overwrite")
+.save(f'{OUTPATH}/{today_nodash}_FDA_Drug_Shortages_Exclusions')
+
+-- step 2 create ADF copy data activity
+
+- requires two datasets
+     a) for the source : New dataset > select File System > parquet
+     b) for the sink: New dataset > select File System > delimited text
+        - note: in the sink dataset
+          - tick the box "First row as header"    
+          - use custom filename in file path e.g. @concat(formatDateTime(utcnow(),'yyyy'), formatDateTime(utcnow(),'MM'), formatDateTime(utcnow(),'dd'), '_FDA_Drug_Shortages_Exclusions.csv')
+   - in the copy data activity "source" settings > select wildcard file path
+   - in the copy data activity "sink" settings 
+        > select "Copy Behaviour" as "Merge"
+        > type ".csv" in File type extension
+```
+<br>
+
+#### Snippets
+```
+df = spark.read.format("parquet").load(file)
+df = (spark.read.format('csv').option('header', 'true').load(file))
+df.write.format("delta").mode("overwrite").saveAsTable("team_data.DXD_OFSH_000_RATIONAL_LIMITS")
+spark.createDataFrame(res, StringType()).write.format("delta").mode("overwrite").saveAsTable("team_data.DXQ_DEFAULT_CEILINGS")
+```
+<br>
+
 #### Create Delta Table from DataFrame
 ```
 df.write.format("delta").mode("overwrite").saveAsTable("schema_name.table_name")
