@@ -29,6 +29,7 @@ steps:
     #virtualenv ~/virtualenvs/pelican
     #cd ~/virtualenvs/pelican
     #. bin/activate
+    pip install pelican-jupyter
     pip install IPython
     pip install Markdown==2.6.6
     pip install pelican==3.6.3
