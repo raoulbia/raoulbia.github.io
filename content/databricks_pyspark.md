@@ -88,20 +88,22 @@ df = spark.read.format(file_type) \
 
 <br>
 
-#### Parameterised Query
+#### Create Spark DF from Pandas DF then Save As Excel or Parquet
 
-```python
-SCHEMA_A = dbutils.widgets.get("<Azure Data Factory Base parameter name 1>")
-SCHEMA_B = dbutils.widgets.get("<Azure Data Factory Base parameter name 2>")
+Note we Save As Parquet if we want to export it as CSV file via ADF Copy data activity
 
-df = spark.sql("""SELECT c.claim_nbr 
-                  FROM {0}.TABLE1 c
-                  LEFT JOIN {1}.TABLE2 p
-                         ON (c.claim_nbr = p.claim_nbr 
-               """.format(SCHEMA_A, SCHEMA_B))
+```
+df_spark = spark.createDataFrame(df, schema=schema)
+df_spark.write.format("delta").mode("overwrite").saveAsTable("team_data.MYTABLE")
+OUTPATH = '/mnt/userspace/custom_dataset/...'
+df = spark.sql('select * from team_data.MYTABLE')
+df.write.format("com.crealytics.spark.excel").option("header", "true").mode("overwrite").save(f'{OUTPATH}/shortages_api_{today}.xlsx')
+df.write.format("parquet").option("header", "true").mode("overwrite").save(f'{OUTPATH}/{today_nodash}_FDA_Drug_Shortages_RxMac')
 ```
 
-#### Create Table from DataFrame with *overwriteSchema*
+<br>
+
+#### Persist Dataframe in Delta Lake
 
 About overwriteSchema: if any new column is added the command will not fail but overwrite the delta table with new schema. 
 [Read More](https://mungingdata.com/delta-lake/schema-enforcement-evolution-mergeschema-overwriteschema/)
@@ -137,6 +139,22 @@ def persist_dataframe(dataframe: object, path: str, schema_name: str, table: str
     # Do we want to partition? if so parse the partition key from the config
     print("\n- Dataframe successfully persisted in Delta Lake\n")
 ```
+<br>
+
+#### Parameterised Query
+
+```python
+SCHEMA_A = dbutils.widgets.get("<Azure Data Factory Base parameter name 1>")
+SCHEMA_B = dbutils.widgets.get("<Azure Data Factory Base parameter name 2>")
+
+df = spark.sql("""SELECT c.claim_nbr 
+                  FROM {0}.TABLE1 c
+                  LEFT JOIN {1}.TABLE2 p
+                         ON (c.claim_nbr = p.claim_nbr 
+               """.format(SCHEMA_A, SCHEMA_B))
+```
+
+<br>
 
 #### Misc.
 ```
