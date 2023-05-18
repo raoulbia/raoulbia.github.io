@@ -13,6 +13,12 @@ DESCRIBE TABLE EXTENDED ORX_IDW_DM_OFSH_INTR_VIEW_PRD.V_D_MEMBER_ADJUD
 DESCRIBE DETAIL ORX_IDW_DM_OFSH_INTR_VIEW_PRD.V_D_MEMBER_ADJUD (only for tables, NOT views)
 DESCRIBE HISTORY table_name
 ```
+```
+today = datetime.today().strftime('%Y-%m-%d')
+today_nodash = today.replace('-','')
+today_slash = datetime.today().strftime('%d/%m/%Y')
+fpath = f"/mnt/userspace/custom_dataset/.../INPUT_FILES/fda_drugshortages_{today}.xlsx"
+```
 
 #### Import Notebook
 ```
