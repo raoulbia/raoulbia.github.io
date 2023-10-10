@@ -57,16 +57,17 @@ Summary: Interview Prep
 * Moving data between layers: Prefect with Jinja and SQL templates
   - Bronze to Silver:		
     + raw data from various sources is ingested into the Bronze layer. 
-    + cleans, deduplicates, and validates 
+    + cleans, deduplicates, and validates
   - Silver to Gold: 
-    + transformed to make fit for purpose for analytics. 
-* transformations, aggregations, and enrichments 
+    + transformed to make fit for purpose for analytics
+    + transformations, aggregations, and enrichments
   - Gold Layer: 
     + optimized for fast querying and analysis. 
     + ETL process may create indexed views, materialized views, or summary tables to facilitate quick data retrieval.
-  - Each stage would have its own set of validation checks, error-handling mechanisms, and monitoring to ensure data integrity and pipeline robustness."
+  - Note: Each stage would have its own set of validation checks, error-handling mechanisms, and monitoring to ensure data integrity and pipeline robustness.
 
-Documentation
+#### Documentation
+
 * Confluence: stakeholders, engagement scope, AS IS process, testing plan & results, hand-over
 * Code: 
   - docstring inputs outputs of functions incl. data type, descriptions 
