@@ -10,10 +10,6 @@ Summary: Interview Prep
 
 <br>
 
-![](img/whiteboard_business_knowledge.png)
-
-<br>
-
 ![](img/whiteboard_confusion_matrix.png)
 
 <br>
