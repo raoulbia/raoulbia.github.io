@@ -70,8 +70,8 @@ Summary: Interview Prep
 
 * Confluence: stakeholders, engagement scope, AS IS process, testing plan & results, hand-over
 * Code: 
-  - docstring inputs outputs of functions incl. data type, descriptions 
-  - PEP8 style guide, linter, pycharm
-  - Adopt Strongly typed coding style although not enforced as such
+  + docstring inputs outputs of functions incl. data type, descriptions 
+  + PEP8 style guide, linter, pycharm
+  + Adopt Strongly typed coding style although not enforced as such
 
 
