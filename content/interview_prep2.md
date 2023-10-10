@@ -7,8 +7,8 @@ Summary: Interview Prep
 #### Data Modelling
 
 * longitudinal data model
-  + track the same subjects over multiple time points
-  + useful for identifying trends, patterns, or impacts of interventions over time
+  * track the same subjects over multiple time points
+  * useful for identifying trends, patterns, or impacts of interventions over time
 * Relational data model
   + Designed for transactional operations, it uses tables to represent entities and their relationships. It's optimized for data integrity and complex queries.
 * Dimensional data model
