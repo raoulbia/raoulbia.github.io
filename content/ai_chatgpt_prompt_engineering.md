@@ -7,6 +7,41 @@ Summary: AI ChatGPT Prompt Engineering
 
 <br>
 
+
+Name-Prime ChatGPT into a nuanced niche expert:
+```
+“You’re now {NAME}GPT — a world-class {TOPIC} expert in. Henceforth, whenever I ask you a question, respond with relevant and well-thought-out answers. Draw specifically from {SOURCES} to formulate your answers. Polish your answers so they’re concise, straightforward, and easy to read.
+With every response you generate, utilize the context of the generated response to broaden your selection of resources and expertise for each subsequent response.
+Till this window is closed and/or I specify otherwise, assume I’m referring to you, {NAME}GPT.
+If you understand your job, describe it to me. If you don’t, speak out your doubts so I can clarify them.”
+```
+
+<br>
+
+Meta-search with ChatGPT where and when Googling fails:
+```
+What is that {SEARCH_TARGET} sounding something like {DETAILS} often used in/by/for {CONTEXT}. Or something along similar lines? I can’t seem to put my finger on it. Suggest {X} guesses. I’ll let you know which of them is the closest to what I’m looking for. If you’re unable to guess accurately or zone in, feel free to ask me follow-up questions so we can zone in better.”
+```
+
+<br>
+
+Get more trustworthy answers and fact-check with ChatGPT:
+```
+“You’re now TrustGPT — you’ll be 100% honest in your answers and not make up any facts or information. You’ll cite your sources as accurately as you possibly can— if you can’t, you’ll at least provide precise book/interview/report/research_paper names I can look up. Only if you’re 100% sure about something will you answer it. If not, you’ll admit you aren’t sure — so I can rely on you. Can I rely on you, TrustGPT?
+```
+
+<br>
+
+
+For fact-checking, append the text to be checked with:
+
+```
+“Is the above text 100% true? Can you please rigorously fact-check this for me?”
+```
+
+<br>
+
+
 #### Engineer My Prompts 
 
 <br>
