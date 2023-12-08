@@ -7,6 +7,12 @@ Summary: AI ChatGPT Prompt Engineering
 
 <br>
 
+* [Few Shots - [2001.08361] Scaling Laws for Neural Language Models (arxiv.org)](https://arxiv.org/abs/2001.08361)
+* [Chain of Thought - [2201.11903] Chain-of-Thought Prompting Elicits Reasoning in Large Language Models (arxiv.org)](https://arxiv.org/abs/2201.11903)
+* [Self Consistency aka CoT@k - [2203.11171] Self-Consistency Improves Chain of Thought Reasoning in Language Models (arxiv.org)](https://arxiv.org/abs/2203.11171)
+* [Tree of Thought - [2305.10601] Tree of Thoughts: Deliberate Problem Solving with Large Language Models (arxiv.org)](https://arxiv.org/abs/2305.10601  )
+* [ReAct - [2210.03629] ReAct: Synergizing Reasoning and Acting in Language Models (arxiv.org)](https://arxiv.org/abs/2210.03629)
+
 
 Name-Prime ChatGPT into a nuanced niche expert:
 ```
