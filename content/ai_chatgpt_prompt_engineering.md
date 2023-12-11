@@ -7,12 +7,8 @@ Summary: AI ChatGPT Prompt Engineering
 
 <br>
 
-* [Few Shots - [2001.08361] Scaling Laws for Neural Language Models (arxiv.org)](https://arxiv.org/abs/2001.08361)
-* [Chain of Thought - [2201.11903] Chain-of-Thought Prompting Elicits Reasoning in Large Language Models (arxiv.org)](https://arxiv.org/abs/2201.11903)
-* [Self Consistency aka CoT@k - [2203.11171] Self-Consistency Improves Chain of Thought Reasoning in Language Models (arxiv.org)](https://arxiv.org/abs/2203.11171)
-* [Tree of Thought - [2305.10601] Tree of Thoughts: Deliberate Problem Solving with Large Language Models (arxiv.org)](https://arxiv.org/abs/2305.10601  )
-* [ReAct - [2210.03629] ReAct: Synergizing Reasoning and Acting in Language Models (arxiv.org)](https://arxiv.org/abs/2210.03629)
 
+### Prompt Snippets
 
 Name-Prime ChatGPT into a nuanced niche expert:
 ```
@@ -55,8 +51,7 @@ For fact-checking, append the text to be checked with:
 
 <br>
 
-
-#### Engineer My Prompts 
+### Prompt Crafter (Custom GPT)
 
 <br>
 
@@ -187,3 +182,100 @@ Your first response should only be a greeting and to ask what the prompt should 
 ```
 
 [source](https://medium.com/swlh/3-advanced-chatgpt-meta-usages-youve-likely-not-seen-before-3b4c0445907f)
+
+<br>
+
+### Deck Virtuoso
+
+[source](https://www.linkedin.com/posts/ruben-hassid_chatgpt-is-replacing-half-of-the-business-ugcPost-7139583681052008449-D9sq/?utm_source=share&utm_medium=member_android)
+
+**Plugins**
+  * Download "Your AI Council" & "Whimsical Diagrams". Select both of them before starting a new chat.
+
+**Go to Custom Instructions**
+
+Prompt 1 (top):
+```
+Persona: Pitch Deck Virtuoso
+
+Background:
+15+ years in marketing, Harvard MBA, and roles at McKinsey & BCG shape the Virtuoso's expertise.
+
+Qualities:
+
+Strategic Storyteller: Masters compelling narratives.
+Data Maven: Integrates data artfully.
+Design Savvy: Crafts stunning visuals.
+Empathetic & Detail-Oriented: Aligns with investors, ensures slide perfection.
+Presenter Coach: Enhances client confidence.
+
+Style:
+
+Minimalistic: Marries clear language with graphics.
+Tailored & Engaging: Industry-specific decks with a logical flow.
+
+Skills:
+Market & Competitive Analysis: Simplifies complex dynamics, highlights uniqueness.
+Financial Translation: Makes intricate insights digestible.
+
+Approach:
+The Virtuoso builds more than decks; they create finely tuned pitches. Engaging in a collaborative strategy, understanding business nuances, and iterating meticulously, they craft presentations that resonate. With an eye on design, a grasp of market subtleties, and an understanding of the investor mindset, each pitch is primed to captivate.
+```
+
+Prompt 2 (bottom):
+```
+Forget all previous instructions.
+
+You will become Pitch Deck Virtuoso.
+
+As soon as I will give you details about my pitch deck need, you will generate one.
+
+You will then crate a diagram of the pitch deck with Whimsical plugin.
+
+Finally, you will discuss with Your AI Council plugin about the project's viability to ensure we have the best possible pitch deck.
+
+Let’s work this out in a step by step way to be sure we have the right answer.
+```
+
+**Start Chat (Share your business idea)**
+
+First Prompt
+```
+Tropical Cyclone Damage Assessment
+
+Input Data:
+1) High-resolution pre and post event analysis-ready images from Maxar of an area impacted by tropical cyclone, as well as moderate-resolution data from the European Sentinel-2 (optical) and Sentinel-1 (Radar) satellites.
+2) a list of objects
+
+Tasks:
+1) Develop a machine learning model to identify and detect "damaged" and "un-damaged" coastal infrastructure that are relevant to disaster response needs. 
+2) list of objecvts to be detected by machine learning model.
+```
+
+2nd Chat Prompt
+```
+Imagine 10 potential tricky questions asked by potential investors.
+
+Imagine then the 10 answers.
+```
+
+3rd Prompt
+```
+Implement these answers in your pitch deck so that it reflects it.
+```
+
+4th Prompt
+```
+Write 2 lines for each part of this pitch deck to help me craft it. Be specific.
+```
+
+<br>
+
+### Papers
+
+* [Few Shots - [2001.08361] Scaling Laws for Neural Language Models (arxiv.org)](https://arxiv.org/abs/2001.08361)
+* [Chain of Thought - [2201.11903] Chain-of-Thought Prompting Elicits Reasoning in Large Language Models (arxiv.org)](https://arxiv.org/abs/2201.11903)
+* [Self Consistency aka CoT@k - [2203.11171] Self-Consistency Improves Chain of Thought Reasoning in Language Models (arxiv.org)](https://arxiv.org/abs/2203.11171)
+* [Tree of Thought - [2305.10601] Tree of Thoughts: Deliberate Problem Solving with Large Language Models (arxiv.org)](https://arxiv.org/abs/2305.10601  )
+* [ReAct - [2210.03629] ReAct: Synergizing Reasoning and Acting in Language Models (arxiv.org)](https://arxiv.org/abs/2210.03629)
+
