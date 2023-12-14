@@ -181,7 +181,7 @@ Your first response should only be a greeting and to ask what the prompt should 
 
 ```
 
-[source](https://medium.com/swlh/3-advanced-chatgpt-meta-usages-youve-likely-not-seen-before-3b4c0445907f)
+[source](https://medium.com/@smraiyyan/gpt-4-become-a-god-like-prompt-engineer-with-this-single-prompt-79d09a1f443a)
 
 <br>
 
