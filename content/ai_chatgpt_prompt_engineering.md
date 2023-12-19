@@ -7,8 +7,13 @@ Summary: AI ChatGPT Prompt Engineering
 
 <br>
 
+### Gnereal Purpose Prompt Snippets
 
-### Prompt Snippets
+````Before answering, ask me three questions that will help you better answer my questions.````
+
+<br>
+
+### Other Prompt Snippets
 
 Name-Prime ChatGPT into a nuanced niche expert:
 ```
