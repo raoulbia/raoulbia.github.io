@@ -7,7 +7,7 @@ Summary: AI ChatGPT Prompt Engineering
 
 <br>
 
-### Gnereal Purpose Prompt Snippets
+### General Purpose Prompt Snippets
 
 ````Before answering, ask me three questions that will help you better answer my questions.````
 
