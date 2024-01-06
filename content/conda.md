@@ -7,7 +7,7 @@ Summary: Virtual Environments
 
 ### Conda
 
-* `conda create --name <name> python=3.7 -y`
+* `conda create --name <name> python=3.8 -y`
 * `conda activate <name>`
 * `pip install ipykernel`
 * `python -m ipykernel install --user --name=<name>`
