@@ -21,3 +21,7 @@ or
 
     eval $(ssh-agent -s)
     ssh-add ~/.ssh/id_rsa
+
+####  Copy the contents of the SSH key to your clipboard
+
+    clip < ~/.ssh/id_rsa.pub
