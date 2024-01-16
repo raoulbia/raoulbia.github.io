@@ -143,7 +143,7 @@ Edit Configuration >> Additional arguments >> `-p no:logging -s`
   
 #### Conda Executable Path on Windows
 
-![](img/pycharm conda executable on windows.JPG)
+    ![](img/pycharm conda executable on windows.JPG)
 
 <br>
 
