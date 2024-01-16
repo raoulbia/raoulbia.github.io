@@ -141,6 +141,10 @@ Edit Configuration >> Additional arguments >> `-p no:logging -s`
 
 * [about setting environment variable e.g. DATA_HOME](https://stackoverflow.com/questions/42708389/how-to-set-environment-variables-in-pycharm)
   
+#### Conda Executable Path on Windows
+
+![](img/pycharm conda executable on windows.JPG)
+
 <br>
 
 ### Jupyter (via Docker)
