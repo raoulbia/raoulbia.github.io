@@ -143,7 +143,7 @@ Edit Configuration >> Additional arguments >> `-p no:logging -s`
   
 #### Conda Executable Path on Windows
 
-    ![](img/pycharm conda executable on windows.JPG)
+    C:\Users\<USER>\AppData\Local\miniconda3\condabin
 
 <br>
 
