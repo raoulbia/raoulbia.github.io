@@ -365,6 +365,11 @@ def patched_send(self, request, **kwargs):
 # Patch the send method
 HTTPAdapter.send = patched_send
 ```
+
+`pip install --trusted-host pypi.org -r .\requirements.txt`
+
+<br>
+
 #### Misc
 
 * `strip()` strips off the new line character
