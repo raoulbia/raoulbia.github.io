@@ -348,6 +348,23 @@ pip install 2to3
 
 Note: `-n` prevents backup files; `-w` instructs to write the conversion
 
+#### SSLCert Error
+
+```
+import requests
+from requests.sessions import Session
+from requests.adapters import HTTPAdapter
+
+# Original function
+original_send = HTTPAdapter.send
+
+def patched_send(self, request, **kwargs):
+    kwargs['verify'] = False  # Disable SSL verification
+    return original_send(self, request, **kwargs)
+
+# Patch the send method
+HTTPAdapter.send = patched_send
+```
 #### Misc
 
 * `strip()` strips off the new line character
