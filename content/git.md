@@ -7,9 +7,9 @@ Summary: Git
 
 #### Set Origin URL with PAT token
 
-    		git remote set-url origin https://<username>:<PAT TOKEN>@github.com/<repo-owner>/<repo-name>.git
+     git remote set-url origin https://<username>:<PAT TOKEN>@github.com/<repo-owner>/<repo-name>.git
 
-            e.g git remote set-url origin https://<PAT TOKEN>@github.com/raoulbia-ai/gpt-playground.git
+e.g. `git remote set-url origin https://<PAT TOKEN>@github.com/raoulbia-ai/gpt-playground.git`
 
 #### Set / Change remote origin url
 
