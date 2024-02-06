@@ -58,7 +58,11 @@ sudo mount -t vboxsf vmtest_kafka ~/shared
 
 #### Desktop size issue
 
-`vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-vbguest`
+```
+vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-vbguest
+vagrant vbguest --do install
+vagrant reload
+```
 
 
 #### Increase Vagrant Box Size
