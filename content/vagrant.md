@@ -60,6 +60,7 @@ sudo mount -t vboxsf vmtest_kafka ~/shared
 
 ```
 vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-vbguest
+vagrant up
 vagrant vbguest --do install
 vagrant reload
 ```
