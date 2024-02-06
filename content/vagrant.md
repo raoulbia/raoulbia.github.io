@@ -21,6 +21,14 @@ Summary: Vagrant VM setup
 
 #### Shared Folders 
 
+**NEW**
+
+On Windows Host, add this to Vagrantfile:
+
+`config.vm.synced_folder "C:/Users/ABCD123/OneDrive - XY/Documents/workproducts-vagrant/linux_mint", "/host_project"`
+
+**OLD**
+
 Vagrantfile: `config.vm.synced_folder HOST GUEST`
 
 where HOST = `"/home/raoulbia/DEV/vagrant_mint"` and GUEST = `"/vagrant"`
@@ -48,12 +56,16 @@ sudo mount -t vboxsf vmtest_kafka ~/shared
 * Set directory permissions on HOST: `chmod 777 -R vmtest_kafka/`
 
 
+#### Desktop size issue
+
+`vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-vbguest`
+
+
 #### Increase Vagrant Box Size
 
 **NEW**
 
-`vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-hostmanager`
-
+`vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-disksize`
 ``
 Vagrant.configure("2") do |config|
   # Your existing configurations like VM box
