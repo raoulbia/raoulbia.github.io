@@ -50,6 +50,23 @@ sudo mount -t vboxsf vmtest_kafka ~/shared
 
 #### Increase Vagrant Box Size
 
+**NEW**
+
+`vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-hostmanager`
+
+``
+Vagrant.configure("2") do |config|
+  # Your existing configurations like VM box
+  config.vm.box = "npalm/mint17-amd64-cinnamon"
+
+  # Plugin configuration to increase disk size
+  config.disksize.size = '50GB'
+
+  # Any other configurations
+end
+``
+**OLD**
+
 Note: it may be easier to just grab a box that has a large size. See above.
 
 1. Clone & Resize
