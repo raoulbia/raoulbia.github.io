@@ -71,7 +71,8 @@ vagrant reload
 **NEW**
 
 `vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-disksize`
-``
+
+````
 Vagrant.configure("2") do |config|
   # Your existing configurations like VM box
   config.vm.box = "npalm/mint17-amd64-cinnamon"
@@ -81,7 +82,8 @@ Vagrant.configure("2") do |config|
 
   # Any other configurations
 end
-``
+````
+
 **OLD**
 
 Note: it may be easier to just grab a box that has a large size. See above.
