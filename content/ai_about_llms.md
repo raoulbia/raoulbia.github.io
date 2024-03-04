@@ -8,11 +8,11 @@ Summary: AI About LLMs
 ### Deploying LLMs Locally
 
 #### Setup ollama for executing open source LLM
-``
+```
 curl -fsSL https://ollama.com/install.sh | sh
 ollama pull llama2:latest
 ollama run llama2
-``
+```
 
 
 ### Finetuning LLMs
