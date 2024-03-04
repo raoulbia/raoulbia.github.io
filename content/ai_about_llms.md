@@ -1,8 +1,9 @@
 Title: AI About LLMs
-Date: 2024-01-02
+Date: 2024-01-01
 Category: AI
 Slug: ai_about_llms
 Summary: AI About LLMs
+
 <br>
 
 ### Deploying LLMs Locally
@@ -14,8 +15,8 @@ ollama pull llama2:latest
 ollama run llama2
 ```
 
-
 ### Finetuning LLMs
+
 * there are a lot of different tokenizers and a tokenizer is really associated with 
 a specific model for each model as it was trained on it. And if you give the wrong tokenizer to your model, it'll 
 be very confused because it will expect different numbers to represent different sets of letters 
