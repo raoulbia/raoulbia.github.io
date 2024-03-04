@@ -36,3 +36,4 @@ tokenizer = AutoTokenizer.from_pretrained("EleutherAI/pythia-70m")
 * [deeplearning.ai - Finetuning LLMs](https://www.deeplearning.ai/short-courses/finetuning-large-language-models/)
 * https://docs.crewai.com/how-to/LLM-Connections/#azure-open-ai-configuration
 * https://kaustavmukherjee-66179.medium.com/create-eexcute-crew-ai-agent-with-llama2-model-without-any-need-og-openai-key-def216cd5f4f
+* https://thoughtbot.com/blog/how-to-use-open-source-LLM-model-locally
