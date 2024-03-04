@@ -43,10 +43,10 @@ MENU_INTERNAL_PAGES = (
     ('Archives', ARCHIVES_URL, ARCHIVES_SAVE_AS) , # note: trailing comma is intentional!
 )
 # additional menu items
-#MENUITEMS = (
+MENUITEMS = (
     ('GitHub', 'https://github.com/raoulbia')
     # ('StackOverflow', 'https://stackoverflow.com/users/425727/raoulbia')
-  #  )
+ )
 
 
 # Blogroll
