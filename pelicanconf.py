@@ -44,7 +44,7 @@ MENU_INTERNAL_PAGES = (
 )
 # additional menu items
 #MENUITEMS = (
- #   ('GitHub', 'https://github.com/raoulbia')
+    ('GitHub', 'https://github.com/raoulbia')
     # ('StackOverflow', 'https://stackoverflow.com/users/425727/raoulbia')
   #  )
 
