@@ -18,10 +18,12 @@ Summary: Linux
 * make script executable: `sudo chmod +x script.sh`
 *  symbolic link: `sudo ln -s confluent-6.1.1/ confluent`
 * list files by name in ascending order of size
-```find /home/vagrant/miniconda3/envs/llamacpp-dev/lib/python3.11/site-packages/gguf_modeldb/gguf_models -type f -name "*.gguf" -exec du -sh {} + | sort -h | awk '{ file=$2; sub(".*/", "", file); print $1, file }'
+```
+find /home/vagrant/miniconda3/envs/llamacpp-dev/lib/python3.11/site-packages/gguf_modeldb/gguf_models -type f -name "*.gguf" -exec du -sh {} + | sort -h | awk '{ file=$2; sub(".*/", "", file); print $1, file }'
 ```
 * delete any file in the specified directory that starts with "mixtral"
-```find /home/vagrant/miniconda3/envs/llamacpp-dev/lib/python3.11/site-packages/gguf_modeldb/gguf_models -type f -name "mixtral*" -exec rm {} \;
+```
+find /home/vagrant/miniconda3/envs/llamacpp-dev/lib/python3.11/site-packages/gguf_modeldb/gguf_models -type f -name "mixtral*" -exec rm {} \;
 ```
 
 #### Handy Tools
