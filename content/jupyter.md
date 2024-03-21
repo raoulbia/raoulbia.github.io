@@ -6,9 +6,37 @@ Summary: Jupyter Notebooks
 
 <br> 
 
-`jupyter lab --ip=0.0.0.0`
+#### Installing Jupyterlab
 
-`jupyter notebook --ip=0.0.0.0`
+```powershell
+pip install --upgrade jupyterlab ipywidgets tqdm
+jupyter labextension install @jupyter-widgets/jupyterlab-manager
+```
+
+#### Testing IPywidgets
+
+try this in a notebook:
+
+```powershell
+import ipywidgets as widgets
+widgets.IntSlider()
+```
+
+#### Making env available in notebook
+
+* `python -m ipykernel install --user --name=myEnv`
+* `jupyter nbextension enable --py widgetsnbextension`
+* `jupyter labextension list`
+* to launch: `jupyter-lab`
+
+
+#### Installing EOther xtensions (TOC, Plotly)
+
+```
+jupyter labextension install @jupyterlab/toc
+jupyter labextension install @jupyterlab/plotly-extension
+```
+for plotly see [here](https://stackoverflow.com/questions/54936125/plotly-gives-an-empty-field-as-output-in-jupyter-lab) for more.
 
 #### Import notebook into another
 ```
@@ -34,43 +62,6 @@ with open("multigraph.p", 'wb') as f:
 with open("multigraph.p", 'rb') as f:  # notice the r instead of w
     G = dill.load(f)
 ```
-
-#### Installing Jupyterlab
-
-```powershell
-pip install jupyterlab
-pip install jupyterlab-widgets
-```
-
-#### Installing IPywidgets
-
-With Conda
-```powershell
-conda install -c conda-forge nodejs -y &&
-conda install -c conda-forge jupyterlab -y &&
-jupyter labextension install @jupyter-widgets/jupyterlab-manager &&
-jupyter contrib nbextension install --sys-prefix
-```
-
-With Pip
-```
-pip install jupyter_contrib_nbextensions
-```
-
-* `python -m ipykernel install --user --name=myEnv`
-* `jupyter nbextension enable --py widgetsnbextension`
-* `jupyter labextension list`
-* to launch: `jupyter-lab`
-
-
-#### Installing Jupyter Lab Extensions
-
-```
-jupyter labextension install @jupyterlab/toc
-jupyter labextension install @jupyterlab/plotly-extension
-```
-for plotly see [here](https://stackoverflow.com/questions/54936125/plotly-gives-an-empty-field-as-output-in-jupyter-lab) for more.
-
 
 #### Converting Notebook to PDF or HTML
 
