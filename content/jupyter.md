@@ -6,7 +6,7 @@ Summary: Jupyter Notebooks
 
 <br> 
 
-#### Installing Jupyterlab
+#### Installing Jupyterlab and IPywidgets
 
 ```powershell
 pip install --upgrade jupyterlab ipywidgets tqdm
@@ -30,7 +30,7 @@ widgets.IntSlider()
 * to launch: `jupyter-lab`
 
 
-#### Installing EOther xtensions (TOC, Plotly)
+#### Installing Other Extensions (TOC, Plotly)
 
 ```
 jupyter labextension install @jupyterlab/toc
