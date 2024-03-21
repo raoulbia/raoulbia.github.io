@@ -17,10 +17,10 @@ from create_gtfs_feed import Feed where create_gtfs_feed is a notebook
 ```
 
 #### Share variables / objects across notebooks
-
+```
 %store G >> to store
 %store -r G >> to load
-
+```
 
 #### Dill (similar to Pickle)
 
