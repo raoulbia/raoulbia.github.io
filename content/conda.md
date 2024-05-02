@@ -29,6 +29,11 @@ python -m venv .env
 source .env/bin/activate
 ```
 
+#### Windows VSC Venv
+
+* To create: `python -m venv .venv`
+* To activate: `.venv\Scripts\activate`
+  
 #### Pipenv
 
 Install
