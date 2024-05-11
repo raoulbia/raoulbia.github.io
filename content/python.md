@@ -6,6 +6,32 @@ Summary: Python Code Snippets
 
 <br>
 
+#### Module Not Found with VSC
+
+Note: Below instructions were compiled while using the Lightning.Ai VSC IDE.
+
+If you want to import `load_keys.py` from any Python script in any subdirectory of the root, you can add the root directory to your PYTHONPATH.
+
+`nano ~/.bashrc`
+
+Add the following line at the end of the file, replacing /path/to/your/root/directory with the actual path to your root directory:
+
+`export PYTHONPATH="${PYTHONPATH}:/teamspace/studios/this_studio"`
+
+Save and close the file.
+
+Source your .bashrc file to apply the changes: `source ~/.bashrc`
+
+ make sure to cd into `rag` directory before running the script
+
+````
+try:
+     from rag.load_keys import *
+     print("config module is available")
+ except ImportError as e:
+     print(e)
+````
+
 #### How to Manage API Keys
 
 Pre-requisite: `pip install python-dotenv`
