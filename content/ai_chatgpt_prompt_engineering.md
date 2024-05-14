@@ -13,6 +13,18 @@ Summary: AI ChatGPT Prompt Engineering
 
 <br>
 
+### Providing Context
+
+````
+Answer the User's question from the following context.
+
+Context:
+https://github.com/langchain-ai/langgraph
+
+User Question:
+How does LangGraph work?
+````
+
 ### Other Prompt Snippets
 
 Name-Prime ChatGPT into a nuanced niche expert:
