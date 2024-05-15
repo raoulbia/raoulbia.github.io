@@ -24,6 +24,12 @@ https://github.com/langchain-ai/langgraph
 User Question:
 How does LangGraph work?
 ````
+#### Make a PowerPoint Presentation
+
+````
+I want you to write me VBA code for a PowerPoint presentation about the history of AI. You are to fill in all the text with your own knowledge, no placeholders. I need 5 slides.
+````
+In PowerPoint: Tools > Macros > Visual Basic Editor > New > paste in the code > press Play button > Click Designer and pick a Design.
 
 ### Other Prompt Snippets
 
