@@ -11,6 +11,11 @@ Summary: AI ChatGPT Prompt Engineering
 
 ````Before answering, ask me three questions that will help you better answer my questions.````
 
+```
+"I will give you a tutorial PDF for setting an API call as an action in a GPT using Flask and AWS EC2. Write an implementation of the same in the Azure portal instead of AWS.
+
+Specifically I would like to implement the same using an Azure Webapp instead of using an Azure VM."
+```
 <br>
 
 ### Providing Context
