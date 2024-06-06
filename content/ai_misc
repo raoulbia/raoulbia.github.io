@@ -1,0 +1,15 @@
+Title: AI About LLMs
+Date: 2024-06-06
+Category: AI
+Slug: ai_miscellaneous
+Summary: AI Misc.
+
+<br>
+
+### Aider
+
+"*Aider lets you pair program with LLMs, to edit code in your local git repository. Start a new project or work with an existing git repo. Aider works well with GPT-4o, Claude 3 Opus, GPT-3.5 and can connect to almost any LLM.*"
+
+[aider.chat](https://aider.chat)
+
+`aider --openai-api-key OPENAI_API_KEY --model gpt-4-1106-preview`
