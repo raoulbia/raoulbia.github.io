@@ -7,6 +7,27 @@ Summary: AI ChatGPT Prompt Engineering
 
 <br>
 
+### Prompt Guidlines
+
+* clarity
+* specificity
+* direction (e.g. goal)
+
+#### combining prompt types
+
+1) identify need
+2) write first prompt 
+3) write more specific prompt based on first response 
+   OR
+   combine goal-oriented & specific prompt
+
+
+#### Iterative prompting
+
+Refining AI responses through a sequence of prompts that build on each other.
+
+<br>
+
 ### General Purpose Prompt Snippets
 
 ````Before answering, ask me three questions that will help you better answer my questions.````
