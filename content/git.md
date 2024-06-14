@@ -5,6 +5,16 @@ Slug: Git
 Summary: Git
 
 
+#### Push permission denied
+
+```
+ssh -T git@github.com
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa_raoulbia
+```
+
+<br>
+
 #### Set Origin URL with PAT token
 
      git remote add origin <repository-url>
