@@ -24,6 +24,10 @@ Summary: AI ChatGPT Prompt Engineering
 
 Here is the refactored table in reStructuredText format, where each type of task is treated as a distinct type:
 
+It looks like the reStructuredText is not displaying as expected. Let's correct the formatting for better display in reStructuredText. I'll break down the table into individual entries to ensure it's clear and well-formatted.
+
+Here's a revised version in reStructuredText that should render correctly:
+
 ```restructuredtext
 .. list-table::
    :header-rows: 1
