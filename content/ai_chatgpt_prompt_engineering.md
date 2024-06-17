@@ -25,93 +25,97 @@ Summary: AI ChatGPT Prompt Engineering
 
 ### LLM Task Prompts and Text-based Techniques
 
-#### Table 1: Type of Task and Prompting Technique
 
-| Task Type                             | Prompting Technique                          |
-|---------------------------------------|----------------------------------------------|
-| Mathematics and Reasoning             | Chain-of-Thought (Thought Generation)        |
-| Mathematics and Reasoning             | Zero-Shot CoT (Thought Generation)           |
-| Mathematics and Reasoning             | Complexity-Based (Thought Generation)        |
-| Mathematics and Reasoning             | Memory-of-Thought (Thought Generation)       |
-| Mathematics and Reasoning             | Least-to-Most (Decomposition)                |
-| Mathematics and Reasoning             | Faithful CoT (Decomposition)                 |
-| Mathematics and Reasoning             | Recursion-of-Thought (Decomposition)         |
-| Mathematics and Reasoning             | Self-Consistency (Ensembling)                |
-| Mathematics and Reasoning             | Universal Self-Consistency (Ensembling)      |
-| Mathematical and Code Generation      | Analogical Prompting (Thought Generation)    |
-| Question Answering and Retrieval      | Thread-of-Thought (Thought Generation)       |
-| Mathematics and Factual QA            | Contrastive (Thought Generation)             |
-| Mathematics and Logical Inference     | Cumulative Reasoning (Self-Criticism)        |
-| Mathematics and Symbolic Manipulation | Least-to-Most (Decomposition)                |
-| Mathematics and Symbolic Reasoning    | Faithful CoT (Decomposition)                 |
-| Mathematics and Algorithmic Tasks     | Recursion-of-Thought (Decomposition)         |
-| Reasoning                             | Step-Back Prompting (Thought Generation)     |
-| Reasoning                             | Self-Verification (Self-Criticism)           |
-| Reasoning                             | Plan-and-Solve (Decomposition)               |
-| Reasoning                             | Self-Consistency (Ensembling)                |
-| Reasoning                             | Universal Self-Consistency (Ensembling)      |
-| Mathematics and Programming           | Program-of-Thought (Decomposition)           |
-| Search and Planning                   | Tree-of-Thought (Decomposition)              |
-| Reasoning, Coding, and Generation     | Self-Refine (Self-Criticism)                 |
-| Text Classification and Translation   | Few-Shot Prompting (In-Context Learning (ICL))|
-| Retrieval and Reasoning               | MoRE (Ensembling)                            |
-| Text Generation                       | Universal Self-Consistency (Ensembling)      |
+#### Table 1: Type of Task, Prompting Technique, Description
+
+
+| Task Type                             | Prompting Technique | Description                                                                            |
+|---------------------------------------|---------------------|----------------------------------------------------------------------------------------|
+| Mathematics and Reasoning             | Chain-of-Thought    | A technique that involves breaking down a problem into a series of intermediate steps to reach the solution. |
+| Mathematics and Reasoning             | Zero-Shot CoT       | A technique where the model generates a step-by-step solution without prior examples.   |
+| Mathematics and Reasoning             | Complexity-Based    | A technique that adapts the complexity of the prompt based on the task requirements.    |
+| Mathematics and Reasoning             | Memory-of-Thought   | A technique that involves recalling previous thoughts to aid current problem-solving.   |
+| Mathematics and Reasoning             | Least-to-Most       | A technique that breaks down a complex task into simpler, sequential steps.             |
+| Mathematics and Reasoning             | Faithful CoT        | A technique that ensures each step logically follows from the previous one.             |
+| Mathematics and Reasoning             | Recursion-of-Thought| A technique that involves recursive steps to handle complex problems.                   |
+| Mathematics and Reasoning             | Self-Consistency    | A technique that ensures consistency in the model's responses across different prompts. |
+| Mathematics and Reasoning             | Universal Self-Consistency | An advanced form of self-consistency applied to various tasks.                          |
+| Mathematical and Code Generation      | Analogical Prompting| A technique that leverages analogies to facilitate problem-solving.                     |
+| Question Answering and Retrieval      | Thread-of-Thought   | A technique that prompts the model to summarize and analyze a context step by step.     |
+| Mathematics and Factual QA            | Contrastive         | A technique that compares different possible answers to improve reasoning accuracy.     |
+| Mathematics and Logical Inference     | Cumulative Reasoning| A technique that builds upon previous steps to draw logical conclusions.                |
+| Mathematics and Symbolic Manipulation | Least-to-Most       | A technique that breaks down a complex task into simpler, sequential steps.             |
+| Mathematics and Symbolic Reasoning    | Faithful CoT        | A technique that ensures each step logically follows from the previous one.             |
+| Mathematics and Algorithmic Tasks     | Recursion-of-Thought| A technique that involves recursive steps to handle complex problems.                   |
+| Reasoning                             | Step-Back Prompting | A technique that involves periodically reviewing and revising previous steps to ensure accuracy. |
+| Reasoning                             | Self-Verification   | A technique where the model verifies its own answers through internal checks.           |
+| Reasoning                             | Plan-and-Solve      | A technique that involves planning a solution path before execution.                    |
+| Reasoning                             | Self-Consistency    | A technique that ensures consistency in the model's responses across different prompts. |
+| Reasoning                             | Universal Self-Consistency | An advanced form of self-consistency applied to various tasks.                          |
+| Mathematics and Programming           | Program-of-Thought  | A technique that uses programming-like structures for problem-solving.                  |
+| Search and Planning                   | Tree-of-Thought     | A technique that explores multiple possible solution paths in parallel.                 |
+| Reasoning, Coding, and Generation     | Self-Refine         | A technique where the model iteratively refines its own answers.                        |
+| Text Classification and Translation   | Few-Shot Prompting  | A technique that uses a few examples to guide the model's response.                     |
+| Retrieval and Reasoning               | MoRE                | A technique that combines multiple reasoning paths to reach a conclusion.               |
+| Text Generation                       | Universal Self-Consistency | An advanced form of self-consistency applied to various tasks.                          |
 
 <br>
 
-#### Table 2: Prompting Technique, Description, Research Paper Title & Authors
+#### Table 2: Prompting Technique, Method, Research Paper Title & Authors
 
-| Prompting Technique                          | Description                                                                            | Research Paper Title & Authors                                      |
-|----------------------------------------------|----------------------------------------------------------------------------------------|---------------------------------------------------------------------|
-| Chain-of-Thought (Thought Generation)        | A technique that involves breaking down a problem into a series of intermediate steps to reach the solution. | Chain-of-Thought Prompting (Wei et al., 2022)                        |
-| Zero-Shot CoT (Thought Generation)           | A technique where the model generates a step-by-step solution without prior examples.   | Let's think step by step: Zero-shot CoT (Kojima et al., 2022)        |
-| Analogical Prompting (Thought Generation)    | A technique that leverages analogies to facilitate problem-solving.                     | Analogical Prompting (Yasunaga et al., 2023)                         |
-| Step-Back Prompting (Thought Generation)     | A technique that involves periodically reviewing and revising previous steps to ensure accuracy. | Step-Back Prompting (Zheng et al., 2023)                             |
-| Thread-of-Thought (Thought Generation)       | A technique that prompts the model to summarize and analyze a context step by step.     | Thread-of-Thought Prompting (Zhou et al., 2023)                      |
-| Complexity-Based (Thought Generation)        | A technique that adapts the complexity of the prompt based on the task requirements.    | Complexity-based Prompting (Fu et al., 2023)                         |
-| Contrastive (Thought Generation)             | A technique that compares different possible answers to improve reasoning accuracy.     | Contrastive CoT Prompting (Chia et al., 2023)                        |
-| Memory-of-Thought (Thought Generation)       | A technique that involves recalling previous thoughts to aid current problem-solving.   | Memory-of-Thought Prompting (Li and Qiu, 2023)                       |
-| Cumulative Reasoning (Self-Criticism)        | A technique that builds upon previous steps to draw logical conclusions.                | Cumulative Reasoning (Zhang et al., 2023)                            |
-| Least-to-Most (Decomposition)                | A technique that breaks down a complex task into simpler, sequential steps.             | Least-to-Most Prompting (Zhou et al., 2022)                          |
-| Faithful CoT (Decomposition)                 | A technique that ensures each step logically follows from the previous one.             | Faithful CoT (Lyu et al., 2023)                                      |
-| Recursion-of-Thought (Decomposition)         | A technique that involves recursive steps to handle complex problems.                   | Recursion-of-Thought (Lee and Kim, 2023)                             |
-| Plan-and-Solve (Decomposition)               | A technique that involves planning a solution path before execution.                    | Plan-and-Solve Prompting (Wang et al., 2023)                         |
-| Program-of-Thought (Decomposition)           | A technique that uses programming-like structures for problem-solving.                  | Program-of-Thoughts (Chen et al., 2023)                              |
-| Tree-of-Thought (Decomposition)              | A technique that explores multiple possible solution paths in parallel.                 | Tree-of-Thought (Yao et al., 2023)                                   |
-| Self-Refine (Self-Criticism)                 | A technique where the model iteratively refines its own answers.                        | Self-Refine (Madaan et al., 2023)                                    |
-| Self-Verification (Self-Criticism)           | A technique where the model verifies its own answers through internal checks.           | Self-Verification (Weng et al., 2022)                                |
-| Few-Shot Prompting (In-Context Learning (ICL)) | A technique that uses a few examples to guide the model's response.                     | Few-Shot Prompting (Brown et al., 2020)                              |
-| MoRE (Ensembling)                            | A technique that combines multiple reasoning paths to reach a conclusion.               | Mixture of Reasoning Experts (Si et al., 2023)                       |
-| Self-Consistency (Ensembling)                | A technique that ensures consistency in the model's responses across different prompts. | Self-Consistency (Wang et al., 2022)                                 |
-| Universal Self-Consistency (Ensembling)      | An advanced form of self-consistency applied to various tasks.                          | Universal Self-Consistency (Chen et al., 2023)                       |
+
+| Prompting Technique | Method         | Research Paper Title & Authors                                      |
+|---------------------|----------------|---------------------------------------------------------------------|
+| Chain-of-Thought    | Thought Generation | Chain-of-Thought Prompting (Wei et al., 2022)                        |
+| Zero-Shot CoT       | Thought Generation | Let's think step by step: Zero-shot CoT (Kojima et al., 2022)        |
+| Analogical Prompting| Thought Generation | Analogical Prompting (Yasunaga et al., 2023)                         |
+| Step-Back Prompting | Thought Generation | Step-Back Prompting (Zheng et al., 2023)                             |
+| Thread-of-Thought   | Thought Generation | Thread-of-Thought Prompting (Zhou et al., 2023)                      |
+| Complexity-Based    | Thought Generation | Complexity-based Prompting (Fu et al., 2023)                         |
+| Contrastive         | Thought Generation | Contrastive CoT Prompting (Chia et al., 2023)                        |
+| Memory-of-Thought   | Thought Generation | Memory-of-Thought Prompting (Li and Qiu, 2023)                       |
+| Cumulative Reasoning| Self-Criticism | Cumulative Reasoning (Zhang et al., 2023)                            |
+| Least-to-Most       | Decomposition  | Least-to-Most Prompting (Zhou et al., 2022)                          |
+| Faithful CoT        | Decomposition  | Faithful CoT (Lyu et al., 2023)                                      |
+| Recursion-of-Thought| Decomposition  | Recursion-of-Thought (Lee and Kim, 2023)                             |
+| Plan-and-Solve      | Decomposition  | Plan-and-Solve Prompting (Wang et al., 2023)                         |
+| Program-of-Thought  | Decomposition  | Program-of-Thoughts (Chen et al., 2023)                              |
+| Tree-of-Thought     | Decomposition  | Tree-of-Thought (Yao et al., 2023)                                   |
+| Self-Refine         | Self-Criticism | Self-Refine (Madaan et al., 2023)                                    |
+| Self-Verification   | Self-Criticism | Self-Verification (Weng et al., 2022)                                |
+| Few-Shot Prompting  | In-Context Learning (ICL) | Few-Shot Prompting (Brown et al., 2020)                              |
+| MoRE                | Ensembling     | Mixture of Reasoning Experts (Si et al., 2023)                       |
+| Self-Consistency    | Ensembling     | Self-Consistency (Wang et al., 2022)                                 |
+| Universal Self-Consistency | Ensembling     | Universal Self-Consistency (Chen et al., 2023)                       |
 
 <br>
 
 #### Table 3: Prompting Technique and Prompt Example
 
-| Prompting Technique                          | Example Prompt                                                                                   |
-|----------------------------------------------|--------------------------------------------------------------------------------------------------|
-| Chain-of-Thought (Thought Generation)        | Q: Jack has two baskets, each containing three balls. How many balls does Jack have in total? A: One basket contains 3 balls, so two baskets contain 3 * 2 = 6 balls. Q: {QUESTION} A:  |
-| Zero-Shot CoT (Thought Generation)           | Let's think step by step. (Kojima et al., 2022)                                                  |
-| Thread-of-Thought (Thought Generation)       | Walk me through this context in manageable parts step by step, summarizing and analyzing as we go. |
-| Plan-and-Solve (Decomposition)               | Let’s first understand the problem and devise a plan to solve it. Then, let’s carry out the plan and solve the problem step by step. (Wang et al., 2023) |
-| Analogical Prompting (Thought Generation)    |                                                                                                  |
-| Step-Back Prompting (Thought Generation)     |                                                                                                  |
-| Complexity-Based (Thought Generation)        |                                                                                                  |
-| Contrastive (Thought Generation)             |                                                                                                  |
-| Memory-of-Thought (Thought Generation)       |                                                                                                  |
-| Cumulative Reasoning (Self-Criticism)        |                                                                                                  |
-| Least-to-Most (Decomposition)                |                                                                                                  |
-| Faithful CoT (Decomposition)                 |                                                                                                  |
-| Recursion-of-Thought (Decomposition)         |                                                                                                  |
-| Program-of-Thought (Decomposition)           |                                                                                                  |
-| Tree-of-Thought (Decomposition)              |                                                                                                  |
-| Self-Refine (Self-Criticism)                 |                                                                                                  |
-| Self-Verification (Self-Criticism)           |                                                                                                  |
-| Few-Shot Prompting (In-Context Learning (ICL)) |                                                                                                  |
-| MoRE (Ensembling)                            |                                                                                                  |
-| Self-Consistency (Ensembling)                |                                                                                                  |
-| Universal Self-Consistency (Ensembling)      |                                                                                                  |
+
+| Prompting Technique | Example Prompt                                                                                   |
+|---------------------|--------------------------------------------------------------------------------------------------|
+| Chain-of-Thought    | Q: Jack has two baskets, each containing three balls. How many balls does Jack have in total? A: One basket contains 3 balls, so two baskets contain 3 * 2 = 6 balls. Q: {QUESTION} A:  |
+| Zero-Shot CoT       | Let's think step by step. (Kojima et al., 2022)                                                  |
+| Thread-of-Thought   | Walk me through this context in manageable parts step by step, summarizing and analyzing as we go. |
+| Plan-and-Solve      | Let’s first understand the problem and devise a plan to solve it. Then, let’s carry out the plan and solve the problem step by step. (Wang et al., 2023) |
+| Analogical Prompting|                                                                                                  |
+| Step-Back Prompting |                                                                                                  |
+| Complexity-Based    |                                                                                                  |
+| Contrastive         |                                                                                                  |
+| Memory-of-Thought   |                                                                                                  |
+| Cumulative Reasoning|                                                                                                  |
+| Least-to-Most       |                                                                                                  |
+| Faithful CoT        |                                                                                                  |
+| Recursion-of-Thought|                                                                                                  |
+| Program-of-Thought  |                                                                                                  |
+| Tree-of-Thought     |                                                                                                  |
+| Self-Refine         |                                                                                                  |
+| Self-Verification   |                                                                                                  |
+| Few-Shot Prompting  |                                                                                                  |
+| MoRE                |                                                                                                  |
+| Self-Consistency    |                                                                                                  |
+| Universal Self-Consistency |                                                                                                  |
 
 <br>
 
