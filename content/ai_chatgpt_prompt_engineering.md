@@ -22,229 +22,53 @@ Summary: AI ChatGPT Prompt Engineering
 
 <br>
 
-Here is the refactored table in reStructuredText format, where each type of task is treated as a distinct type:
 
-It looks like the reStructuredText is not displaying as expected. Let's correct the formatting for better display in reStructuredText. I'll break down the table into individual entries to ensure it's clear and well-formatted.
-
-Here's a revised version in reStructuredText that should render correctly:
-
-```restructuredtext
-.. list-table::
-   :header-rows: 1
-
-   * - Types of Tasks
-     - Prompting Technique
-     - Approach
-     - Example Prompt
-     - Relevant Research Paper
-   * - Mathematics
-     - Thought Generation
-     - Chain-of-Thought (CoT)
-     - Q: Jack has two baskets, each containing three balls. How many balls does Jack have in total? A: One basket contains 3 balls, so two baskets contain 3 * 2 = 6 balls. Q: {QUESTION} A:
-     - Chain-of-Thought Prompting (Wei et al., 2022)
-   * - Reasoning
-     - Thought Generation
-     - Chain-of-Thought (CoT)
-     - Q: Jack has two baskets, each containing three balls. How many balls does Jack have in total? A: One basket contains 3 balls, so two baskets contain 3 * 2 = 6 balls. Q: {QUESTION} A:
-     - Chain-of-Thought Prompting (Wei et al., 2022)
-   * - Reasoning
-     - Thought Generation
-     - Zero-Shot CoT
-     - Let's think step by step. (Kojima et al., 2022)
-     - Let's think step by step: Zero-shot CoT (Kojima et al., 2022)
-   * - Mathematical reasoning
-     - Thought Generation
-     - Analogical Prompting
-     - 
-     - Analogical Prompting (Yasunaga et al., 2023)
-   * - Code generation
-     - Thought Generation
-     - Analogical Prompting
-     - 
-     - Analogical Prompting (Yasunaga et al., 2023)
-   * - Reasoning
-     - Thought Generation
-     - Step-Back Prompting
-     - 
-     - Step-Back Prompting (Zheng et al., 2023)
-   * - Question-answering
-     - Thought Generation
-     - Thread-of-Thought (ThoT)
-     - Walk me through this context in manageable parts step by step, summarizing and analyzing as we go.
-     - Thread-of-Thought Prompting (Zhou et al., 2023)
-   * - Retrieval
-     - Thought Generation
-     - Thread-of-Thought (ThoT)
-     - Walk me through this context in manageable parts step by step, summarizing and analyzing as we go.
-     - Thread-of-Thought Prompting (Zhou et al., 2023)
-   * - Mathematical reasoning
-     - Thought Generation
-     - Complexity-Based
-     - 
-     - Complexity-based Prompting (Fu et al., 2023)
-   * - Arithmetic reasoning
-     - Thought Generation
-     - Contrastive
-     - 
-     - Contrastive CoT Prompting (Chia et al., 2023)
-   * - Factual QA
-     - Thought Generation
-     - Contrastive
-     - 
-     - Contrastive CoT Prompting (Chia et al., 2023)
-   * - Arithmetic
-     - Thought Generation
-     - Memory-of-Thought
-     - 
-     - Memory-of-Thought Prompting (Li and Qiu, 2023)
-   * - Commonsense
-     - Thought Generation
-     - Memory-of-Thought
-     - 
-     - Memory-of-Thought Prompting (Li and Qiu, 2023)
-   * - Factual reasoning
-     - Thought Generation
-     - Memory-of-Thought
-     - 
-     - Memory-of-Thought Prompting (Li and Qiu, 2023)
-   * - Logical inference
-     - Self-Criticism
-     - Cumulative Reasoning
-     - 
-     - Cumulative Reasoning (Zhang et al., 2023)
-   * - Mathematical problem
-     - Self-Criticism
-     - Cumulative Reasoning
-     - 
-     - Cumulative Reasoning (Zhang et al., 2023)
-   * - Symbolic manipulation
-     - Decomposition
-     - Least-to-Most
-     - 
-     - Least-to-Most Prompting (Zhou et al., 2022)
-   * - Compositional generalization
-     - Decomposition
-     - Least-to-Most
-     - 
-     - Least-to-Most Prompting (Zhou et al., 2022)
-   * - Mathematical reasoning
-     - Decomposition
-     - Least-to-Most
-     - 
-     - Least-to-Most Prompting (Zhou et al., 2022)
-   * - Mathematical reasoning
-     - Decomposition
-     - Faithful CoT
-     - 
-     - Faithful CoT (Lyu et al., 2023)
-   * - Symbolic reasoning
-     - Decomposition
-     - Faithful CoT
-     - 
-     - Faithful CoT (Lyu et al., 2023)
-   * - Arithmetic
-     - Decomposition
-     - Recursion-of-Thought
-     - 
-     - Recursion-of-Thought (Lee and Kim, 2023)
-   * - Algorithmic tasks
-     - Decomposition
-     - Recursion-of-Thought
-     - 
-     - Recursion-of-Thought (Lee and Kim, 2023)
-   * - Reasoning datasets
-     - Decomposition
-     - Plan-and-Solve
-     - Let’s first understand the problem and devise a plan to solve it. Then, let’s carry out the plan and solve the problem step by step. (Wang et al., 2023)
-     - Plan-and-Solve Prompting (Wang et al., 2023)
-   * - Mathematical tasks
-     - Decomposition
-     - Program-of-Thought
-     - 
-     - Program-of-Thoughts (Chen et al., 2023)
-   * - Programming-related tasks
-     - Decomposition
-     - Program-of-Thought
-     - 
-     - Program-of-Thoughts (Chen et al., 2023)
-   * - Search
-     - Decomposition
-     - Tree-of-Thought
-     - 
-     - Tree-of-Thought (Yao et al., 2023)
-   * - Planning tasks
-     - Decomposition
-     - Tree-of-Thought
-     - 
-     - Tree-of-Thought (Yao et al., 2023)
-   * - Reasoning
-     - Self-Criticism
-     - Self-Refine
-     - 
-     - Self-Refine (Madaan et al., 2023)
-   * - Coding
-     - Self-Criticism
-     - Self-Refine
-     - 
-     - Self-Refine (Madaan et al., 2023)
-   * - Generation tasks
-     - Self-Criticism
-     - Self-Refine
-     - 
-     - Self-Refine (Madaan et al., 2023)
-   * - Reasoning datasets
-     - Self-Criticism
-     - Self-Verification
-     - 
-     - Self-Verification (Weng et al., 2022)
-   * - Text classification
-     - In-Context Learning (ICL)
-     - Few-Shot Prompting
-     - 
-     - Few-Shot Prompting (Brown et al., 2020)
-   * - Language translation
-     - In-Context Learning (ICL)
-     - Few-Shot Prompting
-     - 
-     - Few-Shot Prompting (Brown et al., 2020)
-   * - Retrieval augmentation
-     - Ensembling
-     - MoRE
-     - 
-     - Mixture of Reasoning Experts (Si et al., 2023)
-   * - Multi-hop reasoning
-     - Ensembling
-     - MoRE
-     - 
-     - Mixture of Reasoning Experts (Si et al., 2023)
-   * - Commonsense reasoning
-     - Ensembling
-     - MoRE
-     - 
-     - Mixture of Reasoning Experts (Si et al., 2023)
-   * - Arithmetic
-     - Ensembling
-     - Self-Consistency
-     - 
-     - Self-Consistency (Wang et al., 2022)
-   * - Commonsense
-     - Ensembling
-     - Self-Consistency
-     - 
-     - Self-Consistency (Wang et al., 2022)
-   * - Symbolic reasoning
-     - Ensembling
-     - Self-Consistency
-     - 
-     - Self-Consistency (Wang et al., 2022)
-   * - Free-form text generation
-     - Ensembling
-     - Universal Self-Consistency
-     - 
-     - Universal Self-Consistency (Chen et al., 2023)
+```markdown
+| Types of Tasks                                           | Prompting Technique       | Approach                              | Example Prompt                                                                                   | Relevant Research Paper                                      |
+|----------------------------------------------------------|---------------------------|----------------------------------------|--------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| Mathematics                                              | Thought Generation        | Chain-of-Thought (CoT)                 | Q: Jack has two baskets, each containing three balls. How many balls does Jack have in total? A: One basket contains 3 balls, so two baskets contain 3 * 2 = 6 balls. Q: {QUESTION} A:  | Chain-of-Thought Prompting (Wei et al., 2022)                |
+| Reasoning                                                | Thought Generation        | Chain-of-Thought (CoT)                 | Q: Jack has two baskets, each containing three balls. How many balls does Jack have in total? A: One basket contains 3 balls, so two baskets contain 3 * 2 = 6 balls. Q: {QUESTION} A:  | Chain-of-Thought Prompting (Wei et al., 2022)                |
+| Reasoning                                                | Thought Generation        | Zero-Shot CoT                          | Let's think step by step. (Kojima et al., 2022)                                                  | Let's think step by step: Zero-shot CoT (Kojima et al., 2022)|
+| Mathematical reasoning                                   | Thought Generation        | Analogical Prompting                   |                                                                                                  | Analogical Prompting (Yasunaga et al., 2023)                 |
+| Code generation                                          | Thought Generation        | Analogical Prompting                   |                                                                                                  | Analogical Prompting (Yasunaga et al., 2023)                 |
+| Reasoning                                                | Thought Generation        | Step-Back Prompting                    |                                                                                                  | Step-Back Prompting (Zheng et al., 2023)                     |
+| Question-answering                                       | Thought Generation        | Thread-of-Thought (ThoT)               | Walk me through this context in manageable parts step by step, summarizing and analyzing as we go. | Thread-of-Thought Prompting (Zhou et al., 2023)              |
+| Retrieval                                                | Thought Generation        | Thread-of-Thought (ThoT)               | Walk me through this context in manageable parts step by step, summarizing and analyzing as we go. | Thread-of-Thought Prompting (Zhou et al., 2023)              |
+| Mathematical reasoning                                   | Thought Generation        | Complexity-Based                       |                                                                                                  | Complexity-based Prompting (Fu et al., 2023)                 |
+| Arithmetic reasoning                                     | Thought Generation        | Contrastive                            |                                                                                                  | Contrastive CoT Prompting (Chia et al., 2023)                |
+| Factual QA                                               | Thought Generation        | Contrastive                            |                                                                                                  | Contrastive CoT Prompting (Chia et al., 2023)                |
+| Arithmetic                                               | Thought Generation        | Memory-of-Thought                      |                                                                                                  | Memory-of-Thought Prompting (Li and Qiu, 2023)               |
+| Commonsense                                              | Thought Generation        | Memory-of-Thought                      |                                                                                                  | Memory-of-Thought Prompting (Li and Qiu, 2023)               |
+| Factual reasoning                                        | Thought Generation        | Memory-of-Thought                      |                                                                                                  | Memory-of-Thought Prompting (Li and Qiu, 2023)               |
+| Logical inference                                        | Self-Criticism            | Cumulative Reasoning                   |                                                                                                  | Cumulative Reasoning (Zhang et al., 2023)                    |
+| Mathematical problem                                     | Self-Criticism            | Cumulative Reasoning                   |                                                                                                  | Cumulative Reasoning (Zhang et al., 2023)                    |
+| Symbolic manipulation                                    | Decomposition             | Least-to-Most                          |                                                                                                  | Least-to-Most Prompting (Zhou et al., 2022)                  |
+| Compositional generalization                             | Decomposition             | Least-to-Most                          |                                                                                                  | Least-to-Most Prompting (Zhou et al., 2022)                  |
+| Mathematical reasoning                                   | Decomposition             | Least-to-Most                          |                                                                                                  | Least-to-Most Prompting (Zhou et al., 2022)                  |
+| Mathematical reasoning                                   | Decomposition             | Faithful CoT                           |                                                                                                  | Faithful CoT (Lyu et al., 2023)                              |
+| Symbolic reasoning                                       | Decomposition             | Faithful CoT                           |                                                                                                  | Faithful CoT (Lyu et al., 2023)                              |
+| Arithmetic                                               | Decomposition             | Recursion-of-Thought                   |                                                                                                  | Recursion-of-Thought (Lee and Kim, 2023)                     |
+| Algorithmic tasks                                        | Decomposition             | Recursion-of-Thought                   |                                                                                                  | Recursion-of-Thought (Lee and Kim, 2023)                     |
+| Reasoning datasets                                       | Decomposition             | Plan-and-Solve                         | Let’s first understand the problem and devise a plan to solve it. Then, let’s carry out the plan and solve the problem step by step. (Wang et al., 2023) | Plan-and-Solve Prompting (Wang et al., 2023)                 |
+| Mathematical tasks                                       | Decomposition             | Program-of-Thought                     |                                                                                                  | Program-of-Thoughts (Chen et al., 2023)                      |
+| Programming-related tasks                                | Decomposition             | Program-of-Thought                     |                                                                                                  | Program-of-Thoughts (Chen et al., 2023)                      |
+| Search                                                   | Decomposition             | Tree-of-Thought                        |                                                                                                  | Tree-of-Thought (Yao et al., 2023)                           |
+| Planning tasks                                           | Decomposition             | Tree-of-Thought                        |                                                                                                  | Tree-of-Thought (Yao et al., 2023)                           |
+| Reasoning                                                | Self-Criticism            | Self-Refine                            |                                                                                                  | Self-Refine (Madaan et al., 2023)                            |
+| Coding                                                   | Self-Criticism            | Self-Refine                            |                                                                                                  | Self-Refine (Madaan et al., 2023)                            |
+| Generation tasks                                         | Self-Criticism            | Self-Refine                            |                                                                                                  | Self-Refine (Madaan et al., 2023)                            |
+| Reasoning datasets                                       | Self-Criticism            | Self-Verification                      |                                                                                                  | Self-Verification (Weng et al., 2022)                        |
+| Text classification                                      | In-Context Learning (ICL) | Few-Shot Prompting                     |                                                                                                  | Few-Shot Prompting (Brown et al., 2020)                      |
+| Language translation                                     | In-Context Learning (ICL) | Few-Shot Prompting                     |                                                                                                  | Few-Shot Prompting (Brown et al., 2020)                      |
+| Retrieval augmentation                                   | Ensembling                | MoRE                                   |                                                                                                  | Mixture of Reasoning Experts (Si et al., 2023)               |
+| Multi-hop reasoning                                      | Ensembling                | MoRE                                   |                                                                                                  | Mixture of Reasoning Experts (Si et al., 2023)               |
+| Commonsense reasoning                                    | Ensembling                | MoRE                                   |                                                                                                  | Mixture of Reasoning Experts (Si et al., 2023)               |
+| Arithmetic                                               | Ensembling                | Self-Consistency                       |                                                                                                  | Self-Consistency (Wang et al., 2022)                         |
+| Commonsense                                              | Ensembling                | Self-Consistency                       |                                                                                                  | Self-Consistency (Wang et al., 2022)                         |
+| Symbolic reasoning                                       | Ensembling                | Self-Consistency                       |                                                                                                  | Self-Consistency (Wang et al., 2022)                         |
+| Free-form text generation                                | Ensembling                | Universal Self-Consistency             |                                                                                                  | Universal Self-Consistency (Chen et al., 2023)               |
 ```
 
-This reStructuredText table presents each distinct task type along with the corresponding prompting technique, approach, example prompt (if available), and relevant research paper.
 <br>
 
 ### LLM Task Prompts and Text-based Techniques
