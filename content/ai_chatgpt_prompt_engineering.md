@@ -23,7 +23,6 @@ Summary: AI ChatGPT Prompt Engineering
 <br>
 
 
-```markdown
 | Types of Tasks                                           | Prompting Technique       | Approach                              | Example Prompt                                                                                   | Relevant Research Paper                                      |
 |----------------------------------------------------------|---------------------------|----------------------------------------|--------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
 | Mathematics                                              | Thought Generation        | Chain-of-Thought (CoT)                 | Q: Jack has two baskets, each containing three balls. How many balls does Jack have in total? A: One basket contains 3 balls, so two baskets contain 3 * 2 = 6 balls. Q: {QUESTION} A:  | Chain-of-Thought Prompting (Wei et al., 2022)                |
@@ -67,7 +66,7 @@ Summary: AI ChatGPT Prompt Engineering
 | Commonsense                                              | Ensembling                | Self-Consistency                       |                                                                                                  | Self-Consistency (Wang et al., 2022)                         |
 | Symbolic reasoning                                       | Ensembling                | Self-Consistency                       |                                                                                                  | Self-Consistency (Wang et al., 2022)                         |
 | Free-form text generation                                | Ensembling                | Universal Self-Consistency             |                                                                                                  | Universal Self-Consistency (Chen et al., 2023)               |
-```
+
 
 <br>
 
