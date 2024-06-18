@@ -6,7 +6,10 @@ Summary: Virtual Environments
 
 ### Issues with SSL Cert
 
-`pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org certifi`
+```
+pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org certifi
+pip install pip-system-certs
+```
 
 ### Conda
 
