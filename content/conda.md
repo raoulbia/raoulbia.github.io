@@ -4,6 +4,9 @@ Category: Virtual Environments
 Slug: conda
 Summary: Virtual Environments
 
+### Issues with SSL Cert
+
+`pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org certifi`
 
 ### Conda
 
