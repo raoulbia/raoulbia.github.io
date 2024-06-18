@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code snippets etc. | articles in the "Cloud" category | Page 4</title>
+    <link rel="shortcut icon" type="image/png" href="../favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+
+                <li class="ephemeral selected"><a href="../category/cloud4.html">Cloud</a></li>
+                <li><a href="../">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="../archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="../">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Mar 25, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../azure_network_security.html" rel="bookmark" title="Permanent Link to &quot;Azure Network Security&quot;">Azure Network Security</a>
+                </h2>
+
+                
+                
+
+                <p><br></p>
+<h2>Network Security</h2>
+<p>also see <a href="https://raoulbia.github.io/azure_general_and_network_security.html">Azure General and Network Security</a></p>
+<ul>
+<li>
+<p>Azure Virtual Network</p>
+<ul>
+<li>is the fundamental buidling block of your private network in Azure.</li>
+<li>enables resources (e.g. VMs) to securely communicate w/each other, the internet and on-prem networks.</li>
+<li>similar to traditional network</li>
+<li>to ensure that to VMs cannot communicate w/ech other they must be deployed in separate VN's.</li>
+<li>VN's are FREE but are tied to VM's therefore removing a VN does not reduce cost.</li>
+<li>a VN can be divided into subnets</li>
+</ul>
+</li>
+<li>
+<p>Azure Firewall</p>
+<ul>
+<li>is a managed network security service</li>
+<li>protects Azure Virtual Network resources  </li>
+<li>can be implemented to secure multiple VNs</li>
+<li>built-in high availability and unrestricted scalability</li>
+<li>Is an application gateway device</li>
+<li>has "threat intelligence" option to automatically block traffic: analyse traffic to see if it matches certain known bad patterns e.g. SQL injections, cross-site scripting</li>
+<li>NOT used for encryption</li>
+<li>NO reports</li>
+</ul>
+</li>
+<li>
+<p>Network Security Groups (NSG)</p>
+<ul>
+<li>to allow applications to be accessed over HTTP</li>
+<li>controls traffic to and from resources in an Azure Virtual NEtwork.</li>
+<li>NSG is a static set of rules that protects each subnet<ul>
+<li>list of IP addresses, port numbers, source and destination that are allowed through</li>
+</ul>
+</li>
+<li>Aka <strong>“access control list”</strong></li>
+<li>It’s <strong>Deny by default</strong> setup where you have to specifically allow traffic through</li>
+<li>NOT used for encryption</li>
+</ul>
+</li>
+<li>
+<p>VPN Gateway</p>
+<ul>
+<li>connecting two or more networks AS IF they were on the same network</li>
+<li>uses a network gateway</li>
+</ul>
+</li>
+<li>
+<p>Virtual Network Peering</p>
+<ul>
+<li>used to link virtual networks</li>
+</ul>
+</li>
+<li>
+<p>ExpressRoute</p>
+<ul>
+<li>lets you extend on-prem network to the cloud</li>
+<li><strong>dedicated private connection that doesn't travel over the internet</strong></li>
+<li>high speed private connection similar to VPN</li>
+<li>does NOT run on public cloud</li>
+<li>does NOT provide encrypted network communication</li>
+</ul>
+</li>
+<li>
+<p>Network Interface (NIC)</p>
+<ul>
+<li>tied to VM</li>
+<li>removing it will NOT reduce cost</li>
+</ul>
+</li>
+<li>
+<p>Local Network Gateway</p>
+<ul>
+<li>used to represent a VPN device in your local network</li>
+<li>used for site-to-site VPN connection between Azure Virtual Network and on-prem local network</li>
+</ul>
+</li>
+<li>
+<p>Private Cloud Network</p>
+<ul>
+<li>operated within a company's firewall</li>
+</ul>
+</li>
+<li>
+<p>DDoS protection</p>
+<ul>
+<li>secures websites from attacks and generates reports that contain details of attempted attacks.</li>
+<li>Basic<ul>
+<li>always on </li>
+<li>free basic level DDoS that applies to everybody</li>
+</ul>
+</li>
+<li>Standard<ul>
+<li>not free</li>
+<li>for you specifically</li>
+<li>real-time atttack metrics</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Encryption</p>
+<ul>
+<li>must install <em>Remote Access Server</em> for VPN.</li>
+</ul>
+</li>
+<li>
+<p>Defence in depth</p>
+<ul>
+<li>Best/recommended protection form all different sides, not just the front door!</li>
+<li>Instead of having a single firewall or security point that enforces security, defence in depth allows to <strong>enforce security at different levels within your group of resources</strong>:<ul>
+<li>Data: virtual network endpoint</li>
+<li>Application: API management</li>
+<li>Compute: limit remote desktop access, windows update</li>
+<li>Network: network security group, subnets, deny by default</li>
+<li>Perimeter: DDoS, firewalls</li>
+<li>Identity and Access: Azure Active Directory</li>
+<li>Physical: doors, keys </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../azure_network_security.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/cloud.html" rel="tag">Cloud</a>
+                </div>
+            </article>            <h4 class="date">Mar 24, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../azure_identity_governance_privacy_compliance.html" rel="bookmark" title="Permanent Link to &quot;Azure Identity, Governance, Privacy and Compliance Features&quot;">Azure Identity, Governance, Privacy and Compliance Features</a>
+                </h2>
+
+                
+                
+
+                <p><br></p>
+<h2>Identity Services</h2>
+<p>Who people are and what access they have.</p>
+<p>Identity IS A digital representation of a person, applications or device (e.g. printer).</p>
+<p>Authenticated does not mean authorised for everything.</p>
+<ul>
+<li>
+<p>MF Authentication</p>
+<ul>
+<li>is an Azure AD feature</li>
+<li>Authentication items must be distinct i.e. sth you know (password), sth you have (SMS code) or sth you are (fingerprint)</li>
+<li>deployment options<ul>
+<li>Conditional Access Policies (only approved devices)</li>
+<li>MFA Settings</li>
+</ul>
+</li>
+<li>NO need to sync on-prem identity to the cloud </li>
+<li>NO need to deploy federation solution</li>
+</ul>
+</li>
+<li>
+<p>Privileged Identity Management: </p>
+<ul>
+<li>MFA for admins but not regular users.</li>
+</ul>
+</li>
+<li>
+<p>Azure Active Directory</p>
+<ul>
+<li>Azure Tenant: represents an organisation in Active Directory (AD)</li>
+<li><strong>is NOT related to authorisation based on roles</strong></li>
+<li>has built-in capability for securing authentication AND authorisation</li>
+<li><strong>Identity as a Service</strong> i.e. don’t have to write any code<ul>
+<li>e.g. Comes with feature such as pw reset etc</li>
+</ul>
+</li>
+<li>Azure AD is NOT the same as Windows AD (there is some overlap)<ul>
+<li>Traditional AD does not work with internet protocols</li>
+</ul>
+</li>
+<li>Authentication open standards: SAML, OpenID, WS Federation</li>
+<li>AD powers other micrososft services: outlook, skype, onedrive, xbox, office365</li>
+</ul>
+</li>
+<li>
+<p>Benefits of Azure AD</p>
+<ul>
+<li>Security, tested and proven</li>
+<li>Reduced development time, easier support</li>
+<li>More features besides basic authentication e.g. MFA, just-in-time elevation of privileges, conditional access</li>
+<li>Centralised administration, API’s</li>
+<li><strong>SSO</strong><ul>
+<li>Integration with Windows AD allowing for single sign on using <strong>AD Connect</strong>. </li>
+<li>SSO is Free for up to 10 Apps</li>
+</ul>
+</li>
+<li>Note SSO is how you disable leavers.</li>
+<li>Integrates with other Azure services e.g. can grant access to storage accounts and SQL DB’s using their windows sign on credentials</li>
+</ul>
+</li>
+<li>
+<p>Azure AD Conditional Access</p>
+<ul>
+<li>allow access only from approved devices</li>
+<li>Can detect unusual activity and require extra authentication from user</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h2>Governance Features</h2>
+<p>Governance is a set of policies and procedures of your company that protect your account and your data.</p>
+<ul>
+<li>
+<p>Role-based access control</p>
+<ul>
+<li>What privileges the user gets </li>
+<li>Roles = common tasks e.g. accounting, developer</li>
+<li>Predefined roles: reader, contributor, owner</li>
+<li>allow some users to control the virtual machines in each environment but prevent them from modifying networking and other resources in the same resource group or Azure subscription</li>
+</ul>
+</li>
+<li>
+<p>Resource locks </p>
+<ul>
+<li>prevent accidental deletion</li>
+</ul>
+</li>
+<li>
+<p>Tags</p>
+<ul>
+<li>Metadata associated with the resource</li>
+<li>Helps with billing and support issues</li>
+</ul>
+</li>
+<li>
+<p>Azure Policy</p>
+<ul>
+<li>Implement standards for your organization across Azure.</li>
+<li>a set of policies is called <em>Initiative</em></li>
+<li>provide organizations with the ability to manage the compliance of Azure resources <strong>across multiple subscriptions</strong>.</li>
+</ul>
+</li>
+<li>
+<p>Governance </p>
+<ul>
+<li>create rules across all of your Azure resources</li>
+<li>e.g. Creating groups and subscriptions and associate rules that way</li>
+</ul>
+</li>
+<li>
+<p>Built-in policies:</p>
+<ul>
+<li>Require SQL Server 12.0</li>
+<li>Allowed storage accounts (nbr units)</li>
+<li>Allowed locations</li>
+<li>Allowed VMs (nbr units, types)</li>
+<li>Apply tag and its default value</li>
+<li>Not allowed resource types</li>
+</ul>
+</li>
+<li>
+<p>Azure Blueprints</p>
+<ul>
+<li>subscription templates with <strong>Roles and Policies</strong> already defined</li>
+</ul>
+</li>
+<li>
+<p>Cloud Adoption Framework (CAF) for Azure</p>
+<ul>
+<li><strong>For migrating to the cloud</strong></li>
+<li>Set of docs and tools to help you on your journey from on-prem apps, and self-hosted, into the cloud</li>
+<li>Best practices for organisations who are looking to make this move</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h2>Privacy and Compliance Resources</h2>
+<ul>
+<li><strong>Resource groups</strong> provide organizations with the ability to <strong>manage the compliance of Azure resources</strong> across multiple subscriptions.</li>
+<li>
+<p>Security Centre vs. Trust Center</p>
+<ul>
+<li>Security Centre: check compliance for a specified environment</li>
+<li>Trust Centre<ul>
+<li>is about Microsoft's compliance</li>
+<li>Has info about the standards MS complies with: GDPR. ISO,…</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>The trusted Cloud initiative</p>
+<ul>
+<li>Security: encryption, security tools,…</li>
+<li>Privacy: you own your data, MS will not mine the data, you control where data is located … </li>
+<li>Compliance: international standards, MS has compliance certificates, follows regional standards</li>
+<li>Resiliency: always available, backups, high availability, disaster recovery</li>
+<li>Intellectual Property protection: Azure offers protection against frivolous infringement claims</li>
+</ul>
+</li>
+<li>
+<p>Online Service Terms (OST) and Data Protection Addendum (DPA)</p>
+<ul>
+<li>MS Privacy Terms: personal we collect, why we collect it</li>
+<li>OST: level of service we promise you …</li>
+<li>DPA: how they handle data, where they store it, what they do if there is a security incident, how data is retained </li>
+</ul>
+</li>
+<li>
+<p>Compliance documentation</p>
+<ul>
+<li>assigning policy compliance responsibilities</li>
+</ul>
+</li>
+<li>
+<p>Azure Sovereign regions (US government and China)`</p>
+<ul>
+<li>Isolated, not connected to public cloud</li>
+</ul>
+</li>
+<li>
+<p>Azure Information Protection</p>
+<ul>
+<li>document processing and adding labels</li>
+</ul>
+</li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../azure_identity_governance_privacy_compliance.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/cloud.html" rel="tag">Cloud</a>
+                </div>
+            </article>
+
+                <div class="clear"></div>
+                <div class="pages">
+
+                    <a href="../category/cloud3.html" class="prev_page">&larr;&nbsp;Previous</a>
+
+                    <a href="../category/cloud5.html" class="next_page">Next&nbsp;&rarr;</a>
+
+                    <span>Page 4 of 5</span>
+                </div>
+
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>
