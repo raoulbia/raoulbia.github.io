@@ -12,4 +12,6 @@ Summary: AI Misc.
 
 [aider.chat](https://aider.chat)
 
+`pip install aider-chat`
+
 `aider --openai-api-key <KEY> --model gpt-4-1106-preview`
