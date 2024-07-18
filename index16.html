@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code snippets etc. | Page 16</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="./">Home</a></li>
+                <li><a href="./archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="./">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Nov 24, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./databases.html" rel="bookmark" title="Permanent Link to &quot;Databases&quot;">Databases</a>
+                </h2>
+
+                
+                
+
+                <h3>Postgres</h3>
+<h4>install postgres and postgis</h4>
+<div class="highlight"><pre><span></span>$<span class="w">  </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>postgis<span class="w"> </span>postgresql-13-postgis-3
+$<span class="w"> </span>sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql
+<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \password postgres</span>
+<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \q</span>
+</pre></div>
+
+
+<p>check installed version(s): <code>dpkg -l | grep postgres</code></p>
+<h4>postgres user authentication error</h4>
+<p><code>sudo nano /etc/postgresql/13/main/pg_hba.conf</code></p>
+<p>CHANGE FROM</p>
+<p><code>local   all     postgres     peer</code></p>
+<p>TO</p>
+<p><code>local   all      postgres    trusted</code></p>
+<p>then 
+sudo service postgresql restart</p>
+<h4>run in pgadmin4</h4>
+<p><code>CREATE EXTENSION postgis;</code></p>
+<ul>
+<li>
+<p>http://www.orbital.co.ke:8080/opengeo-docs/dataadmin/pgGettingStarted/shp2pgsql.html</p>
+</li>
+<li>
+<p>test: <code>psql -U postgres -d &lt;DBNAME&gt; -c "SELECT postgis_version()"</code></p>
+</li>
+<li>
+<p>syntax: <code>shp2pgsql -I -s &lt;SRID&gt; &lt;PATH/TO/SHAPEFILE&gt; &lt;SCHEMA&gt;.&lt;DBTABLE&gt; | psql -U postgres -d &lt;DBNAME&gt;</code></p>
+</li>
+<li>
+<p>example: <code>shp2pgsql -I -s 4326  dublinbus/Dublin_Bus.shp  shp_dublinbus | psql -U postgres -d dublinbus</code></p>
+</li>
+</ul>
+<h3>Utilities: ogr2ogr</h3>
+<ul>
+<li>https://gis.stackexchange.com/questions/65917/can-i-append-to-different-tables-using-ogr2ogr</li>
+<li>https://www.bostongis.com/PrinterFriendly.aspx?content_name=ogr_cheatsheet</li>
+<li>https://www.mankier.com/1/ogr2ogr</li>
+</ul>
+<h4>geojson to shp</h4>
+<p><code>ogr2ogr -f "ESRI Shapefile" destination_data.shp "dcc_public_bin_locations.geojson"</code></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./databases.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
+                </div>
+            </article>            <h4 class="date">Nov 24, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./kafka.html" rel="bookmark" title="Permanent Link to &quot;Kafka Cheatsheet&quot;">Kafka Cheatsheet</a>
+                </h2>
+
+                
+                
+
+                <h3>Terminology</h3>
+<ul>
+<li>A Kafka cluster is a group of Kafka brokers.</li>
+<li>A Kafka broker allows consumers to fetch messages by topic, partition and offset.</li>
+<li>Kafka brokers can create a Kafka cluster by sharing information between each other directly or indirectly using Zookeeper.</li>
+</ul>
+<h3>Installation</h3>
+<ul>
+<li>
+<p>Download and Setup Java 8 JDK: <code>sudo apt install openjdk-8-jdk</code></p>
+</li>
+<li>
+<p>Download &amp; Extract the Kafka binaries from https://kafka.apache.org/downloads</p>
+</li>
+<li>
+<p>Try Kafka commands using bin/kafka-topics.sh (for example)</p>
+</li>
+<li>
+<p>add to <code>~/.bashrc</code>:  <code>export PATH=/home/vagrant/kafka_2.12-2.8.0/bin:$PATH</code></p>
+</li>
+<li>
+<p>Edit Zookeeper &amp; Kafka configs in <code>kafka_2.12-2.8.0/config</code></p>
+<ul>
+<li>
+<p>zookeeper.properties: <code>dataDir=/home/vagrant/kafka_2.12-2.8.0/data/zookeeper</code></p>
+</li>
+<li>
+<p>server.properties: <code>log.dirs=/home/vagrant/kafka_2.12-2.8.0/data/kafka</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Start Zookeeper, Kafka Server and Kafka Connect</h3>
+<ul>
+<li>Pre-requisite: Kafka aded to PATH</li>
+<li>Only when Zookeeper is up and running you can start a Kafka server (that will connect to Zookeeper).</li>
+</ul>
+<div class="highlight"><pre><span></span>zookeeper-server-start.sh<span class="w"> </span>config/zookeeper.properties
+kafka-server-start.sh<span class="w"> </span>config/server.properties
+connect-distributed.sh<span class="w"> </span>config/connect-distributed.properties
+</pre></div>
+
+
+<h3>Topics</h3>
+<div class="highlight"><pre><span></span>kafka-topics.sh --zookeeper localhost:2181 --create --topic &quot;gtfs&quot; --partitions 1 --replication-factor 1
+kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list
+kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;g.*&#39;
+kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;.*ksql.*&#39;
+</pre></div>
+
+
+<h3>Producers</h3>
+<div class="highlight"><pre><span></span>kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic topic_name
+</pre></div>
+
+
+<p>Piping a JSON file into a Topic:</p>
+<div class="highlight"><pre><span></span>file_name.json | kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic topic_name
+</pre></div>
+
+
+<h3>Consumers</h3>
+<p>This tool helps to read data from Kafka topics and outputs it to standard output.</p>
+<div class="highlight"><pre><span></span>kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --from-beginning --property print.key=true --property key.separator=&quot;-&quot; --property print.timestamp=true
+</pre></div>
+
+
+<h3>Faust</h3>
+<p>Note: append -p 6067 to the line below to use a different port.</p>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>script.py<span class="w"> </span>worker<span class="w"> </span>
+</pre></div>
+
+
+<h3>Other Useful Commands</h3>
+<ul>
+<li><code>kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list</code></li>
+<li><code>kafka-consumer-groups.sh  --list --bootstrap-server localhost:9092</code></li>
+<li><code>zookeeper-shell.sh localhost:2181 ls /brokers/ids</code> to list active brokers. </li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./kafka.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/kafka.html" rel="tag">Kafka</a>
+                </div>
+            </article>
+
+                <div class="clear"></div>
+                <div class="pages">
+
+                    <a href="./index15.html" class="prev_page">&larr;&nbsp;Previous</a>
+
+                    <a href="./index17.html" class="next_page">Next&nbsp;&rarr;</a>
+
+                    <span>Page 16 of 30</span>
+                </div>
+
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>
