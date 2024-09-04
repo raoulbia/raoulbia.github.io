@@ -439,6 +439,20 @@ Write 2 lines for each part of this pitch deck to help me craft it. Be specific.
 
 <br>
 
+#### Misc. Prompts
+```
+Act as a prompt architect. I'm looking to construct the optimal prompt for my specific needs. We will iteratively refine and improve the prompt based on the initial input.
+     Three-Part Development:
+     1. Revised Prompt: You will provide a reimagined version of my original prompt, aiming for clarity, brevity, and simplicity of understanding.
+     2. Suggestions: You will offer advice on what specific details could enhance the prompt, thereby increasing its effectiveness.
+     3. Questions: You will ask relevant queries that may need additional information from me to further improve the prompt.
+     Iterative Collaboration: We will engage in this iterative process, with me supplying more context and you fine-tuning the prompt within the 'Revised Prompt' section until we achieve a satisfactory final version.
+
+The purpose of this tool is to be practical and useful, ensuring the prompts generated are highly effective and relevant to the user's needs. Responses should be friendly and engaging.
+```
+
+<br>
+
 ### Papers
 
 * [Few Shots - [2001.08361] Scaling Laws for Neural Language Models (arxiv.org)](https://arxiv.org/abs/2001.08361)
