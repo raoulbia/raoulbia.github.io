@@ -1,7 +1,7 @@
 Title: Vagrant VM with VPN
 Date: 2017-12-03
 Category: Linux
-Slug: Vagrant VM with VPN
+Slug: vagrant_vpn
 Summary: Vagrant VM with VPN setup
 
 ## Step-by-Step Instructions to Set Up a VM to Bypass Zscaler Restrictions
@@ -15,13 +15,15 @@ Summary: Vagrant VM with VPN setup
 #### 2. **Install and Configure Shadowsocks on the DigitalOcean Server**
 
 1. Install Shadowsocks on the server:
-   ```bash
+   
+   ```
    sudo apt update
    sudo apt install shadowsocks-libev
    ```
 
-2. Edit the default Shadowsocks configuration (`/etc/shadowsocks-libev/config.json`) to use port `443` and your custom password:
-   ```json
+3. Edit the default Shadowsocks configuration (`/etc/shadowsocks-libev/config.json`) to use port `443` and your custom password:
+
+   ```
    {
      "server": "0.0.0.0",
      "server_port": 443,
@@ -31,13 +33,15 @@ Summary: Vagrant VM with VPN setup
    }
    ```
 
-3. Restart the Shadowsocks server:
-   ```bash
+5. Restart the Shadowsocks server:
+
+   ```
    sudo systemctl restart shadowsocks-libev
    ```
 
-4. Ensure that port `443` is open on the DigitalOcean server by allowing it through the firewall:
-   ```bash
+7. Ensure that port `443` is open on the DigitalOcean server by allowing it through the firewall:
+
+   ```
    sudo ufw allow 443/tcp
    sudo ufw allow 443/udp
    ```
@@ -45,13 +49,15 @@ Summary: Vagrant VM with VPN setup
 #### 3. **Configure Shadowsocks Client on the Vagrant Guest VM**
 
 1. Install Shadowsocks on the Vagrant guest VM:
-   ```bash
+
+   ```
    sudo apt update
    sudo apt install shadowsocks-libev
    ```
 
-2. Create the Shadowsocks client configuration (`/etc/shadowsocks-libev/config.json`) to connect to the DigitalOcean server:
-   ```json
+3. Create the Shadowsocks client configuration (`/etc/shadowsocks-libev/config.json`) to connect to the DigitalOcean server:
+
+   ```
    {
      "server": "your-digital-ocean-server-ip",
      "server_port": 443,
@@ -62,12 +68,13 @@ Summary: Vagrant VM with VPN setup
    }
    ```
 
-3. Start the Shadowsocks client on the Vagrant VM:
-   ```bash
+5. Start the Shadowsocks client on the Vagrant VM:
+
+   ```
    ss-local -c /etc/shadowsocks-libev/config.json -v
    ```
 
-4. Ensure the Vagrant VM is using **Bridged Adapter** to allow direct internet access and connection to the DigitalOcean server.
+7. Ensure the Vagrant VM is using **Bridged Adapter** to allow direct internet access and connection to the DigitalOcean server.
 
 #### 4. **Configure the Vagrant VM or Browser to Use the SOCKS Proxy**
 
@@ -80,13 +87,15 @@ Summary: Vagrant VM with VPN setup
 #### 5. **Test the Connection**
 
 1. Verify that traffic is routed through the Shadowsocks proxy by browsing or using:
-   ```bash
+
+   ```
    curl --socks5 localhost:1080 http://example.com
    ```
 
-2. Ensure that you can bypass Zscaler restrictions and access unrestricted internet.
+3. Ensure that you can bypass Zscaler restrictions and access unrestricted internet.
 
 #### Summary:
+
 - DigitalOcean droplet runs **Outline VPN Manager** and Shadowsocks on **port 443**.
 - **Vagrant guest VM** connects via Shadowsocks client using `ss-local` with port `443`.
 - **Bridged Adapter** mode is essential for proper networking in the VM.
@@ -104,7 +113,7 @@ Make sure your **DigitalOcean server** is configured and running properly.
 
 1. **DigitalOcean Server Shadowsocks Configuration (`/etc/shadowsocks-libev/config.json`):**
 
-   ```json
+   ```
    {
      "server": "0.0.0.0",
      "server_port": 443,            // Running on port 443 to avoid network restrictions
@@ -115,7 +124,8 @@ Make sure your **DigitalOcean server** is configured and running properly.
    ```
 
 2. **Restart the Shadowsocks server** on the DigitalOcean droplet:
-   ```bash
+
+   ```
    sudo systemctl restart shadowsocks-libev
    ```
 
@@ -123,13 +133,15 @@ Make sure your **DigitalOcean server** is configured and running properly.
 Ensure the Shadowsocks client is installed and running on the **guest VM**.
 
 1. **Install Shadowsocks on the Guest VM**:
-   ```bash
+
+   ```
    sudo apt update
    sudo apt install shadowsocks-libev
    ```
 
-2. **Create or update the client configuration file (`/etc/shadowsocks-libev/config.json`)**:
-   ```json
+3. **Create or update the client configuration file (`/etc/shadowsocks-libev/config.json`)**:
+
+   ```
    {
      "server": "your-digital-ocean-server-ip",   // The public IP of your DigitalOcean server
      "server_port": 443,                         // Port 443 to avoid network restrictions
@@ -140,8 +152,9 @@ Ensure the Shadowsocks client is installed and running on the **guest VM**.
    }
    ```
 
-3. **Start the Shadowsocks client** on the guest VM:
-   ```bash
+5. **Start the Shadowsocks client** on the guest VM:
+
+   ```
    ss-local -c /etc/shadowsocks-libev/config.json -v
    ```
 
@@ -190,4 +203,4 @@ Since your **office screens automatically connect to Ethernet**, you can disable
 
 3. **Test**: Open restricted sites in Firefox on the guest VM to confirm Zscaler is bypassed.
 
-This setup ensures that all traffic from Firefox is routed through the Vagrant guest VM and Shadowsocks, bypassing the Zscaler restrictions when connected to the office Ethernet. Let me know if you need further adjustments!
+
