@@ -8,6 +8,16 @@ Summary: Python Code Snippets
 
 #### Module Not Found with VSC
 
+**Option 1**
+Add this to `settings.json`:
+
+```
+"terminal.integrated.env.windows": {"PYTHONPATH": "${workspaceFolder}"}
+```
+
+<br>
+
+**Option 2**
 Note: Below instructions were compiled while using the Lightning.Ai VSC IDE.
 
 If you want to import `load_keys.py` from any Python script in any subdirectory of the root, you can add the root directory to your PYTHONPATH.
