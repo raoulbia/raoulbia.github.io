@@ -441,6 +441,7 @@ Write 2 lines for each part of this pitch deck to help me craft it. Be specific.
 
 #### Cline System Prompt (Memory Bank)
 
+[source](https://docs.cline.bot/improving-your-prompting-skills/custom-instructions-library/cline-memory-bank)
 ```
 # Cline's Memory Bank
 
