@@ -10,23 +10,23 @@ Summary: AWS Playbook
 ```
 aws configure sso --use-device-code
 
-aws ecr get-login-password --region eu-central-1 --profile AdministratorAccess-Verodat-390402554384 | docker login --username AWS --password-stdin 390402554384.dkr.ecr.eu-central-1.amazonaws.com/hr-assistant-slack-crewai-mcp
+aws ecr get-login-password --region eu-central-1 --profile <Profile-Name> | docker login --username AWS --password-stdin <123>.dkr.ecr.eu-central-1.amazonaws.com/<Repository-Name>
 
-aws sts get-caller-identity --profile AdministratorAccess-Verodat-390402554384
+aws sts get-caller-identity --profile <Profile-Name>
 
-docker build -t hr-assistant-slack-crewai-mcp .
+docker build -t <Repository-Name> .
 
-docker tag hr-assistant-slack-crewai-mcp:latest 390402554384.dkr.ecr.eu-central-1.amazonaws.com/hr-assistant-slack-crewai-mcp:latest
+docker tag <Repository-Name>:latest <123>.dkr.ecr.eu-central-1.amazonaws.com/<Repository-Name>:latest
 
-aws ecr get-login-password --region eu-central-1 --profile AdministratorAccess-Verodat-390402554384 | docker login --username AWS --password-stdin 390402554384.dkr.ecr.eu-central-1.amazonaws.com
+aws ecr get-login-password --region eu-central-1 --profile <Profile-Name> | docker login --username AWS --password-stdin <123>.dkr.ecr.eu-central-1.amazonaws.com
 
-docker push 390402554384.dkr.ecr.eu-central-1.amazonaws.com/hr-assistant-slack-crewai-mcp:latest
+docker push <123>.dkr.ecr.eu-central-1.amazonaws.com/<Repository-Name>:latest
 
-aws ecs register-task-definition --cli-input-json file://path/to/your/task-definition.json --profile AdministratorAccess-Verodat-390402554384
+aws ecs register-task-definition --cli-input-json file://path/to/your/task-definition.json --profile <Profile-Name>
 
-aws ecs update-service --cluster default --service hr-assistant-service --force-new-deployment --region eu-central-1 --profile AdministratorAccess-Verodat-390402554384
+aws ecs update-service --cluster default --service hr-assistant-service --force-new-deployment --region eu-central-1 --profile <Profile-Name>
 
-aws ecs describe-services --cluster default --services hr-assistant-service --region eu-central-1 --profile AdministratorAccess-Verodat-390402554384
+aws ecs describe-services --cluster default --services hr-assistant-service --region eu-central-1 --profile <Profile-Name>
 
 ```
 
