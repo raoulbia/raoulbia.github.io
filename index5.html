@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code snippets etc. | Page 5</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="./">Home</a></li>
+                <li><a href="./archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="./">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Jan 24, 2023</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./databricks_sparksql.html" rel="bookmark" title="Permanent Link to &quot;Databricks Spark SQL&quot;">Databricks Spark SQL</a>
+                </h2>
+
+                
+                
+
+                <h4>Pandas to Spark</h4>
+<div class="highlight"><pre><span></span>df_spark = spark.createDataFrame(df_pandas)
+</pre></div>
+
+
+<h4>Pandas to Spark with Schema</h4>
+<div class="highlight"><pre><span></span><span class="c1"># create schema for your dataframe</span>
+<span class="n">schema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">([</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;CONTRACT_ID&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span> \
+                    <span class="p">,</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;CONTRACT_NAME&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span> \
+                    <span class="p">,</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;ACCOUNT&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span> \
+                    <span class="p">,</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;LINE_OF_BUSINESS&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span> \
+                    <span class="p">,</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;CLIENT_SHAREPOINT&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)])</span>
+
+<span class="c1"># Convert Pandas DataFrame to Spark DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">pandas_df</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">)</span>
+</pre></div>
+
+
+<h4>Create temp View</h4>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s2">&quot;tmp_vw&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<h4>Pandas to Spark to Table</h4>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">StringType</span><span class="p">())</span>
+ <span class="o">.</span><span class="n">write</span>
+ <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="s2">&quot;schema_name.table_name&quot;</span><span class="p">))</span>
+</pre></div>
+
+
+<h4>Read CSV File</h4>
+<div class="highlight"><pre><span></span><span class="n">fpath</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;/mnt/userspace/custom_dataset/path-to-file/filename.csv&quot;&quot;&quot;</span>
+<span class="err">`</span><span class="n">df</span> <span class="o">=</span> <span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;header&#39;</span><span class="p">,</span> <span class="s1">&#39;true&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fpath</span><span class="p">))</span><span class="err">`</span>
+</pre></div>
+
+
+<h4>Read Parquet File</h4>
+<div class="highlight"><pre><span></span><span class="n">fpath</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;/mnt/userspace/custom_dataset/path-to-file/filename.parquet&quot;&quot;&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;parquet&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+</pre></div>
+
+
+<h4>Create Table from CSV File</h4>
+<div class="highlight"><pre><span></span><span class="n">DROP</span> <span class="n">TABLE</span> <span class="n">IF</span> <span class="n">EXISTS</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span> <span class="p">;</span>
+<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span>
+<span class="n">USING</span> <span class="n">csv</span>
+<span class="n">LOCATION</span> <span class="s2">&quot;/mnt/userspace/custom_dataset/bboggava/outbound_data/MACTOOLS/mac_config.csv&quot;</span>
+<span class="n">OPTIONS</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inferSchema</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+
+<h4>Subsetting DataFrame</h4>
+<ul>
+<li>Spark DataFrame: <code>df.where(df.GPI_NO == '12345').display()</code></li>
+<li>Pandas DataFrame: <code>df[df.GPI_NO == '12345'].sort_values(by='DAY_SPLY', ascending=False)</code></li>
+</ul>
+<h4>Misc.</h4>
+<div class="highlight"><pre><span></span><span class="n">SHOW</span> <span class="n">COLUMNS</span> <span class="n">IN</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">DESCRIBE</span> <span class="n">TABLE</span> <span class="n">EXTENDED</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span>
+</pre></div>
+
+
+<p>Only for tables, NOT views:</p>
+<div class="highlight"><pre><span></span><span class="n">DESCRIBE</span> <span class="n">DETAIL</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span><span class="err">`</span> 
+</pre></div>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./databricks_sparksql.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/databricks.html" rel="tag">Databricks</a>
+                </div>
+            </article>            <h4 class="date">Dec 24, 2022</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./azure.html" rel="bookmark" title="Permanent Link to &quot;Azure&quot;">Azure</a>
+                </h2>
+
+                
+                
+
+                <p><br></p>
+<h3>Using Key Vault Secrets in Azure Data Factory</h3>
+<p>Key Vault secrets can be used to securely manage connections to services such as NAS drives or Databricks.</p>
+<h4>NAS Drive Linked Service</h4>
+<ul>
+<li>Create a Service Account with priviliges to access a NAS drive</li>
+<li>create a new secret in KV with the password of the above Service Account</li>
+<li>use the secret, and the Service Account user name, in ADF when configuring a linked service for NAS drive</li>
+<li>use the linked service in an ADF Copy data activity</li>
+</ul>
+<h4>Databricks Linked Service</h4>
+<ul>
+<li>Generate a token in Databricks and take note of it</li>
+<li>create a new secret in KV with the above token</li>
+<li>use the secret in ADF when configuring a linked service for databricks</li>
+<li>use the linked service in an ADF Databricks notebook activity</li>
+</ul>
+<h3>Azure ARM</h3>
+<h4>Deploy via Powershell</h4>
+<ul>
+<li><code>New-AzResourceGroup RG01 "South Central US"</code></li>
+<li><code>New-AzResourceGroupDeployment</code> adds a deployment to an existing resource group. (https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-9.3.0)</li>
+</ul>
+<h4>Useful Links</h4>
+<ul>
+<li>https://samcogan.com/deploying-resource-groups-with-arm-templates/</li>
+</ul>
+<p><br></p>
+<h3>Azure Fundamentals Exam (AZ-900)</h3>
+<ul>
+<li><a href="./drafts/azure_cloud_benefits_and_categories.html">Azure Cloud: Benefits and Categories</a></li>
+<li><a href="./drafts/azure_architectural_components.html">Azure Architectural Components</a></li>
+<li><a href="./drafts/azure_services.html">Azure Services</a></li>
+<li><a href="./drafts/azure_solutions.html">Azure Solutions</a></li>
+<li><a href="./drafts/azure_management_tools.html">Azure Management Tools</a></li>
+<li><a href="./drafts/azure_general_security.html">Azure General Security Features</a></li>
+<li><a href="./drafts/azure_network_security.html">Azure Network Security</a></li>
+<li><a href="./drafts/azure_identity_governance_privacy_compliance.html">Azure Identity, Governance, Privacy and Compliance Features</a></li>
+<li><a href="./drafts/azure_cost_management_and_sla.html">Azure Cost Management and SLA</a></li>
+</ul>
+<h3>Note about creating a Databricks Resource in Azure Portal</h3>
+<ul>
+<li>When creating a Databricks resource, Databricks will itself create a separate resource group (RG) with a storage account. This RG cannot be deleted via the porta;. See here for more: https://stackoverflow.com/questions/60694149/unable-to-remove-azure-databricks-managed-resource-group</li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./azure.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/azure.html" rel="tag">Azure</a>
+                </div>
+            </article>
+
+                <div class="clear"></div>
+                <div class="pages">
+
+                    <a href="./index4.html" class="prev_page">&larr;&nbsp;Previous</a>
+
+                    <a href="./index6.html" class="next_page">Next&nbsp;&rarr;</a>
+
+                    <span>Page 5 of 31</span>
+                </div>
+
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

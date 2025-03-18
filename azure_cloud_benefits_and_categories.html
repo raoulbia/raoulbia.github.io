@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code snippets etc. | Azure Cloud: Benefits and Categories</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="./">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="./archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="./">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Mar 29, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./azure_cloud_benefits_and_categories.html" rel="bookmark" title="Permanent Link to &quot;Azure Cloud: Benefits and Categories&quot;">Azure Cloud: Benefits and Categories</a>
+                </h2>
+
+                
+                
+
+                <p><br></p>
+<h3>Types of Cloud Computing</h3>
+<ul>
+<li>
+<p>Public</p>
+<ul>
+<li>anyone can sign up for it</li>
+<li>azure owns the HW on their network and infrastructure ; you are leasing services</li>
+<li>an organisation can decommission their on-prem data centre when all of their services are in the public cloud</li>
+</ul>
+</li>
+<li>
+<p>Private: </p>
+<ul>
+<li>you use your own datacentre, HW, upfront capital expenditure (CapEx)</li>
+<li>you can license software from the Azure Stack, install on your own hardware</li>
+<li>you can use a portal, create VMS etc just like you do with the public cloud</li>
+<li>You own the HW etc but you use the services of the public cloud thus getting benefits of flexibility, agility and elasticity </li>
+<li>You don’t get the cost savings by just stopping to run sth   </li>
+<li>can be rolled out to select users</li>
+</ul>
+</li>
+<li>
+<p>Hybrid: </p>
+<ul>
+<li>greatest degree of flexibility</li>
+<li>minimises both CapEx and OpEx</li>
+<li>on-prem plus additional resources in the cloud</li>
+<li>extending, or scaling, private infrastructure to the cloud</li>
+<li>most common use: cloud migration and high availability</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3>Benefits of Cloud Services</h3>
+<ul>
+<li>Economies of Scale</li>
+<li>High availability: available for long periods of time</li>
+<li>Scalability vs. Elasticity<ul>
+<li>Scalability: increase/decrease workload on current resources</li>
+<li>Elasticity: <ul>
+<li>quickly provisioning cloud resources        </li>
+<li>increase/decrease the number of resources e.g. adding/removing VMs</li>
+<li>quickly expand or decrease computer processing, memory, and storage resources to meet changing demands wo/worrying about capacity planning for peak usage</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Agility<ul>
+<li>Quickly respond to changes</li>
+<li>Provision or decommission cloud services in minutes using self-service</li>
+</ul>
+</li>
+<li>Disaster recovery<ul>
+<li>Resiliency: ability to recover from a failure e.g. backups for VMs or SQL databases</li>
+</ul>
+</li>
+<li>Cost Effective<ul>
+<li>OpEx vs. CapEx model</li>
+<li>Capital Expenses (CapEx) are predictable upfront costs </li>
+<li>Operational Expenses (OpEx) are ongoing billing costs (pay as you go) and can be deducted from your taxes immediately.</li>
+<li>Operational Expenses (OpEx) suited to agile environments where demand is unpredictable</li>
+</ul>
+</li>
+<li>Consumption-based model<ul>
+<li>Paying for something based on how much you used, as opposed to paying for something no matter if you use it or not. </li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3>Categories of Cloud Services</h3>
+<h4>IaaS</h4>
+<ul>
+<li>examples: <ul>
+<li>VM’s, Load Balancer, Firewall (aka Application Gateway), Virtual Network, VPN, subnets</li>
+<li>Azure Storage</li>
+</ul>
+</li>
+<li>emulation of a real piece of HW that you can buy in a store </li>
+<li>1-to-1 mapping/moving of what you have on-premises, e.g. pieces of hardware, to the cloud</li>
+<li>does NOT include SW services e.g. DB's</li>
+<li>You control the HW, choice of datacentre, availability zone, nbr of CPU’s</li>
+<li>You are responsible for upgrades, patches, version numbers    </li>
+</ul>
+<h4>PaaS aka <em>Web Apps</em> or <em>App Services</em></h4>
+<ul>
+<li>Scaling is your responsibility</li>
+<li>PaaS can integrate with other services<ul>
+<li>e.g. with servlerless Azure SQL Database or Cosmos DB</li>
+<li>e.g. with <em>Machine Learning Studio</em></li>
+</ul>
+</li>
+<li>It’s a platform that you need to build upon to be useful</li>
+<li>Development effort is required to turn it into sth useful</li>
+<li>You pay by the hour even if no one visits your App or website</li>
+<li>Cloud provider is more involved in this paradigm</li>
+<li>You compile code/program, upload it and cloud provider runs that code</li>
+<li>not picking out specific pieces of HW, not setting up networks; no choices over the HW</li>
+<li>
+<p>You do have to choose tiers, and plan levels within the tiers e.g. App Service plan</p>
+<ul>
+<li>Note that an App Service plan is similar to a traditional server farm 
+i.e. an <strong>App Service plan is the set of compute resources needed for a web app to run</strong></li>
+</ul>
+</li>
+<li>
+<p>You pay for performance: the pricing tiers</p>
+</li>
+<li>it is programmable so that you can upload your own code (App Service) </li>
+</ul>
+<h4>SaaS</h4>
+<ul>
+<li>examples: Dropbox, backup services, Google Drive, Google Docs, Office 365, Outlook, Active Directory, CRM tool, any enterprise App, </li>
+<li>Anything where you use a web browser to access a service</li>
+<li>Access to configuration of existing product only; no access to code</li>
+<li>Don’t control servers; only control data and settings</li>
+<li>The product is useful stand alone </li>
+</ul>
+<h4>Serverless</h4>
+<ul>
+<li>Autos-caling<ul>
+<li>Cloud provider is responsible for scaling e.g. adding servers or CPU’s as they are needed</li>
+</ul>
+</li>
+<li>Consumption-based billing<ul>
+<li>you might pay nothing if you don’t use the service i.e. no one ever visits your App</li>
+</ul>
+</li>
+<li>Azure serverless services:<ul>
+<li>Azure functions (compute)</li>
+<li>Serverless Kubernetes (compute)</li>
+<li>Azure SQL Database </li>
+<li>Cosmos DB </li>
+</ul>
+</li>
+<li>no access to server ; don’t know how many servers or processors are running your code</li>
+<li>no control over performance expectations (as opposed to performance via plans and tiers in PaaS)</li>
+<li>You only pay for execution and not for reservation</li>
+<li>You pay for CPU and data utilisation, NOT visits</li>
+</ul>
+<p><br></p>
+<h4>Shared Responsibility model</h4>
+<p><img alt="" src="img/shared-responsibility.png" /></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./azure_cloud_benefits_and_categories.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/cloud.html" rel="tag">Cloud</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>
