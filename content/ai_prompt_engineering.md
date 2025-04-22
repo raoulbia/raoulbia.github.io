@@ -614,6 +614,32 @@ The purpose of this tool is to be practical and useful, ensuring the prompts gen
 
 <br>
 
+```
+Review the entire conversation history, code repository, and documentation for this project. Then write a clear, engaging project summary that includes:
+1. Challenge Context
+- Industry and business problem
+- Legacy system or approach and its pain points
+- Key domain concepts (e.g., assets, Tag statuses, business rules)
+2. Generative AI Workflow
+- Discovery: how AI mapped dependencies or extracted rules
+- Translation: how AI converted formulas or code
+- Validation: how AI‑driven queries (e.g., via MCP) ensured parity and caught edge cases
+- Optimization: how AI tuned performance or architecture
+- Documentation: how AI generated guides, lineage diagrams, or specs
+3. Quantifiable Results
+- Number of formulas or rules migrated
+- Performance improvements (e.g., % load‑time reduction)
+- Accuracy guarantees (e.g., 1:1 metric parity)
+- Maintenance savings or developer‑hours recovered
+- New capabilities enabled (e.g., real‑time analytics)
+4. Timeline and Scope
+- Project duration (e.g., four weeks)
+- Team size or AI‑agent count where relevant
+5. Value and Impact
+- Business outcomes (cost, time, decision‑making benefits)
+- Long‑term advantages (scalability, self‑service, future‑proofing)
+Write in a single cohesive narrative of 200–300 words. Be thorough in capturing all specifics from the source material, but keep the tone concise, active, and compelling. Emphasize how generative AI was the critical enabler of this outcome.
+```
 ### Papers
 
 * [Few Shots - [2001.08361] Scaling Laws for Neural Language Models (arxiv.org)](https://arxiv.org/abs/2001.08361)
