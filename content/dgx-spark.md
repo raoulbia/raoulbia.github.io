@@ -15,6 +15,26 @@ Summary: DGX Spark Misc.
   | LLaMA-Factory         | HuggingFace-based | Web UI, no-code option                                     | Less control                   |
 
 
+## GPU Assessment:
+
+  | Metric   | Value | Assessment             |
+  |----------|-------|------------------------|
+  | GPU Util | 88%   | Good, not bottlenecked |
+  | Temp     | 68°C  | Normal                 |
+  | Power    | 56W   | Moderate               |
+
+  Speed factors (not learning rate):
+
+  | Parameter         | Current    | Could Speed Up?                      |
+  |-------------------|------------|--------------------------------------|
+  | local_batch_size  | 1          | Increase to 2-4 if memory allows     |
+  | global_batch_size | 16         | Means 16 gradient accumulation steps |
+  | seq_length        | 2048       | Lower if your data is shorter        |
+  | Precision         | bf16-mixed | Already optimal                      |
+
+  88% utilization is solid. The main bottleneck is local_batch_size: 1 - you're processing 1 sample at a time with 16 accumulation steps. With 128GB unified
+  memory, you could likely increase to local_batch_size: 2 or 4 to speed things up ~2-4x.
+
 ## Misc
 ```
 docker start vllm-server
