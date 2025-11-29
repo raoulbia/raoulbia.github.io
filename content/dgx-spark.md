@@ -4,6 +4,17 @@ Category: AI
 Slug: dgx_spark
 Summary: DGX Spark Misc.
 
+## Fine-tuning Options on DGX Spark (GB10, 128GB unified memory)
+
+  | Option                | Framework         | Pros                                                       | Cons                           |
+  |-----------------------|-------------------|------------------------------------------------------------|--------------------------------|
+  | NeMo + LoRA (current) | NVIDIA NeMo       | Official NVIDIA support, optimized for DGX, proven working | Complex setup, container-based |
+  | Unsloth               | HuggingFace-based | 2x faster, 60% less memory, simple API                     | Less NVIDIA optimization       |
+  | Axolotl               | HuggingFace-based | YAML config, many techniques (LoRA, QLoRA, full)           | Medium complexity              |
+  | HuggingFace PEFT      | Transformers      | Most popular, huge community                               | Manual optimization needed     |
+  | LLaMA-Factory         | HuggingFace-based | Web UI, no-code option                                     | Less control                   |
+
+
 ## Misc
 ```
 docker start vllm-server
