@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
+      <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | Pandas NLP</title>
+    <title>code snippets etc. - Pandas NLP</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
+
+
+
 
 </head>
 <body>
@@ -26,17 +31,14 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 26, 2018</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./python, pandas, nlp.html" rel="bookmark" title="Permanent Link to &quot;Pandas NLP&quot;">Pandas NLP</a>
-                </h2>
-
-                
-                
-
-                <h4>Useful Links</h4>
+        <div id="content">  <article>
+    <header>
+      <h2>
+        <a href="./python, pandas, nlp.html" rel="bookmark"
+           title="Permalink to Pandas NLP">Pandas NLP</a></h2>
+      
+    </header>
+    <h4>Useful Links</h4>
 <ul>
 <li><a href="https://stackoverflow.com/questions/39124492/nltk-regexpparser-chunk-phrase-by-matching-exactly-one-item">NLTK RegexpParser, chunk phrase by matching exactly one item</a></li>
 <li><a href="https://towardsdatascience.com/try-texthero-the-absolute-simplest-way-to-clean-and-analyze-text-in-pandas-6db86ed14272">TextHero: The Absolute Simplest way to Clean and Analyze Text in Pandas</a></li>
@@ -103,13 +105,16 @@
 <h3>Misc.</h3>
 <h4>Extract words from a list</h4>
 <p><code>df['named_entities'] = [','.join(map(str, l)) for l in df['named_entities']]</code></p>
-                <div class="clear"></div>
+    <footer>
+      <p>Published: <time datetime="2018-01-26T00:00:00+00:00">
+        Fri 26 January 2018
+      </time></p>
+        <p>
+          Category: <a href="./category/python.html">Python</a>
+        </p>
+    </footer>
+  </article>
 
-                <div class="info">
-                    <a href="./python, pandas, nlp.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
-                </div>
-            </article>
             <div class="clear"></div>
             <footer>
                 <p>
@@ -120,5 +125,30 @@
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

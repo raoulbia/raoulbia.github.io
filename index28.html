@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | Page 28</title>
+    <title>code snippets etc.</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
@@ -25,282 +26,38 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jul 01, 2017</h4>
+        <div id="content">        <h2>All articles</h2>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="./graphs.html" rel="bookmark" title="Permanent Link to &quot;Graphs&quot;">Graphs</a>
-                </h2>
 
-                
-                
+        <article>
+            <header> <h2><a href="./graphs.html" rel="bookmark" title="Permalink to Graphs">Graphs</a></h2> </header>
+            <section><p>Graph Theory</p></section>
+            <footer>
+                <p>Published: <time datetime="2017-07-01T00:00:00+01:00"> Sat 01 July 2017 </time></p>
+                <address>By
+                </address>
+            </footer>
+        </article>
+        <article>
+            <header> <h2><a href="./scripts.html" rel="bookmark" title="Permalink to Scripts">Scripts</a></h2> </header>
+            <section><p>Scripts</p></section>
+            <footer>
+                <p>Published: <time datetime="2017-05-25T00:00:00+01:00"> Thu 25 May 2017 </time></p>
+                <address>By
+                </address>
+            </footer>
+        </article>
 
-                <p>Under Construction...</p>
-<h4>Graph Notebooks</h4>
-<ul>
-<li><a href="https://nbviewer.jupyter.org/github/raoulbia/ipython/blob/master/induced_voltages.ipynb?flush_cache=true" target="_blank">Vertex Voltages and Delivered Current</a></li>
-<li><a href="https://nbviewer.jupyter.org/github/raoulbia/ipython/blob/master/mimimum_spanning_tree.ipynb?flush_cache=true" target="_blank">Minimum Spanning Tree</a></li>
-<li><a href="https://github.com/raoulbia/ipython/blob/master/random_walks_on_grid.ipynb?flush_cache=true" target="_blank">Random Walks on a Grid</a></li>
-<li><a href="https://nbviewer.jupyter.org/github/raoulbia/ipython/blob/master/pagerank.ipynb?flush_cache=true" target="_blank">Google PageRank Step By Step</a></li>
-<li><a href="https://nbviewer.jupyter.org/github/raoulbia/ipython/blob/master/random_walk_with_restart.ipynb?flush_cache=true" target="_blank">Random Walk with Restart</a></li>
-<li><a href="https://nbviewer.jupyter.org/github/raoulbia/ipython/blob/master/laplacian_applications.ipynb?flush_cache=true" target="_blank">Application of Laplacian Matrix</a></li>
-<li><a href="https://nbviewer.jupyter.org/github/raoulbia/ipython/blob/master/basic_graph_operations.ipynb?flush_cache=true" target="_blank">Basic Operations</a></li>
-</ul>
-<h4>Knowledge Graphs</h4>
-<ul>
-<li>
-<p><em>"Knowledge Discovery is the nontrivial extraction of implicit, previously unknown, and potentially useful information
-from data."</em> (Frawley et al., 1992)</p>
-</li>
-<li>
-<p><em>"A Knowledge Graph is a directed graph $G = (V, E, R, g)$, where V , E, and R denote
-the node, edge, and relation sets, respectively, and $g : E \rightarrow  R$
-is a function labeling each edge with a semantic relation or predicate. "</em> (Shiralkar et al., 2017)</p>
-</li>
-</ul>
-<h4>Graph Expansion</h4>
-<p>Adding Facts to a Knowledge Graph - Illustration of 1-, and 2-Hop Graph Expansion in Python: 
-<a href="https://nbviewer.jupyter.org/github/raoulbia/jupyter-notebooks/blob/master/KG-Expansion-proteins.svg?flush_cache=true" target="_blank">Proteins KG example</a> and
-<a href="https://nbviewer.jupyter.org/github/raoulbia/jupyter-notebooks/blob/master/KG-Expansion-startrek.svg?flush_cache=true" target="_blank">Star Trek KG example</a></p>
-<h4>How one node may be reached from another one</h4>
-<ul>
-<li>A <em>walk</em> is an unrestricted sequence of nodes in which a node or an edge may appear more than once. Its length is simply the number of edges in the walk.</li>
-<li>A <em>trail</em> is a walk in which no edge is repeated but nodes may be visited more than once.</li>
-<li>A <em>path</em> is a trail in which no edge or node is repeated.</li>
-<li>A <em>cycle</em> is a trail with at least 3 nodes in which start and end node are the same.</li>
-<li>A <em>geodesic</em> between two nodes is a shortest path between them.</li>
-</ul>
-<h4>Connected vs. Strongly Conncected</h4>
-<ul>
-<li>An undirected graph is <em>connected</em> if, for every pair of nodes <em>u</em> and <em>v</em>, there is a path from <em>u</em> to <em>v</em>.</li>
-<li>A directed graph is <em>strongly connected</em> if, for every two nodes <em>u</em> and <em>v</em>, there is a path from <em>u</em> to <em>v</em> and a path from <em>v</em> to <em>u</em>.</li>
-</ul>
-<h4>Trees</h4>
-<ul>
-<li>An undirected graph is a tree if it is connected and does not contain a cycle.</li>
-<li>A spanning tree of G is a tree that contains all the vertices of G.</li>
-<li>Adding a new edge to a spanning tree always creates a cycle.</li>
-</ul>
-<h4>Explaining RelatednessThe task of explaining the relationship between two or more query nodes involves measuring the relevance of paths in</h4>
-<p>the graph that connect those query nodes. The connecting paths represent the implicit relations between the query nodes.</p>
-<ul>
-<li>
-<p>By extension, measuring the relevance of connecting paths involves measuring the relevance of the nodes that are on
-  those connecting paths.</p>
-</li>
-<li>
-<p>A relevant node is a central node for the (indirect) relation between the query nodes.</p>
-</li>
-<li>
-<p>"So, while the nodes that are on relevant connecting paths are explicit and simple — just a set of nodes — they represent
-implicit information." (Langohr et al., 2012)</p>
-</li>
-</ul>
-<h4>The relative importance of nodes</h4>
-<p>Rusinowska et al. (2011) describe the process of finding the top-k relatively important nodes w.r.t. some query nodes, two steps are required:</p>
-<ul>
-<li>
-<p>Measure the strength of relations</p>
-<ul>
-<li>
-<p>Centrality measures: degree, closeness and betweeness</p>
-</li>
-<li>
-<p>Prestige methods: degree prestige (think PageRank where a node’s importance is determined by the importance of its
-   neighbors) and proximity prestige</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Node Ranking</p>
-<ul>
-<li>RW-based methods</li>
-</ul>
-</li>
-</ul>
-<h4>What are the characteristics relevant to measuring centrality?</h4>
-<p><em>Network flow processes and the dimensions along which they differ</em></p>
-<ul>
-<li>
-<p>flow pocesses vary along mechansism dimensions:</p>
-<ul>
-<li>copy mechansims: serial and parallel diffusion via replication</li>
-<li>move mechansim: objects are indivisible and can only be in one place at a time</li>
-</ul>
-</li>
-<li>
-<p>flow pocesses vary along trajectory dimensions: shortest paths, paths, trails or walks</p>
-</li>
-</ul>
-<p>The authors use those two dimensions to construct a topology of flow processes as shown in Table 1 of Borgatti, 2005.</p>
-<p><em>Indivisibility</em></p>
-<ul>
-<li>
-<p>Objects can only be in one place at a time</p>
-<ul>
-<li>nodes and edges are used more than once: networked economy &gt; walk-based transfer e.g. money (see also Markov process)</li>
-<li>nodes may be visited more than once but edges are not re-used: distribution networks &gt; used goods trails</li>
-<li>nodes and edges are not re-used: delivery networks &gt; package arrives through shortest paths</li>
-</ul>
-</li>
-<li>
-<p>Objects can be in several places at once</p>
-<ul>
-<li>
-<p>replication flows in which objects are spread one at a time (serial duplication)</p>
-<ul>
-<li>does not pass same edge twice but can pass the same node more than once: informal network of persons &gt; gossip trails</li>
-</ul>
-</li>
-<li>
-<p>replication flows in which objects are diffused simultaneously (parallel duplication):</p>
-<ul>
-<li>radio broadcast</li>
-<li>email communication: nodes and edges visited only once  &gt; path</li>
-<li>speaker influences audience through interaction: nodes and edges visited only once  &gt; path</li>
-<li>infection / disease: nodes and edges visited only once  &gt; path</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4>Commonly encountered flow processes</h4>
-<ul>
-<li>
-<p>diffusion flows where it matters to be first to get it:</p>
-<ul>
-<li>general information e.g. R&amp;D technology</li>
-</ul>
-</li>
-<li>
-<p>diffusion flows where it matters to know the target and to take the shortest path:</p>
-<ul>
-<li>package delivery, traffic, telecomms</li>
-</ul>
-</li>
-<li>
-<p>flows where reception speed (i.e. shortest path) does not matter i.e. flow has no target and and does not prefer to
-  take shortest path</p>
-<ul>
-<li>gossip</li>
-<li>infections and diseases</li>
-</ul>
-</li>
-<li>
-<p>flows in which traffic is able to move via unrestricted walks rather than being constrained by trails, paths or geodesics:</p>
-<ul>
-<li>no assumption of transfer or replication one at a time</li>
-<li>rather it assumes that each node affects all of its neighbours simultaneously (parallel duplication)</li>
-<li>
-<p>ideally suited for influence type processes: attitudes, beliefs</p>
-<ul>
-<li>a node's importance is determined by the importance of its neighbors thus this is also referred to as <strong>prestige</strong></li>
-<li>degree centrality can be viewed as a <em>immediate</em> influence measure</li>
-<li>eigenvector centrality can be viewed as a <em>long-term direct</em> influence measure</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5>Vertex degree centrality measure</h5>
-<ul>
-<li>For a random walk on a graph, the limiting probabilities for the nodes are proportional to degree. Hence, the proportion of times that a node is visited is a function of its degree.</li>
-<li>This means that degree centrality is an appropriate measure for <strong>walk-based transfer processes such as the money exchange process</strong>.</li>
-</ul>
-<h5>Spanning vs. Induced Subgraphs (<a href="https://www.youtube.com/watch?v=dPHkyRvLtIU&amp;app=desktop">video</a>)</h5>
-<ul>
-<li>
-<p>A spanning subgraph is a subgraph obtained only by edge deletions. The vertex set of the subgraph is the entire vertex set of the original graph.</p>
-</li>
-<li>
-<p>A subgraph obtained only by vertex deletion is called an induced subgraph. When deleting a vertex one must also delete all its incident edges.
-The edge set of an induced subgraph is therefore a subset of the edge set of the original graph.</p>
-</li>
-</ul>
-<h5>Conclusions</h5>
-<p>It is important to match centrality measures to appropriate kinds of flow processes and the implicit flow characteristics they assume.</p>
-<h4>References</h4>
-<p>Rusinowska, A., Berghammer, R., De Swart, H. and Grabisch, M. 2011. Social networks: Prestige, centrality, and influence (Invited paper). IN:  de Swart (ed.) RAMICS 2011. Lecture Notes in Computer Science (LNCS) 6663. Springer, pp. 22–39.</p>
-<p>Borgatti, S.P. 2005. Centrality and network flow. Social Networks, 27(1), pp.55–71.</p>
-<p>Frawley, W.J., Piatetsky-Shapiro, G. and Matheus, C.J. 1992. Knowledge Discovery in Databases: An Overview. AI Mag., 13(3), pp.57–70.</p>
-<p>Shiralkar, P., Flammini, A., Menczer, F. and Ciampaglia, G.L. 2017. Finding Streams in Knowledge Graphs to Support Fact Checking. arXiv:1708.07239 [cs].</p>
-                <div class="clear"></div>
+  <nav>
+    <ul>
+        <li><a href="./index.html">&Lang;</a></li>
+        <li><a href="./index27.html">&lang;</a></li>
+      <li>Page 28 / 31</li>
+        <li><a href="./index29.html">&rang;</a></li>
+        <li><a href="./index31.html">&Rang;</a></li>
+    </ul>
+  </nav>
 
-                <div class="info">
-                    <a href="./graphs.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/graphs.html" rel="tag">Graphs</a>
-                </div>
-            </article>            <h4 class="date">May 25, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./scripts.html" rel="bookmark" title="Permanent Link to &quot;Scripts&quot;">Scripts</a>
-                </h2>
-
-                
-                
-
-                <h3>Import GTFS data into postgres</h3>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
-
-<span class="c1"># init vars</span>
-<span class="nv">workingFolder</span><span class="o">=</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>
-<span class="nv">unzip_dir</span><span class="o">=</span><span class="s2">&quot;gtfs_files_unzipped&quot;</span>
-<span class="nv">fileName</span><span class="o">=</span><span class="s2">&quot;feed_gtfs&quot;</span><span class="w"> </span>
-<span class="nv">dbName</span><span class="o">=</span><span class="s2">&quot;gtfs_dublinbus&quot;</span>
-<span class="nv">user</span><span class="o">=</span><span class="s2">&quot;postgres&quot;</span>
-<span class="nv">password</span><span class="o">=</span><span class="s2">&quot;postgres&quot;</span>
-
-<span class="c1"># create dirs</span>
-<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\r</span>m<span class="w"> </span>-Rf<span class="w"> </span><span class="nv">$workingFolder</span>/<span class="nv">$unzip_dir</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
-mkdir<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
-<span class="c1"># mkdir &quot;$workingFolder/output_test&quot; &gt; /dev/null 2&gt;&amp;1    </span>
-
-<span class="c1"># unzip the GTFS file</span>
-rm<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>/*.csv<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
-rm<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>/*.txt<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
-unzip<span class="w"> </span>-qq<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$fileName</span><span class="s2">&quot;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>
-
-<span class="c1"># create a CSV copy of the source txt GTFS files</span>
-<span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;./</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>
-<span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.txt
-<span class="k">do</span>
-<span class="w">    </span>cp<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;../</span><span class="nv">$unzip_dir</span><span class="s2">/</span><span class="si">${</span><span class="nv">file</span><span class="p">%.txt</span><span class="si">}</span><span class="s2">.csv&quot;</span>
-<span class="k">done</span>
-<span class="nb">cd</span><span class="w"> </span>..
-
-<span class="c1"># import into postgres</span>
-<span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">/&quot;</span>*.csv
-<span class="k">do</span>
-<span class="w">    </span><span class="nv">filename</span><span class="o">=</span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="k">)</span>
-<span class="w">    </span><span class="nv">extension</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">filename</span><span class="p">##*.</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nv">filename</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">filename</span><span class="p">%.*</span><span class="si">}</span><span class="s2">&quot;</span>
-
-<span class="w">    </span>ogr2ogr<span class="w"> </span>-f<span class="w"> </span>PostgreSQL<span class="w"> </span>PG:<span class="s2">&quot;user=</span><span class="nv">$user</span><span class="s2"> dbname=</span><span class="nv">$dbName</span><span class="s2"> password=</span><span class="nv">$password</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">            </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">/</span><span class="nv">$filename</span><span class="s2">.csv&quot;</span><span class="w"> </span>-nln<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filename</span><span class="s2">&quot;</span><span class="w"> </span>
-<span class="k">done</span>
-
-<span class="se">\r</span>m<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">/&quot;</span>*.csv
-
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Done&quot;</span>
-</code></pre></div>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./scripts.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/scripts.html" rel="tag">Scripts</a>
-                </div>
-            </article>
-
-                <div class="clear"></div>
-                <div class="pages">
-
-                    <a href="./index27.html" class="prev_page">&larr;&nbsp;Previous</a>
-
-                    <a href="./index29.html" class="next_page">Next&nbsp;&rarr;</a>
-
-                    <span>Page 28 of 31</span>
-                </div>
 
             <div class="clear"></div>
             <footer>
@@ -312,5 +69,30 @@ unzip<span class="w"> </span>-qq<span class="w"> </span>-o<span class="w"> </spa
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

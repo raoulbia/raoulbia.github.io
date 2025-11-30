@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
+      <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | SnowSQL Cheatsheet</title>
+    <title>code snippets etc. - SnowSQL Cheatsheet</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
+
+
+
 
 </head>
 <body>
@@ -26,17 +31,14 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 23, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./snowsql.html" rel="bookmark" title="Permanent Link to &quot;SnowSQL Cheatsheet&quot;">SnowSQL Cheatsheet</a>
-                </h2>
-
-                
-                
-
-                <h4>SnowSQL CLI Config file</h4>
+        <div id="content">  <article>
+    <header>
+      <h2>
+        <a href="./snowsql.html" rel="bookmark"
+           title="Permalink to SnowSQL Cheatsheet">SnowSQL Cheatsheet</a></h2>
+      
+    </header>
+    <h4>SnowSQL CLI Config file</h4>
 <p>The onfig file is located here: <code>/home/&lt;user&gt;/.snowsql</code>. This is where you configure custom connection parameters.</p>
 <p>In your config file you need to modify this line:</p>
 <p><code>log_file = ../snowsql_rt.log</code> to this <code>log_file = ~/.snowsql/snowsql_rt.log</code></p>
@@ -176,13 +178,16 @@ USE ROLE SYSADMIN ; -- De-esclate the role
 <p>Note: it can take an hour or two for Azure to create objects necessary for the integration</p>
 <div class="highlight"><pre><span></span><code><span class="n">list</span><span class="w"> </span><span class="nv">@gtfs</span><span class="w"> </span><span class="p">;</span>
 </code></pre></div>
-                <div class="clear"></div>
+    <footer>
+      <p>Published: <time datetime="2017-11-23T00:00:00+00:00">
+        Thu 23 November 2017
+      </time></p>
+        <p>
+          Category: <a href="./category/databases.html">Databases</a>
+        </p>
+    </footer>
+  </article>
 
-                <div class="info">
-                    <a href="./snowsql.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
-                </div>
-            </article>
             <div class="clear"></div>
             <footer>
                 <p>
@@ -193,5 +198,30 @@ USE ROLE SYSADMIN ; -- De-esclate the role
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

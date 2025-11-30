@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
+      <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | Python Data Structures</title>
+    <title>code snippets etc. - Python Data Structures</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
+
+
+
 
 </head>
 <body>
@@ -26,17 +31,14 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 03, 2018</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./python_data_structures.html" rel="bookmark" title="Permanent Link to &quot;Python Data Structures&quot;">Python Data Structures</a>
-                </h2>
-
-                
-                
-
-                <p><br></p>
+        <div id="content">  <article>
+    <header>
+      <h2>
+        <a href="./python_data_structures.html" rel="bookmark"
+           title="Permalink to Python Data Structures">Python Data Structures</a></h2>
+      
+    </header>
+    <p><br></p>
 <h3>Lists</h3>
 <h4>itemgetter</h4>
 <p>itemgetter on a list of tuples <code>[('P52564', 61), ('O15169', 44), ...]</code></p>
@@ -110,13 +112,16 @@
 <p><strong>Note</strong>: Named tuples are immutable, so you cannot manipulate them. If you want something mutable, you can use recordtype.
 <a href="https://stackoverflow.com/questions/31252939/changing-values-of-a-list-of-namedtuples">read more</a></p>
 <p><br></p>
-                <div class="clear"></div>
+    <footer>
+      <p>Published: <time datetime="2018-01-03T00:00:00+00:00">
+        Wed 03 January 2018
+      </time></p>
+        <p>
+          Category: <a href="./category/python.html">Python</a>
+        </p>
+    </footer>
+  </article>
 
-                <div class="info">
-                    <a href="./python_data_structures.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
-                </div>
-            </article>
             <div class="clear"></div>
             <footer>
                 <p>
@@ -127,5 +132,30 @@
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

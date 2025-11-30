@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
+      <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | Vagrant VM</title>
+    <title>code snippets etc. - Vagrant VM</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
+
+
+
 
 </head>
 <body>
@@ -26,17 +31,14 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 03, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./Vagrant VM.html" rel="bookmark" title="Permanent Link to &quot;Vagrant VM&quot;">Vagrant VM</a>
-                </h2>
-
-                
-                
-
-                <h4>Useful Links</h4>
+        <div id="content">  <article>
+    <header>
+      <h2>
+        <a href="./Vagrant VM.html" rel="bookmark"
+           title="Permalink to Vagrant VM">Vagrant VM</a></h2>
+      
+    </header>
+    <h4>Useful Links</h4>
 <ul>
 <li><a href="https://www.gis-blog.com/osgeo-live-the-best-open-source-gis-ready-to-use-package/">OSGeo-Live</a></li>
 <li><a href="https://releases.ubuntu.com/20.04/">Ubuntu 20.04 ISO</a></li>
@@ -146,13 +148,16 @@ VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/h
 <li><a href="https://jeremykendall.net/2013/08/09/vagrant-synced-folders-permissions/">vagrant-synced-folders-permissions</a></li>
 <li><a href="https://stackoverflow.com/questions/35807568/vagrant-synced-folder-permissions">vagrant-synced-folders-permissions SO</a></li>
 </ul>
-                <div class="clear"></div>
+    <footer>
+      <p>Published: <time datetime="2017-12-03T00:00:00+00:00">
+        Sun 03 December 2017
+      </time></p>
+        <p>
+          Category: <a href="./category/linux.html">Linux</a>
+        </p>
+    </footer>
+  </article>
 
-                <div class="info">
-                    <a href="./Vagrant VM.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
-                </div>
-            </article>
             <div class="clear"></div>
             <footer>
                 <p>
@@ -163,5 +168,30 @@ VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/h
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

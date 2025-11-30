@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
+      <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | R</title>
+    <title>code snippets etc. - R</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
+
+
+
 
 </head>
 <body>
@@ -26,17 +31,14 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Feb 20, 2018</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./R.html" rel="bookmark" title="Permanent Link to &quot;R&quot;">R</a>
-                </h2>
-
-                
-                
-
-                <h4>Useful Snippets</h4>
+        <div id="content">  <article>
+    <header>
+      <h2>
+        <a href="./R.html" rel="bookmark"
+           title="Permalink to R">R</a></h2>
+      
+    </header>
+    <h4>Useful Snippets</h4>
 <ul>
 <li>Filter: <code>df %&gt;% filter(., GrLivArea &gt;=4000 &amp; SalePrice &lt; 200000)</code></li>
 <li>Remove observations: <code>df &lt;- df[-c(524, 1299), ]</code></li>
@@ -157,13 +159,19 @@
 <li><a href="https://medium.com/analytics-vidhya/group-manipulation-in-r-3-5554a0c1b544">Group Manipulation In R</a></li>
 <li><a href="https://medium.com/@moorissa/the-best-resources-for-r-programming-37dbc94e0de6">The Best Resources for R Programming</a></li>
 </ul>
-                <div class="clear"></div>
+    <footer>
+      <p>Published: <time datetime="2018-02-20T00:00:00+00:00">
+        Tue 20 February 2018
+      </time></p>
+        <p>Last updated: <time datetime="2010-12-04T19:30:00+00:00">
+          Sat 04 December 2010
+        </time></p>
+        <p>
+          Category: <a href="./category/r.html">R</a>
+        </p>
+    </footer>
+  </article>
 
-                <div class="info">
-                    <a href="./R.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/r.html" rel="tag">R</a>
-                </div>
-            </article>
             <div class="clear"></div>
             <footer>
                 <p>
@@ -174,5 +182,30 @@
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

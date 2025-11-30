@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
+      <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | Combinatorics</title>
+    <title>code snippets etc. - Combinatorics</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
+
+
+
 
 </head>
 <body>
@@ -26,28 +31,28 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Oct 04, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./combinatorics.html" rel="bookmark" title="Permanent Link to &quot;Combinatorics&quot;">Combinatorics</a>
-                </h2>
-
-                
-                
-
-                <ul>
+        <div id="content">  <article>
+    <header>
+      <h2>
+        <a href="./combinatorics.html" rel="bookmark"
+           title="Permalink to Combinatorics">Combinatorics</a></h2>
+      
+    </header>
+    <ul>
 <li><a href="./drafts/Combinatorics I.html">Combinatorics I</a></li>
 <li><a href="./drafts/Combinatorics II.html">Combinatorics II</a></li>
 <li><a href="./drafts/Combinatorics III.html">Combinatorics III</a></li>
 </ul>
-                <div class="clear"></div>
+    <footer>
+      <p>Published: <time datetime="2017-10-04T00:00:00+01:00">
+        Wed 04 October 2017
+      </time></p>
+        <p>
+          Category: <a href="./category/combinatorics.html">Combinatorics</a>
+        </p>
+    </footer>
+  </article>
 
-                <div class="info">
-                    <a href="./combinatorics.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/combinatorics.html" rel="tag">Combinatorics</a>
-                </div>
-            </article>
             <div class="clear"></div>
             <footer>
                 <p>
@@ -58,5 +63,30 @@
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
+      <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | Fullstack Dev Notes</title>
+    <title>code snippets etc. - Fullstack Dev Notes</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
+
+
+
 
 </head>
 <body>
@@ -26,17 +31,14 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jul 18, 2024</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./fullstack.html" rel="bookmark" title="Permanent Link to &quot;Fullstack Dev Notes&quot;">Fullstack Dev Notes</a>
-                </h2>
-
-                
-                
-
-                <p><br></p>
+        <div id="content">  <article>
+    <header>
+      <h2>
+        <a href="./fullstack.html" rel="bookmark"
+           title="Permalink to Fullstack Dev Notes">Fullstack Dev Notes</a></h2>
+      
+    </header>
+    <p><br></p>
 <h2>Managing API_HOST Environment Variable in Next.js Projects</h2>
 <p>When developing a Next.js application, it's crucial to manage environment variables effectively, especially for differentiating between local testing and production deployments. This article will guide you through setting up and handling the <code>API_HOST</code> environment variable using the <code>next.config.mjs</code> file and CI/CD pipeline configurations with YAML files.</p>
 <h3>1. Configuring <code>API_HOST</code> in <code>next.config.mjs</code></h3>
@@ -154,13 +156,16 @@
 <li><strong>Value</strong>: <code>https://api.productionurl.com</code> (or your actual production API URL)</li>
 <li><strong>Save the changes</strong> and restart the Web Service.</li>
 </ol>
-                <div class="clear"></div>
+    <footer>
+      <p>Published: <time datetime="2024-07-18T00:00:00+01:00">
+        Thu 18 July 2024
+      </time></p>
+        <p>
+          Category: <a href="./category/ai.html">AI</a>
+        </p>
+    </footer>
+  </article>
 
-                <div class="info">
-                    <a href="./fullstack.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/ai.html" rel="tag">AI</a>
-                </div>
-            </article>
             <div class="clear"></div>
             <footer>
                 <p>
@@ -171,5 +176,30 @@
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

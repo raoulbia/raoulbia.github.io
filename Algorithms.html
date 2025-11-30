@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
+      <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | Algorithms</title>
+    <title>code snippets etc. - Algorithms</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
+
+
+
 
 </head>
 <body>
@@ -26,17 +31,14 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Oct 02, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./Algorithms.html" rel="bookmark" title="Permanent Link to &quot;Algorithms&quot;">Algorithms</a>
-                </h2>
-
-                
-                
-
-                <p>On this page I keep some notes abbout Algorithms. It's work in progress and all might not be 
+        <div id="content">  <article>
+    <header>
+      <h2>
+        <a href="./Algorithms.html" rel="bookmark"
+           title="Permalink to Algorithms">Algorithms</a></h2>
+      
+    </header>
+    <p>On this page I keep some notes abbout Algorithms. It's work in progress and all might not be 
 accurate. I will improve this page as my grasp of the key differences between the core algorithm 
 families improves. </p>
 <p><strong>Introduction</strong></p>
@@ -69,13 +71,16 @@ to be exact, despite the fact that they rely on making random decisions. Yet mos
 algorithms are <em>Monte Carlo algorithms</em>. These algorithms are not guaranteed to return exact solutions,
 but they do quickly find approximate solutions. Because of their speed, they can be run many times, 
 allowing us to choose the best approximation from thousands of runs.</p>
-                <div class="clear"></div>
+    <footer>
+      <p>Published: <time datetime="2017-10-02T00:00:00+01:00">
+        Mon 02 October 2017
+      </time></p>
+        <p>
+          Category: <a href="./category/algorithms.html">Algorithms</a>
+        </p>
+    </footer>
+  </article>
 
-                <div class="info">
-                    <a href="./Algorithms.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/algorithms.html" rel="tag">Algorithms</a>
-                </div>
-            </article>
             <div class="clear"></div>
             <footer>
                 <p>
@@ -86,5 +91,30 @@ allowing us to choose the best approximation from thousands of runs.</p>
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

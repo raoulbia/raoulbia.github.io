@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | articles in the "Logistic Regression" category</title>
+    <title>code snippets etc. - Logistic Regression category</title>
     <link rel="shortcut icon" type="image/png" href="../favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
     <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
@@ -16,8 +17,6 @@
     <header>
         <nav>
             <ul>
-
-                <li class="ephemeral selected"><a href="../category/logistic-regression.html">Logistic Regression</a></li>
                 <li><a href="../">Home</a></li>
                 <li><a href="../archives">Archives</a></li>
             </ul>
@@ -27,46 +26,20 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Sep 03, 2017</h4>
+        <div id="content">    <h2>Articles in the Logistic Regression category</h2>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="../Logistic Regression.html" rel="bookmark" title="Permanent Link to &quot;Logistic Regression&quot;">Logistic Regression</a>
-                </h2>
 
-                
-                
+        <article>
+            <header> <h2><a href="../Logistic Regression.html" rel="bookmark" title="Permalink to Logistic Regression">Logistic Regression</a></h2> </header>
+            <section><p>Logistic Regression</p></section>
+            <footer>
+                <p>Published: <time datetime="2017-09-03T00:00:00+01:00"> Sun 03 September 2017 </time></p>
+                <address>By
+                </address>
+            </footer>
+        </article>
 
-                <p>On this page I keep some ontes on logistic regression.</p>
-<h4>Supervised Learning: Regression Techniques</h4>
-<p>Most supervised learning problems can be framed formally 
-in terms of predicting a response, but prediction alone is often not
-the main goal of the analysis. </p>
-<p>For example, many applications of
-linear regression in the sciences are aimed primarily
-at <strong>understanding how the inputs of a system drive the outputs</strong>.</p>
-<p>An extremely complicated "black box" giving pure predictions would not be
-very useful in and of itself.</p>
-<p>(<a href="https://lagunita.stanford.edu/courses/HumanitiesSciences/StatLearning/Winter2016/about">source</a>)</p>
-<p><em>Gradient Descent</em>: iterative computation of adjusted feature weights</p>
-<h4>Linear vs. Logistic Regression: normalizing</h4>
-<ul>
-<li>
-<p>linear regression: must normalize features</p>
-</li>
-<li>
-<p>logistic regression: no need to normalize the data. </p>
-</li>
-</ul>
-<p>see <a href="https://stats.stackexchange.com/questions/29781/when-conducting-multiple-regression-when-should-you-center-your-predictor-varia">here</a> 
-for a good discussion on the topic of data <em>centering</em> and <em>scaling</em> data features.</p>
-                <div class="clear"></div>
 
-                <div class="info">
-                    <a href="../Logistic Regression.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="../category/logistic-regression.html" rel="tag">Logistic Regression</a>
-                </div>
-            </article>
 
             <div class="clear"></div>
             <footer>
@@ -78,5 +51,30 @@ for a good discussion on the topic of data <em>centering</em> and <em>scaling</e
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

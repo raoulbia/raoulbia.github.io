@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | articles in the "Cloud Deployments" category</title>
+    <title>code snippets etc. - Cloud Deployments category</title>
     <link rel="shortcut icon" type="image/png" href="../favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
     <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
@@ -16,8 +17,6 @@
     <header>
         <nav>
             <ul>
-
-                <li class="ephemeral selected"><a href="../category/cloud-deployments.html">Cloud Deployments</a></li>
                 <li><a href="../">Home</a></li>
                 <li><a href="../archives">Archives</a></li>
             </ul>
@@ -27,45 +26,20 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Mar 18, 2025</h4>
+        <div id="content">    <h2>Articles in the Cloud Deployments category</h2>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="../was_playbook.html" rel="bookmark" title="Permanent Link to &quot;AWS Playbook&quot;">AWS Playbook</a>
-                </h2>
 
-                
-                
+        <article>
+            <header> <h2><a href="../was_playbook.html" rel="bookmark" title="Permalink to AWS Playbook">AWS Playbook</a></h2> </header>
+            <section><p>AWS Playbook</p></section>
+            <footer>
+                <p>Published: <time datetime="2025-03-18T00:00:00+00:00"> Tue 18 March 2025 </time></p>
+                <address>By
+                </address>
+            </footer>
+        </article>
 
-                <p><br></p>
-<h3>AWS Playbook</h3>
-<div class="highlight"><pre><span></span><code><span class="n">aws</span><span class="w"> </span><span class="n">configure</span><span class="w"> </span><span class="n">sso</span><span class="w"> </span><span class="o">--</span><span class="n">use</span><span class="o">-</span><span class="n">device</span><span class="o">-</span><span class="n">code</span>
 
-<span class="n">aws</span><span class="w"> </span><span class="n">ecr</span><span class="w"> </span><span class="n">get</span><span class="o">-</span><span class="n">login</span><span class="o">-</span><span class="n">password</span><span class="w"> </span><span class="o">--</span><span class="n">region</span><span class="w"> </span><span class="n">eu</span><span class="o">-</span><span class="n">central</span><span class="o">-</span><span class="mh">1</span><span class="w"> </span><span class="o">--</span><span class="n">profile</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Profile</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">login</span><span class="w"> </span><span class="o">--</span><span class="n">username</span><span class="w"> </span><span class="n">AWS</span><span class="w"> </span><span class="o">--</span><span class="n">password</span><span class="o">-</span><span class="n">stdin</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">123</span><span class="o">&gt;</span><span class="p">.</span><span class="n">dkr</span><span class="p">.</span><span class="n">ecr</span><span class="p">.</span><span class="n">eu</span><span class="o">-</span><span class="n">central</span><span class="o">-</span><span class="mf">1.</span><span class="n">amazonaws</span><span class="p">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">Repository</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;</span>
-
-<span class="n">aws</span><span class="w"> </span><span class="n">sts</span><span class="w"> </span><span class="n">get</span><span class="o">-</span><span class="n">caller</span><span class="o">-</span><span class="n">identity</span><span class="w"> </span><span class="o">--</span><span class="n">profile</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Profile</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;</span>
-
-<span class="n">docker</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Repository</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;</span><span class="w"> </span><span class="p">.</span>
-
-<span class="n">docker</span><span class="w"> </span><span class="n">tag</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Repository</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;:</span><span class="n">latest</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">123</span><span class="o">&gt;</span><span class="p">.</span><span class="n">dkr</span><span class="p">.</span><span class="n">ecr</span><span class="p">.</span><span class="n">eu</span><span class="o">-</span><span class="n">central</span><span class="o">-</span><span class="mf">1.</span><span class="n">amazonaws</span><span class="p">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">Repository</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;:</span><span class="n">latest</span>
-
-<span class="n">aws</span><span class="w"> </span><span class="n">ecr</span><span class="w"> </span><span class="n">get</span><span class="o">-</span><span class="n">login</span><span class="o">-</span><span class="n">password</span><span class="w"> </span><span class="o">--</span><span class="n">region</span><span class="w"> </span><span class="n">eu</span><span class="o">-</span><span class="n">central</span><span class="o">-</span><span class="mh">1</span><span class="w"> </span><span class="o">--</span><span class="n">profile</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Profile</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">login</span><span class="w"> </span><span class="o">--</span><span class="n">username</span><span class="w"> </span><span class="n">AWS</span><span class="w"> </span><span class="o">--</span><span class="n">password</span><span class="o">-</span><span class="n">stdin</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">123</span><span class="o">&gt;</span><span class="p">.</span><span class="n">dkr</span><span class="p">.</span><span class="n">ecr</span><span class="p">.</span><span class="n">eu</span><span class="o">-</span><span class="n">central</span><span class="o">-</span><span class="mf">1.</span><span class="n">amazonaws</span><span class="p">.</span><span class="n">com</span>
-
-<span class="n">docker</span><span class="w"> </span><span class="n">push</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">123</span><span class="o">&gt;</span><span class="p">.</span><span class="n">dkr</span><span class="p">.</span><span class="n">ecr</span><span class="p">.</span><span class="n">eu</span><span class="o">-</span><span class="n">central</span><span class="o">-</span><span class="mf">1.</span><span class="n">amazonaws</span><span class="p">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">Repository</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;:</span><span class="n">latest</span>
-
-<span class="n">aws</span><span class="w"> </span><span class="n">ecs</span><span class="w"> </span><span class="n">register</span><span class="o">-</span><span class="k">task</span><span class="o">-</span><span class="n">definition</span><span class="w"> </span><span class="o">--</span><span class="n">cli</span><span class="o">-</span><span class="k">input</span><span class="o">-</span><span class="n">json</span><span class="w"> </span><span class="nl">file:</span><span class="c1">//path/to/your/task-definition.json --profile &lt;Profile-Name&gt;</span>
-
-<span class="n">aws</span><span class="w"> </span><span class="n">ecs</span><span class="w"> </span><span class="n">update</span><span class="o">-</span><span class="n">service</span><span class="w"> </span><span class="o">--</span><span class="n">cluster</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="o">--</span><span class="n">service</span><span class="w"> </span><span class="n">hr</span><span class="o">-</span><span class="n">assistant</span><span class="o">-</span><span class="n">service</span><span class="w"> </span><span class="o">--</span><span class="k">force</span><span class="o">-</span><span class="n">new</span><span class="o">-</span><span class="n">deployment</span><span class="w"> </span><span class="o">--</span><span class="n">region</span><span class="w"> </span><span class="n">eu</span><span class="o">-</span><span class="n">central</span><span class="o">-</span><span class="mh">1</span><span class="w"> </span><span class="o">--</span><span class="n">profile</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Profile</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;</span>
-
-<span class="n">aws</span><span class="w"> </span><span class="n">ecs</span><span class="w"> </span><span class="n">describe</span><span class="o">-</span><span class="n">services</span><span class="w"> </span><span class="o">--</span><span class="n">cluster</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="o">--</span><span class="n">services</span><span class="w"> </span><span class="n">hr</span><span class="o">-</span><span class="n">assistant</span><span class="o">-</span><span class="n">service</span><span class="w"> </span><span class="o">--</span><span class="n">region</span><span class="w"> </span><span class="n">eu</span><span class="o">-</span><span class="n">central</span><span class="o">-</span><span class="mh">1</span><span class="w"> </span><span class="o">--</span><span class="n">profile</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Profile</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;</span>
-</code></pre></div>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="../was_playbook.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="../category/cloud-deployments.html" rel="tag">Cloud Deployments</a>
-                </div>
-            </article>
 
             <div class="clear"></div>
             <footer>
@@ -77,5 +51,30 @@
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
+      <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | DGX Spark</title>
+    <title>code snippets etc. - DGX Spark</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
+
+
+
 
 </head>
 <body>
@@ -26,17 +31,15 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 17, 2025</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./dgx_spark.html" rel="bookmark" title="Permanent Link to &quot;DGX Spark&quot;">DGX Spark</a>
-                </h2>
-
-                
-                
-
-                <h2>Fine-tuning Options on DGX Spark (GB10, 128GB unified memory)</h2>
+        <div id="content">  <article>
+    <header>
+      <h2>
+        <a href="./dgx_spark.html" rel="bookmark"
+           title="Permalink to DGX Spark">DGX Spark</a></h2>
+      
+    </header>
+    <p><br></p>
+<h3>Fine-tuning Options on DGX Spark (GB10, 128GB unified memory)</h3>
 <table>
 <thead>
 <tr>
@@ -79,7 +82,8 @@
 </tr>
 </tbody>
 </table>
-<h2>GPU Assessment:</h2>
+<p><br></p>
+<h3>GPU Assessment:</h3>
 <table>
 <thead>
 <tr>
@@ -140,7 +144,8 @@
 </table>
 <p>88% utilization is solid. The main bottleneck is local_batch_size: 1 - you're processing 1 sample at a time with 16 accumulation steps. With 128GB unified
   memory, you could likely increase to local_batch_size: 2 or 4 to speed things up ~2-4x.</p>
-<h2>Misc</h2>
+<p><br></p>
+<h3>Misc</h3>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>start<span class="w"> </span>vllm-server
 docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>--tail<span class="w"> </span><span class="m">50</span><span class="w"> </span>vllm-server
 </code></pre></div>
@@ -155,24 +160,29 @@ docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </s
     LocalForward 11434 localhost:11434
 </code></pre></div>
 
-<h2>SSH Tunnel</h2>
+<p><br></p>
+<h3>SSH Tunnel</h3>
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-N<span class="w"> </span>-L<span class="w"> </span><span class="m">8000</span>:localhost:8000<span class="w"> </span>-L<span class="w"> </span><span class="m">12434</span>:localhost:12434<span class="w"> </span>user@spark-e123.local
 </code></pre></div>
 
-<h2>Example Roo Code configuration for vLLM:</h2>
+<p><br></p>
+<h3>Example Roo Code configuration for vLLM:</h3>
 <ul>
 <li>API Provider: <code>OpenAI Compatible</code></li>
 <li>Base URL: <code>http://localhost:8000/v1</code></li>
 <li>API Key: <code>not-required</code></li>
 <li>Model: <code>Qwen/Qwen2.5-Coder-14B-Instruct</code></li>
 </ul>
-                <div class="clear"></div>
+    <footer>
+      <p>Published: <time datetime="2025-11-17T00:00:00+00:00">
+        Mon 17 November 2025
+      </time></p>
+        <p>
+          Category: <a href="./category/ai.html">AI</a>
+        </p>
+    </footer>
+  </article>
 
-                <div class="info">
-                    <a href="./dgx_spark.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/ai.html" rel="tag">AI</a>
-                </div>
-            </article>
             <div class="clear"></div>
             <footer>
                 <p>
@@ -183,5 +193,30 @@ docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </s
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

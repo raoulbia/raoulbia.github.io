@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | Page 15</title>
+    <title>code snippets etc.</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
@@ -25,326 +26,38 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 03, 2017</h4>
+        <div id="content">        <h2>All articles</h2>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="./Vagrant VM.html" rel="bookmark" title="Permanent Link to &quot;Vagrant VM&quot;">Vagrant VM</a>
-                </h2>
 
-                
-                
+        <article>
+            <header> <h2><a href="./Vagrant VM.html" rel="bookmark" title="Permalink to Vagrant VM">Vagrant VM</a></h2> </header>
+            <section><p>Vagrant VM setup</p></section>
+            <footer>
+                <p>Published: <time datetime="2017-12-03T00:00:00+00:00"> Sun 03 December 2017 </time></p>
+                <address>By
+                </address>
+            </footer>
+        </article>
+        <article>
+            <header> <h2><a href="./vagrant_vpn.html" rel="bookmark" title="Permalink to Vagrant VM with VPN">Vagrant VM with VPN</a></h2> </header>
+            <section><p>Vagrant VM with VPN setup</p></section>
+            <footer>
+                <p>Published: <time datetime="2017-12-03T00:00:00+00:00"> Sun 03 December 2017 </time></p>
+                <address>By
+                </address>
+            </footer>
+        </article>
 
-                <h4>Useful Links</h4>
-<ul>
-<li><a href="https://www.gis-blog.com/osgeo-live-the-best-open-source-gis-ready-to-use-package/">OSGeo-Live</a></li>
-<li><a href="https://releases.ubuntu.com/20.04/">Ubuntu 20.04 ISO</a></li>
-<li><a href="https://blog.engineyard.com/building-a-vagrant-box">Building a Vagrant Box from Start to Finish</a></li>
-<li><a href="https://www.abhishek-tiwari.com/creating-a-new-vagrant-base-box-from-an-existing-vm/">Creating a new Vagrant base box from an existing VM</a></li>
-</ul>
-<h4>Pre-requisites</h4>
-<ul>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-16-04">Git</a></li>
-<li><a href="http://docs.vagrantup.com/v2/installation/index.html">Vagrant</a> </li>
-<li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>.</li>
-</ul>
-<h4>Shared Folders</h4>
-<p><strong>NEW</strong></p>
-<p>On Windows Host, add this to Vagrantfile:</p>
-<p><code>config.vm.synced_folder "C:/Users/ABCD123/OneDrive - XY/Documents/workproducts-vagrant/linux_mint", "/host_project"</code></p>
-<p><strong>OLD</strong></p>
-<p>Vagrantfile: <code>config.vm.synced_folder HOST GUEST</code></p>
-<p>where HOST = <code>"/home/raoulbia/DEV/vagrant_mint"</code> and GUEST = <code>"/vagrant"</code></p>
-<p>e.g.   <code>config.vm.synced_folder "/home/raoulbia/DEV/vagrant_ubuntu", "/vagrant"</code></p>
-<div class="highlight"><pre><span></span><code>config.vm.synced_folder<span class="w"> </span><span class="s2">&quot;.&quot;</span>,<span class="w"> </span><span class="s2">&quot;/vmtest_kafka&quot;</span>
-</code></pre></div>
+  <nav>
+    <ul>
+        <li><a href="./index.html">&Lang;</a></li>
+        <li><a href="./index14.html">&lang;</a></li>
+      <li>Page 15 / 31</li>
+        <li><a href="./index16.html">&rang;</a></li>
+        <li><a href="./index31.html">&Rang;</a></li>
+    </ul>
+  </nav>
 
-<h4>Vagrant Box</h4>
-<p>Assuming you want to share the directory in which <code>Vagrantfile</code> is located and that directory is named <code>vmtest_kafka</code>. 
-First add your share directory in the VM Box (Devices &gt; Shared Folders) and click "Make Permanent".
-Whatever you name your share here will be the name you will need to use when mounting in the vm guest OS e.g. <code>vmtest_kafka</code>. 
-Next on the the guset OS make a directory to use for your mount preferably in your home directory e.g. <code>mkdir ~/shared</code>.</p>
-<div class="highlight"><pre><span></span><code>sudo usermod -a -G vboxsf vagrant
-mkdir ~/shared
-sudo mount -t vboxsf vmtest_kafka ~/shared
-</code></pre></div>
-
-<ul>
-<li><code>sudo nano ~/.profile</code> and add the line: <code>sudo mount -t vboxsf vmtest_kafka ~/shared</code></li>
-<li>Set directory permissions on HOST: <code>chmod 777 -R vmtest_kafka/</code></li>
-</ul>
-<h4>Desktop size issue</h4>
-<div class="highlight"><pre><span></span><code><span class="n">vagrant</span><span class="w"> </span><span class="n">plugin</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">--</span><span class="n">plugin</span><span class="o">-</span><span class="n">clean</span><span class="o">-</span><span class="n">sources</span><span class="w"> </span><span class="o">--</span><span class="n">plugin</span><span class="o">-</span><span class="n">source</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">rubygems</span><span class="o">.</span><span class="n">org</span><span class="w"> </span><span class="n">vagrant</span><span class="o">-</span><span class="n">vbguest</span>
-<span class="n">vagrant</span><span class="w"> </span><span class="n">up</span>
-<span class="n">vagrant</span><span class="w"> </span><span class="n">vbguest</span><span class="w"> </span><span class="o">--</span><span class="n">do</span><span class="w"> </span><span class="n">install</span>
-<span class="n">vagrant</span><span class="w"> </span><span class="n">reload</span>
-</code></pre></div>
-
-<h4>Increase Vagrant Box Size</h4>
-<p><strong>NEW</strong></p>
-<p><code>vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-disksize</code></p>
-<div class="highlight"><pre><span></span><code><span class="nv">Vagrant</span>.<span class="nv">configure</span><span class="ss">(</span><span class="s2">&quot;2&quot;</span><span class="ss">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="nv">config</span><span class="o">|</span>
-<span class="w">  </span>#<span class="w"> </span><span class="nv">Your</span><span class="w"> </span><span class="nv">existing</span><span class="w"> </span><span class="nv">configurations</span><span class="w"> </span><span class="nv">like</span><span class="w"> </span><span class="nv">VM</span><span class="w"> </span><span class="nv">box</span>
-<span class="w">  </span><span class="nv">config</span>.<span class="nv">vm</span>.<span class="nv">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;npalm/mint17-amd64-cinnamon&quot;</span>
-
-<span class="w">  </span>#<span class="w"> </span><span class="nv">Plugin</span><span class="w"> </span><span class="nv">configuration</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">increase</span><span class="w"> </span><span class="nv">disk</span><span class="w"> </span><span class="nv">size</span>
-<span class="w">  </span><span class="nv">config</span>.<span class="nv">disksize</span>.<span class="nv">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;50GB&#39;</span>
-
-<span class="w">  </span>#<span class="w"> </span><span class="nv">Any</span><span class="w"> </span><span class="nv">other</span><span class="w"> </span><span class="nv">configurations</span>
-<span class="k">end</span>
-</code></pre></div>
-
-<p><strong>OLD</strong></p>
-<p>Note: it may be easier to just grab a box that has a large size. See above.</p>
-<ol>
-<li>
-<p>Clone &amp; Resize</p>
-<p>on Linux</p>
-<div class="highlight"><pre><span></span><code>VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vmdk&quot; &quot;/home/baba/VirtualBox VMs/my_box/box.vdi&quot; --format vdi
-VBoxManage modifyhd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; --resize 131072
-VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/home/baba/VirtualBox VMs/my_box/box-resized.vmdk&quot; --format vmdk
-</code></pre></div>
-
-<p>on Window: same steps as below but first run this:</p>
-<div class="highlight"><pre><span></span><code>set PATH=%PATH%;&quot;C:\Program Files\Oracle\VirtualBox&quot;
-</code></pre></div>
-
-</li>
-<li>
-<p>Allocate space</p>
-<p>The newly created disk space is unallocated at this stage. Follow these steps next:</p>
-<ul>
-<li>
-<p><a href="http://www.gitshah.com/2013/05/how-to-fix-out-of-space-problem-for.html?m=1">getting Gparted</a></p>
-</li>
-<li>
-<p><a href="https://www.youtube.com/watch?v=cDgUwWkvuIY">changing partitions using Gparted (Video)</a></p>
-</li>
-</ul>
-</li>
-</ol>
-<p>see also <a href="https://gist.github.com/christopher-hopper/9755310">Resize a Hard Disk for a Virtual Machine</a></p>
-<h4>Create Global Variable for use in Python Scripts</h4>
-<p>In <code>~/.profile</code>add</p>
-<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="n">TOMOE_DATA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">ownCloud</span><span class="o">/</span><span class="n">tomoe</span><span class="o">-</span><span class="n">data</span>
-<span class="k">export</span><span class="w"> </span><span class="n">KG_OUTPUT_DIR</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">vmtest</span><span class="o">/</span><span class="n">tomoe</span><span class="o">/</span><span class="n">wp</span><span class="o">-</span><span class="n">tomoe</span><span class="o">-</span><span class="n">playground</span><span class="o">/</span><span class="n">local</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">kg</span>
-</code></pre></div>
-
-<h4>Useful Vagrant commands</h4>
-<ul>
-<li><code>config.vm.box = "file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box"</code></li>
-<li><code>VBoxClient --clipboard</code></li>
-<li><code>vagrant global-status</code></li>
-<li><code>set PATH=%PATH%;"C:\Program Files\Oracle\VirtualBox"</code></li>
-<li><code>vboxmanage list vms</code></li>
-<li><code>vagrant init file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box</code></li>
-</ul>
-<h4>Misc. Links</h4>
-<ul>
-<li><a href="https://github.com/hashicorp/vagrant/issues/5186">Warning: Authentication failure. Retrying... " after packaging box</a></li>
-<li><a href="https://jeremykendall.net/2013/08/09/vagrant-synced-folders-permissions/">vagrant-synced-folders-permissions</a></li>
-<li><a href="https://stackoverflow.com/questions/35807568/vagrant-synced-folder-permissions">vagrant-synced-folders-permissions SO</a></li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./Vagrant VM.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
-                </div>
-            </article>            <h4 class="date">Dec 03, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./vagrant_vpn.html" rel="bookmark" title="Permanent Link to &quot;Vagrant VM with VPN&quot;">Vagrant VM with VPN</a>
-                </h2>
-
-                
-                
-
-                <h2>Step-by-Step Instructions to Set Up a VM to Bypass Zscaler Restrictions</h2>
-<h4>1. <strong>Create a DigitalOcean Droplet with Outline VPN Manager</strong></h4>
-<ol>
-<li>Set up a new DigitalOcean droplet.</li>
-<li>Install Outline VPN Manager to manage the Shadowsocks server. Follow the official Outline installation guide for setup.</li>
-<li>Note the public IP address of your DigitalOcean server.</li>
-</ol>
-<h4>2. <strong>Install and Configure Shadowsocks on the DigitalOcean Server</strong></h4>
-<ol>
-<li>Install Shadowsocks on the server:</li>
-</ol>
-<p><code>sudo apt update
-   sudo apt install shadowsocks-libev</code></p>
-<ol>
-<li>Edit the default Shadowsocks configuration (<code>/etc/shadowsocks-libev/config.json</code>) to use port <code>443</code> and your custom password:</li>
-</ol>
-<p><code>{
-     "server": "0.0.0.0",
-     "server_port": 443,
-     "password": "your-secure-password",
-     "timeout": 60,
-     "method": "chacha20-ietf-poly1305"
-   }</code></p>
-<ol>
-<li>Restart the Shadowsocks server:</li>
-</ol>
-<p><code>sudo systemctl restart shadowsocks-libev</code></p>
-<ol>
-<li>Ensure that port <code>443</code> is open on the DigitalOcean server by allowing it through the firewall:</li>
-</ol>
-<p><code>sudo ufw allow 443/tcp
-   sudo ufw allow 443/udp</code></p>
-<h4>3. <strong>Configure Shadowsocks Client on the Vagrant Guest VM</strong></h4>
-<ol>
-<li>Install Shadowsocks on the Vagrant guest VM:</li>
-</ol>
-<p><code>sudo apt update
-   sudo apt install shadowsocks-libev</code></p>
-<ol>
-<li>Create the Shadowsocks client configuration (<code>/etc/shadowsocks-libev/config.json</code>) to connect to the DigitalOcean server:</li>
-</ol>
-<p><code>{
-     "server": "your-digital-ocean-server-ip",
-     "server_port": 443,
-     "local_port": 1080,
-     "password": "your-secure-password",
-     "timeout": 60,
-     "method": "chacha20-ietf-poly1305"
-   }</code></p>
-<ol>
-<li>Start the Shadowsocks client on the Vagrant VM:</li>
-</ol>
-<p><code>ss-local -c /etc/shadowsocks-libev/config.json -v</code></p>
-<ol>
-<li>Ensure the Vagrant VM is using <strong>Bridged Adapter</strong> to allow direct internet access and connection to the DigitalOcean server.</li>
-</ol>
-<h4>4. <strong>Configure the Vagrant VM or Browser to Use the SOCKS Proxy</strong></h4>
-<ol>
-<li>Set the system or application (e.g., web browser) to use <code>localhost:1080</code> as the SOCKS5 proxy.</li>
-<li>For Firefox:</li>
-<li>Go to <strong>Preferences</strong> → <strong>Network Settings</strong>.</li>
-<li>Set <strong>SOCKS Host</strong> to <code>localhost</code> and port to <code>1080</code>.</li>
-<li>Ensure <strong>SOCKS v5</strong> is selected.</li>
-</ol>
-<h4>5. <strong>Test the Connection</strong></h4>
-<ol>
-<li>Verify that traffic is routed through the Shadowsocks proxy by browsing or using:</li>
-</ol>
-<p><code>curl --socks5 localhost:1080 http://example.com</code></p>
-<ol>
-<li>Ensure that you can bypass Zscaler restrictions and access unrestricted internet.</li>
-</ol>
-<h4>Summary:</h4>
-<ul>
-<li>DigitalOcean droplet runs <strong>Outline VPN Manager</strong> and Shadowsocks on <strong>port 443</strong>.</li>
-<li><strong>Vagrant guest VM</strong> connects via Shadowsocks client using <code>ss-local</code> with port <code>443</code>.</li>
-<li><strong>Bridged Adapter</strong> mode is essential for proper networking in the VM.</li>
-<li>SOCKS5 proxy runs locally on <code>localhost:1080</code> to bypass restrictions.</li>
-</ul>
-<p>This setup allows you to route traffic through your DigitalOcean server, effectively bypassing Zscaler restrictions.</p>
-<h2>Updated Step-by-Step Solution for Bypassing Zscaler Using the Vagrant Guest VM</h2>
-<p>Since you want to use <strong>Firefox on the Vagrant guest VM</strong> to bypass restrictions without relying on any executable files on the Windows host, we’ll configure the VM and Firefox to directly route traffic through the Shadowsocks proxy.</p>
-<h4>Step 1: Ensure Shadowsocks is Set Up on the DigitalOcean Server</h4>
-<p>Make sure your <strong>DigitalOcean server</strong> is configured and running properly.</p>
-<ol>
-<li><strong>DigitalOcean Server Shadowsocks Configuration (<code>/etc/shadowsocks-libev/config.json</code>):</strong></li>
-</ol>
-<p><code>{
-     "server": "0.0.0.0",
-     "server_port": 443,            // Running on port 443 to avoid network restrictions
-     "password": "your-secure-password",
-     "timeout": 60,
-     "method": "chacha20-ietf-poly1305"
-   }</code></p>
-<ol>
-<li><strong>Restart the Shadowsocks server</strong> on the DigitalOcean droplet:</li>
-</ol>
-<p><code>sudo systemctl restart shadowsocks-libev</code></p>
-<h4>Step 2: Set Up Shadowsocks on the Vagrant Guest VM</h4>
-<p>Ensure the Shadowsocks client is installed and running on the <strong>guest VM</strong>.</p>
-<ol>
-<li><strong>Install Shadowsocks on the Guest VM</strong>:</li>
-</ol>
-<p><code>sudo apt update
-   sudo apt install shadowsocks-libev</code></p>
-<ol>
-<li><strong>Create or update the client configuration file (<code>/etc/shadowsocks-libev/config.json</code>)</strong>:</li>
-</ol>
-<p><code>{
-     "server": "your-digital-ocean-server-ip",   // The public IP of your DigitalOcean server
-     "server_port": 443,                         // Port 443 to avoid network restrictions
-     "local_port": 1080,                         // The local SOCKS5 proxy port
-     "password": "your-secure-password",         // Same as on the server
-     "timeout": 60,
-     "method": "chacha20-ietf-poly1305"          // Same encryption method as the server
-   }</code></p>
-<ol>
-<li><strong>Start the Shadowsocks client</strong> on the guest VM:</li>
-</ol>
-<p><code>ss-local -c /etc/shadowsocks-libev/config.json -v</code></p>
-<p>This command starts the Shadowsocks SOCKS5 proxy on <code>localhost:1080</code> on your VM.</p>
-<h4>Step 3: Configure Firefox on the Guest VM to Use the SOCKS Proxy</h4>
-<ol>
-<li><strong>Open Firefox</strong> on the Vagrant guest VM.</li>
-<li>Go to <strong>Preferences</strong> → Scroll down to <strong>Network Settings</strong> → Click <strong>Settings</strong>.</li>
-<li><strong>Set up the SOCKS Proxy</strong>:</li>
-<li>Choose <strong>Manual proxy configuration</strong>.</li>
-<li>Under <strong>SOCKS Host</strong>, enter <code>localhost</code> and set the port to <code>1080</code>.</li>
-<li>Select <strong>SOCKS v5</strong> as the protocol.</li>
-<li>Check the box for <strong>Proxy DNS when using SOCKS v5</strong>.</li>
-</ol>
-<p><img alt="Firefox Proxy Settings" src="https://support.mozilla.org/en-US/kb/connection-settings-firefox/windows-firefox-proxy-settings-windows.png"> (Example of Firefox manual proxy settings).</p>
-<ol>
-<li><strong>Save</strong> the settings.</li>
-</ol>
-<p>Now, all traffic from Firefox will be routed through the SOCKS5 proxy running on your Vagrant guest VM, which connects to your DigitalOcean Shadowsocks server. This should bypass any Zscaler restrictions.</p>
-<h4>Step 4: Test the Setup</h4>
-<ol>
-<li>Open Firefox on the guest VM and visit a website that is typically restricted by Zscaler.</li>
-<li>Ensure the site loads, confirming that the traffic is routed through your DigitalOcean server and bypassing Zscaler.</li>
-</ol>
-<h3>Additional Steps (If Needed)</h3>
-<h4>Disable Ethernet on Host to Prevent Automatic Connection</h4>
-<p>Since your <strong>office screens automatically connect to Ethernet</strong>, you can disable the Ethernet interface temporarily on the <strong>Windows host</strong> to force all traffic through your guest VM.</p>
-<ol>
-<li>On your <strong>Windows host</strong>, disable Ethernet:</li>
-<li>Press <code>Win + R</code>, type <code>ncpa.cpl</code>, and press <strong>Enter</strong>.</li>
-<li>Right-click on the <strong>Ethernet</strong> adapter and choose <strong>Disable</strong>.</li>
-</ol>
-<p>This will prevent the automatic Ethernet connection when using office screens, forcing your internet traffic through the Vagrant guest VM.</p>
-<h4>Summary of Steps:</h4>
-<ol>
-<li><strong>DigitalOcean Server</strong>:</li>
-<li>
-<p>Ensure Shadowsocks is running on port <code>443</code>.</p>
-</li>
-<li>
-<p><strong>Vagrant Guest VM</strong>:</p>
-</li>
-<li>Start Shadowsocks with <code>ss-local</code> on <code>localhost:1080</code>.</li>
-<li>
-<p>Configure Firefox to use <code>localhost:1080</code> as a SOCKS5 proxy.</p>
-</li>
-<li>
-<p><strong>Test</strong>: Open restricted sites in Firefox on the guest VM to confirm Zscaler is bypassed.</p>
-</li>
-</ol>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./vagrant_vpn.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
-                </div>
-            </article>
-
-                <div class="clear"></div>
-                <div class="pages">
-
-                    <a href="./index14.html" class="prev_page">&larr;&nbsp;Previous</a>
-
-                    <a href="./index16.html" class="next_page">Next&nbsp;&rarr;</a>
-
-                    <span>Page 15 of 31</span>
-                </div>
 
             <div class="clear"></div>
             <footer>
@@ -356,5 +69,30 @@ VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/h
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

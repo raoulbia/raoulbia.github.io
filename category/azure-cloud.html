@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | articles in the "Azure Cloud" category</title>
+    <title>code snippets etc. - Azure Cloud category</title>
     <link rel="shortcut icon" type="image/png" href="../favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
     <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
@@ -16,8 +17,6 @@
     <header>
         <nav>
             <ul>
-
-                <li class="ephemeral selected"><a href="../category/azure-cloud.html">Azure Cloud</a></li>
                 <li><a href="../">Home</a></li>
                 <li><a href="../archives">Archives</a></li>
             </ul>
@@ -27,214 +26,29 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 24, 2022</h4>
+        <div id="content">    <h2>Articles in the Azure Cloud category</h2>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="../azure_data_factory.html" rel="bookmark" title="Permanent Link to &quot;Azure Data Factory&quot;">Azure Data Factory</a>
-                </h2>
 
-                
-                
+        <article>
+            <header> <h2><a href="../azure_data_factory.html" rel="bookmark" title="Permalink to Azure Data Factory">Azure Data Factory</a></h2> </header>
+            <section><p>Azure Data Factory</p></section>
+            <footer>
+                <p>Published: <time datetime="2022-12-24T00:00:00+00:00"> Sat 24 December 2022 </time></p>
+                <address>By
+                </address>
+            </footer>
+        </article>
+        <article>
+            <header> <h2><a href="../azure_databricks.html" rel="bookmark" title="Permalink to Azure Databricks">Azure Databricks</a></h2> </header>
+            <section><p>Azure Databricks</p></section>
+            <footer>
+                <p>Published: <time datetime="2022-12-24T00:00:00+00:00"> Sat 24 December 2022 </time></p>
+                <address>By
+                </address>
+            </footer>
+        </article>
 
-                <p><br></p>
-<h3>Data Ingress</h3>
-<ul>
-<li>
-<p>Excel File with one or more Sheets </p>
-<ul>
-<li>New Dataset &gt; File tab &gt; File System &gt; Excel &gt; select linked service to NAS drive &gt; browse to NAS drive file &gt; select a Sheet name if applicable</li>
-</ul>
-</li>
-<li>
-<p>Netezza Table</p>
-<ul>
-<li>New Dataset &gt; Database tab &gt; Netezza &gt; select linked service to Netezza &gt; select table</li>
-</ul>
-</li>
-</ul>
-<h3>Linked Services</h3>
-<h4>Create a Linked Service to connect ADF to Databricks using Key Vault</h4>
-<p>Pre-requisites: </p>
-<ul>
-<li>
-<p>Create a <strong>Key Vault</strong> resource</p>
-<ul>
-<li><em>Secrets</em> &gt; add a secret holding the Databricks PAT </li>
-<li><strong><em>Access policies</em></strong><ul>
-<li>click <em>Create</em></li>
-<li>select <em>Get</em> and <em>List</em> for <em>Key permissions</em> and <em>Secret permissions</em></li>
-<li>in the search box enter the name of your Azure Data Factory, select it when it shows up and click next and create all the way</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>This requires two linked services</p>
-<ul>
-<li>Databrick ls &gt; get it from 'Compute' tab</li>
-<li>within this ls you are asked to specify an AKV linked service &gt; click on 'New'</li>
-</ul>
-</li>
-<li>
-<p>AKV linked Service</p>
-<ul>
-<li>Base URL should be prefilled</li>
-<li>Authentication Method: <em>System Assigned Managed Identity</em></li>
-</ul>
-</li>
-</ul>
-<p><br></p>
-<h3>Parameterizing ADF</h3>
-<h4>Pass a custom filename to Copy Activity Sink Dataset</h4>
-<p>Copy Activity:     import an Excel to Blob Storage as Parquet file</p>
-<p>Problem to solve:  give the parquet file a custom name</p>
-<p>Solution:          add a parameter to the dataset of interest (source, sink or both depending on use case)</p>
-<p>Explanation:       when a copy activity source, or sink, uses a dataset that has a parameter, the parameter will appear in the source, or sink, <em>Dataset properties</em>. Here you can then specifiy a value, either as hard coded string or as yet another parameter, that will then be passed to the Dataset <em>Connection</em> tab where it is referenced and will be replaced by the value passed to it.</p>
-<p>Steps: 
-* for the sink part (Blob Storage), you need a Parquet dataset with the required Linked Service to ADLS Gen2
-* in the Dataset <em>Parameters</em> tab, add a parameter named <em>sink_file</em> (String)
-* in the Dataset <em>Connection</em> tab, it is assumed the <em>File Path</em> boxes 1 and 2 are populated with the path to the blob storage container where the files will be saved. For <em>File Path</em> box 3, enter <em>@dataset().sink_file</em>
-* in the Copy Activity, under <em>Dataset Properties</em> of the sink, enter the value you wish to pass to the sink dataset. THis can be a string or anotehr parameter e.g. a value captured from a <em>Get Metadata</em> activity, or from a <em>Lookup</em> activity.</p>
-<h4>Query Database Tables and Save as Parquet File to Blob Storage</h4>
-<p>The solution has two core components: A <em>Lookup</em> activity and a <em>ForEach</em> activity.</p>
-<p>The <em>Lookup</em> activity 
-* the source dataset can be a CSV file on NAS drive. The columns in the file are <em>table_name</em> and <em>where_filter</em>. Each row represents one table to be queried by the <em>ForEach</em> loop.</p>
-<p>The <em>ForEach</em> activity
-* consists of two <em>Set variable</em> activities connected to a <em>Copy Data</em> activity.
-* the <em>Set variable</em> activities reference the values for table name and for the where filter passed through by the <em>Lookup</em> activity. The syntax is shown in the screenshot below.
-* the source of the <em>Copy Data</em> activity uses the following query: <em>@concat('select * from ', item().table_name,' ', item().where_filter)</em>. 
-* in the sink of the <em>Copy Data</em> activity we pass a dynamic value to parameter <em>parFile</em> of the sink Parquet dataset: <em>@concat(item().table_name,'_NTZ.parquet')</em></p>
-<p><img alt="" src="img/ForEach_activity_all.PNG"></p>
-<p>The dynamic filename passed to the Parquet dataset is shown below:</p>
-<p><img alt="" src="img/ds_parquet_params_config.PNG"></p>
-<h4>Create dynamic folder name for COPY activity (egress)</h4>
-<ul>
-<li>
-<p>source ADLSGen2:<br>
-<code>@concat('@concat('custom_dataset/shared_team_data/CG_BPT/BPT_CLIENT_EXCELS/', formatdatetime(utcnow(),'yyyy-MM-dd'))</code></p>
-</li>
-<li>
-<p>sink NAS Drive: <br>
-<code>@concat('Azure/CG/static_output_files/', formatDateTime(utcNow(),'yyyy'), '-' ,formatDateTime(utcNow(),'MM'), '-', formatDateTime(utcNow(),'dd'))</code></p>
-</li>
-</ul>
-                <div class="clear"></div>
 
-                <div class="info">
-                    <a href="../azure_data_factory.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="../category/azure-cloud.html" rel="tag">Azure Cloud</a>
-                </div>
-            </article>            <h4 class="date">Dec 24, 2022</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="../azure_databricks.html" rel="bookmark" title="Permanent Link to &quot;Azure Databricks&quot;">Azure Databricks</a>
-                </h2>
-
-                
-                
-
-                <p><br></p>
-<h3>Connecting Azure Storage Account and Databricks</h3>
-<p><br></p>
-<h4>Key Vault Approach</h4>
-<p>High Level</p>
-<ul>
-<li>in KV we create a secret ;  take note of the KV URI and Resource ID</li>
-<li>in Databricks we create a secret scope</li>
-<li>the secet scope points to the KV URI and Resource ID</li>
-<li>in Databricks notebook we reference</li>
-<li>the storage account name</li>
-<li>the name of the Databricks secret scope</li>
-<li>the name of the KV secret     </li>
-</ul>
-<p><br></p>
-<p>Detailed</p>
-<ol>
-<li>
-<p>Create a <strong>Key Vault</strong> resource (or use existing one)</p>
-</li>
-<li>
-<p>go to Key Vault &gt; Secrets</p>
-<ul>
-<li>under settings &gt; +Generate/Import</li>
-<li>provide recognisable <strong>key vault secret name</strong> e.g. StorageAccountSecret</li>
-<li>provide storage key for the Azure Blob storage account</li>
-<li>NOTE: secret value must be changed every 3 months </li>
-</ul>
-</li>
-<li>
-<p>go to Key Vault <strong><em>Access policies</em></strong></p>
-<ul>
-<li>click <em>Create</em></li>
-<li>select <em>Get</em> and <em>List</em> for <em>Key permissions</em> and <em>Secret permissions</em></li>
-<li>in the search box enter <em>"AzureDatabricks"</em>, select it when it shows up and click next and create all the way</li>
-</ul>
-</li>
-<li>
-<p>To use Azure Key Vault in Databricks notebooks, a <strong>Secret scope</strong> must be created in Databricks. The Secret scope can be used in Databricks notebook to retrieve secret values from Azure Key Vault. </p>
-</li>
-<li>go to <code>&lt;Databricks URL&gt;/#secrets/createScope</code></li>
-<li>create a new scope and name it e.g. KeyVaultScope</li>
-<li>Manage Principal &gt; All USers</li>
-<li>DNS name is "Vault URI" in Key Vault <strong>Overview</strong> page</li>
-<li>
-<p>Reosurce ID can be found in Key Vault <strong>Properties</strong> page</p>
-</li>
-<li>
-<p>Notebook implementation:</p>
-</li>
-</ol>
-<div class="highlight"><pre><span></span><code>storageAccount=&quot;[name-of-storage-account]&quot;
-storageKey = dbutils.secrets.get(scope = &quot;[name-of-databricks-secret-scope]&quot;, 
-                                 key = &quot;[name-of-AKV-secret]&quot;)
-mountpoint = &quot;/mnt/KeyVaultBlob&quot;
-storageEndpoint = &quot;wasbs://[container-name]@{}.blob.core.windows.net&quot;.format(storageAccount)
-storageConnSting = &quot;fs.azure.account.key.{}.blob.core.windows.net&quot;.format(storageAccount)
-
-try:
-   dbutils.fs.mount(
-   source = storageEndpoint,
-   mount_point = mountpoint,
-   extra_configs = {storageConnSting:storageKey})
-except:
-   print(\&quot;Already mounted....\&quot; + mountpoint)
-</code></pre></div>
-
-<p><br></p>
-<p>Useful link: <a href="https://stackoverflow.com/questions/56537214/creating-a-secret-scope-in-databricks-backed-by-azure-key-vault-fails">Creating a Secret Scope in Databricks backed by Azure Key Vault fails</a></p>
-<p><br></p>
-<h4>Service Principal Approach</h4>
-<ol>
-<li>Azure Active Directory &gt; App Registration</li>
-<li>give recognisable name e.g. ADLSApp</li>
-<li>leave defaults</li>
-<li>Note: this IS the service principal</li>
-<li>click on the newly registered app</li>
-<li>get Application ID (1)</li>
-<li>get Directory (Tenant) ID (2)</li>
-<li>click on Certificates and Secrets<ul>
-<li>create new secret</li>
-<li>give it a name e.g. ADLSAppSecret</li>
-<li>copy secret value (3)</li>
-</ul>
-</li>
-<li>go to storage account &gt; Access Control (IAM)</li>
-<li>add role assignment<ul>
-<li>select "Storage Blob Data Contributor"</li>
-<li>select Service Principal created in step 1</li>
-</ul>
-</li>
-<li>(1), (2), and (3) can be used hardcoded in Databricks notebook</li>
-</ol>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="../azure_databricks.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="../category/azure-cloud.html" rel="tag">Azure Cloud</a>
-                </div>
-            </article>
 
             <div class="clear"></div>
             <footer>
@@ -246,5 +60,30 @@ except:
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | articles in the "Databases" category</title>
+    <title>code snippets etc. - Databases category</title>
     <link rel="shortcut icon" type="image/png" href="../favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
     <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
@@ -16,8 +17,6 @@
     <header>
         <nav>
             <ul>
-
-                <li class="ephemeral selected"><a href="../category/databases.html">Databases</a></li>
                 <li><a href="../">Home</a></li>
                 <li><a href="../archives">Archives</a></li>
             </ul>
@@ -27,229 +26,36 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 24, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="../databases.html" rel="bookmark" title="Permanent Link to &quot;Databases&quot;">Databases</a>
-                </h2>
-
-                
-                
-
-                <h3>Postgres</h3>
-<h4>install postgres and postgis</h4>
-<div class="highlight"><pre><span></span><code>$<span class="w">  </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>postgis<span class="w"> </span>postgresql-13-postgis-3
-$<span class="w"> </span>sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql
-<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \password postgres</span>
-<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \q</span>
-</code></pre></div>
-
-<p>check installed version(s): <code>dpkg -l | grep postgres</code></p>
-<h4>postgres user authentication error</h4>
-<p><code>sudo nano /etc/postgresql/13/main/pg_hba.conf</code></p>
-<p>CHANGE FROM</p>
-<p><code>local   all     postgres     peer</code></p>
-<p>TO</p>
-<p><code>local   all      postgres    trusted</code></p>
-<p>then 
-sudo service postgresql restart</p>
-<h4>run in pgadmin4</h4>
-<p><code>CREATE EXTENSION postgis;</code></p>
-<ul>
-<li>
-<p>http://www.orbital.co.ke:8080/opengeo-docs/dataadmin/pgGettingStarted/shp2pgsql.html</p>
-</li>
-<li>
-<p>test: <code>psql -U postgres -d &lt;DBNAME&gt; -c "SELECT postgis_version()"</code></p>
-</li>
-<li>
-<p>syntax: <code>shp2pgsql -I -s &lt;SRID&gt; &lt;PATH/TO/SHAPEFILE&gt; &lt;SCHEMA&gt;.&lt;DBTABLE&gt; | psql -U postgres -d &lt;DBNAME&gt;</code></p>
-</li>
-<li>
-<p>example: <code>shp2pgsql -I -s 4326  dublinbus/Dublin_Bus.shp  shp_dublinbus | psql -U postgres -d dublinbus</code></p>
-</li>
-</ul>
-<h3>Utilities: ogr2ogr</h3>
-<ul>
-<li>https://gis.stackexchange.com/questions/65917/can-i-append-to-different-tables-using-ogr2ogr</li>
-<li>https://www.bostongis.com/PrinterFriendly.aspx?content_name=ogr_cheatsheet</li>
-<li>https://www.mankier.com/1/ogr2ogr</li>
-</ul>
-<h4>geojson to shp</h4>
-<p><code>ogr2ogr -f "ESRI Shapefile" destination_data.shp "dcc_public_bin_locations.geojson"</code></p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="../databases.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="../category/databases.html" rel="tag">Databases</a>
-                </div>
-            </article>            <h4 class="date">Nov 23, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="../snowsql.html" rel="bookmark" title="Permanent Link to &quot;SnowSQL Cheatsheet&quot;">SnowSQL Cheatsheet</a>
-                </h2>
-
-                
-                
-
-                <h4>SnowSQL CLI Config file</h4>
-<p>The onfig file is located here: <code>/home/&lt;user&gt;/.snowsql</code>. This is where you configure custom connection parameters.</p>
-<p>In your config file you need to modify this line:</p>
-<p><code>log_file = ../snowsql_rt.log</code> to this <code>log_file = ~/.snowsql/snowsql_rt.log</code></p>
-<h4>Connect to Snowflake account with SnowSQL CLI</h4>
-<p><code>snowsql --accountname 123.north-europe.azure --username &lt;username&gt;</code></p>
-<p><code>snowsql -c my_connection</code></p>
-<h4>Bulk Loading from Local Source</h4>
-<p>Create the Employee table</p>
-<div class="highlight"><pre><span></span><code><span class="n">create</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">Employee</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">row_id</span><span class="w"> </span><span class="n">integer</span><span class="p">,</span>
-<span class="w">    </span><span class="n">first_name</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
-<span class="w">    </span><span class="n">last_name</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
-<span class="w">    </span><span class="n">city</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
-<span class="w">    </span><span class="n">state</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
-<span class="w">    </span><span class="n">hire_date</span><span class="w"> </span><span class="n">date</span><span class="p">,</span>
-<span class="w">    </span><span class="n">salary</span><span class="w"> </span><span class="n">integer</span>
-<span class="p">)</span>
-</code></pre></div>
-
-<p>Some Employee queries</p>
-<div class="highlight"><pre><span></span><code>select * From Public.Employee
-drop table Employee
-truncate table Employee
-</code></pre></div>
-
-<p>Create a File Format Object</p>
-<div class="highlight"><pre><span></span><code><span class="nx">create</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">replace</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">format</span><span class="w"> </span><span class="nx">employee_csv</span>
-<span class="w">  </span><span class="k">type</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">CSV</span><span class="err">&#39;</span>
-<span class="w">  </span><span class="nx">field_delimiter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="sc">&#39;,&#39;</span>
-<span class="w">  </span><span class="nx">skip_header</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-</code></pre></div>
-
-<p>Create an internal Stage object</p>
-<div class="highlight"><pre><span></span><code>create or replace stage employee_stage
-  file_format = employee_csv;
-</code></pre></div>
-
-<p>Display the stages we have created</p>
-<div class="highlight"><pre><span></span><code><span class="k">show</span><span class="w"> </span><span class="nv">stages</span>
-</code></pre></div>
-
-<p>See what's in the employee_stage</p>
-<div class="highlight"><pre><span></span><code><span class="n">list</span><span class="w"> </span><span class="nv">@employee_stage</span><span class="p">;</span>
-</code></pre></div>
-
-<p>Move the data in employee_stage to the employee table. Skip the entire file on any errors</p>
-<div class="highlight"><pre><span></span><code><span class="n">copy</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">employee</span>
-<span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="nv">@employee_stage</span>
-<span class="w">  </span><span class="n">on_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;skip_file&#39;</span><span class="p">;</span>
-</code></pre></div>
-
-<p>Move the data in employee_stage to the employee table. Skip just the rows causing any errors</p>
-<div class="highlight"><pre><span></span><code><span class="n">copy</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">employee</span>
-<span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="nv">@employee_stage</span>
-<span class="w">  </span><span class="n">on_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;continue&#39;</span><span class="p">;</span>
-</code></pre></div>
-
-<p>Remove file from stage</p>
-<div class="highlight"><pre><span></span><code><span class="n">remove</span><span class="w"> </span><span class="nv">@employee_stage</span><span class="w"> </span><span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;.*.csv.gz&#39;</span><span class="p">;</span>
-</code></pre></div>
-
-<p>Create a table to hold all errors during ingestion (VIDEO 21 8:00)</p>
-<div class="highlight"><pre><span></span><code>create or replace table employee_errors as 
-select <span class="gs">* from table(validate(employee, job_id =&gt; &#39;019b04c4-0c52-f649-0001-3d6e0002d14e&#39;));</span>
-<span class="gs">select *</span> from employee_errors
-</code></pre></div>
-
-<p>Describe file format</p>
-<div class="highlight"><pre><span></span><code>describe file format employee_csv
-</code></pre></div>
-
-<h4>Storage Integration: Bulk Loading from External Source</h4>
-<p>Notes:</p>
-<ul>
-<li>
-<p>to verify STORAGE INTEGRATION made it to Azure, go to Azure AAD &gt; Entreprise applications &gt; you should see Snowflake </p>
-</li>
-<li>
-<p>after creating STORAGE INTEGRATION, must authorize Snowflake in Access Control (IAM)
-  go to Storage Account &gt; Access Control (IAM) &gt; Add a role assignment &gt; "Storage Blob Data Contributor"
-  click +Select Members and search for Snowflake principal described above &gt; Select &gt; Review+Assign</p>
-</li>
-</ul>
-<div class="highlight"><pre><span></span><code>SHOW FILE FORMATS
-SHOW TABLES
-SHOW STAGES
-
-// CLEAN UP
-USE ROLE ACCOUNTADMIN ;
-DROP INTEGRATION IF EXISTS AZURE_STORAGE ;
-DROP FILE FORMAT IF EXISTS CSV_FORMAT ;
-DROP STAGE IF EXISTS GTFS ;
-</code></pre></div>
-
-<p>Step 1: Create Table</p>
-<div class="highlight"><pre><span></span><code><span class="n">create</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">agency</span><span class="p">(</span>
-<span class="w">  </span><span class="n">agency_id</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span>
-<span class="w">  </span><span class="n">agency_name</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w">  </span>
-<span class="w">  </span><span class="n">agency_url</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span>
-<span class="w">  </span><span class="n">agency_timezone</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-<span class="p">);</span>
-</code></pre></div>
-
-<p>Step 2: Setup Storage Integration</p>
-<div class="highlight"><pre><span></span><code>USE ROLE ACCOUNTADMIN ;
-CREATE OR REPLACE STORAGE INTEGRATION AZURE_STORAGE
-  TYPE = EXTERNAL_STAGE
-  STORAGE_PROVIDER = AZURE
-  ENABLED = TRUE
-  AZURE_TENANT_ID = &lt; tenant id &gt;
-  STORAGE_ALLOWED_LOCATIONS = (&#39;*&#39;) ;
-
-GRANT USAGE ON INTEGRATION AZURE_STORAGE TO SYSADMIN ;
-
-DESCRIBE STORAGE INTEGRATION AZURE_STORAGE ;
-
-USE ROLE SYSADMIN ; -- De-esclate the role
-</code></pre></div>
-
-<p>Step 3: Setup File Format</p>
-<div class="highlight"><pre><span></span><code><span class="nx">create</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">replace</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">format</span><span class="w"> </span><span class="nx">csv_format</span>
-<span class="w">  </span><span class="k">type</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">CSV</span><span class="err">&#39;</span>
-<span class="w">  </span><span class="nx">field_delimiter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="sc">&#39;,&#39;</span>
-<span class="w">  </span><span class="nx">skip_header</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">  </span><span class="nx">null_if</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="err">&#39;</span><span class="nx">NULL</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">null</span><span class="err">&#39;</span><span class="p">)</span>
-<span class="w">  </span><span class="nx">empty_field_as_null</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">TRUE</span>
-<span class="w">  </span><span class="nx">compression</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">gzip</span><span class="w"> </span><span class="p">;</span>
-</code></pre></div>
-
-<p>Step 4: Set up Stage</p>
-<div class="highlight"><pre><span></span><code><span class="nt">create</span><span class="w"> </span><span class="nt">or</span><span class="w"> </span><span class="nt">replace</span><span class="w"> </span><span class="nt">stage</span><span class="w"> </span><span class="nt">gtfs</span>
-<span class="w">  </span><span class="nt">storage_integration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">AZURE_STORAGE</span>
-<span class="w">  </span><span class="nt">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;azure://&lt;container_name&gt;.blob.core.windows.net/gtfs &#39;</span>
-<span class="w">  </span><span class="nt">file_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">CSV_FORMAT</span><span class="w"> </span><span class="o">;</span>
-</code></pre></div>
-
-<p>Note: it can take an hour or two for Azure to create objects necessary for the integration</p>
-<div class="highlight"><pre><span></span><code><span class="n">list</span><span class="w"> </span><span class="nv">@gtfs</span><span class="w"> </span><span class="p">;</span>
-</code></pre></div>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="../snowsql.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="../category/databases.html" rel="tag">Databases</a>
-                </div>
-            </article>
-
-                <div class="clear"></div>
-                <div class="pages">
+        <div id="content">    <h2>Articles in the Databases category</h2>
 
 
-                    <a href="../category/databases2.html" class="next_page">Next&nbsp;&rarr;</a>
+        <article>
+            <header> <h2><a href="../databases.html" rel="bookmark" title="Permalink to Databases">Databases</a></h2> </header>
+            <section><p>Databases</p></section>
+            <footer>
+                <p>Published: <time datetime="2017-11-24T00:00:00+00:00"> Fri 24 November 2017 </time></p>
+                <address>By
+                </address>
+            </footer>
+        </article>
+        <article>
+            <header> <h2><a href="../snowsql.html" rel="bookmark" title="Permalink to SnowSQL Cheatsheet">SnowSQL Cheatsheet</a></h2> </header>
+            <section><p>SnowSQL  Cheatsheet</p></section>
+            <footer>
+                <p>Published: <time datetime="2017-11-23T00:00:00+00:00"> Thu 23 November 2017 </time></p>
+                <address>By
+                </address>
+            </footer>
+        </article>
 
-                    <span>Page 1 of 2</span>
-                </div>
+  <nav>
+    <ul>
+      <li>Page 1 / 2</li>
+        <li><a href="../category/databases2.html">&rang;</a></li>
+        <li><a href="../category/databases2.html">&Rang;</a></li>
+    </ul>
+  </nav>
+
 
             <div class="clear"></div>
             <footer>
@@ -261,5 +67,30 @@ USE ROLE SYSADMIN ; -- De-esclate the role
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

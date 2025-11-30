@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
+      <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | Databricks PySpark</title>
+    <title>code snippets etc. - Databricks PySpark</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
+
+
+
 
 </head>
 <body>
@@ -26,17 +31,14 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 24, 2023</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./databricks_pyspark.html" rel="bookmark" title="Permanent Link to &quot;Databricks PySpark&quot;">Databricks PySpark</a>
-                </h2>
-
-                
-                
-
-                <h4>Exporting as CSV from Data Factory</h4>
+        <div id="content">  <article>
+    <header>
+      <h2>
+        <a href="./databricks_pyspark.html" rel="bookmark"
+           title="Permalink to Databricks PySpark">Databricks PySpark</a></h2>
+      
+    </header>
+    <h4>Exporting as CSV from Data Factory</h4>
 <div class="highlight"><pre><span></span><code><span class="o">--</span><span class="w"> </span><span class="nx">save</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">CSV</span><span class="w"> </span>
 
 <span class="o">--</span><span class="w"> </span><span class="nx">step</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nx">create</span><span class="w"> </span><span class="nx">parquet</span><span class="w"> </span><span class="nx">file</span>
@@ -206,13 +208,16 @@ df.write.format(&quot;parquet&quot;).option(&quot;header&quot;, &quot;true&quot;
 <li><a href="https://learn.microsoft.com/en-us/azure/databricks/spark/latest/spark-sql/spark-pandas">Spark-Pandas</a></li>
 <li><a href="https://www.educba.com/pyspark-withcolumn/">PySpark withColumn</a></li>
 </ul>
-                <div class="clear"></div>
+    <footer>
+      <p>Published: <time datetime="2023-01-24T00:00:00+00:00">
+        Tue 24 January 2023
+      </time></p>
+        <p>
+          Category: <a href="./category/databricks.html">Databricks</a>
+        </p>
+    </footer>
+  </article>
 
-                <div class="info">
-                    <a href="./databricks_pyspark.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/databricks.html" rel="tag">Databricks</a>
-                </div>
-            </article>
             <div class="clear"></div>
             <footer>
                 <p>
@@ -223,5 +228,30 @@ df.write.format(&quot;parquet&quot;).option(&quot;header&quot;, &quot;true&quot;
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

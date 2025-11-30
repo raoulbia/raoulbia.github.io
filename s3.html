@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
+      <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | s3</title>
+    <title>code snippets etc. - s3</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
+
+
+
 
 </head>
 <body>
@@ -26,17 +31,14 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 01, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./s3.html" rel="bookmark" title="Permanent Link to &quot;s3&quot;">s3</a>
-                </h2>
-
-                
-                
-
-                <p><a href="https://medium.com/bilesanmiahmad/how-to-upload-a-file-to-amazon-s3-in-python-68757a1867c6">How to upload a file to Amazon S3 in Python</a></p>
+        <div id="content">  <article>
+    <header>
+      <h2>
+        <a href="./s3.html" rel="bookmark"
+           title="Permalink to s3">s3</a></h2>
+      
+    </header>
+    <p><a href="https://medium.com/bilesanmiahmad/how-to-upload-a-file-to-amazon-s3-in-python-68757a1867c6">How to upload a file to Amazon S3 in Python</a></p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">botocore.exceptions</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">NoCredentialsError</span>
 
@@ -64,13 +66,16 @@
 <span class="w">                         </span><span class="s1">&#39;bucket.name&#39;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">                         </span><span class="s1">&#39;filename.csv&#39;</span><span class="p">)</span>
 </code></pre></div>
-                <div class="clear"></div>
+    <footer>
+      <p>Published: <time datetime="2017-11-01T00:00:00+00:00">
+        Wed 01 November 2017
+      </time></p>
+        <p>
+          Category: <a href="./category/s3.html">s3</a>
+        </p>
+    </footer>
+  </article>
 
-                <div class="info">
-                    <a href="./s3.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/s3.html" rel="tag">s3</a>
-                </div>
-            </article>
             <div class="clear"></div>
             <footer>
                 <p>
@@ -81,5 +86,30 @@
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

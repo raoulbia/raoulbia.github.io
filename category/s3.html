@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | articles in the "s3" category</title>
+    <title>code snippets etc. - s3 category</title>
     <link rel="shortcut icon" type="image/png" href="../favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
     <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
@@ -16,8 +17,6 @@
     <header>
         <nav>
             <ul>
-
-                <li class="ephemeral selected"><a href="../category/s3.html">s3</a></li>
                 <li><a href="../">Home</a></li>
                 <li><a href="../archives">Archives</a></li>
             </ul>
@@ -27,51 +26,20 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 01, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="../s3.html" rel="bookmark" title="Permanent Link to &quot;s3&quot;">s3</a>
-                </h2>
-
-                
-                
-
-                <p><a href="https://medium.com/bilesanmiahmad/how-to-upload-a-file-to-amazon-s3-in-python-68757a1867c6">How to upload a file to Amazon S3 in Python</a></p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">botocore.exceptions</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">NoCredentialsError</span>
-
-<span class="n">ACCESS_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;xxxx&#39;</span>
-<span class="n">SECRET_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;xxxx&#39;</span>
+        <div id="content">    <h2>Articles in the s3 category</h2>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">upload_to_aws</span><span class="p">(</span><span class="n">local_file</span><span class="p">,</span><span class="w"> </span><span class="n">bucket</span><span class="p">,</span><span class="w"> </span><span class="n">s3_file</span><span class="p">):</span>
-<span class="w">    </span><span class="n">s3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">aws_access_key_id</span><span class="o">=</span><span class="n">ACCESS_KEY</span><span class="p">,</span>
-<span class="w">                      </span><span class="n">aws_secret_access_key</span><span class="o">=</span><span class="n">SECRET_KEY</span><span class="p">)</span>
-
-<span class="w">    </span><span class="k">try</span><span class="p">:</span>
-<span class="w">        </span><span class="n">s3</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="n">local_file</span><span class="p">,</span><span class="w"> </span><span class="n">bucket</span><span class="p">,</span><span class="w"> </span><span class="n">s3_file</span><span class="p">)</span>
-<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Upload Successful&quot;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">True</span>
-<span class="w">    </span><span class="k">except</span><span class="w"> </span><span class="n">FileNotFoundError</span><span class="p">:</span>
-<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The file was not found&quot;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">False</span>
-<span class="w">    </span><span class="k">except</span><span class="w"> </span><span class="n">NoCredentialsError</span><span class="p">:</span>
-<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Credentials not available&quot;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">False</span>
+        <article>
+            <header> <h2><a href="../s3.html" rel="bookmark" title="Permalink to s3">s3</a></h2> </header>
+            <section><p>s3</p></section>
+            <footer>
+                <p>Published: <time datetime="2017-11-01T00:00:00+00:00"> Wed 01 November 2017 </time></p>
+                <address>By
+                </address>
+            </footer>
+        </article>
 
 
-<span class="n">uploaded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">upload_to_aws</span><span class="p">(</span><span class="s1">&#39;filename.csv&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">                         </span><span class="s1">&#39;bucket.name&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">                         </span><span class="s1">&#39;filename.csv&#39;</span><span class="p">)</span>
-</code></pre></div>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="../s3.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="../category/s3.html" rel="tag">s3</a>
-                </div>
-            </article>
 
             <div class="clear"></div>
             <footer>
@@ -83,5 +51,30 @@
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
+      <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | Linux</title>
+    <title>code snippets etc. - Linux</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
+
+
+
 
 </head>
 <body>
@@ -26,17 +31,14 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 02, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./Linux.html" rel="bookmark" title="Permanent Link to &quot;Linux&quot;">Linux</a>
-                </h2>
-
-                
-                
-
-                <h4>Useful Commands</h4>
+        <div id="content">  <article>
+    <header>
+      <h2>
+        <a href="./Linux.html" rel="bookmark"
+           title="Permalink to Linux">Linux</a></h2>
+      
+    </header>
+    <h4>Useful Commands</h4>
 <ul>
 <li><code>sudo tar -xvf package_file.tar.gz</code></li>
 <li><code>sudo dpkg -i package_file.deb</code></li>
@@ -163,13 +165,16 @@ sudo apt-get purge texlive*
 <li><a href="http://askubuntu.com/questions/739297/how-to-install-robomongo-ubuntu-system-please-let-me-know/781793">About the usr/bin directory</a></li>
 <li><a href="https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-18-04">Increase Digitalocean memory</a></li>
 </ul>
-                <div class="clear"></div>
+    <footer>
+      <p>Published: <time datetime="2017-12-02T00:00:00+00:00">
+        Sat 02 December 2017
+      </time></p>
+        <p>
+          Category: <a href="./category/linux.html">Linux</a>
+        </p>
+    </footer>
+  </article>
 
-                <div class="info">
-                    <a href="./Linux.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
-                </div>
-            </article>
             <div class="clear"></div>
             <footer>
                 <p>
@@ -180,5 +185,30 @@ sudo apt-get purge texlive*
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

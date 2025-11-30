@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
+      <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | Embeddings</title>
+    <title>code snippets etc. - Embeddings</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
+
+
+
 
 </head>
 <body>
@@ -26,17 +31,14 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Sep 01, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./embeddings.html" rel="bookmark" title="Permanent Link to &quot;Embeddings&quot;">Embeddings</a>
-                </h2>
-
-                
-                
-
-                <p>On this page I keep some notes abbout <a href="./drafts/GloVe.html">GloVe</a>
+        <div id="content">  <article>
+    <header>
+      <h2>
+        <a href="./embeddings.html" rel="bookmark"
+           title="Permalink to Embeddings">Embeddings</a></h2>
+      
+    </header>
+    <p>On this page I keep some notes abbout <a href="./drafts/GloVe.html">GloVe</a>
 and word2vec word embeddings. </p>
 <h4>various notes</h4>
 <ul>
@@ -288,13 +290,16 @@ with context words</p>
 </ul>
 </li>
 </ul>
-                <div class="clear"></div>
+    <footer>
+      <p>Published: <time datetime="2017-09-01T00:00:00+01:00">
+        Fri 01 September 2017
+      </time></p>
+        <p>
+          Category: <a href="./category/embeddings.html">Embeddings</a>
+        </p>
+    </footer>
+  </article>
 
-                <div class="info">
-                    <a href="./embeddings.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/embeddings.html" rel="tag">Embeddings</a>
-                </div>
-            </article>
             <div class="clear"></div>
             <footer>
                 <p>
@@ -305,5 +310,30 @@ with context words</p>
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>
