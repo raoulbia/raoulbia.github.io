@@ -53,7 +53,7 @@ Host dgx-spark
 ```
 
 ## SSH Tunnel
-```
+```bash
 ssh -N -L 8000:localhost:8000 -L 12434:localhost:12434 user@spark-e123.local
 ```
 
