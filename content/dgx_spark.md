@@ -36,12 +36,13 @@ Summary: DGX Spark Misc.
   memory, you could likely increase to local_batch_size: 2 or 4 to speed things up ~2-4x.
 
 ## Misc
-```
+```bash
 docker start vllm-server
 docker logs -f --tail 50 vllm-server
 ```
+
 ## ~/.ssh/config
-````
+```
 Host dgx-spark
     HostName 192.168.1.xx
     User <user-name>
@@ -49,10 +50,12 @@ Host dgx-spark
     IdentitiesOnly yes
     LocalForward 8000 localhost:8000
     LocalForward 11434 localhost:11434
-````
+```
 
 ## SSH Tunnel
-`ssh -N -L 8000:localhost:8000 -L 12434:localhost:12434 user@spark-e123.local`
+```
+ssh -N -L 8000:localhost:8000 -L 12434:localhost:12434 user@spark-e123.local
+```
 
 ## Example Roo Code configuration for vLLM:
 
