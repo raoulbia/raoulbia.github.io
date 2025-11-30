@@ -71,3 +71,6 @@ MARKUP = ('md', 'rst')
 PLUGIN_PATHS = ['./plugins']
 # PLUGINS = ['ipynb.markup'] #, 'render_math']
 IGNORE_FILES = ['.ipynb_checkpoints']
+
+# Custom template overrides
+THEME_TEMPLATES_OVERRIDES = ['./templates']
