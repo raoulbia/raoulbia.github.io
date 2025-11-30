@@ -4,7 +4,9 @@ Category: AI
 Slug: dgx_spark
 Summary: DGX Spark Misc.
 
-## Fine-tuning Options on DGX Spark (GB10, 128GB unified memory)
+<br>
+
+### Fine-tuning Options on DGX Spark (GB10, 128GB unified memory)
 
   | Option                | Framework         | Pros                                                       | Cons                           |
   |-----------------------|-------------------|------------------------------------------------------------|--------------------------------|
@@ -14,8 +16,9 @@ Summary: DGX Spark Misc.
   | HuggingFace PEFT      | Transformers      | Most popular, huge community                               | Manual optimization needed     |
   | LLaMA-Factory         | HuggingFace-based | Web UI, no-code option                                     | Less control                   |
 
+<br>
 
-## GPU Assessment:
+### GPU Assessment:
 
   | Metric   | Value | Assessment             |
   |----------|-------|------------------------|
@@ -35,7 +38,9 @@ Summary: DGX Spark Misc.
   88% utilization is solid. The main bottleneck is local_batch_size: 1 - you're processing 1 sample at a time with 16 accumulation steps. With 128GB unified
   memory, you could likely increase to local_batch_size: 2 or 4 to speed things up ~2-4x.
 
-## Misc
+<br>
+
+### Misc
 ```bash
 docker start vllm-server
 docker logs -f --tail 50 vllm-server
@@ -52,12 +57,16 @@ Host dgx-spark
     LocalForward 11434 localhost:11434
 ```
 
-## SSH Tunnel
+<br>
+
+### SSH Tunnel
 ```bash
 ssh -N -L 8000:localhost:8000 -L 12434:localhost:12434 user@spark-e123.local
 ```
 
-## Example Roo Code configuration for vLLM:
+<br>
+
+### Example Roo Code configuration for vLLM:
 
 * API Provider: `OpenAI Compatible`
 * Base URL: `http://localhost:8000/v1`
