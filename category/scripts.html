@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. - Scripts category</title>
+    <title>code snippets etc. | articles in the "Scripts" category</title>
     <link rel="shortcut icon" type="image/png" href="../favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
     <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
@@ -17,6 +17,8 @@
     <header>
         <nav>
             <ul>
+
+                <li class="ephemeral selected"><a href="../category/scripts.html">Scripts</a></li>
                 <li><a href="../">Home</a></li>
                 <li><a href="../archives">Archives</a></li>
             </ul>
@@ -26,20 +28,67 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">    <h2>Articles in the Scripts category</h2>
+        <div id="content">            <h4 class="date">May 25, 2017</h4>
 
+            <article class="post">
+                <h2 class="title">
+                    <a href="../scripts.html" rel="bookmark" title="Permanent Link to &quot;Scripts&quot;">Scripts</a>
+                </h2>
 
-        <article>
-            <header> <h2><a href="../scripts.html" rel="bookmark" title="Permalink to Scripts">Scripts</a></h2> </header>
-            <section><p>Scripts</p></section>
-            <footer>
-                <p>Published: <time datetime="2017-05-25T00:00:00+01:00"> Thu 25 May 2017 </time></p>
-                <address>By
-                </address>
-            </footer>
-        </article>
+                
+                
 
+                <h3>Import GTFS data into postgres</h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
+<span class="c1"># init vars</span>
+<span class="nv">workingFolder</span><span class="o">=</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>
+<span class="nv">unzip_dir</span><span class="o">=</span><span class="s2">&quot;gtfs_files_unzipped&quot;</span>
+<span class="nv">fileName</span><span class="o">=</span><span class="s2">&quot;feed_gtfs&quot;</span><span class="w"> </span>
+<span class="nv">dbName</span><span class="o">=</span><span class="s2">&quot;gtfs_dublinbus&quot;</span>
+<span class="nv">user</span><span class="o">=</span><span class="s2">&quot;postgres&quot;</span>
+<span class="nv">password</span><span class="o">=</span><span class="s2">&quot;postgres&quot;</span>
+
+<span class="c1"># create dirs</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\r</span>m<span class="w"> </span>-Rf<span class="w"> </span><span class="nv">$workingFolder</span>/<span class="nv">$unzip_dir</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+mkdir<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="c1"># mkdir &quot;$workingFolder/output_test&quot; &gt; /dev/null 2&gt;&amp;1    </span>
+
+<span class="c1"># unzip the GTFS file</span>
+rm<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>/*.csv<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+rm<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>/*.txt<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+unzip<span class="w"> </span>-qq<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$fileName</span><span class="s2">&quot;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>
+
+<span class="c1"># create a CSV copy of the source txt GTFS files</span>
+<span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;./</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>
+<span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.txt
+<span class="k">do</span>
+<span class="w">    </span>cp<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;../</span><span class="nv">$unzip_dir</span><span class="s2">/</span><span class="si">${</span><span class="nv">file</span><span class="p">%.txt</span><span class="si">}</span><span class="s2">.csv&quot;</span>
+<span class="k">done</span>
+<span class="nb">cd</span><span class="w"> </span>..
+
+<span class="c1"># import into postgres</span>
+<span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">/&quot;</span>*.csv
+<span class="k">do</span>
+<span class="w">    </span><span class="nv">filename</span><span class="o">=</span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="k">)</span>
+<span class="w">    </span><span class="nv">extension</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">filename</span><span class="p">##*.</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">filename</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">filename</span><span class="p">%.*</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="w">    </span>ogr2ogr<span class="w"> </span>-f<span class="w"> </span>PostgreSQL<span class="w"> </span>PG:<span class="s2">&quot;user=</span><span class="nv">$user</span><span class="s2"> dbname=</span><span class="nv">$dbName</span><span class="s2"> password=</span><span class="nv">$password</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">/</span><span class="nv">$filename</span><span class="s2">.csv&quot;</span><span class="w"> </span>-nln<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filename</span><span class="s2">&quot;</span><span class="w"> </span>
+<span class="k">done</span>
+
+<span class="se">\r</span>m<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">/&quot;</span>*.csv
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Done&quot;</span>
+</code></pre></div>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../scripts.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/scripts.html" rel="tag">Scripts</a>
+                </div>
+            </article>
 
             <div class="clear"></div>
             <footer>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. - Azure category</title>
+    <title>code snippets etc. | articles in the "Azure" category</title>
     <link rel="shortcut icon" type="image/png" href="../favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
     <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
@@ -17,6 +17,8 @@
     <header>
         <nav>
             <ul>
+
+                <li class="ephemeral selected"><a href="../category/azure.html">Azure</a></li>
                 <li><a href="../">Home</a></li>
                 <li><a href="../archives">Archives</a></li>
             </ul>
@@ -26,20 +28,67 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">    <h2>Articles in the Azure category</h2>
+        <div id="content">            <h4 class="date">Dec 24, 2022</h4>
 
+            <article class="post">
+                <h2 class="title">
+                    <a href="../azure.html" rel="bookmark" title="Permanent Link to &quot;Azure&quot;">Azure</a>
+                </h2>
 
-        <article>
-            <header> <h2><a href="../azure.html" rel="bookmark" title="Permalink to Azure">Azure</a></h2> </header>
-            <section><p>Azure</p></section>
-            <footer>
-                <p>Published: <time datetime="2022-12-24T00:00:00+00:00"> Sat 24 December 2022 </time></p>
-                <address>By
-                </address>
-            </footer>
-        </article>
+                
+                
 
+                <p><br></p>
+<h3>Using Key Vault Secrets in Azure Data Factory</h3>
+<p>Key Vault secrets can be used to securely manage connections to services such as NAS drives or Databricks.</p>
+<h4>NAS Drive Linked Service</h4>
+<ul>
+<li>Create a Service Account with priviliges to access a NAS drive</li>
+<li>create a new secret in KV with the password of the above Service Account</li>
+<li>use the secret, and the Service Account user name, in ADF when configuring a linked service for NAS drive</li>
+<li>use the linked service in an ADF Copy data activity</li>
+</ul>
+<h4>Databricks Linked Service</h4>
+<ul>
+<li>Generate a token in Databricks and take note of it</li>
+<li>create a new secret in KV with the above token</li>
+<li>use the secret in ADF when configuring a linked service for databricks</li>
+<li>use the linked service in an ADF Databricks notebook activity</li>
+</ul>
+<h3>Azure ARM</h3>
+<h4>Deploy via Powershell</h4>
+<ul>
+<li><code>New-AzResourceGroup RG01 "South Central US"</code></li>
+<li><code>New-AzResourceGroupDeployment</code> adds a deployment to an existing resource group. (https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-9.3.0)</li>
+</ul>
+<h4>Useful Links</h4>
+<ul>
+<li>https://samcogan.com/deploying-resource-groups-with-arm-templates/</li>
+</ul>
+<p><br></p>
+<h3>Azure Fundamentals Exam (AZ-900)</h3>
+<ul>
+<li><a href="../drafts/azure_cloud_benefits_and_categories.html">Azure Cloud: Benefits and Categories</a></li>
+<li><a href="../drafts/azure_architectural_components.html">Azure Architectural Components</a></li>
+<li><a href="../drafts/azure_services.html">Azure Services</a></li>
+<li><a href="../drafts/azure_solutions.html">Azure Solutions</a></li>
+<li><a href="../drafts/azure_management_tools.html">Azure Management Tools</a></li>
+<li><a href="../drafts/azure_general_security.html">Azure General Security Features</a></li>
+<li><a href="../drafts/azure_network_security.html">Azure Network Security</a></li>
+<li><a href="../drafts/azure_identity_governance_privacy_compliance.html">Azure Identity, Governance, Privacy and Compliance Features</a></li>
+<li><a href="../drafts/azure_cost_management_and_sla.html">Azure Cost Management and SLA</a></li>
+</ul>
+<h3>Note about creating a Databricks Resource in Azure Portal</h3>
+<ul>
+<li>When creating a Databricks resource, Databricks will itself create a separate resource group (RG) with a storage account. This RG cannot be deleted via the porta;. See here for more: https://stackoverflow.com/questions/60694149/unable-to-remove-azure-databricks-managed-resource-group</li>
+</ul>
+                <div class="clear"></div>
 
+                <div class="info">
+                    <a href="../azure.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/azure.html" rel="tag">Azure</a>
+                </div>
+            </article>
 
             <div class="clear"></div>
             <footer>

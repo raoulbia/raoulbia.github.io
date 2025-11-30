@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc.</title>
+    <title>code snippets etc. | Page 27</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
@@ -26,38 +26,126 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">        <h2>All articles</h2>
+        <div id="content">            <h4 class="date">Aug 04, 2017</h4>
 
+            <article class="post">
+                <h2 class="title">
+                    <a href="./python, rdflib.html" rel="bookmark" title="Permanent Link to &quot;RDFLib Graph Object&quot;">RDFLib Graph Object</a>
+                </h2>
 
-        <article>
-            <header> <h2><a href="./python, rdflib.html" rel="bookmark" title="Permalink to RDFLib Graph Object">RDFLib Graph Object</a></h2> </header>
-            <section><p>RDFLib (Python) Code Snippets</p></section>
-            <footer>
-                <p>Published: <time datetime="2017-08-04T00:00:00+01:00"> Fri 04 August 2017 </time></p>
-                <address>By
-                </address>
-            </footer>
-        </article>
-        <article>
-            <header> <h2><a href="./graph_problems.html" rel="bookmark" title="Permalink to Graph Problems">Graph Problems</a></h2> </header>
-            <section><p>Graph Theory</p></section>
-            <footer>
-                <p>Published: <time datetime="2017-07-02T00:00:00+01:00"> Sun 02 July 2017 </time></p>
-                <address>By
-                </address>
-            </footer>
-        </article>
+                
+                
 
-  <nav>
-    <ul>
-        <li><a href="./index.html">&Lang;</a></li>
-        <li><a href="./index26.html">&lang;</a></li>
-      <li>Page 27 / 31</li>
-        <li><a href="./index28.html">&rang;</a></li>
-        <li><a href="./index31.html">&Rang;</a></li>
-    </ul>
-  </nav>
+                <p>On this page I keep snippets of code I have found useful when working with the
+<a href="https://rdflib.readthedocs.io/en/stable/">RDFLib library</a>. Specifically, the code snippets show how to</p>
+<ul>
+<li>load a triple (.n3) or quad (.nq) file RDFLib graph object</li>
+<li>read from an RDFLib graph object</li>
+</ul>
+<h5>Loading a triple/quad file into an RDFLib object</h5>
+<div class="highlight"><pre><span></span><code><span class="n">g</span> <span class="o">=</span> <span class="n">rdflib</span><span class="o">.</span><span class="n">ConjunctiveGraph</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">input_kg_dir_path</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">f_extension</span><span class="p">)):</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_kg_dir_path</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+        <span class="c1"># read each kg file and build a graph</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;reading </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">rdflib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">guess_format</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">g</span>
+</code></pre></div>
 
+<h5>Reading an RDFLib graph object</h5>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entity_list</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">entity_list</span><span class="p">)</span>
+    <span class="n">query_results</span> <span class="o">=</span> <span class="n">angio_kg</span><span class="o">.</span><span class="n">query</span><span class="p">(</span> <span class="c1"># is an rdflib conjunctive raph object which has a parse method</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;SELECT DISTINCT ?g</span>
+<span class="sd">        {GRAPH ?g {</span>
+<span class="sd">              {&lt;%s&gt; ?p ?o}</span>
+<span class="sd">              UNION {?s ?p &lt;%s&gt;}</span>
+<span class="sd">         }}&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">entity</span><span class="p">))</span>
+</code></pre></div>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./python, rdflib.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                </div>
+            </article>            <h4 class="date">Jul 02, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./graph_problems.html" rel="bookmark" title="Permanent Link to &quot;Graph Problems&quot;">Graph Problems</a>
+                </h2>
+
+                
+                
+
+                <h4>Vertex Cover</h4>
+<ul>
+<li>A vertex cover is a <strong>subset of the vertices</strong> such that
+each edge in the graph is incident to at least one vertex in
+the subset. </li>
+</ul>
+<p><img alt="" src="img/vertex-cover.png"></p>
+<ul>
+<li>The Minimum Vertex Cover problem seeks to
+find a cover with a <strong>minimum number of vertices in the
+subset</strong>.</li>
+</ul>
+<p><img alt="" src="img/min-vertex-cover.png"></p>
+<p><br></p>
+<ul>
+<li>
+<p>Approximation Algorithm</p>
+<div class="highlight"><pre><span></span><code><span class="n">C</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">empty</span><span class="w"> </span><span class="n">set</span>
+<span class="n">While</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">empty</span>
+<span class="w">    </span><span class="p">{</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">}</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="n">edge</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">E</span>
+<span class="w">    </span><span class="n">add</span><span class="w"> </span><span class="p">{</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">}</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">C</span>
+<span class="w">    </span><span class="n">remove</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">edges</span><span class="w"> </span><span class="n">incident</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">u</span><span class="p">,</span><span class="n">v</span>
+<span class="n">return</span><span class="w"> </span><span class="n">C</span>
+</code></pre></div>
+
+</li>
+<li>
+<p><a href="https://nbviewer.jupyter.org/github/raoulbia/jupyter-notebooks/blob/master/vertex_cover_linear-programming_and_approximation-algorithm.ipynb?flush_cache=true" title="target=&quot;_blank">Solving Vertex Cover with Linear Programming and with Approximation Algorithm</a></p>
+</li>
+</ul>
+<p><br></p>
+<h4>Max Cut</h4>
+<ul>
+<li>
+<p>Partition set of vertices into two sets such that the number of edges between the two sets
+(considered to be severed by the cut), is a large as possible. </p>
+</li>
+<li>
+<p>In the example below vertices 2 and 3 are in one set and
+vertices 1, 4, and 5 are in the other, with a maximum cut value of 5. </p>
+</li>
+</ul>
+<p><img alt="" src="img/max-cut.png"></p>
+<h4>Travelling Salesman problem</h4>
+<ul>
+<li><a href="https://nbviewer.jupyter.org/github/raoulbia/jupyter-notebooks/blob/master/Graph_Traversal_TSP_Approximation_Warehouse.ipynb?flush_cache=true" title="target=&quot;_blank">TSP_Approximation_Warehouse.ipynb</a></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./graph_problems.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/graph-problems.html" rel="tag">Graph Problems</a>
+                </div>
+            </article>
+
+                <div class="clear"></div>
+                <div class="pages">
+
+                    <a href="./index26.html" class="prev_page">&larr;&nbsp;Previous</a>
+
+                    <a href="./index28.html" class="next_page">Next&nbsp;&rarr;</a>
+
+                    <span>Page 27 of 31</span>
+                </div>
 
             <div class="clear"></div>
             <footer>

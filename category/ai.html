@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. - AI category</title>
+    <title>code snippets etc. | articles in the "AI" category</title>
     <link rel="shortcut icon" type="image/png" href="../favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
     <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
@@ -17,6 +17,8 @@
     <header>
         <nav>
             <ul>
+
+                <li class="ephemeral selected"><a href="../category/ai.html">AI</a></li>
                 <li><a href="../">Home</a></li>
                 <li><a href="../archives">Archives</a></li>
             </ul>
@@ -26,36 +28,301 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">    <h2>Articles in the AI category</h2>
+        <div id="content">            <h4 class="date">Nov 17, 2025</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../dgx_spark.html" rel="bookmark" title="Permanent Link to &quot;DGX Spark&quot;">DGX Spark</a>
+                </h2>
+
+                
+                
+
+                <p><br></p>
+<h3>Fine-tuning Options on DGX Spark (GB10, 128GB unified memory)</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Framework</th>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NeMo + LoRA (current)</td>
+<td>NVIDIA NeMo</td>
+<td>Official NVIDIA support, optimized for DGX, proven working</td>
+<td>Complex setup, container-based</td>
+</tr>
+<tr>
+<td>Unsloth</td>
+<td>HuggingFace-based</td>
+<td>2x faster, 60% less memory, simple API</td>
+<td>Less NVIDIA optimization</td>
+</tr>
+<tr>
+<td>Axolotl</td>
+<td>HuggingFace-based</td>
+<td>YAML config, many techniques (LoRA, QLoRA, full)</td>
+<td>Medium complexity</td>
+</tr>
+<tr>
+<td>HuggingFace PEFT</td>
+<td>Transformers</td>
+<td>Most popular, huge community</td>
+<td>Manual optimization needed</td>
+</tr>
+<tr>
+<td>LLaMA-Factory</td>
+<td>HuggingFace-based</td>
+<td>Web UI, no-code option</td>
+<td>Less control</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<h3>GPU Assessment:</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPU Util</td>
+<td>88%</td>
+<td>Good, not bottlenecked</td>
+</tr>
+<tr>
+<td>Temp</td>
+<td>68°C</td>
+<td>Normal</td>
+</tr>
+<tr>
+<td>Power</td>
+<td>56W</td>
+<td>Moderate</td>
+</tr>
+</tbody>
+</table>
+<p>Speed factors (not learning rate):</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Current</th>
+<th>Could Speed Up?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>local_batch_size</td>
+<td>1</td>
+<td>Increase to 2-4 if memory allows</td>
+</tr>
+<tr>
+<td>global_batch_size</td>
+<td>16</td>
+<td>Means 16 gradient accumulation steps</td>
+</tr>
+<tr>
+<td>seq_length</td>
+<td>2048</td>
+<td>Lower if your data is shorter</td>
+</tr>
+<tr>
+<td>Precision</td>
+<td>bf16-mixed</td>
+<td>Already optimal</td>
+</tr>
+</tbody>
+</table>
+<p>88% utilization is solid. The main bottleneck is local_batch_size: 1 - you're processing 1 sample at a time with 16 accumulation steps. With 128GB unified
+  memory, you could likely increase to local_batch_size: 2 or 4 to speed things up ~2-4x.</p>
+<p><br></p>
+<h3>Misc</h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>start<span class="w"> </span>vllm-server
+docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>--tail<span class="w"> </span><span class="m">50</span><span class="w"> </span>vllm-server
+</code></pre></div>
+
+<h2>~/.ssh/config</h2>
+<div class="highlight"><pre><span></span><code>Host dgx-spark
+    HostName 192.168.1.xx
+    User &lt;user-name&gt;
+    IdentityFile ~/.ssh/&lt;name-of-pub-ssh-key&gt;
+    IdentitiesOnly yes
+    LocalForward 8000 localhost:8000
+    LocalForward 11434 localhost:11434
+</code></pre></div>
+
+<p><br></p>
+<h3>SSH Tunnel</h3>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-N<span class="w"> </span>-L<span class="w"> </span><span class="m">8000</span>:localhost:8000<span class="w"> </span>-L<span class="w"> </span><span class="m">12434</span>:localhost:12434<span class="w"> </span>user@spark-e123.local
+</code></pre></div>
+
+<p><br></p>
+<h3>Example Roo Code configuration for vLLM:</h3>
+<ul>
+<li>API Provider: <code>OpenAI Compatible</code></li>
+<li>Base URL: <code>http://localhost:8000/v1</code></li>
+<li>API Key: <code>not-required</code></li>
+<li>Model: <code>Qwen/Qwen2.5-Coder-14B-Instruct</code></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../dgx_spark.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/ai.html" rel="tag">AI</a>
+                </div>
+            </article>            <h4 class="date">Jul 18, 2024</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../fullstack.html" rel="bookmark" title="Permanent Link to &quot;Fullstack Dev Notes&quot;">Fullstack Dev Notes</a>
+                </h2>
+
+                
+                
+
+                <p><br></p>
+<h2>Managing API_HOST Environment Variable in Next.js Projects</h2>
+<p>When developing a Next.js application, it's crucial to manage environment variables effectively, especially for differentiating between local testing and production deployments. This article will guide you through setting up and handling the <code>API_HOST</code> environment variable using the <code>next.config.mjs</code> file and CI/CD pipeline configurations with YAML files.</p>
+<h3>1. Configuring <code>API_HOST</code> in <code>next.config.mjs</code></h3>
+<p>The <code>next.config.mjs</code> file is the central configuration file for a Next.js application. You can use it to define the <code>API_HOST</code> environment variable, ensuring it points to the correct URL based on the environment.</p>
+<h4>Example Configuration:</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">isProd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;production&#39;</span><span class="p">;</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">env</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">API_HOST</span><span class="o">:</span><span class="w"> </span><span class="nx">isProd</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;https://api.productionurl.com&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;http://localhost:3000&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<p>In this setup:
+- If <code>NODE_ENV</code> is set to 'production', <code>API_HOST</code> will be assigned the production URL.
+- For any other environment, it defaults to the localhost URL, suitable for local testing.</p>
+<h3>2. Setting <code>API_HOST</code> in <code>frontend_build_deploy.yml</code></h3>
+<p>This YAML file is typically used for CI/CD pipelines to build and deploy the frontend application. You can define steps to set environment variables before running the build and deploy steps.</p>
+<h4>Example <code>frontend_build_deploy.yml</code>:</h4>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Frontend Build and Deploy</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout code</span>
+<span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set up Node.js</span>
+<span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-node@v2</span>
+<span class="w">      </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">node-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;14&#39;</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm install</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set API_HOST</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;API_HOST=https://api.productionurl.com&quot; &gt;&gt; $GITHUB_ENV</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm run build</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm run deploy</span>
+</code></pre></div>
+
+<p>In this example:
+- The <code>Set API_HOST</code> step sets the <code>API_HOST</code> environment variable for the build process.
+- The $GITHUB_ENV file is created automatically by GitHub Actions. You do not need to manually create this file or define it in your GitHub repository's secrets.</p>
+<h3>3. Setting <code>API_HOST</code> in <code>backend_build_deploy.yml</code></h3>
+<p>Similarly, you can manage environment variables for the backend application using a CI/CD pipeline configuration.</p>
+<h4>Example <code>backend_build_deploy.yml</code>:</h4>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Backend Build and Deploy</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout code</span>
+<span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set up Node.js</span>
+<span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-node@v2</span>
+<span class="w">      </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">node-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;14&#39;</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm install</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set API_HOST</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;API_HOST=https://api.productionurl.com&quot; &gt;&gt; $GITHUB_ENV</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm run build</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm run deploy</span>
+</code></pre></div>
+
+<p>In this setup:
+- The <code>Set API_HOST</code> step sets the <code>API_HOST</code> environment variable for the backend build process.</p>
+<h3>Conclusion</h3>
+<p>By configuring the <code>API_HOST</code> environment variable in <code>next.config.mjs</code> and utilizing CI/CD pipelines with YAML files, you can ensure your Next.js application seamlessly transitions between local testing and production environments. This approach helps maintain consistency and reliability across different deployment stages.</p>
+<p><br></p>
+<h2>Deploying Next.js Applications to Azure as a Web App and Web Service</h2>
+<p>When deploying a Next.js application to Azure, it's essential to ensure that environment variables like <code>API_HOST</code> are correctly configured for both backend (web app) and frontend (web service) deployments. Here’s how to handle this in Azure:</p>
+<h2>Setting Up Environment Variables in Azure Web App (Backend)</h2>
+<ol>
+<li><strong>Navigate to the Azure portal</strong> and select your Web App.</li>
+<li><strong>Go to the Configuration</strong> under the <strong>Settings</strong> section.</li>
+<li><strong>Add a new application setting</strong>:</li>
+<li><strong>Name</strong>: <code>API_HOST</code></li>
+<li><strong>Value</strong>: <code>https://api.productionurl.com</code> (or your actual production API URL)</li>
+<li><strong>Save the changes</strong> and restart the Web App.</li>
+</ol>
+<h2>Setting Up Environment Variables in Azure Web Service (Frontend)</h2>
+<ol>
+<li><strong>Navigate to the Azure portal</strong> and select your Web Service.</li>
+<li><strong>Go to the Configuration</strong> under the <strong>Settings</strong> section.</li>
+<li><strong>Add a new application setting</strong>:</li>
+<li><strong>Name</strong>: <code>API_HOST</code></li>
+<li><strong>Value</strong>: <code>https://api.productionurl.com</code> (or your actual production API URL)</li>
+<li><strong>Save the changes</strong> and restart the Web Service.</li>
+</ol>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../fullstack.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/ai.html" rel="tag">AI</a>
+                </div>
+            </article>
+
+                <div class="clear"></div>
+                <div class="pages">
 
 
-        <article>
-            <header> <h2><a href="../dgx_spark.html" rel="bookmark" title="Permalink to DGX Spark">DGX Spark</a></h2> </header>
-            <section><p>DGX Spark Misc.</p></section>
-            <footer>
-                <p>Published: <time datetime="2025-11-17T00:00:00+00:00"> Mon 17 November 2025 </time></p>
-                <address>By
-                </address>
-            </footer>
-        </article>
-        <article>
-            <header> <h2><a href="../fullstack.html" rel="bookmark" title="Permalink to Fullstack Dev Notes">Fullstack Dev Notes</a></h2> </header>
-            <section><p>Fullstack Dev Notes</p></section>
-            <footer>
-                <p>Published: <time datetime="2024-07-18T00:00:00+01:00"> Thu 18 July 2024 </time></p>
-                <address>By
-                </address>
-            </footer>
-        </article>
+                    <a href="../category/ai2.html" class="next_page">Next&nbsp;&rarr;</a>
 
-  <nav>
-    <ul>
-      <li>Page 1 / 3</li>
-        <li><a href="../category/ai2.html">&rang;</a></li>
-        <li><a href="../category/ai3.html">&Rang;</a></li>
-    </ul>
-  </nav>
-
+                    <span>Page 1 of 3</span>
+                </div>
 
             <div class="clear"></div>
             <footer>

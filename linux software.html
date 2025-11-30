@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+    <title>code snippets etc. | Software</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href=".">Home</a></li>
+                <li><a href="https://github.com/raoulbia">GitHub</a></li>
+                <li><a href="./archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href=".">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Nov 07, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./linux software.html" rel="bookmark" title="Permanent Link to &quot;Software&quot;">Software</a>
+                </h2>
+
+                <h3>PostgreSQL</h3>
+<p><a href="https://www.postgresql.org/download/linux/ubuntu/">Download PostgreSQL</a></p>
+<p><a href="https://linuxhint.com/best_gui_clients_postgresql_ubuntu/#:~:text=pgAdmin,Windows%20and%20Mac%20OS%20X.">Install pgAdmin</a></p>
+<h4>Running multiple versions of PostgreSQL</h4>
+<p>Check the config files to see which version is on which port:</p>
+<p><code>grep -H '^port' /etc/postgresql/*/main/postgresql.conf</code></p>
+<p>sample output:</p>
+<div class="highlight"><pre><span></span><span class="err">/etc/postgresql/10/main/postgresql.conf:port = 5432 </span>
+<span class="err">/etc/postgresql/13/main/postgresql.conf:port = 5433 </span>
+</pre></div>
+
+
+<h4>Restart Postgres</h4>
+<div class="highlight"><pre><span></span><span class="err">sudo /etc/init.d/postgresql reload</span>
+<span class="err">sudo /etc/init.d/postgresql start</span>
+</pre></div>
+
+
+<h4>Hostname</h4>
+<p>PostgreSQL, what is the hostname address of my default database?</p>
+<p>If you're connecting from the same machine, use localhost</p>
+<h4>Connection String</h4>
+<p>You can provide your username and password directly in the connection URI provided to psql:</p>
+<p><code>psql postgresql://username:password@localhost:5432/mydb</code></p>
+<h4>Useful Commands</h4>
+<ul>
+<li>To establish a connection : <code>sudo su - postgres</code></li>
+<li>To open a postgress prompt using the command: <code>psql</code></li>
+<li>To see details of the connection: <code>\conninfo</code></li>
+<li>To view the databases in our PostgreSQL instance: <code>\list</code></li>
+<li><code>CREATE DATABASE dbname;</code></li>
+<li><code>DROP DATABASE dbname;</code></li>
+</ul>
+<h3>R and RStudio</h3>
+<h4>Install on Ubuntu 20.04 (Focal Fossa)</h4>
+<p>Save and run the script below (<a href="https://gist.github.com/mGalarnyk/41c887e921e712baf86fecc507b3afc7">source</a>).</p>
+<div class="highlight"><pre><span></span><span class="o">#</span> <span class="n">Install</span> <span class="n">R</span> <span class="o">+</span> <span class="n">RStudio</span> <span class="k">on</span> <span class="n">Ubuntu</span> <span class="mi">20</span> <span class="n">Focal</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="k">key</span> <span class="n">adv</span> <span class="c1">--keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DF&gt;</span>
+<span class="n">sudo</span> <span class="k">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="err">&#39;</span><span class="n">deb</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">cloud</span><span class="p">.</span><span class="n">r</span><span class="o">-</span><span class="n">project</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">ubuntu</span> <span class="n">focal</span><span class="o">&gt;</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="k">update</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">r</span><span class="o">-</span><span class="n">base</span> <span class="n">r</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">dev</span> <span class="n">gdebi</span><span class="o">-</span><span class="n">core</span>
+<span class="o">#</span> <span class="k">next</span> <span class="n">line</span> <span class="n">required</span> <span class="k">for</span> <span class="n">kableExtra</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">libcurl4</span><span class="o">-</span><span class="n">openssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">openssl</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">openssh</span><span class="o">-</span><span class="n">client</span> <span class="n">libxml2</span><span class="o">-</span><span class="n">dev</span> 
+<span class="o">#</span> <span class="k">next</span> <span class="n">line</span> <span class="n">required</span> <span class="k">for</span> <span class="n">RcppArmadillo</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">liblapack</span><span class="o">-</span><span class="n">dev</span> 
+<span class="o">#</span> <span class="n">install</span> <span class="n">Latex</span> <span class="k">for</span> <span class="n">RMarkdown</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">texlive</span> <span class="n">texstudio</span> <span class="n">texlive</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">recommended</span> <span class="n">texlive</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">extra</span>
+
+<span class="o">#</span> <span class="n">Download</span> <span class="k">and</span> <span class="n">Install</span> <span class="n">RStudio</span>
+<span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download1</span><span class="p">.</span><span class="n">rstudio</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">desktop</span><span class="o">/</span><span class="n">bionic</span><span class="o">/</span><span class="n">amd64</span><span class="o">/</span><span class="n">rstudio</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">1056</span><span class="o">-</span><span class="n">amd64</span><span class="p">.</span><span class="o">&gt;</span>
+<span class="n">sudo</span> <span class="n">gdebi</span> <span class="n">rstudio</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">1056</span><span class="o">-</span><span class="n">amd64</span><span class="p">.</span><span class="n">deb</span>
+<span class="n">rm</span> <span class="n">rstudio</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">1056</span><span class="o">-</span><span class="n">amd64</span><span class="p">.</span><span class="n">deb</span>
+</pre></div>
+
+
+<h4>List of Useful Packages</h4>
+<p><code>install.packages((c("tidyverse", "ggplot2", "ggthemes", "kableExtra", "rbenchmark", "inline", "data.table", "RcppArmadillo"))</code></p>
+<h3>Docker</h3>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04">Install Docker on Ubuntu-16-04</a></li>
+<li><a href="https://www.udemy.com/docker-mastery/">Docker Mastery: The Complete Toolset From a Docker Captain</a>:</li>
+</ul>
+<p>Docker</p>
+<ul>
+<li>get relevant <code>curl</code> line from <a href="https://get.docker.com/">here</a>.
+    Note: this will figure out which version to get for your particular Linux OS</li>
+<li>run shell script (next line in the above link)</li>
+<li><code>sudo usermod -aG docker vagrant</code></li>
+<li><code>docker version</code> to test</li>
+</ul>
+<p>Docker Machine</p>
+<ul>
+<li>get the lines from <a href="https://github.com/docker/machine/releases">https://github.com/docker/machine/releases</a></li>
+</ul>
+<p>Docker Compose</p>
+<ul>
+<li>get lines for latest release <a href="https://github.com/docker/compose/releases">here</a></li>
+<li><code>sudo -i</code> then paste the lines</li>
+<li><code>docker-compse version</code> to test</li>
+</ul>
+<p><br></p>
+<h3>Pycharm</h3>
+<div class="highlight"><pre><span></span>$ wget https://download.jetbrains.com/python/pycharm-community-2018.3.4.tar.gz
+$ tar xvzf pycharm-community-2018.3.4.tar.gz
+$ <span class="nb">cd</span> pycharm-community-2018.3.4/bin
+$ . pycharm.sh
+</pre></div>
+
+
+<ul>
+<li><a href="https://stackoverflow.com/questions/42708389/how-to-set-environment-variables-in-pycharm">about setting environment variable e.g. DATA_HOME</a></li>
+</ul>
+<p><br></p>
+<h3>Jupyter (via Docker)</h3>
+<ul>
+<li><a href="https://towardsdatascience.com/how-to-setup-your-jupyterlab-project-environment-74909dade29b">How to Setup Your JupyterLab Project Environment</a></li>
+</ul>
+<p><br></p>
+<h3>GloVe for Python</h3>
+<ul>
+<li><code>-e git+git@github.com:maciejkula/glove-python.git#egg=glove</code></li>
+<li>dependencies</li>
+<li><code>pip install Cython</code></li>
+<li><code>sudo apt-get install python3-dev</code></li>
+</ul>
+<h4>RoboMongo</h4>
+<div class="highlight"><pre><span></span><span class="err">cd /opt</span>
+<span class="err">sudo wget https://download.robomongo.org/1.0.0/linux/robomongo-1.0.0-linux-x86_64-89f24ea.tar.gz</span>
+<span class="err">sudo tar -zxvf robomongo-1.0.0-linux-x86_64-89f24ea.tar.gz</span>
+<span class="err">sudo rm robomongo-1.0.0-linux-x86_64-89f24ea.tar.gz</span>
+<span class="err">robomongo</span>
+</pre></div>
+
+
+<p><br></p>
+<h4>Jena</h4>
+<div class="highlight"><pre><span></span><span class="err">wget http://mirrors.whoishostingthis.com/apache/jena/binaries/apache-jena-3.1.1.tar.gz</span>
+<span class="err">tar -zxvf</span>
+</pre></div>
+
+
+<p><br></p>
+<h4>Fuseki 2 (requires JDK 8)</h4>
+<div class="highlight"><pre><span></span><span class="err">wget http://mirrors.whoishostingthis.com/apache/jena/binaries/apache-jena-fuseki-2.4.1.tar.gz</span>
+<span class="err">tar -zxvf</span>
+<span class="err">sudo add-apt-repository ppa:webupd8team/java</span>
+<span class="err">sudo apt-get update</span>
+<span class="err">sudo apt-get install oracle-java8-installer</span>
+</pre></div>
+
+
+<p>To test fuseki server</p>
+<div class="highlight"><pre><span></span><span class="err">~/apache-jena-fuseki-2.4.1/fuseki-server --update --loc=angioexplain /angioexplain</span>
+</pre></div>
+
+
+<p>Open browser and got to <code>localhost:3030</code></p>
+<p><br></p>
+<h4>Miniconda3</h4>
+<div class="highlight"><pre><span></span><span class="err">wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</span>
+<span class="err">bash Miniconda3-latest-Linux-x86_64.sh</span>
+</pre></div>
+
+
+<h4>Misc.</h4>
+<p><code>sudo apt-get install terminator</code></p>
+<p>to view a .gv GraphViz file (will crate a pdf)</p>
+<div class="highlight"><pre><span></span><span class="err">f = Source.from_file(&#39;file-name.gv&#39;)</span>
+<span class="err">f.render()</span>
+</pre></div>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./linux software.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

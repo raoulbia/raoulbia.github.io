@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc.</title>
+    <title>code snippets etc. | Page 8</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
@@ -26,38 +26,177 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">        <h2>All articles</h2>
+        <div id="content">            <h4 class="date">Feb 20, 2018</h4>
 
+            <article class="post">
+                <h2 class="title">
+                    <a href="./rmd.html" rel="bookmark" title="Permanent Link to &quot;RMD&quot;">RMD</a>
+                </h2>
 
-        <article>
-            <header> <h2><a href="./rmd.html" rel="bookmark" title="Permalink to RMD">RMD</a></h2> </header>
-            <section><p>RMD</p></section>
-            <footer>
-                <p>Published: <time datetime="2018-02-20T00:00:00+00:00"> Tue 20 February 2018 </time></p>
-                <address>By
-                </address>
-            </footer>
-        </article>
-        <article>
-            <header> <h2><a href="./C++.html" rel="bookmark" title="Permalink to C++">C++</a></h2> </header>
-            <section><p>C++</p></section>
-            <footer>
-                <p>Published: <time datetime="2018-02-19T00:00:00+00:00"> Mon 19 February 2018 </time></p>
-                <address>By
-                </address>
-            </footer>
-        </article>
+                
+                
 
-  <nav>
-    <ul>
-        <li><a href="./index.html">&Lang;</a></li>
-        <li><a href="./index7.html">&lang;</a></li>
-      <li>Page 8 / 31</li>
-        <li><a href="./index9.html">&rang;</a></li>
-        <li><a href="./index31.html">&Rang;</a></li>
-    </ul>
-  </nav>
+                <h4>Useful Snippets</h4>
+<ul>
+<li>Footnote: <code>...some text.^[footnote]</code></li>
+</ul>
+<h4>Exploring Factor Combinations: Dual Boxplots</h4>
+<div class="highlight"><pre><span></span><code><span class="n">plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">SBA_Portion.groups</span><span class="o">:</span><span class="n">New</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">GrAppv</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">geom_boxplot</span><span class="p">(</span><span class="n">lwd</span><span class="o">=</span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="n">outlier.size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SBA Guaranteed Portion : New Business&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme</span><span class="p">(</span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">10</span><span class="p">),</span>
+<span class="w">        </span><span class="c1"># axis.ticks.y = element_blank(),</span>
+<span class="w">        </span><span class="c1"># axis.text.y = element_blank(),</span>
+<span class="w">        </span><span class="n">axis.title.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">8</span><span class="p">),</span>
+<span class="w">        </span><span class="n">axis.title.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">8</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.5</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="m">0.2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4.5</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="m">0.2</span><span class="p">)</span>
 
+<span class="n">ggrob</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplotGrob</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span>
+<span class="nf">grid.arrange</span><span class="p">(</span><span class="n">ggrob</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>Histogram w/Optimum Bin Width</h4>
+<div class="highlight"><pre><span></span><code><span class="n">binw</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nf">IQR</span><span class="p">(</span><span class="n">statistic</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">statistic</span><span class="p">)</span><span class="o">^</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span>
+
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">statistic</span><span class="p">),</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">statistic</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">geom_histogram</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">..density..</span><span class="p">),</span>
+<span class="w">                 </span><span class="n">binwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">binw</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">fill</span><span class="o">=</span><span class="s">&quot;darkred&quot;</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">colour</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">size</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">geom_density</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">..density..</span><span class="p">),</span>
+<span class="w">               </span><span class="n">size</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mean&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Density&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Distribution of sample means&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>Related Links</h4>
+<ul>
+<li><a href="https://rpubs.com/raoulbia/slr">ggplot2 examples</a></li>
+<li><a href="https://stackoverflow.com/questions/1828742/rotating-axis-labels-in-r">SO: Rotating Axis labels</a></li>
+<li><a href="https://www.xspdf.com/resolution/52805925.html">How to calculate number of bins for a histogram</a></li>
+</ul>
+<h4>R: Other Links</h4>
+<ul>
+<li><a href="https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Notebooks-with-R-Markdown">Notebooks with R Markdown</a></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./rmd.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/rmd.html" rel="tag">RMD</a>
+                </div>
+            </article>            <h4 class="date">Feb 19, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./C++.html" rel="bookmark" title="Permanent Link to &quot;C++&quot;">C++</a>
+                </h2>
+
+                
+                
+
+                <h3>Useful C++ snippets</h3>
+<h4>useful headers</h4>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;typeinfo&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span><span class="c1"> # to use fabs() to get the absolute value of a double</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Rcpp.h&gt;</span>
+<span class="n">using</span><span class="w"> </span><span class="n">namespace</span><span class="w"> </span><span class="nn">Rcpp</span><span class="w"> </span><span class="p">;</span>
+<span class="n">using</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="p">;</span>
+</code></pre></div>
+
+<h4>ensure that R Studio console prints out decimals</h4>
+<div class="highlight"><pre><span></span><code><span class="nt">cout</span><span class="p">.</span><span class="nc">precision</span><span class="o">(</span><span class="nt">4</span><span class="o">)</span><span class="w"> </span><span class="o">;</span>
+<span class="nt">cout</span><span class="p">.</span><span class="nc">setf</span><span class="o">(</span><span class="nt">std</span><span class="p">::</span><span class="nd">ios</span><span class="p">::</span><span class="nd">fixed</span><span class="o">)</span><span class="w"> </span><span class="o">;</span>
+</code></pre></div>
+
+<h4>print statement</h4>
+<div class="highlight"><pre><span></span><code><span class="nx">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;x is of type: &quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="nx">typeid</span><span class="p">(</span><span class="nx">x</span><span class="p">).</span><span class="nx">name</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="nx">std</span><span class="o">::</span><span class="nx">endl</span><span class="w"> </span><span class="p">;</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="o">/***</span><span class="w"> </span><span class="n">R</span><span class="w"> </span>
+#<span class="w"> </span><span class="n">Does</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">give</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">R</span><span class="o">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">weighted</span><span class="p">.</span><span class="nb">mean</span><span class="p">()</span><span class="w"> </span><span class="k">function</span>?
+<span class="n">all</span><span class="p">.</span><span class="n">equal</span><span class="p">(</span><span class="n">weighted_mean_cpp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">),</span><span class="w"> </span><span class="n">weighted</span><span class="p">.</span><span class="nb">mean</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">))</span>
+<span class="o">*/</span>
+</code></pre></div>
+
+<h4>Rcpp</h4>
+<ul>
+<li><a href="http://adv-r.had.co.nz/Rcpp.html">High performance functions with Rcpp</a></li>
+<li><a href="http://www.cplusplus.com/reference/stl/">STL Data Structures</a></li>
+<li><a href="http://www.cplusplus.com/reference/algorithm/">C++ <algorithm> header</a></li>
+<li><a href="http://www.cplusplus.com/reference/set/set/">Sets</a></li>
+<li><a href="https://www.boost.org/doc/">Boost C++ libraries</a></li>
+</ul>
+<h3>Rcpp, C++ and Visual Studio Code</h3>
+<ul>
+<li>Including the header Rcpp.h only works if the code is executed / compiled from RStudio</li>
+<li>Compiling a pure cpp file without Rcpp export does NOT require an Rcpp header include. If you do yo will get 
+an error: <code>Rcpp.h: No such file or directory</code>.</li>
+</ul>
+<h4><code>task.json</code></h4>
+<div class="highlight"><pre><span></span><code>{
+<span class="w">  </span>&quot;version&quot;:<span class="w"> </span>&quot;2.0.0&quot;,
+<span class="w">  </span>&quot;tasks&quot;:<span class="w"> </span>[
+<span class="w">    </span>{
+<span class="w">      </span>&quot;type&quot;:<span class="w"> </span>&quot;shell&quot;,
+<span class="w">      </span>&quot;label&quot;:<span class="w"> </span>&quot;build&quot;,
+<span class="w">      </span>&quot;command&quot;:<span class="w"> </span>&quot;g++&quot;,
+<span class="w">      </span>&quot;args&quot;:<span class="w"> </span>[
+<span class="w">        </span>&quot;./MCQ/mcq1.cpp&quot;,
+<span class="w">        </span>&quot;-o&quot;,
+<span class="w">        </span>&quot;<span class="cp">${</span><span class="n">workspaceFolderBasename</span><span class="cp">}</span>&quot;
+<span class="w">      </span>],
+<span class="w">      </span>&quot;problemMatcher&quot;:<span class="w"> </span>[]
+<span class="w">    </span>},
+<span class="w">    </span>{
+<span class="w">      </span>&quot;type&quot;:<span class="w"> </span>&quot;shell&quot;,
+<span class="w">      </span>&quot;label&quot;:<span class="w"> </span>&quot;run&quot;,
+<span class="w">      </span>&quot;command&quot;:<span class="w"> </span>&quot;./<span class="cp">${</span><span class="n">workspaceFolderBasename</span><span class="cp">}</span>&quot;,
+<span class="w">      </span>&quot;dependsOn&quot;:<span class="w"> </span>[
+<span class="w">        </span>&quot;build&quot;
+<span class="w">      </span>],
+<span class="w">      </span>&quot;problemMatcher&quot;:<span class="w"> </span>[],
+<span class="w">      </span>&quot;group&quot;:<span class="w"> </span>{
+<span class="w">        </span>&quot;kind&quot;:<span class="w"> </span>&quot;build&quot;,
+<span class="w">        </span>&quot;isDefault&quot;:<span class="w"> </span>true
+<span class="w">      </span>}
+<span class="w">    </span>}
+<span class="w">  </span>]
+}
+</code></pre></div>
+
+<h4>C++ related Help Files</h4>
+<ul>
+<li><code>?cxxfunction</code></li>
+</ul>
+<h4>Links</h4>
+<ul>
+<li><a href="http://www.cplusplus.com/reference/">C++ Reference</a></li>
+<li><a href="https://stackoverflow.com/questions/31339853/locating-downloading-header-files-r-h-and-rmath-for-c-interfacing-with-r">Locating/downloading header files R.h and Rmath for C interfacing with R</a></li>
+<li><a href="https://medium.com/techie-delight/data-structures-and-algorithms-problems-in-c-using-stl-7900a6ddb1d4">Data structures and algorithms problems in C++ using STL</a></li>
+<li><a href="https://medium.com/sisgrammers/stl-containers-in-c-a95d0b0aa45a">STL Containers in C++</a></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./C++.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/c.html" rel="tag">C++</a>
+                </div>
+            </article>
+
+                <div class="clear"></div>
+                <div class="pages">
+
+                    <a href="./index7.html" class="prev_page">&larr;&nbsp;Previous</a>
+
+                    <a href="./index9.html" class="next_page">Next&nbsp;&rarr;</a>
+
+                    <span>Page 8 of 31</span>
+                </div>
 
             <div class="clear"></div>
             <footer>

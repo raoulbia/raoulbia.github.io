@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-      <meta charset="utf-8" />
+        <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. - Pandas Regular Expressions</title>
+    <title>code snippets etc. | Pandas Regular Expressions</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
@@ -12,10 +12,6 @@
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-
-
-
-
 
 </head>
 <body>
@@ -31,14 +27,17 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">  <article>
-    <header>
-      <h2>
-        <a href="./pandas_regexp.html" rel="bookmark"
-           title="Permalink to Pandas Regular Expressions">Pandas Regular Expressions</a></h2>
-      
-    </header>
-    <h4>Extract Substring</h4>
+        <div id="content">            <h4 class="date">Jan 27, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./pandas_regexp.html" rel="bookmark" title="Permanent Link to &quot;Pandas Regular Expressions&quot;">Pandas Regular Expressions</a>
+                </h2>
+
+                
+                
+
+                <h4>Extract Substring</h4>
 <div class="highlight"><pre><span></span><code># obtain Title from name (Mr, Mrs, Miss etc) by extracting up to but excluding the first dot (.)
 df[&#39;Title&#39;] = df.Name.str.extract(&#39; ([A-Za-z]+)\.&#39;, expand=False)
 </code></pre></div>
@@ -54,16 +53,13 @@ df[&#39;Title&#39;] = df.Name.str.extract(&#39; ([A-Za-z]+)\.&#39;, expand=False
 <span class="n">tmp</span><span class="o">[</span><span class="n">&quot;category_high_level&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="k">select</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span><span class="w"> </span><span class="n">choices</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="o">=</span><span class="n">tmp</span><span class="p">.</span><span class="n">category</span><span class="p">)</span>
 <span class="n">tmp</span><span class="p">.</span><span class="n">stb</span><span class="p">.</span><span class="n">freq</span><span class="p">(</span><span class="o">[</span><span class="n">&#39;category_high_level&#39;</span><span class="o">]</span><span class="p">).</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;category_high_level&#39;</span><span class="p">)</span>
 </code></pre></div>
-    <footer>
-      <p>Published: <time datetime="2018-01-27T00:00:00+00:00">
-        Sat 27 January 2018
-      </time></p>
-        <p>
-          Category: <a href="./category/python.html">Python</a>
-        </p>
-    </footer>
-  </article>
+                <div class="clear"></div>
 
+                <div class="info">
+                    <a href="./pandas_regexp.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                </div>
+            </article>
             <div class="clear"></div>
             <footer>
                 <p>

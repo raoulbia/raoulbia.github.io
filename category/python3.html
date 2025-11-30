@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. - Python category</title>
+    <title>code snippets etc. | articles in the "Python" category | Page 3</title>
     <link rel="shortcut icon" type="image/png" href="../favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
     <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
@@ -17,6 +17,8 @@
     <header>
         <nav>
             <ul>
+
+                <li class="ephemeral selected"><a href="../category/python3.html">Python</a></li>
                 <li><a href="../">Home</a></li>
                 <li><a href="../archives">Archives</a></li>
             </ul>
@@ -26,38 +28,137 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">    <h2>Articles in the Python category</h2>
+        <div id="content">            <h4 class="date">Jan 06, 2018</h4>
 
+            <article class="post">
+                <h2 class="title">
+                    <a href="../Matplotlib.html" rel="bookmark" title="Permanent Link to &quot;Matplotlib&quot;">Matplotlib</a>
+                </h2>
 
-        <article>
-            <header> <h2><a href="../Matplotlib.html" rel="bookmark" title="Permalink to Matplotlib">Matplotlib</a></h2> </header>
-            <section><p>Matplotlib</p></section>
-            <footer>
-                <p>Published: <time datetime="2018-01-06T00:00:00+00:00"> Sat 06 January 2018 </time></p>
-                <address>By
-                </address>
-            </footer>
-        </article>
-        <article>
-            <header> <h2><a href="../jupyter.html" rel="bookmark" title="Permalink to Jupyter">Jupyter</a></h2> </header>
-            <section><p>Jupyter Notebooks</p></section>
-            <footer>
-                <p>Published: <time datetime="2018-01-05T00:00:00+00:00"> Fri 05 January 2018 </time></p>
-                <address>By
-                </address>
-            </footer>
-        </article>
+                
+                
 
-  <nav>
-    <ul>
-        <li><a href="../category/python.html">&Lang;</a></li>
-        <li><a href="../category/python2.html">&lang;</a></li>
-      <li>Page 3 / 5</li>
-        <li><a href="../category/python4.html">&rang;</a></li>
-        <li><a href="../category/python5.html">&Rang;</a></li>
-    </ul>
-  </nav>
+                <p><br> </p>
+<h4>Useful Links</h4>
+<ul>
+<li><a href="https://www.practicaldatascience.org/html/plotting_part2.html">Plotting with plotnine</a></li>
+<li><a href="https://towardsdatascience.com/advanced-histogram-using-python-bceae288e715">Advanced Histogram Using Python</a></li>
+<li><a href="https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149">A Comprehensive Guide to the Grammar of Graphics for Effective Visualization of Multi-dimensional Data</a></li>
+<li><a href="https://towardsdatascience.com/annotating-bar-charts-and-other-matplolib-techniques-cecb54315015">How to Enhance your Matplotlib Plots</a></li>
+<li><a href="https://towardsdatascience.com/visualizing-statistical-plots-with-seaborn-6b6e60ce5e71">Visualizing statistical plots with Seaborn</a></li>
+<li><a href="https://www.drawingfromdata.com/setting-figure-size-using-seaborn-and-matplotlib">DRAWING FROM DATA</a></li>
+<li><a href="https://docs.scipy.org/doc/numpy-1.13.0/reference/routines.polynomials.classes.html">example dynamic label</a></li>
+</ul>
+<h4>Examples</h4>
+<div class="highlight"><pre><span></span><code><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="s2">&quot;paper&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="s2">&quot;monospace&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
 
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Title&#39;</span><span class="p">);</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">freq_descr</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">freq_descr</span><span class="o">.</span><span class="n">cnt</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">))</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+</code></pre></div>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../Matplotlib.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/python.html" rel="tag">Python</a>
+                </div>
+            </article>            <h4 class="date">Jan 05, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../jupyter.html" rel="bookmark" title="Permanent Link to &quot;Jupyter&quot;">Jupyter</a>
+                </h2>
+
+                
+                
+
+                <p><br> </p>
+<h4>Installing Jupyterlab and IPywidgets</h4>
+<div class="highlight"><pre><span></span><code><span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">jupyterlab</span> <span class="n">ipywidgets</span> <span class="n">tqdm</span>
+<span class="n">jupyter</span> <span class="n">labextension</span> <span class="n">install</span> <span class="nv">@jupyter</span><span class="n">-widgets</span><span class="p">/</span><span class="n">jupyterlab-manager</span>
+</code></pre></div>
+
+<h4>Testing IPywidgets</h4>
+<p>try this in a notebook:</p>
+<div class="highlight"><pre><span></span><code><span class="n">import</span> <span class="n">ipywidgets</span> <span class="n">as</span> <span class="n">widgets</span>
+<span class="n">widgets</span><span class="p">.</span><span class="n">IntSlider</span><span class="p">()</span>
+</code></pre></div>
+
+<h4>Making env available in notebook</h4>
+<ul>
+<li><code>python -m ipykernel install --user --name=myEnv</code></li>
+<li><code>jupyter nbextension enable --py widgetsnbextension</code></li>
+<li><code>jupyter labextension list</code></li>
+<li>to launch: <code>jupyter-lab</code></li>
+</ul>
+<h4>Installing Other Extensions (TOC, Plotly)</h4>
+<div class="highlight"><pre><span></span><code><span class="n">jupyter</span><span class="w"> </span><span class="n">labextension</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="nv">@jupyterlab</span><span class="o">/</span><span class="n">toc</span>
+<span class="n">jupyter</span><span class="w"> </span><span class="n">labextension</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="nv">@jupyterlab</span><span class="o">/</span><span class="n">plotly</span><span class="o">-</span><span class="n">extension</span>
+</code></pre></div>
+
+<p>for plotly see <a href="https://stackoverflow.com/questions/54936125/plotly-gives-an-empty-field-as-output-in-jupyter-lab">here</a> for more.</p>
+<h4>Import notebook into another</h4>
+<div class="highlight"><pre><span></span><code><span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">jupyter</span><span class="o">-</span><span class="n">helpers</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">create_gtfs_feed</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">Feed</span><span class="w"> </span><span class="n">where</span><span class="w"> </span><span class="n">create_gtfs_feed</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">notebook</span>
+</code></pre></div>
+
+<h4>Share variables / objects across notebooks</h4>
+<div class="highlight"><pre><span></span><code><span class="nf">%store</span><span class="w"> </span><span class="n">G</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">store</span>
+<span class="nf">%store</span><span class="w"> </span><span class="o">-</span><span class="n">r</span><span class="w"> </span><span class="n">G</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">load</span>
+</code></pre></div>
+
+<h4>Dill (similar to Pickle)</h4>
+<div class="highlight"><pre><span></span><code># Dump graph
+with open(&quot;multigraph.p&quot;, &#39;wb&#39;) as f:
+    dill.dump(G, f)
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># Load graph</span>
+<span class="n">with</span><span class="w"> </span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;multigraph.p&quot;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;rb&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">f</span><span class="p">:</span><span class="w">  </span><span class="c1"># notice the r instead of w</span>
+<span class="w">    </span><span class="n">G</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dill</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>Converting Notebook to PDF or HTML</h4>
+<p>Pre-requisites:</p>
+<p><code>sudo apt-get install texlive texlive-xetex texlive-latex-extra texlive-generic-extra pandoc</code></p>
+<p>Conversion:</p>
+<p><code>jupyter nbconvert --to html features_applied.ipynb --TemplateExporter.exclude_input=True</code></p>
+<h4>Alerts</h4>
+<div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;alert alert-block alert-info&quot;</span><span class="o">&gt;</span>
+<span class="k">case</span> <span class="n">insensitive</span> <span class="n">regexp</span> <span class="ow">in</span> <span class="nb">str</span><span class="o">.</span><span class="n">contains</span><span class="p">()</span>
+<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+</code></pre></div>
+
+<h4>Useful Links</h4>
+<ul>
+<li><a href="https://towardsdatascience.com/integrate-jupyterlab-with-google-drive-98d13e340c63">Integrate JupyterLab with Google Drive</a></li>
+<li><a href="https://towardsdatascience.com/how-to-setup-your-jupyterlab-project-environment-74909dade29b">How to Setup Your JupyterLab Project Environment</a></li>
+<li><a href="https://towardsdatascience.com/interactive-controls-for-jupyter-notebooks-f5c94829aee6">Interactive Controls in Jupyter Notebooks</a></li>
+<li><a href="https://www.youtube.com/watch?v=a9P7qv4P5LE">Changing JupyterLab to suit your needs</a></li>
+<li><a href="http://localhost:8888/tree#nbextensions_configurator">localhost:8888/tree#nbextensions_configurator</a></li>
+<li><a href="https://hackersandslackers.com/running-jupyter-notebooks-on-a-ubuntu-server/">Running Jupyter Notebooks on a Ubuntu Server</a></li>
+<li><a href="https://stackoverflow.com/questions/38545198/access-jupyter-notebook-running-on-vm">access jupyter notebook running on vm</a></li>
+<li><a href="https://stackoverflow.com/questions/47597515/cant-access-jupyter-notebook-in-local-vagrant-virtualbox-via-local-browser">Can't access jupyter notebook in local vagrant virtualbox via local browser</a></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../jupyter.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/python.html" rel="tag">Python</a>
+                </div>
+            </article>
+
+                <div class="clear"></div>
+                <div class="pages">
+
+                    <a href="../category/python2.html" class="prev_page">&larr;&nbsp;Previous</a>
+
+                    <a href="../category/python4.html" class="next_page">Next&nbsp;&rarr;</a>
+
+                    <span>Page 3 of 5</span>
+                </div>
 
             <div class="clear"></div>
             <footer>

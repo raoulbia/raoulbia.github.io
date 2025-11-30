@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc.</title>
+    <title>code snippets etc. | Page 24</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
@@ -26,38 +26,100 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">        <h2>All articles</h2>
+        <div id="content">            <h4 class="date">Oct 02, 2017</h4>
 
+            <article class="post">
+                <h2 class="title">
+                    <a href="./Algorithms.html" rel="bookmark" title="Permanent Link to &quot;Algorithms&quot;">Algorithms</a>
+                </h2>
 
-        <article>
-            <header> <h2><a href="./Algorithms.html" rel="bookmark" title="Permalink to Algorithms">Algorithms</a></h2> </header>
-            <section><p>Some notes about Algorithms</p></section>
-            <footer>
-                <p>Published: <time datetime="2017-10-02T00:00:00+01:00"> Mon 02 October 2017 </time></p>
-                <address>By
-                </address>
-            </footer>
-        </article>
-        <article>
-            <header> <h2><a href="./linear_algebra.html" rel="bookmark" title="Permalink to Linear Algebra">Linear Algebra</a></h2> </header>
-            <section><p>Some notes about Linear Algebra</p></section>
-            <footer>
-                <p>Published: <time datetime="2017-10-01T00:00:00+01:00"> Sun 01 October 2017 </time></p>
-                <address>By
-                </address>
-            </footer>
-        </article>
+                
+                
 
-  <nav>
-    <ul>
-        <li><a href="./index.html">&Lang;</a></li>
-        <li><a href="./index23.html">&lang;</a></li>
-      <li>Page 24 / 31</li>
-        <li><a href="./index25.html">&rang;</a></li>
-        <li><a href="./index31.html">&Rang;</a></li>
-    </ul>
-  </nav>
+                <p>On this page I keep some notes abbout Algorithms. It's work in progress and all might not be 
+accurate. I will improve this page as my grasp of the key differences between the core algorithm 
+families improves. </p>
+<p><strong>Introduction</strong></p>
+<p>Many graph-based problems are of the non-deterministic polynomial time (NP) problem family.<br>
+Specifically this means that graph-based problems can often not be solved efficiently w.r.t. time and 
+space. For example, consider that the optimal solution for a given graph-based problem involves 
+visiting all nodes and vertices in the graph. Such an exhaustive search is unfeasible with large 
+graphs consisting of millions of nodes and vertices.</p>
+<p><strong>Algorithms</strong></p>
+<p>There are several alternative strategies to deal with NP problems that avoid the limitations of 
+exhaustive search. These strategies do not, in general, find optimal solutions, but can find solutions 
+that are reasonably close to being optimal. Such strategies include </p>
+<ul>
+<li>greedy algorithms</li>
+<li>heuristic algorithms </li>
+<li>approximation algorithms</li>
+<li>randomized algorithms </li>
+</ul>
+<p>The idea of greedy algorithm is to solve a problem by making a “locally optimal choice at each stage
+with the hope of finding a global optimum ”. </p>
+<p>Heuristic algorithm try to solve a problem by “proceeding to a solution by trial and error or by 
+rules that are only loosely defined ”. </p>
+<p>The lines between greedy and heuristic algorithms are often blurred and many algorithms exhibit 
+characteristics of both. </p>
+<p>Approximation algorithms are essentially heuristic algorithms with a provable guarantee on the 
+quality of the obtained near-optimal solution.</p>
+<p>Randomized algorithms may be nonintuitive because they lack the control of traditional algorithms.
+Some randomized algorithms are <em>Las Vegas algorithms</em>, which deliver solutions that are guaranteed 
+to be exact, despite the fact that they rely on making random decisions. Yet most randomized 
+algorithms are <em>Monte Carlo algorithms</em>. These algorithms are not guaranteed to return exact solutions,
+but they do quickly find approximate solutions. Because of their speed, they can be run many times, 
+allowing us to choose the best approximation from thousands of runs.</p>
+                <div class="clear"></div>
 
+                <div class="info">
+                    <a href="./Algorithms.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/algorithms.html" rel="tag">Algorithms</a>
+                </div>
+            </article>            <h4 class="date">Oct 01, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./linear_algebra.html" rel="bookmark" title="Permanent Link to &quot;Linear Algebra&quot;">Linear Algebra</a>
+                </h2>
+
+                
+                
+
+                <p>On this page I keep some notes abbout GloVe and word2vec word embeddings. It's work in progress...</p>
+<h4>Matrix Factorization</h4>
+<ul>
+<li>refers to decomposing matrices into their constituent parts</li>
+<li>makes it easier to calculate more complex matrix operations</li>
+<li>A common analogy for matrix decomposition is the factoring of numbers, such as the factoring of 10 into 2 x 5. 
+  For this reason, matrix decomposition is also called matrix factorization. Like factoring real values, there are many 
+  ways to decompose a matrix, hence there are a range of different matrix decomposition techniques.</li>
+<li>Matrix factorization methods such as Latent Semantic Analysis (LSA) use low-rank approximations to decompose large 
+  matrices capturing statistical information about a corpus. 
+  (<a href="">source</a>https://blog.acolyer.org/2016/04/22/glove-global-vectors-for-word-representation/)</li>
+<li>Common methods: QR, SVD, LU (see Resources below)</li>
+</ul>
+<h4>Resources</h4>
+<ul>
+<li><a href="https://machinelearningmastery.com/introduction-to-matrix-decompositions-for-machine-learning/">A Gentle Introduction to Matrix Factorization for Machine Learning</a></li>
+<li><a href="https://stepik.org/lesson/8513/step/1?unit=1609">Linear Algebra: Problems and Methods (Stepik)</a></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./linear_algebra.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linear-algebra.html" rel="tag">Linear Algebra</a>
+                </div>
+            </article>
+
+                <div class="clear"></div>
+                <div class="pages">
+
+                    <a href="./index23.html" class="prev_page">&larr;&nbsp;Previous</a>
+
+                    <a href="./index25.html" class="next_page">Next&nbsp;&rarr;</a>
+
+                    <span>Page 24 of 31</span>
+                </div>
 
             <div class="clear"></div>
             <footer>
