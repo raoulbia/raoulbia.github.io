@@ -3,15 +3,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code repo | articles in the "SPARQL" category</title>
+    <title>code snippets etc. | articles in the "SPARQL" category</title>
     <link rel="shortcut icon" type="image/png" href="../favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
-    <link rel="stylesheet" href="../theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../theme/css/print.css" type="text/css" media="print" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
-    <meta name="author" content="raoulbia" />
+    <meta name="author" content="" />
 </head>
 <body>
     <header>
@@ -20,19 +19,15 @@
 
                 <li class="ephemeral selected"><a href="../category/sparql.html">SPARQL</a></li>
                 <li><a href="../">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
-                <li><a href="https://stackoverflow.com/users/425727/raoulbia">StackOverflow</a></li>
-                <li><a href="../tags">Tags</a></li>
-                <li><a href="../categories">Categories</a></li>
                 <li><a href="../archives">Archives</a></li>
             </ul>
         </nav>
         <div class="header_box">
-            <h1><a href="../">code repo</a></h1>
+            <h1><a href="../">code snippets etc.</a></h1>
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 02, 2017</h4>
+        <div id="content">            <h4 class="date">Aug 05, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -45,8 +40,8 @@
                 <p>A collection of <a href="https://en.wikipedia.org/wiki/SPARQL">SPARQL queries</a> I found useful.</p>
 <p>Note that the queries are use case-specific but they should be easy to generalize. Do ignore the fact that lines are
 commented out. In the original setting I used this approach to quickly select the one or other query.</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">SPARQLWrapper</span> <span class="kn">import</span> <span class="n">SPARQLWrapper</span><span class="p">,</span> <span class="n">JSON</span>
-<span class="n">sparql</span> <span class="o">=</span> <span class="n">SPARQLWrapper</span><span class="p">(</span><span class="s2">&quot;http://localhost:3030/angioexplain3/query&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">SPARQLWrapper</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">SPARQLWrapper</span><span class="p">,</span><span class="w"> </span><span class="n">JSON</span>
+<span class="n">sparql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SPARQLWrapper</span><span class="p">(</span><span class="s2">&quot;http://localhost:3030/angioexplain3/query&quot;</span><span class="p">)</span>
 <span class="n">sparql</span><span class="o">.</span><span class="n">setQuery</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 
 <span class="s2">                    ### Check for reflexive triples in the quads ############################</span>
@@ -267,7 +262,7 @@ commented out. In the original setting I used this approach to quickly select th
 
 
 <span class="n">sparql</span><span class="o">.</span><span class="n">setReturnFormat</span><span class="p">(</span><span class="n">JSON</span><span class="p">)</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">sparql</span><span class="o">.</span><span class="n">query</span><span class="p">()</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span> <span class="c1"># is a Dict.</span>
+<span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sparql</span><span class="o">.</span><span class="n">query</span><span class="p">()</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span><span class="w"> </span><span class="c1"># is a Dict.</span>
 
 <span class="c1"># print(results)</span>
 <span class="c1"># print(len(results[&quot;results&quot;][&quot;bindings&quot;]))</span>
@@ -276,40 +271,37 @@ commented out. In the original setting I used this approach to quickly select th
 
 <span class="c1"># establish the type of out pput we get from the query e.g. [&#39;res&#39;, &#39;cnt&#39;]</span>
 <span class="c1"># this is used to shape the if/else statements below</span>
-<span class="nb">vars</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">listOfVars</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;head&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">listOfVars</span><span class="p">:</span>
-        <span class="nb">vars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span>
+<span class="nb">vars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="k">for</span><span class="w"> </span><span class="n">listOfVars</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;head&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="n">listOfVars</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">vars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">]))</span>
-    <span class="k">elif</span> <span class="nb">vars</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;.1&quot;</span><span class="p">]:</span>
-            <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="c1"># print results without prefix</span>
-            <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="c1"># print simple count</span>
-            <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
+<span class="w">                </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nb">vars</span><span class="p">]))</span>
+<span class="w">    </span><span class="k">elif</span><span class="w"> </span><span class="nb">vars</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;.1&quot;</span><span class="p">]:</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
+<span class="w">                </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+<span class="w">    </span><span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="k">try</span><span class="p">:</span>
+<span class="w">            </span><span class="c1"># print results without prefix</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
+<span class="w">                </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+<span class="w">        </span><span class="k">except</span><span class="p">:</span>
+<span class="w">            </span><span class="c1"># print simple count</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">][</span><span class="s2">&quot;bindings&quot;</span><span class="p">]:</span>
+<span class="w">                </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
 <span class="k">except</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;no data found for query&quot;</span><span class="p">)</span>
-</pre></div>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;no data found for query&quot;</span><span class="p">)</span>
+</code></pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="../SPARQL.html">posted at 10:20</a>
+                    <a href="../SPARQL.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="../category/sparql.html" rel="tag">SPARQL</a>
-                    &nbsp;&middot;
-                    &nbsp;<a href="../tag/sparql.html" class="tags">SPARQL</a>
                 </div>
-		<a href="../SPARQL.html#disqus_thread">Click to read and post comments</a>
             </article>
 
             <div class="clear"></div>
