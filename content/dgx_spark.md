@@ -26,7 +26,9 @@ Summary: DGX Spark Misc.
   | Temp     | 68°C  | Normal                 |
   | Power    | 56W   | Moderate               |
 
-  Speed factors (not learning rate):
+ <br>
+ 
+ ### Speed factors (not learning rate):
 
   | Parameter         | Current    | Could Speed Up?                      |
   |-------------------|------------|--------------------------------------|
