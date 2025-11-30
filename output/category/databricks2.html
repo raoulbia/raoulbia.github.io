@@ -19,7 +19,6 @@
 
                 <li class="ephemeral selected"><a href="../category/databricks2.html">Databricks</a></li>
                 <li><a href="../">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="../archives">Archives</a></li>
             </ul>
         </nav>
@@ -39,12 +38,11 @@
                 
 
                 <h4>Pandas to Spark</h4>
-<div class="highlight"><pre><span></span>df_spark = spark.createDataFrame(df_pandas)
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>df_spark = spark.createDataFrame(df_pandas)
+</code></pre></div>
 
 <h4>Pandas to Spark with Schema</h4>
-<div class="highlight"><pre><span></span><span class="c1"># create schema for your dataframe</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># create schema for your dataframe</span>
 <span class="n">schema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">([</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;CONTRACT_ID&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span> \
                     <span class="p">,</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;CONTRACT_NAME&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span> \
                     <span class="p">,</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;ACCOUNT&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span> \
@@ -53,43 +51,37 @@
 
 <span class="c1"># Convert Pandas DataFrame to Spark DataFrame</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">pandas_df</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <h4>Create temp View</h4>
-<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s2">&quot;tmp_vw&quot;</span><span class="p">)</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s2">&quot;tmp_vw&quot;</span><span class="p">)</span>
+</code></pre></div>
 
 <h4>Pandas to Spark to Table</h4>
-<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">StringType</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">StringType</span><span class="p">())</span>
  <span class="o">.</span><span class="n">write</span>
  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span>
  <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span>
  <span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="s2">&quot;schema_name.table_name&quot;</span><span class="p">))</span>
-</pre></div>
-
+</code></pre></div>
 
 <h4>Read CSV File</h4>
-<div class="highlight"><pre><span></span><span class="n">fpath</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;/mnt/userspace/custom_dataset/path-to-file/filename.csv&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">fpath</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;/mnt/userspace/custom_dataset/path-to-file/filename.csv&quot;&quot;&quot;</span>
 <span class="err">`</span><span class="n">df</span> <span class="o">=</span> <span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;header&#39;</span><span class="p">,</span> <span class="s1">&#39;true&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fpath</span><span class="p">))</span><span class="err">`</span>
-</pre></div>
-
+</code></pre></div>
 
 <h4>Read Parquet File</h4>
-<div class="highlight"><pre><span></span><span class="n">fpath</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;/mnt/userspace/custom_dataset/path-to-file/filename.parquet&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">fpath</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;/mnt/userspace/custom_dataset/path-to-file/filename.parquet&quot;&quot;&quot;</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;parquet&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <h4>Create Table from CSV File</h4>
-<div class="highlight"><pre><span></span><span class="n">DROP</span> <span class="n">TABLE</span> <span class="n">IF</span> <span class="n">EXISTS</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span> <span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="n">DROP</span> <span class="n">TABLE</span> <span class="n">IF</span> <span class="n">EXISTS</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span> <span class="p">;</span>
 <span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span>
 <span class="n">USING</span> <span class="n">csv</span>
 <span class="n">LOCATION</span> <span class="s2">&quot;/mnt/userspace/custom_dataset/bboggava/outbound_data/MACTOOLS/mac_config.csv&quot;</span>
 <span class="n">OPTIONS</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inferSchema</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <h4>Subsetting DataFrame</h4>
 <ul>
@@ -97,17 +89,15 @@
 <li>Pandas DataFrame: <code>df[df.GPI_NO == '12345'].sort_values(by='DAY_SPLY', ascending=False)</code></li>
 </ul>
 <h4>Misc.</h4>
-<div class="highlight"><pre><span></span><span class="n">SHOW</span> <span class="n">COLUMNS</span> <span class="n">IN</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">SHOW</span> <span class="n">COLUMNS</span> <span class="n">IN</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span><span class="n">DESCRIBE</span> <span class="n">TABLE</span> <span class="n">EXTENDED</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">DESCRIBE</span> <span class="n">TABLE</span> <span class="n">EXTENDED</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span>
+</code></pre></div>
 
 <p>Only for tables, NOT views:</p>
-<div class="highlight"><pre><span></span><span class="n">DESCRIBE</span> <span class="n">DETAIL</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span><span class="err">`</span> 
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">DESCRIBE</span> <span class="n">DETAIL</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span><span class="err">`</span> 
+</code></pre></div>
                 <div class="clear"></div>
 
                 <div class="info">

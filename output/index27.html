@@ -17,7 +17,6 @@
         <nav>
             <ul>
                 <li><a href="./">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
@@ -26,127 +25,114 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Apr 25, 2017</h4>
+        <div id="content">            <h4 class="date">Aug 04, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./public_transport.html" rel="bookmark" title="Permanent Link to &quot;Public Transport&quot;">Public Transport</a>
+                    <a href="./python, rdflib.html" rel="bookmark" title="Permanent Link to &quot;RDFLib Graph Object&quot;">RDFLib Graph Object</a>
                 </h2>
 
                 
                 
 
-                <h3>Glossary</h3>
+                <p>On this page I keep snippets of code I have found useful when working with the
+<a href="https://rdflib.readthedocs.io/en/stable/">RDFLib library</a>. Specifically, the code snippets show how to</p>
 <ul>
-<li>
-<p>KML: Keyhole Markup Language is a file format used to display geographic data in an Earth browser such as Google Earth.</p>
-</li>
-<li>
-<p>NaPTAN: acronym for National Public Transport Access Nodes, is a national database that contains a unique entry for each point of access to public transport: railway stations, bus stops, airports, ferry terminals, coach terminus, taxi ranks, and so on. In short, it's an index of every place where a passenger can join or leave public transport.
- <a href="https://dftdigital.blog.gov.uk/2020/07/06/naptan-the-most-popular-dataset-youve-never-heard-of/">source</a></p>
-</li>
-<li>
-<p>A standard for identifying and naming access points to public transport</p>
-</li>
-<li>A database of all the access points in the UK.</li>
-<li>An XML Schema for exchanging stop data as XML documents describing the content. All or part of the database may be exchanged in this format.</li>
-<li>
-<p>An exchange format for exchanging stop data as csv files</p>
-</li>
-<li>
-<p>NeTEx: Network Timetable Exchange</p>
-</li>
-<li>
-<p>Gazeteer: a geographical index or dictionary.</p>
-</li>
+<li>load a triple (.n3) or quad (.nq) file RDFLib graph object</li>
+<li>read from an RDFLib graph object</li>
 </ul>
+<h5>Loading a triple/quad file into an RDFLib object</h5>
+<div class="highlight"><pre><span></span><code><span class="n">g</span> <span class="o">=</span> <span class="n">rdflib</span><span class="o">.</span><span class="n">ConjunctiveGraph</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">input_kg_dir_path</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">f_extension</span><span class="p">)):</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_kg_dir_path</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+        <span class="c1"># read each kg file and build a graph</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;reading </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">rdflib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">guess_format</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">g</span>
+</code></pre></div>
+
+<h5>Reading an RDFLib graph object</h5>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entity_list</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">entity_list</span><span class="p">)</span>
+    <span class="n">query_results</span> <span class="o">=</span> <span class="n">angio_kg</span><span class="o">.</span><span class="n">query</span><span class="p">(</span> <span class="c1"># is an rdflib conjunctive raph object which has a parse method</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;SELECT DISTINCT ?g</span>
+<span class="sd">        {GRAPH ?g {</span>
+<span class="sd">              {&lt;%s&gt; ?p ?o}</span>
+<span class="sd">              UNION {?s ?p &lt;%s&gt;}</span>
+<span class="sd">         }}&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">entity</span><span class="p">))</span>
+</code></pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./public_transport.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/public-transport.html" rel="tag">Public Transport</a>
+                    <a href="./python, rdflib.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
                 </div>
-            </article>            <h4 class="date">Apr 24, 2017</h4>
+            </article>            <h4 class="date">Jul 02, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./public_transport_data.html" rel="bookmark" title="Permanent Link to &quot;Public Transport Data&quot;">Public Transport Data</a>
+                    <a href="./graph_problems.html" rel="bookmark" title="Permanent Link to &quot;Graph Problems&quot;">Graph Problems</a>
                 </h2>
 
                 
                 
 
-                <p><a href="https://gtfs.org/reference/static/#field-definitions">GTFS Field Definitions</a></p>
-<p><a href="http://transitfeeds.com/p/transport-for-ireland">Transit Feeds Transport for Ireland</a></p>
-<p><a href="https://data.smartdublin.ie/dataset?category=Transport+and+Infrastructure">Dublinked Transport and Infrastructure</a></p>
-<h2>TransitFeed</h2>
-<p><a href="https://github.com/google/transitfeed">github.com/google/transitfeed</a></p>
-<h3>Feed Validator</h3>
-<p><a href="https://github.com/google/transitfeed/wiki/FeedValidator">/wiki/FeedValidator</a></p>
-<p><code>python feedvalidator.py dublin_bus_gtfs.zip</code></p>
-<p>Note: Written for Python 2. Make sure to create conda env with pyton 2.7!</p>
-<h3>Schedule Viewer (Map)</h3>
-<p><code>python schedule_viewer.py --feed_filename dublin_bus_gtfs.zip</code></p>
-<p>then go to <code>http://localhost:8765/</code></p>
-<p>Notes: </p>
+                <h4>Vertex Cover</h4>
 <ul>
-<li>add API key to <code>/home/user/shared/transitfeed/gtfsscheduleviewer/files/index.html</code></li>
-<li>and to <code>/home/user/shared/transitfeed/schedule_viewer.py</code> (TBC if this can be dropped)</li>
-<li>restrict API key - see <a href="https://stackoverflow.com/questions/46560859/expiredkeymaperror-on-newly-generated-api-key">this SO post</a></li>
+<li>A vertex cover is a <strong>subset of the vertices</strong> such that
+each edge in the graph is incident to at least one vertex in
+the subset. </li>
 </ul>
-<h2>GTFS Ready Set Go</h2>
-<p><a href="https://github.com/ondata/gtfsreadysetgo">github.com/ondata/gtfsreadysetgo</a></p>
-<p><a href="https://medium.com/tantotanto/gtfs-pronti-partenza-via-23aa4a42c48e">GTFS, pronti, partenza, via …</a></p>
-<p><code>GTFS ready, set, go</code> is a <strong>bash script</strong> to </p>
+<p><img alt="" src="img/vertex-cover.png"></p>
 <ul>
-<li>download a GTFS file, and </li>
-<li>convert it to a spatialite file (stops and the routes tables)</li>
-<li>create report about the GTFS data</li>
-<li>export the stops and the routes tables in GeoJSON and KML formats</li>
+<li>The Minimum Vertex Cover problem seeks to
+find a cover with a <strong>minimum number of vertices in the
+subset</strong>.</li>
 </ul>
-<p>The files produced by this script can be imported int QGIS.</p>
-<h2>GTFS Real Time (upcoming)</h2>
-<p><a href="https://gtfs.org/reference/realtime/v2/">GTFS Realtime Reference v2</a></p>
-<p><a href="https://github.com/seanrees/gtfs-upcoming">github.com/seanrees/gtfs-upcoming</a></p>
-<div class="highlight"><pre><span></span>sudo kill -9 `sudo lsof -t -i:6824`
-python main.py --config=config.ini --env=prod --port=6824 --promport=800
-http://127.0.0.1:6824/upcoming.json
-</pre></div>
+<p><img alt="" src="img/min-vertex-cover.png"></p>
+<p><br></p>
+<ul>
+<li>
+<p>Approximation Algorithm</p>
+<div class="highlight"><pre><span></span><code><span class="n">C</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">empty</span><span class="w"> </span><span class="n">set</span>
+<span class="n">While</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">empty</span>
+<span class="w">    </span><span class="p">{</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">}</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="n">edge</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">E</span>
+<span class="w">    </span><span class="n">add</span><span class="w"> </span><span class="p">{</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">}</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">C</span>
+<span class="w">    </span><span class="n">remove</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">edges</span><span class="w"> </span><span class="n">incident</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">u</span><span class="p">,</span><span class="n">v</span>
+<span class="n">return</span><span class="w"> </span><span class="n">C</span>
+</code></pre></div>
 
-
-<p>Notes:</p>
-<ul>
-<li><a href="https://developer.nationaltransport.ie/">NTA API Developer Portal</a></li>
-<li>add API keys to <code>/home/user/shared/gtfs-upcoming/config.ini</code></li>
+</li>
+<li>
+<p><a href="https://nbviewer.jupyter.org/github/raoulbia/jupyter-notebooks/blob/master/vertex_cover_linear-programming_and_approximation-algorithm.ipynb?flush_cache=true" title="target=&quot;_blank">Solving Vertex Cover with Linear Programming and with Approximation Algorithm</a></p>
+</li>
 </ul>
-<h2>GTFSDB</h2>
-<p><a href="https://github.com/OpenTransitTools/gtfsdb">github.com/OpenTransitTools/gtfsdb</a></p>
-<p><code>bin/gtfsdb-load --database_url postgresql://postgres:user@localhost:5432 dublin_bus_gtfs.zip</code></p>
-<p>Notes:</p>
+<p><br></p>
+<h4>Max Cut</h4>
 <ul>
-<li>Must git clone inside root directory of VM (not the shared directory!)</li>
-<li>requirements: geoalchemy2, psycopg2, SQLAlchemy, zc.recipe.egg</li>
-<li><a href="https://github.com/OpenTransitTools/gtfsdb#install-and-use-via-the-gtfsdb-source-tree">installation with buildout</a></li>
-<li>the database url must contain <code>username:password</code> e.g. <code>postgres:user</code></li>
-<li>the port number can be found using <code>grep -H '^port' /etc/postgresql/*/main/postgresql.conf</code></li>
+<li>
+<p>Partition set of vertices into two sets such that the number of edges between the two sets
+(considered to be severed by the cut), is a large as possible. </p>
+</li>
+<li>
+<p>In the example below vertices 2 and 3 are in one set and
+vertices 1, 4, and 5 are in the other, with a maximum cut value of 5. </p>
+</li>
 </ul>
-<h2>GeoJson</h2>
+<p><img alt="" src="img/max-cut.png"></p>
+<h4>Travelling Salesman problem</h4>
 <ul>
-<li>uses [long, lat]</li>
-</ul>
-<h2></h2>
-<h2>Others (to be reviewed)</h2>
-<ul>
-<li><a href="https://github.com/cbick/gtfs_SQL_importer">github.com/cbick/gtfs_SQL_importer</a></li>
-<li><a href="https://bennettgarner.medium.com/parsing-gtfs-format-transit-data-in-real-time-with-python-3a528ba7aab7">Parsing GTFS format transit data in real time with Python</a></li>
-<li><a href="https://github.com/departmentfortransport/Open_NaPTAN">Open_NaPTAN</a></li>
-<li><a href="https://pypi.org/project/transx2gtfs/">transx2gtfs</a></li>
+<li><a href="https://nbviewer.jupyter.org/github/raoulbia/jupyter-notebooks/blob/master/Graph_Traversal_TSP_Approximation_Warehouse.ipynb?flush_cache=true" title="target=&quot;_blank">TSP_Approximation_Warehouse.ipynb</a></li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./public_transport_data.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/public-transport-data.html" rel="tag">Public Transport Data</a>
+                    <a href="./graph_problems.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/graph-problems.html" rel="tag">Graph Problems</a>
                 </div>
             </article>
 
@@ -155,8 +141,9 @@ http://127.0.0.1:6824/upcoming.json
 
                     <a href="./index26.html" class="prev_page">&larr;&nbsp;Previous</a>
 
+                    <a href="./index28.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 27 of 27</span>
+                    <span>Page 27 of 31</span>
                 </div>
 
             <div class="clear"></div>

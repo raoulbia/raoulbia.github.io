@@ -19,7 +19,6 @@
 
                 <li class="ephemeral selected"><a href="../category/pypi.html">PyPi</a></li>
                 <li><a href="../">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="../archives">Archives</a></li>
             </ul>
         </nav>
@@ -48,21 +47,20 @@
 </li>
 </ul>
 <h4>Deploy on PyPi</h4>
-<hr />
+<hr>
 <p><strong>Note</strong></p>
 <ul>
 <li>Make sure to update version information before deploying. 
 Files to update: <code>__init__.py</code> and <code>setup.py</code>.</li>
 <li>After deploying, don't forget to re-build the documentation at <a href="https://readthedocs.org/projects/shizen-gengo/builds">ReadTheDocs</a>.</li>
 </ul>
-<hr />
-<div class="highlight"><pre><span></span><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">rf</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">dist</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">setup</span><span class="o">.</span><span class="n">py</span><span class="w"> </span><span class="n">sdist</span><span class="w"></span>
-<span class="n">ls</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span><span class="w"></span>
-<span class="c1">#python setup.py check -r -s (obolete)</span><span class="w"></span>
-<span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">twine</span><span class="w"> </span><span class="n">check</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span><span class="w"></span>
-<span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w">  </span><span class="n">twine</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span><span class="w"></span>
-</pre></div>
-
+<hr>
+<div class="highlight"><pre><span></span><code><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">rf</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">dist</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">setup</span><span class="o">.</span><span class="n">py</span><span class="w"> </span><span class="n">sdist</span>
+<span class="n">ls</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span>
+<span class="c1">#python setup.py check -r -s (obolete)</span>
+<span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">twine</span><span class="w"> </span><span class="n">check</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span>
+<span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w">  </span><span class="n">twine</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span>
+</code></pre></div>
 
 <h4>Misc.</h4>
 <ul>

@@ -17,7 +17,6 @@
         <nav>
             <ul>
                 <li><a href="./">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
@@ -26,308 +25,314 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 23, 2017</h4>
+        <div id="content">            <h4 class="date">Dec 03, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./ksql.html" rel="bookmark" title="Permanent Link to &quot;KSql Cheatsheet&quot;">KSql Cheatsheet</a>
+                    <a href="./Vagrant VM.html" rel="bookmark" title="Permanent Link to &quot;Vagrant VM&quot;">Vagrant VM</a>
                 </h2>
 
                 
                 
 
-                <h3>Installation</h3>
+                <h4>Useful Links</h4>
 <ul>
-<li>Download and Setup Java 8 JDK: <code>sudo apt install openjdk-8-jdk</code></li>
-<li>wget https://packages.confluent.io/archive/6.2/confluent-6.2.0.tar.gz</li>
-<li>tar -xvf confluent-6.2.0</li>
-<li><code>sudo ln -s confluent-6.2.0/ confluent</code></li>
-<li>add to <code>~/.bashrc</code>:</li>
-<li><code>export  export PATH=/opt/confluent/bin:$PATH</code> (or where ever the tar has been unzipped to.</li>
-<li><code>export CONFLUENT_HOME=/opt/confluent</code></li>
+<li><a href="https://www.gis-blog.com/osgeo-live-the-best-open-source-gis-ready-to-use-package/">OSGeo-Live</a></li>
+<li><a href="https://releases.ubuntu.com/20.04/">Ubuntu 20.04 ISO</a></li>
+<li><a href="https://blog.engineyard.com/building-a-vagrant-box">Building a Vagrant Box from Start to Finish</a></li>
+<li><a href="https://www.abhishek-tiwari.com/creating-a-new-vagrant-base-box-from-an-existing-vm/">Creating a new Vagrant base box from an existing VM</a></li>
 </ul>
-<h3>Start KSql</h3>
-<div class="highlight"><pre><span></span>confluent <span class="nb">local</span> services ksql-server start
-confluent <span class="nb">local</span> services ksql-server status
-</pre></div>
-
-
-<h4>Topics</h4>
-<p>Note: By default KSql will show only new arriving data.</p>
-<p>Use <code>FROM BEGINNING</code> to see all existing data AND keep listening for new data.</p>
-<p>Also useful for checking that topic has a KEY!!</p>
+<h4>Pre-requisites</h4>
 <ul>
-<li><code>print 'topic_name' FROM BEGINNING LIMIT 1;</code></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-16-04">Git</a></li>
+<li><a href="http://docs.vagrantup.com/v2/installation/index.html">Vagrant</a> </li>
+<li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>.</li>
 </ul>
-<h4>auto.offset.reset</h4>
-<p>By default KSql <code>select</code> only shows new incoming data aka <code>current offset</code>. </p>
-<p>Must run command below (Only valid for current KSql session! Must re-issue each tme entering KSql prompt).</p>
-<div class="highlight"><pre><span></span>SET &#39;auto.offset.reset&#39;=&#39;earliest&#39; ;
-</pre></div>
+<h4>Shared Folders</h4>
+<p><strong>NEW</strong></p>
+<p>On Windows Host, add this to Vagrantfile:</p>
+<p><code>config.vm.synced_folder "C:/Users/ABCD123/OneDrive - XY/Documents/workproducts-vagrant/linux_mint", "/host_project"</code></p>
+<p><strong>OLD</strong></p>
+<p>Vagrantfile: <code>config.vm.synced_folder HOST GUEST</code></p>
+<p>where HOST = <code>"/home/raoulbia/DEV/vagrant_mint"</code> and GUEST = <code>"/vagrant"</code></p>
+<p>e.g.   <code>config.vm.synced_folder "/home/raoulbia/DEV/vagrant_ubuntu", "/vagrant"</code></p>
+<div class="highlight"><pre><span></span><code>config.vm.synced_folder<span class="w"> </span><span class="s2">&quot;.&quot;</span>,<span class="w"> </span><span class="s2">&quot;/vmtest_kafka&quot;</span>
+</code></pre></div>
 
+<h4>Vagrant Box</h4>
+<p>Assuming you want to share the directory in which <code>Vagrantfile</code> is located and that directory is named <code>vmtest_kafka</code>. 
+First add your share directory in the VM Box (Devices &gt; Shared Folders) and click "Make Permanent".
+Whatever you name your share here will be the name you will need to use when mounting in the vm guest OS e.g. <code>vmtest_kafka</code>. 
+Next on the the guset OS make a directory to use for your mount preferably in your home directory e.g. <code>mkdir ~/shared</code>.</p>
+<div class="highlight"><pre><span></span><code>sudo usermod -a -G vboxsf vagrant
+mkdir ~/shared
+sudo mount -t vboxsf vmtest_kafka ~/shared
+</code></pre></div>
 
-<p>to reset this setting:</p>
-<div class="highlight"><pre><span></span>UNSET &#39;auto.offset.reset&#39;;
-</pre></div>
-
-
-<h4>KSql CREATE TABLE (<a href="https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-table/">KSQL Syntax Reference</a> )</h4>
-<div class="highlight"><pre><span></span><span class="nv">create</span> <span class="nv">table</span> <span class="nv">GTFS_DELAYS_TABLE</span> <span class="ss">(</span><span class="nv">id</span> <span class="nv">VARCHAR</span> <span class="nv">PRMARY</span> <span class="nv">KEY</span>, <span class="nv">delay</span> <span class="nv">INT</span>, <span class="nv">timestamp</span> <span class="nv">INT</span><span class="ss">)</span> <span class="nv">WITH</span> <span class="ss">(</span><span class="nv">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">gtfs-delays</span><span class="s1">&#39;</span>, <span class="nv">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">JSON</span><span class="s1">&#39;</span><span class="ss">)</span> <span class="c1">;</span>
-<span class="k">show</span> <span class="nv">tables</span> <span class="c1">;</span>
-<span class="nv">describe</span> <span class="nv">GTFS_DELAYS_TABLE</span> <span class="c1">;</span>
-</pre></div>
-
-
-<div class="highlight"><pre><span></span>create table GTFS_TABLE <span class="o">(</span> <span class="se">\</span>
-id VARCHAR PRIMARY KEY, <span class="se">\</span>
-trip_update_trip_trip_id VARCHAR, <span class="se">\</span>
-trip_update_trip_start_time VARCHAR, <span class="se">\</span>
-trip_update_trip_start_date VARCHAR,<span class="se">\</span>
-trip_update_trip_schedule_relationship VARCHAR, <span class="se">\</span>
-trip_update_trip_route_id VARCHAR, <span class="se">\</span>
-trip_update_stop_time_update_stop_sequence INT, <span class="se">\</span>
-trip_update_stop_time_update_departure_delay INT, <span class="se">\</span>
-trip_update_stop_time_update_stop_id VARCHAR, <span class="se">\</span>
-trip_update_stop_time_update_schedule_relationship VARCHAR, <span class="se">\</span>
-trip_update_stop_time_update_arrival_delay INT <span class="se">\</span>
-<span class="o">)</span> WITH <span class="o">(</span><span class="nv">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;GTFS_TOPIC&#39;</span>, <span class="nv">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="o">)</span> <span class="p">;</span>
-</pre></div>
-
-
-<p>To persist the above table see below. </p>
-<div class="highlight"><pre><span></span>create table GTFS_TABLE2 AS select * from GTFS_TABLE ;
-</pre></div>
-
-
-<p>Before terminating a persistent table we must first terminate that query!</p>
-<div class="highlight"><pre><span></span><span class="k">show</span> <span class="nv">queries</span> <span class="c1">;</span>
-<span class="nv">terminate</span> <span class="o">&lt;</span><span class="nv">query_name</span><span class="o">&gt;</span> <span class="c1">;</span>
-<span class="nv">drop</span> <span class="nv">table</span> <span class="o">&lt;</span><span class="nv">table_name</span><span class="o">&gt;</span> <span class="c1">;</span>
-</pre></div>
-
-
-<h4>KSql SELECT</h4>
-<div class="highlight"><pre><span></span>select trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence, trip_update_stop_time_update_departure_delay from GTFS_TABLE emit changes ;
-</pre></div>
-
-
-<div class="highlight"><pre><span></span>select trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence, sum(trip_update_stop_time_update_departure_delay) from GTFS_TABLE group by trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence emit changes ;
-</pre></div>
-
-
-<h4>KSql streams</h4>
-<p>KSql streams are used to interrogate the underlying data.</p>
-<div class="highlight"><pre><span></span><span class="nv">create</span> <span class="nv">stream</span> <span class="nv">users_stream</span> <span class="ss">(</span><span class="nv">name</span> <span class="nv">VARCHAR</span>, <span class="nv">countrycode</span> <span class="nv">VARCHAR</span><span class="ss">)</span> <span class="nv">WITH</span> <span class="ss">(</span><span class="nv">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">USERS</span><span class="s1">&#39;</span>, <span class="nv">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">DELIMITED</span><span class="s1">&#39;</span><span class="ss">)</span> <span class="c1">;</span>
-<span class="nv">list</span> <span class="nv">streams</span> <span class="c1">;</span>
-<span class="nv">select</span> <span class="nv">name</span>, <span class="nv">countrycode</span> <span class="nv">from</span> <span class="nv">users_stream</span> <span class="nv">emit</span> <span class="nv">changes</span><span class="c1">;</span>
-<span class="nv">select</span> <span class="nv">name</span>, <span class="nv">countrycode</span> <span class="nv">from</span> <span class="nv">users_stream</span> <span class="nv">emit</span> <span class="nv">changes</span> <span class="nv">limit</span> <span class="mi">5</span><span class="c1">;</span>
-<span class="nv">select</span> <span class="nv">countrycode</span>, <span class="nv">count</span><span class="ss">(</span><span class="o">*</span><span class="ss">)</span> <span class="nv">from</span> <span class="nv">users_stream</span> <span class="nv">group</span> <span class="nv">by</span> <span class="nv">countrycode</span><span class="c1">;</span>
-<span class="nv">drop</span> <span class="nv">stream</span> <span class="k">if</span> <span class="nv">exists</span> <span class="nv">users_stream</span> <span class="c1">;</span>
-<span class="nv">drop</span> <span class="nv">stream</span> <span class="k">if</span> <span class="nv">exists</span> <span class="nv">users_stream</span> <span class="nv">delete</span> <span class="nv">topic</span> <span class="c1">;</span>
-</pre></div>
-
-
-<div class="highlight"><pre><span></span><span class="nt">create</span><span class="w"> </span><span class="nt">stream</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="o">(</span><span class="nt">id</span><span class="w"> </span><span class="nt">VARCHAR</span><span class="o">,</span><span class="w"> </span><span class="nt">delay</span><span class="w"> </span><span class="nt">INT</span><span class="o">,</span><span class="w"> </span><span class="nt">timestamp</span><span class="w"> </span><span class="nt">INT</span><span class="o">)</span><span class="w"> </span><span class="nt">WITH</span><span class="w"> </span><span class="o">(</span><span class="nt">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;gtfs-delays&#39;</span><span class="o">,</span><span class="w"> </span><span class="nt">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
-<span class="nt">describe</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
-<span class="nt">select</span><span class="w"> </span><span class="nt">TIMESTAMPTOSTRING</span><span class="o">(</span><span class="nt">rowtime</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;dd/MMM HH:mm&#39;</span><span class="o">)</span><span class="w"> </span><span class="nt">as</span><span class="w"> </span><span class="nt">createtime</span><span class="o">,</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nt">from</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="nt">emit</span><span class="w"> </span><span class="nt">changes</span><span class="w"> </span><span class="nt">limit</span><span class="w"> </span><span class="nt">5</span><span class="o">;</span><span class="w"></span>
-</pre></div>
-
-
-<div class="highlight"><pre><span></span>create stream GTFS_STREAM ( \
-id VARCHAR, \
-trip_update STRUCT \
-    &lt; trip STRUCT \
-        &lt; trip_id VARCHAR, start_time VARCHAR, start_date VARCHAR, schedule_relationship VARCHAR, route_id VARCHAR&gt; \
-    &gt;,  \
-stop_time_update STRUCT &lt; stop_sequence INT, arrival STRUCT &lt; delay INT &gt;, stop_id VARCHAR, schedule_relationship VARCHAR &gt;
-) WITH (KAFKA_TOPIC=&#39;GTFS_TOPIC&#39;, VALUE_FORMAT=&#39;JSON&#39;) ;
-
-select * from GTFS_STREAM emit changes ;
-</pre></div>
-
-
-<h3>Other Useful Commands</h3>
 <ul>
-<li><code>kafka-consumer-groups.sh  --list --bootstrap-server localhost:9092</code></li>
-<li><code>zookeeper-shell.sh localhost:2181 ls /brokers/ids</code> to list active brokers. </li>
+<li><code>sudo nano ~/.profile</code> and add the line: <code>sudo mount -t vboxsf vmtest_kafka ~/shared</code></li>
+<li>Set directory permissions on HOST: <code>chmod 777 -R vmtest_kafka/</code></li>
+</ul>
+<h4>Desktop size issue</h4>
+<div class="highlight"><pre><span></span><code><span class="n">vagrant</span><span class="w"> </span><span class="n">plugin</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">--</span><span class="n">plugin</span><span class="o">-</span><span class="n">clean</span><span class="o">-</span><span class="n">sources</span><span class="w"> </span><span class="o">--</span><span class="n">plugin</span><span class="o">-</span><span class="n">source</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">rubygems</span><span class="o">.</span><span class="n">org</span><span class="w"> </span><span class="n">vagrant</span><span class="o">-</span><span class="n">vbguest</span>
+<span class="n">vagrant</span><span class="w"> </span><span class="n">up</span>
+<span class="n">vagrant</span><span class="w"> </span><span class="n">vbguest</span><span class="w"> </span><span class="o">--</span><span class="n">do</span><span class="w"> </span><span class="n">install</span>
+<span class="n">vagrant</span><span class="w"> </span><span class="n">reload</span>
+</code></pre></div>
+
+<h4>Increase Vagrant Box Size</h4>
+<p><strong>NEW</strong></p>
+<p><code>vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-disksize</code></p>
+<div class="highlight"><pre><span></span><code><span class="nv">Vagrant</span>.<span class="nv">configure</span><span class="ss">(</span><span class="s2">&quot;2&quot;</span><span class="ss">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="nv">config</span><span class="o">|</span>
+<span class="w">  </span>#<span class="w"> </span><span class="nv">Your</span><span class="w"> </span><span class="nv">existing</span><span class="w"> </span><span class="nv">configurations</span><span class="w"> </span><span class="nv">like</span><span class="w"> </span><span class="nv">VM</span><span class="w"> </span><span class="nv">box</span>
+<span class="w">  </span><span class="nv">config</span>.<span class="nv">vm</span>.<span class="nv">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;npalm/mint17-amd64-cinnamon&quot;</span>
+
+<span class="w">  </span>#<span class="w"> </span><span class="nv">Plugin</span><span class="w"> </span><span class="nv">configuration</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">increase</span><span class="w"> </span><span class="nv">disk</span><span class="w"> </span><span class="nv">size</span>
+<span class="w">  </span><span class="nv">config</span>.<span class="nv">disksize</span>.<span class="nv">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;50GB&#39;</span>
+
+<span class="w">  </span>#<span class="w"> </span><span class="nv">Any</span><span class="w"> </span><span class="nv">other</span><span class="w"> </span><span class="nv">configurations</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p><strong>OLD</strong></p>
+<p>Note: it may be easier to just grab a box that has a large size. See above.</p>
+<ol>
+<li>
+<p>Clone &amp; Resize</p>
+<p>on Linux</p>
+<div class="highlight"><pre><span></span><code>VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vmdk&quot; &quot;/home/baba/VirtualBox VMs/my_box/box.vdi&quot; --format vdi
+VBoxManage modifyhd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; --resize 131072
+VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/home/baba/VirtualBox VMs/my_box/box-resized.vmdk&quot; --format vmdk
+</code></pre></div>
+
+<p>on Window: same steps as below but first run this:</p>
+<div class="highlight"><pre><span></span><code>set PATH=%PATH%;&quot;C:\Program Files\Oracle\VirtualBox&quot;
+</code></pre></div>
+
+</li>
+<li>
+<p>Allocate space</p>
+<p>The newly created disk space is unallocated at this stage. Follow these steps next:</p>
+<ul>
+<li>
+<p><a href="http://www.gitshah.com/2013/05/how-to-fix-out-of-space-problem-for.html?m=1">getting Gparted</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=cDgUwWkvuIY">changing partitions using Gparted (Video)</a></p>
+</li>
+</ul>
+</li>
+</ol>
+<p>see also <a href="https://gist.github.com/christopher-hopper/9755310">Resize a Hard Disk for a Virtual Machine</a></p>
+<h4>Create Global Variable for use in Python Scripts</h4>
+<p>In <code>~/.profile</code>add</p>
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="n">TOMOE_DATA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">ownCloud</span><span class="o">/</span><span class="n">tomoe</span><span class="o">-</span><span class="n">data</span>
+<span class="k">export</span><span class="w"> </span><span class="n">KG_OUTPUT_DIR</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">vmtest</span><span class="o">/</span><span class="n">tomoe</span><span class="o">/</span><span class="n">wp</span><span class="o">-</span><span class="n">tomoe</span><span class="o">-</span><span class="n">playground</span><span class="o">/</span><span class="n">local</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">kg</span>
+</code></pre></div>
+
+<h4>Useful Vagrant commands</h4>
+<ul>
+<li><code>config.vm.box = "file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box"</code></li>
+<li><code>VBoxClient --clipboard</code></li>
+<li><code>vagrant global-status</code></li>
+<li><code>set PATH=%PATH%;"C:\Program Files\Oracle\VirtualBox"</code></li>
+<li><code>vboxmanage list vms</code></li>
+<li><code>vagrant init file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box</code></li>
+</ul>
+<h4>Misc. Links</h4>
+<ul>
+<li><a href="https://github.com/hashicorp/vagrant/issues/5186">Warning: Authentication failure. Retrying... " after packaging box</a></li>
+<li><a href="https://jeremykendall.net/2013/08/09/vagrant-synced-folders-permissions/">vagrant-synced-folders-permissions</a></li>
+<li><a href="https://stackoverflow.com/questions/35807568/vagrant-synced-folder-permissions">vagrant-synced-folders-permissions SO</a></li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./ksql.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/ksql.html" rel="tag">KSql</a>
+                    <a href="./Vagrant VM.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
                 </div>
-            </article>            <h4 class="date">Nov 23, 2017</h4>
+            </article>            <h4 class="date">Dec 03, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./snowsql.html" rel="bookmark" title="Permanent Link to &quot;SnowSQL Cheatsheet&quot;">SnowSQL Cheatsheet</a>
+                    <a href="./vagrant_vpn.html" rel="bookmark" title="Permanent Link to &quot;Vagrant VM with VPN&quot;">Vagrant VM with VPN</a>
                 </h2>
 
                 
                 
 
-                <h4>SnowSQL CLI Config file</h4>
-<p>The onfig file is located here: <code>/home/&lt;user&gt;/.snowsql</code>. This is where you configure custom connection parameters.</p>
-<p>In your config file you need to modify this line:</p>
-<p><code>log_file = ../snowsql_rt.log</code> to this <code>log_file = ~/.snowsql/snowsql_rt.log</code></p>
-<h4>Connect to Snowflake account with SnowSQL CLI</h4>
-<p><code>snowsql --accountname 123.north-europe.azure --username &lt;username&gt;</code></p>
-<p><code>snowsql -c my_connection</code></p>
-<h4>Bulk Loading from Local Source</h4>
-<p>Create the Employee table</p>
-<div class="highlight"><pre><span></span><span class="n">create</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">Employee</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">row_id</span><span class="w"> </span><span class="n">integer</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">first_name</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"></span>
-<span class="w">    </span><span class="n">last_name</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"></span>
-<span class="w">    </span><span class="n">city</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"></span>
-<span class="w">    </span><span class="n">state</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"></span>
-<span class="w">    </span><span class="n">hire_date</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">salary</span><span class="w"> </span><span class="n">integer</span><span class="w"></span>
-<span class="p">)</span><span class="w"></span>
-</pre></div>
-
-
-<p>Some Employee queries</p>
-<div class="highlight"><pre><span></span>select * From Public.Employee
-drop table Employee
-truncate table Employee
-</pre></div>
-
-
-<p>Create a File Format Object</p>
-<div class="highlight"><pre><span></span>create or replace file format employee_csv
-  type = &#39;CSV&#39;
-  field_delimiter = &#39;,&#39;
-  skip_header = 1;
-</pre></div>
-
-
-<p>Create an internal Stage object</p>
-<div class="highlight"><pre><span></span>create or replace stage employee_stage
-  file_format = employee_csv;
-</pre></div>
-
-
-<p>Display the stages we have created</p>
-<div class="highlight"><pre><span></span><span class="k">show</span> <span class="nv">stages</span>
-</pre></div>
-
-
-<p>See what's in the employee_stage</p>
-<div class="highlight"><pre><span></span><span class="n">list</span><span class="w"> </span><span class="nv">@employee_stage</span><span class="p">;</span><span class="w"></span>
-</pre></div>
-
-
-<p>Move the data in employee_stage to the employee table. Skip the entire file on any errors</p>
-<div class="highlight"><pre><span></span><span class="n">copy</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">employee</span><span class="w"></span>
-<span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="nv">@employee_stage</span><span class="w"></span>
-<span class="w">  </span><span class="n">on_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;skip_file&#39;</span><span class="p">;</span><span class="w"></span>
-</pre></div>
-
-
-<p>Move the data in employee_stage to the employee table. Skip just the rows causing any errors</p>
-<div class="highlight"><pre><span></span><span class="n">copy</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">employee</span><span class="w"></span>
-<span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="nv">@employee_stage</span><span class="w"></span>
-<span class="w">  </span><span class="n">on_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;continue&#39;</span><span class="p">;</span><span class="w"></span>
-</pre></div>
-
-
-<p>Remove file from stage</p>
-<div class="highlight"><pre><span></span><span class="n">remove</span><span class="w"> </span><span class="nv">@employee_stage</span><span class="w"> </span><span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;.*.csv.gz&#39;</span><span class="p">;</span><span class="w"></span>
-</pre></div>
-
-
-<p>Create a table to hold all errors during ingestion (VIDEO 21 8:00)</p>
-<div class="highlight"><pre><span></span>create or replace table employee_errors as 
-select * from table(validate(employee, job_id =&gt; &#39;019b04c4-0c52-f649-0001-3d6e0002d14e&#39;));
-select * from employee_errors
-</pre></div>
-
-
-<p>Describe file format</p>
-<div class="highlight"><pre><span></span>describe file format employee_csv
-</pre></div>
-
-
-<h4>Storage Integration: Bulk Loading from External Source</h4>
-<p>Notes:</p>
+                <h2>Step-by-Step Instructions to Set Up a VM to Bypass Zscaler Restrictions</h2>
+<h4>1. <strong>Create a DigitalOcean Droplet with Outline VPN Manager</strong></h4>
+<ol>
+<li>Set up a new DigitalOcean droplet.</li>
+<li>Install Outline VPN Manager to manage the Shadowsocks server. Follow the official Outline installation guide for setup.</li>
+<li>Note the public IP address of your DigitalOcean server.</li>
+</ol>
+<h4>2. <strong>Install and Configure Shadowsocks on the DigitalOcean Server</strong></h4>
+<ol>
+<li>Install Shadowsocks on the server:</li>
+</ol>
+<p><code>sudo apt update
+   sudo apt install shadowsocks-libev</code></p>
+<ol>
+<li>Edit the default Shadowsocks configuration (<code>/etc/shadowsocks-libev/config.json</code>) to use port <code>443</code> and your custom password:</li>
+</ol>
+<p><code>{
+     "server": "0.0.0.0",
+     "server_port": 443,
+     "password": "your-secure-password",
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"
+   }</code></p>
+<ol>
+<li>Restart the Shadowsocks server:</li>
+</ol>
+<p><code>sudo systemctl restart shadowsocks-libev</code></p>
+<ol>
+<li>Ensure that port <code>443</code> is open on the DigitalOcean server by allowing it through the firewall:</li>
+</ol>
+<p><code>sudo ufw allow 443/tcp
+   sudo ufw allow 443/udp</code></p>
+<h4>3. <strong>Configure Shadowsocks Client on the Vagrant Guest VM</strong></h4>
+<ol>
+<li>Install Shadowsocks on the Vagrant guest VM:</li>
+</ol>
+<p><code>sudo apt update
+   sudo apt install shadowsocks-libev</code></p>
+<ol>
+<li>Create the Shadowsocks client configuration (<code>/etc/shadowsocks-libev/config.json</code>) to connect to the DigitalOcean server:</li>
+</ol>
+<p><code>{
+     "server": "your-digital-ocean-server-ip",
+     "server_port": 443,
+     "local_port": 1080,
+     "password": "your-secure-password",
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"
+   }</code></p>
+<ol>
+<li>Start the Shadowsocks client on the Vagrant VM:</li>
+</ol>
+<p><code>ss-local -c /etc/shadowsocks-libev/config.json -v</code></p>
+<ol>
+<li>Ensure the Vagrant VM is using <strong>Bridged Adapter</strong> to allow direct internet access and connection to the DigitalOcean server.</li>
+</ol>
+<h4>4. <strong>Configure the Vagrant VM or Browser to Use the SOCKS Proxy</strong></h4>
+<ol>
+<li>Set the system or application (e.g., web browser) to use <code>localhost:1080</code> as the SOCKS5 proxy.</li>
+<li>For Firefox:</li>
+<li>Go to <strong>Preferences</strong> → <strong>Network Settings</strong>.</li>
+<li>Set <strong>SOCKS Host</strong> to <code>localhost</code> and port to <code>1080</code>.</li>
+<li>Ensure <strong>SOCKS v5</strong> is selected.</li>
+</ol>
+<h4>5. <strong>Test the Connection</strong></h4>
+<ol>
+<li>Verify that traffic is routed through the Shadowsocks proxy by browsing or using:</li>
+</ol>
+<p><code>curl --socks5 localhost:1080 http://example.com</code></p>
+<ol>
+<li>Ensure that you can bypass Zscaler restrictions and access unrestricted internet.</li>
+</ol>
+<h4>Summary:</h4>
 <ul>
-<li>
-<p>to verify STORAGE INTEGRATION made it to Azure, go to Azure AAD &gt; Entreprise applications &gt; you should see Snowflake </p>
-</li>
-<li>
-<p>after creating STORAGE INTEGRATION, must authorize Snowflake in Access Control (IAM)
-  go to Storage Account &gt; Access Control (IAM) &gt; Add a role assignment &gt; "Storage Blob Data Contributor"
-  click +Select Members and search for Snowflake principal described above &gt; Select &gt; Review+Assign</p>
-</li>
+<li>DigitalOcean droplet runs <strong>Outline VPN Manager</strong> and Shadowsocks on <strong>port 443</strong>.</li>
+<li><strong>Vagrant guest VM</strong> connects via Shadowsocks client using <code>ss-local</code> with port <code>443</code>.</li>
+<li><strong>Bridged Adapter</strong> mode is essential for proper networking in the VM.</li>
+<li>SOCKS5 proxy runs locally on <code>localhost:1080</code> to bypass restrictions.</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="nv">FILE</span> <span class="nv">FORMATS</span>
-<span class="k">SHOW</span> <span class="nv">TABLES</span>
-<span class="k">SHOW</span> <span class="nv">STAGES</span>
-
-<span class="o">//</span> <span class="nv">CLEAN</span> <span class="nv">UP</span>
-<span class="nv">USE</span> <span class="nv">ROLE</span> <span class="nv">ACCOUNTADMIN</span> <span class="c1">;</span>
-<span class="nv">DROP</span> <span class="nv">INTEGRATION</span> <span class="k">IF</span> <span class="nv">EXISTS</span> <span class="nv">AZURE_STORAGE</span> <span class="c1">;</span>
-<span class="nv">DROP</span> <span class="nv">FILE</span> <span class="nv">FORMAT</span> <span class="k">IF</span> <span class="nv">EXISTS</span> <span class="nv">CSV_FORMAT</span> <span class="c1">;</span>
-<span class="nv">DROP</span> <span class="nv">STAGE</span> <span class="k">IF</span> <span class="nv">EXISTS</span> <span class="nv">GTFS</span> <span class="c1">;</span>
-</pre></div>
-
-
-<p>Step 1: Create Table</p>
-<div class="highlight"><pre><span></span><span class="n">create</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">agency</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="n">agency_id</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span>
-<span class="w">  </span><span class="n">agency_name</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w">  </span>
-<span class="w">  </span><span class="n">agency_url</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span>
-<span class="w">  </span><span class="n">agency_timezone</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"></span>
-<span class="p">);</span><span class="w"></span>
-</pre></div>
-
-
-<p>Step 2: Setup Storage Integration</p>
-<div class="highlight"><pre><span></span>USE ROLE ACCOUNTADMIN ;
-CREATE OR REPLACE STORAGE INTEGRATION AZURE_STORAGE
-  TYPE = EXTERNAL_STAGE
-  STORAGE_PROVIDER = AZURE
-  ENABLED = TRUE
-  AZURE_TENANT_ID = &lt; tenant id &gt;
-  STORAGE_ALLOWED_LOCATIONS = (&#39;*&#39;) ;
-
-GRANT USAGE ON INTEGRATION AZURE_STORAGE TO SYSADMIN ;
-
-DESCRIBE STORAGE INTEGRATION AZURE_STORAGE ;
-
-USE ROLE SYSADMIN ; -- De-esclate the role
-</pre></div>
-
-
-<p>Step 3: Setup File Format</p>
-<div class="highlight"><pre><span></span>create or replace file format csv_format
-  type = &#39;CSV&#39;
-  field_delimiter = &#39;,&#39;
-  skip_header = 1
-  null_if = (&#39;NULL&#39;, &#39;null&#39;)
-  empty_field_as_null = TRUE
-  compression = gzip ;
-</pre></div>
-
-
-<p>Step 4: Set up Stage</p>
-<div class="highlight"><pre><span></span><span class="nt">create</span><span class="w"> </span><span class="nt">or</span><span class="w"> </span><span class="nt">replace</span><span class="w"> </span><span class="nt">stage</span><span class="w"> </span><span class="nt">gtfs</span><span class="w"></span>
-<span class="w">  </span><span class="nt">storage_integration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">AZURE_STORAGE</span><span class="w"></span>
-<span class="w">  </span><span class="nt">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;azure://&lt;container_name&gt;.blob.core.windows.net/gtfs &#39;</span><span class="w"></span>
-<span class="w">  </span><span class="nt">file_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">CSV_FORMAT</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
-</pre></div>
-
-
-<p>Note: it can take an hour or two for Azure to create objects necessary for the integration</p>
-<div class="highlight"><pre><span></span><span class="n">list</span><span class="w"> </span><span class="nv">@gtfs</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-</pre></div>
+<p>This setup allows you to route traffic through your DigitalOcean server, effectively bypassing Zscaler restrictions.</p>
+<h2>Updated Step-by-Step Solution for Bypassing Zscaler Using the Vagrant Guest VM</h2>
+<p>Since you want to use <strong>Firefox on the Vagrant guest VM</strong> to bypass restrictions without relying on any executable files on the Windows host, we’ll configure the VM and Firefox to directly route traffic through the Shadowsocks proxy.</p>
+<h4>Step 1: Ensure Shadowsocks is Set Up on the DigitalOcean Server</h4>
+<p>Make sure your <strong>DigitalOcean server</strong> is configured and running properly.</p>
+<ol>
+<li><strong>DigitalOcean Server Shadowsocks Configuration (<code>/etc/shadowsocks-libev/config.json</code>):</strong></li>
+</ol>
+<p><code>{
+     "server": "0.0.0.0",
+     "server_port": 443,            // Running on port 443 to avoid network restrictions
+     "password": "your-secure-password",
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"
+   }</code></p>
+<ol>
+<li><strong>Restart the Shadowsocks server</strong> on the DigitalOcean droplet:</li>
+</ol>
+<p><code>sudo systemctl restart shadowsocks-libev</code></p>
+<h4>Step 2: Set Up Shadowsocks on the Vagrant Guest VM</h4>
+<p>Ensure the Shadowsocks client is installed and running on the <strong>guest VM</strong>.</p>
+<ol>
+<li><strong>Install Shadowsocks on the Guest VM</strong>:</li>
+</ol>
+<p><code>sudo apt update
+   sudo apt install shadowsocks-libev</code></p>
+<ol>
+<li><strong>Create or update the client configuration file (<code>/etc/shadowsocks-libev/config.json</code>)</strong>:</li>
+</ol>
+<p><code>{
+     "server": "your-digital-ocean-server-ip",   // The public IP of your DigitalOcean server
+     "server_port": 443,                         // Port 443 to avoid network restrictions
+     "local_port": 1080,                         // The local SOCKS5 proxy port
+     "password": "your-secure-password",         // Same as on the server
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"          // Same encryption method as the server
+   }</code></p>
+<ol>
+<li><strong>Start the Shadowsocks client</strong> on the guest VM:</li>
+</ol>
+<p><code>ss-local -c /etc/shadowsocks-libev/config.json -v</code></p>
+<p>This command starts the Shadowsocks SOCKS5 proxy on <code>localhost:1080</code> on your VM.</p>
+<h4>Step 3: Configure Firefox on the Guest VM to Use the SOCKS Proxy</h4>
+<ol>
+<li><strong>Open Firefox</strong> on the Vagrant guest VM.</li>
+<li>Go to <strong>Preferences</strong> → Scroll down to <strong>Network Settings</strong> → Click <strong>Settings</strong>.</li>
+<li><strong>Set up the SOCKS Proxy</strong>:</li>
+<li>Choose <strong>Manual proxy configuration</strong>.</li>
+<li>Under <strong>SOCKS Host</strong>, enter <code>localhost</code> and set the port to <code>1080</code>.</li>
+<li>Select <strong>SOCKS v5</strong> as the protocol.</li>
+<li>Check the box for <strong>Proxy DNS when using SOCKS v5</strong>.</li>
+</ol>
+<p><img alt="Firefox Proxy Settings" src="https://support.mozilla.org/en-US/kb/connection-settings-firefox/windows-firefox-proxy-settings-windows.png"> (Example of Firefox manual proxy settings).</p>
+<ol>
+<li><strong>Save</strong> the settings.</li>
+</ol>
+<p>Now, all traffic from Firefox will be routed through the SOCKS5 proxy running on your Vagrant guest VM, which connects to your DigitalOcean Shadowsocks server. This should bypass any Zscaler restrictions.</p>
+<h4>Step 4: Test the Setup</h4>
+<ol>
+<li>Open Firefox on the guest VM and visit a website that is typically restricted by Zscaler.</li>
+<li>Ensure the site loads, confirming that the traffic is routed through your DigitalOcean server and bypassing Zscaler.</li>
+</ol>
+<h3>Additional Steps (If Needed)</h3>
+<h4>Disable Ethernet on Host to Prevent Automatic Connection</h4>
+<p>Since your <strong>office screens automatically connect to Ethernet</strong>, you can disable the Ethernet interface temporarily on the <strong>Windows host</strong> to force all traffic through your guest VM.</p>
+<ol>
+<li>On your <strong>Windows host</strong>, disable Ethernet:</li>
+<li>Press <code>Win + R</code>, type <code>ncpa.cpl</code>, and press <strong>Enter</strong>.</li>
+<li>Right-click on the <strong>Ethernet</strong> adapter and choose <strong>Disable</strong>.</li>
+</ol>
+<p>This will prevent the automatic Ethernet connection when using office screens, forcing your internet traffic through the Vagrant guest VM.</p>
+<h4>Summary of Steps:</h4>
+<ol>
+<li><strong>DigitalOcean Server</strong>:</li>
+<li>
+<p>Ensure Shadowsocks is running on port <code>443</code>.</p>
+</li>
+<li>
+<p><strong>Vagrant Guest VM</strong>:</p>
+</li>
+<li>Start Shadowsocks with <code>ss-local</code> on <code>localhost:1080</code>.</li>
+<li>
+<p>Configure Firefox to use <code>localhost:1080</code> as a SOCKS5 proxy.</p>
+</li>
+<li>
+<p><strong>Test</strong>: Open restricted sites in Firefox on the guest VM to confirm Zscaler is bypassed.</p>
+</li>
+</ol>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./snowsql.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
+                    <a href="./vagrant_vpn.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
                 </div>
             </article>
 
@@ -338,7 +343,7 @@ USE ROLE SYSADMIN ; -- De-esclate the role
 
                     <a href="./index16.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 15 of 26</span>
+                    <span>Page 15 of 31</span>
                 </div>
 
             <div class="clear"></div>

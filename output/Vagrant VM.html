@@ -18,7 +18,6 @@
         <nav>
             <ul>
                 <li><a href="./">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
@@ -51,44 +50,65 @@
 <li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>.</li>
 </ul>
 <h4>Shared Folders</h4>
+<p><strong>NEW</strong></p>
+<p>On Windows Host, add this to Vagrantfile:</p>
+<p><code>config.vm.synced_folder "C:/Users/ABCD123/OneDrive - XY/Documents/workproducts-vagrant/linux_mint", "/host_project"</code></p>
+<p><strong>OLD</strong></p>
 <p>Vagrantfile: <code>config.vm.synced_folder HOST GUEST</code></p>
 <p>where HOST = <code>"/home/raoulbia/DEV/vagrant_mint"</code> and GUEST = <code>"/vagrant"</code></p>
 <p>e.g.   <code>config.vm.synced_folder "/home/raoulbia/DEV/vagrant_ubuntu", "/vagrant"</code></p>
-<div class="highlight"><pre><span></span>config.vm.synced_folder <span class="s2">&quot;.&quot;</span>, <span class="s2">&quot;/vmtest_kafka&quot;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>config.vm.synced_folder<span class="w"> </span><span class="s2">&quot;.&quot;</span>,<span class="w"> </span><span class="s2">&quot;/vmtest_kafka&quot;</span>
+</code></pre></div>
 
 <h4>Vagrant Box</h4>
 <p>Assuming you want to share the directory in which <code>Vagrantfile</code> is located and that directory is named <code>vmtest_kafka</code>. 
 First add your share directory in the VM Box (Devices &gt; Shared Folders) and click "Make Permanent".
 Whatever you name your share here will be the name you will need to use when mounting in the vm guest OS e.g. <code>vmtest_kafka</code>. 
 Next on the the guset OS make a directory to use for your mount preferably in your home directory e.g. <code>mkdir ~/shared</code>.</p>
-<div class="highlight"><pre><span></span>sudo usermod -a -G vboxsf vagrant
+<div class="highlight"><pre><span></span><code>sudo usermod -a -G vboxsf vagrant
 mkdir ~/shared
 sudo mount -t vboxsf vmtest_kafka ~/shared
-</pre></div>
-
+</code></pre></div>
 
 <ul>
 <li><code>sudo nano ~/.profile</code> and add the line: <code>sudo mount -t vboxsf vmtest_kafka ~/shared</code></li>
 <li>Set directory permissions on HOST: <code>chmod 777 -R vmtest_kafka/</code></li>
 </ul>
+<h4>Desktop size issue</h4>
+<div class="highlight"><pre><span></span><code><span class="n">vagrant</span><span class="w"> </span><span class="n">plugin</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">--</span><span class="n">plugin</span><span class="o">-</span><span class="n">clean</span><span class="o">-</span><span class="n">sources</span><span class="w"> </span><span class="o">--</span><span class="n">plugin</span><span class="o">-</span><span class="n">source</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">rubygems</span><span class="o">.</span><span class="n">org</span><span class="w"> </span><span class="n">vagrant</span><span class="o">-</span><span class="n">vbguest</span>
+<span class="n">vagrant</span><span class="w"> </span><span class="n">up</span>
+<span class="n">vagrant</span><span class="w"> </span><span class="n">vbguest</span><span class="w"> </span><span class="o">--</span><span class="n">do</span><span class="w"> </span><span class="n">install</span>
+<span class="n">vagrant</span><span class="w"> </span><span class="n">reload</span>
+</code></pre></div>
+
 <h4>Increase Vagrant Box Size</h4>
+<p><strong>NEW</strong></p>
+<p><code>vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-disksize</code></p>
+<div class="highlight"><pre><span></span><code><span class="nv">Vagrant</span>.<span class="nv">configure</span><span class="ss">(</span><span class="s2">&quot;2&quot;</span><span class="ss">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="nv">config</span><span class="o">|</span>
+<span class="w">  </span>#<span class="w"> </span><span class="nv">Your</span><span class="w"> </span><span class="nv">existing</span><span class="w"> </span><span class="nv">configurations</span><span class="w"> </span><span class="nv">like</span><span class="w"> </span><span class="nv">VM</span><span class="w"> </span><span class="nv">box</span>
+<span class="w">  </span><span class="nv">config</span>.<span class="nv">vm</span>.<span class="nv">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;npalm/mint17-amd64-cinnamon&quot;</span>
+
+<span class="w">  </span>#<span class="w"> </span><span class="nv">Plugin</span><span class="w"> </span><span class="nv">configuration</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">increase</span><span class="w"> </span><span class="nv">disk</span><span class="w"> </span><span class="nv">size</span>
+<span class="w">  </span><span class="nv">config</span>.<span class="nv">disksize</span>.<span class="nv">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;50GB&#39;</span>
+
+<span class="w">  </span>#<span class="w"> </span><span class="nv">Any</span><span class="w"> </span><span class="nv">other</span><span class="w"> </span><span class="nv">configurations</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p><strong>OLD</strong></p>
 <p>Note: it may be easier to just grab a box that has a large size. See above.</p>
 <ol>
 <li>
 <p>Clone &amp; Resize</p>
 <p>on Linux</p>
-<div class="highlight"><pre><span></span>VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vmdk&quot; &quot;/home/baba/VirtualBox VMs/my_box/box.vdi&quot; --format vdi
+<div class="highlight"><pre><span></span><code>VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vmdk&quot; &quot;/home/baba/VirtualBox VMs/my_box/box.vdi&quot; --format vdi
 VBoxManage modifyhd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; --resize 131072
 VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/home/baba/VirtualBox VMs/my_box/box-resized.vmdk&quot; --format vmdk
-</pre></div>
-
+</code></pre></div>
 
 <p>on Window: same steps as below but first run this:</p>
-<div class="highlight"><pre><span></span>set PATH=%PATH%;&quot;C:\Program Files\Oracle\VirtualBox&quot;
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>set PATH=%PATH%;&quot;C:\Program Files\Oracle\VirtualBox&quot;
+</code></pre></div>
 
 </li>
 <li>
@@ -107,10 +127,9 @@ VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/h
 <p>see also <a href="https://gist.github.com/christopher-hopper/9755310">Resize a Hard Disk for a Virtual Machine</a></p>
 <h4>Create Global Variable for use in Python Scripts</h4>
 <p>In <code>~/.profile</code>add</p>
-<div class="highlight"><pre><span></span><span class="k">export</span><span class="w"> </span><span class="n">TOMOE_DATA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">ownCloud</span><span class="o">/</span><span class="n">tomoe</span><span class="o">-</span><span class="n">data</span><span class="w"></span>
-<span class="k">export</span><span class="w"> </span><span class="n">KG_OUTPUT_DIR</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">vmtest</span><span class="o">/</span><span class="n">tomoe</span><span class="o">/</span><span class="n">wp</span><span class="o">-</span><span class="n">tomoe</span><span class="o">-</span><span class="n">playground</span><span class="o">/</span><span class="n">local</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">kg</span><span class="w"></span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="n">TOMOE_DATA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">ownCloud</span><span class="o">/</span><span class="n">tomoe</span><span class="o">-</span><span class="n">data</span>
+<span class="k">export</span><span class="w"> </span><span class="n">KG_OUTPUT_DIR</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">vmtest</span><span class="o">/</span><span class="n">tomoe</span><span class="o">/</span><span class="n">wp</span><span class="o">-</span><span class="n">tomoe</span><span class="o">-</span><span class="n">playground</span><span class="o">/</span><span class="n">local</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">kg</span>
+</code></pre></div>
 
 <h4>Useful Vagrant commands</h4>
 <ul>

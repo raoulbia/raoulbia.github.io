@@ -18,7 +18,6 @@
         <nav>
             <ul>
                 <li><a href="./">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
@@ -56,45 +55,39 @@
 <li><code>A &lt;- matrix(c(1,2,2,5), nrow=2, ncol=2, byrow=TRUE)</code></li>
 </ul>
 <h4>Script Header</h4>
-<div class="highlight"><pre><span></span><span class="n">library</span><span class="p">(</span><span class="n">rstudioapi</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">library</span><span class="p">(</span><span class="n">rstudioapi</span><span class="p">)</span>
 <span class="n">setwd</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">rstudioapi</span><span class="p">::</span><span class="n">getActiveDocumentContext</span><span class="p">()</span><span class="err">$</span><span class="n">path</span><span class="p">))</span>
 <span class="n">rm</span><span class="p">(</span><span class="nb">list</span><span class="o">=</span><span class="n">ls</span><span class="p">())</span>
 
-<span class="n">library</span><span class="p">(</span><span class="n">rio</span><span class="p">)</span> <span class="c1"># import csv</span>
-</pre></div>
-
+<span class="n">library</span><span class="p">(</span><span class="n">rio</span><span class="p">)</span><span class="w"> </span><span class="c1"># import csv</span>
+</code></pre></div>
 
 <h4>Read Data</h4>
 <p><code>load("data_project_backpain.RData")</code></p>
-<div class="highlight"><pre><span></span><span class="n">data</span>  <span class="o">&lt;-</span> <span class="nf">import</span><span class="p">(</span><span class="s">&#39;superstore.csv&#39;</span><span class="p">,</span> <span class="n">setclass</span> <span class="o">=</span> <span class="s">&quot;tibble&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">data</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">import</span><span class="p">(</span><span class="s">&#39;superstore.csv&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">setclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;tibble&quot;</span><span class="p">)</span>
 <span class="nf">head</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <h4>Select only numeric columns</h4>
-<div class="highlight"><pre><span></span><span class="n">nums</span> <span class="o">&lt;-</span> <span class="nf">unlist</span><span class="p">(</span><span class="nf">lapply</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">is.numeric</span><span class="p">))</span>  
-<span class="n">df</span><span class="p">[</span> <span class="p">,</span> <span class="n">nums</span><span class="p">]</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">nums</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">unlist</span><span class="p">(</span><span class="nf">lapply</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">is.numeric</span><span class="p">))</span><span class="w">  </span>
+<span class="n">df</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">nums</span><span class="p">]</span>
+</code></pre></div>
 
 <h4>Coerce multiple columns to factors at once</h4>
-<div class="highlight"><pre><span></span><span class="n">cols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="ss">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;D&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;H&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="n">df</span><span class="o">[</span><span class="n">cols</span><span class="o">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">df</span><span class="o">[</span><span class="n">cols</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">factor</span><span class="p">)</span><span class="w">  </span><span class="err">##</span><span class="w"> </span><span class="k">as</span><span class="p">.</span><span class="n">factor</span><span class="p">()</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">used</span><span class="w"></span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">cols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="ss">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;D&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;H&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">[</span><span class="n">cols</span><span class="o">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">df</span><span class="o">[</span><span class="n">cols</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">factor</span><span class="p">)</span><span class="w">  </span><span class="err">##</span><span class="w"> </span><span class="k">as</span><span class="p">.</span><span class="n">factor</span><span class="p">()</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">used</span>
+</code></pre></div>
 
 <h4>Exclude columns by name</h4>
-<div class="highlight"><pre><span></span><span class="n">exclude</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Neighborhood&quot;</span><span class="p">,</span> <span class="s">&quot;Exterior2nd&quot;</span><span class="p">,)</span>
-<span class="n">df</span><span class="p">[</span> <span class="p">,</span> <span class="o">-</span><span class="nf">which</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">%in%</span> <span class="n">exclude</span><span class="p">)]</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">exclude</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Neighborhood&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Exterior2nd&quot;</span><span class="p">,)</span>
+<span class="n">df</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="nf">which</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">exclude</span><span class="p">)]</span>
+</code></pre></div>
 
 <h4>Count Missing Values</h4>
 <p><code>sapply(df, function(x) sum(is.na(x)))</code></p>
 <h4>Create vector from column and drop missing values</h4>
-<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">gt</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">gt</span><span class="o">$</span><span class="n">LandAverageTemperature</span><span class="p">),</span> <span class="m">2</span><span class="p">]</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gt</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">gt</span><span class="o">$</span><span class="n">LandAverageTemperature</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">]</span>
+</code></pre></div>
 
 <h4>Making Objects available to RMarkdown</h4>
 <ul>
@@ -107,29 +100,27 @@
 </ul>
 <p><code>load("all.rda")</code></p>
 <h4>Benchmarking</h4>
-<div class="highlight"><pre><span></span>libray(microbenchmark)
-microbenchmark(
-  bad_cpp = bad_select_positive_values_cpp(x),
-  good_cpp = good_select_positive_values_cpp(x),
-  times = 1
-)
+<div class="highlight"><pre><span></span><code><span class="nx">libray</span><span class="p">(</span><span class="nx">microbenchmark</span><span class="p">)</span>
+<span class="nx">microbenchmark</span><span class="p">(</span>
+<span class="w">  </span><span class="nx">bad_cpp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">bad_select_positive_values_cpp</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span>
+<span class="w">  </span><span class="nx">good_cpp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">good_select_positive_values_cpp</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span>
+<span class="w">  </span><span class="nx">times</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">)</span>
 
-library(rbenchmark)
-benchmark(
-  bad_select_positive_values_cpp(x),
-  good_select_positive_values_cpp(x),
-  order = &quot;relative&quot;
-)
-</pre></div>
-
+<span class="kn">library</span><span class="p">(</span><span class="nx">rbenchmark</span><span class="p">)</span>
+<span class="nx">benchmark</span><span class="p">(</span>
+<span class="w">  </span><span class="nx">bad_select_positive_values_cpp</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span>
+<span class="w">  </span><span class="nx">good_select_positive_values_cpp</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span>
+<span class="w">  </span><span class="nx">order</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;relative&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
 
 <h4>Profiling</h4>
-<div class="highlight"><pre><span></span><span class="nv">Rprof</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">profile1.out</span><span class="s2">&quot;</span> <span class="ss">)</span> #<span class="k">send</span> <span class="nv">profiling</span> <span class="nv">to</span> <span class="nv">profile1</span>.<span class="nv">out</span>
-# <span class="o">&lt;</span><span class="k">call</span> <span class="nl">function</span> <span class="nv">here</span><span class="o">&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="nv">Rprof</span><span class="ss">(</span><span class="s2">&quot;profile1.out&quot;</span><span class="w"> </span><span class="ss">)</span><span class="w"> </span>#<span class="k">send</span><span class="w"> </span><span class="nv">profiling</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">profile1</span>.<span class="nv">out</span>
+#<span class="w"> </span><span class="o">&lt;</span><span class="k">call</span><span class="w"> </span><span class="nl">function</span><span class="w"> </span><span class="nv">here</span><span class="o">&gt;</span>
 <span class="nv">Rprof</span><span class="ss">(</span><span class="nv">NULL</span><span class="ss">)</span>
-<span class="nv">summaryRprof</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">profile1.out</span><span class="s2">&quot;</span><span class="ss">)</span>
-</pre></div>
-
+<span class="nv">summaryRprof</span><span class="ss">(</span><span class="s2">&quot;profile1.out&quot;</span><span class="ss">)</span>
+</code></pre></div>
 
 <h4>Sliding Window</h4>
 <p>How sliding window works:</p>
@@ -139,13 +130,12 @@ benchmark(
 <li>2nd iter: x[4 - 3 + 1, 4] gives x[2, 4]</li>
 <li>...</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="k">window</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span>
-<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="k">window</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">))</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="n">x_subset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="o">[</span><span class="n">seq(i - window + 1, i)</span><span class="o">]</span><span class="w"></span>
-<span class="n">res</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">x_subset</span><span class="p">)</span><span class="w"></span>
-<span class="err">}</span><span class="w"></span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="k">window</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span>
+<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="k">window</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">))</span><span class="w"> </span><span class="err">{</span>
+<span class="n">x_subset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="o">[</span><span class="n">seq(i - window + 1, i)</span><span class="o">]</span>
+<span class="n">res</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">x_subset</span><span class="p">)</span>
+<span class="err">}</span>
+</code></pre></div>
 
 <h4>R: Packages</h4>
 <ul>

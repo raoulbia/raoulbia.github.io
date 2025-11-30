@@ -18,7 +18,6 @@
         <nav>
             <ul>
                 <li><a href="./">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
@@ -37,9 +36,14 @@
                 
                 
 
-                <h3>Conda</h3>
+                <h3>Issues with SSL Cert</h3>
+<div class="highlight"><pre><span></span><code>pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org certifi
+pip install pip-system-certs
+</code></pre></div>
+
+<h3>Conda</h3>
 <ul>
-<li><code>conda create --name &lt;name&gt; python=3.7 -y</code></li>
+<li><code>conda create --name &lt;name&gt; python=3.8 -y</code></li>
 <li><code>conda activate &lt;name&gt;</code></li>
 <li><code>pip install ipykernel</code></li>
 <li><code>python -m ipykernel install --user --name=&lt;name&gt;</code></li>
@@ -55,12 +59,16 @@
 <li>Geopandas: <code>conda create --name=gtfs_graph python=3.8 geopandas scipy --channel=conda-forge</code></li>
 </ul>
 <h4>Venv</h4>
-<div class="highlight"><pre><span></span>apt-get install python3-venv
+<div class="highlight"><pre><span></span><code>apt-get install python3-venv
 python -m venv .env
 source .env/bin/activate
-</pre></div>
+</code></pre></div>
 
-
+<h4>Windows VSC Venv</h4>
+<ul>
+<li>To create: <code>python -m venv .venv</code></li>
+<li>To activate: <code>.venv\Scripts\activate</code></li>
+</ul>
 <h4>Pipenv</h4>
 <p>Install</p>
 <ul>

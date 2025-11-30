@@ -18,7 +18,6 @@
         <nav>
             <ul>
                 <li><a href="./">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
@@ -39,12 +38,11 @@
 
                 <h3>Postgres</h3>
 <h4>install postgres and postgis</h4>
-<div class="highlight"><pre><span></span>$  sudo apt install postgis postgresql-13-postgis-3
-$ sudo -u postgres psql
+<div class="highlight"><pre><span></span><code>$<span class="w">  </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>postgis<span class="w"> </span>postgresql-13-postgis-3
+$<span class="w"> </span>sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql
 <span class="nv">postgres</span><span class="o">=</span><span class="c1"># \password postgres</span>
 <span class="nv">postgres</span><span class="o">=</span><span class="c1"># \q</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>check installed version(s): <code>dpkg -l | grep postgres</code></p>
 <h4>postgres user authentication error</h4>

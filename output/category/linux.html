@@ -19,7 +19,6 @@
 
                 <li class="ephemeral selected"><a href="../category/linux.html">Linux</a></li>
                 <li><a href="../">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="../archives">Archives</a></li>
             </ul>
         </nav>
@@ -52,44 +51,65 @@
 <li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>.</li>
 </ul>
 <h4>Shared Folders</h4>
+<p><strong>NEW</strong></p>
+<p>On Windows Host, add this to Vagrantfile:</p>
+<p><code>config.vm.synced_folder "C:/Users/ABCD123/OneDrive - XY/Documents/workproducts-vagrant/linux_mint", "/host_project"</code></p>
+<p><strong>OLD</strong></p>
 <p>Vagrantfile: <code>config.vm.synced_folder HOST GUEST</code></p>
 <p>where HOST = <code>"/home/raoulbia/DEV/vagrant_mint"</code> and GUEST = <code>"/vagrant"</code></p>
 <p>e.g.   <code>config.vm.synced_folder "/home/raoulbia/DEV/vagrant_ubuntu", "/vagrant"</code></p>
-<div class="highlight"><pre><span></span>config.vm.synced_folder <span class="s2">&quot;.&quot;</span>, <span class="s2">&quot;/vmtest_kafka&quot;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>config.vm.synced_folder<span class="w"> </span><span class="s2">&quot;.&quot;</span>,<span class="w"> </span><span class="s2">&quot;/vmtest_kafka&quot;</span>
+</code></pre></div>
 
 <h4>Vagrant Box</h4>
 <p>Assuming you want to share the directory in which <code>Vagrantfile</code> is located and that directory is named <code>vmtest_kafka</code>. 
 First add your share directory in the VM Box (Devices &gt; Shared Folders) and click "Make Permanent".
 Whatever you name your share here will be the name you will need to use when mounting in the vm guest OS e.g. <code>vmtest_kafka</code>. 
 Next on the the guset OS make a directory to use for your mount preferably in your home directory e.g. <code>mkdir ~/shared</code>.</p>
-<div class="highlight"><pre><span></span>sudo usermod -a -G vboxsf vagrant
+<div class="highlight"><pre><span></span><code>sudo usermod -a -G vboxsf vagrant
 mkdir ~/shared
 sudo mount -t vboxsf vmtest_kafka ~/shared
-</pre></div>
-
+</code></pre></div>
 
 <ul>
 <li><code>sudo nano ~/.profile</code> and add the line: <code>sudo mount -t vboxsf vmtest_kafka ~/shared</code></li>
 <li>Set directory permissions on HOST: <code>chmod 777 -R vmtest_kafka/</code></li>
 </ul>
+<h4>Desktop size issue</h4>
+<div class="highlight"><pre><span></span><code><span class="n">vagrant</span><span class="w"> </span><span class="n">plugin</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">--</span><span class="n">plugin</span><span class="o">-</span><span class="n">clean</span><span class="o">-</span><span class="n">sources</span><span class="w"> </span><span class="o">--</span><span class="n">plugin</span><span class="o">-</span><span class="n">source</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">rubygems</span><span class="o">.</span><span class="n">org</span><span class="w"> </span><span class="n">vagrant</span><span class="o">-</span><span class="n">vbguest</span>
+<span class="n">vagrant</span><span class="w"> </span><span class="n">up</span>
+<span class="n">vagrant</span><span class="w"> </span><span class="n">vbguest</span><span class="w"> </span><span class="o">--</span><span class="n">do</span><span class="w"> </span><span class="n">install</span>
+<span class="n">vagrant</span><span class="w"> </span><span class="n">reload</span>
+</code></pre></div>
+
 <h4>Increase Vagrant Box Size</h4>
+<p><strong>NEW</strong></p>
+<p><code>vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-disksize</code></p>
+<div class="highlight"><pre><span></span><code><span class="nv">Vagrant</span>.<span class="nv">configure</span><span class="ss">(</span><span class="s2">&quot;2&quot;</span><span class="ss">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="nv">config</span><span class="o">|</span>
+<span class="w">  </span>#<span class="w"> </span><span class="nv">Your</span><span class="w"> </span><span class="nv">existing</span><span class="w"> </span><span class="nv">configurations</span><span class="w"> </span><span class="nv">like</span><span class="w"> </span><span class="nv">VM</span><span class="w"> </span><span class="nv">box</span>
+<span class="w">  </span><span class="nv">config</span>.<span class="nv">vm</span>.<span class="nv">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;npalm/mint17-amd64-cinnamon&quot;</span>
+
+<span class="w">  </span>#<span class="w"> </span><span class="nv">Plugin</span><span class="w"> </span><span class="nv">configuration</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">increase</span><span class="w"> </span><span class="nv">disk</span><span class="w"> </span><span class="nv">size</span>
+<span class="w">  </span><span class="nv">config</span>.<span class="nv">disksize</span>.<span class="nv">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;50GB&#39;</span>
+
+<span class="w">  </span>#<span class="w"> </span><span class="nv">Any</span><span class="w"> </span><span class="nv">other</span><span class="w"> </span><span class="nv">configurations</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p><strong>OLD</strong></p>
 <p>Note: it may be easier to just grab a box that has a large size. See above.</p>
 <ol>
 <li>
 <p>Clone &amp; Resize</p>
 <p>on Linux</p>
-<div class="highlight"><pre><span></span>VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vmdk&quot; &quot;/home/baba/VirtualBox VMs/my_box/box.vdi&quot; --format vdi
+<div class="highlight"><pre><span></span><code>VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vmdk&quot; &quot;/home/baba/VirtualBox VMs/my_box/box.vdi&quot; --format vdi
 VBoxManage modifyhd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; --resize 131072
 VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/home/baba/VirtualBox VMs/my_box/box-resized.vmdk&quot; --format vmdk
-</pre></div>
-
+</code></pre></div>
 
 <p>on Window: same steps as below but first run this:</p>
-<div class="highlight"><pre><span></span>set PATH=%PATH%;&quot;C:\Program Files\Oracle\VirtualBox&quot;
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>set PATH=%PATH%;&quot;C:\Program Files\Oracle\VirtualBox&quot;
+</code></pre></div>
 
 </li>
 <li>
@@ -108,10 +128,9 @@ VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/h
 <p>see also <a href="https://gist.github.com/christopher-hopper/9755310">Resize a Hard Disk for a Virtual Machine</a></p>
 <h4>Create Global Variable for use in Python Scripts</h4>
 <p>In <code>~/.profile</code>add</p>
-<div class="highlight"><pre><span></span><span class="k">export</span><span class="w"> </span><span class="n">TOMOE_DATA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">ownCloud</span><span class="o">/</span><span class="n">tomoe</span><span class="o">-</span><span class="n">data</span><span class="w"></span>
-<span class="k">export</span><span class="w"> </span><span class="n">KG_OUTPUT_DIR</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">vmtest</span><span class="o">/</span><span class="n">tomoe</span><span class="o">/</span><span class="n">wp</span><span class="o">-</span><span class="n">tomoe</span><span class="o">-</span><span class="n">playground</span><span class="o">/</span><span class="n">local</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">kg</span><span class="w"></span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="n">TOMOE_DATA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">ownCloud</span><span class="o">/</span><span class="n">tomoe</span><span class="o">-</span><span class="n">data</span>
+<span class="k">export</span><span class="w"> </span><span class="n">KG_OUTPUT_DIR</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">vmtest</span><span class="o">/</span><span class="n">tomoe</span><span class="o">/</span><span class="n">wp</span><span class="o">-</span><span class="n">tomoe</span><span class="o">-</span><span class="n">playground</span><span class="o">/</span><span class="n">local</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">kg</span>
+</code></pre></div>
 
 <h4>Useful Vagrant commands</h4>
 <ul>
@@ -134,141 +153,187 @@ VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/h
                     <a href="../Vagrant VM.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="../category/linux.html" rel="tag">Linux</a>
                 </div>
-            </article>            <h4 class="date">Dec 02, 2017</h4>
+            </article>            <h4 class="date">Dec 03, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="../Linux.html" rel="bookmark" title="Permanent Link to &quot;Linux&quot;">Linux</a>
+                    <a href="../vagrant_vpn.html" rel="bookmark" title="Permanent Link to &quot;Vagrant VM with VPN&quot;">Vagrant VM with VPN</a>
                 </h2>
 
                 
                 
 
-                <h4>Useful Commands</h4>
+                <h2>Step-by-Step Instructions to Set Up a VM to Bypass Zscaler Restrictions</h2>
+<h4>1. <strong>Create a DigitalOcean Droplet with Outline VPN Manager</strong></h4>
+<ol>
+<li>Set up a new DigitalOcean droplet.</li>
+<li>Install Outline VPN Manager to manage the Shadowsocks server. Follow the official Outline installation guide for setup.</li>
+<li>Note the public IP address of your DigitalOcean server.</li>
+</ol>
+<h4>2. <strong>Install and Configure Shadowsocks on the DigitalOcean Server</strong></h4>
+<ol>
+<li>Install Shadowsocks on the server:</li>
+</ol>
+<p><code>sudo apt update
+   sudo apt install shadowsocks-libev</code></p>
+<ol>
+<li>Edit the default Shadowsocks configuration (<code>/etc/shadowsocks-libev/config.json</code>) to use port <code>443</code> and your custom password:</li>
+</ol>
+<p><code>{
+     "server": "0.0.0.0",
+     "server_port": 443,
+     "password": "your-secure-password",
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"
+   }</code></p>
+<ol>
+<li>Restart the Shadowsocks server:</li>
+</ol>
+<p><code>sudo systemctl restart shadowsocks-libev</code></p>
+<ol>
+<li>Ensure that port <code>443</code> is open on the DigitalOcean server by allowing it through the firewall:</li>
+</ol>
+<p><code>sudo ufw allow 443/tcp
+   sudo ufw allow 443/udp</code></p>
+<h4>3. <strong>Configure Shadowsocks Client on the Vagrant Guest VM</strong></h4>
+<ol>
+<li>Install Shadowsocks on the Vagrant guest VM:</li>
+</ol>
+<p><code>sudo apt update
+   sudo apt install shadowsocks-libev</code></p>
+<ol>
+<li>Create the Shadowsocks client configuration (<code>/etc/shadowsocks-libev/config.json</code>) to connect to the DigitalOcean server:</li>
+</ol>
+<p><code>{
+     "server": "your-digital-ocean-server-ip",
+     "server_port": 443,
+     "local_port": 1080,
+     "password": "your-secure-password",
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"
+   }</code></p>
+<ol>
+<li>Start the Shadowsocks client on the Vagrant VM:</li>
+</ol>
+<p><code>ss-local -c /etc/shadowsocks-libev/config.json -v</code></p>
+<ol>
+<li>Ensure the Vagrant VM is using <strong>Bridged Adapter</strong> to allow direct internet access and connection to the DigitalOcean server.</li>
+</ol>
+<h4>4. <strong>Configure the Vagrant VM or Browser to Use the SOCKS Proxy</strong></h4>
+<ol>
+<li>Set the system or application (e.g., web browser) to use <code>localhost:1080</code> as the SOCKS5 proxy.</li>
+<li>For Firefox:</li>
+<li>Go to <strong>Preferences</strong> → <strong>Network Settings</strong>.</li>
+<li>Set <strong>SOCKS Host</strong> to <code>localhost</code> and port to <code>1080</code>.</li>
+<li>Ensure <strong>SOCKS v5</strong> is selected.</li>
+</ol>
+<h4>5. <strong>Test the Connection</strong></h4>
+<ol>
+<li>Verify that traffic is routed through the Shadowsocks proxy by browsing or using:</li>
+</ol>
+<p><code>curl --socks5 localhost:1080 http://example.com</code></p>
+<ol>
+<li>Ensure that you can bypass Zscaler restrictions and access unrestricted internet.</li>
+</ol>
+<h4>Summary:</h4>
 <ul>
-<li><code>sudo tar -xvf package_file.tar.gz</code></li>
-<li><code>sudo dpkg -i package_file.deb</code></li>
-<li><code>cat /etc/*release</code></li>
-<li><code>echo $XDG_CURRENT_DESKTOP</code></li>
-<li><code>sudo find ~/ -name rdflib</code></li>
-<li><code>sudo find / -name "*.cls"</code></li>
-<li><code>dpkg -L jenkins</code> will help you find what files does a package install</li>
-<li><code>ps -a</code> or <code>sudo lsof -t -i:8888</code> then <code>kill -9 (processID)</code></li>
-<li>make script executable: <code>sudo chmod +x script.sh</code></li>
-<li>symbolic link: <code>sudo ln -s confluent-6.1.1/ confluent</code></li>
+<li>DigitalOcean droplet runs <strong>Outline VPN Manager</strong> and Shadowsocks on <strong>port 443</strong>.</li>
+<li><strong>Vagrant guest VM</strong> connects via Shadowsocks client using <code>ss-local</code> with port <code>443</code>.</li>
+<li><strong>Bridged Adapter</strong> mode is essential for proper networking in the VM.</li>
+<li>SOCKS5 proxy runs locally on <code>localhost:1080</code> to bypass restrictions.</li>
 </ul>
-<h4>Handy Tools</h4>
-<ul>
-<li><a href="https://fishshell.com/">Fish</a>: <code>sudo apt-get install fish</code></li>
-<li><a href="https://linuxize.com/post/getting-started-with-tmux/">Tmux</a>: <code>sudo apt-get install tmux</code></li>
-</ul>
-<h4>Pip install problems</h4>
-<div class="highlight"><pre><span></span>sudo apt-get install aptitude
-sudo aptitude install ...
-</pre></div>
-
-
-<h4>tmux Sessions</h4>
-<ul>
-<li><code>tmux new -s session_name</code> new session</li>
-<li><code>tmux a -t session_name</code> attach</li>
-<li><code>ctrl + b</code> then <code>d</code> detach</li>
-<li><code>ctrl + b</code> then 'x' terminate session</li>
-<li><code>ctrl + b</code> then <code>(</code> move between sessions</li>
-<li><code>ctrl + b</code> the 'c` to make a new tab in an existing session</li>
-<li><code>ctrl + b</code> then the number of the tab e.g. <code>0</code> or <code>1</code> to move between tab</li>
-<li><code>htop</code> + Enter to see running processes (create new tab inside session)</li>
-</ul>
-<h4>File Handling</h4>
-<ul>
-<li><code>tar xzvf archive_name.tar.gz</code> to uncompress tar.gz file</li>
-<li><code>tar xjvf archive_name.tar.bz2</code> to uncompress tar.bz2 file</li>
-<li><code>less file.csv</code> to open file</li>
-<li><code>q + enter</code> to close and exit</li>
-<li><code>zcat file.tsv.gz | more</code> to view fcompressed gz file</li>
-<li><code>zcat file.tsv.gz | grep "pattern match"</code> to find string</li>
-<li><code>cat -vet file</code> to see hidden chars</li>
-<li><code>uniq -d file.txt</code> to get duplicate lines</li>
-<li><code>cat gene2refseq | awk '{if ($1==6239) print $0}' | head</code></li>
-</ul>
-<h4>Packages</h4>
-<ul>
-<li>To see packages and their size <code>conda clean --all</code></li>
-<li>To clean up <code>du -sh */</code></li>
+<p>This setup allows you to route traffic through your DigitalOcean server, effectively bypassing Zscaler restrictions.</p>
+<h2>Updated Step-by-Step Solution for Bypassing Zscaler Using the Vagrant Guest VM</h2>
+<p>Since you want to use <strong>Firefox on the Vagrant guest VM</strong> to bypass restrictions without relying on any executable files on the Windows host, we’ll configure the VM and Firefox to directly route traffic through the Shadowsocks proxy.</p>
+<h4>Step 1: Ensure Shadowsocks is Set Up on the DigitalOcean Server</h4>
+<p>Make sure your <strong>DigitalOcean server</strong> is configured and running properly.</p>
+<ol>
+<li><strong>DigitalOcean Server Shadowsocks Configuration (<code>/etc/shadowsocks-libev/config.json</code>):</strong></li>
+</ol>
+<p><code>{
+     "server": "0.0.0.0",
+     "server_port": 443,            // Running on port 443 to avoid network restrictions
+     "password": "your-secure-password",
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"
+   }</code></p>
+<ol>
+<li><strong>Restart the Shadowsocks server</strong> on the DigitalOcean droplet:</li>
+</ol>
+<p><code>sudo systemctl restart shadowsocks-libev</code></p>
+<h4>Step 2: Set Up Shadowsocks on the Vagrant Guest VM</h4>
+<p>Ensure the Shadowsocks client is installed and running on the <strong>guest VM</strong>.</p>
+<ol>
+<li><strong>Install Shadowsocks on the Guest VM</strong>:</li>
+</ol>
+<p><code>sudo apt update
+   sudo apt install shadowsocks-libev</code></p>
+<ol>
+<li><strong>Create or update the client configuration file (<code>/etc/shadowsocks-libev/config.json</code>)</strong>:</li>
+</ol>
+<p><code>{
+     "server": "your-digital-ocean-server-ip",   // The public IP of your DigitalOcean server
+     "server_port": 443,                         // Port 443 to avoid network restrictions
+     "local_port": 1080,                         // The local SOCKS5 proxy port
+     "password": "your-secure-password",         // Same as on the server
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"          // Same encryption method as the server
+   }</code></p>
+<ol>
+<li><strong>Start the Shadowsocks client</strong> on the guest VM:</li>
+</ol>
+<p><code>ss-local -c /etc/shadowsocks-libev/config.json -v</code></p>
+<p>This command starts the Shadowsocks SOCKS5 proxy on <code>localhost:1080</code> on your VM.</p>
+<h4>Step 3: Configure Firefox on the Guest VM to Use the SOCKS Proxy</h4>
+<ol>
+<li><strong>Open Firefox</strong> on the Vagrant guest VM.</li>
+<li>Go to <strong>Preferences</strong> → Scroll down to <strong>Network Settings</strong> → Click <strong>Settings</strong>.</li>
+<li><strong>Set up the SOCKS Proxy</strong>:</li>
+<li>Choose <strong>Manual proxy configuration</strong>.</li>
+<li>Under <strong>SOCKS Host</strong>, enter <code>localhost</code> and set the port to <code>1080</code>.</li>
+<li>Select <strong>SOCKS v5</strong> as the protocol.</li>
+<li>Check the box for <strong>Proxy DNS when using SOCKS v5</strong>.</li>
+</ol>
+<p><img alt="Firefox Proxy Settings" src="https://support.mozilla.org/en-US/kb/connection-settings-firefox/windows-firefox-proxy-settings-windows.png"> (Example of Firefox manual proxy settings).</p>
+<ol>
+<li><strong>Save</strong> the settings.</li>
+</ol>
+<p>Now, all traffic from Firefox will be routed through the SOCKS5 proxy running on your Vagrant guest VM, which connects to your DigitalOcean Shadowsocks server. This should bypass any Zscaler restrictions.</p>
+<h4>Step 4: Test the Setup</h4>
+<ol>
+<li>Open Firefox on the guest VM and visit a website that is typically restricted by Zscaler.</li>
+<li>Ensure the site loads, confirming that the traffic is routed through your DigitalOcean server and bypassing Zscaler.</li>
+</ol>
+<h3>Additional Steps (If Needed)</h3>
+<h4>Disable Ethernet on Host to Prevent Automatic Connection</h4>
+<p>Since your <strong>office screens automatically connect to Ethernet</strong>, you can disable the Ethernet interface temporarily on the <strong>Windows host</strong> to force all traffic through your guest VM.</p>
+<ol>
+<li>On your <strong>Windows host</strong>, disable Ethernet:</li>
+<li>Press <code>Win + R</code>, type <code>ncpa.cpl</code>, and press <strong>Enter</strong>.</li>
+<li>Right-click on the <strong>Ethernet</strong> adapter and choose <strong>Disable</strong>.</li>
+</ol>
+<p>This will prevent the automatic Ethernet connection when using office screens, forcing your internet traffic through the Vagrant guest VM.</p>
+<h4>Summary of Steps:</h4>
+<ol>
+<li><strong>DigitalOcean Server</strong>:</li>
 <li>
-<p>To remove package</p>
-<div class="highlight"><pre><span></span>sudo apt-get remove r-base
-sudo apt-get purge texlive*
-</pre></div>
-
-
+<p>Ensure Shadowsocks is running on port <code>443</code>.</p>
 </li>
 <li>
-<p>To reinstall package</p>
-<div class="highlight"><pre><span></span>sudo apt-get install --reinstall package_name
-</pre></div>
-
-
+<p><strong>Vagrant Guest VM</strong>:</p>
+</li>
+<li>Start Shadowsocks with <code>ss-local</code> on <code>localhost:1080</code>.</li>
+<li>
+<p>Configure Firefox to use <code>localhost:1080</code> as a SOCKS5 proxy.</p>
 </li>
 <li>
-<p><code>dpkg -l | grep miktex</code> to see what's installed</p>
+<p><strong>Test</strong>: Open restricted sites in Firefox on the guest VM to confirm Zscaler is bypassed.</p>
 </li>
-<li><code>dpkg -L package-name</code> to list files installed by some package</li>
-<li><code>dpkg -l | grep package_name</code> to see if package is installed</li>
-</ul>
-<h4>Show git branch name in Terminal</h4>
-<p>Add this to <code>.bashrc</code>:</p>
-<div class="highlight"><pre><span></span><span class="n">force_color_prompt</span><span class="o">=</span><span class="n">yes</span>
-<span class="n">color_prompt</span><span class="o">=</span><span class="n">yes</span>
-<span class="n">parse_git_branch</span><span class="p">()</span> <span class="p">{</span>
-<span class="n">git</span> <span class="n">branch</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;/^[^*]/d&#39;</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;s/* \(.*\)/(</span><span class="se">\1</span><span class="s1">)/&#39;</span>
-<span class="p">}</span>
-<span class="k">if</span> <span class="p">[</span> <span class="s2">&quot;$color_prompt&quot;</span> <span class="o">=</span> <span class="n">yes</span> <span class="p">];</span> <span class="n">then</span>
-<span class="n">PS1</span><span class="o">=</span><span class="s1">&#39;${debian_chroot:+($debian_chroot)}\[</span><span class="se">\033</span><span class="s1">[01;32m\]\u@\h\[</span><span class="se">\033</span><span class="s1">[00m\]:\[</span><span class="se">\033</span><span class="s1">[01;34m\]\w\[</span><span class="se">\033</span><span class="s1">[01;31m\]$(parse_git_branch)\[</span><span class="se">\033</span><span class="s1">[00m\]\$ &#39;</span>
-<span class="k">else</span>
-<span class="n">PS1</span><span class="o">=</span><span class="s1">&#39;${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ &#39;</span>
-<span class="n">fi</span>
-<span class="n">unset</span> <span class="n">color_prompt</span> <span class="n">force_color_prompt</span>
-</pre></div>
-
-
-<p><br></p>
-<h4><code>apt-get</code> vs. <code>pip install</code> vs. <code>conda install</code></h4>
-<ul>
-<li><code>apt-get</code> installs a (python) package/module system-wide.</li>
-<li><code>pip</code> installs module in venv only.</li>
-<li>If using <code>pip install</code> after activating the venv, module will be installed into that venv only.</li>
-<li><code>pip</code> installs a package/module within any environment.</li>
-<li><code>conda</code> installs module/package within conda environments.</li>
-</ul>
-<h4>Pip Cache</h4>
-<ul>
-<li><code>pip config set global.cache-dir false</code></li>
-<li><code>pip install NAME --no-cache-dir</code> e.g. <code>pip --no-cache-dir install scipy</code></li>
-<li><code>sudo rm -R ~/.cache/pipenv</code> and <code>sudo rm -R ~/.cache/pip</code></li>
-</ul>
-<h4>Misc.</h4>
-<ul>
-<li><a href="https://acethecloud.com/blog/linux-commands-for-sre/">100 Linux commands</a></li>
-<li>change nvidia gamma settings: <code>udo nano ~/.nvidia-settings-rc</code></li>
-<li><code>df -h</code> check disk space</li>
-<li><a href="https://itsfoss.com/how-to-find-the-process-id-of-a-program-and-kill-it-quick-tip/">kill process</a></li>
-<li><code>rm file</code> to remove file</li>
-<li><code>rm -r dirName</code> to remove directory</li>
-<li><code>ln -s /opt/robomongo/bin/robomongo ~/robomongo_lnk</code> to make a shortcut/alias</li>
-<li><code>pip list --local</code> to list installed packages in a given venv</li>
-<li>about the double dash <code>--</code><ul>
-<li>Almost all short options have a corresponding long option; <code>rm -f</code> is equivalent to <code>rm --force</code>.</li>
-<li>Many long options, though, have no corresponding short option.</li>
-</ul>
-</li>
-<li><a href="http://askubuntu.com/questions/739297/how-to-install-robomongo-ubuntu-system-please-let-me-know/781793">About the usr/bin directory</a></li>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-18-04">Increase Digitalocean memory</a></li>
-</ul>
+</ol>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="../Linux.html">posted at 00:00</a>
+                    <a href="../vagrant_vpn.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="../category/linux.html" rel="tag">Linux</a>
                 </div>
             </article>
@@ -279,7 +344,7 @@ sudo apt-get purge texlive*
 
                     <a href="../category/linux2.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 1 of 2</span>
+                    <span>Page 1 of 3</span>
                 </div>
 
             <div class="clear"></div>

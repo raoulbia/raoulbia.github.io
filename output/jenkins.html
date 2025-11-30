@@ -18,7 +18,6 @@
         <nav>
             <ul>
                 <li><a href="./">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
@@ -44,18 +43,16 @@
 <li><code>dpkg -L jenkins</code> will help you find what files the package installed</li>
 </ul>
 <h4>Build Periodically</h4>
-<div class="highlight"><pre><span></span># MINUTE (0-59), HOUR (0-23), DAY (1-31), MONTH (1-12), DAY OF THE WEEK (0-6)
-# weekday daily build twice a day, at _ and _ , Monday to Friday:
-H 10,17 * * 1-5
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="gh">#</span> MINUTE (0-59), HOUR (0-23), DAY (1-31), MONTH (1-12), DAY OF THE WEEK (0-6)
+<span class="gh">#</span> weekday daily build twice a day, at _ and _ , Monday to Friday:
+H 10,17 <span class="gs">* *</span> 1-5
+</code></pre></div>
 
 <h4>Build: Execute Windows Batch Command</h4>
-<div class="highlight"><pre><span></span>call C:\Users\Raoul.Biagioni\Miniconda3\Scripts\activate.bat C:\Users\Raoul.Biagioni\Miniconda3
+<div class="highlight"><pre><span></span><code>call C:\Users\Raoul.Biagioni\Miniconda3\Scripts\activate.bat C:\Users\Raoul.Biagioni\Miniconda3
 call conda activate gtfsRT
 python C:\\Users\\&lt;FirstName.LastName&gt;\\&lt;path-to-file&gt;\\scriptname.py
-</pre></div>
-
+</code></pre></div>
 
 <h4>Misc.</h4>
 <ul>

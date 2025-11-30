@@ -17,7 +17,6 @@
         <nav>
             <ul>
                 <li><a href="./">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
@@ -26,126 +25,163 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 27, 2018</h4>
+        <div id="content">            <h4 class="date">Dec 24, 2022</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./pandas_regexp.html" rel="bookmark" title="Permanent Link to &quot;Pandas Regular Expressions&quot;">Pandas Regular Expressions</a>
+                    <a href="./azure.html" rel="bookmark" title="Permanent Link to &quot;Azure&quot;">Azure</a>
                 </h2>
 
                 
                 
 
-                <h4>Extract Substring</h4>
-<div class="highlight"><pre><span></span># obtain Title from name (Mr, Mrs, Miss etc) by extracting up to but excluding the first dot (.)
-df[&#39;Title&#39;] = df.Name.str.extract(&#39; ([A-Za-z]+)\.&#39;, expand=False)
-</pre></div>
-
-
-<h4>String Matching</h4>
-<div class="highlight"><pre><span></span><span class="n">col</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;category&#39;</span><span class="w"></span>
-<span class="n">conditions</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">(tmp[col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)ISD&quot;</span><span class="p">)),</span><span class="w"></span>
-<span class="w">               </span><span class="p">(</span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)DST&quot;</span><span class="p">)),</span><span class="w"></span>
-<span class="w">               </span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)IT&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">              </span><span class="err">]</span><span class="w"></span>
-<span class="n">choices</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;ISD&#39;, &#39;DST&#39;, &#39;IT&#39;</span><span class="o">]</span><span class="w"></span>
-
-<span class="n">tmp</span><span class="o">[</span><span class="n">&quot;category_high_level&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="k">select</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span><span class="w"> </span><span class="n">choices</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="o">=</span><span class="n">tmp</span><span class="p">.</span><span class="n">category</span><span class="p">)</span><span class="w"></span>
-<span class="n">tmp</span><span class="p">.</span><span class="n">stb</span><span class="p">.</span><span class="n">freq</span><span class="p">(</span><span class="o">[</span><span class="n">&#39;category_high_level&#39;</span><span class="o">]</span><span class="p">).</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;category_high_level&#39;</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./pandas_regexp.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
-                </div>
-            </article>            <h4 class="date">Jan 26, 2018</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./python, pandas, nlp.html" rel="bookmark" title="Permanent Link to &quot;Pandas NLP&quot;">Pandas NLP</a>
-                </h2>
-
-                
-                
-
-                <h4>Useful Links</h4>
+                <p><br></p>
+<h3>Using Key Vault Secrets in Azure Data Factory</h3>
+<p>Key Vault secrets can be used to securely manage connections to services such as NAS drives or Databricks.</p>
+<h4>NAS Drive Linked Service</h4>
 <ul>
-<li><a href="https://stackoverflow.com/questions/39124492/nltk-regexpparser-chunk-phrase-by-matching-exactly-one-item">NLTK RegexpParser, chunk phrase by matching exactly one item</a></li>
-<li><a href="https://towardsdatascience.com/try-texthero-the-absolute-simplest-way-to-clean-and-analyze-text-in-pandas-6db86ed14272">TextHero: The Absolute Simplest way to Clean and Analyze Text in Pandas</a></li>
-<li><a href="https://pypi.org/project/shizen-gengo/">shizen-gengo</a></li>
+<li>Create a Service Account with priviliges to access a NAS drive</li>
+<li>create a new secret in KV with the password of the above Service Account</li>
+<li>use the secret, and the Service Account user name, in ADF when configuring a linked service for NAS drive</li>
+<li>use the linked service in an ADF Copy data activity</li>
 </ul>
-<h3>Imports</h3>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">io</span>
-<span class="kn">import</span> <span class="nn">unicodedata</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
-
-<span class="kn">import</span> <span class="nn">nltk</span>
-<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">RegexpTokenizer</span>
-<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">WordNetLemmatizer</span><span class="p">,</span> <span class="n">PorterStemmer</span>
-<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
-<span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
-<span class="n">stemmer</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span> 
-<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">RegexpTokenizer</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\w+&#39;</span><span class="p">)</span>
-<span class="n">words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">))</span> <span class="c1"># set() sppeds up stopword removal!!</span>
-</pre></div>
-
-
-<h3>SpaCy</h3>
-<p><code>$ python3 -m spacy download en_core_web_sm</code></p>
-<h3>NLTK</h3>
-<p>once off download required. from cmd, launch python and run:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;wordnet&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;averaged_perceptron_tagger&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;maxent_ne_chunker&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;words&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-
-
-<h4>NLTK Grammars</h4>
-<div class="highlight"><pre><span></span><span class="n">grammar</span> <span class="o">=</span> <span class="s2">&quot;NP: {(&lt;V\w+&gt;|&lt;NN\w?&gt;)+.*&lt;NN\w?&gt;}&quot;</span> 
-<span class="n">grammar</span> <span class="o">=</span> <span class="s2">&quot;NP: {&lt;DT&gt;?&lt;JJ|NN|V&gt;&lt;V|NN|NNS|NNP&gt;+}&quot;</span>
-<span class="n">grammar</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">  NP: {&lt;DT|PP\$&gt;?&lt;JJ&gt;*&lt;NN&gt;}   # chunk determiner/possessive, adjectives and noun</span>
-<span class="s2">  {&lt;NNP&gt;+}                # chunk sequences of proper nouns</span>
-<span class="s2">  {&lt;NN&gt;+}                 # chunk consecutive nouns</span>
-<span class="s2">  &quot;&quot;&quot;</span>
-</pre></div>
-
-
-<h3>Regexp</h3>
-<h4>Regexp String Matching</h4>
-<div class="highlight"><pre><span></span><span class="n">col</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;category&#39;</span><span class="w"></span>
-<span class="n">conditions</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">(tmp[col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)ISD&quot;</span><span class="p">)),</span><span class="w"></span>
-<span class="w">               </span><span class="p">(</span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)DST&quot;</span><span class="p">)),</span><span class="w"></span>
-<span class="w">               </span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)IT&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">              </span><span class="err">]</span><span class="w"></span>
-<span class="n">choices</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;ISD&#39;, &#39;DST&#39;, &#39;IT&#39;</span><span class="o">]</span><span class="w"></span>
-
-<span class="n">tmp</span><span class="o">[</span><span class="n">&quot;category_high_level&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="k">select</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span><span class="w"> </span><span class="n">choices</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="o">=</span><span class="n">tmp</span><span class="p">.</span><span class="n">category</span><span class="p">)</span><span class="w"></span>
-<span class="n">tmp</span><span class="p">.</span><span class="n">stb</span><span class="p">.</span><span class="n">freq</span><span class="p">(</span><span class="o">[</span><span class="n">&#39;category_high_level&#39;</span><span class="o">]</span><span class="p">).</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;category_high_level&#39;</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-
-
-<h4>Sentence Fragement by Word Window</h4>
-<div class="highlight"><pre><span></span><span class="n">pat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">&#39;(</span><span class="o">?</span><span class="n">P</span><span class="o">&lt;</span><span class="n">before</span><span class="o">&gt;</span><span class="p">(</span><span class="o">?:</span><span class="n">\w+\W+){,3})products\W+(?P&lt;after&gt;(?:\w+\W+){,3})&#39;</span><span class="w"></span>
-<span class="n">new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">str</span><span class="p">.</span><span class="n">extract</span><span class="p">(</span><span class="n">pat</span><span class="p">,</span><span class="w"> </span><span class="n">expand</span><span class="o">=</span><span class="n">True</span><span class="p">)</span><span class="w"></span>
-<span class="n">df</span><span class="p">.</span><span class="k">assign</span><span class="p">(</span><span class="o">**</span><span class="n">new</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-
-
-<h3>Misc.</h3>
-<h4>Extract words from a list</h4>
-<p><code>df['named_entities'] = [','.join(map(str, l)) for l in df['named_entities']]</code></p>
+<h4>Databricks Linked Service</h4>
+<ul>
+<li>Generate a token in Databricks and take note of it</li>
+<li>create a new secret in KV with the above token</li>
+<li>use the secret in ADF when configuring a linked service for databricks</li>
+<li>use the linked service in an ADF Databricks notebook activity</li>
+</ul>
+<h3>Azure ARM</h3>
+<h4>Deploy via Powershell</h4>
+<ul>
+<li><code>New-AzResourceGroup RG01 "South Central US"</code></li>
+<li><code>New-AzResourceGroupDeployment</code> adds a deployment to an existing resource group. (https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-9.3.0)</li>
+</ul>
+<h4>Useful Links</h4>
+<ul>
+<li>https://samcogan.com/deploying-resource-groups-with-arm-templates/</li>
+</ul>
+<p><br></p>
+<h3>Azure Fundamentals Exam (AZ-900)</h3>
+<ul>
+<li><a href="./drafts/azure_cloud_benefits_and_categories.html">Azure Cloud: Benefits and Categories</a></li>
+<li><a href="./drafts/azure_architectural_components.html">Azure Architectural Components</a></li>
+<li><a href="./drafts/azure_services.html">Azure Services</a></li>
+<li><a href="./drafts/azure_solutions.html">Azure Solutions</a></li>
+<li><a href="./drafts/azure_management_tools.html">Azure Management Tools</a></li>
+<li><a href="./drafts/azure_general_security.html">Azure General Security Features</a></li>
+<li><a href="./drafts/azure_network_security.html">Azure Network Security</a></li>
+<li><a href="./drafts/azure_identity_governance_privacy_compliance.html">Azure Identity, Governance, Privacy and Compliance Features</a></li>
+<li><a href="./drafts/azure_cost_management_and_sla.html">Azure Cost Management and SLA</a></li>
+</ul>
+<h3>Note about creating a Databricks Resource in Azure Portal</h3>
+<ul>
+<li>When creating a Databricks resource, Databricks will itself create a separate resource group (RG) with a storage account. This RG cannot be deleted via the porta;. See here for more: https://stackoverflow.com/questions/60694149/unable-to-remove-azure-databricks-managed-resource-group</li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./python, pandas, nlp.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                    <a href="./azure.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/azure.html" rel="tag">Azure</a>
+                </div>
+            </article>            <h4 class="date">Dec 24, 2022</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./azure_data_factory.html" rel="bookmark" title="Permanent Link to &quot;Azure Data Factory&quot;">Azure Data Factory</a>
+                </h2>
+
+                
+                
+
+                <p><br></p>
+<h3>Data Ingress</h3>
+<ul>
+<li>
+<p>Excel File with one or more Sheets </p>
+<ul>
+<li>New Dataset &gt; File tab &gt; File System &gt; Excel &gt; select linked service to NAS drive &gt; browse to NAS drive file &gt; select a Sheet name if applicable</li>
+</ul>
+</li>
+<li>
+<p>Netezza Table</p>
+<ul>
+<li>New Dataset &gt; Database tab &gt; Netezza &gt; select linked service to Netezza &gt; select table</li>
+</ul>
+</li>
+</ul>
+<h3>Linked Services</h3>
+<h4>Create a Linked Service to connect ADF to Databricks using Key Vault</h4>
+<p>Pre-requisites: </p>
+<ul>
+<li>
+<p>Create a <strong>Key Vault</strong> resource</p>
+<ul>
+<li><em>Secrets</em> &gt; add a secret holding the Databricks PAT </li>
+<li><strong><em>Access policies</em></strong><ul>
+<li>click <em>Create</em></li>
+<li>select <em>Get</em> and <em>List</em> for <em>Key permissions</em> and <em>Secret permissions</em></li>
+<li>in the search box enter the name of your Azure Data Factory, select it when it shows up and click next and create all the way</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>This requires two linked services</p>
+<ul>
+<li>Databrick ls &gt; get it from 'Compute' tab</li>
+<li>within this ls you are asked to specify an AKV linked service &gt; click on 'New'</li>
+</ul>
+</li>
+<li>
+<p>AKV linked Service</p>
+<ul>
+<li>Base URL should be prefilled</li>
+<li>Authentication Method: <em>System Assigned Managed Identity</em></li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3>Parameterizing ADF</h3>
+<h4>Pass a custom filename to Copy Activity Sink Dataset</h4>
+<p>Copy Activity:     import an Excel to Blob Storage as Parquet file</p>
+<p>Problem to solve:  give the parquet file a custom name</p>
+<p>Solution:          add a parameter to the dataset of interest (source, sink or both depending on use case)</p>
+<p>Explanation:       when a copy activity source, or sink, uses a dataset that has a parameter, the parameter will appear in the source, or sink, <em>Dataset properties</em>. Here you can then specifiy a value, either as hard coded string or as yet another parameter, that will then be passed to the Dataset <em>Connection</em> tab where it is referenced and will be replaced by the value passed to it.</p>
+<p>Steps: 
+* for the sink part (Blob Storage), you need a Parquet dataset with the required Linked Service to ADLS Gen2
+* in the Dataset <em>Parameters</em> tab, add a parameter named <em>sink_file</em> (String)
+* in the Dataset <em>Connection</em> tab, it is assumed the <em>File Path</em> boxes 1 and 2 are populated with the path to the blob storage container where the files will be saved. For <em>File Path</em> box 3, enter <em>@dataset().sink_file</em>
+* in the Copy Activity, under <em>Dataset Properties</em> of the sink, enter the value you wish to pass to the sink dataset. THis can be a string or anotehr parameter e.g. a value captured from a <em>Get Metadata</em> activity, or from a <em>Lookup</em> activity.</p>
+<h4>Query Database Tables and Save as Parquet File to Blob Storage</h4>
+<p>The solution has two core components: A <em>Lookup</em> activity and a <em>ForEach</em> activity.</p>
+<p>The <em>Lookup</em> activity 
+* the source dataset can be a CSV file on NAS drive. The columns in the file are <em>table_name</em> and <em>where_filter</em>. Each row represents one table to be queried by the <em>ForEach</em> loop.</p>
+<p>The <em>ForEach</em> activity
+* consists of two <em>Set variable</em> activities connected to a <em>Copy Data</em> activity.
+* the <em>Set variable</em> activities reference the values for table name and for the where filter passed through by the <em>Lookup</em> activity. The syntax is shown in the screenshot below.
+* the source of the <em>Copy Data</em> activity uses the following query: <em>@concat('select * from ', item().table_name,' ', item().where_filter)</em>. 
+* in the sink of the <em>Copy Data</em> activity we pass a dynamic value to parameter <em>parFile</em> of the sink Parquet dataset: <em>@concat(item().table_name,'_NTZ.parquet')</em></p>
+<p><img alt="" src="img/ForEach_activity_all.PNG"></p>
+<p>The dynamic filename passed to the Parquet dataset is shown below:</p>
+<p><img alt="" src="img/ds_parquet_params_config.PNG"></p>
+<h4>Create dynamic folder name for COPY activity (egress)</h4>
+<ul>
+<li>
+<p>source ADLSGen2:<br>
+<code>@concat('@concat('custom_dataset/shared_team_data/CG_BPT/BPT_CLIENT_EXCELS/', formatdatetime(utcnow(),'yyyy-MM-dd'))</code></p>
+</li>
+<li>
+<p>sink NAS Drive: <br>
+<code>@concat('Azure/CG/static_output_files/', formatDateTime(utcNow(),'yyyy'), '-' ,formatDateTime(utcNow(),'MM'), '-', formatDateTime(utcNow(),'dd'))</code></p>
+</li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./azure_data_factory.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/azure-cloud.html" rel="tag">Azure Cloud</a>
                 </div>
             </article>
 
@@ -156,7 +192,7 @@ df[&#39;Title&#39;] = df.Name.str.extract(&#39; ([A-Za-z]+)\.&#39;, expand=False
 
                     <a href="./index7.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 6 of 26</span>
+                    <span>Page 6 of 31</span>
                 </div>
 
             <div class="clear"></div>

@@ -17,7 +17,6 @@
         <nav>
             <ul>
                 <li><a href="./">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
@@ -26,117 +25,232 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 01, 2018</h4>
+        <div id="content">            <h4 class="date">Jan 26, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./pypi.html" rel="bookmark" title="Permanent Link to &quot;PyPi&quot;">PyPi</a>
+                    <a href="./python, pandas, nlp.html" rel="bookmark" title="Permanent Link to &quot;Pandas NLP&quot;">Pandas NLP</a>
                 </h2>
 
                 
                 
 
-                <h4>Pre-requisites</h4>
+                <h4>Useful Links</h4>
 <ul>
-<li>
-<p><code>pip install -U twine</code></p>
-</li>
-<li>
-<p>in <code>~.pypirc</code> add <code>chmod 600 ~/.pypirc</code></p>
-</li>
+<li><a href="https://stackoverflow.com/questions/39124492/nltk-regexpparser-chunk-phrase-by-matching-exactly-one-item">NLTK RegexpParser, chunk phrase by matching exactly one item</a></li>
+<li><a href="https://towardsdatascience.com/try-texthero-the-absolute-simplest-way-to-clean-and-analyze-text-in-pandas-6db86ed14272">TextHero: The Absolute Simplest way to Clean and Analyze Text in Pandas</a></li>
+<li><a href="https://pypi.org/project/shizen-gengo/">shizen-gengo</a></li>
 </ul>
-<h4>Deploy on PyPi</h4>
-<hr />
-<p><strong>Note</strong></p>
-<ul>
-<li>Make sure to update version information before deploying. 
-Files to update: <code>__init__.py</code> and <code>setup.py</code>.</li>
-<li>After deploying, don't forget to re-build the documentation at <a href="https://readthedocs.org/projects/shizen-gengo/builds">ReadTheDocs</a>.</li>
-</ul>
-<hr />
-<div class="highlight"><pre><span></span><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">rf</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">dist</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">setup</span><span class="o">.</span><span class="n">py</span><span class="w"> </span><span class="n">sdist</span><span class="w"></span>
-<span class="n">ls</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span><span class="w"></span>
-<span class="c1">#python setup.py check -r -s (obolete)</span><span class="w"></span>
-<span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">twine</span><span class="w"> </span><span class="n">check</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span><span class="w"></span>
-<span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w">  </span><span class="n">twine</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span><span class="w"></span>
-</pre></div>
+<h3>Imports</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">unicodedata</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
 
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">RegexpTokenizer</span>
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">WordNetLemmatizer</span><span class="p">,</span> <span class="n">PorterStemmer</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
+<span class="n">stemmer</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span> 
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">RegexpTokenizer</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\w+&#39;</span><span class="p">)</span>
+<span class="n">words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">))</span> <span class="c1"># set() sppeds up stopword removal!!</span>
+</code></pre></div>
 
-<h4>Misc.</h4>
-<ul>
-<li><a href="https://help.github.com/en/github/creating-cloning-and-archiving-repositories/licensing-a-repository">Licensing a repository
-</a></li>
-</ul>
+<h3>SpaCy</h3>
+<p><code>$ python3 -m spacy download en_core_web_sm</code></p>
+<h3>NLTK</h3>
+<p>once off download required. from cmd, launch python and run:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;wordnet&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;averaged_perceptron_tagger&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;maxent_ne_chunker&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;words&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>NLTK Grammars</h4>
+<div class="highlight"><pre><span></span><code><span class="n">grammar</span> <span class="o">=</span> <span class="s2">&quot;NP: {(&lt;V\w+&gt;|&lt;NN\w?&gt;)+.*&lt;NN\w?&gt;}&quot;</span> 
+<span class="n">grammar</span> <span class="o">=</span> <span class="s2">&quot;NP: {&lt;DT&gt;?&lt;JJ|NN|V&gt;&lt;V|NN|NNS|NNP&gt;+}&quot;</span>
+<span class="n">grammar</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">  NP: {&lt;DT|PP\$&gt;?&lt;JJ&gt;*&lt;NN&gt;}   # chunk determiner/possessive, adjectives and noun</span>
+<span class="s2">  {&lt;NNP&gt;+}                # chunk sequences of proper nouns</span>
+<span class="s2">  {&lt;NN&gt;+}                 # chunk consecutive nouns</span>
+<span class="s2">  &quot;&quot;&quot;</span>
+</code></pre></div>
+
+<h3>Regexp</h3>
+<h4>Regexp String Matching</h4>
+<div class="highlight"><pre><span></span><code><span class="n">col</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;category&#39;</span>
+<span class="n">conditions</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">(tmp[col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)ISD&quot;</span><span class="p">)),</span>
+<span class="w">               </span><span class="p">(</span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)DST&quot;</span><span class="p">)),</span>
+<span class="w">               </span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)IT&quot;</span><span class="p">)</span>
+<span class="w">              </span><span class="err">]</span>
+<span class="n">choices</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;ISD&#39;, &#39;DST&#39;, &#39;IT&#39;</span><span class="o">]</span>
+
+<span class="n">tmp</span><span class="o">[</span><span class="n">&quot;category_high_level&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="k">select</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span><span class="w"> </span><span class="n">choices</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="o">=</span><span class="n">tmp</span><span class="p">.</span><span class="n">category</span><span class="p">)</span>
+<span class="n">tmp</span><span class="p">.</span><span class="n">stb</span><span class="p">.</span><span class="n">freq</span><span class="p">(</span><span class="o">[</span><span class="n">&#39;category_high_level&#39;</span><span class="o">]</span><span class="p">).</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;category_high_level&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>Sentence Fragement by Word Window</h4>
+<div class="highlight"><pre><span></span><code><span class="n">pat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">&#39;(</span><span class="o">?</span><span class="n">P</span><span class="o">&lt;</span><span class="n">before</span><span class="o">&gt;</span><span class="p">(</span><span class="o">?:</span><span class="n">\w+\W+){,3})products\W+(?P&lt;after&gt;(?:\w+\W+){,3})&#39;</span>
+<span class="n">new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">str</span><span class="p">.</span><span class="n">extract</span><span class="p">(</span><span class="n">pat</span><span class="p">,</span><span class="w"> </span><span class="n">expand</span><span class="o">=</span><span class="n">True</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="k">assign</span><span class="p">(</span><span class="o">**</span><span class="n">new</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>Misc.</h3>
+<h4>Extract words from a list</h4>
+<p><code>df['named_entities'] = [','.join(map(str, l)) for l in df['named_entities']]</code></p>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./pypi.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/pypi.html" rel="tag">PyPi</a>
+                    <a href="./python, pandas, nlp.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
                 </div>
-            </article>            <h4 class="date">Dec 05, 2017</h4>
+            </article>            <h4 class="date">Jan 25, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./Git.html" rel="bookmark" title="Permanent Link to &quot;Git&quot;">Git</a>
+                    <a href="./python, pandas.html" rel="bookmark" title="Permanent Link to &quot;Pandas Applied&quot;">Pandas Applied</a>
                 </h2>
 
                 
                 
 
-                <h4>Set / Change remote origin url</h4>
-<div class="highlight"><pre><span></span>git remote add origin &lt;remote repository URL&gt;
-
-git remote set-url origin &lt;remote repository url&gt;
-</pre></div>
-
-
-<h4>Remove dir from remote but keep local</h4>
-<div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s1">&#39;.idea&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">.</span><span class="n">gitignore</span>
-<span class="n">git</span> <span class="n">rm</span> <span class="o">-</span><span class="n">r</span> <span class="o">--</span><span class="n">cached</span> <span class="o">.</span><span class="n">idea</span><span class="o">/</span> <span class="c1"># Remove the file from the repository</span>
-<span class="n">git</span> <span class="n">add</span> <span class="o">.</span><span class="n">gitignore</span>
-<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s1">&#39;remove dir from remote&#39;</span>
-<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>
-</pre></div>
-
-
-<h4>Git Tagging</h4>
-<div class="highlight"><pre><span></span>git add GTFSR.py
-git commit -m &quot;GTFSRT script initial commit&quot;
-git tag -a GTFSRT_v1.0 -m &quot;original GTFSRT script&quot;
-git push origin master tag GTFSRT_v1.0
-</pre></div>
-
-
-<h4>Git commands</h4>
+                <h4>Useful Links</h4>
 <ul>
-<li><code>git add -A</code></li>
-<li><code>git add .</code> to add a new file</li>
-<li><code>git remote -v</code></li>
-<li><code>git checkout --theirs PATH/FILE</code> if conflict: If solution is to accept remote/other-branch version</li>
-<li><code>git add -p</code> <a href="https://medium.com/@mc999/git-add-p-is-a-gamechanger-in-file-management-e4c879e89ab">read more</a></li>
-<li><code>git clone -b &lt;branch name&gt; &lt;rep url&gt;</code></li>
-<li><code>git add dir/*</code> to add new files or directories:</li>
-<li><code>git commit -m "update" $$ git push origin &lt;branch name&gt;</code></li>
-<li><code>git pull origin &lt;branch name&gt;</code></li>
-<li><code>git reset --hard origin/master</code></li>
-<li><code>git branch -a</code></li>
-<li><code>git remote show origin</code></li>
-<li><code>git checkout -- .</code> to remove all unstaged files in current working directory</li>
-<li><code>git branch -u origin/master</code> tell git that local branch (master) should compare itself to remote counterpart (origin/master)</li>
+<li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html">inter-annotator agreement</a></li>
 </ul>
-<h4>Useful Links</h4>
-<ul>
-<li><a href="https://stackoverflow.com/questions/4470523/create-a-branch-in-git-from-another-branch">Create a branch in Git from another branch</a></li>
-<li><a href="https://stackoverflow.com/questions/33101962/how-to-create-a-new-gitlab-repo-from-my-existing-local-git-repo-using-cli">How to create a new gitlab repo from my existing local git repo</a></li>
-<li><a href="https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/">Adding an existing project to GitHub using the command line</a></li>
-<li><a href="https://techbase.kde.org/Development/Git/Feature_Branch_Workflow">Feature_Branch_Workflow</a></li>
-<li><a href="https://stackoverflow.com/questions/67699/how-to-clone-all-remote-branches-in-git">How to clone all remote branches</a></li>
-</ul>
+<h3>Sentence Fragment: Search Window with RegExp</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">search_window</span><span class="p">(</span><span class="n">dataframe_col</span><span class="p">,</span> <span class="n">token</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">dataframe_col</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span> <span class="p">(</span><span class="s2">&quot;not a dataframe&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataframe_col</span><span class="p">))</span>
+    <span class="n">dataframe_col</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">dataframe_col</span> <span class="o">=</span> <span class="n">dataframe_col</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataframe_col</span><span class="p">))</span>
+    <span class="n">pat</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(?P&lt;before&gt;(?:\w+\W+){,8})(?i)&#39;</span> <span class="o">+</span> <span class="n">token</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;\W+(?P&lt;after&gt;(?:\w+\W+){,8})&#39;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">dataframe_col</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">pat</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="c1"># print(len(new))</span>
+    <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)))</span>
+</code></pre></div>
+
+<h3>Inter-annotator agreement</h3>
+<div class="highlight"><pre><span></span><code>Unit    obs1    obs2    obs3    obs4    obs5
+1       1       1       2       .       2
+2       1       1       0       1       .
+3       2       3       3       3       .
+4       .       0       0       .       0
+5       0       0       0       .       0
+6       0       0       0       .       0
+7       1       0       2       .       1
+</code></pre></div>
+
+<h4>Reshape data to triples in the form <code>(coder,item,label)</code></h4>
+<div class="highlight"><pre><span></span><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">other_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_1&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs1&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_2&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs2&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_3&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs3&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_4&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs4&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_5&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs5&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">cohen_kappa_score</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">input_eval_dp</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">file</span><span class="p">,</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">type_label_list</span><span class="p">):</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_eval_dp</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">eval_df</span> <span class="o">=</span> <span class="n">get_eval</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+    <span class="n">eval_typed_df</span> <span class="o">=</span> <span class="n">eval_df</span><span class="p">[</span><span class="n">eval_df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="nb">type</span><span class="p">]</span>
+
+    <span class="c1"># remove any rows where at least one NA is found</span>
+    <span class="n">eval_typed_df</span> <span class="o">=</span> <span class="n">eval_typed_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;judge_1&#39;</span><span class="p">,</span> <span class="s1">&#39;judge_2&#39;</span><span class="p">])</span>
+
+    <span class="c1"># transform the three columns with scores into a 15 x 3 matrix</span>
+    <span class="n">rankings</span> <span class="o">=</span> <span class="n">eval_typed_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">as_matrix</span><span class="p">()</span>
+
+    <span class="n">judge_A_matrix</span> <span class="o">=</span> <span class="n">rankings</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">judge_B_matrix</span> <span class="o">=</span> <span class="n">rankings</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Kappa Cohen 2 annotators</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&#39;</span><span class="si">{}</span><span class="s2">&#39;</span><span class="se">\t</span><span class="s2">inter annotator agreement between judge A and judge B&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">))</span>
+    <span class="n">cohen_kappa</span><span class="p">(</span><span class="n">judge_A_matrix</span><span class="p">,</span> <span class="n">judge_B_matrix</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>DataFrame.apply</h3>
+<p>df_a</p>
+<div class="highlight"><pre><span></span><code>   ent_a  count
+0   5197    1.0
+1  12766    2.0
+2   3091    2.0
+3   3162    1.0
+4   1956   13.0
+</code></pre></div>
+
+<p>df_ab</p>
+<div class="highlight"><pre><span></span><code>       ent_ab  count_ab
+0   5197-56744       1.0
+1   12766-5197       1.0
+2  12766-56744       1.0
+3    3091-3162       1.0
+4   3091-54583       1.0
+</code></pre></div>
+
+<h4>Add column:</h4>
+<p><code>df_ab['ent_a'] = df_ab.ent_ab.apply(lambda x: x.split('-')[0])</code></p>
+<p>df_ab:</p>
+<div class="highlight"><pre><span></span><code>        ent_ab  count_ab  ent_a
+0   5197-56744       1.0   5197
+1   12766-5197       1.0  12766
+2  12766-56744       1.0  12766
+3    3091-3162       1.0   3091
+4   3091-54583       1.0   3091
+</code></pre></div>
+
+<h4>Add column from df_a to df_ab:</h4>
+<p><code>df_ab['ent_a_count'] = df_ab.ent_a.apply(get_ent, args=(df_a, 'ent_a', ))</code></p>
+<h4>Add column with <code>apply</code>:</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_ent</span><span class="p">(</span><span class="n">ent_df_a</span><span class="p">,</span> <span class="n">df_a</span><span class="p">,</span> <span class="n">colname_df_ab</span><span class="p">):</span>
+    <span class="n">row_df_a</span> <span class="o">=</span> <span class="n">df_a</span><span class="p">[</span><span class="n">df_a</span><span class="p">[</span><span class="n">colname_df_ab</span><span class="p">]</span> <span class="o">==</span> <span class="n">ent_df_a</span><span class="p">]</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">row_df_a</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;count&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">i</span>
+</code></pre></div>
+
+<p>df_ab</p>
+<div class="highlight"><pre><span></span><code>        ent_ab  count_ab  ent_a  ent_b  ent_a_count
+0   5197-56744       1.0   5197  56744          1.0
+1   12766-5197       1.0  12766   5197          2.0
+2  12766-56744       1.0  12766  56744          2.0
+3    3091-3162       1.0   3091   3162          2.0
+4   3091-54583       1.0   3091  54583          2.0
+</code></pre></div>
+
+<h3>Kendall Tau rank correlation coefficient</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_kendall_tau</span><span class="p">(</span><span class="n">df_pop</span><span class="p">):</span>
+    <span class="c1"># testing</span>
+    <span class="c1"># x1 = [12, 2, 1, 12, 2]</span>
+    <span class="c1"># x2 = [1, 4, 7, 1, 0]</span>
+    <span class="c1"># remove random as they don&#39;t have a rank</span>
+    <span class="n">df_pop_kendall</span> <span class="o">=</span> <span class="n">df_pop</span><span class="p">[</span><span class="n">df_pop</span><span class="o">.</span><span class="n">source_tsne</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">df_pop_kendall</span><span class="p">[</span><span class="s1">&#39;rank_tsne&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">df_pop_kendall</span><span class="p">[</span><span class="s1">&#39;rank_avg_relevance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">tau</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">kendalltau</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span> <span class="c1"># scipy implementation scipy.stats.kendalltau</span>
+    <span class="k">return</span> <span class="n">tau</span><span class="p">,</span> <span class="n">p_value</span>
+</code></pre></div>
+
+<p><a href="https://en.wikipedia.org/wiki/Kendall_rank_correlation_coefficient">read more</a></p>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./Git.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/git.html" rel="tag">Git</a>
+                    <a href="./python, pandas.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
                 </div>
             </article>
 
@@ -147,7 +261,7 @@ git push origin master tag GTFSRT_v1.0
 
                     <a href="./index11.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 10 of 26</span>
+                    <span>Page 10 of 31</span>
                 </div>
 
             <div class="clear"></div>

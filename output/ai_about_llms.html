@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code snippets etc. | AI About LLMs</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="./">Home</a></li>
+                <li><a href="./archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="./">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Jan 01, 2024</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./ai_about_llms.html" rel="bookmark" title="Permanent Link to &quot;AI About LLMs&quot;">AI About LLMs</a>
+                </h2>
+
+                
+                
+
+                <p><br></p>
+<h3>Deploying LLMs Locally</h3>
+<h4>Setup ollama for executing open source LLM</h4>
+<div class="highlight"><pre><span></span><code>curl -fsSL https://ollama.com/install.sh | sh
+ollama pull llama2:latest
+ollama run llama2
+</code></pre></div>
+
+<h3>Finetuning LLMs</h3>
+<ul>
+<li>
+<p>there are a lot of different tokenizers and a tokenizer is really associated with 
+a specific model for each model as it was trained on it. And if you give the wrong tokenizer to your model, it'll 
+be very confused because it will expect different numbers to represent different sets of letters 
+and different words. So make sure you use the right tokenizer.</p>
+</li>
+<li>
+<p>The AutoTokenizer class from the Transformers library by HuggingFace automatically finds the right tokenizer or for your 
+model when you just specify what the model is. So all you have to do is put the model and name in.</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">AutoTokenizer</span>
+<span class="n">tokenizer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;EleutherAI/pythia-70m&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>Resources</h3>
+<ul>
+<li><a href="https://www.deeplearning.ai/short-courses/finetuning-large-language-models/">deeplearning.ai - Finetuning LLMs</a></li>
+<li>https://docs.crewai.com/how-to/LLM-Connections/#azure-open-ai-configuration</li>
+<li>https://kaustavmukherjee-66179.medium.com/create-eexcute-crew-ai-agent-with-llama2-model-without-any-need-og-openai-key-def216cd5f4f</li>
+<li>https://thoughtbot.com/blog/how-to-use-open-source-LLM-model-locally</li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./ai_about_llms.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/ai.html" rel="tag">AI</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

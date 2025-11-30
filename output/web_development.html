@@ -18,7 +18,6 @@
         <nav>
             <ul>
                 <li><a href="./">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
@@ -64,10 +63,9 @@
 <li><code>web: gunicorn project_name.wsgi</code> where <code>project_name</code> is name of dir in which <code>settings.py</code> is located.</li>
 </ul>
 <p>Procfile for standalone python script</p>
-<div class="highlight"><pre><span></span><span class="n">web</span><span class="o">:</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">script</span><span class="o">.</span><span class="na">py</span><span class="w"></span>
-<span class="n">worker</span><span class="o">:</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">script</span><span class="o">.</span><span class="na">py</span><span class="w"></span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">web</span><span class="o">:</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">script</span><span class="o">.</span><span class="na">py</span>
+<span class="n">worker</span><span class="o">:</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">script</span><span class="o">.</span><span class="na">py</span>
+</code></pre></div>
 
 <h4>Install Heroku CLI</h4>
 <p>Needed for <code>heroku login --interactive</code> and <code>heroku create</code>.</p>
@@ -131,24 +129,22 @@
 <p><br></p>
 <h3>Django2</h3>
 <p>Useful commands</p>
-<div class="highlight"><pre><span></span><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">startproject</span> <span class="n">app1</span>
+<div class="highlight"><pre><span></span><code><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">startproject</span> <span class="n">app1</span>
 <span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
 <span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
 <span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span>
 <span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Django templates</p>
 <p>in <code>settings.py</code></p>
-<div class="highlight"><pre><span></span> <span class="nv">BASE_DIR</span> <span class="o">=</span> <span class="nv">os</span>.<span class="nv">path</span>.<span class="k">dirname</span><span class="ss">(</span><span class="nv">os</span>.<span class="nv">path</span>.<span class="k">dirname</span><span class="ss">(</span><span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">abspath</span><span class="ss">(</span><span class="nv">__file__</span><span class="ss">)))</span>
+<div class="highlight"><pre><span></span><code> BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
  ...
- <span class="nv">TEMPLATES</span> <span class="o">=</span> [
+ TEMPLATES = [
    {
-       <span class="s1">&#39;</span><span class="s">DIRS</span><span class="s1">&#39;</span>: [<span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">join</span><span class="ss">(</span><span class="nv">BASE_DIR</span>, <span class="s1">&#39;</span><span class="s">firstwebsite/templates</span><span class="s1">&#39;</span><span class="ss">)</span>]
+       &#39;DIRS&#39;: [os.path.join(BASE_DIR, &#39;firstwebsite/templates&#39;)]
    }]
-</pre></div>
-
+</code></pre></div>
 
 <p>in <code>urls.py</code></p>
 <ul>
@@ -193,10 +189,9 @@
 <p><br></p>
 <h3>Node JS</h3>
 <p>Install nodejs:</p>
-<div class="highlight"><pre><span></span>curl -sL https://deb.nodesource.com/setup_8.x — Node.js 8 LTS &quot;Carbon&quot; | sudo -E bash -
+<div class="highlight"><pre><span></span><code>curl -sL https://deb.nodesource.com/setup_8.x — Node.js 8 LTS &quot;Carbon&quot; | sudo -E bash -
 sudo apt-get install -y nodejs
-</pre></div>
-
+</code></pre></div>
 
 <p>symlink issue with Vagrant VM shared folder:</p>
 <p><code>npm install --no-bin-links</code></p>

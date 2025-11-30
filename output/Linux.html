@@ -18,7 +18,6 @@
         <nav>
             <ul>
                 <li><a href="./">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
@@ -49,17 +48,26 @@
 <li><code>ps -a</code> or <code>sudo lsof -t -i:8888</code> then <code>kill -9 (processID)</code></li>
 <li>make script executable: <code>sudo chmod +x script.sh</code></li>
 <li>symbolic link: <code>sudo ln -s confluent-6.1.1/ confluent</code></li>
+<li>list files by name in ascending order of size</li>
 </ul>
+<div class="highlight"><pre><span></span><code><span class="nx">find</span><span class="w"> </span><span class="o">/</span><span class="nx">home</span><span class="o">/</span><span class="nx">vagrant</span><span class="o">/</span><span class="nx">miniconda3</span><span class="o">/</span><span class="nx">envs</span><span class="o">/</span><span class="nx">llamacpp</span><span class="o">-</span><span class="nx">dev</span><span class="o">/</span><span class="nx">lib</span><span class="o">/</span><span class="nx">python3</span><span class="m m-Double">.11</span><span class="o">/</span><span class="nx">site</span><span class="o">-</span><span class="nx">packages</span><span class="o">/</span><span class="nx">gguf_modeldb</span><span class="o">/</span><span class="nx">gguf_models</span><span class="w"> </span><span class="o">-</span><span class="k">type</span><span class="w"> </span><span class="nx">f</span><span class="w"> </span><span class="o">-</span><span class="nx">name</span><span class="w"> </span><span class="s">&quot;*.gguf&quot;</span><span class="w"> </span><span class="o">-</span><span class="nx">exec</span><span class="w"> </span><span class="nx">du</span><span class="w"> </span><span class="o">-</span><span class="nx">sh</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">sort</span><span class="w"> </span><span class="o">-</span><span class="nx">h</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">awk</span><span class="w"> </span><span class="err">&#39;</span><span class="p">{</span><span class="w"> </span><span class="nx">file</span><span class="p">=</span><span class="err">$</span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="nx">sub</span><span class="p">(</span><span class="s">&quot;.*/&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span><span class="w"> </span><span class="nx">print</span><span class="w"> </span><span class="err">$</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="p">}</span><span class="err">&#39;</span>
+</code></pre></div>
+
+<ul>
+<li>delete any file in the specified directory that starts with "mixtral"</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nx">find</span><span class="w"> </span><span class="o">/</span><span class="nx">home</span><span class="o">/</span><span class="nx">vagrant</span><span class="o">/</span><span class="nx">miniconda3</span><span class="o">/</span><span class="nx">envs</span><span class="o">/</span><span class="nx">llamacpp</span><span class="o">-</span><span class="nx">dev</span><span class="o">/</span><span class="nx">lib</span><span class="o">/</span><span class="nx">python3</span><span class="m m-Double">.11</span><span class="o">/</span><span class="nx">site</span><span class="o">-</span><span class="nx">packages</span><span class="o">/</span><span class="nx">gguf_modeldb</span><span class="o">/</span><span class="nx">gguf_models</span><span class="w"> </span><span class="o">-</span><span class="k">type</span><span class="w"> </span><span class="nx">f</span><span class="w"> </span><span class="o">-</span><span class="nx">name</span><span class="w"> </span><span class="s">&quot;mixtral*&quot;</span><span class="w"> </span><span class="o">-</span><span class="nx">exec</span><span class="w"> </span><span class="nx">rm</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="err">\</span><span class="p">;</span>
+</code></pre></div>
+
 <h4>Handy Tools</h4>
 <ul>
 <li><a href="https://fishshell.com/">Fish</a>: <code>sudo apt-get install fish</code></li>
 <li><a href="https://linuxize.com/post/getting-started-with-tmux/">Tmux</a>: <code>sudo apt-get install tmux</code></li>
 </ul>
 <h4>Pip install problems</h4>
-<div class="highlight"><pre><span></span>sudo apt-get install aptitude
+<div class="highlight"><pre><span></span><code>sudo apt-get install aptitude
 sudo aptitude install ...
-</pre></div>
-
+</code></pre></div>
 
 <h4>tmux Sessions</h4>
 <ul>
@@ -90,17 +98,15 @@ sudo aptitude install ...
 <li>To clean up <code>du -sh */</code></li>
 <li>
 <p>To remove package</p>
-<div class="highlight"><pre><span></span>sudo apt-get remove r-base
+<div class="highlight"><pre><span></span><code>sudo apt-get remove r-base
 sudo apt-get purge texlive*
-</pre></div>
-
+</code></pre></div>
 
 </li>
 <li>
 <p>To reinstall package</p>
-<div class="highlight"><pre><span></span>sudo apt-get install --reinstall package_name
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="nx">sudo</span><span class="w"> </span><span class="nx">apt</span><span class="o">-</span><span class="nx">get</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="o">--</span><span class="nx">reinstall</span><span class="w"> </span><span class="nx">package_name</span>
+</code></pre></div>
 
 </li>
 <li>
@@ -111,7 +117,7 @@ sudo apt-get purge texlive*
 </ul>
 <h4>Show git branch name in Terminal</h4>
 <p>Add this to <code>.bashrc</code>:</p>
-<div class="highlight"><pre><span></span><span class="n">force_color_prompt</span><span class="o">=</span><span class="n">yes</span>
+<div class="highlight"><pre><span></span><code><span class="n">force_color_prompt</span><span class="o">=</span><span class="n">yes</span>
 <span class="n">color_prompt</span><span class="o">=</span><span class="n">yes</span>
 <span class="n">parse_git_branch</span><span class="p">()</span> <span class="p">{</span>
 <span class="n">git</span> <span class="n">branch</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;/^[^*]/d&#39;</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;s/* \(.*\)/(</span><span class="se">\1</span><span class="s1">)/&#39;</span>
@@ -122,8 +128,7 @@ sudo apt-get purge texlive*
 <span class="n">PS1</span><span class="o">=</span><span class="s1">&#39;${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ &#39;</span>
 <span class="n">fi</span>
 <span class="n">unset</span> <span class="n">color_prompt</span> <span class="n">force_color_prompt</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><br></p>
 <h4><code>apt-get</code> vs. <code>pip install</code> vs. <code>conda install</code></h4>

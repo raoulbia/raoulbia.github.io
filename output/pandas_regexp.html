@@ -18,7 +18,6 @@
         <nav>
             <ul>
                 <li><a href="./">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
@@ -38,22 +37,21 @@
                 
 
                 <h4>Extract Substring</h4>
-<div class="highlight"><pre><span></span># obtain Title from name (Mr, Mrs, Miss etc) by extracting up to but excluding the first dot (.)
+<div class="highlight"><pre><span></span><code># obtain Title from name (Mr, Mrs, Miss etc) by extracting up to but excluding the first dot (.)
 df[&#39;Title&#39;] = df.Name.str.extract(&#39; ([A-Za-z]+)\.&#39;, expand=False)
-</pre></div>
-
+</code></pre></div>
 
 <h4>String Matching</h4>
-<div class="highlight"><pre><span></span><span class="n">col</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;category&#39;</span><span class="w"></span>
-<span class="n">conditions</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">(tmp[col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)ISD&quot;</span><span class="p">)),</span><span class="w"></span>
-<span class="w">               </span><span class="p">(</span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)DST&quot;</span><span class="p">)),</span><span class="w"></span>
-<span class="w">               </span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)IT&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">              </span><span class="err">]</span><span class="w"></span>
-<span class="n">choices</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;ISD&#39;, &#39;DST&#39;, &#39;IT&#39;</span><span class="o">]</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="n">col</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;category&#39;</span>
+<span class="n">conditions</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">(tmp[col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)ISD&quot;</span><span class="p">)),</span>
+<span class="w">               </span><span class="p">(</span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)DST&quot;</span><span class="p">)),</span>
+<span class="w">               </span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)IT&quot;</span><span class="p">)</span>
+<span class="w">              </span><span class="err">]</span>
+<span class="n">choices</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;ISD&#39;, &#39;DST&#39;, &#39;IT&#39;</span><span class="o">]</span>
 
-<span class="n">tmp</span><span class="o">[</span><span class="n">&quot;category_high_level&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="k">select</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span><span class="w"> </span><span class="n">choices</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="o">=</span><span class="n">tmp</span><span class="p">.</span><span class="n">category</span><span class="p">)</span><span class="w"></span>
-<span class="n">tmp</span><span class="p">.</span><span class="n">stb</span><span class="p">.</span><span class="n">freq</span><span class="p">(</span><span class="o">[</span><span class="n">&#39;category_high_level&#39;</span><span class="o">]</span><span class="p">).</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;category_high_level&#39;</span><span class="p">)</span><span class="w"></span>
-</pre></div>
+<span class="n">tmp</span><span class="o">[</span><span class="n">&quot;category_high_level&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="k">select</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span><span class="w"> </span><span class="n">choices</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="o">=</span><span class="n">tmp</span><span class="p">.</span><span class="n">category</span><span class="p">)</span>
+<span class="n">tmp</span><span class="p">.</span><span class="n">stb</span><span class="p">.</span><span class="n">freq</span><span class="p">(</span><span class="o">[</span><span class="n">&#39;category_high_level&#39;</span><span class="o">]</span><span class="p">).</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;category_high_level&#39;</span><span class="p">)</span>
+</code></pre></div>
                 <div class="clear"></div>
 
                 <div class="info">

@@ -18,7 +18,6 @@
         <nav>
             <ul>
                 <li><a href="./">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
@@ -39,33 +38,29 @@
 
                 <h3>Useful C++ snippets</h3>
 <h4>useful headers</h4>
-<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;typeinfo&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span><span class="c1"> # to use fabs() to get the absolute value of a double</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Rcpp.h&gt;</span><span class="cp"></span>
-<span class="n">using</span><span class="w"> </span><span class="n">namespace</span><span class="w"> </span><span class="nn">Rcpp</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="n">using</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;typeinfo&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span><span class="c1"> # to use fabs() to get the absolute value of a double</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Rcpp.h&gt;</span>
+<span class="n">using</span><span class="w"> </span><span class="n">namespace</span><span class="w"> </span><span class="nn">Rcpp</span><span class="w"> </span><span class="p">;</span>
+<span class="n">using</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="p">;</span>
+</code></pre></div>
 
 <h4>ensure that R Studio console prints out decimals</h4>
-<div class="highlight"><pre><span></span><span class="nt">cout</span><span class="p">.</span><span class="nc">precision</span><span class="o">(</span><span class="nt">4</span><span class="o">)</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
-<span class="nt">cout</span><span class="p">.</span><span class="nc">setf</span><span class="o">(</span><span class="nt">std</span><span class="p">::</span><span class="nd">ios</span><span class="p">::</span><span class="nd">fixed</span><span class="o">)</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="nt">cout</span><span class="p">.</span><span class="nc">precision</span><span class="o">(</span><span class="nt">4</span><span class="o">)</span><span class="w"> </span><span class="o">;</span>
+<span class="nt">cout</span><span class="p">.</span><span class="nc">setf</span><span class="o">(</span><span class="nt">std</span><span class="p">::</span><span class="nd">ios</span><span class="p">::</span><span class="nd">fixed</span><span class="o">)</span><span class="w"> </span><span class="o">;</span>
+</code></pre></div>
 
 <h4>print statement</h4>
-<div class="highlight"><pre><span></span><span class="nt">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s2">&quot;x is of type: &quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="nt">typeid</span><span class="o">(</span><span class="nt">x</span><span class="o">)</span><span class="p">.</span><span class="nc">name</span><span class="o">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="nt">std</span><span class="p">::</span><span class="nd">endl</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;x is of type: &quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="nx">typeid</span><span class="p">(</span><span class="nx">x</span><span class="p">).</span><span class="nx">name</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="nx">std</span><span class="o">::</span><span class="nx">endl</span><span class="w"> </span><span class="p">;</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span><span class="cm">/*** R </span>
-<span class="cm"># Does the function give the same results as R&#39;s weighted.mean() function?</span>
-<span class="cm">all.equal(weighted_mean_cpp(x, w), weighted.mean(x, w))</span>
-<span class="cm">*/</span><span class="w"></span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="o">/***</span><span class="w"> </span><span class="n">R</span><span class="w"> </span>
+#<span class="w"> </span><span class="n">Does</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">give</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">R</span><span class="o">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">weighted</span><span class="p">.</span><span class="nb">mean</span><span class="p">()</span><span class="w"> </span><span class="k">function</span>?
+<span class="n">all</span><span class="p">.</span><span class="n">equal</span><span class="p">(</span><span class="n">weighted_mean_cpp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">),</span><span class="w"> </span><span class="n">weighted</span><span class="p">.</span><span class="nb">mean</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">))</span>
+<span class="o">*/</span>
+</code></pre></div>
 
 <h4>Rcpp</h4>
 <ul>
@@ -82,37 +77,36 @@
 an error: <code>Rcpp.h: No such file or directory</code>.</li>
 </ul>
 <h4><code>task.json</code></h4>
-<div class="highlight"><pre><span></span>{
-  &quot;version&quot;: &quot;2.0.0&quot;,
-  &quot;tasks&quot;: [
-    {
-      &quot;type&quot;: &quot;shell&quot;,
-      &quot;label&quot;: &quot;build&quot;,
-      &quot;command&quot;: &quot;g++&quot;,
-      &quot;args&quot;: [
-        &quot;./MCQ/mcq1.cpp&quot;,
-        &quot;-o&quot;,
-        &quot;<span class="cp">${</span><span class="n">workspaceFolderBasename</span><span class="cp">}</span>&quot;
-      ],
-      &quot;problemMatcher&quot;: []
-    },
-    {
-      &quot;type&quot;: &quot;shell&quot;,
-      &quot;label&quot;: &quot;run&quot;,
-      &quot;command&quot;: &quot;./<span class="cp">${</span><span class="n">workspaceFolderBasename</span><span class="cp">}</span>&quot;,
-      &quot;dependsOn&quot;: [
-        &quot;build&quot;
-      ],
-      &quot;problemMatcher&quot;: [],
-      &quot;group&quot;: {
-        &quot;kind&quot;: &quot;build&quot;,
-        &quot;isDefault&quot;: true
-      }
-    }
-  ]
+<div class="highlight"><pre><span></span><code>{
+<span class="w">  </span>&quot;version&quot;:<span class="w"> </span>&quot;2.0.0&quot;,
+<span class="w">  </span>&quot;tasks&quot;:<span class="w"> </span>[
+<span class="w">    </span>{
+<span class="w">      </span>&quot;type&quot;:<span class="w"> </span>&quot;shell&quot;,
+<span class="w">      </span>&quot;label&quot;:<span class="w"> </span>&quot;build&quot;,
+<span class="w">      </span>&quot;command&quot;:<span class="w"> </span>&quot;g++&quot;,
+<span class="w">      </span>&quot;args&quot;:<span class="w"> </span>[
+<span class="w">        </span>&quot;./MCQ/mcq1.cpp&quot;,
+<span class="w">        </span>&quot;-o&quot;,
+<span class="w">        </span>&quot;<span class="cp">${</span><span class="n">workspaceFolderBasename</span><span class="cp">}</span>&quot;
+<span class="w">      </span>],
+<span class="w">      </span>&quot;problemMatcher&quot;:<span class="w"> </span>[]
+<span class="w">    </span>},
+<span class="w">    </span>{
+<span class="w">      </span>&quot;type&quot;:<span class="w"> </span>&quot;shell&quot;,
+<span class="w">      </span>&quot;label&quot;:<span class="w"> </span>&quot;run&quot;,
+<span class="w">      </span>&quot;command&quot;:<span class="w"> </span>&quot;./<span class="cp">${</span><span class="n">workspaceFolderBasename</span><span class="cp">}</span>&quot;,
+<span class="w">      </span>&quot;dependsOn&quot;:<span class="w"> </span>[
+<span class="w">        </span>&quot;build&quot;
+<span class="w">      </span>],
+<span class="w">      </span>&quot;problemMatcher&quot;:<span class="w"> </span>[],
+<span class="w">      </span>&quot;group&quot;:<span class="w"> </span>{
+<span class="w">        </span>&quot;kind&quot;:<span class="w"> </span>&quot;build&quot;,
+<span class="w">        </span>&quot;isDefault&quot;:<span class="w"> </span>true
+<span class="w">      </span>}
+<span class="w">    </span>}
+<span class="w">  </span>]
 }
-</pre></div>
-
+</code></pre></div>
 
 <h4>C++ related Help Files</h4>
 <ul>

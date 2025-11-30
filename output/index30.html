@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code snippets etc. | Page 30</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="./">Home</a></li>
+                <li><a href="./archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="./">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Apr 24, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./public_transport_data.html" rel="bookmark" title="Permanent Link to &quot;Public Transport Data&quot;">Public Transport Data</a>
+                </h2>
+
+                
+                
+
+                <p><a href="https://gtfs.org/reference/static/#field-definitions">GTFS Field Definitions</a></p>
+<p><a href="http://transitfeeds.com/p/transport-for-ireland">Transit Feeds Transport for Ireland</a></p>
+<p><a href="https://data.smartdublin.ie/dataset?category=Transport+and+Infrastructure">Dublinked Transport and Infrastructure</a></p>
+<h2>TransitFeed</h2>
+<p><a href="https://github.com/google/transitfeed">github.com/google/transitfeed</a></p>
+<h3>Feed Validator</h3>
+<p><a href="https://github.com/google/transitfeed/wiki/FeedValidator">/wiki/FeedValidator</a></p>
+<p><code>python feedvalidator.py dublin_bus_gtfs.zip</code></p>
+<p>Note: Written for Python 2. Make sure to create conda env with pyton 2.7!</p>
+<h3>Schedule Viewer (Map)</h3>
+<p><code>python schedule_viewer.py --feed_filename dublin_bus_gtfs.zip</code></p>
+<p>then go to <code>http://localhost:8765/</code></p>
+<p>Notes: </p>
+<ul>
+<li>add API key to <code>/home/user/shared/transitfeed/gtfsscheduleviewer/files/index.html</code></li>
+<li>and to <code>/home/user/shared/transitfeed/schedule_viewer.py</code> (TBC if this can be dropped)</li>
+<li>restrict API key - see <a href="https://stackoverflow.com/questions/46560859/expiredkeymaperror-on-newly-generated-api-key">this SO post</a></li>
+</ul>
+<h2>GTFS Ready Set Go</h2>
+<p><a href="https://github.com/ondata/gtfsreadysetgo">github.com/ondata/gtfsreadysetgo</a></p>
+<p><a href="https://medium.com/tantotanto/gtfs-pronti-partenza-via-23aa4a42c48e">GTFS, pronti, partenza, via …</a></p>
+<p><code>GTFS ready, set, go</code> is a <strong>bash script</strong> to </p>
+<ul>
+<li>download a GTFS file, and </li>
+<li>convert it to a spatialite file (stops and the routes tables)</li>
+<li>create report about the GTFS data</li>
+<li>export the stops and the routes tables in GeoJSON and KML formats</li>
+</ul>
+<p>The files produced by this script can be imported int QGIS.</p>
+<h2>GTFS Real Time (upcoming)</h2>
+<p><a href="https://gtfs.org/reference/realtime/v2/">GTFS Realtime Reference v2</a></p>
+<p><a href="https://github.com/seanrees/gtfs-upcoming">github.com/seanrees/gtfs-upcoming</a></p>
+<div class="highlight"><pre><span></span><code>sudo kill -9 `sudo lsof -t -i:6824`
+python main.py --config=config.ini --env=prod --port=6824 --promport=800
+http://127.0.0.1:6824/upcoming.json
+</code></pre></div>
+
+<p>Notes:</p>
+<ul>
+<li><a href="https://developer.nationaltransport.ie/">NTA API Developer Portal</a></li>
+<li>add API keys to <code>/home/user/shared/gtfs-upcoming/config.ini</code></li>
+</ul>
+<h2>GTFSDB</h2>
+<p><a href="https://github.com/OpenTransitTools/gtfsdb">github.com/OpenTransitTools/gtfsdb</a></p>
+<p><code>bin/gtfsdb-load --database_url postgresql://postgres:user@localhost:5432 dublin_bus_gtfs.zip</code></p>
+<p>Notes:</p>
+<ul>
+<li>Must git clone inside root directory of VM (not the shared directory!)</li>
+<li>requirements: geoalchemy2, psycopg2, SQLAlchemy, zc.recipe.egg</li>
+<li><a href="https://github.com/OpenTransitTools/gtfsdb#install-and-use-via-the-gtfsdb-source-tree">installation with buildout</a></li>
+<li>the database url must contain <code>username:password</code> e.g. <code>postgres:user</code></li>
+<li>the port number can be found using <code>grep -H '^port' /etc/postgresql/*/main/postgresql.conf</code></li>
+</ul>
+<h2>GeoJson</h2>
+<ul>
+<li>uses [long, lat]</li>
+</ul>
+<h2></h2>
+<h2>Others (to be reviewed)</h2>
+<ul>
+<li><a href="https://github.com/cbick/gtfs_SQL_importer">github.com/cbick/gtfs_SQL_importer</a></li>
+<li><a href="https://bennettgarner.medium.com/parsing-gtfs-format-transit-data-in-real-time-with-python-3a528ba7aab7">Parsing GTFS format transit data in real time with Python</a></li>
+<li><a href="https://github.com/departmentfortransport/Open_NaPTAN">Open_NaPTAN</a></li>
+<li><a href="https://pypi.org/project/transx2gtfs/">transx2gtfs</a></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./public_transport_data.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/public-transport-data.html" rel="tag">Public Transport Data</a>
+                </div>
+            </article>            <h4 class="date">Jan 25, 2015</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./pelican.html" rel="bookmark" title="Permanent Link to &quot;Pelican How To&quot;">Pelican How To</a>
+                </h2>
+
+                
+                
+
+                <p><a href="https://blog.getpelican.com/">Pelican</a> is a static site generator, written in Python, that requires no database or server-side logic.</p>
+<h3>Environment Setup</h3>
+<ol>
+<li>
+<p>Create a public repository on github e.g. username.github.io</p>
+</li>
+<li>
+<p>Create a project directory for your blog and save the <code>requirements.txt</code> file in that directory. See the links in the
+   Resources section below for examples of what the file should contain.</p>
+</li>
+<li>
+<p>Setup a virtual environment</p>
+<div class="highlight"><pre><span></span><code>conda create --name myblog python=3.5
+conda activate myblog
+pip install -r requirements.txt
+pelican-quickstart
+git clone https://github.com/getpelican/pelican-plugins.git
+</code></pre></div>
+
+</li>
+<li>
+<p>Connect to repo</p>
+<div class="highlight"><pre><span></span><code><span class="n">git</span><span class="w"> </span><span class="n">remote</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="n">git</span><span class="nv">@github</span><span class="p">.</span><span class="nl">com</span><span class="p">:</span><span class="n">raoulbia</span><span class="o">/</span><span class="n">raoulbia</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">git</span>
+</code></pre></div>
+
+<p>To test run <code>git remote -v</code>. You should see your repo listed.</p>
+</li>
+<li>
+<p>Create a new branch for hosting the pelican source code.</p>
+<div class="highlight"><pre><span></span><code>git checkout -b pelican
+</code></pre></div>
+
+</li>
+<li>
+<p>Install IPython notebook</p>
+<div class="highlight"><pre><span></span><code>mkdir plugins &amp;&amp; cd plugins
+git submodule add git://github.com/danielfrg/pelican-ipynb.git ipynb
+git submodule add https://github.com/barrysteyn/pelican_plugin-render_math.git render_math
+</code></pre></div>
+
+</li>
+<li>
+<p>In order to activate the plugin, add these lines at the bottom of <code>pelicanconf.py</code>:</p>
+<div class="highlight"><pre><span></span><code>MARKUP = (&#39;md&#39;, &#39;ipynb&#39;)
+PLUGIN_PATH = &#39;./plugins&#39;
+PLUGINS = [&#39;ipynb.markup&#39;, &#39;render_math&#39;]
+</code></pre></div>
+
+</li>
+<li>
+<p>Fetch <code>`.gitignore</code> from <a href="https://github.com/getpelican/pelican-blog/blob/master/.gitignore">here</a> - save it to root</p>
+</li>
+</ol>
+<h3>Pelican Themes</h3>
+<p>The installation of themes proved to be rather tricky. It is possible to add all existing Pelican themes to your
+development repository. However in my experience they are not straightforward to install or don't work. I may have done
+something wrong when trying to do so but in the end I settled for the <a href="https://github.com/jody-frankowski/blue-penguin">blue-penguin</a>
+theme. It should be noted that the default Pelican theme may suffice to some users in which case this section can be
+skipped.</p>
+<p>To add all existing Pelican themes to your development repository</p>
+<div class="highlight"><pre><span></span><code>git clone --recursive https://github.com/getpelican/pelican-themes ./pelican-themes
+</code></pre></div>
+
+<p>To install one of the downloaded themes</p>
+<div class="highlight"><pre><span></span><code>pelican-themes --install ./pelican-themes/name-of-theme --verbose
+</code></pre></div>
+
+<p>Alternatively you can just get the one theme you want to use</p>
+<div class="highlight"><pre><span></span><code>git clone https://github.com/jody-frankowski/blue-penguin.git ./pelican-themes
+</code></pre></div>
+
+<h4>Config Files</h4>
+<p>Now to the part that took me a while to figure out: 
+the theme of choice must be specified in <strong>both</strong> <code>publishconf.py</code> and <code>pelicanconf.py</code>!</p>
+<ul>
+<li>
+<p>in <code>publishconf.py</code> add the following line: <code>THEME = "blue-penguin"</code></p>
+</li>
+<li>
+<p>in <code>pelicanconf.py</code> add the following line: <code>THEME = "./pelican-themes/blue-penguin"</code></p>
+</li>
+</ul>
+<h3>Local Testing</h3>
+<p>Note: First, activate your virtual environment e.g. <code>$ source activate venv-name</code></p>
+<ol>
+<li>
+<p>start Localhost : <code>make devserver</code></p>
+</li>
+<li>
+<p>add/remove/modify page(s)</p>
+</li>
+<li>
+<p>preview <code>localhost:8000/</code> in your browser</p>
+<p>To stop localhost type <code>Ctrl + c</code> then run below command twice</p>
+<div class="highlight"><pre><span></span><code>kill -9 $(lsof -i TCP:8000 | grep LISTEN | awk &#39;{print $2}&#39;)
+</code></pre></div>
+
+</li>
+</ol>
+<h3>Deploy to Github</h3>
+<p>Note: First, activate your virtual environment e.g. <code>$ source activate venv-name</code></p>
+<p>There are two sides to Pelican publishing on Github: publishing the blog pages (master branch) and pushing the
+project source code (pelican branch). To publish either run the code below.</p>
+<hr>
+<p><strong>NOTE</strong>
+  IMPORTANT RUN THIS FROM THE PELICAN BRANCH!</p>
+<hr>
+<h4>Publish Blog pages</h4>
+<div class="highlight"><pre><span></span><code><span class="n">pelican</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">-</span><span class="n">s</span><span class="w"> </span><span class="n">pelicanconf</span><span class="o">.</span><span class="n">py</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="n">ghp</span><span class="o">-</span><span class="kn">import</span><span class="w"> </span><span class="nn">output</span><span class="w"> </span><span class="o">-</span><span class="n">r</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="n">master</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="n">git</span><span class="w"> </span><span class="n">push</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="n">master</span>
+</code></pre></div>
+
+<h4>Push Source Code</h4>
+<div class="highlight"><pre><span></span><code>git add -A &amp;&amp;
+git commit -a -m &quot;Update&quot; &amp;&amp;
+git push -u origin pelican
+</code></pre></div>
+
+<h3>Finally ...</h3>
+<p>Try visiting your page e.g. <a href="http://raoulbia.github.io">http://raoulbia.github.io</a> -- you should see your blog!</p>
+<p><br></p>
+<h3>DevOps YAML File</h3>
+<div class="highlight"><pre><span></span><code><span class="n">trigger</span><span class="p">:</span>
+<span class="o">-</span><span class="w"> </span><span class="n">pelican</span>
+
+<span class="n">pool</span><span class="p">:</span>
+<span class="w">  </span><span class="n">vmImage</span><span class="p">:</span><span class="w"> </span><span class="n">ubuntu</span><span class="o">-</span><span class="n">latest</span>
+<span class="n">strategy</span><span class="p">:</span>
+<span class="w">  </span><span class="n">matrix</span><span class="p">:</span>
+<span class="w">    </span><span class="n">Python37</span><span class="p">:</span>
+<span class="w">      </span><span class="n">python</span><span class="o">.</span><span class="n">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.7&#39;</span>
+<span class="w">  </span><span class="n">maxParallel</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">steps</span><span class="p">:</span>
+<span class="o">-</span><span class="w"> </span><span class="n">checkout</span><span class="p">:</span><span class="w"> </span><span class="bp">self</span>
+<span class="w">  </span><span class="n">persistCredentials</span><span class="p">:</span><span class="w"> </span><span class="n">true</span>
+<span class="o">-</span><span class="w"> </span><span class="n">task</span><span class="p">:</span><span class="w"> </span><span class="n">UsePythonVersion</span><span class="o">@</span><span class="mi">0</span>
+<span class="w">  </span><span class="n">inputs</span><span class="p">:</span>
+<span class="w">    </span><span class="n">versionSpec</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(python.version)&#39;</span>
+
+<span class="o">-</span><span class="w"> </span><span class="n">script</span><span class="p">:</span><span class="w"> </span><span class="n">echo</span><span class="w"> </span><span class="n">Hello</span><span class="p">,</span><span class="w"> </span><span class="n">world</span><span class="err">!</span>
+<span class="w">  </span><span class="n">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Run a one-line script&#39;</span>
+
+<span class="o">-</span><span class="w"> </span><span class="n">script</span><span class="p">:</span><span class="w"> </span><span class="o">|</span>
+<span class="w">    </span><span class="n">echo</span><span class="w"> </span><span class="n">Add</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">tasks</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">build</span><span class="p">,</span><span class="w"> </span><span class="n">test</span><span class="p">,</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">deploy</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">project</span><span class="o">.</span>
+<span class="w">    </span><span class="n">echo</span><span class="w"> </span><span class="n">See</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">aka</span><span class="o">.</span><span class="n">ms</span><span class="o">/</span><span class="n">yaml</span>
+<span class="w">    </span><span class="n">virtualenv</span><span class="w"> </span><span class="o">~/</span><span class="n">virtualenvs</span><span class="o">/</span><span class="n">pelican</span>
+<span class="w">    </span><span class="n">cd</span><span class="w"> </span><span class="o">~/</span><span class="n">virtualenvs</span><span class="o">/</span><span class="n">pelican</span>
+<span class="w">    </span><span class="o">.</span><span class="w"> </span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+<span class="w">    </span><span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">Markdown</span><span class="o">==</span><span class="mf">2.6.6</span>
+<span class="w">    </span><span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">pelican</span><span class="o">==</span><span class="mf">3.6.3</span>
+<span class="w">    </span><span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">ghp</span><span class="o">-</span><span class="n">import</span><span class="o">==</span><span class="mf">0.4.1</span>
+<span class="w">    </span><span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">jinja2</span><span class="o">==</span><span class="mf">3.0</span>
+<span class="w">    </span><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jody</span><span class="o">-</span><span class="n">frankowski</span><span class="o">/</span><span class="n">blue</span><span class="o">-</span><span class="n">penguin</span><span class="o">.</span><span class="n">git</span><span class="w"> </span><span class="o">./</span><span class="n">pelican</span><span class="o">-</span><span class="n">themes</span><span class="o">/</span><span class="n">theme</span><span class="o">/</span><span class="n">blue</span><span class="o">-</span><span class="n">penguin</span>
+<span class="w">    </span><span class="n">pelican</span><span class="o">-</span><span class="n">themes</span><span class="w"> </span><span class="o">--</span><span class="n">install</span><span class="w"> </span><span class="o">./</span><span class="n">pelican</span><span class="o">-</span><span class="n">themes</span><span class="o">/</span><span class="n">theme</span><span class="o">/</span><span class="n">blue</span><span class="o">-</span><span class="n">penguin</span>
+<span class="w">    </span><span class="n">pelican</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">-</span><span class="n">s</span><span class="w"> </span><span class="n">pelicanconf</span><span class="o">.</span><span class="n">py</span>
+<span class="w">    </span><span class="n">ghp</span><span class="o">-</span><span class="kn">import</span><span class="w"> </span><span class="nn">output</span><span class="w"> </span><span class="o">-</span><span class="n">r</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="n">master</span>
+<span class="w">    </span><span class="n">git</span><span class="w"> </span><span class="n">push</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">usernbame</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">PAT</span><span class="w"> </span><span class="n">Token</span><span class="o">&gt;</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">username</span><span class="o">/</span><span class="n">repo</span><span class="o">.</span><span class="n">git</span><span class="w"> </span><span class="n">master</span><span class="w"> </span><span class="o">--</span><span class="n">force</span>
+<span class="w">  </span><span class="n">displayName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Run a multi-line script&#39;</span>
+</code></pre></div>
+
+<p><br></p>
+<h4>Useful Links</h4>
+<ul>
+<li><a href="https://cloudbytes.dev/snippets/add-a-table-of-contents-using-markdown-in-pelican">Add a Table of Contents using Markdown in Pelican</a></li>
+<li>Pelican and ipynb error: <a href="http://marohn-public.site44.com/Marohn-20171011-102214--Pelican-and-ipynb.html">http://marohn-public.site44.com/Marohn-20171011-102214--Pelican-and-ipynb.html</a></li>
+<li><a href="http://anotherdatum.com/pelican-and-github-pages-workflow.html">http://anotherdatum.com/pelican-and-github-pages-workflow.html</a> (Excellent!)</li>
+<li><a href="http://www.christianlong.com/blog/more-on-pelican-themes.html">http://www.christianlong.com/blog/more-on-pelican-themes.html</a></li>
+<li><a href="https://rasor.github.io/using-pelican-blog-on-github-pages.html">https://rasor.github.io/using-pelican-blog-on-github-pages.html</a></li>
+<li><a href="http://jamesnewbrain.com/how-to-host-pelican-github-vps-blog.html#ii-use-pelicans-simple-dev-server-to-preview-posts-in-browser-as-you-edit">http://jamesnewbrain.com/how-to-host-pelican-github-vps-blog.html#ii-use-pelicans-simple-dev-server-to-preview-posts-in-browser-as-you-edit</a></li>
+<li><a href="http://docs.getpelican.com/en/3.3.0/getting_started.html">http://docs.getpelican.com/en/3.3.0/getting_started.html</a></li>
+<li><a href="http://docs.getpelican.com/en/3.6.3/content.html#syntax-highlighting">http://docs.getpelican.com/en/3.6.3/content.html#syntax-highlighting</a></li>
+<li><a href="http://jamesgregson.ca/using-the-pelican-static-website-generator.html">http://jamesgregson.ca/using-the-pelican-static-website-generator.html</a> (change CSS)</li>
+</ul>
+<h4>Change Blog CSS</h4>
+<p><code>C:\Users\USER\vmtest\myblog\pelican-themes\blue-penguin\static\css</code></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./pelican.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                </div>
+            </article>
+
+                <div class="clear"></div>
+                <div class="pages">
+
+                    <a href="./index29.html" class="prev_page">&larr;&nbsp;Previous</a>
+
+                    <a href="./index31.html" class="next_page">Next&nbsp;&rarr;</a>
+
+                    <span>Page 30 of 31</span>
+                </div>
+
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

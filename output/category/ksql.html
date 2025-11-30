@@ -19,7 +19,6 @@
 
                 <li class="ephemeral selected"><a href="../category/ksql.html">KSql</a></li>
                 <li><a href="../">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="../archives">Archives</a></li>
             </ul>
         </nav>
@@ -49,10 +48,9 @@
 <li><code>export CONFLUENT_HOME=/opt/confluent</code></li>
 </ul>
 <h3>Start KSql</h3>
-<div class="highlight"><pre><span></span>confluent <span class="nb">local</span> services ksql-server start
-confluent <span class="nb">local</span> services ksql-server status
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>confluent<span class="w"> </span><span class="nb">local</span><span class="w"> </span>services<span class="w"> </span>ksql-server<span class="w"> </span>start
+confluent<span class="w"> </span><span class="nb">local</span><span class="w"> </span>services<span class="w"> </span>ksql-server<span class="w"> </span>status
+</code></pre></div>
 
 <h4>Topics</h4>
 <p>Note: By default KSql will show only new arriving data.</p>
@@ -64,78 +62,68 @@ confluent <span class="nb">local</span> services ksql-server status
 <h4>auto.offset.reset</h4>
 <p>By default KSql <code>select</code> only shows new incoming data aka <code>current offset</code>. </p>
 <p>Must run command below (Only valid for current KSql session! Must re-issue each tme entering KSql prompt).</p>
-<div class="highlight"><pre><span></span>SET &#39;auto.offset.reset&#39;=&#39;earliest&#39; ;
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>SET &#39;auto.offset.reset&#39;=&#39;earliest&#39; ;
+</code></pre></div>
 
 <p>to reset this setting:</p>
-<div class="highlight"><pre><span></span>UNSET &#39;auto.offset.reset&#39;;
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>UNSET &#39;auto.offset.reset&#39;;
+</code></pre></div>
 
 <h4>KSql CREATE TABLE (<a href="https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-table/">KSQL Syntax Reference</a> )</h4>
-<div class="highlight"><pre><span></span><span class="nv">create</span> <span class="nv">table</span> <span class="nv">GTFS_DELAYS_TABLE</span> <span class="ss">(</span><span class="nv">id</span> <span class="nv">VARCHAR</span> <span class="nv">PRMARY</span> <span class="nv">KEY</span>, <span class="nv">delay</span> <span class="nv">INT</span>, <span class="nv">timestamp</span> <span class="nv">INT</span><span class="ss">)</span> <span class="nv">WITH</span> <span class="ss">(</span><span class="nv">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">gtfs-delays</span><span class="s1">&#39;</span>, <span class="nv">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">JSON</span><span class="s1">&#39;</span><span class="ss">)</span> <span class="c1">;</span>
-<span class="k">show</span> <span class="nv">tables</span> <span class="c1">;</span>
-<span class="nv">describe</span> <span class="nv">GTFS_DELAYS_TABLE</span> <span class="c1">;</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>create table GTFS_DELAYS_TABLE (id VARCHAR PRMARY KEY, delay INT, timestamp INT) WITH (KAFKA_TOPIC=&#39;gtfs-delays&#39;, VALUE_FORMAT=&#39;JSON&#39;) ;
+show tables ;
+describe GTFS_DELAYS_TABLE ;
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>create table GTFS_TABLE <span class="o">(</span> <span class="se">\</span>
-id VARCHAR PRIMARY KEY, <span class="se">\</span>
-trip_update_trip_trip_id VARCHAR, <span class="se">\</span>
-trip_update_trip_start_time VARCHAR, <span class="se">\</span>
-trip_update_trip_start_date VARCHAR,<span class="se">\</span>
-trip_update_trip_schedule_relationship VARCHAR, <span class="se">\</span>
-trip_update_trip_route_id VARCHAR, <span class="se">\</span>
-trip_update_stop_time_update_stop_sequence INT, <span class="se">\</span>
-trip_update_stop_time_update_departure_delay INT, <span class="se">\</span>
-trip_update_stop_time_update_stop_id VARCHAR, <span class="se">\</span>
-trip_update_stop_time_update_schedule_relationship VARCHAR, <span class="se">\</span>
-trip_update_stop_time_update_arrival_delay INT <span class="se">\</span>
-<span class="o">)</span> WITH <span class="o">(</span><span class="nv">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;GTFS_TOPIC&#39;</span>, <span class="nv">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="o">)</span> <span class="p">;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>create<span class="w"> </span>table<span class="w"> </span>GTFS_TABLE<span class="w"> </span><span class="o">(</span><span class="w"> </span><span class="se">\</span>
+id<span class="w"> </span>VARCHAR<span class="w"> </span>PRIMARY<span class="w"> </span>KEY,<span class="w"> </span><span class="se">\</span>
+trip_update_trip_trip_id<span class="w"> </span>VARCHAR,<span class="w"> </span><span class="se">\</span>
+trip_update_trip_start_time<span class="w"> </span>VARCHAR,<span class="w"> </span><span class="se">\</span>
+trip_update_trip_start_date<span class="w"> </span>VARCHAR,<span class="se">\</span>
+trip_update_trip_schedule_relationship<span class="w"> </span>VARCHAR,<span class="w"> </span><span class="se">\</span>
+trip_update_trip_route_id<span class="w"> </span>VARCHAR,<span class="w"> </span><span class="se">\</span>
+trip_update_stop_time_update_stop_sequence<span class="w"> </span>INT,<span class="w"> </span><span class="se">\</span>
+trip_update_stop_time_update_departure_delay<span class="w"> </span>INT,<span class="w"> </span><span class="se">\</span>
+trip_update_stop_time_update_stop_id<span class="w"> </span>VARCHAR,<span class="w"> </span><span class="se">\</span>
+trip_update_stop_time_update_schedule_relationship<span class="w"> </span>VARCHAR,<span class="w"> </span><span class="se">\</span>
+trip_update_stop_time_update_arrival_delay<span class="w"> </span>INT<span class="w"> </span><span class="se">\</span>
+<span class="o">)</span><span class="w"> </span>WITH<span class="w"> </span><span class="o">(</span><span class="nv">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;GTFS_TOPIC&#39;</span>,<span class="w"> </span><span class="nv">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="o">)</span><span class="w"> </span><span class="p">;</span>
+</code></pre></div>
 
 <p>To persist the above table see below. </p>
-<div class="highlight"><pre><span></span>create table GTFS_TABLE2 AS select * from GTFS_TABLE ;
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>create table GTFS_TABLE2 AS select * from GTFS_TABLE ;
+</code></pre></div>
 
 <p>Before terminating a persistent table we must first terminate that query!</p>
-<div class="highlight"><pre><span></span><span class="k">show</span> <span class="nv">queries</span> <span class="c1">;</span>
-<span class="nv">terminate</span> <span class="o">&lt;</span><span class="nv">query_name</span><span class="o">&gt;</span> <span class="c1">;</span>
-<span class="nv">drop</span> <span class="nv">table</span> <span class="o">&lt;</span><span class="nv">table_name</span><span class="o">&gt;</span> <span class="c1">;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>show queries ;
+terminate &lt;query_name&gt; ;
+drop table &lt;table_name&gt; ;
+</code></pre></div>
 
 <h4>KSql SELECT</h4>
-<div class="highlight"><pre><span></span>select trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence, trip_update_stop_time_update_departure_delay from GTFS_TABLE emit changes ;
-</pre></div>
+<div class="highlight"><pre><span></span><code>select trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence, trip_update_stop_time_update_departure_delay from GTFS_TABLE emit changes ;
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>select trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence, sum(trip_update_stop_time_update_departure_delay) from GTFS_TABLE group by trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence emit changes ;
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>select trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence, sum(trip_update_stop_time_update_departure_delay) from GTFS_TABLE group by trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence emit changes ;
+</code></pre></div>
 
 <h4>KSql streams</h4>
 <p>KSql streams are used to interrogate the underlying data.</p>
-<div class="highlight"><pre><span></span><span class="nv">create</span> <span class="nv">stream</span> <span class="nv">users_stream</span> <span class="ss">(</span><span class="nv">name</span> <span class="nv">VARCHAR</span>, <span class="nv">countrycode</span> <span class="nv">VARCHAR</span><span class="ss">)</span> <span class="nv">WITH</span> <span class="ss">(</span><span class="nv">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">USERS</span><span class="s1">&#39;</span>, <span class="nv">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">DELIMITED</span><span class="s1">&#39;</span><span class="ss">)</span> <span class="c1">;</span>
-<span class="nv">list</span> <span class="nv">streams</span> <span class="c1">;</span>
-<span class="nv">select</span> <span class="nv">name</span>, <span class="nv">countrycode</span> <span class="nv">from</span> <span class="nv">users_stream</span> <span class="nv">emit</span> <span class="nv">changes</span><span class="c1">;</span>
-<span class="nv">select</span> <span class="nv">name</span>, <span class="nv">countrycode</span> <span class="nv">from</span> <span class="nv">users_stream</span> <span class="nv">emit</span> <span class="nv">changes</span> <span class="nv">limit</span> <span class="mi">5</span><span class="c1">;</span>
-<span class="nv">select</span> <span class="nv">countrycode</span>, <span class="nv">count</span><span class="ss">(</span><span class="o">*</span><span class="ss">)</span> <span class="nv">from</span> <span class="nv">users_stream</span> <span class="nv">group</span> <span class="nv">by</span> <span class="nv">countrycode</span><span class="c1">;</span>
-<span class="nv">drop</span> <span class="nv">stream</span> <span class="k">if</span> <span class="nv">exists</span> <span class="nv">users_stream</span> <span class="c1">;</span>
-<span class="nv">drop</span> <span class="nv">stream</span> <span class="k">if</span> <span class="nv">exists</span> <span class="nv">users_stream</span> <span class="nv">delete</span> <span class="nv">topic</span> <span class="c1">;</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>create stream users_stream (name VARCHAR, countrycode VARCHAR) WITH (KAFKA_TOPIC=&#39;USERS&#39;, VALUE_FORMAT=&#39;DELIMITED&#39;) ;
+list streams ;
+select name, countrycode from users_stream emit changes;
+select name, countrycode from users_stream emit changes limit 5;
+select countrycode, count(*) from users_stream group by countrycode;
+drop stream if exists users_stream ;
+drop stream if exists users_stream delete topic ;
+</code></pre></div>
 
+<div class="highlight"><pre><span></span><code><span class="nt">create</span><span class="w"> </span><span class="nt">stream</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="o">(</span><span class="nt">id</span><span class="w"> </span><span class="nt">VARCHAR</span><span class="o">,</span><span class="w"> </span><span class="nt">delay</span><span class="w"> </span><span class="nt">INT</span><span class="o">,</span><span class="w"> </span><span class="nt">timestamp</span><span class="w"> </span><span class="nt">INT</span><span class="o">)</span><span class="w"> </span><span class="nt">WITH</span><span class="w"> </span><span class="o">(</span><span class="nt">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;gtfs-delays&#39;</span><span class="o">,</span><span class="w"> </span><span class="nt">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">;</span>
+<span class="nt">describe</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="o">;</span>
+<span class="nt">select</span><span class="w"> </span><span class="nt">TIMESTAMPTOSTRING</span><span class="o">(</span><span class="nt">rowtime</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;dd/MMM HH:mm&#39;</span><span class="o">)</span><span class="w"> </span><span class="nt">as</span><span class="w"> </span><span class="nt">createtime</span><span class="o">,</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nt">from</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="nt">emit</span><span class="w"> </span><span class="nt">changes</span><span class="w"> </span><span class="nt">limit</span><span class="w"> </span><span class="nt">5</span><span class="o">;</span>
+</code></pre></div>
 
-<div class="highlight"><pre><span></span><span class="nt">create</span><span class="w"> </span><span class="nt">stream</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="o">(</span><span class="nt">id</span><span class="w"> </span><span class="nt">VARCHAR</span><span class="o">,</span><span class="w"> </span><span class="nt">delay</span><span class="w"> </span><span class="nt">INT</span><span class="o">,</span><span class="w"> </span><span class="nt">timestamp</span><span class="w"> </span><span class="nt">INT</span><span class="o">)</span><span class="w"> </span><span class="nt">WITH</span><span class="w"> </span><span class="o">(</span><span class="nt">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;gtfs-delays&#39;</span><span class="o">,</span><span class="w"> </span><span class="nt">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
-<span class="nt">describe</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="o">;</span><span class="w"></span>
-<span class="nt">select</span><span class="w"> </span><span class="nt">TIMESTAMPTOSTRING</span><span class="o">(</span><span class="nt">rowtime</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;dd/MMM HH:mm&#39;</span><span class="o">)</span><span class="w"> </span><span class="nt">as</span><span class="w"> </span><span class="nt">createtime</span><span class="o">,</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nt">from</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="nt">emit</span><span class="w"> </span><span class="nt">changes</span><span class="w"> </span><span class="nt">limit</span><span class="w"> </span><span class="nt">5</span><span class="o">;</span><span class="w"></span>
-</pre></div>
-
-
-<div class="highlight"><pre><span></span>create stream GTFS_STREAM ( \
+<div class="highlight"><pre><span></span><code>create stream GTFS_STREAM ( \
 id VARCHAR, \
 trip_update STRUCT \
     &lt; trip STRUCT \
@@ -145,8 +133,7 @@ stop_time_update STRUCT &lt; stop_sequence INT, arrival STRUCT &lt; delay INT &g
 ) WITH (KAFKA_TOPIC=&#39;GTFS_TOPIC&#39;, VALUE_FORMAT=&#39;JSON&#39;) ;
 
 select * from GTFS_STREAM emit changes ;
-</pre></div>
-
+</code></pre></div>
 
 <h3>Other Useful Commands</h3>
 <ul>

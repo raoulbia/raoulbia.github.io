@@ -18,7 +18,6 @@
         <nav>
             <ul>
                 <li><a href="./">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
@@ -69,11 +68,10 @@
 <h2>GTFS Real Time (upcoming)</h2>
 <p><a href="https://gtfs.org/reference/realtime/v2/">GTFS Realtime Reference v2</a></p>
 <p><a href="https://github.com/seanrees/gtfs-upcoming">github.com/seanrees/gtfs-upcoming</a></p>
-<div class="highlight"><pre><span></span>sudo kill -9 `sudo lsof -t -i:6824`
+<div class="highlight"><pre><span></span><code>sudo kill -9 `sudo lsof -t -i:6824`
 python main.py --config=config.ini --env=prod --port=6824 --promport=800
 http://127.0.0.1:6824/upcoming.json
-</pre></div>
-
+</code></pre></div>
 
 <p>Notes:</p>
 <ul>

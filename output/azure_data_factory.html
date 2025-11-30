@@ -18,7 +18,6 @@
         <nav>
             <ul>
                 <li><a href="./">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
@@ -38,43 +37,84 @@
                 
 
                 <p><br></p>
+<h3>Data Ingress</h3>
+<ul>
+<li>
+<p>Excel File with one or more Sheets </p>
+<ul>
+<li>New Dataset &gt; File tab &gt; File System &gt; Excel &gt; select linked service to NAS drive &gt; browse to NAS drive file &gt; select a Sheet name if applicable</li>
+</ul>
+</li>
+<li>
+<p>Netezza Table</p>
+<ul>
+<li>New Dataset &gt; Database tab &gt; Netezza &gt; select linked service to Netezza &gt; select table</li>
+</ul>
+</li>
+</ul>
 <h3>Linked Services</h3>
 <h4>Create a Linked Service to connect ADF to Databricks using Key Vault</h4>
 <p>Pre-requisites: </p>
 <ul>
-<li>Create a <strong>Key Vault</strong> resource</li>
-<li><em>Secrets</em> &gt; add a secret holding the Databricks PAT </li>
 <li>
-<p><strong><em>Access policies</em></strong></p>
+<p>Create a <strong>Key Vault</strong> resource</p>
 <ul>
+<li><em>Secrets</em> &gt; add a secret holding the Databricks PAT </li>
+<li><strong><em>Access policies</em></strong><ul>
 <li>click <em>Create</em></li>
 <li>select <em>Get</em> and <em>List</em> for <em>Key permissions</em> and <em>Secret permissions</em></li>
 <li>in the search box enter the name of your Azure Data Factory, select it when it shows up and click next and create all the way</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>
 <p>This requires two linked services</p>
-</li>
+<ul>
 <li>Databrick ls &gt; get it from 'Compute' tab</li>
-<li>
-<p>within this ls you are asked to specify an AKV linked service &gt; click on 'New'</p>
+<li>within this ls you are asked to specify an AKV linked service &gt; click on 'New'</li>
+</ul>
 </li>
 <li>
 <p>AKV linked Service</p>
-</li>
+<ul>
 <li>Base URL should be prefilled</li>
 <li>Authentication Method: <em>System Assigned Managed Identity</em></li>
 </ul>
+</li>
+</ul>
 <p><br></p>
 <h3>Parameterizing ADF</h3>
-<p>Create dynamic folder name for COPY activity (egress)</p>
+<h4>Pass a custom filename to Copy Activity Sink Dataset</h4>
+<p>Copy Activity:     import an Excel to Blob Storage as Parquet file</p>
+<p>Problem to solve:  give the parquet file a custom name</p>
+<p>Solution:          add a parameter to the dataset of interest (source, sink or both depending on use case)</p>
+<p>Explanation:       when a copy activity source, or sink, uses a dataset that has a parameter, the parameter will appear in the source, or sink, <em>Dataset properties</em>. Here you can then specifiy a value, either as hard coded string or as yet another parameter, that will then be passed to the Dataset <em>Connection</em> tab where it is referenced and will be replaced by the value passed to it.</p>
+<p>Steps: 
+* for the sink part (Blob Storage), you need a Parquet dataset with the required Linked Service to ADLS Gen2
+* in the Dataset <em>Parameters</em> tab, add a parameter named <em>sink_file</em> (String)
+* in the Dataset <em>Connection</em> tab, it is assumed the <em>File Path</em> boxes 1 and 2 are populated with the path to the blob storage container where the files will be saved. For <em>File Path</em> box 3, enter <em>@dataset().sink_file</em>
+* in the Copy Activity, under <em>Dataset Properties</em> of the sink, enter the value you wish to pass to the sink dataset. THis can be a string or anotehr parameter e.g. a value captured from a <em>Get Metadata</em> activity, or from a <em>Lookup</em> activity.</p>
+<h4>Query Database Tables and Save as Parquet File to Blob Storage</h4>
+<p>The solution has two core components: A <em>Lookup</em> activity and a <em>ForEach</em> activity.</p>
+<p>The <em>Lookup</em> activity 
+* the source dataset can be a CSV file on NAS drive. The columns in the file are <em>table_name</em> and <em>where_filter</em>. Each row represents one table to be queried by the <em>ForEach</em> loop.</p>
+<p>The <em>ForEach</em> activity
+* consists of two <em>Set variable</em> activities connected to a <em>Copy Data</em> activity.
+* the <em>Set variable</em> activities reference the values for table name and for the where filter passed through by the <em>Lookup</em> activity. The syntax is shown in the screenshot below.
+* the source of the <em>Copy Data</em> activity uses the following query: <em>@concat('select * from ', item().table_name,' ', item().where_filter)</em>. 
+* in the sink of the <em>Copy Data</em> activity we pass a dynamic value to parameter <em>parFile</em> of the sink Parquet dataset: <em>@concat(item().table_name,'_NTZ.parquet')</em></p>
+<p><img alt="" src="img/ForEach_activity_all.PNG"></p>
+<p>The dynamic filename passed to the Parquet dataset is shown below:</p>
+<p><img alt="" src="img/ds_parquet_params_config.PNG"></p>
+<h4>Create dynamic folder name for COPY activity (egress)</h4>
 <ul>
 <li>
-<p>source ADLSGen2:<br />
+<p>source ADLSGen2:<br>
 <code>@concat('@concat('custom_dataset/shared_team_data/CG_BPT/BPT_CLIENT_EXCELS/', formatdatetime(utcnow(),'yyyy-MM-dd'))</code></p>
 </li>
 <li>
-<p>sink NAS Drive: <br />
+<p>sink NAS Drive: <br>
 <code>@concat('Azure/CG/static_output_files/', formatDateTime(utcNow(),'yyyy'), '-' ,formatDateTime(utcNow(),'MM'), '-', formatDateTime(utcNow(),'dd'))</code></p>
 </li>
 </ul>
@@ -82,7 +122,7 @@
 
                 <div class="info">
                     <a href="./azure_data_factory.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/azure-data-factory.html" rel="tag">Azure Data Factory</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/azure-cloud.html" rel="tag">Azure Cloud</a>
                 </div>
             </article>
             <div class="clear"></div>

@@ -18,7 +18,6 @@
         <nav>
             <ul>
                 <li><a href="./">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
@@ -42,7 +41,7 @@
 <li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html">inter-annotator agreement</a></li>
 </ul>
 <h3>Sentence Fragment: Search Window with RegExp</h3>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">search_window</span><span class="p">(</span><span class="n">dataframe_col</span><span class="p">,</span> <span class="n">token</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">search_window</span><span class="p">(</span><span class="n">dataframe_col</span><span class="p">,</span> <span class="n">token</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">dataframe_col</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">Exception</span> <span class="p">(</span><span class="s2">&quot;not a dataframe&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataframe_col</span><span class="p">))</span>
@@ -54,11 +53,10 @@
     <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
     <span class="c1"># print(len(new))</span>
     <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)))</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>Inter-annotator agreement</h3>
-<div class="highlight"><pre><span></span>Unit    obs1    obs2    obs3    obs4    obs5
+<div class="highlight"><pre><span></span><code>Unit    obs1    obs2    obs3    obs4    obs5
 1       1       1       2       .       2
 2       1       1       0       1       .
 3       2       3       3       3       .
@@ -66,11 +64,10 @@
 5       0       0       0       .       0
 6       0       0       0       .       0
 7       1       0       2       .       1
-</pre></div>
-
+</code></pre></div>
 
 <h4>Reshape data to triples in the form <code>(coder,item,label)</code></h4>
-<div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">other_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_1&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs1&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_2&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs2&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -78,10 +75,9 @@
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_4&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs4&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;coder&#39;</span><span class="p">:</span> <span class="s1">&#39;obs_5&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;obs5&#39;</span><span class="p">]},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">itertools</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -104,64 +100,58 @@
     <span class="c1"># Kappa Cohen 2 annotators</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&#39;</span><span class="si">{}</span><span class="s2">&#39;</span><span class="se">\t</span><span class="s2">inter annotator agreement between judge A and judge B&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">))</span>
     <span class="n">cohen_kappa</span><span class="p">(</span><span class="n">judge_A_matrix</span><span class="p">,</span> <span class="n">judge_B_matrix</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>DataFrame.apply</h3>
 <p>df_a</p>
-<div class="highlight"><pre><span></span>   ent_a  count
+<div class="highlight"><pre><span></span><code>   ent_a  count
 0   5197    1.0
 1  12766    2.0
 2   3091    2.0
 3   3162    1.0
 4   1956   13.0
-</pre></div>
-
+</code></pre></div>
 
 <p>df_ab</p>
-<div class="highlight"><pre><span></span>       ent_ab  count_ab
+<div class="highlight"><pre><span></span><code>       ent_ab  count_ab
 0   5197-56744       1.0
 1   12766-5197       1.0
 2  12766-56744       1.0
 3    3091-3162       1.0
 4   3091-54583       1.0
-</pre></div>
-
+</code></pre></div>
 
 <h4>Add column:</h4>
 <p><code>df_ab['ent_a'] = df_ab.ent_ab.apply(lambda x: x.split('-')[0])</code></p>
 <p>df_ab:</p>
-<div class="highlight"><pre><span></span>        ent_ab  count_ab  ent_a
+<div class="highlight"><pre><span></span><code>        ent_ab  count_ab  ent_a
 0   5197-56744       1.0   5197
 1   12766-5197       1.0  12766
 2  12766-56744       1.0  12766
 3    3091-3162       1.0   3091
 4   3091-54583       1.0   3091
-</pre></div>
-
+</code></pre></div>
 
 <h4>Add column from df_a to df_ab:</h4>
 <p><code>df_ab['ent_a_count'] = df_ab.ent_a.apply(get_ent, args=(df_a, 'ent_a', ))</code></p>
 <h4>Add column with <code>apply</code>:</h4>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_ent</span><span class="p">(</span><span class="n">ent_df_a</span><span class="p">,</span> <span class="n">df_a</span><span class="p">,</span> <span class="n">colname_df_ab</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_ent</span><span class="p">(</span><span class="n">ent_df_a</span><span class="p">,</span> <span class="n">df_a</span><span class="p">,</span> <span class="n">colname_df_ab</span><span class="p">):</span>
     <span class="n">row_df_a</span> <span class="o">=</span> <span class="n">df_a</span><span class="p">[</span><span class="n">df_a</span><span class="p">[</span><span class="n">colname_df_ab</span><span class="p">]</span> <span class="o">==</span> <span class="n">ent_df_a</span><span class="p">]</span>
     <span class="n">i</span> <span class="o">=</span> <span class="n">row_df_a</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;count&#39;</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">i</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>df_ab</p>
-<div class="highlight"><pre><span></span>        ent_ab  count_ab  ent_a  ent_b  ent_a_count
+<div class="highlight"><pre><span></span><code>        ent_ab  count_ab  ent_a  ent_b  ent_a_count
 0   5197-56744       1.0   5197  56744          1.0
 1   12766-5197       1.0  12766   5197          2.0
 2  12766-56744       1.0  12766  56744          2.0
 3    3091-3162       1.0   3091   3162          2.0
 4   3091-54583       1.0   3091  54583          2.0
-</pre></div>
-
+</code></pre></div>
 
 <h3>Kendall Tau rank correlation coefficient</h3>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_kendall_tau</span><span class="p">(</span><span class="n">df_pop</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_kendall_tau</span><span class="p">(</span><span class="n">df_pop</span><span class="p">):</span>
     <span class="c1"># testing</span>
     <span class="c1"># x1 = [12, 2, 1, 12, 2]</span>
     <span class="c1"># x2 = [1, 4, 7, 1, 0]</span>
@@ -171,8 +161,7 @@
     <span class="n">x2</span> <span class="o">=</span> <span class="n">df_pop_kendall</span><span class="p">[</span><span class="s1">&#39;rank_avg_relevance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
     <span class="n">tau</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">kendalltau</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span> <span class="c1"># scipy implementation scipy.stats.kendalltau</span>
     <span class="k">return</span> <span class="n">tau</span><span class="p">,</span> <span class="n">p_value</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><a href="https://en.wikipedia.org/wiki/Kendall_rank_correlation_coefficient">read more</a></p>
                 <div class="clear"></div>

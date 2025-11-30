@@ -19,7 +19,6 @@
 
                 <li class="ephemeral selected"><a href="../category/python3.html">Python</a></li>
                 <li><a href="../">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="../archives">Archives</a></li>
             </ul>
         </nav>
@@ -50,14 +49,14 @@
 <li><a href="https://docs.scipy.org/doc/numpy-1.13.0/reference/routines.polynomials.classes.html">example dynamic label</a></li>
 </ul>
 <h4>Examples</h4>
-<div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="s2">&quot;paper&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="s2">&quot;monospace&quot;</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Title&#39;</span><span class="p">);</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">freq_descr</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">freq_descr</span><span class="o">.</span><span class="n">cnt</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">))</span>
 <span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
@@ -75,74 +74,61 @@
                 
 
                 <p><br> </p>
-<p><code>jupyter lab --ip=0.0.0.0</code></p>
-<p><code>jupyter notebook --ip=0.0.0.0</code></p>
-<h4>Import notebook into another</h4>
-<div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">jupyter</span><span class="o">-</span><span class="n">helpers</span>
-<span class="kn">from</span> <span class="nn">create_gtfs_feed</span> <span class="kn">import</span> <span class="n">Feed</span> <span class="n">where</span> <span class="n">create_gtfs_feed</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">notebook</span>
-</pre></div>
+<h4>Installing Jupyterlab and IPywidgets</h4>
+<div class="highlight"><pre><span></span><code><span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">jupyterlab</span> <span class="n">ipywidgets</span> <span class="n">tqdm</span>
+<span class="n">jupyter</span> <span class="n">labextension</span> <span class="n">install</span> <span class="nv">@jupyter</span><span class="n">-widgets</span><span class="p">/</span><span class="n">jupyterlab-manager</span>
+</code></pre></div>
 
+<h4>Testing IPywidgets</h4>
+<p>try this in a notebook:</p>
+<div class="highlight"><pre><span></span><code><span class="n">import</span> <span class="n">ipywidgets</span> <span class="n">as</span> <span class="n">widgets</span>
+<span class="n">widgets</span><span class="p">.</span><span class="n">IntSlider</span><span class="p">()</span>
+</code></pre></div>
 
-<h4>Share variables / objects across notebooks</h4>
-<p>%store G &gt;&gt; to store
-%store -r G &gt;&gt; to load</p>
-<h4>Dill (similar to Pickle)</h4>
-<div class="highlight"><pre><span></span># Dump graph
-with open(&quot;multigraph.p&quot;, &#39;wb&#39;) as f:
-    dill.dump(G, f)
-</pre></div>
-
-
-<div class="highlight"><pre><span></span><span class="c1"># Load graph</span><span class="w"></span>
-<span class="n">with</span><span class="w"> </span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;multigraph.p&quot;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;rb&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">f</span><span class="p">:</span><span class="w">  </span><span class="c1"># notice the r instead of w</span><span class="w"></span>
-<span class="w">    </span><span class="n">G</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dill</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-
-
-<h4>Installing Jupyterlab</h4>
-<div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">jupyterlab</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">jupyterlab-widgets</span>
-</pre></div>
-
-
-<h4>Installing IPywidgets</h4>
-<p>With Conda</p>
-<div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">-c</span> <span class="n">conda-forge</span> <span class="n">nodejs</span> <span class="n">-y</span> <span class="p">&amp;&amp;</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="n">-c</span> <span class="n">conda-forge</span> <span class="n">jupyterlab</span> <span class="n">-y</span> <span class="p">&amp;&amp;</span>
-<span class="n">jupyter</span> <span class="n">labextension</span> <span class="n">install</span> <span class="nv">@jupyter</span><span class="n">-widgets</span><span class="p">/</span><span class="n">jupyterlab-manager</span> <span class="p">&amp;&amp;</span>
-<span class="n">jupyter</span> <span class="n">contrib</span> <span class="n">nbextension</span> <span class="n">install</span> <span class="p">-</span><span class="n">-sys-prefix</span>
-</pre></div>
-
-
-<p>With Pip</p>
-<div class="highlight"><pre><span></span>pip install jupyter_contrib_nbextensions
-</pre></div>
-
-
+<h4>Making env available in notebook</h4>
 <ul>
 <li><code>python -m ipykernel install --user --name=myEnv</code></li>
 <li><code>jupyter nbextension enable --py widgetsnbextension</code></li>
 <li><code>jupyter labextension list</code></li>
 <li>to launch: <code>jupyter-lab</code></li>
 </ul>
-<h4>Installing Jupyter Lab Extensions</h4>
-<div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="w"> </span><span class="n">labextension</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="nv">@jupyterlab</span><span class="o">/</span><span class="n">toc</span><span class="w"></span>
-<span class="n">jupyter</span><span class="w"> </span><span class="n">labextension</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="nv">@jupyterlab</span><span class="o">/</span><span class="n">plotly</span><span class="o">-</span><span class="n">extension</span><span class="w"></span>
-</pre></div>
-
+<h4>Installing Other Extensions (TOC, Plotly)</h4>
+<div class="highlight"><pre><span></span><code><span class="n">jupyter</span><span class="w"> </span><span class="n">labextension</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="nv">@jupyterlab</span><span class="o">/</span><span class="n">toc</span>
+<span class="n">jupyter</span><span class="w"> </span><span class="n">labextension</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="nv">@jupyterlab</span><span class="o">/</span><span class="n">plotly</span><span class="o">-</span><span class="n">extension</span>
+</code></pre></div>
 
 <p>for plotly see <a href="https://stackoverflow.com/questions/54936125/plotly-gives-an-empty-field-as-output-in-jupyter-lab">here</a> for more.</p>
+<h4>Import notebook into another</h4>
+<div class="highlight"><pre><span></span><code><span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">jupyter</span><span class="o">-</span><span class="n">helpers</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">create_gtfs_feed</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">Feed</span><span class="w"> </span><span class="n">where</span><span class="w"> </span><span class="n">create_gtfs_feed</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">notebook</span>
+</code></pre></div>
+
+<h4>Share variables / objects across notebooks</h4>
+<div class="highlight"><pre><span></span><code><span class="nf">%store</span><span class="w"> </span><span class="n">G</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">store</span>
+<span class="nf">%store</span><span class="w"> </span><span class="o">-</span><span class="n">r</span><span class="w"> </span><span class="n">G</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">load</span>
+</code></pre></div>
+
+<h4>Dill (similar to Pickle)</h4>
+<div class="highlight"><pre><span></span><code># Dump graph
+with open(&quot;multigraph.p&quot;, &#39;wb&#39;) as f:
+    dill.dump(G, f)
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># Load graph</span>
+<span class="n">with</span><span class="w"> </span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;multigraph.p&quot;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;rb&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">f</span><span class="p">:</span><span class="w">  </span><span class="c1"># notice the r instead of w</span>
+<span class="w">    </span><span class="n">G</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dill</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</code></pre></div>
+
 <h4>Converting Notebook to PDF or HTML</h4>
 <p>Pre-requisites:</p>
 <p><code>sudo apt-get install texlive texlive-xetex texlive-latex-extra texlive-generic-extra pandoc</code></p>
 <p>Conversion:</p>
 <p><code>jupyter nbconvert --to html features_applied.ipynb --TemplateExporter.exclude_input=True</code></p>
 <h4>Alerts</h4>
-<div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;alert alert-block alert-info&quot;</span><span class="o">&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;alert alert-block alert-info&quot;</span><span class="o">&gt;</span>
 <span class="k">case</span> <span class="n">insensitive</span> <span class="n">regexp</span> <span class="ow">in</span> <span class="nb">str</span><span class="o">.</span><span class="n">contains</span><span class="p">()</span>
 <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
-</pre></div>
-
+</code></pre></div>
 
 <h4>Useful Links</h4>
 <ul>

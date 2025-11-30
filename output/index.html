@@ -17,7 +17,6 @@
         <nav>
             <ul>
                 <li class="selected"><a href="./">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
@@ -26,152 +25,189 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 24, 2023</h4>
+        <div id="content">            <h4 class="date">Nov 17, 2025</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./databricks_miscellaneous.html" rel="bookmark" title="Permanent Link to &quot;Databricks Misc.&quot;">Databricks Misc.</a>
+                    <a href="./dgx_spark.html" rel="bookmark" title="Permanent Link to &quot;DGX Spark&quot;">DGX Spark</a>
                 </h2>
 
                 
                 
 
-                <h4>Import another notebook</h4>
-<div class="highlight"><pre><span></span><span class="nf">%run</span><span class="w"> </span><span class="s">&quot;../../schemas/master_config&quot;</span><span class="w"></span>
-</pre></div>
+                <h2>Fine-tuning Options on DGX Spark (GB10, 128GB unified memory)</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Framework</th>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NeMo + LoRA (current)</td>
+<td>NVIDIA NeMo</td>
+<td>Official NVIDIA support, optimized for DGX, proven working</td>
+<td>Complex setup, container-based</td>
+</tr>
+<tr>
+<td>Unsloth</td>
+<td>HuggingFace-based</td>
+<td>2x faster, 60% less memory, simple API</td>
+<td>Less NVIDIA optimization</td>
+</tr>
+<tr>
+<td>Axolotl</td>
+<td>HuggingFace-based</td>
+<td>YAML config, many techniques (LoRA, QLoRA, full)</td>
+<td>Medium complexity</td>
+</tr>
+<tr>
+<td>HuggingFace PEFT</td>
+<td>Transformers</td>
+<td>Most popular, huge community</td>
+<td>Manual optimization needed</td>
+</tr>
+<tr>
+<td>LLaMA-Factory</td>
+<td>HuggingFace-based</td>
+<td>Web UI, no-code option</td>
+<td>Less control</td>
+</tr>
+</tbody>
+</table>
+<h2>GPU Assessment:</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPU Util</td>
+<td>88%</td>
+<td>Good, not bottlenecked</td>
+</tr>
+<tr>
+<td>Temp</td>
+<td>68°C</td>
+<td>Normal</td>
+</tr>
+<tr>
+<td>Power</td>
+<td>56W</td>
+<td>Moderate</td>
+</tr>
+</tbody>
+</table>
+<p>Speed factors (not learning rate):</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Current</th>
+<th>Could Speed Up?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>local_batch_size</td>
+<td>1</td>
+<td>Increase to 2-4 if memory allows</td>
+</tr>
+<tr>
+<td>global_batch_size</td>
+<td>16</td>
+<td>Means 16 gradient accumulation steps</td>
+</tr>
+<tr>
+<td>seq_length</td>
+<td>2048</td>
+<td>Lower if your data is shorter</td>
+</tr>
+<tr>
+<td>Precision</td>
+<td>bf16-mixed</td>
+<td>Already optimal</td>
+</tr>
+</tbody>
+</table>
+<p>88% utilization is solid. The main bottleneck is local_batch_size: 1 - you're processing 1 sample at a time with 16 accumulation steps. With 128GB unified
+  memory, you could likely increase to local_batch_size: 2 or 4 to speed things up ~2-4x.</p>
+<h2>Misc</h2>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>start<span class="w"> </span>vllm-server
+docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>--tail<span class="w"> </span><span class="m">50</span><span class="w"> </span>vllm-server
+</code></pre></div>
 
+<h2>~/.ssh/config</h2>
+<div class="highlight"><pre><span></span><code>Host dgx-spark
+    HostName 192.168.1.xx
+    User &lt;user-name&gt;
+    IdentityFile ~/.ssh/&lt;name-of-pub-ssh-key&gt;
+    IdentitiesOnly yes
+    LocalForward 8000 localhost:8000
+    LocalForward 11434 localhost:11434
+</code></pre></div>
 
-<h4>Fitler DatFrame rows by Column values</h4>
-<div class="highlight"><pre><span></span>df = df.filter( (df.COL_A == i) &amp; (df.COL_B.isin([&#39;R&#39;,&#39;S&#39;])) )
-</pre></div>
+<h2>SSH Tunnel</h2>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-N<span class="w"> </span>-L<span class="w"> </span><span class="m">8000</span>:localhost:8000<span class="w"> </span>-L<span class="w"> </span><span class="m">12434</span>:localhost:12434<span class="w"> </span>user@spark-e123.local
+</code></pre></div>
 
-
-<h4>Databricks CLI</h4>
+<h2>Example Roo Code configuration for vLLM:</h2>
 <ul>
-<li><code>pip install databricks-cli</code></li>
-<li><code>export PATH="$HOME/.local/bin:$PATH"</code></li>
-<li><code>/home/username/.local/bin/databricks configure</code></li>
-<li>List existing secret scopes: <code>databricks secrets list-scopes</code></li>
+<li>API Provider: <code>OpenAI Compatible</code></li>
+<li>Base URL: <code>http://localhost:8000/v1</code></li>
+<li>API Key: <code>not-required</code></li>
+<li>Model: <code>Qwen/Qwen2.5-Coder-14B-Instruct</code></li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./databricks_miscellaneous.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/databricks.html" rel="tag">Databricks</a>
+                    <a href="./dgx_spark.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/ai.html" rel="tag">AI</a>
                 </div>
-            </article>            <h4 class="date">Jan 24, 2023</h4>
+            </article>            <h4 class="date">Mar 18, 2025</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./databricks_pyspark.html" rel="bookmark" title="Permanent Link to &quot;Databricks PySpark&quot;">Databricks PySpark</a>
+                    <a href="./was_playbook.html" rel="bookmark" title="Permanent Link to &quot;AWS Playbook&quot;">AWS Playbook</a>
                 </h2>
 
                 
                 
 
-                <h4>Create Table from DataFrame</h4>
-<div class="highlight"><pre><span></span>df.write.format(&quot;delta&quot;).mode(&quot;overwrite&quot;).saveAsTable(&quot;schema_name.table_name&quot;)
-</pre></div>
+                <p><br></p>
+<h3>AWS Playbook</h3>
+<div class="highlight"><pre><span></span><code><span class="n">aws</span><span class="w"> </span><span class="n">configure</span><span class="w"> </span><span class="n">sso</span><span class="w"> </span><span class="o">--</span><span class="n">use</span><span class="o">-</span><span class="n">device</span><span class="o">-</span><span class="n">code</span>
 
+<span class="n">aws</span><span class="w"> </span><span class="n">ecr</span><span class="w"> </span><span class="n">get</span><span class="o">-</span><span class="n">login</span><span class="o">-</span><span class="n">password</span><span class="w"> </span><span class="o">--</span><span class="n">region</span><span class="w"> </span><span class="n">eu</span><span class="o">-</span><span class="n">central</span><span class="o">-</span><span class="mh">1</span><span class="w"> </span><span class="o">--</span><span class="n">profile</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Profile</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">login</span><span class="w"> </span><span class="o">--</span><span class="n">username</span><span class="w"> </span><span class="n">AWS</span><span class="w"> </span><span class="o">--</span><span class="n">password</span><span class="o">-</span><span class="n">stdin</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">123</span><span class="o">&gt;</span><span class="p">.</span><span class="n">dkr</span><span class="p">.</span><span class="n">ecr</span><span class="p">.</span><span class="n">eu</span><span class="o">-</span><span class="n">central</span><span class="o">-</span><span class="mf">1.</span><span class="n">amazonaws</span><span class="p">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">Repository</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;</span>
 
-<h4>Create Empty Table</h4>
-<div class="highlight"><pre><span></span>spark.sql(&quot;CREATE OR REPLACE TABLE team_data.bob_tbl(GPI_NO STRING, 
-                                                     DAY_SPLY STRING, 
-                                                     RX INT, 
-                                                     QTY Decimal(10,3), 
-                                                     IC Decimal(10,2), 
-                                                     AWP Decimal(15,8), 
-                                                     MBR INT)&quot;)
-</pre></div>
+<span class="n">aws</span><span class="w"> </span><span class="n">sts</span><span class="w"> </span><span class="n">get</span><span class="o">-</span><span class="n">caller</span><span class="o">-</span><span class="n">identity</span><span class="w"> </span><span class="o">--</span><span class="n">profile</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Profile</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;</span>
 
+<span class="n">docker</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Repository</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;</span><span class="w"> </span><span class="p">.</span>
 
-<h4>Save DataFrame as XLS</h4>
-<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">write</span>
- <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span>
- <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;com.crealytics.spark.excel&quot;</span><span class="p">)</span>
- <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span>
- <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;dataAddress&quot;</span><span class="p">,</span> <span class="s2">&quot;&#39;Sheet Name&#39;!A1&quot;</span><span class="p">)</span>
- <span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;/mnt/userspace/custom_dataset/path-to-dir/filename.xlsx&quot;</span><span class="p">))</span>
- <span class="err">```</span>
+<span class="n">docker</span><span class="w"> </span><span class="n">tag</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Repository</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;:</span><span class="n">latest</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">123</span><span class="o">&gt;</span><span class="p">.</span><span class="n">dkr</span><span class="p">.</span><span class="n">ecr</span><span class="p">.</span><span class="n">eu</span><span class="o">-</span><span class="n">central</span><span class="o">-</span><span class="mf">1.</span><span class="n">amazonaws</span><span class="p">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">Repository</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;:</span><span class="n">latest</span>
 
-<span class="c1">#### Save DataFrame as CSV</span>
+<span class="n">aws</span><span class="w"> </span><span class="n">ecr</span><span class="w"> </span><span class="n">get</span><span class="o">-</span><span class="n">login</span><span class="o">-</span><span class="n">password</span><span class="w"> </span><span class="o">--</span><span class="n">region</span><span class="w"> </span><span class="n">eu</span><span class="o">-</span><span class="n">central</span><span class="o">-</span><span class="mh">1</span><span class="w"> </span><span class="o">--</span><span class="n">profile</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Profile</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">login</span><span class="w"> </span><span class="o">--</span><span class="n">username</span><span class="w"> </span><span class="n">AWS</span><span class="w"> </span><span class="o">--</span><span class="n">password</span><span class="o">-</span><span class="n">stdin</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">123</span><span class="o">&gt;</span><span class="p">.</span><span class="n">dkr</span><span class="p">.</span><span class="n">ecr</span><span class="p">.</span><span class="n">eu</span><span class="o">-</span><span class="n">central</span><span class="o">-</span><span class="mf">1.</span><span class="n">amazonaws</span><span class="p">.</span><span class="n">com</span>
 
-<span class="n">To</span> <span class="n">save</span> <span class="n">a</span> <span class="n">DataFrame</span> <span class="k">as</span> <span class="n">CSV</span> <span class="n">requires</span> <span class="n">three</span> <span class="n">steps</span><span class="o">.</span> 
+<span class="n">docker</span><span class="w"> </span><span class="n">push</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">123</span><span class="o">&gt;</span><span class="p">.</span><span class="n">dkr</span><span class="p">.</span><span class="n">ecr</span><span class="p">.</span><span class="n">eu</span><span class="o">-</span><span class="n">central</span><span class="o">-</span><span class="mf">1.</span><span class="n">amazonaws</span><span class="p">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">Repository</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;:</span><span class="n">latest</span>
 
-<span class="mf">1.</span> <span class="n">Use</span> <span class="err">`</span><span class="n">coalesce</span><span class="p">()</span><span class="err">`</span> <span class="n">to</span> <span class="n">create</span> <span class="n">a</span> <span class="n">parquet</span> <span class="n">file</span><span class="p">,</span> <span class="n">Note</span><span class="p">,</span> <span class="n">here</span> <span class="n">the</span> <span class="n">path</span> <span class="n">points</span> <span class="n">to</span> <span class="n">a</span> <span class="n">directory</span><span class="p">,</span> <span class="n">NOT</span> <span class="n">a</span> <span class="n">file</span><span class="o">.</span>
-<span class="mf">2.</span> <span class="n">Read</span> <span class="n">the</span> <span class="n">parquet</span> <span class="n">file</span> <span class="n">into</span> <span class="n">a</span> <span class="n">Pandas</span> <span class="n">DataFrame</span><span class="p">:</span> <span class="err">`</span><span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">()</span><span class="err">`</span>
-<span class="mf">3.</span> <span class="n">save</span> <span class="n">the</span> <span class="n">Pandas</span> <span class="n">DataFrame</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="err">`</span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="err">`</span>
+<span class="n">aws</span><span class="w"> </span><span class="n">ecs</span><span class="w"> </span><span class="n">register</span><span class="o">-</span><span class="k">task</span><span class="o">-</span><span class="n">definition</span><span class="w"> </span><span class="o">--</span><span class="n">cli</span><span class="o">-</span><span class="k">input</span><span class="o">-</span><span class="n">json</span><span class="w"> </span><span class="nl">file:</span><span class="c1">//path/to/your/task-definition.json --profile &lt;Profile-Name&gt;</span>
 
-<span class="err">```</span><span class="n">python</span>
-<span class="p">(</span><span class="n">res</span>
- <span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
- <span class="o">.</span><span class="n">write</span>
- <span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;/mnt/userspace/custom_dataset/path-to-dir/&quot;</span><span class="p">))</span>
-</pre></div>
+<span class="n">aws</span><span class="w"> </span><span class="n">ecs</span><span class="w"> </span><span class="n">update</span><span class="o">-</span><span class="n">service</span><span class="w"> </span><span class="o">--</span><span class="n">cluster</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="o">--</span><span class="n">service</span><span class="w"> </span><span class="n">hr</span><span class="o">-</span><span class="n">assistant</span><span class="o">-</span><span class="n">service</span><span class="w"> </span><span class="o">--</span><span class="k">force</span><span class="o">-</span><span class="n">new</span><span class="o">-</span><span class="n">deployment</span><span class="w"> </span><span class="o">--</span><span class="n">region</span><span class="w"> </span><span class="n">eu</span><span class="o">-</span><span class="n">central</span><span class="o">-</span><span class="mh">1</span><span class="w"> </span><span class="o">--</span><span class="n">profile</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Profile</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;</span>
 
-
-<h4>Parameterised Query</h4>
-<div class="highlight"><pre><span></span><span class="n">SCHEMA_A</span> <span class="o">=</span> <span class="n">dbutils</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;&lt;Azure Data Factory Base parameter name 1&gt;&quot;</span><span class="p">)</span>
-<span class="n">SCHEMA_B</span> <span class="o">=</span> <span class="n">dbutils</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;&lt;Azure Data Factory Base parameter name 2&gt;&quot;</span><span class="p">)</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT c.claim_nbr </span>
-<span class="s2">                  FROM </span><span class="si">{0}</span><span class="s2">.TABLE1 c</span>
-<span class="s2">                  LEFT JOIN </span><span class="si">{1}</span><span class="s2">.TABLE2 p</span>
-<span class="s2">                         ON (c.claim_nbr = p.claim_nbr </span>
-<span class="s2">               &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">SCHEMA_A</span><span class="p">,</span> <span class="n">SCHEMA_B</span><span class="p">))</span>
-</pre></div>
-
-
-<h4>Create Table from DataFrame with overwriteSchema</h4>
-<p>About overwriteSchema: if any new column is added the command will not fail but overwrite the delta table with new schema. 
-<a href="https://mungingdata.com/delta-lake/schema-enforcement-evolution-mergeschema-overwriteschema/">Read More</a></p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">persist_dataframe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">schema_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">evolution</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span> <span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    function to persist the dataframe to parquet and/or delta lake</span>
-<span class="sd">    return: success/error message</span>
-
-<span class="sd">    Evolution = True will mergeSchema - This is for  incremental schema changes.</span>
-<span class="sd">    Evolution = False will OverwriteSchema - This is for wiping out old schema for new schema</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="c1"># Check if table exists</span>
-    <span class="n">_</span><span class="p">,</span> <span class="n">table_exist</span> <span class="o">=</span> <span class="n">validate_table_source</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">schema_name</span><span class="o">=</span><span class="n">schema_name</span><span class="p">,</span> <span class="n">table</span><span class="o">=</span><span class="n">table</span><span class="p">)</span>
-
-    <span class="n">target</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">schema_name</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">table_exist</span> <span class="ow">is</span> <span class="kc">True</span> <span class="p">:</span>
-        <span class="c1"># if schema evolution is set merge the schemas</span>
-        <span class="k">if</span> <span class="n">evolution</span> <span class="ow">is</span> <span class="kc">True</span> <span class="p">:</span>
-            <span class="n">dataframe</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;mergeSchema&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data overwritten and Schema evolved for table </span><span class="si">{0}</span><span class="s2"> in database&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
-        <span class="k">else</span> <span class="p">:</span>
-            <span class="n">dataframe</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;overwriteSchema&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data and Schema overwritten. New Schema in place for table </span><span class="si">{0}</span><span class="s2"> in database&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
-    <span class="k">else</span> <span class="p">:</span>
-        <span class="n">dataframe</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Table </span><span class="si">{0}</span><span class="s2"> added to database&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
-
-
-    <span class="c1"># Do we want to partition? if so parse the partition key from the config</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">- Dataframe successfully persisted in Delta Lake</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-
-
-<h4>Misc.</h4>
-<div class="highlight"><pre><span></span><span class="nv">spark</span>.<span class="nv">sql</span><span class="ss">(</span><span class="s2">&quot;&quot;&quot;</span><span class="s">desc formatted &lt;table name&gt;</span><span class="s2">&quot;&quot;&quot;</span><span class="ss">)</span>.<span class="k">show</span><span class="ss">(</span><span class="mi">100</span>, <span class="nv">truncate</span><span class="o">=</span><span class="nv">False</span><span class="ss">)</span>
-</pre></div>
-
-
-<h4>Useful Links</h4>
-<ul>
-<li>https://learn.microsoft.com/en-us/azure/databricks/spark/latest/spark-sql/spark-pandas</li>
-<li>https://www.educba.com/pyspark-withcolumn/</li>
-</ul>
+<span class="n">aws</span><span class="w"> </span><span class="n">ecs</span><span class="w"> </span><span class="n">describe</span><span class="o">-</span><span class="n">services</span><span class="w"> </span><span class="o">--</span><span class="n">cluster</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="o">--</span><span class="n">services</span><span class="w"> </span><span class="n">hr</span><span class="o">-</span><span class="n">assistant</span><span class="o">-</span><span class="n">service</span><span class="w"> </span><span class="o">--</span><span class="n">region</span><span class="w"> </span><span class="n">eu</span><span class="o">-</span><span class="n">central</span><span class="o">-</span><span class="mh">1</span><span class="w"> </span><span class="o">--</span><span class="n">profile</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Profile</span><span class="o">-</span><span class="n">Name</span><span class="o">&gt;</span>
+</code></pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./databricks_pyspark.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/databricks.html" rel="tag">Databricks</a>
+                    <a href="./was_playbook.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/cloud-deployments.html" rel="tag">Cloud Deployments</a>
                 </div>
             </article>
 
@@ -181,7 +217,7 @@
 
                     <a href="./index2.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 1 of 26</span>
+                    <span>Page 1 of 31</span>
                 </div>
 
             <div class="clear"></div>

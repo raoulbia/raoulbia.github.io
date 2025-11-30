@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code snippets etc. | Interview Prep</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="./">Home</a></li>
+                <li><a href="./archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="./">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Apr 26, 1900</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./interview_prep2.html" rel="bookmark" title="Permanent Link to &quot;Interview Prep&quot;">Interview Prep</a>
+                </h2>
+
+                
+                
+
+                <h4>Data Modelling</h4>
+<ul>
+<li>longitudinal data model<ul>
+<li>track the same subjects over multiple time points</li>
+<li>useful for identifying trends, patterns, or impacts of interventions over time</li>
+</ul>
+</li>
+<li>Relational data model<ul>
+<li>Designed for transactional operations, it uses tables to represent entities and their relationships. It's optimized for data integrity and complex queries.</li>
+</ul>
+</li>
+<li>Dimensional data model<ul>
+<li>Designed for analytical processing, it uses facts and dimensions to represent data. It's optimized for fast query performance and ease of use in data analysis.</li>
+</ul>
+</li>
+<li>Columnar databases<ul>
+<li>collect statistics about the data stored in each column, which can further enhance query performance. These statistics can include information like minimum and maximum values …</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h4>Databases</h4>
+<ul>
+<li>Handling large volumes of data<ul>
+<li>Partitioning rows by e,g, Prescription Date to more effectively retrieve data from last 30 days </li>
+<li>Indexing: create a lookup table on e.g. email address</li>
+<li>Batch processing: data load every Monday at 5 AM</li>
+<li>Sharding (distributed databases) distribute data across multiple clusters</li>
+<li>Archiving old data</li>
+</ul>
+</li>
+<li>Security<ul>
+<li>access control: roles </li>
+<li>data masking: row or column level (Optum onshore offshore example)</li>
+<li>backups</li>
+<li>hardware: regular updates and batches</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h4>ETL</h4>
+<ul>
+<li>pipeline key elements: <ul>
+<li>sources: CSV files</li>
+<li>ingestion: ADF</li>
+<li>processing: Databricks notebooks</li>
+<li>output: optimised drug prices</li>
+</ul>
+</li>
+<li>robust, reliable and efficient pipeline<ul>
+<li>Error Handling: automated email alerts if pipeline fails</li>
+<li>Data validation: schema validation through ADF e.g. helps check date format is consistent</li>
+<li>Monitoring time to execute</li>
+<li>Scalability i.e. ability to handle increasing volume: azure cloud and ADF take care of this by design</li>
+</ul>
+</li>
+<li>
+<p>CI/CD: only high quality code ends up in PROD</p>
+<ul>
+<li>Automated testing every time code is committed</li>
+<li>Version control to make roll back easier</li>
+<li>Better work flow management by integrating with Jira</li>
+<li>Consistency of environment e.g. python library version</li>
+<li>Monitoring (alerts)</li>
+<li>Audit of changes made </li>
+</ul>
+</li>
+<li>
+<p>Moving data between layers: Prefect with Jinja and SQL templates</p>
+</li>
+<li>Bronze to Silver:       <ul>
+<li>raw data from various sources is ingested into the Bronze layer. </li>
+<li>cleans, deduplicates, and validates</li>
+</ul>
+</li>
+<li>Silver to Gold: <ul>
+<li>transformed to make fit for purpose for analytics</li>
+<li>transformations, aggregations, and enrichments</li>
+</ul>
+</li>
+<li>Gold Layer: <ul>
+<li>optimized for fast querying and analysis. </li>
+<li>ETL process may create indexed views, materialized views, or summary tables to facilitate quick data retrieval.</li>
+</ul>
+</li>
+<li>Note: Each stage would have its own set of validation checks, error-handling mechanisms, and monitoring to ensure data integrity and pipeline robustness.</li>
+</ul>
+<h4>Documentation</h4>
+<ul>
+<li>Confluence: stakeholders, engagement scope, AS IS process, testing plan &amp; results, hand-over</li>
+<li>Code: <ul>
+<li>docstring inputs outputs of functions incl. data type, descriptions </li>
+<li>PEP8 style guide, linter, pycharm</li>
+<li>Adopt Strongly typed coding style although not enforced as such</li>
+</ul>
+</li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./interview_prep2.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/none.html" rel="tag">None</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

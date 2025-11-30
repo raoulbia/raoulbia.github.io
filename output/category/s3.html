@@ -19,7 +19,6 @@
 
                 <li class="ephemeral selected"><a href="../category/s3.html">s3</a></li>
                 <li><a href="../">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="../archives">Archives</a></li>
             </ul>
         </nav>
@@ -39,33 +38,33 @@
                 
 
                 <p><a href="https://medium.com/bilesanmiahmad/how-to-upload-a-file-to-amazon-s3-in-python-68757a1867c6">How to upload a file to Amazon S3 in Python</a></p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
-<span class="kn">from</span> <span class="nn">botocore.exceptions</span> <span class="kn">import</span> <span class="n">NoCredentialsError</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">botocore.exceptions</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">NoCredentialsError</span>
 
-<span class="n">ACCESS_KEY</span> <span class="o">=</span> <span class="s1">&#39;xxxx&#39;</span>
-<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="s1">&#39;xxxx&#39;</span>
-
-
-<span class="k">def</span> <span class="nf">upload_to_aws</span><span class="p">(</span><span class="n">local_file</span><span class="p">,</span> <span class="n">bucket</span><span class="p">,</span> <span class="n">s3_file</span><span class="p">):</span>
-    <span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">,</span> <span class="n">aws_access_key_id</span><span class="o">=</span><span class="n">ACCESS_KEY</span><span class="p">,</span>
-                      <span class="n">aws_secret_access_key</span><span class="o">=</span><span class="n">SECRET_KEY</span><span class="p">)</span>
-
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">s3</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="n">local_file</span><span class="p">,</span> <span class="n">bucket</span><span class="p">,</span> <span class="n">s3_file</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Upload Successful&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">True</span>
-    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The file was not found&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">False</span>
-    <span class="k">except</span> <span class="n">NoCredentialsError</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Credentials not available&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">False</span>
+<span class="n">ACCESS_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;xxxx&#39;</span>
+<span class="n">SECRET_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;xxxx&#39;</span>
 
 
-<span class="n">uploaded</span> <span class="o">=</span> <span class="n">upload_to_aws</span><span class="p">(</span><span class="s1">&#39;filename.csv&#39;</span><span class="p">,</span> 
-                         <span class="s1">&#39;bucket.name&#39;</span><span class="p">,</span> 
-                         <span class="s1">&#39;filename.csv&#39;</span><span class="p">)</span>
-</pre></div>
+<span class="k">def</span><span class="w"> </span><span class="nf">upload_to_aws</span><span class="p">(</span><span class="n">local_file</span><span class="p">,</span><span class="w"> </span><span class="n">bucket</span><span class="p">,</span><span class="w"> </span><span class="n">s3_file</span><span class="p">):</span>
+<span class="w">    </span><span class="n">s3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">aws_access_key_id</span><span class="o">=</span><span class="n">ACCESS_KEY</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">aws_secret_access_key</span><span class="o">=</span><span class="n">SECRET_KEY</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">try</span><span class="p">:</span>
+<span class="w">        </span><span class="n">s3</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="n">local_file</span><span class="p">,</span><span class="w"> </span><span class="n">bucket</span><span class="p">,</span><span class="w"> </span><span class="n">s3_file</span><span class="p">)</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Upload Successful&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">True</span>
+<span class="w">    </span><span class="k">except</span><span class="w"> </span><span class="n">FileNotFoundError</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The file was not found&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">False</span>
+<span class="w">    </span><span class="k">except</span><span class="w"> </span><span class="n">NoCredentialsError</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Credentials not available&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">False</span>
+
+
+<span class="n">uploaded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">upload_to_aws</span><span class="p">(</span><span class="s1">&#39;filename.csv&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                         </span><span class="s1">&#39;bucket.name&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                         </span><span class="s1">&#39;filename.csv&#39;</span><span class="p">)</span>
+</code></pre></div>
                 <div class="clear"></div>
 
                 <div class="info">

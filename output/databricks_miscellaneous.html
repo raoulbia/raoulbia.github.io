@@ -18,7 +18,6 @@
         <nav>
             <ul>
                 <li><a href="./">Home</a></li>
-                <li><a href="https://github.com/raoulbia">GitHub</a></li>
                 <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
@@ -37,15 +36,27 @@
                 
                 
 
-                <h4>Import another notebook</h4>
-<div class="highlight"><pre><span></span><span class="nf">%run</span><span class="w"> </span><span class="s">&quot;../../schemas/master_config&quot;</span><span class="w"></span>
-</pre></div>
+                <h4>Code Snippets</h4>
+<div class="highlight"><pre><span></span><code><span class="nx">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">FROM</span><span class="w"> </span><span class="nx">_v_objects</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="nx">objtype</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">TABLE</span><span class="err">&#39;</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">objname</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="err">&#39;</span><span class="o">%</span><span class="nx">PCM</span><span class="o">%</span><span class="err">&#39;</span>
+<span class="nx">SHOW</span><span class="w"> </span><span class="nx">COLUMNS</span><span class="w"> </span><span class="nx">IN</span><span class="w"> </span><span class="nx">team_data</span><span class="p">.</span><span class="nx">dds_perf_guar_by_week</span>
+<span class="nx">DESCRIBE</span><span class="w"> </span><span class="nx">TABLE</span><span class="w"> </span><span class="nx">EXTENDED</span><span class="w"> </span><span class="nx">ORX_IDW_DM_OFSH_INTR_VIEW_PRD</span><span class="p">.</span><span class="nx">V_D_MEMBER_ADJUD</span>
+<span class="nx">DESCRIBE</span><span class="w"> </span><span class="nx">DETAIL</span><span class="w"> </span><span class="nx">ORX_IDW_DM_OFSH_INTR_VIEW_PRD</span><span class="p">.</span><span class="nx">V_D_MEMBER_ADJUD</span><span class="w"> </span><span class="p">(</span><span class="nx">only</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">tables</span><span class="p">,</span><span class="w"> </span><span class="nx">NOT</span><span class="w"> </span><span class="nx">views</span><span class="p">)</span>
+<span class="nx">DESCRIBE</span><span class="w"> </span><span class="nx">HISTORY</span><span class="w"> </span><span class="nx">table_name</span>
+</code></pre></div>
 
+<div class="highlight"><pre><span></span><code>today = datetime.today().strftime(&#39;%Y-%m-%d&#39;)
+today_nodash = today.replace(&#39;-&#39;,&#39;&#39;)
+today_slash = datetime.today().strftime(&#39;%d/%m/%Y&#39;)
+fpath = f&quot;/mnt/userspace/custom_dataset/.../INPUT_FILES/fda_drugshortages_{today}.xlsx&quot;
+</code></pre></div>
 
-<h4>Fitler DatFrame rows by Column values</h4>
-<div class="highlight"><pre><span></span>df = df.filter( (df.COL_A == i) &amp; (df.COL_B.isin([&#39;R&#39;,&#39;S&#39;])) )
-</pre></div>
+<h4>Import Notebook</h4>
+<div class="highlight"><pre><span></span><code><span class="nf">%run</span><span class="w"> </span><span class="s">&quot;../../schemas/master_config&quot;</span>
+</code></pre></div>
 
+<h4>Filter Dataframe Rows by Column Values</h4>
+<div class="highlight"><pre><span></span><code>df = df.filter( (df.COL_A == i) &amp; (df.COL_B.isin([&#39;R&#39;,&#39;S&#39;])) )
+</code></pre></div>
 
 <h4>Databricks CLI</h4>
 <ul>

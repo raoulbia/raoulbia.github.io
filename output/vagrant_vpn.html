@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code snippets etc. | Vagrant VM with VPN</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="./">Home</a></li>
+                <li><a href="./archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="./">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Dec 03, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./vagrant_vpn.html" rel="bookmark" title="Permanent Link to &quot;Vagrant VM with VPN&quot;">Vagrant VM with VPN</a>
+                </h2>
+
+                
+                
+
+                <h2>Step-by-Step Instructions to Set Up a VM to Bypass Zscaler Restrictions</h2>
+<h4>1. <strong>Create a DigitalOcean Droplet with Outline VPN Manager</strong></h4>
+<ol>
+<li>Set up a new DigitalOcean droplet.</li>
+<li>Install Outline VPN Manager to manage the Shadowsocks server. Follow the official Outline installation guide for setup.</li>
+<li>Note the public IP address of your DigitalOcean server.</li>
+</ol>
+<h4>2. <strong>Install and Configure Shadowsocks on the DigitalOcean Server</strong></h4>
+<ol>
+<li>Install Shadowsocks on the server:</li>
+</ol>
+<p><code>sudo apt update
+   sudo apt install shadowsocks-libev</code></p>
+<ol>
+<li>Edit the default Shadowsocks configuration (<code>/etc/shadowsocks-libev/config.json</code>) to use port <code>443</code> and your custom password:</li>
+</ol>
+<p><code>{
+     "server": "0.0.0.0",
+     "server_port": 443,
+     "password": "your-secure-password",
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"
+   }</code></p>
+<ol>
+<li>Restart the Shadowsocks server:</li>
+</ol>
+<p><code>sudo systemctl restart shadowsocks-libev</code></p>
+<ol>
+<li>Ensure that port <code>443</code> is open on the DigitalOcean server by allowing it through the firewall:</li>
+</ol>
+<p><code>sudo ufw allow 443/tcp
+   sudo ufw allow 443/udp</code></p>
+<h4>3. <strong>Configure Shadowsocks Client on the Vagrant Guest VM</strong></h4>
+<ol>
+<li>Install Shadowsocks on the Vagrant guest VM:</li>
+</ol>
+<p><code>sudo apt update
+   sudo apt install shadowsocks-libev</code></p>
+<ol>
+<li>Create the Shadowsocks client configuration (<code>/etc/shadowsocks-libev/config.json</code>) to connect to the DigitalOcean server:</li>
+</ol>
+<p><code>{
+     "server": "your-digital-ocean-server-ip",
+     "server_port": 443,
+     "local_port": 1080,
+     "password": "your-secure-password",
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"
+   }</code></p>
+<ol>
+<li>Start the Shadowsocks client on the Vagrant VM:</li>
+</ol>
+<p><code>ss-local -c /etc/shadowsocks-libev/config.json -v</code></p>
+<ol>
+<li>Ensure the Vagrant VM is using <strong>Bridged Adapter</strong> to allow direct internet access and connection to the DigitalOcean server.</li>
+</ol>
+<h4>4. <strong>Configure the Vagrant VM or Browser to Use the SOCKS Proxy</strong></h4>
+<ol>
+<li>Set the system or application (e.g., web browser) to use <code>localhost:1080</code> as the SOCKS5 proxy.</li>
+<li>For Firefox:</li>
+<li>Go to <strong>Preferences</strong> → <strong>Network Settings</strong>.</li>
+<li>Set <strong>SOCKS Host</strong> to <code>localhost</code> and port to <code>1080</code>.</li>
+<li>Ensure <strong>SOCKS v5</strong> is selected.</li>
+</ol>
+<h4>5. <strong>Test the Connection</strong></h4>
+<ol>
+<li>Verify that traffic is routed through the Shadowsocks proxy by browsing or using:</li>
+</ol>
+<p><code>curl --socks5 localhost:1080 http://example.com</code></p>
+<ol>
+<li>Ensure that you can bypass Zscaler restrictions and access unrestricted internet.</li>
+</ol>
+<h4>Summary:</h4>
+<ul>
+<li>DigitalOcean droplet runs <strong>Outline VPN Manager</strong> and Shadowsocks on <strong>port 443</strong>.</li>
+<li><strong>Vagrant guest VM</strong> connects via Shadowsocks client using <code>ss-local</code> with port <code>443</code>.</li>
+<li><strong>Bridged Adapter</strong> mode is essential for proper networking in the VM.</li>
+<li>SOCKS5 proxy runs locally on <code>localhost:1080</code> to bypass restrictions.</li>
+</ul>
+<p>This setup allows you to route traffic through your DigitalOcean server, effectively bypassing Zscaler restrictions.</p>
+<h2>Updated Step-by-Step Solution for Bypassing Zscaler Using the Vagrant Guest VM</h2>
+<p>Since you want to use <strong>Firefox on the Vagrant guest VM</strong> to bypass restrictions without relying on any executable files on the Windows host, we’ll configure the VM and Firefox to directly route traffic through the Shadowsocks proxy.</p>
+<h4>Step 1: Ensure Shadowsocks is Set Up on the DigitalOcean Server</h4>
+<p>Make sure your <strong>DigitalOcean server</strong> is configured and running properly.</p>
+<ol>
+<li><strong>DigitalOcean Server Shadowsocks Configuration (<code>/etc/shadowsocks-libev/config.json</code>):</strong></li>
+</ol>
+<p><code>{
+     "server": "0.0.0.0",
+     "server_port": 443,            // Running on port 443 to avoid network restrictions
+     "password": "your-secure-password",
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"
+   }</code></p>
+<ol>
+<li><strong>Restart the Shadowsocks server</strong> on the DigitalOcean droplet:</li>
+</ol>
+<p><code>sudo systemctl restart shadowsocks-libev</code></p>
+<h4>Step 2: Set Up Shadowsocks on the Vagrant Guest VM</h4>
+<p>Ensure the Shadowsocks client is installed and running on the <strong>guest VM</strong>.</p>
+<ol>
+<li><strong>Install Shadowsocks on the Guest VM</strong>:</li>
+</ol>
+<p><code>sudo apt update
+   sudo apt install shadowsocks-libev</code></p>
+<ol>
+<li><strong>Create or update the client configuration file (<code>/etc/shadowsocks-libev/config.json</code>)</strong>:</li>
+</ol>
+<p><code>{
+     "server": "your-digital-ocean-server-ip",   // The public IP of your DigitalOcean server
+     "server_port": 443,                         // Port 443 to avoid network restrictions
+     "local_port": 1080,                         // The local SOCKS5 proxy port
+     "password": "your-secure-password",         // Same as on the server
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"          // Same encryption method as the server
+   }</code></p>
+<ol>
+<li><strong>Start the Shadowsocks client</strong> on the guest VM:</li>
+</ol>
+<p><code>ss-local -c /etc/shadowsocks-libev/config.json -v</code></p>
+<p>This command starts the Shadowsocks SOCKS5 proxy on <code>localhost:1080</code> on your VM.</p>
+<h4>Step 3: Configure Firefox on the Guest VM to Use the SOCKS Proxy</h4>
+<ol>
+<li><strong>Open Firefox</strong> on the Vagrant guest VM.</li>
+<li>Go to <strong>Preferences</strong> → Scroll down to <strong>Network Settings</strong> → Click <strong>Settings</strong>.</li>
+<li><strong>Set up the SOCKS Proxy</strong>:</li>
+<li>Choose <strong>Manual proxy configuration</strong>.</li>
+<li>Under <strong>SOCKS Host</strong>, enter <code>localhost</code> and set the port to <code>1080</code>.</li>
+<li>Select <strong>SOCKS v5</strong> as the protocol.</li>
+<li>Check the box for <strong>Proxy DNS when using SOCKS v5</strong>.</li>
+</ol>
+<p><img alt="Firefox Proxy Settings" src="https://support.mozilla.org/en-US/kb/connection-settings-firefox/windows-firefox-proxy-settings-windows.png"> (Example of Firefox manual proxy settings).</p>
+<ol>
+<li><strong>Save</strong> the settings.</li>
+</ol>
+<p>Now, all traffic from Firefox will be routed through the SOCKS5 proxy running on your Vagrant guest VM, which connects to your DigitalOcean Shadowsocks server. This should bypass any Zscaler restrictions.</p>
+<h4>Step 4: Test the Setup</h4>
+<ol>
+<li>Open Firefox on the guest VM and visit a website that is typically restricted by Zscaler.</li>
+<li>Ensure the site loads, confirming that the traffic is routed through your DigitalOcean server and bypassing Zscaler.</li>
+</ol>
+<h3>Additional Steps (If Needed)</h3>
+<h4>Disable Ethernet on Host to Prevent Automatic Connection</h4>
+<p>Since your <strong>office screens automatically connect to Ethernet</strong>, you can disable the Ethernet interface temporarily on the <strong>Windows host</strong> to force all traffic through your guest VM.</p>
+<ol>
+<li>On your <strong>Windows host</strong>, disable Ethernet:</li>
+<li>Press <code>Win + R</code>, type <code>ncpa.cpl</code>, and press <strong>Enter</strong>.</li>
+<li>Right-click on the <strong>Ethernet</strong> adapter and choose <strong>Disable</strong>.</li>
+</ol>
+<p>This will prevent the automatic Ethernet connection when using office screens, forcing your internet traffic through the Vagrant guest VM.</p>
+<h4>Summary of Steps:</h4>
+<ol>
+<li><strong>DigitalOcean Server</strong>:</li>
+<li>
+<p>Ensure Shadowsocks is running on port <code>443</code>.</p>
+</li>
+<li>
+<p><strong>Vagrant Guest VM</strong>:</p>
+</li>
+<li>Start Shadowsocks with <code>ss-local</code> on <code>localhost:1080</code>.</li>
+<li>
+<p>Configure Firefox to use <code>localhost:1080</code> as a SOCKS5 proxy.</p>
+</li>
+<li>
+<p><strong>Test</strong>: Open restricted sites in Firefox on the guest VM to confirm Zscaler is bypassed.</p>
+</li>
+</ol>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./vagrant_vpn.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>
