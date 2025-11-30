@@ -1,38 +1,92 @@
-/* Custom code block improvements */
-pre, code {
-    font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', 'Liberation Mono', monospace;
-    font-size: 1.05em;
-    background: #23272e;
-    color: #f8f8f2;
-    border-radius: 6px;
-}
+/* Modern code block styling */
 pre {
-    padding: 1em;
+    background: linear-gradient(135deg, #0f172a 0%, #1a202c 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 1.25rem;
     overflow-x: auto;
     position: relative;
-    margin-bottom: 1.5em;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
 }
+
+pre:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+}
+
 code {
-    padding: 0.2em 0.4em;
-    background: #23272e;
-    color: #f8f8f2;
-    border-radius: 4px;
+    font-family: 'Fira Code', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'Monaco', 'Liberation Mono', monospace;
+    font-size: 0.95em;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+    color: #e2e8f0;
 }
+
+pre code {
+    background: none;
+    color: #e2e8f0;
+    padding: 0;
+    border-radius: 0;
+}
+
+/* Inline code styling */
+p code, li code {
+    background: rgba(148, 163, 184, 0.1);
+    color: #0f172a;
+    padding: 0.25em 0.5em;
+    border-radius: 4px;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    font-size: 0.9em;
+}
+
+/* Copy button styling */
 .copy-btn {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #4a90e2;
+    top: 12px;
+    right: 12px;
+    background: rgba(59, 130, 246, 0.9);
     color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 0.3em 0.8em;
-    font-size: 0.95em;
+    border: 1px solid rgba(59, 130, 246, 1);
+    border-radius: 6px;
+    padding: 0.5em 1em;
+    font-size: 0.85em;
+    font-weight: 500;
     cursor: pointer;
-    opacity: 0.85;
-    transition: opacity 0.2s;
+    opacity: 0.7;
+    transition: all 0.25s ease;
     z-index: 2;
+    backdrop-filter: blur(4px);
 }
+
 .copy-btn:hover {
     opacity: 1;
+    background: rgba(59, 130, 246, 1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.copy-btn:active {
+    transform: translateY(0);
+}
+
+/* Scrollbar styling for pre blocks */
+pre::-webkit-scrollbar {
+    height: 8px;
+}
+
+pre::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+pre::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.5);
+    border-radius: 10px;
+    transition: background 0.2s;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+    background: rgba(59, 130, 246, 0.8);
 }
