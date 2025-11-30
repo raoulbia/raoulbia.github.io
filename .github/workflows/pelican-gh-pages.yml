@@ -24,6 +24,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install pelican Markdown jinja2 ghp-import
 
+      - name: Install blue-penguin theme
+        run: |
+          mkdir -p pelican-themes/theme
+          git clone https://github.com/jody-frankowski/blue-penguin.git pelican-themes/theme/blue-penguin
+
       - name: Build site
         run: |
           pelican content -o output -s pelicanconf.py
