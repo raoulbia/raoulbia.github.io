@@ -28,52 +28,88 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 01, 2024</h4>
+        <div id="content">            <h4 class="date">Jul 16, 2024</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="../ai_about_llms.html" rel="bookmark" title="Permanent Link to &quot;AI About LLMs&quot;">AI About LLMs</a>
+                    <a href="../restful_api.html" rel="bookmark" title="Permanent Link to &quot;RESTful API&quot;">RESTful API</a>
                 </h2>
 
                 
                 
 
                 <p><br></p>
-<h3>Deploying LLMs Locally</h3>
-<h4>Setup ollama for executing open source LLM</h4>
-<div class="highlight"><pre><span></span><code>curl -fsSL https://ollama.com/install.sh | sh
-ollama pull llama2:latest
-ollama run llama2
-</code></pre></div>
-
-<h3>Finetuning LLMs</h3>
-<ul>
+<h1>Characteristics of a RESTful API</h1>
+<p>A RESTful API (Representational State Transfer) is an architectural style for designing networked applications. It relies on a stateless, client-server communication protocol, typically HTTP. Here are the key principles of a RESTful API:</p>
+<ol>
+<li><strong>Stateless</strong>: Each request from a client to a server must contain all the information needed to understand and process the request. The server does not store any client context between requests.</li>
+<li><strong>Client-Server</strong>: The client and server are separate entities that communicate over a network. The client is responsible for the user interface and user experience, while the server handles data storage and business logic.</li>
+<li><strong>Uniform Interface</strong>: RESTful APIs have a consistent and uniform interface, which simplifies and decouples the architecture. This is typically achieved through standard HTTP methods (GET, POST, PUT, DELETE) and resource-based URIs.</li>
+<li><strong>Cacheable</strong>: Responses from the server can be marked as cacheable or non-cacheable, allowing clients to cache responses to improve performance.</li>
+<li>Resource-Based: The API is designed around resources, which are identified by URLs. In backend/app.py, resources like artist suggestions, all artists, and artist details are accessed via specific endpoints. 
+This can also be referred to as <strong>Layered System</strong>, where the architecture can be composed of multiple layers, with each layer having a specific responsibility. This helps in managing complexity and scalability.</li>
+</ol>
+<h2>Example in Code: Application MusicMuse</h2>
+<p><a href="https://github.com/raoulbia-ai/music-muse">https://github.com/raoulbia-ai/music-muse</a></p>
+<p>In this application, the backend provides RESTful API endpoints that the frontend interacts with. For example, the <code>/api/suggestions</code> endpoint allows the frontend to fetch artist suggestions based on a query.</p>
+<p><code>backend/app.py</code> follows the principles of RESTful APIs by 
+* being stateless, 
+* having a client-server architecture, 
+* providing a uniform interface, 
+* being resource-based, and 
+* using standard HTTP methods. </p>
+<p>Therefore, it can be considered a RESTful API.</p>
+<h1>RESTful APIs and asynchronous requests</h1>
+<p>RESTful APIs and asynchronous requests fit together seamlessly to create efficient and responsive web applications. Here's how they work together:</p>
+<ol>
 <li>
-<p>there are a lot of different tokenizers and a tokenizer is really associated with 
-a specific model for each model as it was trained on it. And if you give the wrong tokenizer to your model, it'll 
-be very confused because it will expect different numbers to represent different sets of letters 
-and different words. So make sure you use the right tokenizer.</p>
+<p><strong>RESTful APIs</strong>: These provide a standardized way for the frontend to communicate with the backend. They use HTTP methods (GET, POST, PUT, DELETE) to perform CRUD (Create, Read, Update, Delete) operations on resources identified by URLs.</p>
 </li>
 <li>
-<p>The AutoTokenizer class from the Transformers library by HuggingFace automatically finds the right tokenizer or for your 
-model when you just specify what the model is. So all you have to do is put the model and name in.</p>
+<p><strong>Asynchronous Requests</strong>: These allow the frontend to make requests to the backend without blocking the main thread. This means the user interface remains responsive while waiting for the server to respond.</p>
 </li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">AutoTokenizer</span>
-<span class="n">tokenizer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;EleutherAI/pythia-70m&quot;</span><span class="p">)</span>
+</ol>
+<h3>How They Fit Together</h3>
+<ol>
+<li>
+<p><strong>Frontend Initiates Request</strong>: When a user interacts with the frontend (e.g., typing in a search box), the frontend makes an asynchronous request to the backend using the fetch API or similar.</p>
+</li>
+<li>
+<p><strong>Backend Processes Request</strong>: The backend receives the request, processes it (e.g., querying a database), and sends back a response.</p>
+</li>
+<li>
+<p><strong>Frontend Handles Response</strong>: The frontend receives the response and updates the UI accordingly (e.g., displaying search suggestions).</p>
+</li>
+</ol>
+<h2>Example in Code: Application MusicMuse</h2>
+<p><a href="https://github.com/raoulbia-ai/music-muse">https://github.com/raoulbia-ai/music-muse</a></p>
+<p><code>SearchBox.js</code> script demonstrates this interaction. The setup ensures that the frontend can make non-blocking requests to the backend, 
+receive data, and update the UI without interrupting the user experience.</p>
+<h4>Making an Asynchronous Request</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">fetchSuggestions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">query</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_API_BASE_URL</span><span class="si">}</span><span class="sb">/api/suggestions?query=</span><span class="si">${</span><span class="nx">query</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">setSuggestions</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">setNoArtistsFound</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// Show message if no artists found</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error fetching suggestions:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">};</span>
 </code></pre></div>
 
-<h3>Resources</h3>
-<ul>
-<li><a href="https://www.deeplearning.ai/short-courses/finetuning-large-language-models/">deeplearning.ai - Finetuning LLMs</a></li>
-<li>https://docs.crewai.com/how-to/LLM-Connections/#azure-open-ai-configuration</li>
-<li>https://kaustavmukherjee-66179.medium.com/create-eexcute-crew-ai-agent-with-llama2-model-without-any-need-og-openai-key-def216cd5f4f</li>
-<li>https://thoughtbot.com/blog/how-to-use-open-source-LLM-model-locally</li>
-</ul>
+<h4>RESTful API Endpoint</h4>
+<p>In <code>app.py</code>, the backend defines a RESTful API endpoint to handle the request:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/suggestions&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_suggestions</span><span class="p">():</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;query&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">suggestions</span> <span class="o">=</span> <span class="p">[</span><span class="n">artist</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">artist</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="n">query</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">artist</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">suggestions</span><span class="p">)</span>
+</code></pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="../ai_about_llms.html">posted at 00:00</a>
+                    <a href="../restful_api.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="../category/ai.html" rel="tag">AI</a>
                 </div>
             </article>
