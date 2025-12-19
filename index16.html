@@ -26,130 +26,495 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 01, 2018</h4>
+        <div id="content">            <h4 class="date">Jan 03, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./pypi.html" rel="bookmark" title="Permanent Link to &quot;PyPi&quot;">PyPi</a>
+                    <a href="./python_data_structures.html" rel="bookmark" title="Permanent Link to &quot;Python Data Structures&quot;">Python Data Structures</a>
                 </h2>
 
                 
                 
 
-                <h4>Pre-requisites</h4>
-<ul>
-<li>
-<p><code>pip install -U twine</code></p>
-</li>
-<li>
-<p>in <code>~.pypirc</code> add <code>chmod 600 ~/.pypirc</code></p>
-</li>
-</ul>
-<h4>Deploy on PyPi</h4>
-<hr>
-<p><strong>Note</strong></p>
-<ul>
-<li>Make sure to update version information before deploying. 
-Files to update: <code>__init__.py</code> and <code>setup.py</code>.</li>
-<li>After deploying, don't forget to re-build the documentation at <a href="https://readthedocs.org/projects/shizen-gengo/builds">ReadTheDocs</a>.</li>
-</ul>
-<hr>
-<div class="highlight"><pre><span></span><code><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">rf</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">dist</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">setup</span><span class="o">.</span><span class="n">py</span><span class="w"> </span><span class="n">sdist</span>
-<span class="n">ls</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span>
-<span class="c1">#python setup.py check -r -s (obolete)</span>
-<span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">twine</span><span class="w"> </span><span class="n">check</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span>
-<span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w">  </span><span class="n">twine</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span>
+                <p><br></p>
+<h3>Lists</h3>
+<h4>itemgetter</h4>
+<p>itemgetter on a list of tuples <code>[('P52564', 61), ('O15169', 44), ...]</code></p>
+<p><code>sorted(list(degrees), key=operator.itemgetter(1), reverse=True)[0:5]</code></p>
+<p>itemgetter on a dict</p>
+<p><code>sorted(pr.items(), key=operator.itemgetter(1), reverse=True)[0:5]</code></p>
+<h4>Compare items in two lists:</h4>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">rank_true</span><span class="p">,</span> <span class="n">rank_pred</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="n">pred</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">rank_true</span> <span class="o">==</span> <span class="n">rank_pred</span><span class="p">:</span>
 </code></pre></div>
 
-<h4>Misc.</h4>
-<ul>
-<li><a href="https://help.github.com/en/github/creating-cloning-and-archiving-repositories/licensing-a-repository">Licensing a repository
-</a></li>
-</ul>
-                <div class="clear"></div>
+<h4>Print list items</h4>
+<p><code>print(*myList, sep='\n')</code></p>
+<h4>Convert a list of chars into proper list:</h4>
+<div class="highlight"><pre><span></span><code><span class="nb">list</span> <span class="o">=</span> <span class="s1">&#39;123; 456; 887&#39;</span>
+<span class="n">ls</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+</code></pre></div>
 
-                <div class="info">
-                    <a href="./pypi.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/pypi.html" rel="tag">PyPi</a>
-                </div>
-            </article>            <h4 class="date">Dec 05, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./Git.html" rel="bookmark" title="Permanent Link to &quot;Git&quot;">Git</a>
-                </h2>
-
-                
-                
-
-                <h4>Push permission denied</h4>
-<div class="highlight"><pre><span></span><code><span class="n">ssh</span><span class="w"> </span><span class="o">-</span><span class="n">T</span><span class="w"> </span><span class="n">git</span><span class="nv">@github</span><span class="p">.</span><span class="n">com</span>
-<span class="n">eval</span><span class="w"> </span><span class="ss">&quot;$(ssh-agent -s)&quot;</span>
-<span class="n">ssh</span><span class="o">-</span><span class="k">add</span><span class="w"> </span><span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_raoulbia</span>
+<h4>List Comprehension: If/Else</h4>
+<div class="highlight"><pre><span></span><code><span class="n">rel_bin</span> <span class="o">=</span> <span class="p">[</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">y</span> <span class="o">==</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="n">x</span> <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="n">y</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">y</span> <span class="o">==</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">1</span>
+            <span class="k">else</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">2</span>
+            <span class="k">else</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span>
+            <span class="k">else</span> <span class="o">-</span><span class="mi">9</span> <span class="c1"># to catch any issues</span>
+            <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rel_bin_judge_1</span><span class="p">,</span> <span class="n">rel_bin_judge_2</span><span class="p">)]</span>
 </code></pre></div>
 
 <p><br></p>
-<h4>Set Origin URL with PAT token</h4>
-<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">remote</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">&lt;</span><span class="n">repository</span><span class="o">-</span><span class="n">url</span><span class="o">&gt;</span>
-
-<span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">remote</span><span class="w"> </span><span class="k">set</span><span class="o">-</span><span class="n">url</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">username</span><span class="o">&gt;</span><span class="err">:</span><span class="o">&lt;</span><span class="n">PAT</span><span class="w"> </span><span class="n">TOKEN</span><span class="o">&gt;</span><span class="nv">@github</span><span class="p">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">repo</span><span class="o">-</span><span class="n">owner</span><span class="o">&gt;/&lt;</span><span class="n">repo</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="p">.</span><span class="n">git</span>
+<h3>Dictionaries</h3>
+<h4>Counting</h4>
+<div class="highlight"><pre><span></span><code><span class="n">context_dic</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">query_results</span><span class="p">:</span>
+    <span class="n">context_dic</span><span class="p">[</span><span class="n">res</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 </code></pre></div>
 
-<p>e.g. </p>
-<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">remote</span><span class="w"> </span><span class="k">set</span><span class="o">-</span><span class="n">url</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">PAT</span><span class="w"> </span><span class="n">TOKEN</span><span class="o">&gt;</span><span class="nv">@github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">raoulbia</span><span class="o">-</span><span class="n">ai</span><span class="o">/</span><span class="n">gpt</span><span class="o">-</span><span class="n">playground</span><span class="p">.</span><span class="n">git</span>
-</code></pre></div>
-
-<h4>Set / Change remote origin url</h4>
-<div class="highlight"><pre><span></span><code>git remote add origin &lt;remote repository URL&gt;
-
-git remote set-url origin &lt;remote repository url&gt;
-</code></pre></div>
-
-<h4>Remove dir from remote but keep local</h4>
-<div class="highlight"><pre><span></span><code><span class="n">echo</span> <span class="s1">&#39;.idea&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">.</span><span class="n">gitignore</span>
-<span class="n">git</span> <span class="n">rm</span> <span class="o">-</span><span class="n">r</span> <span class="o">--</span><span class="n">cached</span> <span class="o">.</span><span class="n">idea</span><span class="o">/</span> <span class="c1"># Remove the file from the repository</span>
-<span class="n">git</span> <span class="n">add</span> <span class="o">.</span><span class="n">gitignore</span>
-<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s1">&#39;remove dir from remote&#39;</span>
-<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>
-</code></pre></div>
-
-<h4>Git Tagging</h4>
-<div class="highlight"><pre><span></span><code>git add GTFSR.py
-git commit -m &quot;GTFSRT script initial commit&quot;
-git tag -a GTFSRT_v1.0 -m &quot;original GTFSRT script&quot;
-git push origin master tag GTFSRT_v1.0
-</code></pre></div>
-
-<h4>Git commands</h4>
+<h4>Count distinct values in a dict key</h4>
 <ul>
-<li><code>git add -A</code></li>
-<li><code>git add .</code> to add a new file</li>
-<li><code>git remote -v</code></li>
-<li><code>git checkout --theirs PATH/FILE</code> if conflict: If solution is to accept remote/other-branch version</li>
-<li><code>git add -p</code> <a href="https://medium.com/@mc999/git-add-p-is-a-gamechanger-in-file-management-e4c879e89ab">read more</a></li>
-<li><code>git clone -b &lt;branch name&gt; &lt;rep url&gt;</code></li>
-<li><code>git add dir/*</code> to add new files or directories:</li>
-<li><code>git commit -m "update" $$ git push origin &lt;branch name&gt;</code></li>
-<li><code>git pull origin &lt;branch name&gt;</code></li>
-<li><code>git reset --hard origin/master</code></li>
-<li><code>git branch -a</code></li>
-<li><code>git remote show origin</code></li>
-<li><code>git checkout -- .</code> to remove all unstaged files in current working directory</li>
-<li><code>git branch -u origin/master</code> tell git that local branch (master) should compare itself to remote counterpart (origin/master)</li>
+<li><code>{value: len(list(freq)) for value, freq in groupby(sorted(schedule_rel_types))}</code></li>
 </ul>
-<h4>Useful Links</h4>
+<h4>Count unique values using <code>Counter</code> class</h4>
+<div class="highlight"><pre><span></span><code><span class="n">d</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">co_occurrence_counts</span><span class="p">[</span><span class="s1">&#39;Gene_Gene&#39;</span><span class="p">][</span><span class="s1">&#39;ent_ab&#39;</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%i</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+</code></pre></div>
+
+<p>see also <a href="https://stackoverflow.com/questions/16406329/python-dictionary-count-of-unique-values">dictionary count of unique values</a></p>
+<p><br></p>
+<h3>Named Tuples</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">=</span><span class="si">{1}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">k</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">]))</span>
+
+<span class="bp">self</span><span class="o">.</span><span class="n">Result</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Result&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="s1">&#39;entity&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">,</span>
+                                                       <span class="s1">&#39;precision&#39;</span><span class="p">,</span> <span class="s1">&#39;recall&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">))</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">elf</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Result</span><span class="p">(</span><span class="n">embedding</span><span class="o">=</span><span class="n">source</span><span class="p">,</span>
+                                          <span class="n">entity</span><span class="o">=</span><span class="n">entity</span><span class="p">,</span>
+                                          <span class="nb">type</span><span class="o">=</span><span class="nb">type</span><span class="p">,</span>
+                                          <span class="n">precision</span><span class="o">=</span><span class="n">precision</span><span class="p">,</span>
+                                          <span class="n">recall</span><span class="o">=</span><span class="n">recall</span><span class="p">,</span>
+                                          <span class="o">...</span>
+                                          <span class="p">))</span>
+<span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span>
+<span class="n">t_by_emb</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;embedding&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">t_by_emb_bio</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="s1">&#39;entity&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">t_by_emb_type</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">t_by_emb</span><span class="p">,</span> <span class="n">t_by_emb_bio</span><span class="p">,</span> <span class="n">t_by_emb_type</span> <span class="o">=</span> <span class="n">t_by_emb</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">t_by_emb_bio</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">t_by_emb_type</span><span class="o">.</span><span class="n">T</span>
+</code></pre></div>
+
+<p><strong>Note</strong>: Named tuples are immutable, so you cannot manipulate them. If you want something mutable, you can use recordtype.
+<a href="https://stackoverflow.com/questions/31252939/changing-values-of-a-list-of-namedtuples">read more</a></p>
+<p><br></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./python_data_structures.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                </div>
+            </article>            <h4 class="date">Jan 02, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./python.html" rel="bookmark" title="Permanent Link to &quot;Python&quot;">Python</a>
+                </h2>
+
+                
+                
+
+                <p><br></p>
+<h4>Module Not Found with VSC</h4>
+<p><strong>Option 1</strong>
+Add this to <code>settings.json</code>:</p>
+<div class="highlight"><pre><span></span><code>&quot;terminal.integrated.env.windows&quot;:<span class="w"> </span>{&quot;PYTHONPATH&quot;:<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">workspaceFolder</span><span class="cp">}</span>&quot;}
+</code></pre></div>
+
+<p><br></p>
+<p><strong>Option 2</strong>
+Note: Below instructions were compiled while using the Lightning.Ai VSC IDE.</p>
+<p>If you want to import <code>load_keys.py</code> from any Python script in any subdirectory of the root, you can add the root directory to your PYTHONPATH.</p>
+<p><code>nano ~/.bashrc</code></p>
+<p>Add the following line at the end of the file, replacing /path/to/your/root/directory with the actual path to your root directory:</p>
+<p><code>export PYTHONPATH="${PYTHONPATH}:/teamspace/studios/this_studio"</code></p>
+<p>Save and close the file.</p>
+<p>Source your .bashrc file to apply the changes: <code>source ~/.bashrc</code></p>
+<p>make sure to cd into <code>rag</code> directory before running the script</p>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+<span class="w">     </span><span class="kn">from</span><span class="w"> </span><span class="nn">rag.load_keys</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="o">*</span>
+<span class="w">     </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;config module is available&quot;</span><span class="p">)</span>
+<span class="w"> </span><span class="k">except</span><span class="w"> </span><span class="n">ImportError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">e</span><span class="p">:</span>
+<span class="w">     </span><span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>How to Manage API Keys</h4>
+<p>Pre-requisite: <code>pip install python-dotenv</code></p>
+<p>Example config.py: </p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">llama_index.llms.openai</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">OpenAI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">llama_index.embeddings.openai</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">OpenAIEmbedding</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">load_dotenv</span><span class="p">,</span><span class="w"> </span><span class="n">find_dotenv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">load_dotenv</span><span class="p">(</span><span class="n">find_dotenv</span><span class="p">(),</span><span class="w"> </span><span class="n">override</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">OPENAI_API_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">)</span>
+<span class="n">COHERE_API_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;COHERE_API_KEY&quot;</span><span class="p">)</span>
+<span class="n">HF_TOKEN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;HUGGINGFACEHUB_API_TOKEN&quot;</span><span class="p">)</span>
+<span class="n">PINECONE_API_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;PINECONE_API_KEY&quot;</span><span class="p">)</span>
+<span class="n">PINECONE_ENV</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;PINECONE_ENV&quot;</span><span class="p">)</span>
+
+<span class="c1"># Initialize shared instances</span>
+<span class="n">llm_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-3.5-turbo&quot;</span><span class="p">)</span>
+<span class="n">embedding_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAIEmbedding</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;text-embedding-ada-002&quot;</span><span class="p">)</span>
+
+<span class="n">llm_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4&quot;</span><span class="p">)</span>
+<span class="n">embedding_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAIEmbedding</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;text-embedding-ada-002&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>All you have to do then is to import the desired API Key like so:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">config</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="p">(</span><span class="n">OPENAI_API_KEY</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                     </span><span class="n">PINECONE_API_KEY</span><span class="p">,</span><span class="w"> </span>
+<span class="w">             </span><span class="n">PINECONE_ENV</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">llm_instance</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">embedding_instance</span><span class="p">)</span>
+</code></pre></div>
+
+<p><br></p>
+<h4>File paths</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">Path</span>
+
+<span class="n">output_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;data&#39;</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;output&#39;</span><span class="c1">#self.output_dir = Path.cwd() / &#39;data&#39; / &#39;output&#39; / &#39;geojson&#39;</span>
+
+<span class="k">try</span><span class="p">:</span>
+<span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="w"> </span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">except</span><span class="w"> </span><span class="n">FileExistsError</span><span class="p">:</span>
+<span class="w"> </span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Folder already exists&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+<span class="w"> </span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Folder was created: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>mkdir if not exists</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">Path</span>
+
+<span class="n">TODAY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+<span class="n">outdir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="sa">f</span><span class="s2">&quot;outputs/</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">TODAY</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="c1">#.replace(&#39;-&#39;, &#39;&#39;)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">outdir</span><span class="p">):</span><span class="w">  </span>
+<span class="w">  </span><span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The new directory is created!&quot;</span><span class="p">)</span>
+<span class="n">outdir</span>
+</code></pre></div>
+
+<h4>limited FOR loop</h4>
+<p><code>for i, elem in zip(range(100), elems[::10])</code> where <code>[::10]</code> is every 10th</p>
+<h4>Query</h4>
 <ul>
-<li><a href="https://stackoverflow.com/questions/4470523/create-a-branch-in-git-from-another-branch">Create a branch in Git from another branch</a></li>
-<li><a href="https://stackoverflow.com/questions/33101962/how-to-create-a-new-gitlab-repo-from-my-existing-local-git-repo-using-cli">How to create a new gitlab repo from my existing local git repo</a></li>
-<li><a href="https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/">Adding an existing project to GitHub using the command line</a></li>
-<li><a href="https://techbase.kde.org/Development/Git/Feature_Branch_Workflow">Feature_Branch_Workflow</a></li>
-<li><a href="https://stackoverflow.com/questions/67699/how-to-clone-all-remote-branches-in-git">How to clone all remote branches</a></li>
+<li><code>pd.read_csv("file.csv").query("year==2000")</code></li>
+<li><code>df.query("delay_arrival == 'n/a' | delay_arrival == 'NO_DATA' ")</code></li>
+</ul>
+<h4>File Handling:</h4>
+<div class="highlight"><pre><span></span><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">dosomething</span><span class="p">()</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># remove if exists then write df to csv</span>
+<span class="n">f</span> <span class="o">=</span> <span class="s1">&#39;local-data/filename.csv&#39;</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Notes:</p>
+<ul>
+<li>Opening a file with this statement will handle file closing for you</li>
+<li>The <code>StringIO</code> and <code>cStringIO</code> modules are gone. </li>
+<li>Instead, import the <code>io</code> module and use <code>io.StringIO</code> for <strong>text</strong> and <code>io.BytesIO</code> for <strong>data</strong>.</li>
+<li>Calling <code>read()</code> reads through the entire file and leaves the read cursor at the end of the file (with nothing more to read).</li>
+<li>Once a file has been read, with <code>read()</code> you can use <code>seek(0)</code> to return the read cursor to the start of the file</li>
+<li>To check if a file exists or to overwrite an existing file:</li>
+</ul>
+<h4>Get index based on values in another column</h4>
+<div class="highlight"><pre><span></span><code><span class="n">id_in_top5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">df_ranked</span><span class="p">[</span><span class="n">rank_column</span><span class="p">][</span><span class="n">df_ranked</span><span class="p">[</span><span class="n">rank_column</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">])[::]</span>
+</code></pre></div>
+
+<p><br></p>
+<h3>Ranking</h3>
+<h4>Create rankings</h4>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;source&#39;</span><span class="p">)[</span><span class="s1">&#39;dist&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>Create a dummy rank</h4>
+<p>This was used for a list of 10 items where 1 to 5 is already ranked and we need to fill the remaining 5 <code>NaN</code> ranks with ranks 6 to 10.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">rank2rand</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col_to_modify</span><span class="p">):</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">existing_ranks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="n">col_to_modify</span><span class="p">]])</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;source_random&#39;</span><span class="p">]])</span>
+    <span class="n">updated_ranks</span> <span class="o">=</span> <span class="p">[</span><span class="nb">next</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span> <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">existing_ranks</span><span class="p">,</span> <span class="n">source</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">updated_ranks</span>
+</code></pre></div>
+
+<p><br></p>
+<h3>Lambda</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">transform</span><span class="p">():</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">2</span><span class="o">**</span><span class="n">x</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">transform</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
+</code></pre></div>
+
+<p>see also <a href="https://www.python-course.eu/python3_lambda.php">Lambda, filter, reduce and map</a></p>
+<h4>Lambda and dataframes: examples</h4>
+<p><code>df = df.apply(lambda x: x.astype(str).str.upper())</code></p>
+<p><code>df['Score'] = df['Score'].apply(lambda x: sigmoid(float(x)))</code></p>
+<p><code>df['string_id'] = df['string_id'].apply(lambda id_string: '9606.' + id_string)</code></p>
+<p><br></p>
+<h3>Misc.</h3>
+<h4><em>args &amp; </em>*kargs</h4>
+<ul>
+<li>*args refers to an undetermined number of positional arguments</li>
+<li>**kargs refers to an undetermined number of keyword arguments</li>
+</ul>
+<div class="highlight"><pre><span></span><code>def add_numbers(num0, num1, num2=2, num3=3):
+    outcome = num0 + num1 + num2 + num3
+    print(f&quot;num0={num0}, num1={num1}, num2={num2}, num3={num3}&quot;)
+    return outcome
+</code></pre></div>
+
+<p><a href="https://medium.com/better-programming/top-5-mistakes-you-make-when-declaring-functions-in-python-b7a0747711a4">read more</a></p>
+<h4>Remove zeros from numpy array</h4>
+<div class="highlight"><pre><span></span><code><span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># print(index)</span>
+    <span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+</code></pre></div>
+
+<p>see also <a href="https://towardsdatascience.com/top-4-numpy-functions-you-dont-know-about-probably-28fcd5d7174f">Top 4 Numpy Functions You Don’t Know About</a></p>
+<h4>double colon e.g. <code>[::3]</code></h4>
+<p><code>[::3]</code> just means that you have not specified any start or end indices for your slice (as in <code>seq[start:end:step]</code>).</p>
+<p>Since you have specified a step, 3, this will take every third entry of something starting at the first index.</p>
+<p>For example: <code>'123123123'[::3] &gt;&gt; '111'</code></p>
+<p>It can also be used to reverse a list using <code>[::-1]</code>:</p>
+<p><code>a[::-1]</code> does not reverse anything, it's just a new view on the same data, more specifically a mirror view.</p>
+<p>The method <code>a[::-1].sort()</code> operates on the mirrored image, implying that when sort moves left a smaller item in its
+ mirrored image, in reality it is moving it to the right in the real memory block of the a array. The mirrored view is
+ sorted in ascending order, the real data is sorted in descending order.
+ <a href="https://stackoverflow.com/questions/26984414/efficiently-sorting-a-numpy-array-in-descending-order">source</a></p>
+<h4>What does selection by <code>[:,None]</code> do?</h4>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">NP</span>
+<span class="o">&gt;&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">NP</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">a</span>
+<span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span>
+<span class="p">(</span><span class="mi">4</span><span class="p">,)</span>
+<span class="o">&gt;&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">a</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">a</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span>
+<span class="p">[[</span><span class="mi">1</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]]</span>
+</code></pre></div>
+
+<p>see also <a href="http://stackoverflow.com/questions/37867354/in-numpy-what-does-selection-by-none-do">here</a></p>
+<h4>About Relative Imports</h4>
+<ul>
+<li>In order to run a script that uses relative imports such as <code>from .build_corpus import BuildCorpus</code>,
+you must run the script from the <strong>parent</strong> directory using <code>-m</code> and <strong>without</strong> the <code>.py</code>
+e.g. <code>python -m cai_pytorch.pytorch</code></li>
+</ul>
+<h4>About Python Modules</h4>
+<ul>
+<li>When getting error: <code>module ... not found</code>: <a href="http://askubuntu.com/questions/470982/how-to-add-a-python-module-to-syspath">see here</a></li>
+<li>To prevent getting error <code>no module named...</code> resp. before importing a module from a different project make sure to run: 
+<code>$ python setup.py install</code></li>
+<li>How to get <code>import</code> of modules to work (<a href="http://stackoverflow.com/questions/36650163/cant-import-from-specific-folder-in-pycharm">source</a>)</li>
+<li>Modules are imported from a Python Package, not from a Directory. Therefore, instead of storing python scripts in a    directory, store them in a Python Package: right-click on your project directory, choose Python Package.</li>
+<li>Alternatively, in the existing directory, create an empty <code>__init__.py</code> file.</li>
+</ul>
+<h4>About Python Packages</h4>
+<p>To list installed packages</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pip</span>
+<span class="n">installed_packages</span> <span class="o">=</span> <span class="n">pip</span><span class="o">.</span><span class="n">get_installed_distributions</span><span class="p">()</span>
+<span class="n">installed_packages_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">==</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">installed_packages</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">installed_packages_list</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>Python Profiler for Debugging</h4>
+<ul>
+<li>
+<p><a href="https://stackoverflow.com/questions/49262187/storing-the-link-prediction-score-in-a-matrix-form-using-networkx">cProfiler</a></p>
+</li>
+<li>
+<p>line profiler</p>
+</li>
+</ul>
+<p>Assumes you are using a shell script to run your program.</p>
+<p>Pre-requiste: <code>pip install line_profiler</code></p>
+<ol>
+<li>
+<p>change shell script as follows:</p>
+<div class="highlight"><pre><span></span><code>   #!/bin/bash -x
+
+   kernprof -lv my_script.py \
+   # time python3 my_script.py \
+   ...
+</code></pre></div>
+
+</li>
+<li>
+<p>add <code>@profile</code> at the start of each function you want to profile</p>
+</li>
+<li>
+<p>execute shell script</p>
+</li>
+<li>
+<p>when done, reverse changes made in Steps 1. and 2.</p>
+</li>
+</ol>
+<h4><code>super()</code> with <code>__init__()</code></h4>
+<p><a href="https://stackoverflow.com/questions/576169/understanding-python-super-with-init-methods">Understanding Python super() with <strong>init</strong>() methods</a></p>
+<h4>About the Python import mechanism</h4>
+<ul>
+<li><a href="https://stackoverflow.com/questions/11536764/how-to-fix-attempted-relative-import-in-non-package-even-with-init-py">here</a></li>
+<li><a href="https://stackoverflow.com/questions/44834/can-someone-explain-all-in-python">and here</a></li>
+</ul>
+<h4>Time it</h4>
+<p>time a for loop:</p>
+<div class="highlight"><pre><span></span><code><span class="c">%%timeit -n 10</span>
+<span class="k">for</span><span class="w"> </span><span class="k">...</span><span class="c">:</span>
+<span class="w">  </span><span class="k">...</span>
+</code></pre></div>
+
+<p>general timing</p>
+<div class="highlight"><pre><span></span><code>testtime = datetime.now()
+...
+testtime = testtime.strftime(&quot;%H:%M&quot;)
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="o">...</span>
+<span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">t2r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;execution time </span><span class="si">{:.4f}</span><span class="s1"> mins&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t2r</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">60</span><span class="p">))</span>
+</code></pre></div>
+
+<h4>Logging &amp; Try/Except</h4>
+<ul>
+<li><a href="https://medium.com/better-programming/a-comprehensive-guide-to-handling-exceptions-in-python-7175f0ce81f7">A Comprehensive Guide to Handling Exceptions in Python</a></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">build_pathway_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">list</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__qualname__</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pathway</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Building Pathway Data Set&#39;</span><span class="p">)</span>
+            <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">dataset</span> <span class="o">=</span> <span class="n">PathwayDataset</span><span class="p">(</span><span class="nb">list</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">args</span><span class="p">)</span>
+            <span class="n">dataset</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">pathway_limit</span><span class="o">=</span><span class="n">pathway_limit</span><span class="p">)</span>
+            <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;finished in </span><span class="si">%5.2f</span><span class="s1"> s&#39;</span><span class="p">,</span> <span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;dataset will not be built&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exception</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">e</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">])))</span>
+        <span class="k">raise</span> <span class="n">e</span>
+</code></pre></div>
+
+<h4>Create a temporary file for unit tests:</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tomoe.io</span> <span class="kn">import</span> <span class="n">get_tomoe_local_data_dir</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="n">temp_path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;dist-graph-sampling&quot;</span><span class="p">)</span>
+
+ <span class="o">...</span>
+
+<span class="n">TOMOE_TEMP_FOLDER</span> <span class="o">=</span> <span class="n">get_tomoe_local_data_dir</span><span class="p">()</span>
+
+ <span class="o">...</span>
+<span class="n">triples_hg_csv_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="p">,</span> <span class="s1">&#39;triples.hg.csv.tsv&#39;</span><span class="p">)</span>
+<span class="n">triple_csv_to_hyperedge_csv</span><span class="p">(</span><span class="n">triples_csv_path</span><span class="p">,</span> <span class="n">triples_hg_csv_path</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">triples_hg_csv_path</span><span class="p">)</span><span class="o">.</span><span class="n">st_size</span> <span class="o">!=</span> <span class="mi">0</span>
+</code></pre></div>
+
+<h4>Variable assignemnt Gotchas</h4>
+<div class="highlight"><pre><span></span><code><span class="n">a</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">b</span><span class="o">=</span><span class="n">a</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mi">12</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>How to install Python 3.6 on Ubuntu 16.04 LTS</h4>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>add-apt-repository<span class="w"> </span>ppa:jonathonf/python-3.6
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3.6
+</code></pre></div>
+
+<p>may be needed:</p>
+<p><code>sudo apt-get install python3.6-gdbm</code> </p>
+<h4>Convert Python2 to Python3</h4>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>2to3
+2to3<span class="w"> </span>-n<span class="w"> </span>-w<span class="w"> </span>path/to/script/script_namae.py
+</code></pre></div>
+
+<p>Note: <code>-n</code> prevents backup files; <code>-w</code> instructs to write the conversion</p>
+<h4>SSLCert Error</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">requests.sessions</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">Session</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">requests.adapters</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">HTTPAdapter</span>
+
+<span class="c1"># Original function</span>
+<span class="n">original_send</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HTTPAdapter</span><span class="o">.</span><span class="n">send</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">patched_send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;verify&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">False</span><span class="w">  </span><span class="c1"># Disable SSL verification</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">original_send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="c1"># Patch the send method</span>
+<span class="n">HTTPAdapter</span><span class="o">.</span><span class="n">send</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">patched_send</span>
+</code></pre></div>
+
+<p><code>pip install --trusted-host pypi.org -r .\requirements.txt</code></p>
+<p><br></p>
+<h4>Misc</h4>
+<ul>
+<li><code>strip()</code> strips off the new line character</li>
+<li>Widen Pycharm console output for pandas DFs: <code>pd.set_option('display.expand_frame_repr', False)</code></li>
+<li>About <code>action="store_true"</code>: <a href="https://docs.python.org/2/howto/argparse.html">see here</a></li>
+<li><code>PYTHONPATH</code> is the module search path.</li>
+<li><code>PYTHONHOME</code> is used for the standard libraries,</li>
+</ul>
+<h4>Various Links</h4>
+<ul>
+<li><a href="http://zetcode.com/python/regularexpressions/">Python regular expressions</a></li>
+<li><a href="https://kate.io/blog/2017/08/22/weird-python-integers/">Weird Python Integers</a></li>
+<li><a href="https://stackoverflow.com/questions/34229363/converting-json-string-into-python-dictionary">json.dumps vs json.loads</a></li>
+<li><a href="https://joblib.readthedocs.io/en/latest/">py joblib tutorial</a> ( about parallelization )</li>
+<li><a href="https://medium.com/analytics-vidhya/top-10-nice-to-have-data-science-libraries-d155196710ef">Top 10 Nice-To-Have Data Science Libraries</a></li>
+<li><a href="https://towardsdatascience.com/how-to-analyse-100s-of-gbs-of-data-on-your-laptop-with-python-f83363dda94">How to analyse 100 GB of data on your laptop with Python</a></li>
+<li><a href="https://www.kaggle.com/learn/overview">Kaggle Learn</a></li>
+<li><a href="https://medium.com/better-programming/tips-and-tricks-for-handling-configuration-files-in-python-a9d7429aa50b">Tips and Tricks for Handling Configuration Files in Python</a></li>
+<li><a href="https://medium.com/better-programming/dont-fear-the-pickle-using-pickle-dump-and-pickle-load-5212f23dbbce">Don’t Fear the Pickle: Using pickle.dump and pickle.load</a></li>
+<li><a href="https://www.youtube.com/channel/UCFxcvyt2Ucq5IL0_1Njzqlg/playlists">Python Videos</a></li>
+<li><a href="https://towardsdatascience.com/15-data-science-books-you-should-read-6f6981e6b3d8">15 Data Science Books You Should Read</a></li>
+<li><a href="https://people.duke.edu/~ccc14/sta-663/index.html">Computational Statistics in Python</a></li>
+<li><a href="https://medium.com/better-programming/what-are-args-and-kwargs-in-python-6aaf9e3cad73">What Are <em>args and </em>*kwargs in Python?</a></li>
+<li><a href="https://medium.com/better-programming/introduction-to-functional-programming-in-python-3d26cd9cbfd7">Introduction to Functional Programming in Python</a> ( about <strong>call</strong>() )</li>
+<li><a href="https://towardsdatascience.com/making-python-programs-blazingly-fast-c1cd79bd1b32">Making Python Programs Blazingly Fast</a></li>
+<li><a href="https://levelup.gitconnected.com/handy-python-features-e33751ef98a8">Decorators and Functions in Python</a></li>
+<li><a href="https://medium.com/better-programming/decorators-in-python-72a1d578eac4">Decorators in Python</a></li>
+<li><a href="https://www.statsmodels.org/stable/index.html">Statistics in Python</a></li>
+<li><a href="https://towardsdatascience.com/reduce-memory-usage-and-make-your-python-code-faster-using-generators-bd79dbfeb4c">create iterators in a very pythonic manner</a></li>
+<li><a href="https://medium.com/dataseries/descriptive-statistics-with-python-75e2b1249e8d">Descriptive Statistics with Python</a></li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./Git.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/git.html" rel="tag">Git</a>
+                    <a href="./python.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
                 </div>
             </article>
 
