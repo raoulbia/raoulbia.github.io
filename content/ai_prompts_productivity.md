@@ -108,3 +108,79 @@ Review the entire conversation history, code repository, and documentation for t
 - Long-term advantages (scalability, self-service, future-proofing)
 Write in a single cohesive narrative of 200-300 words. Be thorough in capturing all specifics from the source material, but keep the tone concise, active, and compelling. Emphasize how generative AI was the critical enabler of this outcome.
 ```
+
+### PhD-Level Research
+
+```text
+Give me a complete breakdown, PhD level research on the previous.
+Including code and implementation. Be complete and verbose,
+include all files/folders, instructions and tests,
+installation bash, Dockerfile.
+```
+
+### News/Content Summary
+
+```text
+Craft a tight summary of [TOPIC] based on the attached transcripts,
+focus on [TARGET_AUDIENCE].
+```
+
+Example: "Craft a tight e-mail summary of key news and stories in AI last week based on the attached transcripts, focus on an enterprise audience"
+
+### Deep Research Persona Dossier
+
+Use with ChatGPT 4o, then enable Deep Research:
+
+**Step 1** (with memory on):
+```text
+Based on all your memory and all our past conversations, please create
+a detailed and granular, very specific and accurate persona dossier about me.
+Who I am, what I like, my life, my family, my location, profession,
+interests, style, preferences, etc.
+```
+
+**Step 2** (enable Deep Research):
+```text
+Now, research me online, and fill all the missing parts or correct
+any inaccuracies. To help, here are some basics for the research:
+First Name:
+Last Name:
+LinkedIn:
+X:
+GitHub:
+Website:
+
+Find everything you can find about me, my communities, my friends,
+my family, etc.
+```
+
+**Step 3**:
+```text
+Now write a clear, clean, and accurate dossier about me.
+Everything from any possible angle about myself, my life, my network,
+my family, my community, my interests, my passions, my work,
+my contributions, my aspirations, my loves, my hates, etc.
+Every possible thing.
+```
+
+### Parallel Agents Game Development
+
+```text
+Create an offline browser-based asteroid game which relies on arrow keys
+to pilot a ship destroying asteroids in the playspace.
+
+Use test driven development, use Playwright to confirm the webpage
+renders correctly, prepare a Docker image and run tests against
+the Docker image.
+
+Launch the Docker image through a local port for user testing.
+Spawn up to 5 agents working in parallel to work on this game.
+```
+
+### Challenge My Thinking
+
+```text
+Now use your own prerogative and don't assume that the way I've
+architected this is just right — come back and tell me how you
+would change it.
+```
