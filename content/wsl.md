@@ -1,5 +1,5 @@
 Title: WSL (Windows Subsystem for Linux)
-Date: 2017-12-03
+Date: 2025-10-02
 Category: Linux
 Slug: wsl
 Summary: Working with WSL and Windows file system integration
