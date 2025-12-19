@@ -28,246 +28,192 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 03, 2025</h4>
+        <div id="content">            <h4 class="date">Nov 01, 2025</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="../ai_prompts_roles.html" rel="bookmark" title="Permanent Link to &quot;AI Prompts - Roles & Personas&quot;">AI Prompts - Roles & Personas</a>
+                    <a href="../ai_prompts_creativity.html" rel="bookmark" title="Permanent Link to &quot;AI Prompts - Creativity&quot;">AI Prompts - Creativity</a>
                 </h2>
 
                 
                 
 
-                <h3>Expert Persona Template</h3>
-<p>Name-Prime ChatGPT into a nuanced niche expert:</p>
-<div class="highlight"><pre><span></span><code><span class="err">&quot;You&#39;re now {NAME}GPT — a world-class {TOPIC} expert in. Henceforth, whenever I ask you a question,</span>
-<span class="err">respond with relevant and well-thought-out answers. Draw specifically from {SOURCES} to formulate your answers.</span>
-<span class="err">Polish your answers so they&#39;re concise, straightforward, and easy to read.</span>
-<span class="err">With every response you generate, utilize the context of the generated response to broaden your selection of resources</span>
-<span class="err">and expertise for each subsequent response.</span>
-<span class="err">Till this window is closed and/or I specify otherwise, assume I&#39;m referring to you, {NAME}GPT.</span>
-<span class="k">If</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">understand</span><span class="w"> </span><span class="nv">your</span><span class="w"> </span><span class="nv">job</span>,<span class="w"> </span><span class="nv">describe</span><span class="w"> </span><span class="nv">it</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">me</span>.<span class="w"> </span><span class="k">If</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">don</span><span class="err">&#39;t, speak out your doubts so I can clarify them.&quot;</span>
+                <h3>LinkedIn Profile Picture (Image Generation)</h3>
+<p><strong>Prompt 1</strong> - Classic professional headshot:</p>
+<div class="highlight"><pre><span></span><code>Create a professional portrait of the person in the uploaded image
+for a LinkedIn profile photo.
+
+The person should have a subtle smile, conveying a professional and
+confident demeanor. The person should be dressed in a black business suit,
+with sharp, realistic features and an authentic touch.
+
+The background should be gray, with a well-lit environment.
+The image must be extremely detailed, rendered in 4K 360 HD resolution.
 </code></pre></div>
 
-<h3>Prompt Architect</h3>
-<div class="highlight"><pre><span></span><code><span class="n">Act</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">architect</span><span class="o">.</span><span class="w"> </span><span class="n">I</span><span class="s1">&#39;m looking to construct the optimal prompt for my specific needs. We will iteratively refine and improve the prompt based on the initial input.</span>
-<span class="w">     </span><span class="n">Three</span><span class="o">-</span><span class="n">Part</span><span class="w"> </span><span class="n">Development</span><span class="p">:</span>
-<span class="w">     </span><span class="mf">1.</span><span class="w"> </span><span class="n">Revised</span><span class="w"> </span><span class="n">Prompt</span><span class="p">:</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">provide</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">reimagined</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">my</span><span class="w"> </span><span class="n">original</span><span class="w"> </span><span class="n">prompt</span><span class="p">,</span><span class="w"> </span><span class="n">aiming</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">clarity</span><span class="p">,</span><span class="w"> </span><span class="n">brevity</span><span class="p">,</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">simplicity</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">understanding</span><span class="o">.</span>
-<span class="w">     </span><span class="mf">2.</span><span class="w"> </span><span class="n">Suggestions</span><span class="p">:</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">offer</span><span class="w"> </span><span class="n">advice</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">what</span><span class="w"> </span><span class="n">specific</span><span class="w"> </span><span class="n">details</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="n">enhance</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="p">,</span><span class="w"> </span><span class="n">thereby</span><span class="w"> </span><span class="n">increasing</span><span class="w"> </span><span class="n">its</span><span class="w"> </span><span class="n">effectiveness</span><span class="o">.</span>
-<span class="w">     </span><span class="mf">3.</span><span class="w"> </span><span class="n">Questions</span><span class="p">:</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">ask</span><span class="w"> </span><span class="n">relevant</span><span class="w"> </span><span class="n">queries</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">may</span><span class="w"> </span><span class="n">need</span><span class="w"> </span><span class="n">additional</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">further</span><span class="w"> </span><span class="n">improve</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="o">.</span>
-<span class="w">     </span><span class="n">Iterative</span><span class="w"> </span><span class="n">Collaboration</span><span class="p">:</span><span class="w"> </span><span class="n">We</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">engage</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">iterative</span><span class="w"> </span><span class="n">process</span><span class="p">,</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="n">supplying</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">fine</span><span class="o">-</span><span class="n">tuning</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">within</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="s1">&#39;Revised Prompt&#39;</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="n">we</span><span class="w"> </span><span class="n">achieve</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">satisfactory</span><span class="w"> </span><span class="n">final</span><span class="w"> </span><span class="n">version</span><span class="o">.</span>
+<p><strong>Prompt 2</strong> - Natural look with outfit change:</p>
+<div class="highlight"><pre><span></span><code>Create a professional LinkedIn profile photo of the person in the
+uploaded image.
 
-<span class="n">The</span><span class="w"> </span><span class="n">purpose</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="k">tool</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">practical</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">useful</span><span class="p">,</span><span class="w"> </span><span class="n">ensuring</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompts</span><span class="w"> </span><span class="n">generated</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">highly</span><span class="w"> </span><span class="n">effective</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">relevant</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">user</span><span class="s1">&#39;s needs. Responses should be friendly and engaging.</span>
+Keep the original facial details and natural skin texture to avoid
+an AI-generated look.
+
+Change the outfit to a well-fitted dark business blazer over a light shirt,
+suitable for a corporate environment.
+
+Use a clean, neutral background (light gray or soft blue) with soft,
+natural studio lighting.
+
+Make the person face the camera with a relaxed, confident posture and
+a slight, professional smile.
+
+Crop the image as a head-and-shoulders portrait, centered, high-resolution
+and photorealistic.
 </code></pre></div>
 
-<h3>Brutally Honest Advisor</h3>
-<p>For unfiltered feedback (works best with ChatGPT memory on):</p>
-<div class="highlight"><pre><span></span><code>I want you to act as my brutally honest, high-level advisor.
+<p><strong>Prompt 3</strong> - Studio quality with technical specifications:</p>
+<div class="highlight"><pre><span></span><code>A professional, high-resolution profile photo, maintaining the exact
+facial structure, identity, and key features of the person in the input image.
 
-Speak to me like I&#39;m a founder, creator, or leader with massive potential
-but who also has blind spots, weaknesses, or delusions that need to be
-cut through immediately.
+The subject is framed from the chest up, with ample headroom and negative
+space above their head, ensuring the top of their head is not cropped.
 
-I don&#39;t want comfort. I don&#39;t want fluff. I want truth that stings,
-if that&#39;s what it takes to grow.
+The person looks directly at the camera, and the subject&#39;s body is also
+directly facing the camera.
 
-Give me your full, unfiltered analysis — even if it&#39;s harsh, even if it
-questions my decisions, mindset, behavior, or direction.
+They are styled for a professional photo studio shoot, wearing a smart
+casual blazer.
 
-Look at my situation with complete objectivity and strategic depth.
-Tell me:
-- What I&#39;m doing wrong
-- What I&#39;m underestimating
-- What I&#39;m avoiding
-- What excuses I&#39;m making
-- Where I&#39;m wasting time or playing small
+The background is a solid &#39;#141414&#39; neutral studio.
 
-Then tell me what I need to do, think, or build to get to the next level
-— with precision, clarity, and ruthless prioritization.
+Shot from a high angle with bright and airy soft, diffused studio lighting,
+gently illuminating the face and creating a subtle catchlight in the eyes,
+conveying a sense of clarity.
 
-If I&#39;m lost, call it out.
-If I&#39;m making a mistake, explain why.
-If I&#39;m on the right path but moving too slow, tell me how to fix it.
+Captured on an 85mm f/1.8 lens with a shallow depth of field, exquisite
+focus on the eyes, and beautiful, soft bokeh.
 
-Hold nothing back. Treat me like someone whose success depends on
-hearing the truth, not being coddled.
+Observe crisp detail on the fabric texture of the blazer, individual
+strands of hair, and natural, realistic skin texture.
+
+The atmosphere exudes confidence, professionalism, and approachability.
+
+Clean and bright cinematic color grading with subtle warmth and balanced
+tones, ensuring a polished and contemporary feel.
+</code></pre></div>
+
+<hr>
+<h3>Lo-Fi 2010s Phone Selfie (Image Generation)</h3>
+<p>Structured prompt for generating authentic-looking casual 2010s phone selfies:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;scene&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;casual 2010s phone selfie; unintentional snapshot&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;subject&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;adult woman (idol vibe)&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;age_range&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;20s&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;hair&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;straight or simple ponytail&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;makeup&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;glossy lips, eyeliner highlight&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;jewelry&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;small hoops, thin chain, bracelets&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;wardrobe&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;top&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;basic tee or camisole&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;bottom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;denim shorts or mini skirt&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;footwear&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sneakers or ankle boots&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;notes&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;everyday outfit, not styled&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;pose&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;angle&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mirror selfie FULL BODY&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;standing, weight on one hip&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;hands&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;phone in one hand; other relaxed or in pocket&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;framing&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HEAD-TO-SHOES, feet visible, not cropped&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;camera&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;iPhone 4/5 era&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;flash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;on (harsh LED) with mirror glare&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;orientation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vertical&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;aspect_ratio&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4:3&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;distance&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2-3 m from mirror to capture full body&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;focus&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;soft; slight hand-shake blur&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;look&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;texture&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grainy digital noise; mild JPEG artifacts&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;sharpness&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;low; soft focus&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cool indoor white balance; blown highlights from flash&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;effects&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;subtle vignette; cheap filter vibe&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;background&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;environment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bedroom or bathroom; clutter allowed; visible floor&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;props&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;framed mirror; phone visible&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;style&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;genre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lo-fi Y2K/2010s snapshot&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;authenticity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;imperfect candid moment&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;ban&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;studio lighting&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;DSLR/bokeh look&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;cinematic grading&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;spotless staged room&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;logos/brand text&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;nsfw&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;cropped feet&quot;</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;output&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1200x1600&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;safety&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;strict&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;variants&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;timer_fullbody&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;angle&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rear camera on dresser, timer; subject centered, both hands visible&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="../ai_prompts_roles.html">posted at 00:00</a>
+                    <a href="../ai_prompts_creativity.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="../category/ai.html" rel="tag">AI</a>
                 </div>
-            </article>            <h4 class="date">Nov 02, 2025</h4>
+            </article>            <h4 class="date">Oct 08, 2025</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="../ai_prompts_productivity.html" rel="bookmark" title="Permanent Link to &quot;AI Prompts - Productivity&quot;">AI Prompts - Productivity</a>
+                    <a href="../ai_miscellaneous.html" rel="bookmark" title="Permanent Link to &quot;AI Misc.&quot;">AI Misc.</a>
                 </h2>
 
                 
                 
 
-                <h3>Meeting Summary</h3>
-<div class="highlight"><pre><span></span><code>You are an expert technical meeting minute taker for semiconductor/ASIC design teams.
-
-Your output must be in Markdown and contain exactly these sections in this order
-— no extra text outside the sections:
-
-## Meeting Summary
-
-One-paragraph executive summary (3–5 sentences max).
-
-## Key Decisions
-
-- Bullet list
-- Only decisions, not discussions
-
-## Action Items
-
-| Owner | Action | Due Date | Jira/Tracker (if mentioned) |
-|-------|--------|----------|-----------------------------|
-
-Use real names or Slack handles as mentioned. If no due date mentioned, write &quot;ASAP&quot;.
-
-## Risks &amp; Blockers Raised
-
-- Bullet list
-- Include who will handle mitigation if mentioned
-
-## Technical Highlights / Deep-Dive Notes
-
-- Use sub-bullets or code blocks when appropriate
-- Keep Verilog snippets, timing numbers, power figures, etc. exactly as spoken
-
-## Follow-up Email Draft (copy-paste ready)
-
-Subject: [Auto-generate concise subject]
-
-Body: Polite, professional, includes action table and key decisions.
-
-Transcript or recording text starts now:
-
-&lt;&lt;&lt;START TRANSCRIPT&gt;&gt;&gt;
-[PASTE THE RAW ZOOM/TEAMS/GMEET TRANSCRIPT HERE]
-&lt;&lt;&lt;END TRANSCRIPT&gt;&gt;&gt;
-
-Produce the output immediately with no yapping.
-</code></pre></div>
-
-<h3>Providing Context</h3>
-<div class="highlight"><pre><span></span><code>Answer the User&#39;s question from the following context.
-
-Context:
-https://github.com/langchain-ai/langgraph
-
-User Question:
-How does LangGraph work?
-</code></pre></div>
-
-<h3>Make a PowerPoint Presentation</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">I</span><span class="w"> </span><span class="nv">want</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">write</span><span class="w"> </span><span class="nv">me</span><span class="w"> </span><span class="nv">VBA</span><span class="w"> </span><span class="nv">code</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">PowerPoint</span><span class="w"> </span><span class="nv">presentation</span><span class="w"> </span><span class="nv">about</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">history</span><span class="w"> </span><span class="nv">of</span><span class="w"> </span><span class="nv">AI</span>.<span class="w"> </span><span class="nv">You</span><span class="w"> </span><span class="nv">are</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">fill</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">all</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">text</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">your</span><span class="w"> </span><span class="nv">own</span><span class="w"> </span><span class="nv">knowledge</span>,<span class="w"> </span><span class="nv">no</span><span class="w"> </span><span class="nv">placeholders</span>.<span class="w"> </span><span class="nv">I</span><span class="w"> </span><span class="nv">need</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="nv">slides</span>.
-</code></pre></div>
-
-<p>In PowerPoint: Tools &gt; Macros &gt; Visual Basic Editor &gt; New &gt; paste in the code &gt; press Play button &gt; Click Designer and pick a Design.</p>
-<h3>Technology Migration</h3>
-<div class="highlight"><pre><span></span><code><span class="nx">I</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">give</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">tutorial</span><span class="w"> </span><span class="nx">PDF</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">setting</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">API</span><span class="w"> </span><span class="nx">call</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">action</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">GPT</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">Flask</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">AWS</span><span class="w"> </span><span class="nx">EC2</span><span class="p">.</span><span class="w"> </span><span class="nx">Write</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">implementation</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">same</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">Azure</span><span class="w"> </span><span class="nx">portal</span><span class="w"> </span><span class="nx">instead</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">AWS</span><span class="p">.</span>
-
-<span class="nx">Specifically</span><span class="w"> </span><span class="nx">I</span><span class="w"> </span><span class="nx">would</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">implement</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">same</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">Azure</span><span class="w"> </span><span class="nx">Webapp</span><span class="w"> </span><span class="nx">instead</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">Azure</span><span class="w"> </span><span class="nx">VM</span><span class="p">.</span>
-</code></pre></div>
-
-<h3>Project Summary</h3>
-<div class="highlight"><pre><span></span><code><span class="n">Review</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">entire</span><span class="w"> </span><span class="n">conversation</span><span class="w"> </span><span class="n">history</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="n">repository</span><span class="p">,</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">documentation</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">project</span><span class="o">.</span><span class="w"> </span><span class="n">Then</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">clear</span><span class="p">,</span><span class="w"> </span><span class="n">engaging</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="n">summary</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">includes</span><span class="p">:</span>
-<span class="mf">1.</span><span class="w"> </span><span class="n">Challenge</span><span class="w"> </span><span class="n">Context</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Industry</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">business</span><span class="w"> </span><span class="n">problem</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Legacy</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">approach</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">its</span><span class="w"> </span><span class="n">pain</span><span class="w"> </span><span class="n">points</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Key</span><span class="w"> </span><span class="n">domain</span><span class="w"> </span><span class="n">concepts</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="n">assets</span><span class="p">,</span><span class="w"> </span><span class="n">Tag</span><span class="w"> </span><span class="n">statuses</span><span class="p">,</span><span class="w"> </span><span class="n">business</span><span class="w"> </span><span class="n">rules</span><span class="p">)</span>
-<span class="mf">2.</span><span class="w"> </span><span class="n">Generative</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">Workflow</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Discovery</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">mapped</span><span class="w"> </span><span class="n">dependencies</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">extracted</span><span class="w"> </span><span class="n">rules</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Translation</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">converted</span><span class="w"> </span><span class="n">formulas</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">code</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Validation</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="o">-</span><span class="n">driven</span><span class="w"> </span><span class="n">queries</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="n">via</span><span class="w"> </span><span class="n">MCP</span><span class="p">)</span><span class="w"> </span><span class="n">ensured</span><span class="w"> </span><span class="n">parity</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">caught</span><span class="w"> </span><span class="n">edge</span><span class="w"> </span><span class="n">cases</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Optimization</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">tuned</span><span class="w"> </span><span class="n">performance</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">architecture</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Documentation</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">generated</span><span class="w"> </span><span class="n">guides</span><span class="p">,</span><span class="w"> </span><span class="n">lineage</span><span class="w"> </span><span class="n">diagrams</span><span class="p">,</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">specs</span>
-<span class="mf">3.</span><span class="w"> </span><span class="n">Quantifiable</span><span class="w"> </span><span class="n">Results</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">formulas</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">rules</span><span class="w"> </span><span class="n">migrated</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Performance</span><span class="w"> </span><span class="n">improvements</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nb">load</span><span class="o">-</span><span class="n">time</span><span class="w"> </span><span class="n">reduction</span><span class="p">)</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Accuracy</span><span class="w"> </span><span class="n">guarantees</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="w"> </span><span class="n">metric</span><span class="w"> </span><span class="n">parity</span><span class="p">)</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Maintenance</span><span class="w"> </span><span class="n">savings</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">developer</span><span class="o">-</span><span class="n">hours</span><span class="w"> </span><span class="n">recovered</span>
-<span class="o">-</span><span class="w"> </span><span class="n">New</span><span class="w"> </span><span class="n">capabilities</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="n">real</span><span class="o">-</span><span class="n">time</span><span class="w"> </span><span class="n">analytics</span><span class="p">)</span>
-<span class="mf">4.</span><span class="w"> </span><span class="n">Timeline</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">Scope</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Project</span><span class="w"> </span><span class="n">duration</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="n">four</span><span class="w"> </span><span class="n">weeks</span><span class="p">)</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Team</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">AI</span><span class="o">-</span><span class="n">agent</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="n">where</span><span class="w"> </span><span class="n">relevant</span>
-<span class="mf">5.</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">Impact</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Business</span><span class="w"> </span><span class="n">outcomes</span><span class="w"> </span><span class="p">(</span><span class="n">cost</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">decision</span><span class="o">-</span><span class="n">making</span><span class="w"> </span><span class="n">benefits</span><span class="p">)</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Long</span><span class="o">-</span><span class="n">term</span><span class="w"> </span><span class="n">advantages</span><span class="w"> </span><span class="p">(</span><span class="n">scalability</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">-</span><span class="n">service</span><span class="p">,</span><span class="w"> </span><span class="n">future</span><span class="o">-</span><span class="n">proofing</span><span class="p">)</span>
-<span class="n">Write</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">single</span><span class="w"> </span><span class="n">cohesive</span><span class="w"> </span><span class="n">narrative</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="mi">200</span><span class="o">-</span><span class="mi">300</span><span class="w"> </span><span class="n">words</span><span class="o">.</span><span class="w"> </span><span class="n">Be</span><span class="w"> </span><span class="n">thorough</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">capturing</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">specifics</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="n">material</span><span class="p">,</span><span class="w"> </span><span class="n">but</span><span class="w"> </span><span class="n">keep</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">tone</span><span class="w"> </span><span class="n">concise</span><span class="p">,</span><span class="w"> </span><span class="n">active</span><span class="p">,</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">compelling</span><span class="o">.</span><span class="w"> </span><span class="n">Emphasize</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">generative</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">was</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">critical</span><span class="w"> </span><span class="n">enabler</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">outcome</span><span class="o">.</span>
-</code></pre></div>
-
-<h3>PhD-Level Research</h3>
-<div class="highlight"><pre><span></span><code>Give me a complete breakdown, PhD level research on the previous.
-Including code and implementation. Be complete and verbose,
-include all files/folders, instructions and tests,
-installation bash, Dockerfile.
-</code></pre></div>
-
-<h3>News/Content Summary</h3>
-<div class="highlight"><pre><span></span><code>Craft a tight summary of [TOPIC] based on the attached transcripts,
-focus on [TARGET_AUDIENCE].
-</code></pre></div>
-
-<p>Example: "Craft a tight e-mail summary of key news and stories in AI last week based on the attached transcripts, focus on an enterprise audience"</p>
-<h3>Deep Research Persona Dossier</h3>
-<p>Use with ChatGPT 4o, then enable Deep Research:</p>
-<p><strong>Step 1</strong> (with memory on):</p>
-<div class="highlight"><pre><span></span><code>Based on all your memory and all our past conversations, please create
-a detailed and granular, very specific and accurate persona dossier about me.
-Who I am, what I like, my life, my family, my location, profession,
-interests, style, preferences, etc.
-</code></pre></div>
-
-<p><strong>Step 2</strong> (enable Deep Research):</p>
-<div class="highlight"><pre><span></span><code>Now, research me online, and fill all the missing parts or correct
-any inaccuracies. To help, here are some basics for the research:
-First Name:
-Last Name:
-LinkedIn:
-X:
-GitHub:
-Website:
-
-Find everything you can find about me, my communities, my friends,
-my family, etc.
-</code></pre></div>
-
-<p><strong>Step 3</strong>:</p>
-<div class="highlight"><pre><span></span><code>Now write a clear, clean, and accurate dossier about me.
-Everything from any possible angle about myself, my life, my network,
-my family, my community, my interests, my passions, my work,
-my contributions, my aspirations, my loves, my hates, etc.
-Every possible thing.
-</code></pre></div>
-
-<h3>Parallel Agents Game Development</h3>
-<div class="highlight"><pre><span></span><code>Create an offline browser-based asteroid game which relies on arrow keys
-to pilot a ship destroying asteroids in the playspace.
-
-Use test driven development, use Playwright to confirm the webpage
-renders correctly, prepare a Docker image and run tests against
-the Docker image.
-
-Launch the Docker image through a local port for user testing.
-Spawn up to 5 agents working in parallel to work on this game.
-</code></pre></div>
-
-<h3>Challenge My Thinking</h3>
-<div class="highlight"><pre><span></span><code>Now use your own prerogative and don&#39;t assume that the way I&#39;ve
-architected this is just right — come back and tell me how you
-would change it.
-</code></pre></div>
+                <p><br></p>
+<h3>Aider</h3>
+<p>"<em>Aider lets you pair program with LLMs, to edit code in your local git repository. Start a new project or work with an existing git repo. Aider works well with GPT-4o, Claude 3 Opus, GPT-3.5 and can connect to almost any LLM.</em>"</p>
+<p><a href="https://aider.chat">aider.chat</a></p>
+<p><code>pip install aider-chat</code></p>
+<p><code>aider --openai-api-key &lt;KEY&gt; --model gpt-4-1106-preview</code></p>
+<h3>Links (not curated - scratchpad)</h3>
+<ul>
+<li>https://hackerspacelive.events.kaltura.com/homepage</li>
+<li>https://obsidian.md</li>
+<li>https://www.youtube.com/watch?v=ZDPqYx2FCVk (obsidian)</li>
+<li>https://huggingface.co/blog/smolagents</li>
+<li>https://pydantic.run/</li>
+<li>https://ai.pydantic.dev/</li>
+<li>https://dspy.ai/</li>
+<li>https://www.getzep.com/ (Production-Ready Agent Memory)</li>
+<li>https://www.codeguide.dev/</li>
+<li>https://repomix.com/ (Pack your codebase into AI-friendly formats)</li>
+<li>https://promptly.tools/</li>
+<li>https://pypi.org/project/mcp-snowflake-server/</li>
+<li>https://llmstxt.firecrawl.dev/</li>
+<li>https://cline.bot/mcp-marketplace</li>
+<li></li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="../ai_prompts_productivity.html">posted at 00:00</a>
+                    <a href="../ai_miscellaneous.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="../category/ai.html" rel="tag">AI</a>
                 </div>
             </article>

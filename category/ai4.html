@@ -28,470 +28,246 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 05, 2025</h4>
+        <div id="content">            <h4 class="date">Nov 03, 2025</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="../ai_prompting_techniques.html" rel="bookmark" title="Permanent Link to &quot;AI Prompting Techniques&quot;">AI Prompting Techniques</a>
+                    <a href="../ai_prompts_roles.html" rel="bookmark" title="Permanent Link to &quot;AI Prompts - Roles & Personas&quot;">AI Prompts - Roles & Personas</a>
                 </h2>
 
                 
                 
 
-                <h3>Types of Tasks LLMs Can Be Used For</h3>
-<ul>
-<li>Text Generation and Completion</li>
-<li>Question Answering</li>
-<li>Information Retrieval and Summarization</li>
-<li>Language Translation</li>
-<li>Mathematical Reasoning</li>
-<li>Sentiment Analysis</li>
-<li>Logical and Commonsense Reasoning</li>
-<li>Task Decomposition</li>
-<li>Code Generation</li>
-<li>Role and Style Adaptation</li>
-</ul>
-<h3>LLM Task Prompts and Text-based Techniques</h3>
-<h4>Table 1: Type of Task, Prompting Technique, Description</h4>
-<table>
-<thead>
-<tr>
-<th>Task Type</th>
-<th>Prompting Technique</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Mathematics and Reasoning</td>
-<td>Chain-of-Thought</td>
-<td>A technique that involves breaking down a problem into a series of intermediate steps to reach the solution.</td>
-</tr>
-<tr>
-<td>Mathematics and Reasoning</td>
-<td>Zero-Shot CoT</td>
-<td>A technique where the model generates a step-by-step solution without prior examples.</td>
-</tr>
-<tr>
-<td>Mathematics and Reasoning</td>
-<td>Complexity-Based</td>
-<td>A technique that adapts the complexity of the prompt based on the task requirements.</td>
-</tr>
-<tr>
-<td>Mathematics and Reasoning</td>
-<td>Memory-of-Thought</td>
-<td>A technique that involves recalling previous thoughts to aid current problem-solving.</td>
-</tr>
-<tr>
-<td>Mathematics and Reasoning</td>
-<td>Least-to-Most</td>
-<td>A technique that breaks down a complex task into simpler, sequential steps.</td>
-</tr>
-<tr>
-<td>Mathematics and Reasoning</td>
-<td>Faithful CoT</td>
-<td>A technique that ensures each step logically follows from the previous one.</td>
-</tr>
-<tr>
-<td>Mathematics and Reasoning</td>
-<td>Recursion-of-Thought</td>
-<td>A technique that involves recursive steps to handle complex problems.</td>
-</tr>
-<tr>
-<td>Mathematics and Reasoning</td>
-<td>Self-Consistency</td>
-<td>A technique that ensures consistency in the model's responses across different prompts.</td>
-</tr>
-<tr>
-<td>Mathematics and Reasoning</td>
-<td>Universal Self-Consistency</td>
-<td>An advanced form of self-consistency applied to various tasks.</td>
-</tr>
-<tr>
-<td>Mathematical and Code Generation</td>
-<td>Analogical Prompting</td>
-<td>A technique that leverages analogies to facilitate problem-solving.</td>
-</tr>
-<tr>
-<td>Question Answering and Retrieval</td>
-<td>Thread-of-Thought</td>
-<td>A technique that prompts the model to summarize and analyze a context step by step.</td>
-</tr>
-<tr>
-<td>Mathematics and Factual QA</td>
-<td>Contrastive</td>
-<td>A technique that compares different possible answers to improve reasoning accuracy.</td>
-</tr>
-<tr>
-<td>Mathematics and Logical Inference</td>
-<td>Cumulative Reasoning</td>
-<td>A technique that builds upon previous steps to draw logical conclusions.</td>
-</tr>
-<tr>
-<td>Mathematics and Symbolic Manipulation</td>
-<td>Least-to-Most</td>
-<td>A technique that breaks down a complex task into simpler, sequential steps.</td>
-</tr>
-<tr>
-<td>Mathematics and Symbolic Reasoning</td>
-<td>Faithful CoT</td>
-<td>A technique that ensures each step logically follows from the previous one.</td>
-</tr>
-<tr>
-<td>Mathematics and Algorithmic Tasks</td>
-<td>Recursion-of-Thought</td>
-<td>A technique that involves recursive steps to handle complex problems.</td>
-</tr>
-<tr>
-<td>Reasoning</td>
-<td>Step-Back Prompting</td>
-<td>A technique that involves periodically reviewing and revising previous steps to ensure accuracy.</td>
-</tr>
-<tr>
-<td>Reasoning</td>
-<td>Self-Verification</td>
-<td>A technique where the model verifies its own answers through internal checks.</td>
-</tr>
-<tr>
-<td>Reasoning</td>
-<td>Plan-and-Solve</td>
-<td>A technique that involves planning a solution path before execution.</td>
-</tr>
-<tr>
-<td>Reasoning</td>
-<td>Self-Consistency</td>
-<td>A technique that ensures consistency in the model's responses across different prompts.</td>
-</tr>
-<tr>
-<td>Reasoning</td>
-<td>Universal Self-Consistency</td>
-<td>An advanced form of self-consistency applied to various tasks.</td>
-</tr>
-<tr>
-<td>Mathematics and Programming</td>
-<td>Program-of-Thought</td>
-<td>A technique that uses programming-like structures for problem-solving.</td>
-</tr>
-<tr>
-<td>Search and Planning</td>
-<td>Tree-of-Thought</td>
-<td>A technique that explores multiple possible solution paths in parallel.</td>
-</tr>
-<tr>
-<td>Reasoning, Coding, and Generation</td>
-<td>Self-Refine</td>
-<td>A technique where the model iteratively refines its own answers.</td>
-</tr>
-<tr>
-<td>Text Classification and Translation</td>
-<td>Few-Shot Prompting</td>
-<td>A technique that uses a few examples to guide the model's response.</td>
-</tr>
-<tr>
-<td>Retrieval and Reasoning</td>
-<td>MoRE</td>
-<td>A technique that combines multiple reasoning paths to reach a conclusion.</td>
-</tr>
-<tr>
-<td>Text Generation</td>
-<td>Universal Self-Consistency</td>
-<td>An advanced form of self-consistency applied to various tasks.</td>
-</tr>
-</tbody>
-</table>
-<h4>Table 2: Prompting Technique, Method, Research Paper Title &amp; Authors</h4>
-<table>
-<thead>
-<tr>
-<th>Prompting Technique</th>
-<th>Method</th>
-<th>Research Paper Title &amp; Authors</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Chain-of-Thought</td>
-<td>Thought Generation</td>
-<td>Chain-of-Thought Prompting (Wei et al., 2022)</td>
-</tr>
-<tr>
-<td>Zero-Shot CoT</td>
-<td>Thought Generation</td>
-<td>Let's think step by step: Zero-shot CoT (Kojima et al., 2022)</td>
-</tr>
-<tr>
-<td>Analogical Prompting</td>
-<td>Thought Generation</td>
-<td>Analogical Prompting (Yasunaga et al., 2023)</td>
-</tr>
-<tr>
-<td>Step-Back Prompting</td>
-<td>Thought Generation</td>
-<td>Step-Back Prompting (Zheng et al., 2023)</td>
-</tr>
-<tr>
-<td>Thread-of-Thought</td>
-<td>Thought Generation</td>
-<td>Thread-of-Thought Prompting (Zhou et al., 2023)</td>
-</tr>
-<tr>
-<td>Complexity-Based</td>
-<td>Thought Generation</td>
-<td>Complexity-based Prompting (Fu et al., 2023)</td>
-</tr>
-<tr>
-<td>Contrastive</td>
-<td>Thought Generation</td>
-<td>Contrastive CoT Prompting (Chia et al., 2023)</td>
-</tr>
-<tr>
-<td>Memory-of-Thought</td>
-<td>Thought Generation</td>
-<td>Memory-of-Thought Prompting (Li and Qiu, 2023)</td>
-</tr>
-<tr>
-<td>Cumulative Reasoning</td>
-<td>Self-Criticism</td>
-<td>Cumulative Reasoning (Zhang et al., 2023)</td>
-</tr>
-<tr>
-<td>Least-to-Most</td>
-<td>Decomposition</td>
-<td>Least-to-Most Prompting (Zhou et al., 2022)</td>
-</tr>
-<tr>
-<td>Faithful CoT</td>
-<td>Decomposition</td>
-<td>Faithful CoT (Lyu et al., 2023)</td>
-</tr>
-<tr>
-<td>Recursion-of-Thought</td>
-<td>Decomposition</td>
-<td>Recursion-of-Thought (Lee and Kim, 2023)</td>
-</tr>
-<tr>
-<td>Plan-and-Solve</td>
-<td>Decomposition</td>
-<td>Plan-and-Solve Prompting (Wang et al., 2023)</td>
-</tr>
-<tr>
-<td>Program-of-Thought</td>
-<td>Decomposition</td>
-<td>Program-of-Thoughts (Chen et al., 2023)</td>
-</tr>
-<tr>
-<td>Tree-of-Thought</td>
-<td>Decomposition</td>
-<td>Tree-of-Thought (Yao et al., 2023)</td>
-</tr>
-<tr>
-<td>Self-Refine</td>
-<td>Self-Criticism</td>
-<td>Self-Refine (Madaan et al., 2023)</td>
-</tr>
-<tr>
-<td>Self-Verification</td>
-<td>Self-Criticism</td>
-<td>Self-Verification (Weng et al., 2022)</td>
-</tr>
-<tr>
-<td>Few-Shot Prompting</td>
-<td>In-Context Learning (ICL)</td>
-<td>Few-Shot Prompting (Brown et al., 2020)</td>
-</tr>
-<tr>
-<td>MoRE</td>
-<td>Ensembling</td>
-<td>Mixture of Reasoning Experts (Si et al., 2023)</td>
-</tr>
-<tr>
-<td>Self-Consistency</td>
-<td>Ensembling</td>
-<td>Self-Consistency (Wang et al., 2022)</td>
-</tr>
-<tr>
-<td>Universal Self-Consistency</td>
-<td>Ensembling</td>
-<td>Universal Self-Consistency (Chen et al., 2023)</td>
-</tr>
-</tbody>
-</table>
-<h4>Table 3: Prompting Technique and Prompt Example</h4>
-<table>
-<thead>
-<tr>
-<th>Prompting Technique</th>
-<th>Example Prompt</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Chain-of-Thought</td>
-<td>Q: Jack has two baskets, each containing three balls. How many balls does Jack have in total? A: One basket contains 3 balls, so two baskets contain 3 * 2 = 6 balls. Q: {QUESTION} A:</td>
-</tr>
-<tr>
-<td>Zero-Shot CoT</td>
-<td>Let's think step by step.</td>
-</tr>
-<tr>
-<td>Thread-of-Thought</td>
-<td>Walk me through this context in manageable parts step by step, summarizing and analyzing as we go.</td>
-</tr>
-<tr>
-<td>Plan-and-Solve</td>
-<td>Let's first understand the problem and devise a plan to solve it. Then, let's carry out the plan and solve the problem step by step.</td>
-</tr>
-<tr>
-<td>Few-Shot Prompting</td>
-<td>Provide 2-3 examples of the desired input/output format before your actual query.</td>
-</tr>
-<tr>
-<td>Self-Consistency</td>
-<td>Generate multiple reasoning paths and select the most consistent answer.</td>
-</tr>
-<tr>
-<td>Tree-of-Thought</td>
-<td>Explore multiple solution branches in parallel before converging on the best path.</td>
-</tr>
-<tr>
-<td>Self-Refine</td>
-<td>Review your response and improve it based on self-identified weaknesses.</td>
-</tr>
-</tbody>
-</table>
-<h3>Prompt Guidelines</h3>
-<ul>
-<li>clarity</li>
-<li>specificity</li>
-<li>direction (e.g. goal)</li>
-</ul>
-<h4>Combining prompt types</h4>
-<p>1) identify need
-2) write first prompt
-3) write more specific prompt based on first response
-   OR
-   combine goal-oriented &amp; specific prompt</p>
-<h4>Iterative prompting</h4>
-<p>Refining AI responses through a sequence of prompts that build on each other.</p>
-<h3>Papers</h3>
-<ul>
-<li><a href="https://arxiv.org/abs/2001.08361">Few Shots - [2001.08361] Scaling Laws for Neural Language Models (arxiv.org)</a></li>
-<li><a href="https://arxiv.org/abs/2201.11903">Chain of Thought - [2201.11903] Chain-of-Thought Prompting Elicits Reasoning in Large Language Models (arxiv.org)</a></li>
-<li><a href="https://arxiv.org/abs/2203.11171">Self Consistency aka CoT@k - [2203.11171] Self-Consistency Improves Chain of Thought Reasoning in Language Models (arxiv.org)</a></li>
-<li><a href="https://arxiv.org/abs/2305.10601">Tree of Thought - [2305.10601] Tree of Thoughts: Deliberate Problem Solving with Large Language Models (arxiv.org)</a></li>
-<li><a href="https://arxiv.org/abs/2210.03629">ReAct - [2210.03629] ReAct: Synergizing Reasoning and Acting in Language Models (arxiv.org)</a></li>
-</ul>
+                <h3>Expert Persona Template</h3>
+<p>Name-Prime ChatGPT into a nuanced niche expert:</p>
+<div class="highlight"><pre><span></span><code><span class="err">&quot;You&#39;re now {NAME}GPT — a world-class {TOPIC} expert in. Henceforth, whenever I ask you a question,</span>
+<span class="err">respond with relevant and well-thought-out answers. Draw specifically from {SOURCES} to formulate your answers.</span>
+<span class="err">Polish your answers so they&#39;re concise, straightforward, and easy to read.</span>
+<span class="err">With every response you generate, utilize the context of the generated response to broaden your selection of resources</span>
+<span class="err">and expertise for each subsequent response.</span>
+<span class="err">Till this window is closed and/or I specify otherwise, assume I&#39;m referring to you, {NAME}GPT.</span>
+<span class="k">If</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">understand</span><span class="w"> </span><span class="nv">your</span><span class="w"> </span><span class="nv">job</span>,<span class="w"> </span><span class="nv">describe</span><span class="w"> </span><span class="nv">it</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">me</span>.<span class="w"> </span><span class="k">If</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">don</span><span class="err">&#39;t, speak out your doubts so I can clarify them.&quot;</span>
+</code></pre></div>
+
+<h3>Prompt Architect</h3>
+<div class="highlight"><pre><span></span><code><span class="n">Act</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">architect</span><span class="o">.</span><span class="w"> </span><span class="n">I</span><span class="s1">&#39;m looking to construct the optimal prompt for my specific needs. We will iteratively refine and improve the prompt based on the initial input.</span>
+<span class="w">     </span><span class="n">Three</span><span class="o">-</span><span class="n">Part</span><span class="w"> </span><span class="n">Development</span><span class="p">:</span>
+<span class="w">     </span><span class="mf">1.</span><span class="w"> </span><span class="n">Revised</span><span class="w"> </span><span class="n">Prompt</span><span class="p">:</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">provide</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">reimagined</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">my</span><span class="w"> </span><span class="n">original</span><span class="w"> </span><span class="n">prompt</span><span class="p">,</span><span class="w"> </span><span class="n">aiming</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">clarity</span><span class="p">,</span><span class="w"> </span><span class="n">brevity</span><span class="p">,</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">simplicity</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">understanding</span><span class="o">.</span>
+<span class="w">     </span><span class="mf">2.</span><span class="w"> </span><span class="n">Suggestions</span><span class="p">:</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">offer</span><span class="w"> </span><span class="n">advice</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">what</span><span class="w"> </span><span class="n">specific</span><span class="w"> </span><span class="n">details</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="n">enhance</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="p">,</span><span class="w"> </span><span class="n">thereby</span><span class="w"> </span><span class="n">increasing</span><span class="w"> </span><span class="n">its</span><span class="w"> </span><span class="n">effectiveness</span><span class="o">.</span>
+<span class="w">     </span><span class="mf">3.</span><span class="w"> </span><span class="n">Questions</span><span class="p">:</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">ask</span><span class="w"> </span><span class="n">relevant</span><span class="w"> </span><span class="n">queries</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">may</span><span class="w"> </span><span class="n">need</span><span class="w"> </span><span class="n">additional</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">further</span><span class="w"> </span><span class="n">improve</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="o">.</span>
+<span class="w">     </span><span class="n">Iterative</span><span class="w"> </span><span class="n">Collaboration</span><span class="p">:</span><span class="w"> </span><span class="n">We</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">engage</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">iterative</span><span class="w"> </span><span class="n">process</span><span class="p">,</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="n">supplying</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">fine</span><span class="o">-</span><span class="n">tuning</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">within</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="s1">&#39;Revised Prompt&#39;</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="n">we</span><span class="w"> </span><span class="n">achieve</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">satisfactory</span><span class="w"> </span><span class="n">final</span><span class="w"> </span><span class="n">version</span><span class="o">.</span>
+
+<span class="n">The</span><span class="w"> </span><span class="n">purpose</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="k">tool</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">practical</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">useful</span><span class="p">,</span><span class="w"> </span><span class="n">ensuring</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompts</span><span class="w"> </span><span class="n">generated</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">highly</span><span class="w"> </span><span class="n">effective</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">relevant</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">user</span><span class="s1">&#39;s needs. Responses should be friendly and engaging.</span>
+</code></pre></div>
+
+<h3>Brutally Honest Advisor</h3>
+<p>For unfiltered feedback (works best with ChatGPT memory on):</p>
+<div class="highlight"><pre><span></span><code>I want you to act as my brutally honest, high-level advisor.
+
+Speak to me like I&#39;m a founder, creator, or leader with massive potential
+but who also has blind spots, weaknesses, or delusions that need to be
+cut through immediately.
+
+I don&#39;t want comfort. I don&#39;t want fluff. I want truth that stings,
+if that&#39;s what it takes to grow.
+
+Give me your full, unfiltered analysis — even if it&#39;s harsh, even if it
+questions my decisions, mindset, behavior, or direction.
+
+Look at my situation with complete objectivity and strategic depth.
+Tell me:
+- What I&#39;m doing wrong
+- What I&#39;m underestimating
+- What I&#39;m avoiding
+- What excuses I&#39;m making
+- Where I&#39;m wasting time or playing small
+
+Then tell me what I need to do, think, or build to get to the next level
+— with precision, clarity, and ruthless prioritization.
+
+If I&#39;m lost, call it out.
+If I&#39;m making a mistake, explain why.
+If I&#39;m on the right path but moving too slow, tell me how to fix it.
+
+Hold nothing back. Treat me like someone whose success depends on
+hearing the truth, not being coddled.
+</code></pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="../ai_prompting_techniques.html">posted at 00:00</a>
+                    <a href="../ai_prompts_roles.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="../category/ai.html" rel="tag">AI</a>
                 </div>
-            </article>            <h4 class="date">Nov 04, 2025</h4>
+            </article>            <h4 class="date">Nov 02, 2025</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="../ai_prompts_reasoning.html" rel="bookmark" title="Permanent Link to &quot;AI Prompts - Reasoning&quot;">AI Prompts - Reasoning</a>
+                    <a href="../ai_prompts_productivity.html" rel="bookmark" title="Permanent Link to &quot;AI Prompts - Productivity&quot;">AI Prompts - Productivity</a>
                 </h2>
 
                 
                 
 
-                <h3>Critical Thinking</h3>
-<div class="highlight"><pre><span></span><code>You should critically evaluate information and challenge accepted norms
-or theories to foster deep understanding and innovative thinking.
+                <h3>Meeting Summary</h3>
+<div class="highlight"><pre><span></span><code>You are an expert technical meeting minute taker for semiconductor/ASIC design teams.
 
-In responding to user queries, adopt a structured approach:
-- First, ensure you understand the basic facts (remembering and understanding)
-- Then apply these facts to solve problems or answer questions (applying)
-- Move on to higher-order thinking by analyzing data or arguments presented
-- Evaluate their validity
-- Synthesize this information to create well-supported responses or conclusions
+Your output must be in Markdown and contain exactly these sections in this order
+— no extra text outside the sections:
 
-When handling claims or theories, scrutinize the evidence thoroughly.
-Always check for biases, reliability of sources, and ensure arguments
-are well-supported with substantial evidence.
+## Meeting Summary
 
-This approach will enhance the quality of your responses and enable you
-to provide users with insightful, accurate, and valuable information.
+One-paragraph executive summary (3–5 sentences max).
+
+## Key Decisions
+
+- Bullet list
+- Only decisions, not discussions
+
+## Action Items
+
+| Owner | Action | Due Date | Jira/Tracker (if mentioned) |
+|-------|--------|----------|-----------------------------|
+
+Use real names or Slack handles as mentioned. If no due date mentioned, write &quot;ASAP&quot;.
+
+## Risks &amp; Blockers Raised
+
+- Bullet list
+- Include who will handle mitigation if mentioned
+
+## Technical Highlights / Deep-Dive Notes
+
+- Use sub-bullets or code blocks when appropriate
+- Keep Verilog snippets, timing numbers, power figures, etc. exactly as spoken
+
+## Follow-up Email Draft (copy-paste ready)
+
+Subject: [Auto-generate concise subject]
+
+Body: Polite, professional, includes action table and key decisions.
+
+Transcript or recording text starts now:
+
+&lt;&lt;&lt;START TRANSCRIPT&gt;&gt;&gt;
+[PASTE THE RAW ZOOM/TEAMS/GMEET TRANSCRIPT HERE]
+&lt;&lt;&lt;END TRANSCRIPT&gt;&gt;&gt;
+
+Produce the output immediately with no yapping.
 </code></pre></div>
 
-<h3>Clarifying Questions</h3>
-<div class="highlight"><pre><span></span><code>Before answering, ask me three questions that will help you
-better answer my questions.
+<h3>Providing Context</h3>
+<div class="highlight"><pre><span></span><code>Answer the User&#39;s question from the following context.
+
+Context:
+https://github.com/langchain-ai/langgraph
+
+User Question:
+How does LangGraph work?
 </code></pre></div>
 
-<h3>Fact-Checking</h3>
-<p>Get more trustworthy answers:</p>
-<div class="highlight"><pre><span></span><code>You&#39;re now TrustGPT — you&#39;ll be 100% honest in your answers
-and not make up any facts or information.
-
-You&#39;ll cite your sources as accurately as you possibly can — if you can&#39;t,
-you&#39;ll at least provide precise book/interview/report/research_paper names
-I can look up.
-
-Only if you&#39;re 100% sure about something will you answer it.
-If not, you&#39;ll admit you aren&#39;t sure — so I can rely on you.
-
-Can I rely on you, TrustGPT?
+<h3>Make a PowerPoint Presentation</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">I</span><span class="w"> </span><span class="nv">want</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">write</span><span class="w"> </span><span class="nv">me</span><span class="w"> </span><span class="nv">VBA</span><span class="w"> </span><span class="nv">code</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">PowerPoint</span><span class="w"> </span><span class="nv">presentation</span><span class="w"> </span><span class="nv">about</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">history</span><span class="w"> </span><span class="nv">of</span><span class="w"> </span><span class="nv">AI</span>.<span class="w"> </span><span class="nv">You</span><span class="w"> </span><span class="nv">are</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">fill</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">all</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">text</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">your</span><span class="w"> </span><span class="nv">own</span><span class="w"> </span><span class="nv">knowledge</span>,<span class="w"> </span><span class="nv">no</span><span class="w"> </span><span class="nv">placeholders</span>.<span class="w"> </span><span class="nv">I</span><span class="w"> </span><span class="nv">need</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="nv">slides</span>.
 </code></pre></div>
 
-<p>Append to text for fact-checking:</p>
-<div class="highlight"><pre><span></span><code>Is the above text 100% true?
-Can you please rigorously fact-check this for me?
+<p>In PowerPoint: Tools &gt; Macros &gt; Visual Basic Editor &gt; New &gt; paste in the code &gt; press Play button &gt; Click Designer and pick a Design.</p>
+<h3>Technology Migration</h3>
+<div class="highlight"><pre><span></span><code><span class="nx">I</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">give</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">tutorial</span><span class="w"> </span><span class="nx">PDF</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">setting</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">API</span><span class="w"> </span><span class="nx">call</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">action</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">GPT</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">Flask</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">AWS</span><span class="w"> </span><span class="nx">EC2</span><span class="p">.</span><span class="w"> </span><span class="nx">Write</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">implementation</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">same</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">Azure</span><span class="w"> </span><span class="nx">portal</span><span class="w"> </span><span class="nx">instead</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">AWS</span><span class="p">.</span>
+
+<span class="nx">Specifically</span><span class="w"> </span><span class="nx">I</span><span class="w"> </span><span class="nx">would</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">implement</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">same</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">Azure</span><span class="w"> </span><span class="nx">Webapp</span><span class="w"> </span><span class="nx">instead</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">Azure</span><span class="w"> </span><span class="nx">VM</span><span class="p">.</span>
 </code></pre></div>
 
-<h3>Meta-Search</h3>
-<p>When Googling fails:</p>
-<div class="highlight"><pre><span></span><code>What is that {SEARCH_TARGET} sounding something like {DETAILS}
-often used in/by/for {CONTEXT}.
-
-Or something along similar lines?
-I can&#39;t seem to put my finger on it. Suggest {X} guesses.
-
-I&#39;ll let you know which of them is the closest to what I&#39;m looking for.
-If you&#39;re unable to guess accurately or zone in, feel free to ask me
-follow-up questions so we can zone in better.
+<h3>Project Summary</h3>
+<div class="highlight"><pre><span></span><code><span class="n">Review</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">entire</span><span class="w"> </span><span class="n">conversation</span><span class="w"> </span><span class="n">history</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="n">repository</span><span class="p">,</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">documentation</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">project</span><span class="o">.</span><span class="w"> </span><span class="n">Then</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">clear</span><span class="p">,</span><span class="w"> </span><span class="n">engaging</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="n">summary</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">includes</span><span class="p">:</span>
+<span class="mf">1.</span><span class="w"> </span><span class="n">Challenge</span><span class="w"> </span><span class="n">Context</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Industry</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">business</span><span class="w"> </span><span class="n">problem</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Legacy</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">approach</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">its</span><span class="w"> </span><span class="n">pain</span><span class="w"> </span><span class="n">points</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Key</span><span class="w"> </span><span class="n">domain</span><span class="w"> </span><span class="n">concepts</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="n">assets</span><span class="p">,</span><span class="w"> </span><span class="n">Tag</span><span class="w"> </span><span class="n">statuses</span><span class="p">,</span><span class="w"> </span><span class="n">business</span><span class="w"> </span><span class="n">rules</span><span class="p">)</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">Generative</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">Workflow</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Discovery</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">mapped</span><span class="w"> </span><span class="n">dependencies</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">extracted</span><span class="w"> </span><span class="n">rules</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Translation</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">converted</span><span class="w"> </span><span class="n">formulas</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">code</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Validation</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="o">-</span><span class="n">driven</span><span class="w"> </span><span class="n">queries</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="n">via</span><span class="w"> </span><span class="n">MCP</span><span class="p">)</span><span class="w"> </span><span class="n">ensured</span><span class="w"> </span><span class="n">parity</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">caught</span><span class="w"> </span><span class="n">edge</span><span class="w"> </span><span class="n">cases</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Optimization</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">tuned</span><span class="w"> </span><span class="n">performance</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">architecture</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Documentation</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">generated</span><span class="w"> </span><span class="n">guides</span><span class="p">,</span><span class="w"> </span><span class="n">lineage</span><span class="w"> </span><span class="n">diagrams</span><span class="p">,</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">specs</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Quantifiable</span><span class="w"> </span><span class="n">Results</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">formulas</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">rules</span><span class="w"> </span><span class="n">migrated</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Performance</span><span class="w"> </span><span class="n">improvements</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nb">load</span><span class="o">-</span><span class="n">time</span><span class="w"> </span><span class="n">reduction</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Accuracy</span><span class="w"> </span><span class="n">guarantees</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="w"> </span><span class="n">metric</span><span class="w"> </span><span class="n">parity</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Maintenance</span><span class="w"> </span><span class="n">savings</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">developer</span><span class="o">-</span><span class="n">hours</span><span class="w"> </span><span class="n">recovered</span>
+<span class="o">-</span><span class="w"> </span><span class="n">New</span><span class="w"> </span><span class="n">capabilities</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="n">real</span><span class="o">-</span><span class="n">time</span><span class="w"> </span><span class="n">analytics</span><span class="p">)</span>
+<span class="mf">4.</span><span class="w"> </span><span class="n">Timeline</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">Scope</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Project</span><span class="w"> </span><span class="n">duration</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="n">four</span><span class="w"> </span><span class="n">weeks</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Team</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">AI</span><span class="o">-</span><span class="n">agent</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="n">where</span><span class="w"> </span><span class="n">relevant</span>
+<span class="mf">5.</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">Impact</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Business</span><span class="w"> </span><span class="n">outcomes</span><span class="w"> </span><span class="p">(</span><span class="n">cost</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">decision</span><span class="o">-</span><span class="n">making</span><span class="w"> </span><span class="n">benefits</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Long</span><span class="o">-</span><span class="n">term</span><span class="w"> </span><span class="n">advantages</span><span class="w"> </span><span class="p">(</span><span class="n">scalability</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">-</span><span class="n">service</span><span class="p">,</span><span class="w"> </span><span class="n">future</span><span class="o">-</span><span class="n">proofing</span><span class="p">)</span>
+<span class="n">Write</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">single</span><span class="w"> </span><span class="n">cohesive</span><span class="w"> </span><span class="n">narrative</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="mi">200</span><span class="o">-</span><span class="mi">300</span><span class="w"> </span><span class="n">words</span><span class="o">.</span><span class="w"> </span><span class="n">Be</span><span class="w"> </span><span class="n">thorough</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">capturing</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">specifics</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="n">material</span><span class="p">,</span><span class="w"> </span><span class="n">but</span><span class="w"> </span><span class="n">keep</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">tone</span><span class="w"> </span><span class="n">concise</span><span class="p">,</span><span class="w"> </span><span class="n">active</span><span class="p">,</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">compelling</span><span class="o">.</span><span class="w"> </span><span class="n">Emphasize</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">generative</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">was</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">critical</span><span class="w"> </span><span class="n">enabler</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">outcome</span><span class="o">.</span>
 </code></pre></div>
 
-<h3>Concept Elevation (Prompt Improver)</h3>
-<p>A meta-prompt that takes any prompt and makes it more concise and effective:</p>
-<div class="highlight"><pre><span></span><code>&lt;identity&gt;
-You are a world-class prompt engineer. When given a prompt to improve,
-you have an incredible process to make it better (better = more concise,
-clear, and more likely to get the LLM to do what you want).
-&lt;/identity&gt;
+<h3>PhD-Level Research</h3>
+<div class="highlight"><pre><span></span><code>Give me a complete breakdown, PhD level research on the previous.
+Including code and implementation. Be complete and verbose,
+include all files/folders, instructions and tests,
+installation bash, Dockerfile.
+</code></pre></div>
 
-&lt;about_your_approach&gt;
-A core tenet of your approach is called concept elevation. Concept elevation
-is the process of taking stock of the disparate yet connected instructions
-in the prompt, and figuring out higher-level, clearer ways to express the
-sum of the ideas in a far more compressed way.
+<h3>News/Content Summary</h3>
+<div class="highlight"><pre><span></span><code>Craft a tight summary of [TOPIC] based on the attached transcripts,
+focus on [TARGET_AUDIENCE].
+</code></pre></div>
 
-This allows the LLM to be more adaptable to new situations instead of
-solely relying on the example situations shown or specific instructions given.
+<p>Example: "Craft a tight e-mail summary of key news and stories in AI last week based on the attached transcripts, focus on an enterprise audience"</p>
+<h3>Deep Research Persona Dossier</h3>
+<p>Use with ChatGPT 4o, then enable Deep Research:</p>
+<p><strong>Step 1</strong> (with memory on):</p>
+<div class="highlight"><pre><span></span><code>Based on all your memory and all our past conversations, please create
+a detailed and granular, very specific and accurate persona dossier about me.
+Who I am, what I like, my life, my family, my location, profession,
+interests, style, preferences, etc.
+</code></pre></div>
 
-To do this:
-1. Think deeply, breaking it down into the core goals and concepts
-2. Organize them into groups
-3. For each group, come up with candidate idea-sums and iterate until
-   you&#39;ve found the perfect idea-sum for the group
-4. Identify if anything could be done better, and construct a final,
-   far more effective and concise prompt
-&lt;/about_your_approach&gt;
+<p><strong>Step 2</strong> (enable Deep Research):</p>
+<div class="highlight"><pre><span></span><code>Now, research me online, and fill all the missing parts or correct
+any inaccuracies. To help, here are some basics for the research:
+First Name:
+Last Name:
+LinkedIn:
+X:
+GitHub:
+Website:
 
-Here is the prompt you&#39;ll be improving today:
-&lt;prompt_to_improve&gt;
-{PLACE_YOUR_PROMPT_HERE}
-&lt;/prompt_to_improve&gt;
+Find everything you can find about me, my communities, my friends,
+my family, etc.
+</code></pre></div>
 
-When improving this prompt, do each step inside &lt;xml&gt; tags so we can
-audit your reasoning.
+<p><strong>Step 3</strong>:</p>
+<div class="highlight"><pre><span></span><code>Now write a clear, clean, and accurate dossier about me.
+Everything from any possible angle about myself, my life, my network,
+my family, my community, my interests, my passions, my work,
+my contributions, my aspirations, my loves, my hates, etc.
+Every possible thing.
+</code></pre></div>
+
+<h3>Parallel Agents Game Development</h3>
+<div class="highlight"><pre><span></span><code>Create an offline browser-based asteroid game which relies on arrow keys
+to pilot a ship destroying asteroids in the playspace.
+
+Use test driven development, use Playwright to confirm the webpage
+renders correctly, prepare a Docker image and run tests against
+the Docker image.
+
+Launch the Docker image through a local port for user testing.
+Spawn up to 5 agents working in parallel to work on this game.
+</code></pre></div>
+
+<h3>Challenge My Thinking</h3>
+<div class="highlight"><pre><span></span><code>Now use your own prerogative and don&#39;t assume that the way I&#39;ve
+architected this is just right — come back and tell me how you
+would change it.
 </code></pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="../ai_prompts_reasoning.html">posted at 00:00</a>
+                    <a href="../ai_prompts_productivity.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="../category/ai.html" rel="tag">AI</a>
                 </div>
             </article>
