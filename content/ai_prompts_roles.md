@@ -1,5 +1,5 @@
 Title: AI Prompts - Roles & Personas
-Date: 2023-12-03
+Date: 2025-11-03
 Category: AI
 Slug: ai_prompts_roles
 Summary: Prompts for role-playing and expert personas

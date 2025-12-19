@@ -1,5 +1,5 @@
 Title: AI Prompting Techniques
-Date: 2023-12-05
+Date: 2025-11-05
 Category: AI
 Slug: ai_prompting_techniques
 Summary: LLM prompting techniques, methods, and research papers

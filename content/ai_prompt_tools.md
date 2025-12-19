@@ -1,5 +1,5 @@
 Title: AI Prompt Tools
-Date: 2023-12-06
+Date: 2025-11-06
 Category: AI
 Slug: ai_prompt_tools
 Summary: Advanced prompt systems and tools for ChatGPT and AI assistants

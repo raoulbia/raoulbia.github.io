@@ -1,5 +1,5 @@
 Title: AWS Playbook
-Date: 2025-03-18
+Date: 2024-07-01
 Category: Cloud Deployments
 Slug: was_playbook
 Summary: AWS Playbook

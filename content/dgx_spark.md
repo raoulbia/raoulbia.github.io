@@ -1,54 +1,47 @@
-Title: DGX Spark
-Date: 2025-11-17
+Title: DGX Spark Fine-tuning
+Date: 2025-12-19
 Category: AI
-Slug: dgx_spark
-Summary: DGX Spark Misc.
-
-<br>
+Slug: dgx_spark_finetuning
+Summary: Fine-tuning LLMs on DGX Spark (GB10)
 
 ### Fine-tuning Options on DGX Spark (GB10, 128GB unified memory)
 
-  | Option                | Framework         | Pros                                                       | Cons                           |
-  |-----------------------|-------------------|------------------------------------------------------------|--------------------------------|
-  | NeMo + LoRA (current) | NVIDIA NeMo       | Official NVIDIA support, optimized for DGX, proven working | Complex setup, container-based |
-  | Unsloth               | HuggingFace-based | 2x faster, 60% less memory, simple API                     | Less NVIDIA optimization       |
-  | Axolotl               | HuggingFace-based | YAML config, many techniques (LoRA, QLoRA, full)           | Medium complexity              |
-  | HuggingFace PEFT      | Transformers      | Most popular, huge community                               | Manual optimization needed     |
-  | LLaMA-Factory         | HuggingFace-based | Web UI, no-code option                                     | Less control                   |
+| Option                | Framework         | Pros                                                       | Cons                           |
+|-----------------------|-------------------|------------------------------------------------------------|--------------------------------|
+| NeMo + LoRA (current) | NVIDIA NeMo       | Official NVIDIA support, optimized for DGX, proven working | Complex setup, container-based |
+| Unsloth               | HuggingFace-based | 2x faster, 60% less memory, simple API                     | Less NVIDIA optimization       |
+| Axolotl               | HuggingFace-based | YAML config, many techniques (LoRA, QLoRA, full)           | Medium complexity              |
+| HuggingFace PEFT      | Transformers      | Most popular, huge community                               | Manual optimization needed     |
+| LLaMA-Factory         | HuggingFace-based | Web UI, no-code option                                     | Less control                   |
 
-<br>
+### GPU Assessment
 
-### GPU Assessment:
+| Metric   | Value | Assessment             |
+|----------|-------|------------------------|
+| GPU Util | 88%   | Good, not bottlenecked |
+| Temp     | 68°C  | Normal                 |
+| Power    | 56W   | Moderate               |
 
-  | Metric   | Value | Assessment             |
-  |----------|-------|------------------------|
-  | GPU Util | 88%   | Good, not bottlenecked |
-  | Temp     | 68°C  | Normal                 |
-  | Power    | 56W   | Moderate               |
+### Speed Factors (not learning rate)
 
- <br>
- 
- ### Speed factors (not learning rate):
+| Parameter         | Current    | Could Speed Up?                      |
+|-------------------|------------|--------------------------------------|
+| local_batch_size  | 1          | Increase to 2-4 if memory allows     |
+| global_batch_size | 16         | Means 16 gradient accumulation steps |
+| seq_length        | 2048       | Lower if your data is shorter        |
+| Precision         | bf16-mixed | Already optimal                      |
 
-  | Parameter         | Current    | Could Speed Up?                      |
-  |-------------------|------------|--------------------------------------|
-  | local_batch_size  | 1          | Increase to 2-4 if memory allows     |
-  | global_batch_size | 16         | Means 16 gradient accumulation steps |
-  | seq_length        | 2048       | Lower if your data is shorter        |
-  | Precision         | bf16-mixed | Already optimal                      |
-
-  88% utilization is solid. The main bottleneck is local_batch_size: 1 - you're processing 1 sample at a time with 16 accumulation steps. With 128GB unified
-  memory, you could likely increase to local_batch_size: 2 or 4 to speed things up ~2-4x.
-
-<br>
+88% utilization is solid. The main bottleneck is `local_batch_size: 1` - you're processing 1 sample at a time with 16 accumulation steps. With 128GB unified memory, you could likely increase to `local_batch_size: 2` or `4` to speed things up ~2-4x.
 
 ### Misc
+
 ```bash
 docker start vllm-server
 docker logs -f --tail 50 vllm-server
 ```
 
-## ~/.ssh/config
+### SSH Config (~/.ssh/config)
+
 ```
 Host dgx-spark
     HostName 192.168.1.xx
@@ -59,19 +52,15 @@ Host dgx-spark
     LocalForward 11434 localhost:11434
 ```
 
-<br>
-
 ### SSH Tunnel
+
 ```bash
 ssh -N -L 8000:localhost:8000 -L 12434:localhost:12434 user@spark-e123.local
 ```
 
-<br>
-
-### Example Roo Code configuration for vLLM:
+### Example Roo Code configuration for vLLM
 
 * API Provider: `OpenAI Compatible`
 * Base URL: `http://localhost:8000/v1`
 * API Key: `not-required`
 * Model: `Qwen/Qwen2.5-Coder-14B-Instruct`
-

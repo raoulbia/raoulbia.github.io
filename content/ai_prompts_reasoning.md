@@ -1,5 +1,5 @@
 Title: AI Prompts - Reasoning
-Date: 2023-12-04
+Date: 2025-11-04
 Category: AI
 Slug: ai_prompts_reasoning
 Summary: Prompts for critical thinking, fact-checking, and analytical tasks

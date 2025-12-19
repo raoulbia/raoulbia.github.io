@@ -1,5 +1,5 @@
 Title: AI Prompts - Creativity
-Date: 2023-12-01
+Date: 2025-11-01
 Category: AI
 Slug: ai_prompts_creativity
 Summary: Prompts for creative writing, brainstorming, and ideation

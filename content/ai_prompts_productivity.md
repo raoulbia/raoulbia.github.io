@@ -1,5 +1,5 @@
 Title: AI Prompts - Productivity
-Date: 2023-12-02
+Date: 2025-11-02
 Category: AI
 Slug: ai_prompts_productivity
 Summary: Prompts for presentations, summaries, and task-oriented work
