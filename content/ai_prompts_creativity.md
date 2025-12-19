@@ -4,6 +4,46 @@ Category: AI
 Slug: ai_prompts_creativity
 Summary: Prompts for creative writing, brainstorming, and ideation
 
+### LinkedIn Profile Picture (Image Generation)
+
+**Prompt 1** - Classic professional headshot:
+
+```text
+Create a professional portrait of the person in the uploaded image
+for a LinkedIn profile photo.
+
+The person should have a subtle smile, conveying a professional and
+confident demeanor. The person should be dressed in a black business suit,
+with sharp, realistic features and an authentic touch.
+
+The background should be gray, with a well-lit environment.
+The image must be extremely detailed, rendered in 4K 360 HD resolution.
+```
+
+**Prompt 2** - Natural look with outfit change:
+
+```text
+Create a professional LinkedIn profile photo of the person in the
+uploaded image.
+
+Keep the original facial details and natural skin texture to avoid
+an AI-generated look.
+
+Change the outfit to a well-fitted dark business blazer over a light shirt,
+suitable for a corporate environment.
+
+Use a clean, neutral background (light gray or soft blue) with soft,
+natural studio lighting.
+
+Make the person face the camera with a relaxed, confident posture and
+a slight, professional smile.
+
+Crop the image as a head-and-shoulders portrait, centered, high-resolution
+and photorealistic.
+```
+
+---
+
 ### Lo-Fi 2010s Phone Selfie (Image Generation)
 
 Structured prompt for generating authentic-looking casual 2010s phone selfies:
