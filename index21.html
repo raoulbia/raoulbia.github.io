@@ -30,6 +30,63 @@
 
             <article class="post">
                 <h2 class="title">
+                    <a href="./databases.html" rel="bookmark" title="Permanent Link to &quot;Databases&quot;">Databases</a>
+                </h2>
+
+                
+                
+
+                <h3>Postgres</h3>
+<h4>install postgres and postgis</h4>
+<div class="highlight"><pre><span></span><code>$<span class="w">  </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>postgis<span class="w"> </span>postgresql-13-postgis-3
+$<span class="w"> </span>sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql
+<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \password postgres</span>
+<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \q</span>
+</code></pre></div>
+
+<p>check installed version(s): <code>dpkg -l | grep postgres</code></p>
+<h4>postgres user authentication error</h4>
+<p><code>sudo nano /etc/postgresql/13/main/pg_hba.conf</code></p>
+<p>CHANGE FROM</p>
+<p><code>local   all     postgres     peer</code></p>
+<p>TO</p>
+<p><code>local   all      postgres    trusted</code></p>
+<p>then 
+sudo service postgresql restart</p>
+<h4>run in pgadmin4</h4>
+<p><code>CREATE EXTENSION postgis;</code></p>
+<ul>
+<li>
+<p>http://www.orbital.co.ke:8080/opengeo-docs/dataadmin/pgGettingStarted/shp2pgsql.html</p>
+</li>
+<li>
+<p>test: <code>psql -U postgres -d &lt;DBNAME&gt; -c "SELECT postgis_version()"</code></p>
+</li>
+<li>
+<p>syntax: <code>shp2pgsql -I -s &lt;SRID&gt; &lt;PATH/TO/SHAPEFILE&gt; &lt;SCHEMA&gt;.&lt;DBTABLE&gt; | psql -U postgres -d &lt;DBNAME&gt;</code></p>
+</li>
+<li>
+<p>example: <code>shp2pgsql -I -s 4326  dublinbus/Dublin_Bus.shp  shp_dublinbus | psql -U postgres -d dublinbus</code></p>
+</li>
+</ul>
+<h3>Utilities: ogr2ogr</h3>
+<ul>
+<li>https://gis.stackexchange.com/questions/65917/can-i-append-to-different-tables-using-ogr2ogr</li>
+<li>https://www.bostongis.com/PrinterFriendly.aspx?content_name=ogr_cheatsheet</li>
+<li>https://www.mankier.com/1/ogr2ogr</li>
+</ul>
+<h4>geojson to shp</h4>
+<p><code>ogr2ogr -f "ESRI Shapefile" destination_data.shp "dcc_public_bin_locations.geojson"</code></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./databases.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
+                </div>
+            </article>            <h4 class="date">Nov 24, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
                     <a href="./kafka.html" rel="bookmark" title="Permanent Link to &quot;Kafka Cheatsheet&quot;">Kafka Cheatsheet</a>
                 </h2>
 
@@ -115,77 +172,6 @@ kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;.*ksql.*&#39;
                     <a href="./kafka.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/kafka.html" rel="tag">Kafka</a>
                 </div>
-            </article>            <h4 class="date">Nov 23, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./kafka_connect.html" rel="bookmark" title="Permanent Link to &quot;Kafka Connect Cheatsheet&quot;">Kafka Connect Cheatsheet</a>
-                </h2>
-
-                
-                
-
-                <h3>Connectors</h3>
-<p>In this demonstration we're going to make use of the Kafka Connect API.</p>
-<p><a href="https://docs.confluent.io/current/connect/references/restapi.html">See the documentation for more information on any of these actions</a>.</p>
-<p>To get a list of connectors that are loaded in to the Kafka Connect cluster</p>
-<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8083</span><span class="o">/</span><span class="n">connector</span><span class="o">-</span><span class="n">plugins</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="k">tool</span>
-</code></pre></div>
-
-<h4>Viewing Connectors</h4>
-<p>First, we can view connector-plugins:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8083/connector-plugins<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>json.tool
-</code></pre></div>
-
-<h4>Create a Connector</h4>
-<p>Lets create a connector. We'll dive into more details on how this works later.</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
-<span class="s1">    &quot;name&quot;: &quot;first-connector&quot;,</span>
-<span class="s1">    &quot;config&quot;: {</span>
-<span class="s1">        &quot;connector.class&quot;: &quot;FileStreamSource&quot;,</span>
-<span class="s1">        &quot;tasks.max&quot;: 1,</span>
-<span class="s1">        &quot;file&quot;: &quot;/var/log/journal/confluent-kafka-connect.service.log&quot;,</span>
-<span class="s1">        &quot;topic&quot;: &quot;kafka-connect-logs&quot;</span>
-<span class="s1">    }</span>
-<span class="s1">  }&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>http://localhost:8083/connectors
-</code></pre></div>
-
-<h4>List connectors</h4>
-<p>We can list all configured connectors with:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8083/connectors<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>json.tool
-</code></pre></div>
-
-<p>You can see our connector in the list.</p>
-<h4>Detailing connectors</h4>
-<p>Let's list details on our connector:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8083/connectors/first-connector<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>json.tool
-</code></pre></div>
-
-<h4>Pausing connectors</h4>
-<p>Sometimes its desirable to pause or restart connectors:</p>
-<p>To view status:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8083/connectors/first-connector/status<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>json.tool
-</code></pre></div>
-
-<p>To pause:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://localhost:8083/connectors/first-connector/pause<span class="w"> </span>
-</code></pre></div>
-
-<p>To restart (note this is a POST command!):</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8083/connectors/first-connector/restart
-</code></pre></div>
-
-<h4>Deleting connectors</h4>
-<p>Finally, to delete your connector:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span>http://localhost:8083/connectors/first-connector
-</code></pre></div>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./kafka_connect.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/kafka.html" rel="tag">Kafka</a>
-                </div>
             </article>
 
                 <div class="clear"></div>
@@ -195,7 +181,7 @@ kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;.*ksql.*&#39;
 
                     <a href="./index22.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 21 of 34</span>
+                    <span>Page 21 of 35</span>
                 </div>
 
             <div class="clear"></div>

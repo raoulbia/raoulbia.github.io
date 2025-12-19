@@ -26,7 +26,67 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">May 24, 2017</h4>
+        <div id="content">            <h4 class="date">May 25, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./scripts.html" rel="bookmark" title="Permanent Link to &quot;Scripts&quot;">Scripts</a>
+                </h2>
+
+                
+                
+
+                <h3>Import GTFS data into postgres</h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># init vars</span>
+<span class="nv">workingFolder</span><span class="o">=</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>
+<span class="nv">unzip_dir</span><span class="o">=</span><span class="s2">&quot;gtfs_files_unzipped&quot;</span>
+<span class="nv">fileName</span><span class="o">=</span><span class="s2">&quot;feed_gtfs&quot;</span><span class="w"> </span>
+<span class="nv">dbName</span><span class="o">=</span><span class="s2">&quot;gtfs_dublinbus&quot;</span>
+<span class="nv">user</span><span class="o">=</span><span class="s2">&quot;postgres&quot;</span>
+<span class="nv">password</span><span class="o">=</span><span class="s2">&quot;postgres&quot;</span>
+
+<span class="c1"># create dirs</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\r</span>m<span class="w"> </span>-Rf<span class="w"> </span><span class="nv">$workingFolder</span>/<span class="nv">$unzip_dir</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+mkdir<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="c1"># mkdir &quot;$workingFolder/output_test&quot; &gt; /dev/null 2&gt;&amp;1    </span>
+
+<span class="c1"># unzip the GTFS file</span>
+rm<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>/*.csv<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+rm<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>/*.txt<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+unzip<span class="w"> </span>-qq<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$fileName</span><span class="s2">&quot;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>
+
+<span class="c1"># create a CSV copy of the source txt GTFS files</span>
+<span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;./</span><span class="nv">$unzip_dir</span><span class="s2">&quot;</span>
+<span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.txt
+<span class="k">do</span>
+<span class="w">    </span>cp<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;../</span><span class="nv">$unzip_dir</span><span class="s2">/</span><span class="si">${</span><span class="nv">file</span><span class="p">%.txt</span><span class="si">}</span><span class="s2">.csv&quot;</span>
+<span class="k">done</span>
+<span class="nb">cd</span><span class="w"> </span>..
+
+<span class="c1"># import into postgres</span>
+<span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">/&quot;</span>*.csv
+<span class="k">do</span>
+<span class="w">    </span><span class="nv">filename</span><span class="o">=</span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="k">)</span>
+<span class="w">    </span><span class="nv">extension</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">filename</span><span class="p">##*.</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">filename</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">filename</span><span class="p">%.*</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="w">    </span>ogr2ogr<span class="w"> </span>-f<span class="w"> </span>PostgreSQL<span class="w"> </span>PG:<span class="s2">&quot;user=</span><span class="nv">$user</span><span class="s2"> dbname=</span><span class="nv">$dbName</span><span class="s2"> password=</span><span class="nv">$password</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">/</span><span class="nv">$filename</span><span class="s2">.csv&quot;</span><span class="w"> </span>-nln<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filename</span><span class="s2">&quot;</span><span class="w"> </span>
+<span class="k">done</span>
+
+<span class="se">\r</span>m<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$workingFolder</span><span class="s2">/</span><span class="nv">$unzip_dir</span><span class="s2">/&quot;</span>*.csv
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Done&quot;</span>
+</code></pre></div>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./scripts.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/scripts.html" rel="tag">Scripts</a>
+                </div>
+            </article>            <h4 class="date">May 24, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -53,46 +113,6 @@
                     <a href="./notebooks.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/python-r.html" rel="tag">Python, R</a>
                 </div>
-            </article>            <h4 class="date">Apr 25, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./public_transport.html" rel="bookmark" title="Permanent Link to &quot;Public Transport&quot;">Public Transport</a>
-                </h2>
-
-                
-                
-
-                <h3>Glossary</h3>
-<ul>
-<li>
-<p>KML: Keyhole Markup Language is a file format used to display geographic data in an Earth browser such as Google Earth.</p>
-</li>
-<li>
-<p>NaPTAN: acronym for National Public Transport Access Nodes, is a national database that contains a unique entry for each point of access to public transport: railway stations, bus stops, airports, ferry terminals, coach terminus, taxi ranks, and so on. In short, it's an index of every place where a passenger can join or leave public transport.
- <a href="https://dftdigital.blog.gov.uk/2020/07/06/naptan-the-most-popular-dataset-youve-never-heard-of/">source</a></p>
-</li>
-<li>
-<p>A standard for identifying and naming access points to public transport</p>
-</li>
-<li>A database of all the access points in the UK.</li>
-<li>An XML Schema for exchanging stop data as XML documents describing the content. All or part of the database may be exchanged in this format.</li>
-<li>
-<p>An exchange format for exchanging stop data as csv files</p>
-</li>
-<li>
-<p>NeTEx: Network Timetable Exchange</p>
-</li>
-<li>
-<p>Gazeteer: a geographical index or dictionary.</p>
-</li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./public_transport.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/public-transport.html" rel="tag">Public Transport</a>
-                </div>
             </article>
 
                 <div class="clear"></div>
@@ -102,7 +122,7 @@
 
                     <a href="./index33.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 32 of 34</span>
+                    <span>Page 32 of 35</span>
                 </div>
 
             <div class="clear"></div>

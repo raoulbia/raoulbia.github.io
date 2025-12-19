@@ -30,6 +30,77 @@
 
             <article class="post">
                 <h2 class="title">
+                    <a href="./kafka_connect.html" rel="bookmark" title="Permanent Link to &quot;Kafka Connect Cheatsheet&quot;">Kafka Connect Cheatsheet</a>
+                </h2>
+
+                
+                
+
+                <h3>Connectors</h3>
+<p>In this demonstration we're going to make use of the Kafka Connect API.</p>
+<p><a href="https://docs.confluent.io/current/connect/references/restapi.html">See the documentation for more information on any of these actions</a>.</p>
+<p>To get a list of connectors that are loaded in to the Kafka Connect cluster</p>
+<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8083</span><span class="o">/</span><span class="n">connector</span><span class="o">-</span><span class="n">plugins</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="k">tool</span>
+</code></pre></div>
+
+<h4>Viewing Connectors</h4>
+<p>First, we can view connector-plugins:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8083/connector-plugins<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>json.tool
+</code></pre></div>
+
+<h4>Create a Connector</h4>
+<p>Lets create a connector. We'll dive into more details on how this works later.</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;name&quot;: &quot;first-connector&quot;,</span>
+<span class="s1">    &quot;config&quot;: {</span>
+<span class="s1">        &quot;connector.class&quot;: &quot;FileStreamSource&quot;,</span>
+<span class="s1">        &quot;tasks.max&quot;: 1,</span>
+<span class="s1">        &quot;file&quot;: &quot;/var/log/journal/confluent-kafka-connect.service.log&quot;,</span>
+<span class="s1">        &quot;topic&quot;: &quot;kafka-connect-logs&quot;</span>
+<span class="s1">    }</span>
+<span class="s1">  }&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>http://localhost:8083/connectors
+</code></pre></div>
+
+<h4>List connectors</h4>
+<p>We can list all configured connectors with:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8083/connectors<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>json.tool
+</code></pre></div>
+
+<p>You can see our connector in the list.</p>
+<h4>Detailing connectors</h4>
+<p>Let's list details on our connector:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8083/connectors/first-connector<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>json.tool
+</code></pre></div>
+
+<h4>Pausing connectors</h4>
+<p>Sometimes its desirable to pause or restart connectors:</p>
+<p>To view status:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8083/connectors/first-connector/status<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>json.tool
+</code></pre></div>
+
+<p>To pause:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://localhost:8083/connectors/first-connector/pause<span class="w"> </span>
+</code></pre></div>
+
+<p>To restart (note this is a POST command!):</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8083/connectors/first-connector/restart
+</code></pre></div>
+
+<h4>Deleting connectors</h4>
+<p>Finally, to delete your connector:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span>http://localhost:8083/connectors/first-connector
+</code></pre></div>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./kafka_connect.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/kafka.html" rel="tag">Kafka</a>
+                </div>
+            </article>            <h4 class="date">Nov 23, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
                     <a href="./ksql.html" rel="bookmark" title="Permanent Link to &quot;KSql Cheatsheet&quot;">KSql Cheatsheet</a>
                 </h2>
 
@@ -145,162 +216,6 @@ select * from GTFS_STREAM emit changes ;
                     <a href="./ksql.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/ksql.html" rel="tag">KSql</a>
                 </div>
-            </article>            <h4 class="date">Nov 23, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./snowsql.html" rel="bookmark" title="Permanent Link to &quot;SnowSQL Cheatsheet&quot;">SnowSQL Cheatsheet</a>
-                </h2>
-
-                
-                
-
-                <h4>SnowSQL CLI Config file</h4>
-<p>The onfig file is located here: <code>/home/&lt;user&gt;/.snowsql</code>. This is where you configure custom connection parameters.</p>
-<p>In your config file you need to modify this line:</p>
-<p><code>log_file = ../snowsql_rt.log</code> to this <code>log_file = ~/.snowsql/snowsql_rt.log</code></p>
-<h4>Connect to Snowflake account with SnowSQL CLI</h4>
-<p><code>snowsql --accountname 123.north-europe.azure --username &lt;username&gt;</code></p>
-<p><code>snowsql -c my_connection</code></p>
-<h4>Bulk Loading from Local Source</h4>
-<p>Create the Employee table</p>
-<div class="highlight"><pre><span></span><code><span class="n">create</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">Employee</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">row_id</span><span class="w"> </span><span class="n">integer</span><span class="p">,</span>
-<span class="w">    </span><span class="n">first_name</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
-<span class="w">    </span><span class="n">last_name</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
-<span class="w">    </span><span class="n">city</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
-<span class="w">    </span><span class="n">state</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
-<span class="w">    </span><span class="n">hire_date</span><span class="w"> </span><span class="n">date</span><span class="p">,</span>
-<span class="w">    </span><span class="n">salary</span><span class="w"> </span><span class="n">integer</span>
-<span class="p">)</span>
-</code></pre></div>
-
-<p>Some Employee queries</p>
-<div class="highlight"><pre><span></span><code>select * From Public.Employee
-drop table Employee
-truncate table Employee
-</code></pre></div>
-
-<p>Create a File Format Object</p>
-<div class="highlight"><pre><span></span><code><span class="nx">create</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">replace</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">format</span><span class="w"> </span><span class="nx">employee_csv</span>
-<span class="w">  </span><span class="k">type</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">CSV</span><span class="err">&#39;</span>
-<span class="w">  </span><span class="nx">field_delimiter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="sc">&#39;,&#39;</span>
-<span class="w">  </span><span class="nx">skip_header</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-</code></pre></div>
-
-<p>Create an internal Stage object</p>
-<div class="highlight"><pre><span></span><code>create or replace stage employee_stage
-  file_format = employee_csv;
-</code></pre></div>
-
-<p>Display the stages we have created</p>
-<div class="highlight"><pre><span></span><code><span class="k">show</span><span class="w"> </span><span class="nv">stages</span>
-</code></pre></div>
-
-<p>See what's in the employee_stage</p>
-<div class="highlight"><pre><span></span><code><span class="n">list</span><span class="w"> </span><span class="nv">@employee_stage</span><span class="p">;</span>
-</code></pre></div>
-
-<p>Move the data in employee_stage to the employee table. Skip the entire file on any errors</p>
-<div class="highlight"><pre><span></span><code><span class="n">copy</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">employee</span>
-<span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="nv">@employee_stage</span>
-<span class="w">  </span><span class="n">on_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;skip_file&#39;</span><span class="p">;</span>
-</code></pre></div>
-
-<p>Move the data in employee_stage to the employee table. Skip just the rows causing any errors</p>
-<div class="highlight"><pre><span></span><code><span class="n">copy</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">employee</span>
-<span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="nv">@employee_stage</span>
-<span class="w">  </span><span class="n">on_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;continue&#39;</span><span class="p">;</span>
-</code></pre></div>
-
-<p>Remove file from stage</p>
-<div class="highlight"><pre><span></span><code><span class="n">remove</span><span class="w"> </span><span class="nv">@employee_stage</span><span class="w"> </span><span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;.*.csv.gz&#39;</span><span class="p">;</span>
-</code></pre></div>
-
-<p>Create a table to hold all errors during ingestion (VIDEO 21 8:00)</p>
-<div class="highlight"><pre><span></span><code>create or replace table employee_errors as 
-select <span class="gs">* from table(validate(employee, job_id =&gt; &#39;019b04c4-0c52-f649-0001-3d6e0002d14e&#39;));</span>
-<span class="gs">select *</span> from employee_errors
-</code></pre></div>
-
-<p>Describe file format</p>
-<div class="highlight"><pre><span></span><code>describe file format employee_csv
-</code></pre></div>
-
-<h4>Storage Integration: Bulk Loading from External Source</h4>
-<p>Notes:</p>
-<ul>
-<li>
-<p>to verify STORAGE INTEGRATION made it to Azure, go to Azure AAD &gt; Entreprise applications &gt; you should see Snowflake </p>
-</li>
-<li>
-<p>after creating STORAGE INTEGRATION, must authorize Snowflake in Access Control (IAM)
-  go to Storage Account &gt; Access Control (IAM) &gt; Add a role assignment &gt; "Storage Blob Data Contributor"
-  click +Select Members and search for Snowflake principal described above &gt; Select &gt; Review+Assign</p>
-</li>
-</ul>
-<div class="highlight"><pre><span></span><code>SHOW FILE FORMATS
-SHOW TABLES
-SHOW STAGES
-
-// CLEAN UP
-USE ROLE ACCOUNTADMIN ;
-DROP INTEGRATION IF EXISTS AZURE_STORAGE ;
-DROP FILE FORMAT IF EXISTS CSV_FORMAT ;
-DROP STAGE IF EXISTS GTFS ;
-</code></pre></div>
-
-<p>Step 1: Create Table</p>
-<div class="highlight"><pre><span></span><code><span class="n">create</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">agency</span><span class="p">(</span>
-<span class="w">  </span><span class="n">agency_id</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span>
-<span class="w">  </span><span class="n">agency_name</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w">  </span>
-<span class="w">  </span><span class="n">agency_url</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span>
-<span class="w">  </span><span class="n">agency_timezone</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-<span class="p">);</span>
-</code></pre></div>
-
-<p>Step 2: Setup Storage Integration</p>
-<div class="highlight"><pre><span></span><code>USE ROLE ACCOUNTADMIN ;
-CREATE OR REPLACE STORAGE INTEGRATION AZURE_STORAGE
-  TYPE = EXTERNAL_STAGE
-  STORAGE_PROVIDER = AZURE
-  ENABLED = TRUE
-  AZURE_TENANT_ID = &lt; tenant id &gt;
-  STORAGE_ALLOWED_LOCATIONS = (&#39;*&#39;) ;
-
-GRANT USAGE ON INTEGRATION AZURE_STORAGE TO SYSADMIN ;
-
-DESCRIBE STORAGE INTEGRATION AZURE_STORAGE ;
-
-USE ROLE SYSADMIN ; -- De-esclate the role
-</code></pre></div>
-
-<p>Step 3: Setup File Format</p>
-<div class="highlight"><pre><span></span><code><span class="nx">create</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">replace</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">format</span><span class="w"> </span><span class="nx">csv_format</span>
-<span class="w">  </span><span class="k">type</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">CSV</span><span class="err">&#39;</span>
-<span class="w">  </span><span class="nx">field_delimiter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="sc">&#39;,&#39;</span>
-<span class="w">  </span><span class="nx">skip_header</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">  </span><span class="nx">null_if</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="err">&#39;</span><span class="nx">NULL</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">null</span><span class="err">&#39;</span><span class="p">)</span>
-<span class="w">  </span><span class="nx">empty_field_as_null</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">TRUE</span>
-<span class="w">  </span><span class="nx">compression</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">gzip</span><span class="w"> </span><span class="p">;</span>
-</code></pre></div>
-
-<p>Step 4: Set up Stage</p>
-<div class="highlight"><pre><span></span><code><span class="nt">create</span><span class="w"> </span><span class="nt">or</span><span class="w"> </span><span class="nt">replace</span><span class="w"> </span><span class="nt">stage</span><span class="w"> </span><span class="nt">gtfs</span>
-<span class="w">  </span><span class="nt">storage_integration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">AZURE_STORAGE</span>
-<span class="w">  </span><span class="nt">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;azure://&lt;container_name&gt;.blob.core.windows.net/gtfs &#39;</span>
-<span class="w">  </span><span class="nt">file_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">CSV_FORMAT</span><span class="w"> </span><span class="o">;</span>
-</code></pre></div>
-
-<p>Note: it can take an hour or two for Azure to create objects necessary for the integration</p>
-<div class="highlight"><pre><span></span><code><span class="n">list</span><span class="w"> </span><span class="nv">@gtfs</span><span class="w"> </span><span class="p">;</span>
-</code></pre></div>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./snowsql.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
-                </div>
             </article>
 
                 <div class="clear"></div>
@@ -310,7 +225,7 @@ USE ROLE SYSADMIN ; -- De-esclate the role
 
                     <a href="./index23.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 22 of 34</span>
+                    <span>Page 22 of 35</span>
                 </div>
 
             <div class="clear"></div>

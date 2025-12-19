@@ -1,183 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+        <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | articles in the "AI" category</title>
-    <link rel="shortcut icon" type="image/png" href="../favicon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
-    <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
-    <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../static/custom-code.css" type="text/css" />
+    <title>code snippets etc. | AI Prompts - Claude Code</title>
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
 </head>
 <body>
     <header>
         <nav>
             <ul>
-
-                <li class="ephemeral selected"><a href="../category/ai.html">AI</a></li>
-                <li><a href="../">Home</a></li>
-                <li><a href="../archives">Archives</a></li>
+                <li><a href="./">Home</a></li>
+                <li><a href="./archives">Archives</a></li>
             </ul>
         </nav>
         <div class="header_box">
-            <h1><a href="../">code snippets etc.</a></h1>
+            <h1><a href="./">code snippets etc.</a></h1>
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 19, 2025</h4>
+        <div id="content">            <h4 class="date">Nov 09, 2025</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="../dgx_spark_finetuning.html" rel="bookmark" title="Permanent Link to &quot;DGX Spark Fine-tuning&quot;">DGX Spark Fine-tuning</a>
-                </h2>
-
-                
-                
-
-                <h3>Fine-tuning Options on DGX Spark (GB10, 128GB unified memory)</h3>
-<table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Framework</th>
-<th>Pros</th>
-<th>Cons</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>NeMo + LoRA (current)</td>
-<td>NVIDIA NeMo</td>
-<td>Official NVIDIA support, optimized for DGX, proven working</td>
-<td>Complex setup, container-based</td>
-</tr>
-<tr>
-<td>Unsloth</td>
-<td>HuggingFace-based</td>
-<td>2x faster, 60% less memory, simple API</td>
-<td>Less NVIDIA optimization</td>
-</tr>
-<tr>
-<td>Axolotl</td>
-<td>HuggingFace-based</td>
-<td>YAML config, many techniques (LoRA, QLoRA, full)</td>
-<td>Medium complexity</td>
-</tr>
-<tr>
-<td>HuggingFace PEFT</td>
-<td>Transformers</td>
-<td>Most popular, huge community</td>
-<td>Manual optimization needed</td>
-</tr>
-<tr>
-<td>LLaMA-Factory</td>
-<td>HuggingFace-based</td>
-<td>Web UI, no-code option</td>
-<td>Less control</td>
-</tr>
-</tbody>
-</table>
-<h3>GPU Assessment</h3>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Value</th>
-<th>Assessment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>GPU Util</td>
-<td>88%</td>
-<td>Good, not bottlenecked</td>
-</tr>
-<tr>
-<td>Temp</td>
-<td>68°C</td>
-<td>Normal</td>
-</tr>
-<tr>
-<td>Power</td>
-<td>56W</td>
-<td>Moderate</td>
-</tr>
-</tbody>
-</table>
-<h3>Speed Factors (not learning rate)</h3>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Current</th>
-<th>Could Speed Up?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>local_batch_size</td>
-<td>1</td>
-<td>Increase to 2-4 if memory allows</td>
-</tr>
-<tr>
-<td>global_batch_size</td>
-<td>16</td>
-<td>Means 16 gradient accumulation steps</td>
-</tr>
-<tr>
-<td>seq_length</td>
-<td>2048</td>
-<td>Lower if your data is shorter</td>
-</tr>
-<tr>
-<td>Precision</td>
-<td>bf16-mixed</td>
-<td>Already optimal</td>
-</tr>
-</tbody>
-</table>
-<p>88% utilization is solid. The main bottleneck is <code>local_batch_size: 1</code> - you're processing 1 sample at a time with 16 accumulation steps. With 128GB unified memory, you could likely increase to <code>local_batch_size: 2</code> or <code>4</code> to speed things up ~2-4x.</p>
-<h3>Misc</h3>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>start<span class="w"> </span>vllm-server
-docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>--tail<span class="w"> </span><span class="m">50</span><span class="w"> </span>vllm-server
-</code></pre></div>
-
-<h3>SSH Config (~/.ssh/config)</h3>
-<div class="highlight"><pre><span></span><code>Host dgx-spark
-    HostName 192.168.1.xx
-    User &lt;user-name&gt;
-    IdentityFile ~/.ssh/&lt;name-of-pub-ssh-key&gt;
-    IdentitiesOnly yes
-    LocalForward 8000 localhost:8000
-    LocalForward 11434 localhost:11434
-</code></pre></div>
-
-<h3>SSH Tunnel</h3>
-<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-N<span class="w"> </span>-L<span class="w"> </span><span class="m">8000</span>:localhost:8000<span class="w"> </span>-L<span class="w"> </span><span class="m">12434</span>:localhost:12434<span class="w"> </span>user@spark-e123.local
-</code></pre></div>
-
-<h3>Example Roo Code configuration for vLLM</h3>
-<ul>
-<li>API Provider: <code>OpenAI Compatible</code></li>
-<li>Base URL: <code>http://localhost:8000/v1</code></li>
-<li>API Key: <code>not-required</code></li>
-<li>Model: <code>Qwen/Qwen2.5-Coder-14B-Instruct</code></li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="../dgx_spark_finetuning.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="../category/ai.html" rel="tag">AI</a>
-                </div>
-            </article>            <h4 class="date">Nov 09, 2025</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="../ai_prompts_claude_code.html" rel="bookmark" title="Permanent Link to &quot;AI Prompts - Claude Code&quot;">AI Prompts - Claude Code</a>
+                    <a href="./ai_prompts_claude_code.html" rel="bookmark" title="Permanent Link to &quot;AI Prompts - Claude Code&quot;">AI Prompts - Claude Code</a>
                 </h2>
 
                 
@@ -417,20 +271,10 @@ Create tests in /tests/api/{endpoint-name}.test.ts
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="../ai_prompts_claude_code.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="../category/ai.html" rel="tag">AI</a>
+                    <a href="./ai_prompts_claude_code.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/ai.html" rel="tag">AI</a>
                 </div>
             </article>
-
-                <div class="clear"></div>
-                <div class="pages">
-
-
-                    <a href="../category/ai2.html" class="next_page">Next&nbsp;&rarr;</a>
-
-                    <span>Page 1 of 6</span>
-                </div>
-
             <div class="clear"></div>
             <footer>
                 <p>

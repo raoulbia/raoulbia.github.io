@@ -26,7 +26,43 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 25, 2017</h4>
+        <div id="content">            <h4 class="date">Dec 01, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./ssh_keys.html" rel="bookmark" title="Permanent Link to &quot;SSH Keys&quot;">SSH Keys</a>
+                </h2>
+
+                
+                
+
+                <h4>Checking for existing keys</h4>
+<div class="highlight"><pre><span></span><code>ls -al ~/.ssh
+</code></pre></div>
+
+<h4>Generating a new key</h4>
+<div class="highlight"><pre><span></span><code><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="n">rsa</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="mi">4096</span><span class="w"> </span><span class="o">-</span><span class="n">C</span><span class="w"> </span><span class="ss">&quot;your_email@example.com&quot;</span>
+</code></pre></div>
+
+<p>or</p>
+<div class="highlight"><pre><span></span><code>ssh-keygen -t rsa -C &quot;some name&quot; -b 4096
+</code></pre></div>
+
+<h4>Adding a key</h4>
+<div class="highlight"><pre><span></span><code>eval $(ssh-agent -s)
+ssh-add ~/.ssh/id_rsa
+</code></pre></div>
+
+<h4>Copy the contents of the SSH key to your clipboard</h4>
+<div class="highlight"><pre><span></span><code>clip &lt; ~/.ssh/id_rsa.pub
+</code></pre></div>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./ssh_keys.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
+                </div>
+            </article>            <h4 class="date">Nov 25, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -248,63 +284,6 @@ f.render()</p>
                     <a href="./software.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
                 </div>
-            </article>            <h4 class="date">Nov 24, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./databases.html" rel="bookmark" title="Permanent Link to &quot;Databases&quot;">Databases</a>
-                </h2>
-
-                
-                
-
-                <h3>Postgres</h3>
-<h4>install postgres and postgis</h4>
-<div class="highlight"><pre><span></span><code>$<span class="w">  </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>postgis<span class="w"> </span>postgresql-13-postgis-3
-$<span class="w"> </span>sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql
-<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \password postgres</span>
-<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \q</span>
-</code></pre></div>
-
-<p>check installed version(s): <code>dpkg -l | grep postgres</code></p>
-<h4>postgres user authentication error</h4>
-<p><code>sudo nano /etc/postgresql/13/main/pg_hba.conf</code></p>
-<p>CHANGE FROM</p>
-<p><code>local   all     postgres     peer</code></p>
-<p>TO</p>
-<p><code>local   all      postgres    trusted</code></p>
-<p>then 
-sudo service postgresql restart</p>
-<h4>run in pgadmin4</h4>
-<p><code>CREATE EXTENSION postgis;</code></p>
-<ul>
-<li>
-<p>http://www.orbital.co.ke:8080/opengeo-docs/dataadmin/pgGettingStarted/shp2pgsql.html</p>
-</li>
-<li>
-<p>test: <code>psql -U postgres -d &lt;DBNAME&gt; -c "SELECT postgis_version()"</code></p>
-</li>
-<li>
-<p>syntax: <code>shp2pgsql -I -s &lt;SRID&gt; &lt;PATH/TO/SHAPEFILE&gt; &lt;SCHEMA&gt;.&lt;DBTABLE&gt; | psql -U postgres -d &lt;DBNAME&gt;</code></p>
-</li>
-<li>
-<p>example: <code>shp2pgsql -I -s 4326  dublinbus/Dublin_Bus.shp  shp_dublinbus | psql -U postgres -d dublinbus</code></p>
-</li>
-</ul>
-<h3>Utilities: ogr2ogr</h3>
-<ul>
-<li>https://gis.stackexchange.com/questions/65917/can-i-append-to-different-tables-using-ogr2ogr</li>
-<li>https://www.bostongis.com/PrinterFriendly.aspx?content_name=ogr_cheatsheet</li>
-<li>https://www.mankier.com/1/ogr2ogr</li>
-</ul>
-<h4>geojson to shp</h4>
-<p><code>ogr2ogr -f "ESRI Shapefile" destination_data.shp "dcc_public_bin_locations.geojson"</code></p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./databases.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
-                </div>
             </article>
 
                 <div class="clear"></div>
@@ -314,7 +293,7 @@ sudo service postgresql restart</p>
 
                     <a href="./index21.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 20 of 34</span>
+                    <span>Page 20 of 35</span>
                 </div>
 
             <div class="clear"></div>

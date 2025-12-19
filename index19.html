@@ -30,6 +30,132 @@
 
             <article class="post">
                 <h2 class="title">
+                    <a href="./Vagrant VM.html" rel="bookmark" title="Permanent Link to &quot;Vagrant VM&quot;">Vagrant VM</a>
+                </h2>
+
+                
+                
+
+                <h4>Useful Links</h4>
+<ul>
+<li><a href="https://www.gis-blog.com/osgeo-live-the-best-open-source-gis-ready-to-use-package/">OSGeo-Live</a></li>
+<li><a href="https://releases.ubuntu.com/20.04/">Ubuntu 20.04 ISO</a></li>
+<li><a href="https://blog.engineyard.com/building-a-vagrant-box">Building a Vagrant Box from Start to Finish</a></li>
+<li><a href="https://www.abhishek-tiwari.com/creating-a-new-vagrant-base-box-from-an-existing-vm/">Creating a new Vagrant base box from an existing VM</a></li>
+</ul>
+<h4>Pre-requisites</h4>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-16-04">Git</a></li>
+<li><a href="http://docs.vagrantup.com/v2/installation/index.html">Vagrant</a> </li>
+<li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>.</li>
+</ul>
+<h4>Shared Folders</h4>
+<p><strong>NEW</strong></p>
+<p>On Windows Host, add this to Vagrantfile:</p>
+<p><code>config.vm.synced_folder "C:/Users/ABCD123/OneDrive - XY/Documents/workproducts-vagrant/linux_mint", "/host_project"</code></p>
+<p><strong>OLD</strong></p>
+<p>Vagrantfile: <code>config.vm.synced_folder HOST GUEST</code></p>
+<p>where HOST = <code>"/home/raoulbia/DEV/vagrant_mint"</code> and GUEST = <code>"/vagrant"</code></p>
+<p>e.g.   <code>config.vm.synced_folder "/home/raoulbia/DEV/vagrant_ubuntu", "/vagrant"</code></p>
+<div class="highlight"><pre><span></span><code>config.vm.synced_folder<span class="w"> </span><span class="s2">&quot;.&quot;</span>,<span class="w"> </span><span class="s2">&quot;/vmtest_kafka&quot;</span>
+</code></pre></div>
+
+<h4>Vagrant Box</h4>
+<p>Assuming you want to share the directory in which <code>Vagrantfile</code> is located and that directory is named <code>vmtest_kafka</code>. 
+First add your share directory in the VM Box (Devices &gt; Shared Folders) and click "Make Permanent".
+Whatever you name your share here will be the name you will need to use when mounting in the vm guest OS e.g. <code>vmtest_kafka</code>. 
+Next on the the guset OS make a directory to use for your mount preferably in your home directory e.g. <code>mkdir ~/shared</code>.</p>
+<div class="highlight"><pre><span></span><code>sudo usermod -a -G vboxsf vagrant
+mkdir ~/shared
+sudo mount -t vboxsf vmtest_kafka ~/shared
+</code></pre></div>
+
+<ul>
+<li><code>sudo nano ~/.profile</code> and add the line: <code>sudo mount -t vboxsf vmtest_kafka ~/shared</code></li>
+<li>Set directory permissions on HOST: <code>chmod 777 -R vmtest_kafka/</code></li>
+</ul>
+<h4>Desktop size issue</h4>
+<div class="highlight"><pre><span></span><code><span class="n">vagrant</span><span class="w"> </span><span class="n">plugin</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">--</span><span class="n">plugin</span><span class="o">-</span><span class="n">clean</span><span class="o">-</span><span class="n">sources</span><span class="w"> </span><span class="o">--</span><span class="n">plugin</span><span class="o">-</span><span class="n">source</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">rubygems</span><span class="o">.</span><span class="n">org</span><span class="w"> </span><span class="n">vagrant</span><span class="o">-</span><span class="n">vbguest</span>
+<span class="n">vagrant</span><span class="w"> </span><span class="n">up</span>
+<span class="n">vagrant</span><span class="w"> </span><span class="n">vbguest</span><span class="w"> </span><span class="o">--</span><span class="n">do</span><span class="w"> </span><span class="n">install</span>
+<span class="n">vagrant</span><span class="w"> </span><span class="n">reload</span>
+</code></pre></div>
+
+<h4>Increase Vagrant Box Size</h4>
+<p><strong>NEW</strong></p>
+<p><code>vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-disksize</code></p>
+<div class="highlight"><pre><span></span><code><span class="nv">Vagrant</span>.<span class="nv">configure</span><span class="ss">(</span><span class="s2">&quot;2&quot;</span><span class="ss">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="nv">config</span><span class="o">|</span>
+<span class="w">  </span>#<span class="w"> </span><span class="nv">Your</span><span class="w"> </span><span class="nv">existing</span><span class="w"> </span><span class="nv">configurations</span><span class="w"> </span><span class="nv">like</span><span class="w"> </span><span class="nv">VM</span><span class="w"> </span><span class="nv">box</span>
+<span class="w">  </span><span class="nv">config</span>.<span class="nv">vm</span>.<span class="nv">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;npalm/mint17-amd64-cinnamon&quot;</span>
+
+<span class="w">  </span>#<span class="w"> </span><span class="nv">Plugin</span><span class="w"> </span><span class="nv">configuration</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">increase</span><span class="w"> </span><span class="nv">disk</span><span class="w"> </span><span class="nv">size</span>
+<span class="w">  </span><span class="nv">config</span>.<span class="nv">disksize</span>.<span class="nv">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;50GB&#39;</span>
+
+<span class="w">  </span>#<span class="w"> </span><span class="nv">Any</span><span class="w"> </span><span class="nv">other</span><span class="w"> </span><span class="nv">configurations</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p><strong>OLD</strong></p>
+<p>Note: it may be easier to just grab a box that has a large size. See above.</p>
+<ol>
+<li>
+<p>Clone &amp; Resize</p>
+<p>on Linux</p>
+<div class="highlight"><pre><span></span><code>VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vmdk&quot; &quot;/home/baba/VirtualBox VMs/my_box/box.vdi&quot; --format vdi
+VBoxManage modifyhd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; --resize 131072
+VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/home/baba/VirtualBox VMs/my_box/box-resized.vmdk&quot; --format vmdk
+</code></pre></div>
+
+<p>on Window: same steps as below but first run this:</p>
+<div class="highlight"><pre><span></span><code>set PATH=%PATH%;&quot;C:\Program Files\Oracle\VirtualBox&quot;
+</code></pre></div>
+
+</li>
+<li>
+<p>Allocate space</p>
+<p>The newly created disk space is unallocated at this stage. Follow these steps next:</p>
+<ul>
+<li>
+<p><a href="http://www.gitshah.com/2013/05/how-to-fix-out-of-space-problem-for.html?m=1">getting Gparted</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=cDgUwWkvuIY">changing partitions using Gparted (Video)</a></p>
+</li>
+</ul>
+</li>
+</ol>
+<p>see also <a href="https://gist.github.com/christopher-hopper/9755310">Resize a Hard Disk for a Virtual Machine</a></p>
+<h4>Create Global Variable for use in Python Scripts</h4>
+<p>In <code>~/.profile</code>add</p>
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="n">TOMOE_DATA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">ownCloud</span><span class="o">/</span><span class="n">tomoe</span><span class="o">-</span><span class="n">data</span>
+<span class="k">export</span><span class="w"> </span><span class="n">KG_OUTPUT_DIR</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">vmtest</span><span class="o">/</span><span class="n">tomoe</span><span class="o">/</span><span class="n">wp</span><span class="o">-</span><span class="n">tomoe</span><span class="o">-</span><span class="n">playground</span><span class="o">/</span><span class="n">local</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">kg</span>
+</code></pre></div>
+
+<h4>Useful Vagrant commands</h4>
+<ul>
+<li><code>config.vm.box = "file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box"</code></li>
+<li><code>VBoxClient --clipboard</code></li>
+<li><code>vagrant global-status</code></li>
+<li><code>set PATH=%PATH%;"C:\Program Files\Oracle\VirtualBox"</code></li>
+<li><code>vboxmanage list vms</code></li>
+<li><code>vagrant init file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box</code></li>
+</ul>
+<h4>Misc. Links</h4>
+<ul>
+<li><a href="https://github.com/hashicorp/vagrant/issues/5186">Warning: Authentication failure. Retrying... " after packaging box</a></li>
+<li><a href="https://jeremykendall.net/2013/08/09/vagrant-synced-folders-permissions/">vagrant-synced-folders-permissions</a></li>
+<li><a href="https://stackoverflow.com/questions/35807568/vagrant-synced-folder-permissions">vagrant-synced-folders-permissions SO</a></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./Vagrant VM.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
+                </div>
+            </article>            <h4 class="date">Dec 03, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
                     <a href="./vagrant_vpn.html" rel="bookmark" title="Permanent Link to &quot;Vagrant VM with VPN&quot;">Vagrant VM with VPN</a>
                 </h2>
 
@@ -209,42 +335,6 @@
                     <a href="./vagrant_vpn.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
                 </div>
-            </article>            <h4 class="date">Dec 01, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./ssh_keys.html" rel="bookmark" title="Permanent Link to &quot;SSH Keys&quot;">SSH Keys</a>
-                </h2>
-
-                
-                
-
-                <h4>Checking for existing keys</h4>
-<div class="highlight"><pre><span></span><code>ls -al ~/.ssh
-</code></pre></div>
-
-<h4>Generating a new key</h4>
-<div class="highlight"><pre><span></span><code><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="n">rsa</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="mi">4096</span><span class="w"> </span><span class="o">-</span><span class="n">C</span><span class="w"> </span><span class="ss">&quot;your_email@example.com&quot;</span>
-</code></pre></div>
-
-<p>or</p>
-<div class="highlight"><pre><span></span><code>ssh-keygen -t rsa -C &quot;some name&quot; -b 4096
-</code></pre></div>
-
-<h4>Adding a key</h4>
-<div class="highlight"><pre><span></span><code>eval $(ssh-agent -s)
-ssh-add ~/.ssh/id_rsa
-</code></pre></div>
-
-<h4>Copy the contents of the SSH key to your clipboard</h4>
-<div class="highlight"><pre><span></span><code>clip &lt; ~/.ssh/id_rsa.pub
-</code></pre></div>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./ssh_keys.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
-                </div>
             </article>
 
                 <div class="clear"></div>
@@ -254,7 +344,7 @@ ssh-add ~/.ssh/id_rsa
 
                     <a href="./index20.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 19 of 34</span>
+                    <span>Page 19 of 35</span>
                 </div>
 
             <div class="clear"></div>

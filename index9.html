@@ -30,6 +30,192 @@
 
             <article class="post">
                 <h2 class="title">
+                    <a href="./databricks_pyspark.html" rel="bookmark" title="Permanent Link to &quot;Databricks PySpark&quot;">Databricks PySpark</a>
+                </h2>
+
+                
+                
+
+                <h4>Exporting as CSV from Data Factory</h4>
+<div class="highlight"><pre><span></span><code><span class="o">--</span><span class="w"> </span><span class="nx">save</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">CSV</span><span class="w"> </span>
+
+<span class="o">--</span><span class="w"> </span><span class="nx">step</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nx">create</span><span class="w"> </span><span class="nx">parquet</span><span class="w"> </span><span class="nx">file</span>
+
+<span class="nx">df</span><span class="p">.</span><span class="nx">coalesce</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nx">write</span>
+<span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="s">&quot;parquet&quot;</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">option</span><span class="p">(</span><span class="s">&quot;header&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">mode</span><span class="p">(</span><span class="s">&quot;overwrite&quot;</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">f</span><span class="err">&#39;</span><span class="p">{</span><span class="nx">OUTPATH</span><span class="p">}</span><span class="o">/</span><span class="p">{</span><span class="nx">today_nodash</span><span class="p">}</span><span class="nx">_FDA_Drug_Shortages_Exclusions</span><span class="err">&#39;</span><span class="p">)</span>
+
+<span class="o">--</span><span class="w"> </span><span class="nx">step</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nx">create</span><span class="w"> </span><span class="nx">ADF</span><span class="w"> </span><span class="nx">copy</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="nx">activity</span>
+
+<span class="o">-</span><span class="w"> </span><span class="nx">requires</span><span class="w"> </span><span class="nx">two</span><span class="w"> </span><span class="nx">datasets</span>
+<span class="w">     </span><span class="nx">a</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">source</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">New</span><span class="w"> </span><span class="nx">dataset</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">select</span><span class="w"> </span><span class="nx">File</span><span class="w"> </span><span class="nx">System</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">parquet</span>
+<span class="w">     </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">sink</span><span class="p">:</span><span class="w"> </span><span class="nx">New</span><span class="w"> </span><span class="nx">dataset</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">select</span><span class="w"> </span><span class="nx">File</span><span class="w"> </span><span class="nx">System</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">delimited</span><span class="w"> </span><span class="nx">text</span>
+<span class="w">        </span><span class="o">-</span><span class="w"> </span><span class="nx">note</span><span class="p">:</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">sink</span><span class="w"> </span><span class="nx">dataset</span>
+<span class="w">          </span><span class="o">-</span><span class="w"> </span><span class="nx">tick</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">box</span><span class="w"> </span><span class="s">&quot;First row as header&quot;</span><span class="w">    </span>
+<span class="w">          </span><span class="o">-</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="nx">custom</span><span class="w"> </span><span class="nx">filename</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">path</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">g</span><span class="p">.</span><span class="w"> </span><span class="err">@</span><span class="nx">concat</span><span class="p">(</span><span class="nx">formatDateTime</span><span class="p">(</span><span class="nx">utcnow</span><span class="p">(),</span><span class="err">&#39;</span><span class="nx">yyyy</span><span class="err">&#39;</span><span class="p">),</span><span class="w"> </span><span class="nx">formatDateTime</span><span class="p">(</span><span class="nx">utcnow</span><span class="p">(),</span><span class="err">&#39;</span><span class="nx">MM</span><span class="err">&#39;</span><span class="p">),</span><span class="w"> </span><span class="nx">formatDateTime</span><span class="p">(</span><span class="nx">utcnow</span><span class="p">(),</span><span class="err">&#39;</span><span class="nx">dd</span><span class="err">&#39;</span><span class="p">),</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">_FDA_Drug_Shortages_Exclusions</span><span class="p">.</span><span class="nx">csv</span><span class="err">&#39;</span><span class="p">)</span>
+<span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">copy</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="nx">activity</span><span class="w"> </span><span class="s">&quot;source&quot;</span><span class="w"> </span><span class="nx">settings</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">select</span><span class="w"> </span><span class="nx">wildcard</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">path</span>
+<span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">copy</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="nx">activity</span><span class="w"> </span><span class="s">&quot;sink&quot;</span><span class="w"> </span><span class="nx">settings</span><span class="w"> </span>
+<span class="w">        </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">select</span><span class="w"> </span><span class="s">&quot;Copy Behaviour&quot;</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">&quot;Merge&quot;</span>
+<span class="w">        </span><span class="p">&gt;</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="s">&quot;.csv&quot;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">File</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">extension</span>
+</code></pre></div>
+
+<p><br></p>
+<h4>Snippets</h4>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;parquet&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+<span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;header&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;true&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>
+<span class="n">df</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="s2">&quot;team_data.DXD_OFSH_000_RATIONAL_LIMITS&quot;</span><span class="p">)</span>
+<span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="w"> </span><span class="n">StringType</span><span class="p">())</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="s2">&quot;team_data.DXQ_DEFAULT_CEILINGS&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><br></p>
+<h4>Create Delta Table from DataFrame</h4>
+<div class="highlight"><pre><span></span><code>df.write.format(&quot;delta&quot;).mode(&quot;overwrite&quot;).saveAsTable(&quot;schema_name.table_name&quot;)
+</code></pre></div>
+
+<p><br></p>
+<h4>Create Temp View</h4>
+<div class="highlight"><pre><span></span><code>df.createOrReplaceTempView(&quot;my_temp_view&quot;)
+</code></pre></div>
+
+<p><br></p>
+<h4>Create Empty Table</h4>
+<div class="highlight"><pre><span></span><code>spark.sql(&quot;CREATE OR REPLACE TABLE team_data.bob_tbl(COL1 STRING, 
+                                                     COL2 INT, 
+                                                     COL3 Decimal(10,3)&quot;)
+</code></pre></div>
+
+<p><br></p>
+<h4>Save Dataframe as XLS</h4>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">write</span>
+ <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;com.crealytics.spark.excel&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;dataAddress&quot;</span><span class="p">,</span> <span class="s2">&quot;&#39;Sheet Name&#39;!A1&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;/mnt/userspace/custom_dataset/path-to-dir/filename.xlsx&quot;</span><span class="p">))</span>
+</code></pre></div>
+
+<p><br></p>
+<h4>Save DataFrame as CSV</h4>
+<p>To save a DataFrame as CSV requires three steps. </p>
+<ol>
+<li>Use <code>coalesce()</code> to create a parquet file, Note, here the path points to a directory, NOT a file.</li>
+<li>Read the parquet file into a Pandas DataFrame: <code>pd.read_parquet()</code></li>
+<li>save the Pandas DataFrame e.g. <code>df.to_csv('...', index=False)</code></li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">res</span>
+ <span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">write</span>
+ <span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;/mnt/userspace/custom_dataset/path-to-dir/&quot;</span><span class="p">))</span>
+</code></pre></div>
+
+<p><br></p>
+<h4>Load CSV Then Save As Parquet</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.types</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="o">*</span>
+
+<span class="c1"># Define Schema</span>
+<span class="n">schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StructType</span><span class="p">([</span><span class="n">StructField</span><span class="p">(</span><span class="s1">&#39;COL1&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">LongType</span><span class="p">(),</span><span class="w"> </span><span class="kc">True</span><span class="p">)</span><span class="w"> \</span>
+<span class="w">                    </span><span class="p">,</span><span class="n">StructField</span><span class="p">(</span><span class="s1">&#39;COL2&#39;</span><span class="p">,</span><span class="n">StringType</span><span class="p">(),</span><span class="w"> </span><span class="kc">True</span><span class="p">)</span><span class="w"> \</span>
+<span class="w">                    </span><span class="p">,</span><span class="n">StructField</span><span class="p">(</span><span class="s1">&#39;COL3&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">TimestampType</span><span class="p">(),</span><span class="w"> </span><span class="kc">True</span><span class="p">)</span><span class="w"> </span><span class="p">])</span>
+
+<span class="c1"># File location and type</span>
+<span class="n">file_location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/mnt/userspace/custom_dataset/username/file.csv&quot;</span>
+<span class="n">file_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;csv&quot;</span>
+
+<span class="c1"># Make DF from CSV file</span>
+<span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_type</span><span class="p">)</span><span class="w"> \</span>
+<span class="w">  </span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span><span class="w"> \</span>
+<span class="w">  </span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;true&quot;</span><span class="p">)</span><span class="w"> \</span>
+<span class="w">  </span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;sep&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="p">)</span><span class="w"> \</span>
+<span class="w">  </span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_location</span><span class="p">)</span>
+
+<span class="c1"># Save DF as Parquet</span>
+<span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">write</span>
+<span class="w"> </span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span>
+<span class="w"> </span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;parquet&quot;</span><span class="p">)</span>
+<span class="w"> </span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;true&quot;</span><span class="p">)</span>
+<span class="w"> </span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;/mnt/userspace/custom_dataset/username/file.parquet&quot;</span><span class="p">))</span>
+</code></pre></div>
+
+<p><br></p>
+<h4>Create Spark DF from Pandas DF then Save As Excel or Parquet</h4>
+<p>Note we Save As Parquet if we want to export it as CSV file via ADF Copy data activity</p>
+<div class="highlight"><pre><span></span><code>df_spark = spark.createDataFrame(df, schema=schema)
+df_spark.write.format(&quot;delta&quot;).mode(&quot;overwrite&quot;).saveAsTable(&quot;team_data.MYTABLE&quot;)
+OUTPATH = &#39;/mnt/userspace/custom_dataset/...&#39;
+df = spark.sql(&#39;select * from team_data.MYTABLE&#39;)
+df.write.format(&quot;com.crealytics.spark.excel&quot;).option(&quot;header&quot;, &quot;true&quot;).mode(&quot;overwrite&quot;).save(f&#39;{OUTPATH}/shortages_api_{today}.xlsx&#39;)
+df.write.format(&quot;parquet&quot;).option(&quot;header&quot;, &quot;true&quot;).mode(&quot;overwrite&quot;).save(f&#39;{OUTPATH}/{today_nodash}_FDA_Drug_Shortages_RxMac&#39;)
+</code></pre></div>
+
+<p><br></p>
+<h4>Persist Dataframe in Delta Lake</h4>
+<p>About overwriteSchema: if any new column is added the command will not fail but overwrite the delta table with new schema. 
+<a href="https://mungingdata.com/delta-lake/schema-enforcement-evolution-mergeschema-overwriteschema/">Read More</a></p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">persist_dataframe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">schema_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">evolution</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span> <span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    function to persist the dataframe to parquet and/or delta lake</span>
+<span class="sd">    return: success/error message</span>
+
+<span class="sd">    Evolution = True will mergeSchema - This is for  incremental schema changes.</span>
+<span class="sd">    Evolution = False will OverwriteSchema - This is for wiping out old schema for new schema</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Check if table exists</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">table_exist</span> <span class="o">=</span> <span class="n">validate_table_source</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">schema_name</span><span class="o">=</span><span class="n">schema_name</span><span class="p">,</span> <span class="n">table</span><span class="o">=</span><span class="n">table</span><span class="p">)</span>
+
+    <span class="n">target</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">schema_name</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">table_exist</span> <span class="ow">is</span> <span class="kc">True</span> <span class="p">:</span>
+        <span class="c1"># if schema evolution is set merge the schemas</span>
+        <span class="k">if</span> <span class="n">evolution</span> <span class="ow">is</span> <span class="kc">True</span> <span class="p">:</span>
+            <span class="n">dataframe</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;mergeSchema&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data overwritten and Schema evolved for table </span><span class="si">{0}</span><span class="s2"> in database&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
+        <span class="k">else</span> <span class="p">:</span>
+            <span class="n">dataframe</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;overwriteSchema&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data and Schema overwritten. New Schema in place for table </span><span class="si">{0}</span><span class="s2"> in database&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">dataframe</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Table </span><span class="si">{0}</span><span class="s2"> added to database&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
+
+
+    <span class="c1"># Do we want to partition? if so parse the partition key from the config</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">- Dataframe successfully persisted in Delta Lake</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><br></p>
+<h4>Parameterised Query</h4>
+<div class="highlight"><pre><span></span><code><span class="n">SCHEMA_A</span> <span class="o">=</span> <span class="n">dbutils</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;&lt;Azure Data Factory Base parameter name 1&gt;&quot;</span><span class="p">)</span>
+<span class="n">SCHEMA_B</span> <span class="o">=</span> <span class="n">dbutils</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;&lt;Azure Data Factory Base parameter name 2&gt;&quot;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT c.claim_nbr </span>
+<span class="s2">                  FROM </span><span class="si">{0}</span><span class="s2">.TABLE1 c</span>
+<span class="s2">                  LEFT JOIN </span><span class="si">{1}</span><span class="s2">.TABLE2 p</span>
+<span class="s2">                         ON (c.claim_nbr = p.claim_nbr </span>
+<span class="s2">               &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">SCHEMA_A</span><span class="p">,</span> <span class="n">SCHEMA_B</span><span class="p">))</span>
+</code></pre></div>
+
+<p><br></p>
+<h4>Misc.</h4>
+<div class="highlight"><pre><span></span><code><span class="nv">spark</span>.<span class="nv">sql</span><span class="ss">(</span><span class="s2">&quot;&quot;&quot;desc formatted &lt;table name&gt;&quot;&quot;&quot;</span><span class="ss">)</span>.<span class="k">show</span><span class="ss">(</span><span class="mi">100</span>,<span class="w"> </span><span class="nv">truncate</span><span class="o">=</span><span class="nv">False</span><span class="ss">)</span>
+</code></pre></div>
+
+<h4>Useful Links</h4>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/databricks/spark/latest/spark-sql/spark-pandas">Spark-Pandas</a></li>
+<li><a href="https://www.educba.com/pyspark-withcolumn/">PySpark withColumn</a></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./databricks_pyspark.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/databricks.html" rel="tag">Databricks</a>
+                </div>
+            </article>            <h4 class="date">Jan 24, 2023</h4>
+
+            <article class="post">
+                <h2 class="title">
                     <a href="./databricks_sparksql.html" rel="bookmark" title="Permanent Link to &quot;Databricks Spark SQL&quot;">Databricks Spark SQL</a>
                 </h2>
 
@@ -103,66 +289,6 @@
                     <a href="./databricks_sparksql.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/databricks.html" rel="tag">Databricks</a>
                 </div>
-            </article>            <h4 class="date">Dec 24, 2022</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./azure.html" rel="bookmark" title="Permanent Link to &quot;Azure&quot;">Azure</a>
-                </h2>
-
-                
-                
-
-                <p><br></p>
-<h3>Using Key Vault Secrets in Azure Data Factory</h3>
-<p>Key Vault secrets can be used to securely manage connections to services such as NAS drives or Databricks.</p>
-<h4>NAS Drive Linked Service</h4>
-<ul>
-<li>Create a Service Account with priviliges to access a NAS drive</li>
-<li>create a new secret in KV with the password of the above Service Account</li>
-<li>use the secret, and the Service Account user name, in ADF when configuring a linked service for NAS drive</li>
-<li>use the linked service in an ADF Copy data activity</li>
-</ul>
-<h4>Databricks Linked Service</h4>
-<ul>
-<li>Generate a token in Databricks and take note of it</li>
-<li>create a new secret in KV with the above token</li>
-<li>use the secret in ADF when configuring a linked service for databricks</li>
-<li>use the linked service in an ADF Databricks notebook activity</li>
-</ul>
-<h3>Azure ARM</h3>
-<h4>Deploy via Powershell</h4>
-<ul>
-<li><code>New-AzResourceGroup RG01 "South Central US"</code></li>
-<li><code>New-AzResourceGroupDeployment</code> adds a deployment to an existing resource group. (https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-9.3.0)</li>
-</ul>
-<h4>Useful Links</h4>
-<ul>
-<li>https://samcogan.com/deploying-resource-groups-with-arm-templates/</li>
-</ul>
-<p><br></p>
-<h3>Azure Fundamentals Exam (AZ-900)</h3>
-<ul>
-<li><a href="./drafts/azure_cloud_benefits_and_categories.html">Azure Cloud: Benefits and Categories</a></li>
-<li><a href="./drafts/azure_architectural_components.html">Azure Architectural Components</a></li>
-<li><a href="./drafts/azure_services.html">Azure Services</a></li>
-<li><a href="./drafts/azure_solutions.html">Azure Solutions</a></li>
-<li><a href="./drafts/azure_management_tools.html">Azure Management Tools</a></li>
-<li><a href="./drafts/azure_general_security.html">Azure General Security Features</a></li>
-<li><a href="./drafts/azure_network_security.html">Azure Network Security</a></li>
-<li><a href="./drafts/azure_identity_governance_privacy_compliance.html">Azure Identity, Governance, Privacy and Compliance Features</a></li>
-<li><a href="./drafts/azure_cost_management_and_sla.html">Azure Cost Management and SLA</a></li>
-</ul>
-<h3>Note about creating a Databricks Resource in Azure Portal</h3>
-<ul>
-<li>When creating a Databricks resource, Databricks will itself create a separate resource group (RG) with a storage account. This RG cannot be deleted via the porta;. See here for more: https://stackoverflow.com/questions/60694149/unable-to-remove-azure-databricks-managed-resource-group</li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./azure.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/azure.html" rel="tag">Azure</a>
-                </div>
             </article>
 
                 <div class="clear"></div>
@@ -172,7 +298,7 @@
 
                     <a href="./index10.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 9 of 34</span>
+                    <span>Page 9 of 35</span>
                 </div>
 
             <div class="clear"></div>

@@ -26,7 +26,117 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 01, 2025</h4>
+        <div id="content">            <h4 class="date">Nov 02, 2025</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./ai_prompts_productivity.html" rel="bookmark" title="Permanent Link to &quot;AI Prompts - Productivity&quot;">AI Prompts - Productivity</a>
+                </h2>
+
+                
+                
+
+                <h3>Meeting Summary</h3>
+<div class="highlight"><pre><span></span><code>You are an expert technical meeting minute taker for semiconductor/ASIC design teams.
+
+Your output must be in Markdown and contain exactly these sections in this order
+— no extra text outside the sections:
+
+## Meeting Summary
+
+One-paragraph executive summary (3–5 sentences max).
+
+## Key Decisions
+
+- Bullet list
+- Only decisions, not discussions
+
+## Action Items
+
+| Owner | Action | Due Date | Jira/Tracker (if mentioned) |
+|-------|--------|----------|-----------------------------|
+
+Use real names or Slack handles as mentioned. If no due date mentioned, write &quot;ASAP&quot;.
+
+## Risks &amp; Blockers Raised
+
+- Bullet list
+- Include who will handle mitigation if mentioned
+
+## Technical Highlights / Deep-Dive Notes
+
+- Use sub-bullets or code blocks when appropriate
+- Keep Verilog snippets, timing numbers, power figures, etc. exactly as spoken
+
+## Follow-up Email Draft (copy-paste ready)
+
+Subject: [Auto-generate concise subject]
+
+Body: Polite, professional, includes action table and key decisions.
+
+Transcript or recording text starts now:
+
+&lt;&lt;&lt;START TRANSCRIPT&gt;&gt;&gt;
+[PASTE THE RAW ZOOM/TEAMS/GMEET TRANSCRIPT HERE]
+&lt;&lt;&lt;END TRANSCRIPT&gt;&gt;&gt;
+
+Produce the output immediately with no yapping.
+</code></pre></div>
+
+<h3>Providing Context</h3>
+<div class="highlight"><pre><span></span><code>Answer the User&#39;s question from the following context.
+
+Context:
+https://github.com/langchain-ai/langgraph
+
+User Question:
+How does LangGraph work?
+</code></pre></div>
+
+<h3>Make a PowerPoint Presentation</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">I</span><span class="w"> </span><span class="nv">want</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">write</span><span class="w"> </span><span class="nv">me</span><span class="w"> </span><span class="nv">VBA</span><span class="w"> </span><span class="nv">code</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">PowerPoint</span><span class="w"> </span><span class="nv">presentation</span><span class="w"> </span><span class="nv">about</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">history</span><span class="w"> </span><span class="nv">of</span><span class="w"> </span><span class="nv">AI</span>.<span class="w"> </span><span class="nv">You</span><span class="w"> </span><span class="nv">are</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">fill</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">all</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">text</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">your</span><span class="w"> </span><span class="nv">own</span><span class="w"> </span><span class="nv">knowledge</span>,<span class="w"> </span><span class="nv">no</span><span class="w"> </span><span class="nv">placeholders</span>.<span class="w"> </span><span class="nv">I</span><span class="w"> </span><span class="nv">need</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="nv">slides</span>.
+</code></pre></div>
+
+<p>In PowerPoint: Tools &gt; Macros &gt; Visual Basic Editor &gt; New &gt; paste in the code &gt; press Play button &gt; Click Designer and pick a Design.</p>
+<h3>Technology Migration</h3>
+<div class="highlight"><pre><span></span><code><span class="nx">I</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">give</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">tutorial</span><span class="w"> </span><span class="nx">PDF</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">setting</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">API</span><span class="w"> </span><span class="nx">call</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">action</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">GPT</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">Flask</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">AWS</span><span class="w"> </span><span class="nx">EC2</span><span class="p">.</span><span class="w"> </span><span class="nx">Write</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">implementation</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">same</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">Azure</span><span class="w"> </span><span class="nx">portal</span><span class="w"> </span><span class="nx">instead</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">AWS</span><span class="p">.</span>
+
+<span class="nx">Specifically</span><span class="w"> </span><span class="nx">I</span><span class="w"> </span><span class="nx">would</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">implement</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">same</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">Azure</span><span class="w"> </span><span class="nx">Webapp</span><span class="w"> </span><span class="nx">instead</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">Azure</span><span class="w"> </span><span class="nx">VM</span><span class="p">.</span>
+</code></pre></div>
+
+<h3>Project Summary</h3>
+<div class="highlight"><pre><span></span><code><span class="n">Review</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">entire</span><span class="w"> </span><span class="n">conversation</span><span class="w"> </span><span class="n">history</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="n">repository</span><span class="p">,</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">documentation</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">project</span><span class="o">.</span><span class="w"> </span><span class="n">Then</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">clear</span><span class="p">,</span><span class="w"> </span><span class="n">engaging</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="n">summary</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">includes</span><span class="p">:</span>
+<span class="mf">1.</span><span class="w"> </span><span class="n">Challenge</span><span class="w"> </span><span class="n">Context</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Industry</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">business</span><span class="w"> </span><span class="n">problem</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Legacy</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">approach</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">its</span><span class="w"> </span><span class="n">pain</span><span class="w"> </span><span class="n">points</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Key</span><span class="w"> </span><span class="n">domain</span><span class="w"> </span><span class="n">concepts</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="n">assets</span><span class="p">,</span><span class="w"> </span><span class="n">Tag</span><span class="w"> </span><span class="n">statuses</span><span class="p">,</span><span class="w"> </span><span class="n">business</span><span class="w"> </span><span class="n">rules</span><span class="p">)</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">Generative</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">Workflow</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Discovery</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">mapped</span><span class="w"> </span><span class="n">dependencies</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">extracted</span><span class="w"> </span><span class="n">rules</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Translation</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">converted</span><span class="w"> </span><span class="n">formulas</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">code</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Validation</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="o">-</span><span class="n">driven</span><span class="w"> </span><span class="n">queries</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="n">via</span><span class="w"> </span><span class="n">MCP</span><span class="p">)</span><span class="w"> </span><span class="n">ensured</span><span class="w"> </span><span class="n">parity</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">caught</span><span class="w"> </span><span class="n">edge</span><span class="w"> </span><span class="n">cases</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Optimization</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">tuned</span><span class="w"> </span><span class="n">performance</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">architecture</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Documentation</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">generated</span><span class="w"> </span><span class="n">guides</span><span class="p">,</span><span class="w"> </span><span class="n">lineage</span><span class="w"> </span><span class="n">diagrams</span><span class="p">,</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">specs</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Quantifiable</span><span class="w"> </span><span class="n">Results</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">formulas</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">rules</span><span class="w"> </span><span class="n">migrated</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Performance</span><span class="w"> </span><span class="n">improvements</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nb">load</span><span class="o">-</span><span class="n">time</span><span class="w"> </span><span class="n">reduction</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Accuracy</span><span class="w"> </span><span class="n">guarantees</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="w"> </span><span class="n">metric</span><span class="w"> </span><span class="n">parity</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Maintenance</span><span class="w"> </span><span class="n">savings</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">developer</span><span class="o">-</span><span class="n">hours</span><span class="w"> </span><span class="n">recovered</span>
+<span class="o">-</span><span class="w"> </span><span class="n">New</span><span class="w"> </span><span class="n">capabilities</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="n">real</span><span class="o">-</span><span class="n">time</span><span class="w"> </span><span class="n">analytics</span><span class="p">)</span>
+<span class="mf">4.</span><span class="w"> </span><span class="n">Timeline</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">Scope</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Project</span><span class="w"> </span><span class="n">duration</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="n">four</span><span class="w"> </span><span class="n">weeks</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Team</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">AI</span><span class="o">-</span><span class="n">agent</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="n">where</span><span class="w"> </span><span class="n">relevant</span>
+<span class="mf">5.</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">Impact</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Business</span><span class="w"> </span><span class="n">outcomes</span><span class="w"> </span><span class="p">(</span><span class="n">cost</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">decision</span><span class="o">-</span><span class="n">making</span><span class="w"> </span><span class="n">benefits</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Long</span><span class="o">-</span><span class="n">term</span><span class="w"> </span><span class="n">advantages</span><span class="w"> </span><span class="p">(</span><span class="n">scalability</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">-</span><span class="n">service</span><span class="p">,</span><span class="w"> </span><span class="n">future</span><span class="o">-</span><span class="n">proofing</span><span class="p">)</span>
+<span class="n">Write</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">single</span><span class="w"> </span><span class="n">cohesive</span><span class="w"> </span><span class="n">narrative</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="mi">200</span><span class="o">-</span><span class="mi">300</span><span class="w"> </span><span class="n">words</span><span class="o">.</span><span class="w"> </span><span class="n">Be</span><span class="w"> </span><span class="n">thorough</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">capturing</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">specifics</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="n">material</span><span class="p">,</span><span class="w"> </span><span class="n">but</span><span class="w"> </span><span class="n">keep</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">tone</span><span class="w"> </span><span class="n">concise</span><span class="p">,</span><span class="w"> </span><span class="n">active</span><span class="p">,</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">compelling</span><span class="o">.</span><span class="w"> </span><span class="n">Emphasize</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">generative</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">was</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">critical</span><span class="w"> </span><span class="n">enabler</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">outcome</span><span class="o">.</span>
+</code></pre></div>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./ai_prompts_productivity.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/ai.html" rel="tag">AI</a>
+                </div>
+            </article>            <h4 class="date">Nov 01, 2025</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -43,79 +153,6 @@
                     <a href="./ai_prompts_creativity.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/ai.html" rel="tag">AI</a>
                 </div>
-            </article>            <h4 class="date">Oct 02, 2025</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./wsl.html" rel="bookmark" title="Permanent Link to &quot;WSL (Windows Subsystem for Linux)&quot;">WSL (Windows Subsystem for Linux)</a>
-                </h2>
-
-                
-                
-
-                <h3>Accessing Windows Files from WSL</h3>
-<p>Windows drives are mounted under <code>/mnt/</code> in WSL. Your C: drive is at <code>/mnt/c/</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Navigate to Windows user directory</span>
-<span class="nb">cd</span><span class="w"> </span>/mnt/c/Users/your-username/Documents
-
-<span class="c1"># List files</span>
-ls<span class="w"> </span>-la
-</code></pre></div>
-
-<h3>Opening Windows File Explorer from WSL</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Open Explorer at current WSL directory</span>
-explorer.exe<span class="w"> </span>.
-</code></pre></div>
-
-<h3>Accessing WSL Files from Windows</h3>
-<p>In Windows File Explorer, navigate to:</p>
-<div class="highlight"><pre><span></span><code>\\wsl$\
-</code></pre></div>
-
-<p>This shows all installed WSL distributions and their file systems.</p>
-<h3>Create Shortcuts with Symbolic Links</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Create a symlink to quickly access Windows folders</span>
-ln<span class="w"> </span>-s<span class="w"> </span>/mnt/c/Users/your-username/workproducts<span class="w"> </span>~/winwork
-
-<span class="c1"># Now just use</span>
-<span class="nb">cd</span><span class="w"> </span>~/winwork
-</code></pre></div>
-
-<h3>Performance Tips</h3>
-<ul>
-<li><strong>Keep project files in WSL filesystem</strong> (<code>/home/...</code>) for best performance</li>
-<li><strong>Avoid heavy I/O across filesystems</strong> - accessing <code>/mnt/c/</code> is slower than native WSL paths</li>
-<li><strong>Use WSL 2</strong> for better file system performance with Linux-native filesystems</li>
-</ul>
-<h3>Common Paths</h3>
-<table>
-<thead>
-<tr>
-<th>Windows Path</th>
-<th>WSL Path</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>C:\Users\username</code></td>
-<td><code>/mnt/c/Users/username</code></td>
-</tr>
-<tr>
-<td><code>D:\Projects</code></td>
-<td><code>/mnt/d/Projects</code></td>
-</tr>
-<tr>
-<td>WSL home</td>
-<td><code>\\wsl$\Ubuntu\home\username</code> (from Windows)</td>
-</tr>
-</tbody>
-</table>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./wsl.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
-                </div>
             </article>
 
                 <div class="clear"></div>
@@ -125,7 +162,7 @@ ln<span class="w"> </span>-s<span class="w"> </span>/mnt/c/Users/your-username/w
 
                     <a href="./index6.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 5 of 34</span>
+                    <span>Page 5 of 35</span>
                 </div>
 
             <div class="clear"></div>

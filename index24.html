@@ -26,7 +26,24 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 10, 2017</h4>
+        <div id="content">            <h4 class="date">Nov 19, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./sql_reference_queries.html" rel="bookmark" title="Permanent Link to &quot;SQL Reference Queries&quot;">SQL Reference Queries</a>
+                </h2>
+
+                
+                
+
+                <h3>Flavour: TSQL</h3>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./sql_reference_queries.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
+                </div>
+            </article>            <h4 class="date">Nov 10, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -51,50 +68,6 @@ https://www.scss.tcd.ie/publications/theses/diss/2019/TCD-SCSS-DISSERTATION-2019
                     <a href="./posygis.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/gis.html" rel="tag">GIS</a>
                 </div>
-            </article>            <h4 class="date">Nov 01, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./s3.html" rel="bookmark" title="Permanent Link to &quot;s3&quot;">s3</a>
-                </h2>
-
-                
-                
-
-                <p><a href="https://medium.com/bilesanmiahmad/how-to-upload-a-file-to-amazon-s3-in-python-68757a1867c6">How to upload a file to Amazon S3 in Python</a></p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">botocore.exceptions</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">NoCredentialsError</span>
-
-<span class="n">ACCESS_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;xxxx&#39;</span>
-<span class="n">SECRET_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;xxxx&#39;</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">upload_to_aws</span><span class="p">(</span><span class="n">local_file</span><span class="p">,</span><span class="w"> </span><span class="n">bucket</span><span class="p">,</span><span class="w"> </span><span class="n">s3_file</span><span class="p">):</span>
-<span class="w">    </span><span class="n">s3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">aws_access_key_id</span><span class="o">=</span><span class="n">ACCESS_KEY</span><span class="p">,</span>
-<span class="w">                      </span><span class="n">aws_secret_access_key</span><span class="o">=</span><span class="n">SECRET_KEY</span><span class="p">)</span>
-
-<span class="w">    </span><span class="k">try</span><span class="p">:</span>
-<span class="w">        </span><span class="n">s3</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="n">local_file</span><span class="p">,</span><span class="w"> </span><span class="n">bucket</span><span class="p">,</span><span class="w"> </span><span class="n">s3_file</span><span class="p">)</span>
-<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Upload Successful&quot;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">True</span>
-<span class="w">    </span><span class="k">except</span><span class="w"> </span><span class="n">FileNotFoundError</span><span class="p">:</span>
-<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The file was not found&quot;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">False</span>
-<span class="w">    </span><span class="k">except</span><span class="w"> </span><span class="n">NoCredentialsError</span><span class="p">:</span>
-<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Credentials not available&quot;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">False</span>
-
-
-<span class="n">uploaded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">upload_to_aws</span><span class="p">(</span><span class="s1">&#39;filename.csv&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">                         </span><span class="s1">&#39;bucket.name&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">                         </span><span class="s1">&#39;filename.csv&#39;</span><span class="p">)</span>
-</code></pre></div>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./s3.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/s3.html" rel="tag">s3</a>
-                </div>
             </article>
 
                 <div class="clear"></div>
@@ -104,7 +77,7 @@ https://www.scss.tcd.ie/publications/theses/diss/2019/TCD-SCSS-DISSERTATION-2019
 
                     <a href="./index25.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 24 of 34</span>
+                    <span>Page 24 of 35</span>
                 </div>
 
             <div class="clear"></div>

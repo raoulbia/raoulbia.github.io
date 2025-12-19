@@ -26,7 +26,90 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 25, 2018</h4>
+        <div id="content">            <h4 class="date">Jan 26, 2018</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./python, pandas, nlp.html" rel="bookmark" title="Permanent Link to &quot;Pandas NLP&quot;">Pandas NLP</a>
+                </h2>
+
+                
+                
+
+                <h4>Useful Links</h4>
+<ul>
+<li><a href="https://stackoverflow.com/questions/39124492/nltk-regexpparser-chunk-phrase-by-matching-exactly-one-item">NLTK RegexpParser, chunk phrase by matching exactly one item</a></li>
+<li><a href="https://towardsdatascience.com/try-texthero-the-absolute-simplest-way-to-clean-and-analyze-text-in-pandas-6db86ed14272">TextHero: The Absolute Simplest way to Clean and Analyze Text in Pandas</a></li>
+<li><a href="https://pypi.org/project/shizen-gengo/">shizen-gengo</a></li>
+</ul>
+<h3>Imports</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">unicodedata</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">RegexpTokenizer</span>
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">WordNetLemmatizer</span><span class="p">,</span> <span class="n">PorterStemmer</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
+<span class="n">stemmer</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span> 
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">RegexpTokenizer</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\w+&#39;</span><span class="p">)</span>
+<span class="n">words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">))</span> <span class="c1"># set() sppeds up stopword removal!!</span>
+</code></pre></div>
+
+<h3>SpaCy</h3>
+<p><code>$ python3 -m spacy download en_core_web_sm</code></p>
+<h3>NLTK</h3>
+<p>once off download required. from cmd, launch python and run:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;wordnet&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;averaged_perceptron_tagger&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;maxent_ne_chunker&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;words&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>NLTK Grammars</h4>
+<div class="highlight"><pre><span></span><code><span class="n">grammar</span> <span class="o">=</span> <span class="s2">&quot;NP: {(&lt;V\w+&gt;|&lt;NN\w?&gt;)+.*&lt;NN\w?&gt;}&quot;</span> 
+<span class="n">grammar</span> <span class="o">=</span> <span class="s2">&quot;NP: {&lt;DT&gt;?&lt;JJ|NN|V&gt;&lt;V|NN|NNS|NNP&gt;+}&quot;</span>
+<span class="n">grammar</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">  NP: {&lt;DT|PP\$&gt;?&lt;JJ&gt;*&lt;NN&gt;}   # chunk determiner/possessive, adjectives and noun</span>
+<span class="s2">  {&lt;NNP&gt;+}                # chunk sequences of proper nouns</span>
+<span class="s2">  {&lt;NN&gt;+}                 # chunk consecutive nouns</span>
+<span class="s2">  &quot;&quot;&quot;</span>
+</code></pre></div>
+
+<h3>Regexp</h3>
+<h4>Regexp String Matching</h4>
+<div class="highlight"><pre><span></span><code><span class="n">col</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;category&#39;</span>
+<span class="n">conditions</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">(tmp[col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)ISD&quot;</span><span class="p">)),</span>
+<span class="w">               </span><span class="p">(</span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)DST&quot;</span><span class="p">)),</span>
+<span class="w">               </span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)IT&quot;</span><span class="p">)</span>
+<span class="w">              </span><span class="err">]</span>
+<span class="n">choices</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;ISD&#39;, &#39;DST&#39;, &#39;IT&#39;</span><span class="o">]</span>
+
+<span class="n">tmp</span><span class="o">[</span><span class="n">&quot;category_high_level&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="k">select</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span><span class="w"> </span><span class="n">choices</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="o">=</span><span class="n">tmp</span><span class="p">.</span><span class="n">category</span><span class="p">)</span>
+<span class="n">tmp</span><span class="p">.</span><span class="n">stb</span><span class="p">.</span><span class="n">freq</span><span class="p">(</span><span class="o">[</span><span class="n">&#39;category_high_level&#39;</span><span class="o">]</span><span class="p">).</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;category_high_level&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>Sentence Fragement by Word Window</h4>
+<div class="highlight"><pre><span></span><code><span class="n">pat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">&#39;(</span><span class="o">?</span><span class="n">P</span><span class="o">&lt;</span><span class="n">before</span><span class="o">&gt;</span><span class="p">(</span><span class="o">?:</span><span class="n">\w+\W+){,3})products\W+(?P&lt;after&gt;(?:\w+\W+){,3})&#39;</span>
+<span class="n">new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">str</span><span class="p">.</span><span class="n">extract</span><span class="p">(</span><span class="n">pat</span><span class="p">,</span><span class="w"> </span><span class="n">expand</span><span class="o">=</span><span class="n">True</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="k">assign</span><span class="p">(</span><span class="o">**</span><span class="n">new</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>Misc.</h3>
+<h4>Extract words from a list</h4>
+<p><code>df['named_entities'] = [','.join(map(str, l)) for l in df['named_entities']]</code></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./python, pandas, nlp.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                </div>
+            </article>            <h4 class="date">Jan 25, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -170,42 +253,6 @@
                     <a href="./python, pandas.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
                 </div>
-            </article>            <h4 class="date">Jan 06, 2018</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./Matplotlib.html" rel="bookmark" title="Permanent Link to &quot;Matplotlib&quot;">Matplotlib</a>
-                </h2>
-
-                
-                
-
-                <p><br> </p>
-<h4>Useful Links</h4>
-<ul>
-<li><a href="https://www.practicaldatascience.org/html/plotting_part2.html">Plotting with plotnine</a></li>
-<li><a href="https://towardsdatascience.com/advanced-histogram-using-python-bceae288e715">Advanced Histogram Using Python</a></li>
-<li><a href="https://towardsdatascience.com/a-comprehensive-guide-to-the-grammar-of-graphics-for-effective-visualization-of-multi-dimensional-1f92b4ed4149">A Comprehensive Guide to the Grammar of Graphics for Effective Visualization of Multi-dimensional Data</a></li>
-<li><a href="https://towardsdatascience.com/annotating-bar-charts-and-other-matplolib-techniques-cecb54315015">How to Enhance your Matplotlib Plots</a></li>
-<li><a href="https://towardsdatascience.com/visualizing-statistical-plots-with-seaborn-6b6e60ce5e71">Visualizing statistical plots with Seaborn</a></li>
-<li><a href="https://www.drawingfromdata.com/setting-figure-size-using-seaborn-and-matplotlib">DRAWING FROM DATA</a></li>
-<li><a href="https://docs.scipy.org/doc/numpy-1.13.0/reference/routines.polynomials.classes.html">example dynamic label</a></li>
-</ul>
-<h4>Examples</h4>
-<div class="highlight"><pre><span></span><code><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="s2">&quot;paper&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="s2">&quot;monospace&quot;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Title&#39;</span><span class="p">);</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">freq_descr</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">freq_descr</span><span class="o">.</span><span class="n">cnt</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">))</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
-</code></pre></div>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./Matplotlib.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
-                </div>
             </article>
 
                 <div class="clear"></div>
@@ -215,7 +262,7 @@
 
                     <a href="./index15.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 14 of 34</span>
+                    <span>Page 14 of 35</span>
                 </div>
 
             <div class="clear"></div>

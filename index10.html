@@ -30,6 +30,66 @@
 
             <article class="post">
                 <h2 class="title">
+                    <a href="./azure.html" rel="bookmark" title="Permanent Link to &quot;Azure&quot;">Azure</a>
+                </h2>
+
+                
+                
+
+                <p><br></p>
+<h3>Using Key Vault Secrets in Azure Data Factory</h3>
+<p>Key Vault secrets can be used to securely manage connections to services such as NAS drives or Databricks.</p>
+<h4>NAS Drive Linked Service</h4>
+<ul>
+<li>Create a Service Account with priviliges to access a NAS drive</li>
+<li>create a new secret in KV with the password of the above Service Account</li>
+<li>use the secret, and the Service Account user name, in ADF when configuring a linked service for NAS drive</li>
+<li>use the linked service in an ADF Copy data activity</li>
+</ul>
+<h4>Databricks Linked Service</h4>
+<ul>
+<li>Generate a token in Databricks and take note of it</li>
+<li>create a new secret in KV with the above token</li>
+<li>use the secret in ADF when configuring a linked service for databricks</li>
+<li>use the linked service in an ADF Databricks notebook activity</li>
+</ul>
+<h3>Azure ARM</h3>
+<h4>Deploy via Powershell</h4>
+<ul>
+<li><code>New-AzResourceGroup RG01 "South Central US"</code></li>
+<li><code>New-AzResourceGroupDeployment</code> adds a deployment to an existing resource group. (https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-9.3.0)</li>
+</ul>
+<h4>Useful Links</h4>
+<ul>
+<li>https://samcogan.com/deploying-resource-groups-with-arm-templates/</li>
+</ul>
+<p><br></p>
+<h3>Azure Fundamentals Exam (AZ-900)</h3>
+<ul>
+<li><a href="./drafts/azure_cloud_benefits_and_categories.html">Azure Cloud: Benefits and Categories</a></li>
+<li><a href="./drafts/azure_architectural_components.html">Azure Architectural Components</a></li>
+<li><a href="./drafts/azure_services.html">Azure Services</a></li>
+<li><a href="./drafts/azure_solutions.html">Azure Solutions</a></li>
+<li><a href="./drafts/azure_management_tools.html">Azure Management Tools</a></li>
+<li><a href="./drafts/azure_general_security.html">Azure General Security Features</a></li>
+<li><a href="./drafts/azure_network_security.html">Azure Network Security</a></li>
+<li><a href="./drafts/azure_identity_governance_privacy_compliance.html">Azure Identity, Governance, Privacy and Compliance Features</a></li>
+<li><a href="./drafts/azure_cost_management_and_sla.html">Azure Cost Management and SLA</a></li>
+</ul>
+<h3>Note about creating a Databricks Resource in Azure Portal</h3>
+<ul>
+<li>When creating a Databricks resource, Databricks will itself create a separate resource group (RG) with a storage account. This RG cannot be deleted via the porta;. See here for more: https://stackoverflow.com/questions/60694149/unable-to-remove-azure-databricks-managed-resource-group</li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./azure.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/azure.html" rel="tag">Azure</a>
+                </div>
+            </article>            <h4 class="date">Dec 24, 2022</h4>
+
+            <article class="post">
+                <h2 class="title">
                     <a href="./azure_data_factory.html" rel="bookmark" title="Permanent Link to &quot;Azure Data Factory&quot;">Azure Data Factory</a>
                 </h2>
 
@@ -124,115 +184,6 @@
                     <a href="./azure_data_factory.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/azure-cloud.html" rel="tag">Azure Cloud</a>
                 </div>
-            </article>            <h4 class="date">Dec 24, 2022</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./azure_databricks.html" rel="bookmark" title="Permanent Link to &quot;Azure Databricks&quot;">Azure Databricks</a>
-                </h2>
-
-                
-                
-
-                <p><br></p>
-<h3>Connecting Azure Storage Account and Databricks</h3>
-<p><br></p>
-<h4>Key Vault Approach</h4>
-<p>High Level</p>
-<ul>
-<li>in KV we create a secret ;  take note of the KV URI and Resource ID</li>
-<li>in Databricks we create a secret scope</li>
-<li>the secet scope points to the KV URI and Resource ID</li>
-<li>in Databricks notebook we reference</li>
-<li>the storage account name</li>
-<li>the name of the Databricks secret scope</li>
-<li>the name of the KV secret     </li>
-</ul>
-<p><br></p>
-<p>Detailed</p>
-<ol>
-<li>
-<p>Create a <strong>Key Vault</strong> resource (or use existing one)</p>
-</li>
-<li>
-<p>go to Key Vault &gt; Secrets</p>
-<ul>
-<li>under settings &gt; +Generate/Import</li>
-<li>provide recognisable <strong>key vault secret name</strong> e.g. StorageAccountSecret</li>
-<li>provide storage key for the Azure Blob storage account</li>
-<li>NOTE: secret value must be changed every 3 months </li>
-</ul>
-</li>
-<li>
-<p>go to Key Vault <strong><em>Access policies</em></strong></p>
-<ul>
-<li>click <em>Create</em></li>
-<li>select <em>Get</em> and <em>List</em> for <em>Key permissions</em> and <em>Secret permissions</em></li>
-<li>in the search box enter <em>"AzureDatabricks"</em>, select it when it shows up and click next and create all the way</li>
-</ul>
-</li>
-<li>
-<p>To use Azure Key Vault in Databricks notebooks, a <strong>Secret scope</strong> must be created in Databricks. The Secret scope can be used in Databricks notebook to retrieve secret values from Azure Key Vault. </p>
-</li>
-<li>go to <code>&lt;Databricks URL&gt;/#secrets/createScope</code></li>
-<li>create a new scope and name it e.g. KeyVaultScope</li>
-<li>Manage Principal &gt; All USers</li>
-<li>DNS name is "Vault URI" in Key Vault <strong>Overview</strong> page</li>
-<li>
-<p>Reosurce ID can be found in Key Vault <strong>Properties</strong> page</p>
-</li>
-<li>
-<p>Notebook implementation:</p>
-</li>
-</ol>
-<div class="highlight"><pre><span></span><code>storageAccount=&quot;[name-of-storage-account]&quot;
-storageKey = dbutils.secrets.get(scope = &quot;[name-of-databricks-secret-scope]&quot;, 
-                                 key = &quot;[name-of-AKV-secret]&quot;)
-mountpoint = &quot;/mnt/KeyVaultBlob&quot;
-storageEndpoint = &quot;wasbs://[container-name]@{}.blob.core.windows.net&quot;.format(storageAccount)
-storageConnSting = &quot;fs.azure.account.key.{}.blob.core.windows.net&quot;.format(storageAccount)
-
-try:
-   dbutils.fs.mount(
-   source = storageEndpoint,
-   mount_point = mountpoint,
-   extra_configs = {storageConnSting:storageKey})
-except:
-   print(\&quot;Already mounted....\&quot; + mountpoint)
-</code></pre></div>
-
-<p><br></p>
-<p>Useful link: <a href="https://stackoverflow.com/questions/56537214/creating-a-secret-scope-in-databricks-backed-by-azure-key-vault-fails">Creating a Secret Scope in Databricks backed by Azure Key Vault fails</a></p>
-<p><br></p>
-<h4>Service Principal Approach</h4>
-<ol>
-<li>Azure Active Directory &gt; App Registration</li>
-<li>give recognisable name e.g. ADLSApp</li>
-<li>leave defaults</li>
-<li>Note: this IS the service principal</li>
-<li>click on the newly registered app</li>
-<li>get Application ID (1)</li>
-<li>get Directory (Tenant) ID (2)</li>
-<li>click on Certificates and Secrets<ul>
-<li>create new secret</li>
-<li>give it a name e.g. ADLSAppSecret</li>
-<li>copy secret value (3)</li>
-</ul>
-</li>
-<li>go to storage account &gt; Access Control (IAM)</li>
-<li>add role assignment<ul>
-<li>select "Storage Blob Data Contributor"</li>
-<li>select Service Principal created in step 1</li>
-</ul>
-</li>
-<li>(1), (2), and (3) can be used hardcoded in Databricks notebook</li>
-</ol>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./azure_databricks.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/azure-cloud.html" rel="tag">Azure Cloud</a>
-                </div>
             </article>
 
                 <div class="clear"></div>
@@ -242,7 +193,7 @@ except:
 
                     <a href="./index11.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 10 of 34</span>
+                    <span>Page 10 of 35</span>
                 </div>
 
             <div class="clear"></div>
