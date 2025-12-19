@@ -28,7 +28,366 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 04, 2025</h4>
+        <div id="content">            <h4 class="date">Nov 05, 2025</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../ai_prompting_techniques.html" rel="bookmark" title="Permanent Link to &quot;AI Prompting Techniques&quot;">AI Prompting Techniques</a>
+                </h2>
+
+                
+                
+
+                <h3>Types of Tasks LLMs Can Be Used For</h3>
+<ul>
+<li>Text Generation and Completion</li>
+<li>Question Answering</li>
+<li>Information Retrieval and Summarization</li>
+<li>Language Translation</li>
+<li>Mathematical Reasoning</li>
+<li>Sentiment Analysis</li>
+<li>Logical and Commonsense Reasoning</li>
+<li>Task Decomposition</li>
+<li>Code Generation</li>
+<li>Role and Style Adaptation</li>
+</ul>
+<h3>LLM Task Prompts and Text-based Techniques</h3>
+<h4>Table 1: Type of Task, Prompting Technique, Description</h4>
+<table>
+<thead>
+<tr>
+<th>Task Type</th>
+<th>Prompting Technique</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mathematics and Reasoning</td>
+<td>Chain-of-Thought</td>
+<td>A technique that involves breaking down a problem into a series of intermediate steps to reach the solution.</td>
+</tr>
+<tr>
+<td>Mathematics and Reasoning</td>
+<td>Zero-Shot CoT</td>
+<td>A technique where the model generates a step-by-step solution without prior examples.</td>
+</tr>
+<tr>
+<td>Mathematics and Reasoning</td>
+<td>Complexity-Based</td>
+<td>A technique that adapts the complexity of the prompt based on the task requirements.</td>
+</tr>
+<tr>
+<td>Mathematics and Reasoning</td>
+<td>Memory-of-Thought</td>
+<td>A technique that involves recalling previous thoughts to aid current problem-solving.</td>
+</tr>
+<tr>
+<td>Mathematics and Reasoning</td>
+<td>Least-to-Most</td>
+<td>A technique that breaks down a complex task into simpler, sequential steps.</td>
+</tr>
+<tr>
+<td>Mathematics and Reasoning</td>
+<td>Faithful CoT</td>
+<td>A technique that ensures each step logically follows from the previous one.</td>
+</tr>
+<tr>
+<td>Mathematics and Reasoning</td>
+<td>Recursion-of-Thought</td>
+<td>A technique that involves recursive steps to handle complex problems.</td>
+</tr>
+<tr>
+<td>Mathematics and Reasoning</td>
+<td>Self-Consistency</td>
+<td>A technique that ensures consistency in the model's responses across different prompts.</td>
+</tr>
+<tr>
+<td>Mathematics and Reasoning</td>
+<td>Universal Self-Consistency</td>
+<td>An advanced form of self-consistency applied to various tasks.</td>
+</tr>
+<tr>
+<td>Mathematical and Code Generation</td>
+<td>Analogical Prompting</td>
+<td>A technique that leverages analogies to facilitate problem-solving.</td>
+</tr>
+<tr>
+<td>Question Answering and Retrieval</td>
+<td>Thread-of-Thought</td>
+<td>A technique that prompts the model to summarize and analyze a context step by step.</td>
+</tr>
+<tr>
+<td>Mathematics and Factual QA</td>
+<td>Contrastive</td>
+<td>A technique that compares different possible answers to improve reasoning accuracy.</td>
+</tr>
+<tr>
+<td>Mathematics and Logical Inference</td>
+<td>Cumulative Reasoning</td>
+<td>A technique that builds upon previous steps to draw logical conclusions.</td>
+</tr>
+<tr>
+<td>Mathematics and Symbolic Manipulation</td>
+<td>Least-to-Most</td>
+<td>A technique that breaks down a complex task into simpler, sequential steps.</td>
+</tr>
+<tr>
+<td>Mathematics and Symbolic Reasoning</td>
+<td>Faithful CoT</td>
+<td>A technique that ensures each step logically follows from the previous one.</td>
+</tr>
+<tr>
+<td>Mathematics and Algorithmic Tasks</td>
+<td>Recursion-of-Thought</td>
+<td>A technique that involves recursive steps to handle complex problems.</td>
+</tr>
+<tr>
+<td>Reasoning</td>
+<td>Step-Back Prompting</td>
+<td>A technique that involves periodically reviewing and revising previous steps to ensure accuracy.</td>
+</tr>
+<tr>
+<td>Reasoning</td>
+<td>Self-Verification</td>
+<td>A technique where the model verifies its own answers through internal checks.</td>
+</tr>
+<tr>
+<td>Reasoning</td>
+<td>Plan-and-Solve</td>
+<td>A technique that involves planning a solution path before execution.</td>
+</tr>
+<tr>
+<td>Reasoning</td>
+<td>Self-Consistency</td>
+<td>A technique that ensures consistency in the model's responses across different prompts.</td>
+</tr>
+<tr>
+<td>Reasoning</td>
+<td>Universal Self-Consistency</td>
+<td>An advanced form of self-consistency applied to various tasks.</td>
+</tr>
+<tr>
+<td>Mathematics and Programming</td>
+<td>Program-of-Thought</td>
+<td>A technique that uses programming-like structures for problem-solving.</td>
+</tr>
+<tr>
+<td>Search and Planning</td>
+<td>Tree-of-Thought</td>
+<td>A technique that explores multiple possible solution paths in parallel.</td>
+</tr>
+<tr>
+<td>Reasoning, Coding, and Generation</td>
+<td>Self-Refine</td>
+<td>A technique where the model iteratively refines its own answers.</td>
+</tr>
+<tr>
+<td>Text Classification and Translation</td>
+<td>Few-Shot Prompting</td>
+<td>A technique that uses a few examples to guide the model's response.</td>
+</tr>
+<tr>
+<td>Retrieval and Reasoning</td>
+<td>MoRE</td>
+<td>A technique that combines multiple reasoning paths to reach a conclusion.</td>
+</tr>
+<tr>
+<td>Text Generation</td>
+<td>Universal Self-Consistency</td>
+<td>An advanced form of self-consistency applied to various tasks.</td>
+</tr>
+</tbody>
+</table>
+<h4>Table 2: Prompting Technique, Method, Research Paper Title &amp; Authors</h4>
+<table>
+<thead>
+<tr>
+<th>Prompting Technique</th>
+<th>Method</th>
+<th>Research Paper Title &amp; Authors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chain-of-Thought</td>
+<td>Thought Generation</td>
+<td>Chain-of-Thought Prompting (Wei et al., 2022)</td>
+</tr>
+<tr>
+<td>Zero-Shot CoT</td>
+<td>Thought Generation</td>
+<td>Let's think step by step: Zero-shot CoT (Kojima et al., 2022)</td>
+</tr>
+<tr>
+<td>Analogical Prompting</td>
+<td>Thought Generation</td>
+<td>Analogical Prompting (Yasunaga et al., 2023)</td>
+</tr>
+<tr>
+<td>Step-Back Prompting</td>
+<td>Thought Generation</td>
+<td>Step-Back Prompting (Zheng et al., 2023)</td>
+</tr>
+<tr>
+<td>Thread-of-Thought</td>
+<td>Thought Generation</td>
+<td>Thread-of-Thought Prompting (Zhou et al., 2023)</td>
+</tr>
+<tr>
+<td>Complexity-Based</td>
+<td>Thought Generation</td>
+<td>Complexity-based Prompting (Fu et al., 2023)</td>
+</tr>
+<tr>
+<td>Contrastive</td>
+<td>Thought Generation</td>
+<td>Contrastive CoT Prompting (Chia et al., 2023)</td>
+</tr>
+<tr>
+<td>Memory-of-Thought</td>
+<td>Thought Generation</td>
+<td>Memory-of-Thought Prompting (Li and Qiu, 2023)</td>
+</tr>
+<tr>
+<td>Cumulative Reasoning</td>
+<td>Self-Criticism</td>
+<td>Cumulative Reasoning (Zhang et al., 2023)</td>
+</tr>
+<tr>
+<td>Least-to-Most</td>
+<td>Decomposition</td>
+<td>Least-to-Most Prompting (Zhou et al., 2022)</td>
+</tr>
+<tr>
+<td>Faithful CoT</td>
+<td>Decomposition</td>
+<td>Faithful CoT (Lyu et al., 2023)</td>
+</tr>
+<tr>
+<td>Recursion-of-Thought</td>
+<td>Decomposition</td>
+<td>Recursion-of-Thought (Lee and Kim, 2023)</td>
+</tr>
+<tr>
+<td>Plan-and-Solve</td>
+<td>Decomposition</td>
+<td>Plan-and-Solve Prompting (Wang et al., 2023)</td>
+</tr>
+<tr>
+<td>Program-of-Thought</td>
+<td>Decomposition</td>
+<td>Program-of-Thoughts (Chen et al., 2023)</td>
+</tr>
+<tr>
+<td>Tree-of-Thought</td>
+<td>Decomposition</td>
+<td>Tree-of-Thought (Yao et al., 2023)</td>
+</tr>
+<tr>
+<td>Self-Refine</td>
+<td>Self-Criticism</td>
+<td>Self-Refine (Madaan et al., 2023)</td>
+</tr>
+<tr>
+<td>Self-Verification</td>
+<td>Self-Criticism</td>
+<td>Self-Verification (Weng et al., 2022)</td>
+</tr>
+<tr>
+<td>Few-Shot Prompting</td>
+<td>In-Context Learning (ICL)</td>
+<td>Few-Shot Prompting (Brown et al., 2020)</td>
+</tr>
+<tr>
+<td>MoRE</td>
+<td>Ensembling</td>
+<td>Mixture of Reasoning Experts (Si et al., 2023)</td>
+</tr>
+<tr>
+<td>Self-Consistency</td>
+<td>Ensembling</td>
+<td>Self-Consistency (Wang et al., 2022)</td>
+</tr>
+<tr>
+<td>Universal Self-Consistency</td>
+<td>Ensembling</td>
+<td>Universal Self-Consistency (Chen et al., 2023)</td>
+</tr>
+</tbody>
+</table>
+<h4>Table 3: Prompting Technique and Prompt Example</h4>
+<table>
+<thead>
+<tr>
+<th>Prompting Technique</th>
+<th>Example Prompt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chain-of-Thought</td>
+<td>Q: Jack has two baskets, each containing three balls. How many balls does Jack have in total? A: One basket contains 3 balls, so two baskets contain 3 * 2 = 6 balls. Q: {QUESTION} A:</td>
+</tr>
+<tr>
+<td>Zero-Shot CoT</td>
+<td>Let's think step by step.</td>
+</tr>
+<tr>
+<td>Thread-of-Thought</td>
+<td>Walk me through this context in manageable parts step by step, summarizing and analyzing as we go.</td>
+</tr>
+<tr>
+<td>Plan-and-Solve</td>
+<td>Let's first understand the problem and devise a plan to solve it. Then, let's carry out the plan and solve the problem step by step.</td>
+</tr>
+<tr>
+<td>Few-Shot Prompting</td>
+<td>Provide 2-3 examples of the desired input/output format before your actual query.</td>
+</tr>
+<tr>
+<td>Self-Consistency</td>
+<td>Generate multiple reasoning paths and select the most consistent answer.</td>
+</tr>
+<tr>
+<td>Tree-of-Thought</td>
+<td>Explore multiple solution branches in parallel before converging on the best path.</td>
+</tr>
+<tr>
+<td>Self-Refine</td>
+<td>Review your response and improve it based on self-identified weaknesses.</td>
+</tr>
+</tbody>
+</table>
+<h3>Prompt Guidelines</h3>
+<ul>
+<li>clarity</li>
+<li>specificity</li>
+<li>direction (e.g. goal)</li>
+</ul>
+<h4>Combining prompt types</h4>
+<p>1) identify need
+2) write first prompt
+3) write more specific prompt based on first response
+   OR
+   combine goal-oriented &amp; specific prompt</p>
+<h4>Iterative prompting</h4>
+<p>Refining AI responses through a sequence of prompts that build on each other.</p>
+<h3>Papers</h3>
+<ul>
+<li><a href="https://arxiv.org/abs/2001.08361">Few Shots - [2001.08361] Scaling Laws for Neural Language Models (arxiv.org)</a></li>
+<li><a href="https://arxiv.org/abs/2201.11903">Chain of Thought - [2201.11903] Chain-of-Thought Prompting Elicits Reasoning in Large Language Models (arxiv.org)</a></li>
+<li><a href="https://arxiv.org/abs/2203.11171">Self Consistency aka CoT@k - [2203.11171] Self-Consistency Improves Chain of Thought Reasoning in Language Models (arxiv.org)</a></li>
+<li><a href="https://arxiv.org/abs/2305.10601">Tree of Thought - [2305.10601] Tree of Thoughts: Deliberate Problem Solving with Large Language Models (arxiv.org)</a></li>
+<li><a href="https://arxiv.org/abs/2210.03629">ReAct - [2210.03629] ReAct: Synergizing Reasoning and Acting in Language Models (arxiv.org)</a></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../ai_prompting_techniques.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/ai.html" rel="tag">AI</a>
+                </div>
+            </article>            <h4 class="date">Nov 04, 2025</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -94,47 +453,45 @@ I&#39;ll let you know which of them is the closest to what I&#39;m looking for.
 If you&#39;re unable to guess accurately or zone in, feel free to ask me
 follow-up questions so we can zone in better.
 </code></pre></div>
+
+<h3>Concept Elevation (Prompt Improver)</h3>
+<p>A meta-prompt that takes any prompt and makes it more concise and effective:</p>
+<div class="highlight"><pre><span></span><code>&lt;identity&gt;
+You are a world-class prompt engineer. When given a prompt to improve,
+you have an incredible process to make it better (better = more concise,
+clear, and more likely to get the LLM to do what you want).
+&lt;/identity&gt;
+
+&lt;about_your_approach&gt;
+A core tenet of your approach is called concept elevation. Concept elevation
+is the process of taking stock of the disparate yet connected instructions
+in the prompt, and figuring out higher-level, clearer ways to express the
+sum of the ideas in a far more compressed way.
+
+This allows the LLM to be more adaptable to new situations instead of
+solely relying on the example situations shown or specific instructions given.
+
+To do this:
+1. Think deeply, breaking it down into the core goals and concepts
+2. Organize them into groups
+3. For each group, come up with candidate idea-sums and iterate until
+   you&#39;ve found the perfect idea-sum for the group
+4. Identify if anything could be done better, and construct a final,
+   far more effective and concise prompt
+&lt;/about_your_approach&gt;
+
+Here is the prompt you&#39;ll be improving today:
+&lt;prompt_to_improve&gt;
+{PLACE_YOUR_PROMPT_HERE}
+&lt;/prompt_to_improve&gt;
+
+When improving this prompt, do each step inside &lt;xml&gt; tags so we can
+audit your reasoning.
+</code></pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
                     <a href="../ai_prompts_reasoning.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="../category/ai.html" rel="tag">AI</a>
-                </div>
-            </article>            <h4 class="date">Nov 03, 2025</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="../ai_prompts_roles.html" rel="bookmark" title="Permanent Link to &quot;AI Prompts - Roles & Personas&quot;">AI Prompts - Roles & Personas</a>
-                </h2>
-
-                
-                
-
-                <h3>Expert Persona Template</h3>
-<p>Name-Prime ChatGPT into a nuanced niche expert:</p>
-<div class="highlight"><pre><span></span><code><span class="err">&quot;You&#39;re now {NAME}GPT — a world-class {TOPIC} expert in. Henceforth, whenever I ask you a question,</span>
-<span class="err">respond with relevant and well-thought-out answers. Draw specifically from {SOURCES} to formulate your answers.</span>
-<span class="err">Polish your answers so they&#39;re concise, straightforward, and easy to read.</span>
-<span class="err">With every response you generate, utilize the context of the generated response to broaden your selection of resources</span>
-<span class="err">and expertise for each subsequent response.</span>
-<span class="err">Till this window is closed and/or I specify otherwise, assume I&#39;m referring to you, {NAME}GPT.</span>
-<span class="k">If</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">understand</span><span class="w"> </span><span class="nv">your</span><span class="w"> </span><span class="nv">job</span>,<span class="w"> </span><span class="nv">describe</span><span class="w"> </span><span class="nv">it</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">me</span>.<span class="w"> </span><span class="k">If</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">don</span><span class="err">&#39;t, speak out your doubts so I can clarify them.&quot;</span>
-</code></pre></div>
-
-<h3>Prompt Architect</h3>
-<div class="highlight"><pre><span></span><code><span class="n">Act</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">architect</span><span class="o">.</span><span class="w"> </span><span class="n">I</span><span class="s1">&#39;m looking to construct the optimal prompt for my specific needs. We will iteratively refine and improve the prompt based on the initial input.</span>
-<span class="w">     </span><span class="n">Three</span><span class="o">-</span><span class="n">Part</span><span class="w"> </span><span class="n">Development</span><span class="p">:</span>
-<span class="w">     </span><span class="mf">1.</span><span class="w"> </span><span class="n">Revised</span><span class="w"> </span><span class="n">Prompt</span><span class="p">:</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">provide</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">reimagined</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">my</span><span class="w"> </span><span class="n">original</span><span class="w"> </span><span class="n">prompt</span><span class="p">,</span><span class="w"> </span><span class="n">aiming</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">clarity</span><span class="p">,</span><span class="w"> </span><span class="n">brevity</span><span class="p">,</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">simplicity</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">understanding</span><span class="o">.</span>
-<span class="w">     </span><span class="mf">2.</span><span class="w"> </span><span class="n">Suggestions</span><span class="p">:</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">offer</span><span class="w"> </span><span class="n">advice</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">what</span><span class="w"> </span><span class="n">specific</span><span class="w"> </span><span class="n">details</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="n">enhance</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="p">,</span><span class="w"> </span><span class="n">thereby</span><span class="w"> </span><span class="n">increasing</span><span class="w"> </span><span class="n">its</span><span class="w"> </span><span class="n">effectiveness</span><span class="o">.</span>
-<span class="w">     </span><span class="mf">3.</span><span class="w"> </span><span class="n">Questions</span><span class="p">:</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">ask</span><span class="w"> </span><span class="n">relevant</span><span class="w"> </span><span class="n">queries</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">may</span><span class="w"> </span><span class="n">need</span><span class="w"> </span><span class="n">additional</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">further</span><span class="w"> </span><span class="n">improve</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="o">.</span>
-<span class="w">     </span><span class="n">Iterative</span><span class="w"> </span><span class="n">Collaboration</span><span class="p">:</span><span class="w"> </span><span class="n">We</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">engage</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">iterative</span><span class="w"> </span><span class="n">process</span><span class="p">,</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="n">supplying</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">fine</span><span class="o">-</span><span class="n">tuning</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">within</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="s1">&#39;Revised Prompt&#39;</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="n">we</span><span class="w"> </span><span class="n">achieve</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">satisfactory</span><span class="w"> </span><span class="n">final</span><span class="w"> </span><span class="n">version</span><span class="o">.</span>
-
-<span class="n">The</span><span class="w"> </span><span class="n">purpose</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="k">tool</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">practical</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">useful</span><span class="p">,</span><span class="w"> </span><span class="n">ensuring</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompts</span><span class="w"> </span><span class="n">generated</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">highly</span><span class="w"> </span><span class="n">effective</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">relevant</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">user</span><span class="s1">&#39;s needs. Responses should be friendly and engaging.</span>
-</code></pre></div>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="../ai_prompts_roles.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="../category/ai.html" rel="tag">AI</a>
                 </div>
             </article>
@@ -146,7 +503,7 @@ follow-up questions so we can zone in better.
 
                     <a href="../category/ai5.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 4 of 6</span>
+                    <span>Page 4 of 7</span>
                 </div>
 
             <div class="clear"></div>

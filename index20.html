@@ -26,7 +26,190 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 01, 2017</h4>
+        <div id="content">            <h4 class="date">Dec 03, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./vagrant_vpn.html" rel="bookmark" title="Permanent Link to &quot;Vagrant VM with VPN&quot;">Vagrant VM with VPN</a>
+                </h2>
+
+                
+                
+
+                <h2>Step-by-Step Instructions to Set Up a VM to Bypass Zscaler Restrictions</h2>
+<h4>1. <strong>Create a DigitalOcean Droplet with Outline VPN Manager</strong></h4>
+<ol>
+<li>Set up a new DigitalOcean droplet.</li>
+<li>Install Outline VPN Manager to manage the Shadowsocks server. Follow the official Outline installation guide for setup.</li>
+<li>Note the public IP address of your DigitalOcean server.</li>
+</ol>
+<h4>2. <strong>Install and Configure Shadowsocks on the DigitalOcean Server</strong></h4>
+<ol>
+<li>Install Shadowsocks on the server:</li>
+</ol>
+<p><code>sudo apt update
+   sudo apt install shadowsocks-libev</code></p>
+<ol>
+<li>Edit the default Shadowsocks configuration (<code>/etc/shadowsocks-libev/config.json</code>) to use port <code>443</code> and your custom password:</li>
+</ol>
+<p><code>{
+     "server": "0.0.0.0",
+     "server_port": 443,
+     "password": "your-secure-password",
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"
+   }</code></p>
+<ol>
+<li>Restart the Shadowsocks server:</li>
+</ol>
+<p><code>sudo systemctl restart shadowsocks-libev</code></p>
+<ol>
+<li>Ensure that port <code>443</code> is open on the DigitalOcean server by allowing it through the firewall:</li>
+</ol>
+<p><code>sudo ufw allow 443/tcp
+   sudo ufw allow 443/udp</code></p>
+<h4>3. <strong>Configure Shadowsocks Client on the Vagrant Guest VM</strong></h4>
+<ol>
+<li>Install Shadowsocks on the Vagrant guest VM:</li>
+</ol>
+<p><code>sudo apt update
+   sudo apt install shadowsocks-libev</code></p>
+<ol>
+<li>Create the Shadowsocks client configuration (<code>/etc/shadowsocks-libev/config.json</code>) to connect to the DigitalOcean server:</li>
+</ol>
+<p><code>{
+     "server": "your-digital-ocean-server-ip",
+     "server_port": 443,
+     "local_port": 1080,
+     "password": "your-secure-password",
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"
+   }</code></p>
+<ol>
+<li>Start the Shadowsocks client on the Vagrant VM:</li>
+</ol>
+<p><code>ss-local -c /etc/shadowsocks-libev/config.json -v</code></p>
+<ol>
+<li>Ensure the Vagrant VM is using <strong>Bridged Adapter</strong> to allow direct internet access and connection to the DigitalOcean server.</li>
+</ol>
+<h4>4. <strong>Configure the Vagrant VM or Browser to Use the SOCKS Proxy</strong></h4>
+<ol>
+<li>Set the system or application (e.g., web browser) to use <code>localhost:1080</code> as the SOCKS5 proxy.</li>
+<li>For Firefox:</li>
+<li>Go to <strong>Preferences</strong> → <strong>Network Settings</strong>.</li>
+<li>Set <strong>SOCKS Host</strong> to <code>localhost</code> and port to <code>1080</code>.</li>
+<li>Ensure <strong>SOCKS v5</strong> is selected.</li>
+</ol>
+<h4>5. <strong>Test the Connection</strong></h4>
+<ol>
+<li>Verify that traffic is routed through the Shadowsocks proxy by browsing or using:</li>
+</ol>
+<p><code>curl --socks5 localhost:1080 http://example.com</code></p>
+<ol>
+<li>Ensure that you can bypass Zscaler restrictions and access unrestricted internet.</li>
+</ol>
+<h4>Summary:</h4>
+<ul>
+<li>DigitalOcean droplet runs <strong>Outline VPN Manager</strong> and Shadowsocks on <strong>port 443</strong>.</li>
+<li><strong>Vagrant guest VM</strong> connects via Shadowsocks client using <code>ss-local</code> with port <code>443</code>.</li>
+<li><strong>Bridged Adapter</strong> mode is essential for proper networking in the VM.</li>
+<li>SOCKS5 proxy runs locally on <code>localhost:1080</code> to bypass restrictions.</li>
+</ul>
+<p>This setup allows you to route traffic through your DigitalOcean server, effectively bypassing Zscaler restrictions.</p>
+<h2>Updated Step-by-Step Solution for Bypassing Zscaler Using the Vagrant Guest VM</h2>
+<p>Since you want to use <strong>Firefox on the Vagrant guest VM</strong> to bypass restrictions without relying on any executable files on the Windows host, we’ll configure the VM and Firefox to directly route traffic through the Shadowsocks proxy.</p>
+<h4>Step 1: Ensure Shadowsocks is Set Up on the DigitalOcean Server</h4>
+<p>Make sure your <strong>DigitalOcean server</strong> is configured and running properly.</p>
+<ol>
+<li><strong>DigitalOcean Server Shadowsocks Configuration (<code>/etc/shadowsocks-libev/config.json</code>):</strong></li>
+</ol>
+<p><code>{
+     "server": "0.0.0.0",
+     "server_port": 443,            // Running on port 443 to avoid network restrictions
+     "password": "your-secure-password",
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"
+   }</code></p>
+<ol>
+<li><strong>Restart the Shadowsocks server</strong> on the DigitalOcean droplet:</li>
+</ol>
+<p><code>sudo systemctl restart shadowsocks-libev</code></p>
+<h4>Step 2: Set Up Shadowsocks on the Vagrant Guest VM</h4>
+<p>Ensure the Shadowsocks client is installed and running on the <strong>guest VM</strong>.</p>
+<ol>
+<li><strong>Install Shadowsocks on the Guest VM</strong>:</li>
+</ol>
+<p><code>sudo apt update
+   sudo apt install shadowsocks-libev</code></p>
+<ol>
+<li><strong>Create or update the client configuration file (<code>/etc/shadowsocks-libev/config.json</code>)</strong>:</li>
+</ol>
+<p><code>{
+     "server": "your-digital-ocean-server-ip",   // The public IP of your DigitalOcean server
+     "server_port": 443,                         // Port 443 to avoid network restrictions
+     "local_port": 1080,                         // The local SOCKS5 proxy port
+     "password": "your-secure-password",         // Same as on the server
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"          // Same encryption method as the server
+   }</code></p>
+<ol>
+<li><strong>Start the Shadowsocks client</strong> on the guest VM:</li>
+</ol>
+<p><code>ss-local -c /etc/shadowsocks-libev/config.json -v</code></p>
+<p>This command starts the Shadowsocks SOCKS5 proxy on <code>localhost:1080</code> on your VM.</p>
+<h4>Step 3: Configure Firefox on the Guest VM to Use the SOCKS Proxy</h4>
+<ol>
+<li><strong>Open Firefox</strong> on the Vagrant guest VM.</li>
+<li>Go to <strong>Preferences</strong> → Scroll down to <strong>Network Settings</strong> → Click <strong>Settings</strong>.</li>
+<li><strong>Set up the SOCKS Proxy</strong>:</li>
+<li>Choose <strong>Manual proxy configuration</strong>.</li>
+<li>Under <strong>SOCKS Host</strong>, enter <code>localhost</code> and set the port to <code>1080</code>.</li>
+<li>Select <strong>SOCKS v5</strong> as the protocol.</li>
+<li>Check the box for <strong>Proxy DNS when using SOCKS v5</strong>.</li>
+</ol>
+<p><img alt="Firefox Proxy Settings" src="https://support.mozilla.org/en-US/kb/connection-settings-firefox/windows-firefox-proxy-settings-windows.png"> (Example of Firefox manual proxy settings).</p>
+<ol>
+<li><strong>Save</strong> the settings.</li>
+</ol>
+<p>Now, all traffic from Firefox will be routed through the SOCKS5 proxy running on your Vagrant guest VM, which connects to your DigitalOcean Shadowsocks server. This should bypass any Zscaler restrictions.</p>
+<h4>Step 4: Test the Setup</h4>
+<ol>
+<li>Open Firefox on the guest VM and visit a website that is typically restricted by Zscaler.</li>
+<li>Ensure the site loads, confirming that the traffic is routed through your DigitalOcean server and bypassing Zscaler.</li>
+</ol>
+<h3>Additional Steps (If Needed)</h3>
+<h4>Disable Ethernet on Host to Prevent Automatic Connection</h4>
+<p>Since your <strong>office screens automatically connect to Ethernet</strong>, you can disable the Ethernet interface temporarily on the <strong>Windows host</strong> to force all traffic through your guest VM.</p>
+<ol>
+<li>On your <strong>Windows host</strong>, disable Ethernet:</li>
+<li>Press <code>Win + R</code>, type <code>ncpa.cpl</code>, and press <strong>Enter</strong>.</li>
+<li>Right-click on the <strong>Ethernet</strong> adapter and choose <strong>Disable</strong>.</li>
+</ol>
+<p>This will prevent the automatic Ethernet connection when using office screens, forcing your internet traffic through the Vagrant guest VM.</p>
+<h4>Summary of Steps:</h4>
+<ol>
+<li><strong>DigitalOcean Server</strong>:</li>
+<li>
+<p>Ensure Shadowsocks is running on port <code>443</code>.</p>
+</li>
+<li>
+<p><strong>Vagrant Guest VM</strong>:</p>
+</li>
+<li>Start Shadowsocks with <code>ss-local</code> on <code>localhost:1080</code>.</li>
+<li>
+<p>Configure Firefox to use <code>localhost:1080</code> as a SOCKS5 proxy.</p>
+</li>
+<li>
+<p><strong>Test</strong>: Open restricted sites in Firefox on the guest VM to confirm Zscaler is bypassed.</p>
+</li>
+</ol>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./vagrant_vpn.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
+                </div>
+            </article>            <h4 class="date">Dec 01, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -60,228 +243,6 @@ ssh-add ~/.ssh/id_rsa
 
                 <div class="info">
                     <a href="./ssh_keys.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
-                </div>
-            </article>            <h4 class="date">Nov 25, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./software.html" rel="bookmark" title="Permanent Link to &quot;Software&quot;">Software</a>
-                </h2>
-
-                
-                
-
-                <h3>PostgreSQL</h3>
-<p><a href="https://www.postgresql.org/download/linux/ubuntu/">Download PostgreSQL</a></p>
-<p><a href="https://linuxhint.com/best_gui_clients_postgresql_ubuntu/#:~:text=pgAdmin,Windows%20and%20Mac%20OS%20X.">Install pgAdmin</a></p>
-<h4>Running multiple versions of PostgreSQL</h4>
-<p>Check the config files to see which version is on which port:</p>
-<p><code>grep -H '^port' /etc/postgresql/*/main/postgresql.conf</code></p>
-<p>sample output:</p>
-<div class="highlight"><pre><span></span><code>/etc/postgresql/10/main/postgresql.conf:port = 5432 
-/etc/postgresql/13/main/postgresql.conf:port = 5433 
-</code></pre></div>
-
-<h4>Restart Postgres</h4>
-<div class="highlight"><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">postgresql</span><span class="w"> </span><span class="n">reload</span>
-<span class="n">sudo</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">postgresql</span><span class="w"> </span><span class="n">start</span>
-</code></pre></div>
-
-<h4>Hostname</h4>
-<p>PostgreSQL, what is the hostname address of my default database?</p>
-<p>If you're connecting from the same machine, use localhost</p>
-<h4>Connection String</h4>
-<p>You can provide your username and password directly in the connection URI provided to psql:</p>
-<p><code>psql postgresql://username:password@localhost:5432/mydb</code></p>
-<h4>Useful Commands</h4>
-<ul>
-<li>To establish a connection : <code>sudo su - postgres</code></li>
-<li>To open a postgress prompt using the command: <code>psql</code></li>
-<li>To see details of the connection: <code>\conninfo</code></li>
-<li>To view the databases in our PostgreSQL instance: <code>\list</code></li>
-<li><code>CREATE DATABASE dbname;</code></li>
-<li><code>DROP DATABASE dbname;</code></li>
-</ul>
-<h3>R and RStudio</h3>
-<h4>Uninstall previous R installation</h4>
-<div class="highlight"><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">save</span>
-<span class="n">pkgList</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">installed.packages</span><span class="p">(</span><span class="n">priority</span><span class="o">=</span><span class="s">&#39;NA&#39;</span><span class="p">)</span>
-<span class="nf">remove.packages</span><span class="p">(</span><span class="n">pkgList</span><span class="p">)</span>
-<span class="nf">q</span><span class="p">()</span>
-<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="o">-</span><span class="n">get</span><span class="w"> </span><span class="n">remove</span><span class="w"> </span><span class="o">--</span><span class="n">purge</span><span class="w"> </span><span class="n">r</span><span class="o">-</span><span class="n">cran</span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="o">-</span><span class="n">base</span><span class="o">*</span>
-</code></pre></div>
-
-<h4>Install on Ubuntu 20.04 (Focal Fossa)</h4>
-<p>Save and run the script below (<a href="https://gist.github.com/mGalarnyk/41c887e921e712baf86fecc507b3afc7">source</a>).</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Install R + RStudio on Ubuntu 20 Focal</span>
-<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="o">-</span><span class="n">key</span><span class="w"> </span><span class="n">adv</span><span class="w"> </span><span class="o">--</span><span class="n">keyserver</span><span class="w"> </span><span class="n">keyserver</span><span class="o">.</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">com</span><span class="w"> </span><span class="o">--</span><span class="n">recv</span><span class="o">-</span><span class="n">keys</span><span class="w"> </span><span class="n">E298A3A825C0D65DF</span><span class="o">&gt;</span>
-<span class="n">sudo</span><span class="w"> </span><span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span><span class="w"> </span><span class="s1">&#39;deb https://cloud.r-project.org/bin/linux/ubuntu focal&gt;</span>
-<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="n">update</span>
-<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">r</span><span class="o">-</span><span class="n">base</span><span class="w"> </span><span class="n">r</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span><span class="n">gdebi</span><span class="o">-</span><span class="n">core</span>
-
-<span class="c1"># next line required for kableExtra</span>
-<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">libcurl4</span><span class="o">-</span><span class="n">openssl</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span><span class="n">openssl</span><span class="w"> </span><span class="n">libssl</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span><span class="n">openssh</span><span class="o">-</span><span class="n">client</span><span class="w"> </span><span class="n">libxml2</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span>
-
-<span class="c1"># next line required for RcppArmadillo</span>
-<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">liblapack</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span>
-
-<span class="c1"># install Latex for RMarkdown</span>
-<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">texlive</span><span class="w"> </span><span class="n">texstudio</span><span class="w"> </span><span class="n">texlive</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">recommended</span><span class="w"> </span><span class="n">texlive</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">extra</span>
-
-<span class="c1"># Download and Install RStudio</span>
-<span class="n">wget</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download1</span><span class="o">.</span><span class="n">rstudio</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">desktop</span><span class="o">/</span><span class="n">bionic</span><span class="o">/</span><span class="n">amd64</span><span class="o">/</span><span class="n">rstudio</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">1103</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span>
-<span class="n">sudo</span><span class="w"> </span><span class="n">gdebi</span><span class="w"> </span><span class="n">rstudio</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">1103</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span>
-<span class="n">rm</span><span class="w"> </span><span class="n">rstudio</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">1103</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span>
-</code></pre></div>
-
-<h4>List of Useful Packages</h4>
-<p><code>install.packages((c("tidyverse", "ggplot2", "ggthemes", "kableExtra", "rbenchmark", "inline", "data.table", "RcppArmadillo"))</code></p>
-<h3>Docker</h3>
-<ul>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04">Install Docker on Ubuntu-16-04</a></li>
-<li><a href="https://www.udemy.com/docker-mastery/">Docker Mastery: The Complete Toolset From a Docker Captain</a>:</li>
-</ul>
-<p>Docker</p>
-<ul>
-<li>get relevant <code>curl</code> line from <a href="https://get.docker.com/">here</a>.
-    Note: this will figure out which version to get for your particular Linux OS</li>
-<li>run shell script (next line in the above link)</li>
-<li><code>sudo usermod -aG docker vagrant</code></li>
-<li><code>docker version</code> to test</li>
-</ul>
-<p>Docker Machine</p>
-<ul>
-<li>get the lines from <a href="https://github.com/docker/machine/releases">https://github.com/docker/machine/releases</a></li>
-</ul>
-<p>Docker Compose</p>
-<ul>
-<li>get lines for latest release <a href="https://github.com/docker/compose/releases">here</a></li>
-<li><code>sudo -i</code> then paste the lines</li>
-<li><code>docker-compse version</code> to test</li>
-</ul>
-<p><br></p>
-<h3>Pycharm</h3>
-<h4>Install</h4>
-<div class="highlight"><pre><span></span><code><span class="o">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">openjdk</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="n">jdk</span>
-<span class="o">$</span><span class="w"> </span><span class="n">java</span><span class="w"> </span><span class="o">-</span><span class="n">version</span>
-<span class="o">$</span><span class="w"> </span><span class="n">wget</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">jetbrains</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">pycharm</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="mf">2018.3</span><span class="o">.</span><span class="mf">4.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
-<span class="o">$</span><span class="w"> </span><span class="n">tar</span><span class="w"> </span><span class="o">-</span><span class="n">xvf</span><span class="w"> </span><span class="n">pycharm</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="mf">2018.3</span><span class="o">.</span><span class="mf">4.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
-<span class="o">$</span><span class="w"> </span><span class="n">cd</span><span class="w"> </span><span class="n">pycharm</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="mf">2018.3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">bin</span>
-<span class="o">$</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="n">pycharm</span><span class="o">.</span><span class="n">sh</span>
-</code></pre></div>
-
-<h4>pytest</h4>
-<p>Edit Configuration &gt;&gt; Additional arguments &gt;&gt; <code>-p no:logging -s</code></p>
-<h4>environment variables</h4>
-<ul>
-<li><a href="https://stackoverflow.com/questions/42708389/how-to-set-environment-variables-in-pycharm">about setting environment variable e.g. DATA_HOME</a></li>
-</ul>
-<h4>Conda Executable Path on Windows</h4>
-<div class="highlight"><pre><span></span><code>C:\Users\&lt;USER&gt;\AppData\Local\miniconda3\condabin
-</code></pre></div>
-
-<p><br></p>
-<h3>Jupyter (via Docker)</h3>
-<ul>
-<li><a href="https://towardsdatascience.com/how-to-setup-your-jupyterlab-project-environment-74909dade29b">How to Setup Your JupyterLab Project Environment</a></li>
-</ul>
-<p><br></p>
-<h3>RoboMongo</h3>
-<ul>
-<li><a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/">Install MongoDB Community Edition on Ubuntu</a></li>
-<li><a href="https://robomongo.org/download">Robo 3T: the hobbyist GUI</a></li>
-<li><a href="https://gist.github.com/abdallahokasha/37911a64ad289487387e2d1a144604ae">Install Robo3t On Ubuntu 18.04</a></li>
-<li><code>mongoimport --db naptan --collection naptan --file test.json --jsonArray</code></li>
-</ul>
-<h3>NodeJS</h3>
-<ul>
-<li>npm install xml-stream, xml2js</li>
-<li>node myfile.js</li>
-</ul>
-<h4>NodeJS XML to JSON</h4>
-<div class="highlight"><pre><span></span><code><span class="k">var</span><span class="w"> </span><span class="n">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
-<span class="k">var</span><span class="w"> </span><span class="n">xml2js</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;xml2js&#39;</span><span class="p">);</span>
-<span class="k">var</span><span class="w"> </span><span class="n">util</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;util&#39;</span><span class="p">);</span>
-
-<span class="k">var</span><span class="w"> </span><span class="n">parser</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">xml2js</span><span class="o">.</span><span class="n">Parser</span><span class="p">();</span>
-
-<span class="n">fs</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s1">&#39;NaPTAN_2018_11_08.xml&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">function</span><span class="p">(</span><span class="n">err</span><span class="p">,</span><span class="n">data</span><span class="p">){</span>
-<span class="w">    </span><span class="n">parser</span><span class="o">.</span><span class="n">parseString</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">function</span><span class="p">(</span><span class="n">err</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">){</span>
-
-<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"> </span><span class="bp">true</span><span class="p">));</span>
-
-<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">toString</span><span class="p">(),</span><span class="w"> </span><span class="n">function</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="o">//</span><span class="w">     </span><span class="k">if</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="o">//</span><span class="w">         </span><span class="k">return</span><span class="w"> </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">err</span><span class="p">);</span>
-<span class="w">        </span><span class="o">//</span><span class="w">     </span><span class="p">}</span>
-<span class="w">        </span><span class="o">//</span><span class="w">     </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;The file was saved!&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="p">});</span>
-
-<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="nb">convert</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">JSON</span><span class="w"> </span><span class="n">string</span>
-<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JSON</span><span class="o">.</span><span class="n">stringify</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span>
-
-<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="n">save</span><span class="w"> </span><span class="n">JSON</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">file</span>
-<span class="w">        </span><span class="n">fs</span><span class="o">.</span><span class="n">writeFileSync</span><span class="p">(</span><span class="s1">&#39;test.json&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">json</span><span class="p">);</span>
-
-<span class="w">    </span><span class="p">});</span>
-<span class="p">});</span>
-</code></pre></div>
-
-<h4></h4>
-<h3>GloVe for Python</h3>
-<ul>
-<li><code>-e git+git@github.com:maciejkula/glove-python.git#egg=glove</code></li>
-<li>dependencies</li>
-<li><code>pip install Cython</code></li>
-<li><code>sudo apt-get install python3-dev</code></li>
-</ul>
-<p><br></p>
-<h4>Jena</h4>
-<div class="highlight"><pre><span></span><code>wget http://mirrors.whoishostingthis.com/apache/jena/binaries/apache-jena-3.1.1.tar.gz
-tar -zxvf
-</code></pre></div>
-
-<p><br></p>
-<h4>Fuseki 2 (requires JDK 8)</h4>
-<div class="highlight"><pre><span></span><code>wget http://mirrors.whoishostingthis.com/apache/jena/binaries/apache-jena-fuseki-2.4.1.tar.gz
-tar -zxvf
-sudo add-apt-repository ppa:webupd8team/java
-sudo apt-get update
-sudo apt-get install oracle-java8-installer
-</code></pre></div>
-
-<p>To test fuseki server</p>
-<div class="highlight"><pre><span></span><code>~/apache-jena-fuseki-2.4.1/fuseki-server --update --loc=angioexplain /angioexplain
-</code></pre></div>
-
-<p>Open browser and got to <code>localhost:3030</code></p>
-<p><br></p>
-<h4>Miniconda3</h4>
-<div class="highlight"><pre><span></span><code>wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh
-</code></pre></div>
-
-<p>then add below line to <code>.bashrc</code>, restart terminal and check installation with <code>conda -V</code>.</p>
-<p><code>export PATH="/home/username/miniconda3/bin:$PATH"</code></p>
-<h4>Misc.</h4>
-<ul>
-<li>
-<p><code>sudo apt-get install terminator</code></p>
-</li>
-<li>
-<p>VSCode Run(Compile): Shit+Ctrl+B </p>
-</li>
-<li>
-<p>to view a .gv GraphViz file (will crate a pdf)</p>
-<p>f = Source.from_file('file-name.gv')
-f.render()</p>
-</li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./software.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
                 </div>
             </article>

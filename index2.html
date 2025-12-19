@@ -26,7 +26,254 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 08, 2025</h4>
+        <div id="content">            <h4 class="date">Nov 09, 2025</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./ai_prompts_claude_code.html" rel="bookmark" title="Permanent Link to &quot;AI Prompts - Claude Code&quot;">AI Prompts - Claude Code</a>
+                </h2>
+
+                
+                
+
+                <h3>What is Claude.md?</h3>
+<p>Claude.md is your AI team member's persistent memory - essential context available in every prompt. Like onboarding a new developer, you provide Claude Code with institutional knowledge to work effectively.</p>
+<h3>The CONTEXT Framework for Claude.md</h3>
+<table>
+<thead>
+<tr>
+<th>Letter</th>
+<th>Principle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C</td>
+<td>Clear and Concise Instructions</td>
+</tr>
+<tr>
+<td>O</td>
+<td>Operational Processes</td>
+</tr>
+<tr>
+<td>N</td>
+<td>Naming and Standards</td>
+</tr>
+<tr>
+<td>T</td>
+<td>Testing and Quality Gates</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Examples and References</td>
+</tr>
+<tr>
+<td>X</td>
+<td>Expectations and Boundaries</td>
+</tr>
+<tr>
+<td>T</td>
+<td>Tools and Dependencies</td>
+</tr>
+</tbody>
+</table>
+<h3>Core Principles</h3>
+<p><strong>Essential Information Only</strong> - Global information that applies to every task. Don't overwhelm with project-specific details.</p>
+<p><strong>Specificity Creates Better Targets</strong> - "Write solid code" is vague; "Follow SOLID design principles for all object-oriented code" is actionable.</p>
+<p><strong>Process Over Micromanagement</strong> - Define workflows and checks, not implementation details.</p>
+<h3>Claude.md Best Practices</h3>
+<p><strong>Do's:</strong>
+- Use clear, actionable language
+- Provide specific tools and frameworks
+- Define quality gates and testing requirements
+- Include workflow processes
+- Specify naming conventions</p>
+<p><strong>Don'ts:</strong>
+- Include task-specific details that only apply sometimes
+- Write 1000-page documentation dumps
+- Use vague instructions like "write good code"
+- Micromanage implementation details</p>
+<h3>Claude.md Example</h3>
+<div class="highlight"><pre><span></span><code># Project: TaskFlow Web Application
+
+## Core Principles
+IMPORTANT: All code MUST follow SOLID design principles.
+
+## Development Workflow
+1. Create and checkout feature branch: feature-[brief-description]
+2. Write comprehensive tests for all new functionality
+3. Compile code and run all tests before committing
+4. Write detailed commit messages explaining changes
+5. Commit all changes to the feature branch
+
+## Architecture Overview
+- Frontend: Next.js 14 with TypeScript and Tailwind CSS
+- State Management: Zustand for client state, React Query for server state
+- Backend: Node.js with Express and Prisma ORM
+- Database: PostgreSQL
+- Testing: Jest for unit tests, Playwright for E2E
+
+## Quality Gates
+- All code must compile without warnings
+- Test coverage must remain above 80%
+- All tests must pass before committing
+- ESLint and Prettier must pass without errors
+</code></pre></div>
+
+<hr>
+<h2>Creating Claude Commands</h2>
+<p>Commands deliver targeted context for specific, repeatable tasks. They're specialized instruction sets stored in <code>.claude/commands/</code> directory.</p>
+<h3>The TARGETED Framework</h3>
+<table>
+<thead>
+<tr>
+<th>Letter</th>
+<th>Principle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T</td>
+<td>Task-Specific Instructions</td>
+</tr>
+<tr>
+<td>A</td>
+<td>Arguments and Placeholders</td>
+</tr>
+<tr>
+<td>R</td>
+<td>Reusable Process Steps</td>
+</tr>
+<tr>
+<td>G</td>
+<td>Guided Examples and References</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Explicit Output Requirements</td>
+</tr>
+<tr>
+<td>T</td>
+<td>Template-Based Naming</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Error Handling and Edge Cases</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Documentation and Context</td>
+</tr>
+</tbody>
+</table>
+<h3>Command Location</h3>
+<ul>
+<li><strong>Project-specific</strong>: <code>.claude/commands/</code> (versioned with project)</li>
+<li><strong>Global commands</strong>: <code>~/.claude/commands/</code> (available across all projects)</li>
+</ul>
+<h3>Organization Strategies</h3>
+<ul>
+<li><strong>By Function</strong>: <code>plan-feature.md</code>, <code>impl-api.md</code>, <code>test-unit.md</code></li>
+<li><strong>By Domain</strong>: <code>auth-login.md</code>, <code>user-profile.md</code>, <code>payment-process.md</code></li>
+<li><strong>By Role</strong>: <code>dev-review.md</code>, <code>qa-automation.md</code>, <code>ops-deploy.md</code></li>
+</ul>
+<hr>
+<h2>Example Commands</h2>
+<h3>Code Review Command</h3>
+<p>File: <code>.claude/commands/code-review.md</code></p>
+<div class="highlight"><pre><span></span><code># Code Review Command
+
+Carefully perform a comprehensive code review of $ARGUMENTS.
+
+## Review Standards
+Examples of excellent code to match:
+- src/components/UserProfile/UserProfile.tsx (React components)
+- src/utils/dataValidation.ts (utility functions)
+- src/hooks/useUserData.ts (custom hooks)
+
+## Process
+1. Read example files to understand patterns and conventions
+2. Analyze $ARGUMENTS against these standards
+3. Create detailed critique covering:
+   - Code structure and organization
+   - Adherence to established patterns
+   - Performance considerations
+   - Security implications
+   - Test coverage gaps
+
+## Output Requirements
+- Save review as ai-code-reviews/{filename}.review.md
+- Include specific line references for issues
+- Rate quality: Excellent/Good/Needs Improvement/Poor
+- Estimate refactoring effort: Low/Medium/High
+</code></pre></div>
+
+<h3>Parallel Work Command</h3>
+<p>File: <code>.claude/commands/parallel-work.md</code></p>
+<div class="highlight"><pre><span></span><code>I want to develop features in parallel using Git worktrees: $ARGUMENTS
+
+Think about how to divide the work into separate features.
+
+Please help me set up the worktree environment:
+1. For each feature, create worktree at ../project-[feature-name]
+   with branch feature/[feature-name]
+2. Set up development environment in each worktree
+3. List all worktrees to confirm creation
+4. Explain what each worktree contains and how they&#39;re isolated
+
+I want to work on all features simultaneously without conflicts.
+</code></pre></div>
+
+<p>Usage: <code>/parallel-work budget-tracking notifications user-settings</code></p>
+<h3>Integrate Parallel Work Command</h3>
+<p>File: <code>.claude/commands/integrate-parallel-work.md</code></p>
+<div class="highlight"><pre><span></span><code>I have features developed in parallel worktrees to integrate: $ARGUMENTS
+
+Please help me integrate these features:
+1. Create integration branch: integration/parallel-features
+2. For each feature, merge branch feature/[feature-name]
+3. Resolve any merge conflicts
+4. Test that all features work together
+5. Run all tests to ensure nothing is broken
+6. Once successful, merge to main and clean up branches
+
+I want to integrate safely before merging to main.
+</code></pre></div>
+
+<p>Usage: <code>/integrate-parallel-work budget-tracking notifications user-settings</code></p>
+<h3>API Test Command</h3>
+<p>File: <code>.claude/commands/api-test.md</code></p>
+<div class="highlight"><pre><span></span><code># API Testing Command
+
+Create comprehensive API tests for: $ARGUMENTS
+
+## Testing Strategy
+
+1. Happy Path Testing:
+   - Valid request formats
+   - Expected response structures
+   - Proper HTTP status codes
+
+2. Error Handling Testing:
+   - Invalid request payloads
+   - Authentication failures
+   - Rate limiting scenarios
+
+3. Edge Cases:
+   - Boundary value testing
+   - Large payload handling
+   - Concurrent request handling
+
+## Test Structure
+Create tests in /tests/api/{endpoint-name}.test.ts
+</code></pre></div>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./ai_prompts_claude_code.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/ai.html" rel="tag">AI</a>
+                </div>
+            </article>            <h4 class="date">Nov 08, 2025</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -64,54 +311,6 @@
 
                 <div class="info">
                     <a href="./ai_miscellaneous.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/ai.html" rel="tag">AI</a>
-                </div>
-            </article>            <h4 class="date">Nov 07, 2025</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./ai_about_llms.html" rel="bookmark" title="Permanent Link to &quot;AI About LLMs&quot;">AI About LLMs</a>
-                </h2>
-
-                
-                
-
-                <p><br></p>
-<h3>Deploying LLMs Locally</h3>
-<h4>Setup ollama for executing open source LLM</h4>
-<div class="highlight"><pre><span></span><code>curl -fsSL https://ollama.com/install.sh | sh
-ollama pull llama2:latest
-ollama run llama2
-</code></pre></div>
-
-<h3>Finetuning LLMs</h3>
-<ul>
-<li>
-<p>there are a lot of different tokenizers and a tokenizer is really associated with 
-a specific model for each model as it was trained on it. And if you give the wrong tokenizer to your model, it'll 
-be very confused because it will expect different numbers to represent different sets of letters 
-and different words. So make sure you use the right tokenizer.</p>
-</li>
-<li>
-<p>The AutoTokenizer class from the Transformers library by HuggingFace automatically finds the right tokenizer or for your 
-model when you just specify what the model is. So all you have to do is put the model and name in.</p>
-</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">AutoTokenizer</span>
-<span class="n">tokenizer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;EleutherAI/pythia-70m&quot;</span><span class="p">)</span>
-</code></pre></div>
-
-<h3>Resources</h3>
-<ul>
-<li><a href="https://www.deeplearning.ai/short-courses/finetuning-large-language-models/">deeplearning.ai - Finetuning LLMs</a></li>
-<li>https://docs.crewai.com/how-to/LLM-Connections/#azure-open-ai-configuration</li>
-<li>https://kaustavmukherjee-66179.medium.com/create-eexcute-crew-ai-agent-with-llama2-model-without-any-need-og-openai-key-def216cd5f4f</li>
-<li>https://thoughtbot.com/blog/how-to-use-open-source-LLM-model-locally</li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./ai_about_llms.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/ai.html" rel="tag">AI</a>
                 </div>
             </article>

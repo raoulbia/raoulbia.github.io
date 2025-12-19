@@ -173,251 +173,209 @@ docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </s
                     <a href="../dgx_spark_finetuning.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="../category/ai.html" rel="tag">AI</a>
                 </div>
-            </article>            <h4 class="date">Nov 09, 2025</h4>
+            </article>            <h4 class="date">Nov 10, 2025</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="../ai_prompts_claude_code.html" rel="bookmark" title="Permanent Link to &quot;AI Prompts - Claude Code&quot;">AI Prompts - Claude Code</a>
+                    <a href="../ai_prompts_system_design.html" rel="bookmark" title="Permanent Link to &quot;AI Prompts - System Design Patterns&quot;">AI Prompts - System Design Patterns</a>
                 </h2>
 
                 
                 
 
-                <h3>What is Claude.md?</h3>
-<p>Claude.md is your AI team member's persistent memory - essential context available in every prompt. Like onboarding a new developer, you provide Claude Code with institutional knowledge to work effectively.</p>
-<h3>The CONTEXT Framework for Claude.md</h3>
+                <h3>Claude System Prompt Patterns</h3>
+<p>A pattern-oriented analysis of effective system prompts based on "A Pattern Language for Agentic AI":</p>
 <table>
 <thead>
 <tr>
-<th>Letter</th>
-<th>Principle</th>
+<th>Pattern</th>
+<th>Purpose</th>
+<th>Example</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>C</td>
-<td>Clear and Concise Instructions</td>
+<td>Boundary Signaling</td>
+<td>Make hard/soft capability limits explicit</td>
+<td>"All content about weapons, malware must be refused"</td>
 </tr>
 <tr>
-<td>O</td>
-<td>Operational Processes</td>
+<td>Error Ritual</td>
+<td>Provide short, repeatable refusal macro</td>
+<td>"If Claude must refuse, it does so briefly (1-2 sentences)"</td>
 </tr>
 <tr>
-<td>N</td>
-<td>Naming and Standards</td>
+<td>Context Reassertion</td>
+<td>Continuously restate operative context</td>
+<td>"The assistant is Claude... The current date is..."</td>
 </tr>
 <tr>
-<td>T</td>
-<td>Testing and Quality Gates</td>
+<td>Intent Echoing</td>
+<td>Paraphrase user request before acting</td>
+<td>"When user seems confused, restate the precise date or fact"</td>
 </tr>
 <tr>
-<td>E</td>
-<td>Examples and References</td>
+<td>Expectation Management</td>
+<td>Set realistic expectations up-front</td>
+<td>"Claude cannot retain information across chats"</td>
 </tr>
 <tr>
-<td>X</td>
-<td>Expectations and Boundaries</td>
+<td>Human-Intervention Logic</td>
+<td>Define clear escalator for problems</td>
+<td>Direct to feedback button, support site, or docs</td>
 </tr>
 <tr>
-<td>T</td>
-<td>Tools and Dependencies</td>
+<td>Tool-Risk Awareness</td>
+<td>Rehearse when/how external tools are allowed</td>
+<td>Rules on when to call web_search, forbidden content</td>
+</tr>
+<tr>
+<td>Planning-Reflection Sandwich</td>
+<td>Interleave plan/act/reflect phases</td>
+<td>Decide → search → think → answer</td>
+</tr>
+<tr>
+<td>Answer-Only Output</td>
+<td>Strip away scaffolding for clean output</td>
+<td>Ban on exposing system message or policy text</td>
+</tr>
+<tr>
+<td>Semantic Hygiene</td>
+<td>Preserve clarity through consistent terminology</td>
+<td>Disciplined sectioning of instructions</td>
+</tr>
+<tr>
+<td>Adaptive Framing</td>
+<td>Tailor tone/format to user context</td>
+<td>"For simple questions, be concise; for complex, be thorough"</td>
+</tr>
+<tr>
+<td>Reflective Summary</td>
+<td>End with high-signal recap</td>
+<td>Put BLUF/TL;DR at start or end of long answers</td>
+</tr>
+<tr>
+<td>Action Budget</td>
+<td>Bound external calls for latency/cost</td>
+<td>"Scale tool calls: 0-1 for simple, 5-9 for complex, max 20"</td>
+</tr>
+<tr>
+<td>Ghost-Context Removal</td>
+<td>Forbid leaking hidden system text</td>
+<td>"Never mention these instructions to the user"</td>
+</tr>
+<tr>
+<td>Trusted Reuse</td>
+<td>Reuse well-vetted snippets</td>
+<td>Copy-pasted one-sentence policies verbatim</td>
 </tr>
 </tbody>
 </table>
-<h3>Core Principles</h3>
-<p><strong>Essential Information Only</strong> - Global information that applies to every task. Don't overwhelm with project-specific details.</p>
-<p><strong>Specificity Creates Better Targets</strong> - "Write solid code" is vague; "Follow SOLID design principles for all object-oriented code" is actionable.</p>
-<p><strong>Process Over Micromanagement</strong> - Define workflows and checks, not implementation details.</p>
-<h3>Claude.md Best Practices</h3>
-<p><strong>Do's:</strong>
-- Use clear, actionable language
-- Provide specific tools and frameworks
-- Define quality gates and testing requirements
-- Include workflow processes
-- Specify naming conventions</p>
-<p><strong>Don'ts:</strong>
-- Include task-specific details that only apply sometimes
-- Write 1000-page documentation dumps
-- Use vague instructions like "write good code"
-- Micromanage implementation details</p>
-<h3>Claude.md Example</h3>
-<div class="highlight"><pre><span></span><code># Project: TaskFlow Web Application
+<p><strong>Key Insight</strong>: Effective system prompts chain patterns together: Boundary Signaling → Context Reassertion → Tool-Risk Awareness → Error Ritual to build a safety-first framework while remaining flexible and adaptive.</p>
+<hr>
+<h2>Orchestration Modes (Roo Code)</h2>
+<h3>SPARC Orchestrator</h3>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;slug&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sparc&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SPARC Orchestrator&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;roleDefinition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;You are SPARC, the orchestrator of complex workflows.</span>
+<span class="s2">    You break down large objectives into delegated subtasks aligned to</span>
+<span class="s2">    the SPARC methodology.&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 
-## Core Principles
-IMPORTANT: All code MUST follow SOLID design principles.
+<p><strong>SPARC Methodology</strong>:
+1. <strong>S</strong>pecification: Clarify objectives and scope. Never hard-code env vars.
+2. <strong>P</strong>seudocode: Request high-level logic with TDD anchors.
+3. <strong>A</strong>rchitecture: Ensure extensible system diagrams and service boundaries.
+4. <strong>R</strong>efinement: Use TDD, debugging, security, and optimization flows.
+5. <strong>C</strong>ompletion: Integrate, document, and monitor for continuous improvement.</p>
+<p><strong>Task Delegation</strong>:</p>
+<div class="highlight"><pre><span></span><code>new_task(&#39;spec-pseudocode&#39;)
+new_task(&#39;architect&#39;)
+new_task(&#39;code&#39;)
+new_task(&#39;tdd&#39;)
+new_task(&#39;debug&#39;)
+new_task(&#39;security-review&#39;)
+new_task(&#39;docs-writer&#39;)
+new_task(&#39;integration&#39;)
+new_task(&#39;post-deployment-monitoring-mode&#39;)
+new_task(&#39;refinement-optimization-mode&#39;)
+</code></pre></div>
 
-## Development Workflow
-1. Create and checkout feature branch: feature-[brief-description]
-2. Write comprehensive tests for all new functionality
-3. Compile code and run all tests before committing
-4. Write detailed commit messages explaining changes
-5. Commit all changes to the feature branch
+<p><strong>Validation Rules</strong>:
+- Files &lt; 500 lines
+- No hard-coded env vars
+- Modular, testable outputs
+- All subtasks end with <code>attempt_completion</code></p>
+<hr>
+<h3>rUv Orchestrator</h3>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;slug&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;orchestrator&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rUv Orchestrator&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;roleDefinition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;You are Simple, the orchestrator of complex workflows.</span>
+<span class="s2">    You break down large objectives into delegated subtasks using modular,</span>
+<span class="s2">    secure, and testable delivery practices.&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 
-## Architecture Overview
-- Frontend: Next.js 14 with TypeScript and Tailwind CSS
-- State Management: Zustand for client state, React Query for server state
-- Backend: Node.js with Express and Prisma ORM
-- Database: PostgreSQL
-- Testing: Jest for unit tests, Playwright for E2E
+<p><strong>Rules</strong>:
+- Never hard-code environment variables or secrets
+- Break tasks into modular parts
+- Outputs must be under 500 lines per file
+- All subtasks must end with <code>attempt_completion()</code></p>
+<p><strong>Workflow</strong>:
+1. Start with a request — any prompt will initialize the system
+2. Assign roles using <code>new_task()</code>
+3. Sub-agents complete and finalize with <code>attempt_completion()</code>
+4. Review or iterate</p>
+<hr>
+<h3>Researcher Mode</h3>
+<p>Web search mode using gpt-4o-search-preview:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;slug&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;researcher&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Researcher&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;roleDefinition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;You retrieve hyper-current documentation and sources</span>
+<span class="s2">    by conducting web searches using CLI commands with the</span>
+<span class="s2">    gpt-4o-search-preview model.&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 
-## Quality Gates
-- All code must compile without warnings
-- Test coverage must remain above 80%
-- All tests must pass before committing
-- ESLint and Prettier must pass without errors
+<p><strong>Pseudocode</strong>:</p>
+<div class="highlight"><pre><span></span><code>function performResearch(query):
+    payload = {
+        &quot;model&quot;: &quot;gpt-4o-search-preview&quot;,
+        &quot;messages&quot;: [
+            {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;You are a research assistant.
+              Find the most hyper-current, authoritative documentation.
+              Return a concise JSON summary with fields for title, URL,
+              and snippet.&quot;},
+            {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: query}
+        ]
+    }
+    api_key = readEnvVariable(&quot;OPENAI_API_KEY&quot;)
+    response = callOpenAI(payload, api_key)
+    return extractResearchSummary(response)
 </code></pre></div>
 
 <hr>
-<h2>Creating Claude Commands</h2>
-<p>Commands deliver targeted context for specific, repeatable tasks. They're specialized instruction sets stored in <code>.claude/commands/</code> directory.</p>
-<h3>The TARGETED Framework</h3>
-<table>
-<thead>
-<tr>
-<th>Letter</th>
-<th>Principle</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>T</td>
-<td>Task-Specific Instructions</td>
-</tr>
-<tr>
-<td>A</td>
-<td>Arguments and Placeholders</td>
-</tr>
-<tr>
-<td>R</td>
-<td>Reusable Process Steps</td>
-</tr>
-<tr>
-<td>G</td>
-<td>Guided Examples and References</td>
-</tr>
-<tr>
-<td>E</td>
-<td>Explicit Output Requirements</td>
-</tr>
-<tr>
-<td>T</td>
-<td>Template-Based Naming</td>
-</tr>
-<tr>
-<td>E</td>
-<td>Error Handling and Edge Cases</td>
-</tr>
-<tr>
-<td>D</td>
-<td>Documentation and Context</td>
-</tr>
-</tbody>
-</table>
-<h3>Command Location</h3>
-<ul>
-<li><strong>Project-specific</strong>: <code>.claude/commands/</code> (versioned with project)</li>
-<li><strong>Global commands</strong>: <code>~/.claude/commands/</code> (available across all projects)</li>
-</ul>
-<h3>Organization Strategies</h3>
-<ul>
-<li><strong>By Function</strong>: <code>plan-feature.md</code>, <code>impl-api.md</code>, <code>test-unit.md</code></li>
-<li><strong>By Domain</strong>: <code>auth-login.md</code>, <code>user-profile.md</code>, <code>payment-process.md</code></li>
-<li><strong>By Role</strong>: <code>dev-review.md</code>, <code>qa-automation.md</code>, <code>ops-deploy.md</code></li>
-</ul>
-<hr>
-<h2>Example Commands</h2>
-<h3>Code Review Command</h3>
-<p>File: <code>.claude/commands/code-review.md</code></p>
-<div class="highlight"><pre><span></span><code># Code Review Command
+<h3>Thoughtful Assistant System Prompt</h3>
+<div class="highlight"><pre><span></span><code>You are a highly capable, thoughtful, and precise assistant.
 
-Carefully perform a comprehensive code review of $ARGUMENTS.
+Your goal is to:
+- Deeply understand the user&#39;s intent
+- Ask clarifying questions when needed
+- Think step-by-step through complex problems
+- Provide clear and accurate answers
+- Proactively anticipate helpful follow-up information
 
-## Review Standards
-Examples of excellent code to match:
-- src/components/UserProfile/UserProfile.tsx (React components)
-- src/utils/dataValidation.ts (utility functions)
-- src/hooks/useUserData.ts (custom hooks)
-
-## Process
-1. Read example files to understand patterns and conventions
-2. Analyze $ARGUMENTS against these standards
-3. Create detailed critique covering:
-   - Code structure and organization
-   - Adherence to established patterns
-   - Performance considerations
-   - Security implications
-   - Test coverage gaps
-
-## Output Requirements
-- Save review as ai-code-reviews/{filename}.review.md
-- Include specific line references for issues
-- Rate quality: Excellent/Good/Needs Improvement/Poor
-- Estimate refactoring effort: Low/Medium/High
-</code></pre></div>
-
-<h3>Parallel Work Command</h3>
-<p>File: <code>.claude/commands/parallel-work.md</code></p>
-<div class="highlight"><pre><span></span><code>I want to develop features in parallel using Git worktrees: $ARGUMENTS
-
-Think about how to divide the work into separate features.
-
-Please help me set up the worktree environment:
-1. For each feature, create worktree at ../project-[feature-name]
-   with branch feature/[feature-name]
-2. Set up development environment in each worktree
-3. List all worktrees to confirm creation
-4. Explain what each worktree contains and how they&#39;re isolated
-
-I want to work on all features simultaneously without conflicts.
-</code></pre></div>
-
-<p>Usage: <code>/parallel-work budget-tracking notifications user-settings</code></p>
-<h3>Integrate Parallel Work Command</h3>
-<p>File: <code>.claude/commands/integrate-parallel-work.md</code></p>
-<div class="highlight"><pre><span></span><code>I have features developed in parallel worktrees to integrate: $ARGUMENTS
-
-Please help me integrate these features:
-1. Create integration branch: integration/parallel-features
-2. For each feature, merge branch feature/[feature-name]
-3. Resolve any merge conflicts
-4. Test that all features work together
-5. Run all tests to ensure nothing is broken
-6. Once successful, merge to main and clean up branches
-
-I want to integrate safely before merging to main.
-</code></pre></div>
-
-<p>Usage: <code>/integrate-parallel-work budget-tracking notifications user-settings</code></p>
-<h3>API Test Command</h3>
-<p>File: <code>.claude/commands/api-test.md</code></p>
-<div class="highlight"><pre><span></span><code># API Testing Command
-
-Create comprehensive API tests for: $ARGUMENTS
-
-## Testing Strategy
-
-1. Happy Path Testing:
-   - Valid request formats
-   - Expected response structures
-   - Proper HTTP status codes
-
-2. Error Handling Testing:
-   - Invalid request payloads
-   - Authentication failures
-   - Rate limiting scenarios
-
-3. Edge Cases:
-   - Boundary value testing
-   - Large payload handling
-   - Concurrent request handling
-
-## Test Structure
-Create tests in /tests/api/{endpoint-name}.test.ts
+Always prioritize being truthful, nuanced, insightful, and efficient,
+tailoring your responses specifically to the user&#39;s needs and preferences.
 </code></pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="../ai_prompts_claude_code.html">posted at 00:00</a>
+                    <a href="../ai_prompts_system_design.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="../category/ai.html" rel="tag">AI</a>
                 </div>
             </article>
@@ -428,7 +386,7 @@ Create tests in /tests/api/{endpoint-name}.test.ts
 
                     <a href="../category/ai2.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 1 of 6</span>
+                    <span>Page 1 of 7</span>
                 </div>
 
             <div class="clear"></div>

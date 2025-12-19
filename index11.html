@@ -30,6 +30,104 @@
 
             <article class="post">
                 <h2 class="title">
+                    <a href="./azure_data_factory.html" rel="bookmark" title="Permanent Link to &quot;Azure Data Factory&quot;">Azure Data Factory</a>
+                </h2>
+
+                
+                
+
+                <p><br></p>
+<h3>Data Ingress</h3>
+<ul>
+<li>
+<p>Excel File with one or more Sheets </p>
+<ul>
+<li>New Dataset &gt; File tab &gt; File System &gt; Excel &gt; select linked service to NAS drive &gt; browse to NAS drive file &gt; select a Sheet name if applicable</li>
+</ul>
+</li>
+<li>
+<p>Netezza Table</p>
+<ul>
+<li>New Dataset &gt; Database tab &gt; Netezza &gt; select linked service to Netezza &gt; select table</li>
+</ul>
+</li>
+</ul>
+<h3>Linked Services</h3>
+<h4>Create a Linked Service to connect ADF to Databricks using Key Vault</h4>
+<p>Pre-requisites: </p>
+<ul>
+<li>
+<p>Create a <strong>Key Vault</strong> resource</p>
+<ul>
+<li><em>Secrets</em> &gt; add a secret holding the Databricks PAT </li>
+<li><strong><em>Access policies</em></strong><ul>
+<li>click <em>Create</em></li>
+<li>select <em>Get</em> and <em>List</em> for <em>Key permissions</em> and <em>Secret permissions</em></li>
+<li>in the search box enter the name of your Azure Data Factory, select it when it shows up and click next and create all the way</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>This requires two linked services</p>
+<ul>
+<li>Databrick ls &gt; get it from 'Compute' tab</li>
+<li>within this ls you are asked to specify an AKV linked service &gt; click on 'New'</li>
+</ul>
+</li>
+<li>
+<p>AKV linked Service</p>
+<ul>
+<li>Base URL should be prefilled</li>
+<li>Authentication Method: <em>System Assigned Managed Identity</em></li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3>Parameterizing ADF</h3>
+<h4>Pass a custom filename to Copy Activity Sink Dataset</h4>
+<p>Copy Activity:     import an Excel to Blob Storage as Parquet file</p>
+<p>Problem to solve:  give the parquet file a custom name</p>
+<p>Solution:          add a parameter to the dataset of interest (source, sink or both depending on use case)</p>
+<p>Explanation:       when a copy activity source, or sink, uses a dataset that has a parameter, the parameter will appear in the source, or sink, <em>Dataset properties</em>. Here you can then specifiy a value, either as hard coded string or as yet another parameter, that will then be passed to the Dataset <em>Connection</em> tab where it is referenced and will be replaced by the value passed to it.</p>
+<p>Steps: 
+* for the sink part (Blob Storage), you need a Parquet dataset with the required Linked Service to ADLS Gen2
+* in the Dataset <em>Parameters</em> tab, add a parameter named <em>sink_file</em> (String)
+* in the Dataset <em>Connection</em> tab, it is assumed the <em>File Path</em> boxes 1 and 2 are populated with the path to the blob storage container where the files will be saved. For <em>File Path</em> box 3, enter <em>@dataset().sink_file</em>
+* in the Copy Activity, under <em>Dataset Properties</em> of the sink, enter the value you wish to pass to the sink dataset. THis can be a string or anotehr parameter e.g. a value captured from a <em>Get Metadata</em> activity, or from a <em>Lookup</em> activity.</p>
+<h4>Query Database Tables and Save as Parquet File to Blob Storage</h4>
+<p>The solution has two core components: A <em>Lookup</em> activity and a <em>ForEach</em> activity.</p>
+<p>The <em>Lookup</em> activity 
+* the source dataset can be a CSV file on NAS drive. The columns in the file are <em>table_name</em> and <em>where_filter</em>. Each row represents one table to be queried by the <em>ForEach</em> loop.</p>
+<p>The <em>ForEach</em> activity
+* consists of two <em>Set variable</em> activities connected to a <em>Copy Data</em> activity.
+* the <em>Set variable</em> activities reference the values for table name and for the where filter passed through by the <em>Lookup</em> activity. The syntax is shown in the screenshot below.
+* the source of the <em>Copy Data</em> activity uses the following query: <em>@concat('select * from ', item().table_name,' ', item().where_filter)</em>. 
+* in the sink of the <em>Copy Data</em> activity we pass a dynamic value to parameter <em>parFile</em> of the sink Parquet dataset: <em>@concat(item().table_name,'_NTZ.parquet')</em></p>
+<p><img alt="" src="img/ForEach_activity_all.PNG"></p>
+<p>The dynamic filename passed to the Parquet dataset is shown below:</p>
+<p><img alt="" src="img/ds_parquet_params_config.PNG"></p>
+<h4>Create dynamic folder name for COPY activity (egress)</h4>
+<ul>
+<li>
+<p>source ADLSGen2:<br>
+<code>@concat('@concat('custom_dataset/shared_team_data/CG_BPT/BPT_CLIENT_EXCELS/', formatdatetime(utcnow(),'yyyy-MM-dd'))</code></p>
+</li>
+<li>
+<p>sink NAS Drive: <br>
+<code>@concat('Azure/CG/static_output_files/', formatDateTime(utcNow(),'yyyy'), '-' ,formatDateTime(utcNow(),'MM'), '-', formatDateTime(utcNow(),'dd'))</code></p>
+</li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./azure_data_factory.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/azure-cloud.html" rel="tag">Azure Cloud</a>
+                </div>
+            </article>            <h4 class="date">Dec 24, 2022</h4>
+
+            <article class="post">
+                <h2 class="title">
                     <a href="./azure_databricks.html" rel="bookmark" title="Permanent Link to &quot;Azure Databricks&quot;">Azure Databricks</a>
                 </h2>
 
@@ -134,143 +232,6 @@ except:
                 <div class="info">
                     <a href="./azure_databricks.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/azure-cloud.html" rel="tag">Azure Cloud</a>
-                </div>
-            </article>            <h4 class="date">Feb 20, 2018</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./R.html" rel="bookmark" title="Permanent Link to &quot;R&quot;">R</a>
-                </h2>
-
-                
-                
-
-                <h4>Useful Snippets</h4>
-<ul>
-<li>Filter: <code>df %&gt;% filter(., GrLivArea &gt;=4000 &amp; SalePrice &lt; 200000)</code></li>
-<li>Remove observations: <code>df &lt;- df[-c(524, 1299), ]</code></li>
-<li>Reomve column: <code>df$colname&lt;- NULL</code></li>
-<li>Order columns alphabetically: <code>df &lt;- df[ ,order(colnames(df))]</code></li>
-<li>Convert: <code>df$colname &lt;- as.integer(df$colname)</code></li>
-<li>Make df with only numeric vars: <code>num_df &lt;- df[, sapply(df, is.numeric)]</code></li>
-<li>Correlation: <code>cor(num_df, use="complete.obs")</code></li>
-<li>random sampling from each factor: <code>olive_sample &lt;- ddply(olive,.(region),function(x) x[sample(nrow(x),10),])</code></li>
-<li>to access the 1rst and 3rd elements of a vector: <code>my.vec[c(1,3)]</code></li>
-</ul>
-<h4>Creating vectors and matrices</h4>
-<ul>
-<li><code>my.vec &lt;- c(1:4)</code></li>
-<li><code>my.vec &lt;- c(TRUE, FALSE, FALSE, FALSE, TRUE, TRUE)</code></li>
-<li><code>A &lt;- matrix(c(1,2,2,5), nrow=2, ncol=2, byrow=TRUE)</code></li>
-</ul>
-<h4>Script Header</h4>
-<div class="highlight"><pre><span></span><code><span class="n">library</span><span class="p">(</span><span class="n">rstudioapi</span><span class="p">)</span>
-<span class="n">setwd</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">rstudioapi</span><span class="p">::</span><span class="n">getActiveDocumentContext</span><span class="p">()</span><span class="err">$</span><span class="n">path</span><span class="p">))</span>
-<span class="n">rm</span><span class="p">(</span><span class="nb">list</span><span class="o">=</span><span class="n">ls</span><span class="p">())</span>
-
-<span class="n">library</span><span class="p">(</span><span class="n">rio</span><span class="p">)</span><span class="w"> </span><span class="c1"># import csv</span>
-</code></pre></div>
-
-<h4>Read Data</h4>
-<p><code>load("data_project_backpain.RData")</code></p>
-<div class="highlight"><pre><span></span><code><span class="n">data</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">import</span><span class="p">(</span><span class="s">&#39;superstore.csv&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">setclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;tibble&quot;</span><span class="p">)</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-</code></pre></div>
-
-<h4>Select only numeric columns</h4>
-<div class="highlight"><pre><span></span><code><span class="n">nums</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">unlist</span><span class="p">(</span><span class="nf">lapply</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">is.numeric</span><span class="p">))</span><span class="w">  </span>
-<span class="n">df</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">nums</span><span class="p">]</span>
-</code></pre></div>
-
-<h4>Coerce multiple columns to factors at once</h4>
-<div class="highlight"><pre><span></span><code><span class="n">cols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="ss">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;D&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;H&quot;</span><span class="p">)</span>
-<span class="n">df</span><span class="o">[</span><span class="n">cols</span><span class="o">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">df</span><span class="o">[</span><span class="n">cols</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">factor</span><span class="p">)</span><span class="w">  </span><span class="err">##</span><span class="w"> </span><span class="k">as</span><span class="p">.</span><span class="n">factor</span><span class="p">()</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">used</span>
-</code></pre></div>
-
-<h4>Exclude columns by name</h4>
-<div class="highlight"><pre><span></span><code><span class="n">exclude</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Neighborhood&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Exterior2nd&quot;</span><span class="p">,)</span>
-<span class="n">df</span><span class="p">[</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="nf">which</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">exclude</span><span class="p">)]</span>
-</code></pre></div>
-
-<h4>Count Missing Values</h4>
-<p><code>sapply(df, function(x) sum(is.na(x)))</code></p>
-<h4>Create vector from column and drop missing values</h4>
-<div class="highlight"><pre><span></span><code><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gt</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">gt</span><span class="o">$</span><span class="n">LandAverageTemperature</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">]</span>
-</code></pre></div>
-
-<h4>Making Objects available to RMarkdown</h4>
-<ul>
-<li>in R script</li>
-</ul>
-<p><code>save(all = TRUE, file= "all.rda")</code>
-<code>save(object1.name, object2.name, file= "all.rda")</code></p>
-<ul>
-<li>in RMD file</li>
-</ul>
-<p><code>load("all.rda")</code></p>
-<h4>Benchmarking</h4>
-<div class="highlight"><pre><span></span><code><span class="nx">libray</span><span class="p">(</span><span class="nx">microbenchmark</span><span class="p">)</span>
-<span class="nx">microbenchmark</span><span class="p">(</span>
-<span class="w">  </span><span class="nx">bad_cpp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">bad_select_positive_values_cpp</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span>
-<span class="w">  </span><span class="nx">good_cpp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">good_select_positive_values_cpp</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span>
-<span class="w">  </span><span class="nx">times</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span>
-<span class="p">)</span>
-
-<span class="kn">library</span><span class="p">(</span><span class="nx">rbenchmark</span><span class="p">)</span>
-<span class="nx">benchmark</span><span class="p">(</span>
-<span class="w">  </span><span class="nx">bad_select_positive_values_cpp</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span>
-<span class="w">  </span><span class="nx">good_select_positive_values_cpp</span><span class="p">(</span><span class="nx">x</span><span class="p">),</span>
-<span class="w">  </span><span class="nx">order</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;relative&quot;</span>
-<span class="p">)</span>
-</code></pre></div>
-
-<h4>Profiling</h4>
-<div class="highlight"><pre><span></span><code><span class="nv">Rprof</span><span class="ss">(</span><span class="s2">&quot;profile1.out&quot;</span><span class="w"> </span><span class="ss">)</span><span class="w"> </span>#<span class="k">send</span><span class="w"> </span><span class="nv">profiling</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">profile1</span>.<span class="nv">out</span>
-#<span class="w"> </span><span class="o">&lt;</span><span class="k">call</span><span class="w"> </span><span class="nl">function</span><span class="w"> </span><span class="nv">here</span><span class="o">&gt;</span>
-<span class="nv">Rprof</span><span class="ss">(</span><span class="nv">NULL</span><span class="ss">)</span>
-<span class="nv">summaryRprof</span><span class="ss">(</span><span class="s2">&quot;profile1.out&quot;</span><span class="ss">)</span>
-</code></pre></div>
-
-<h4>Sliding Window</h4>
-<p>How sliding window works:</p>
-<ul>
-<li>select subset of x of size 3 using its indices</li>
-<li>1st iter: x[3 - 3 + 1, 3] gives x[1, 3]</li>
-<li>2nd iter: x[4 - 3 + 1, 4] gives x[2, 4]</li>
-<li>...</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="k">window</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span>
-<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="k">window</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">))</span><span class="w"> </span><span class="err">{</span>
-<span class="n">x_subset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="o">[</span><span class="n">seq(i - window + 1, i)</span><span class="o">]</span>
-<span class="n">res</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">x_subset</span><span class="p">)</span>
-<span class="err">}</span>
-</code></pre></div>
-
-<h4>R: Packages</h4>
-<ul>
-<li><a href="https://heartbeat.fritz.ai/using-caret-in-r-to-classify-term-deposit-subscriptions-for-a-bank-bd40ff5cc15">caret</a></li>
-<li><a href="http://www.rebeccabarter.com/blog/2019-06-06_pre_processing/">Using the recipes package for easy pre-processing</a></li>
-<li><a href="https://cran.r-project.org/web/packages/bestNormalize/vignettes/bestNormalize.html">bestNormalize</a></li>
-</ul>
-<h4>Related Links</h4>
-<ul>
-<li><a href="https://blog.exploratory.io/populating-missing-dates-with-complete-and-fill-functions-in-r-and-exploratory-79f2a321e6b5">Populating Missing Dates with Complete and Fill Functions in R and Exploratory</a></li>
-<li><a href="https://www.youtube.com/user/marinstatlectures/playlists">MarinStatsLectures</a></li>
-<li><a href="https://towardsdatascience.com/data-cleaning-with-r-and-the-tidyverse-detecting-missing-values-ea23c519bc62">Data Cleaning with R and the Tidyverse: Detecting Missing Values</a></li>
-<li><a href="https://medium.com/x8-the-ai-community/play-with-your-ml-dataset-cheatsheet-in-r-bd8451ec6dd7">Play With Your ML Dataset - Cheatsheet in R</a></li>
-<li><a href="https://towardsdatascience.com/coding-in-r-pivot-painlessly-32e40a0b6c3d">Coding in R: Pivot Painlessly</a></li>
-<li><a href="https://towardsdatascience.com/simple-fast-exploratory-data-analysis-in-r-with-dataexplorer-package-e055348d9619">Simple Fast Exploratory Data Analysis in R with DataExplorer Package</a></li>
-<li><a href="https://community.rstudio.com/t/wrap-column-name-in-pdf-table-from-knitr-kable/3278">Wrap column name in pdf table, from knitr::kable</a></li>
-<li><a href="https://medium.com/analytics-vidhya/a-guide-to-machine-learning-in-r-for-beginners-part-5-4c00f2366b90">A Guide to Machine Learning in R for Beginners: Logistic Regression</a></li>
-<li><a href="https://towardsdatascience.com/tired-of-nested-ifelse-in-dplyr-look-no-further-ebf7166b5289">Clean Up Your R Code! A Secret to Better Feature Engineering</a></li>
-<li><a href="https://medium.com/analytics-vidhya/group-manipulation-in-r-3-5554a0c1b544">Group Manipulation In R</a></li>
-<li><a href="https://medium.com/@moorissa/the-best-resources-for-r-programming-37dbc94e0de6">The Best Resources for R Programming</a></li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./R.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/r.html" rel="tag">R</a>
                 </div>
             </article>
 
