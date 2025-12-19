@@ -113,6 +113,7 @@
                     <li><a href="../conda.html">Conda</a></li>
                     <li><a href="../Vagrant VM.html">Vagrant VM</a></li>
                     <li><a href="../vagrant_vpn.html">Vagrant VM with VPN</a></li>
+                    <li><a href="../wsl.html">WSL (Windows Subsystem for Linux)</a></li>
                     <li><a href="../Linux.html">Linux</a></li>
                     <li><a href="../ssh_keys.html">SSH Keys</a></li>
                 </ul>
@@ -206,20 +207,24 @@
 <script>
 // Add copy buttons to all code blocks
 document.addEventListener('DOMContentLoaded', function() {
+    var copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    var checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     document.querySelectorAll('pre').forEach(function(pre) {
         // Avoid duplicate buttons
         if (pre.querySelector('.copy-btn')) return;
         var btn = document.createElement('button');
         btn.className = 'copy-btn';
         btn.type = 'button';
-        btn.innerText = 'Copy';
+        btn.innerHTML = copyIcon;
+        btn.title = 'Copy to clipboard';
         btn.onclick = function() {
             var code = pre.querySelector('code');
             if (code) {
                 var text = code.innerText;
                 navigator.clipboard.writeText(text).then(function() {
-                    btn.innerText = 'Copied!';
-                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                    btn.innerHTML = checkIcon;
+                    setTimeout(function() { btn.innerHTML = copyIcon; }, 1200);
                 });
             }
         };

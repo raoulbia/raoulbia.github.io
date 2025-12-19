@@ -26,7 +26,32 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 01, 2017</h4>
+        <div id="content">            <h4 class="date">Nov 10, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./posygis.html" rel="bookmark" title="Permanent Link to &quot;PostGIS&quot;">PostGIS</a>
+                </h2>
+
+                
+                
+
+                <h4>QGIS</h4>
+<h4>Codes</h4>
+<p>CRS: 4326</p>
+<p>DUBLIN BUS EPSG CRS 2157
+https://www.scss.tcd.ie/publications/theses/diss/2019/TCD-SCSS-DISSERTATION-2019-016.pdf</p>
+<h3>postgis resources</h3>
+<ul>
+<li><a href="https://postgis.net/docs/manual-1.3/ch03.html">PostGIS FAQs</a></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./posygis.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/gis.html" rel="tag">GIS</a>
+                </div>
+            </article>            <h4 class="date">Nov 01, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -70,207 +95,6 @@
                     <a href="./s3.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/s3.html" rel="tag">s3</a>
                 </div>
-            </article>            <h4 class="date">Nov 01, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./web_development.html" rel="bookmark" title="Permanent Link to &quot;Web Development&quot;">Web Development</a>
-                </h2>
-
-                
-                
-
-                <h3>nginx</h3>
-<ul>
-<li><code>sudo nginx -t</code> to test nginx</li>
-<li><code>sudo /etc/init.d/nginx reload</code> to restart nginx</li>
-<li><code>sudo apt-get remove nginx nginx-common</code> to to remove all but config files</li>
-<li><code>sudo apt-get purge nginx nginx-common</code> to remove everything</li>
-<li><code>find /etc/nginx -name '*.conf' | xargs grep -i log</code></li>
-<li><a href="https://www.youtube.com/watch?v=fpeQlbdRmKI">How To Set Up nginx Virtual Hosts (Server Blocks)</a></li>
-</ul>
-<p><br></p>
-<h3>start ngrok</h3>
-<p>To start ngrok:</p>
-<p><code>./ngrok http 5000</code></p>
-<p><br></p>
-<h3>Heroku</h3>
-<h4>Deploying a Flask App vs. running a Python script on the VM</h4>
-<ul>
-<li>The key difference is in how <code>Dynos</code> are configured in the <code>Resources</code> section.</li>
-<li>This is dictated by what is in the Procfile (see below). </li>
-<li>For running a Python script, click <code>Edit dyno formation</code> of <code>web</code> and <code>worker</code> and activate both radio buttons. Note that the <code>worker</code> can also be activate using <code>heroku ps:scale worker=1 -a APPNAME</code>.</li>
-</ul>
-<h4>Procfile</h4>
-<p>Procfile for Flask App</p>
-<ul>
-<li><code>web: gunicorn project_name.wsgi</code> where <code>project_name</code> is name of dir in which <code>settings.py</code> is located.</li>
-</ul>
-<p>Procfile for standalone python script</p>
-<div class="highlight"><pre><span></span><code><span class="n">web</span><span class="o">:</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">script</span><span class="o">.</span><span class="na">py</span>
-<span class="n">worker</span><span class="o">:</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">script</span><span class="o">.</span><span class="na">py</span>
-</code></pre></div>
-
-<h4>Install Heroku CLI</h4>
-<p>Needed for <code>heroku login --interactive</code> and <code>heroku create</code>.</p>
-<ul>
-<li><code>curl https://cli-assets.heroku.com/install.sh | sh</code></li>
-<li><a href="https://devcenter.heroku.com/categories/command-line">read more</a></li>
-</ul>
-<h4>Stop/Start Heroku VM</h4>
-<p>Start:</p>
-<ul>
-<li><code>heroku ps:scale web=1</code> for starting a Flask App</li>
-<li><code>heroku ps:scale worker=1 -a APPNAME</code> for starting a "worker" which will in turn kick off a Python script i.e. will result in the same as logging in with <code>heroku login</code> and running <code>python script.py</code>.</li>
-</ul>
-<p>Stop:</p>
-<ul>
-<li><code>heroku ps:scale web=0</code> to stop Flask app</li>
-</ul>
-<p>or </p>
-<ul>
-<li><code>heroku ps -a APPNAME</code> to get current running dynos (e.g. <code>worker.1</code></li>
-<li><code>heroku ps:stop worker.1 -a APPNAME</code></li>
-<li><code>heroku logs --tail -a APPNAME</code> to see what is going on in the VM.</li>
-</ul>
-<h4>Misc.</h4>
-<ul>
-<li><a href="https://devcenter.heroku.com/articles/git">overview</a></li>
-<li>add <code>Pipfile</code> to <code>.gitignore</code> to ensure that dependencies are installed from <code>requirements.txt</code>.</li>
-<li>add <code>.env/</code> to <code>.gitignore</code> to ensure that secret key is hidden on github/gitlab.</li>
-<li>after deployment run <code>heroku ps:scale web=1 --app APPNAME</code></li>
-</ul>
-<h4>Login to Heroku VM</h4>
-<ul>
-<li><code>heroku login</code></li>
-<li><code>heroku run bash</code></li>
-<li><a href="https://help.heroku.com/18PI5RSY/how-do-i-clear-the-build-cache">clear the build cache</a></li>
-<li><a href="https://chatbotslife.com/github-repo-heroku-explained-how-to-host-your-bot-server-python-8b3ec4f071ce">related article</a></li>
-</ul>
-<h4>Heroku <strong>Flask</strong> Deployment</h4>
-<ul>
-<li><code>heroku create &lt;NAME&gt;</code> to create a Heroku remote</li>
-<li><code>git add . ; git commit -m "update"</code></li>
-<li><code>git push heroku master</code></li>
-<li><code>heroku run python manage.py migrate</code></li>
-<li><code>heroku run python manage.py createsuperuser</code></li>
-</ul>
-<p>Heroku <strong>Dash</strong> Deployment</p>
-<ul>
-<li><a href="https://github.com/plotly/dash-heroku-template">see here</a></li>
-<li>change Step 6 to: <code>git remote add heroku https://git.heroku.com/semmeddb</code></li>
-</ul>
-<p>Heroku <strong>Django</strong> Deployment</p>
-<ul>
-<li><a href="https://github.com/heroku/heroku-django-template">heroku django template</a></li>
-<li><a href="https://devcenter.heroku.com/articles/django-assets">about static assets</a></li>
-<li><code>pipenv install whitenoise</code></li>
-<li><code>python manage.py collectstatic</code></li>
-<li><a href="https://devcenter.heroku.com/articles/django-app-configuration">Django App configuration</a></li>
-<li>add <code>import django_heroku</code> to <code>settings.py</code> (top)</li>
-<li>add <code>django_heroku.settings(locals())</code> to <code>settings.py</code> (bottom)</li>
-</ul>
-<p><br></p>
-<h3>Django2</h3>
-<p>Useful commands</p>
-<div class="highlight"><pre><span></span><code><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">startproject</span> <span class="n">app1</span>
-<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
-<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
-<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span>
-<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
-</code></pre></div>
-
-<p>Django templates</p>
-<p>in <code>settings.py</code></p>
-<div class="highlight"><pre><span></span><code> BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
- ...
- TEMPLATES = [
-   {
-       &#39;DIRS&#39;: [os.path.join(BASE_DIR, &#39;firstwebsite/templates&#39;)]
-   }]
-</code></pre></div>
-
-<p>in <code>urls.py</code></p>
-<ul>
-<li>...to be completed (Django1 vs Django2 issue)</li>
-<li>try <code>from views import</code> appraoch</li>
-</ul>
-<p>Django Resources</p>
-<ul>
-<li><a href="https://ccbv.co.uk/">Classy Class-Based Views ccbv.co.uk</a></li>
-<li><a href="https://docs.djangoproject.com/en/2.1/ref/models/">docs.djangoproject.com/en/2.1/ref/models</a></li>
-<li><a href="https://docs.djangoproject.com/en/2.1/ref/class-based-views/generic-display/">docs.djangoproject.com/en/2.1/ref/class-based-views/generic-display</a></li>
-<li><a href="https://docs.djangoproject.com/en/2.1/topics/class-based-views/generic-display/">docs.djangoproject.com/en/2.1/topics/class-based-views/generic-display</a></li>
-<li><a href="https://docs.djangoproject.com/en/2.1/ref/templates/builtins/">docs.djangoproject.com/en/2.1/ref/templates/builtins</a></li>
-<li><a href="https://docs.djangoproject.com/en/2.1/topics/db/queries/">docs.djangoproject.com/en/2.1/topics/db/queries</a></li>
-</ul>
-<p><br></p>
-<h3>Apache2</h3>
-<ul>
-<li><code>apachectl -S</code></li>
-<li><code>sudo service apache2 restart</code></li>
-<li><a href="http://flask.pocoo.org/docs/1.0/deploying/mod_wsgi/#configuring-apache">Configure Apache for Flask</a></li>
-<li><a href="http://terokarvinen.com/2016/deploy-flask-python3-on-apache2-ubuntu">Deploy Flask Python3 on Apache2 on Ubuntu</a></li>
-<li><a href="https://www.bogotobogo.com/python/Flask/Python_Flask_HelloWorld_App_with_Apache_WSGI_Ubuntu14.php">Flask HelloWorld App_with_Apache WSGI_Ubuntu14</a></li>
-<li><a href="https://websiteforstudents.com/installing-apache2-mariadb-on-ubuntu-16-04-17-10-18-04-with-php-7-2-support-lamp/">Installing LAMP</a></li>
-</ul>
-<p><br></p>
-<h3>Flask</h3>
-<ul>
-<li>to run a Flask app: <code>python app.py</code></li>
-<li><code>import pdb; pdb.set_trace()</code></li>
-<li>error: address already in use<ul>
-<li><code>sudo lsof -i :5000</code></li>
-<li><code>sudo kill PID</code></li>
-</ul>
-</li>
-<li><code>FLASK_APP=run.py flask run</code></li>
-<li><a href="https://stackoverflow.com/questions/41144565/flask-does-not-see-change-in-js-file">flask does not see change in .js file</a></li>
-<li><a href="https://help.parsehub.com/hc/en-us/articles/217751808-API-Tutorial-How-to-get-run-data-using-Python-Flask">API Tutorial: How to get run data using Python &amp; Flask</a></li>
-<li><a href="https://stackoverflow.com/questions/53258168/gunicorn-wont-start-flask-app-because-application-object-must-be-callable">gunicorn and wsgi configuration</a></li>
-<li><a href="https://coderwall.com/p/pstm1w/deploying-a-flask-app-at-heroku">gunicorn and flask</a></li>
-</ul>
-<p><br></p>
-<h3>Node JS</h3>
-<p>Install nodejs:</p>
-<div class="highlight"><pre><span></span><code>curl -sL https://deb.nodesource.com/setup_8.x — Node.js 8 LTS &quot;Carbon&quot; | sudo -E bash -
-sudo apt-get install -y nodejs
-</code></pre></div>
-
-<p>symlink issue with Vagrant VM shared folder:</p>
-<p><code>npm install --no-bin-links</code></p>
-<p>port already in use</p>
-<p><code>ps aux | awk '/node/{print $2}' | xargs kill -9</code></p>
-<p><br></p>
-<h3>Redux</h3>
-<ul>
-<li><a href="https://www.bram.us/2016/10/25/plotly-academy-state-management-with-redux/">https://www.bram.us/2016/10/25/plotly-academy-state-management-with-redux/</a></li>
-</ul>
-<p><br></p>
-<h3>Ansible</h3>
-<ul>
-<li><a href="https://blog.jetbrains.com/pycharm/2017/12/developing-in-a-vm-with-vagrant-and-ansible/">Developing a VM-with Vagrant and Ansible</a></li>
-</ul>
-<p><br></p>
-<h3>SAP Conversational AI</h3>
-<ul>
-<li>markdown URL syntax: <code>[Click Here]({{memory.url}})</code> </li>
-</ul>
-<p><br></p>
-<h3>Misc.</h3>
-<ul>
-<li><a href="https://miro.com/">https://miro.com/</a></li>
-<li><a href="https://wireframe.cc/">https://wireframe.cc/</a></li>
-<li><a href="https://www.creative-tim.com/product/get-shit-done-kit">https://www.creative-tim.com/product/get-shit-done-kit</a></li>
-<li><a href="https://uxplanet.org/how-the-bootstrap-4-grid-works-a1b04703a3b7">https://uxplanet.org/how-the-bootstrap-4-grid-works-a1b04703a3b7</a></li>
-<li><a href="https://hackerthemes.com/bootstrap-cheatsheet/#col-sm-1">https://hackerthemes.com/bootstrap-cheatsheet/#col-sm-1</a></li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./web_development.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/web-development.html" rel="tag">Web Development</a>
-                </div>
             </article>
 
                 <div class="clear"></div>
@@ -296,20 +120,24 @@ sudo apt-get install -y nodejs
 <script>
 // Add copy buttons to all code blocks
 document.addEventListener('DOMContentLoaded', function() {
+    var copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    var checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     document.querySelectorAll('pre').forEach(function(pre) {
         // Avoid duplicate buttons
         if (pre.querySelector('.copy-btn')) return;
         var btn = document.createElement('button');
         btn.className = 'copy-btn';
         btn.type = 'button';
-        btn.innerText = 'Copy';
+        btn.innerHTML = copyIcon;
+        btn.title = 'Copy to clipboard';
         btn.onclick = function() {
             var code = pre.querySelector('code');
             if (code) {
                 var text = code.innerText;
                 navigator.clipboard.writeText(text).then(function() {
-                    btn.innerText = 'Copied!';
-                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                    btn.innerHTML = checkIcon;
+                    setTimeout(function() { btn.innerHTML = copyIcon; }, 1200);
                 });
             }
         };

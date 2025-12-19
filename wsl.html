@@ -3,7 +3,7 @@
 <head>
         <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | Azure</title>
+    <title>code snippets etc. | WSL (Windows Subsystem for Linux)</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
@@ -27,65 +27,78 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 24, 2022</h4>
+        <div id="content">            <h4 class="date">Dec 03, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./azure.html" rel="bookmark" title="Permanent Link to &quot;Azure&quot;">Azure</a>
+                    <a href="./wsl.html" rel="bookmark" title="Permanent Link to &quot;WSL (Windows Subsystem for Linux)&quot;">WSL (Windows Subsystem for Linux)</a>
                 </h2>
 
                 
                 
 
-                <p><br></p>
-<h3>Using Key Vault Secrets in Azure Data Factory</h3>
-<p>Key Vault secrets can be used to securely manage connections to services such as NAS drives or Databricks.</p>
-<h4>NAS Drive Linked Service</h4>
+                <h3>Accessing Windows Files from WSL</h3>
+<p>Windows drives are mounted under <code>/mnt/</code> in WSL. Your C: drive is at <code>/mnt/c/</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Navigate to Windows user directory</span>
+<span class="nb">cd</span><span class="w"> </span>/mnt/c/Users/your-username/Documents
+
+<span class="c1"># List files</span>
+ls<span class="w"> </span>-la
+</code></pre></div>
+
+<h3>Opening Windows File Explorer from WSL</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Open Explorer at current WSL directory</span>
+explorer.exe<span class="w"> </span>.
+</code></pre></div>
+
+<h3>Accessing WSL Files from Windows</h3>
+<p>In Windows File Explorer, navigate to:</p>
+<div class="highlight"><pre><span></span><code>\\wsl$\
+</code></pre></div>
+
+<p>This shows all installed WSL distributions and their file systems.</p>
+<h3>Create Shortcuts with Symbolic Links</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a symlink to quickly access Windows folders</span>
+ln<span class="w"> </span>-s<span class="w"> </span>/mnt/c/Users/your-username/workproducts<span class="w"> </span>~/winwork
+
+<span class="c1"># Now just use</span>
+<span class="nb">cd</span><span class="w"> </span>~/winwork
+</code></pre></div>
+
+<h3>Performance Tips</h3>
 <ul>
-<li>Create a Service Account with priviliges to access a NAS drive</li>
-<li>create a new secret in KV with the password of the above Service Account</li>
-<li>use the secret, and the Service Account user name, in ADF when configuring a linked service for NAS drive</li>
-<li>use the linked service in an ADF Copy data activity</li>
+<li><strong>Keep project files in WSL filesystem</strong> (<code>/home/...</code>) for best performance</li>
+<li><strong>Avoid heavy I/O across filesystems</strong> - accessing <code>/mnt/c/</code> is slower than native WSL paths</li>
+<li><strong>Use WSL 2</strong> for better file system performance with Linux-native filesystems</li>
 </ul>
-<h4>Databricks Linked Service</h4>
-<ul>
-<li>Generate a token in Databricks and take note of it</li>
-<li>create a new secret in KV with the above token</li>
-<li>use the secret in ADF when configuring a linked service for databricks</li>
-<li>use the linked service in an ADF Databricks notebook activity</li>
-</ul>
-<h3>Azure ARM</h3>
-<h4>Deploy via Powershell</h4>
-<ul>
-<li><code>New-AzResourceGroup RG01 "South Central US"</code></li>
-<li><code>New-AzResourceGroupDeployment</code> adds a deployment to an existing resource group. (https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-9.3.0)</li>
-</ul>
-<h4>Useful Links</h4>
-<ul>
-<li>https://samcogan.com/deploying-resource-groups-with-arm-templates/</li>
-</ul>
-<p><br></p>
-<h3>Azure Fundamentals Exam (AZ-900)</h3>
-<ul>
-<li><a href="./drafts/azure_cloud_benefits_and_categories.html">Azure Cloud: Benefits and Categories</a></li>
-<li><a href="./drafts/azure_architectural_components.html">Azure Architectural Components</a></li>
-<li><a href="./drafts/azure_services.html">Azure Services</a></li>
-<li><a href="./drafts/azure_solutions.html">Azure Solutions</a></li>
-<li><a href="./drafts/azure_management_tools.html">Azure Management Tools</a></li>
-<li><a href="./drafts/azure_general_security.html">Azure General Security Features</a></li>
-<li><a href="./drafts/azure_network_security.html">Azure Network Security</a></li>
-<li><a href="./drafts/azure_identity_governance_privacy_compliance.html">Azure Identity, Governance, Privacy and Compliance Features</a></li>
-<li><a href="./drafts/azure_cost_management_and_sla.html">Azure Cost Management and SLA</a></li>
-</ul>
-<h3>Note about creating a Databricks Resource in Azure Portal</h3>
-<ul>
-<li>When creating a Databricks resource, Databricks will itself create a separate resource group (RG) with a storage account. This RG cannot be deleted via the porta;. See here for more: https://stackoverflow.com/questions/60694149/unable-to-remove-azure-databricks-managed-resource-group</li>
-</ul>
+<h3>Common Paths</h3>
+<table>
+<thead>
+<tr>
+<th>Windows Path</th>
+<th>WSL Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>C:\Users\username</code></td>
+<td><code>/mnt/c/Users/username</code></td>
+</tr>
+<tr>
+<td><code>D:\Projects</code></td>
+<td><code>/mnt/d/Projects</code></td>
+</tr>
+<tr>
+<td>WSL home</td>
+<td><code>\\wsl$\Ubuntu\home\username</code> (from Windows)</td>
+</tr>
+</tbody>
+</table>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./azure.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/azure.html" rel="tag">Azure</a>
+                    <a href="./wsl.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
                 </div>
             </article>
             <div class="clear"></div>

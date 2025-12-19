@@ -30,6 +30,125 @@
 
             <article class="post">
                 <h2 class="title">
+                    <a href="./ksql.html" rel="bookmark" title="Permanent Link to &quot;KSql Cheatsheet&quot;">KSql Cheatsheet</a>
+                </h2>
+
+                
+                
+
+                <h3>Installation</h3>
+<ul>
+<li>Download and Setup Java 8 JDK: <code>sudo apt install openjdk-8-jdk</code></li>
+<li>wget https://packages.confluent.io/archive/6.2/confluent-6.2.0.tar.gz</li>
+<li>tar -xvf confluent-6.2.0</li>
+<li><code>sudo ln -s confluent-6.2.0/ confluent</code></li>
+<li>add to <code>~/.bashrc</code>:</li>
+<li><code>export  export PATH=/opt/confluent/bin:$PATH</code> (or where ever the tar has been unzipped to.</li>
+<li><code>export CONFLUENT_HOME=/opt/confluent</code></li>
+</ul>
+<h3>Start KSql</h3>
+<div class="highlight"><pre><span></span><code>confluent<span class="w"> </span><span class="nb">local</span><span class="w"> </span>services<span class="w"> </span>ksql-server<span class="w"> </span>start
+confluent<span class="w"> </span><span class="nb">local</span><span class="w"> </span>services<span class="w"> </span>ksql-server<span class="w"> </span>status
+</code></pre></div>
+
+<h4>Topics</h4>
+<p>Note: By default KSql will show only new arriving data.</p>
+<p>Use <code>FROM BEGINNING</code> to see all existing data AND keep listening for new data.</p>
+<p>Also useful for checking that topic has a KEY!!</p>
+<ul>
+<li><code>print 'topic_name' FROM BEGINNING LIMIT 1;</code></li>
+</ul>
+<h4>auto.offset.reset</h4>
+<p>By default KSql <code>select</code> only shows new incoming data aka <code>current offset</code>. </p>
+<p>Must run command below (Only valid for current KSql session! Must re-issue each tme entering KSql prompt).</p>
+<div class="highlight"><pre><span></span><code>SET &#39;auto.offset.reset&#39;=&#39;earliest&#39; ;
+</code></pre></div>
+
+<p>to reset this setting:</p>
+<div class="highlight"><pre><span></span><code>UNSET &#39;auto.offset.reset&#39;;
+</code></pre></div>
+
+<h4>KSql CREATE TABLE (<a href="https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-table/">KSQL Syntax Reference</a> )</h4>
+<div class="highlight"><pre><span></span><code>create table GTFS_DELAYS_TABLE (id VARCHAR PRMARY KEY, delay INT, timestamp INT) WITH (KAFKA_TOPIC=&#39;gtfs-delays&#39;, VALUE_FORMAT=&#39;JSON&#39;) ;
+show tables ;
+describe GTFS_DELAYS_TABLE ;
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>create<span class="w"> </span>table<span class="w"> </span>GTFS_TABLE<span class="w"> </span><span class="o">(</span><span class="w"> </span><span class="se">\</span>
+id<span class="w"> </span>VARCHAR<span class="w"> </span>PRIMARY<span class="w"> </span>KEY,<span class="w"> </span><span class="se">\</span>
+trip_update_trip_trip_id<span class="w"> </span>VARCHAR,<span class="w"> </span><span class="se">\</span>
+trip_update_trip_start_time<span class="w"> </span>VARCHAR,<span class="w"> </span><span class="se">\</span>
+trip_update_trip_start_date<span class="w"> </span>VARCHAR,<span class="se">\</span>
+trip_update_trip_schedule_relationship<span class="w"> </span>VARCHAR,<span class="w"> </span><span class="se">\</span>
+trip_update_trip_route_id<span class="w"> </span>VARCHAR,<span class="w"> </span><span class="se">\</span>
+trip_update_stop_time_update_stop_sequence<span class="w"> </span>INT,<span class="w"> </span><span class="se">\</span>
+trip_update_stop_time_update_departure_delay<span class="w"> </span>INT,<span class="w"> </span><span class="se">\</span>
+trip_update_stop_time_update_stop_id<span class="w"> </span>VARCHAR,<span class="w"> </span><span class="se">\</span>
+trip_update_stop_time_update_schedule_relationship<span class="w"> </span>VARCHAR,<span class="w"> </span><span class="se">\</span>
+trip_update_stop_time_update_arrival_delay<span class="w"> </span>INT<span class="w"> </span><span class="se">\</span>
+<span class="o">)</span><span class="w"> </span>WITH<span class="w"> </span><span class="o">(</span><span class="nv">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;GTFS_TOPIC&#39;</span>,<span class="w"> </span><span class="nv">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="o">)</span><span class="w"> </span><span class="p">;</span>
+</code></pre></div>
+
+<p>To persist the above table see below. </p>
+<div class="highlight"><pre><span></span><code>create table GTFS_TABLE2 AS select * from GTFS_TABLE ;
+</code></pre></div>
+
+<p>Before terminating a persistent table we must first terminate that query!</p>
+<div class="highlight"><pre><span></span><code>show queries ;
+terminate &lt;query_name&gt; ;
+drop table &lt;table_name&gt; ;
+</code></pre></div>
+
+<h4>KSql SELECT</h4>
+<div class="highlight"><pre><span></span><code>select trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence, trip_update_stop_time_update_departure_delay from GTFS_TABLE emit changes ;
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>select trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence, sum(trip_update_stop_time_update_departure_delay) from GTFS_TABLE group by trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence emit changes ;
+</code></pre></div>
+
+<h4>KSql streams</h4>
+<p>KSql streams are used to interrogate the underlying data.</p>
+<div class="highlight"><pre><span></span><code>create stream users_stream (name VARCHAR, countrycode VARCHAR) WITH (KAFKA_TOPIC=&#39;USERS&#39;, VALUE_FORMAT=&#39;DELIMITED&#39;) ;
+list streams ;
+select name, countrycode from users_stream emit changes;
+select name, countrycode from users_stream emit changes limit 5;
+select countrycode, count(*) from users_stream group by countrycode;
+drop stream if exists users_stream ;
+drop stream if exists users_stream delete topic ;
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="nt">create</span><span class="w"> </span><span class="nt">stream</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="o">(</span><span class="nt">id</span><span class="w"> </span><span class="nt">VARCHAR</span><span class="o">,</span><span class="w"> </span><span class="nt">delay</span><span class="w"> </span><span class="nt">INT</span><span class="o">,</span><span class="w"> </span><span class="nt">timestamp</span><span class="w"> </span><span class="nt">INT</span><span class="o">)</span><span class="w"> </span><span class="nt">WITH</span><span class="w"> </span><span class="o">(</span><span class="nt">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;gtfs-delays&#39;</span><span class="o">,</span><span class="w"> </span><span class="nt">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">;</span>
+<span class="nt">describe</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="o">;</span>
+<span class="nt">select</span><span class="w"> </span><span class="nt">TIMESTAMPTOSTRING</span><span class="o">(</span><span class="nt">rowtime</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;dd/MMM HH:mm&#39;</span><span class="o">)</span><span class="w"> </span><span class="nt">as</span><span class="w"> </span><span class="nt">createtime</span><span class="o">,</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nt">from</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="nt">emit</span><span class="w"> </span><span class="nt">changes</span><span class="w"> </span><span class="nt">limit</span><span class="w"> </span><span class="nt">5</span><span class="o">;</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>create stream GTFS_STREAM ( \
+id VARCHAR, \
+trip_update STRUCT \
+    &lt; trip STRUCT \
+        &lt; trip_id VARCHAR, start_time VARCHAR, start_date VARCHAR, schedule_relationship VARCHAR, route_id VARCHAR&gt; \
+    &gt;,  \
+stop_time_update STRUCT &lt; stop_sequence INT, arrival STRUCT &lt; delay INT &gt;, stop_id VARCHAR, schedule_relationship VARCHAR &gt;
+) WITH (KAFKA_TOPIC=&#39;GTFS_TOPIC&#39;, VALUE_FORMAT=&#39;JSON&#39;) ;
+
+select * from GTFS_STREAM emit changes ;
+</code></pre></div>
+
+<h3>Other Useful Commands</h3>
+<ul>
+<li><code>kafka-consumer-groups.sh  --list --bootstrap-server localhost:9092</code></li>
+<li><code>zookeeper-shell.sh localhost:2181 ls /brokers/ids</code> to list active brokers. </li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./ksql.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/ksql.html" rel="tag">KSql</a>
+                </div>
+            </article>            <h4 class="date">Nov 23, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
                     <a href="./snowsql.html" rel="bookmark" title="Permanent Link to &quot;SnowSQL Cheatsheet&quot;">SnowSQL Cheatsheet</a>
                 </h2>
 
@@ -182,230 +301,6 @@ USE ROLE SYSADMIN ; -- De-esclate the role
                     <a href="./snowsql.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
                 </div>
-            </article>            <h4 class="date">Nov 19, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./sql.html" rel="bookmark" title="Permanent Link to &quot;SQL&quot;">SQL</a>
-                </h2>
-
-                
-                
-
-                <h3>Advanced SQL – Window Functions (LinkedIn Learning)</h3>
-<h4>Blank OVER()</h4>
-<ul>
-<li>Blank OVER() clause will make the window consider the whole set</li>
-</ul>
-<h4>Filtering data</h4>
-<ul>
-<li>when using a subquery in a SELECT statement, and the sub-query contains a WHERE clause, then the WHERE clause must be duplicated in the main query (see 2.2 3:25)</li>
-<li>with WINDOW functions, it's enough to filter in the main query WHERE clause, and that data is all that the WINDOW funtions sees!</li>
-</ul>
-<h4>Non-correlated Subquery Example</h4>
-<ul>
-<li>Example of non-correlated subquery i.e. which will be executed only once - see 2.3 3:20</li>
-</ul>
-<h4>Dual Purpose of ORDER BY clause</h4>
-<ul>
-<li>see 2.3 3:45</li>
-<li>Aggregate and frame offset window functions are inherently order agnostic. For these, ORDER BY is used for defining frames that further limit the rows visible to the function </li>
-<li>For rank, row offset, and distribution window functions, ORDER BY defines how the function is evaluated.</li>
-</ul>
-<h4>Framing Rows and Ranging</h4>
-<ul>
-<li>UNBOUNDED PRECEDING, UNBOUNDED FOLLOWING, CURRENT ROW, 1 PRECEDING, 1 FOLLOWING etc</li>
-<li>
-<p>can be applied to ROWS, RANGES and GROUPS</p>
-</li>
-<li>
-<p>ROWS frame boundaries are specified using row position count</p>
-<ul>
-<li>e.g. one row, 20 row, or all the rows that either precede or follow the current one</li>
-<li>Row frames don't care what values are in these rows, they just count rows</li>
-<li>N PRECEDING and N FOLLOWING, point to any number of rows before or after the current one</li>
-</ul>
-</li>
-<li>
-<p>RANGE frames are specified using value ranges that either precede or follow the current row </p>
-<ul>
-<li>regardless of how many rows they cover</li>
-<li>RANGE frames are data type dependent. </li>
-<li>Example: an integer range of 10 represents all rows that have a sorting value which is plus or minus 10 from the current rows value</li>
-<li>Value, NOT position</li>
-<li>CUREENT ROW for RANGE frames doesn't refer to the current row's position like it did with the ROWS frame. </li>
-<li>For RANGE, it refers to the current row's value, and that includes all rows that share the same value. </li>
-</ul>
-</li>
-<li>
-<p>GROUPS frames are defined using the number of peer groups following or preceding the current row's group. - see 3.1 05:51</p>
-<ul>
-<li>A peer group is a set of rows that share the same sorting values. </li>
-<li>So when evaluated for the second row in this partition, a group frame that begins with one PRECEDING and ends with one FOLLOWING, will cover all partition rows </li>
-</ul>
-</li>
-</ul>
-<h4>The Window Clause</h4>
-<p><img alt="" src="img/the_window_clause.png"></p>
-<h4>Windows vs Group Aggregate Functions</h4>
-<ul>
-<li>Aggregate Window Functions are defined with the OVER clause. </li>
-<li>They see all the rows or row groups as defined by their window specification. </li>
-<li>They don't see individual rows within each row group. </li>
-<li>Aggregate Grouped Functions </li>
-<li>can be used in the HAVING, SELECT, and ORDER BY clauses. </li>
-<li>They see individual rows within each group, but they can't see any row groups other than their own</li>
-</ul>
-<p><img alt="" src="img/windows_vs_group_aggregate_functions.png"></p>
-<h4>RANK Window Functions</h4>
-<ul>
-<li>ORDER BY determines the basis for the rank and is mandatory. </li>
-<li>a rank of an expression is always relative to others within its partition</li>
-<li>Framing doesn't make sense for Rank functions</li>
-</ul>
-<h4>RANK vs DENSE_RANK</h4>
-<p><img alt="" src="img/rank_vs_dense_rank.png"></p>
-<h4>Ntile</h4>
-<ul>
-<li>Ntile segments a partition into as equal as possible n or less segments. </li>
-<li>Each segment is called a tile. Ntile assigns each row an integer number out of a monotonically increasing sequence
-  starting with one and ending either at N or the number of rows within the partition in case there are fewer of those.</li>
-</ul>
-<h3>Some Sample Queries</h3>
-<div class="highlight"><pre><span></span><code>SELECT train, dest, time FROM ( 
-  SELECT train, dest, time, 
-    RANK() OVER (PARTITION BY train ORDER BY time DESC) dest_rank
-    FROM traintable
-  ) where dest_rank = 1
-</code></pre></div>
-
-<p><br></p>
-<div class="highlight"><pre><span></span><code>select <span class="gs">* from PREDICATION where SUBJECT_SEMTYPE in (&#39;gngm&#39;) limit 10;</span>
-<span class="gs">select *</span> from ENTITY where SEMTYPE in (&#39;gngm&#39;) and GENE_ID &lt;&gt; &#39;&#39; limit 10;
-</code></pre></div>
-
-<p><br></p>
-<div class="highlight"><pre><span></span><code><span class="n">select</span><span class="w"> </span><span class="n">count</span><span class="p">([</span><span class="n">Incident</span><span class="w"> </span><span class="n">Type</span><span class="p">]),</span><span class="w"> </span><span class="p">[</span><span class="n">Incident</span><span class="w"> </span><span class="n">Type</span><span class="p">]</span>
-<span class="n">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">bat_2020</span><span class="p">]</span>
-<span class="n">Group</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="p">[</span><span class="n">Incident</span><span class="w"> </span><span class="n">Type</span><span class="p">]</span>
-</code></pre></div>
-
-<p><br></p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="nf">MIN</span><span class="w"> </span><span class="p">(</span><span class="o">[</span><span class="n">Created Date Time</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="ss">&quot;Min Date&quot;</span><span class="w"> </span><span class="p">,</span>
-<span class="w">       </span><span class="nf">MAX</span><span class="w"> </span><span class="p">(</span><span class="o">[</span><span class="n">Created Date Time</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="ss">&quot;Max Date&quot;</span><span class="w">  </span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">[</span><span class="n">dbo</span><span class="o">]</span><span class="p">.</span><span class="o">[</span><span class="n">bat_2020</span><span class="o">]</span>
-</code></pre></div>
-
-<h3>Useful commands</h3>
-<h4>Determine table column size</h4>
-<div class="highlight"><pre><span></span><code><span class="k">Select</span><span class="w">        </span><span class="nf">max</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="o">[</span><span class="n">number</span><span class="o">]</span><span class="p">))</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">[</span><span class="n">number</span><span class="o">]</span>
-<span class="w">              </span><span class="p">,</span><span class="nf">max</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="o">[</span><span class="n">u_opened_date</span><span class="o">]</span><span class="p">))</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">[</span><span class="n">u_opened_date</span><span class="o">]</span>
-<span class="w">              </span><span class="p">...</span>
-<span class="k">from</span><span class="w">   </span><span class="n">dbo</span><span class="p">.</span><span class="n">mytable</span>
-</code></pre></div>
-
-<h4>Insert from another table</h4>
-<p>To get the table details</p>
-<p><code>show create table ENTITY;</code> </p>
-<p>To create the new ENTITY2 table, copy/paste from the above output.</p>
-<p><code>insert into ENTITY2 select * from ENTITY where GENE_ID &lt;&gt; '';</code></p>
-<h4>See table columns and their data types</h4>
-<div class="highlight"><pre><span></span><code>SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS 
-  WHERE table_name = &#39;tbl_name&#39; AND COLUMN_NAME = &#39;col_name&#39;;
-</code></pre></div>
-
-<h4>Create DB</h4>
-<div class="highlight"><pre><span></span><code>GRANT ALL PRIVILEGES ON <span class="gs">*.*</span> TO &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;root&#39;;
-CREATE DATABASE dbname;
-USE dbname;
-</code></pre></div>
-
-<h4>Import from sql.gz file</h4>
-<div class="highlight"><pre><span></span><code><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">pv</span>
-<span class="n">zcat</span> <span class="n">filename</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">gz</span> <span class="o">|</span> <span class="n">pv</span> <span class="o">-</span><span class="n">cN</span> <span class="n">zcat</span> <span class="o">|</span> <span class="n">mysql</span> <span class="o">-</span><span class="n">u</span> <span class="n">root</span> <span class="o">-</span><span class="n">p</span> <span class="o">-</span><span class="n">f</span> <span class="o">-</span><span class="n">D</span> <span class="n">dbname</span> <span class="p">;</span>
-</code></pre></div>
-
-<h4>Get stats</h4>
-<div class="highlight"><pre><span></span><code><span class="n">SELECT</span> <span class="n">table_schema</span> <span class="s2">&quot;dbname&quot;</span><span class="p">,</span>
-        <span class="n">ROUND</span><span class="p">(</span><span class="n">SUM</span><span class="p">(</span><span class="n">data_length</span> <span class="o">+</span> <span class="n">index_length</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="s2">&quot;DB Size in MB&quot;</span> 
-<span class="n">FROM</span> <span class="n">information_schema</span><span class="o">.</span><span class="n">tables</span> 
-<span class="n">GROUP</span> <span class="n">BY</span> <span class="n">table_schema</span><span class="p">;</span> 
-</code></pre></div>
-
-<p>or (requires mysql v5.7+)</p>
-<div class="highlight"><pre><span></span><code>select table_schema, table_name, rows_fetched, rows_inserted, rows_updated, rows_deleted 
-    from sys.schema_table_statistics where table_schema=&#39;dbname&#39;;
-</code></pre></div>
-
-<p>or</p>
-<p><code>SHOW TABLE STATUS dbname;</code></p>
-<h4>Logging</h4>
-<ul>
-<li>start logging: <code>tee ./mylofile.log</code></li>
-<li>stop logging: <code>notee</code></li>
-</ul>
-<h4>Where is the table data stored?</h4>
-<ul>
-<li>it is specified in <code>my.cnf</code></li>
-<li>otherwise, the default location is <code>/var/lib/mysql/</code></li>
-</ul>
-<h4>Partition</h4>
-<div class="highlight"><pre><span></span><code><span class="n">alter</span> <span class="n">table</span> <span class="n">ENTITY</span> <span class="n">partition</span> <span class="n">by</span> <span class="nb">range</span><span class="p">(</span><span class="n">ENTITY_ID</span><span class="p">)(</span>
-<span class="n">partition</span> <span class="n">p0</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="p">(</span><span class="mi">250000000</span><span class="p">),</span>
-<span class="n">partition</span> <span class="n">p1</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="p">(</span><span class="mi">500000000</span><span class="p">),</span>
-<span class="n">partition</span> <span class="n">p2</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="p">(</span><span class="mi">750000000</span><span class="p">),</span>
-<span class="n">partition</span> <span class="n">p3</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="n">maxvalue</span>
-<span class="p">);</span>
-</code></pre></div>
-
-<h4>Set Primary Key</h4>
-<p><code>ALTER TABLE table_name ADD PRIMARY KEY (column_1, column_2);</code></p>
-<h4>Drop foreign key</h4>
-<div class="highlight"><pre><span></span><code><span class="n">ALTER</span> <span class="n">TABLE</span> <span class="n">ENTITY</span> <span class="n">DROP</span> <span class="n">FOREIGN</span> <span class="n">KEY</span> <span class="s1">&#39;ENTITY_ibfk_1&#39;</span><span class="p">;</span>
-<span class="n">Note</span><span class="p">:</span> <span class="n">would</span> <span class="n">this</span> <span class="n">be</span> <span class="n">better</span><span class="err">??</span>
-    <span class="n">ALTER</span> <span class="n">TABLE</span> <span class="n">foo</span> <span class="n">DISABLE</span> <span class="n">KEYS</span><span class="p">;</span>
-    <span class="n">do</span> <span class="n">stuff</span>
-    <span class="n">ALTER</span> <span class="n">TABLE</span> <span class="n">ENABLE</span> <span class="n">KEYS</span><span class="p">;</span>
-</code></pre></div>
-
-<h4>Increase buffer size for large import</h4>
-<div class="highlight"><pre><span></span><code><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">nano</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">my</span><span class="p">.</span><span class="n">cnf</span>
-<span class="o">[</span><span class="n">mysqld</span><span class="o">]</span><span class="w"> </span><span class="n">innodb_buffer_pool_size</span><span class="o">=</span><span class="mi">228</span><span class="n">G</span>
-</code></pre></div>
-
-<h4>Error with MySQL: "The total number of locks exceeds the lock table size"</h4>
-<ul>
-<li><a href="https://dba.stackexchange.com/questions/27328/how-large-should-be-mysql-innodb-buffer-pool-size">see here</a></li>
-</ul>
-<h4>Misc. Mysql</h4>
-<ul>
-<li><code>$ mysql -u root -p</code></li>
-<li><code>$ sudo service mysql restart</code></li>
-<li><code>SHOW ENGINE INNODB STATUS;</code></li>
-<li><code>show table status like 'ENTITY'\G;</code> # number of rows in table</li>
-<li><code>SELECT ENTITY_ID, COUNT(*) c FROM ENTITY_GENE GROUP BY ENTITY_ID HAVING c &gt; 1;</code> # find duplicates</li>
-</ul>
-<h4>Install MySQL</h4>
-<ul>
-<li><a href="https://askubuntu.com/questions/750498/mysql-5-5-update-to-mysql-5-7">see here</a>
-and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-14-04">here</a></li>
-</ul>
-<h4>Resources</h4>
-<ul>
-<li><a href="https://towardsdatascience.com/ten-sql-concepts-you-should-know-for-data-science-interviews-7acf3e428185">Ten SQL Concepts </a></li>
-<li><a href="https://github.com/jamescalam/pysqlplus">pysqlplus</a></li>
-<li><a href="https://stackoverflow.com/questions/5136013/how-to-change-column-datatype-in-sql-database-without-losing-data/5136055">How to change column datatype in SQL</a></li>
-<li><a href="http://www.sqlfiddle.com/#!2/599d0/1">SQL Fiddle</a></li>
-<li><a href="https://www.a2hosting.com/kb/developer-corner/mysql/managing-mysql-databases-and-users-from-the-command-line">How to manage MySQL databases and users from the command line</a></li>
-<li><a href="https://www.linode.com/docs/databases/mysql/install-and-configure-mysql-workbench-on-ubuntu/">Install and Configure MySQL Workbench on Ubuntu 16.04</a></li>
-<li><a href="https://www.youtube.com/watch?v=iUjoPB27-iA">MySQL Partitioning</a></li>
-</ul>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./sql.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
-                </div>
             </article>
 
                 <div class="clear"></div>
@@ -431,20 +326,24 @@ and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-mys
 <script>
 // Add copy buttons to all code blocks
 document.addEventListener('DOMContentLoaded', function() {
+    var copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    var checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     document.querySelectorAll('pre').forEach(function(pre) {
         // Avoid duplicate buttons
         if (pre.querySelector('.copy-btn')) return;
         var btn = document.createElement('button');
         btn.className = 'copy-btn';
         btn.type = 'button';
-        btn.innerText = 'Copy';
+        btn.innerHTML = copyIcon;
+        btn.title = 'Copy to clipboard';
         btn.onclick = function() {
             var code = pre.querySelector('code');
             if (code) {
                 var text = code.innerText;
                 navigator.clipboard.writeText(text).then(function() {
-                    btn.innerText = 'Copied!';
-                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                    btn.innerHTML = checkIcon;
+                    setTimeout(function() { btn.innerHTML = copyIcon; }, 1200);
                 });
             }
         };
