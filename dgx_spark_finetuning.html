@@ -3,11 +3,12 @@
 <head>
         <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | DGX Spark</title>
+    <title>code snippets etc. | DGX Spark Fine-tuning</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
     <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="./static/custom-code.css" type="text/css" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="" />
@@ -26,17 +27,17 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 17, 2025</h4>
+        <div id="content">            <h4 class="date">Dec 19, 2025</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./dgx_spark.html" rel="bookmark" title="Permanent Link to &quot;DGX Spark&quot;">DGX Spark</a>
+                    <a href="./dgx_spark_finetuning.html" rel="bookmark" title="Permanent Link to &quot;DGX Spark Fine-tuning&quot;">DGX Spark Fine-tuning</a>
                 </h2>
 
                 
                 
 
-                <h2>Fine-tuning Options on DGX Spark (GB10, 128GB unified memory)</h2>
+                <h3>Fine-tuning Options on DGX Spark (GB10, 128GB unified memory)</h3>
 <table>
 <thead>
 <tr>
@@ -79,7 +80,7 @@
 </tr>
 </tbody>
 </table>
-<h2>GPU Assessment:</h2>
+<h3>GPU Assessment</h3>
 <table>
 <thead>
 <tr>
@@ -106,7 +107,7 @@
 </tr>
 </tbody>
 </table>
-<p>Speed factors (not learning rate):</p>
+<h3>Speed Factors (not learning rate)</h3>
 <table>
 <thead>
 <tr>
@@ -138,14 +139,13 @@
 </tr>
 </tbody>
 </table>
-<p>88% utilization is solid. The main bottleneck is local_batch_size: 1 - you're processing 1 sample at a time with 16 accumulation steps. With 128GB unified
-  memory, you could likely increase to local_batch_size: 2 or 4 to speed things up ~2-4x.</p>
-<h2>Misc</h2>
+<p>88% utilization is solid. The main bottleneck is <code>local_batch_size: 1</code> - you're processing 1 sample at a time with 16 accumulation steps. With 128GB unified memory, you could likely increase to <code>local_batch_size: 2</code> or <code>4</code> to speed things up ~2-4x.</p>
+<h3>Misc</h3>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>start<span class="w"> </span>vllm-server
 docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>--tail<span class="w"> </span><span class="m">50</span><span class="w"> </span>vllm-server
 </code></pre></div>
 
-<h2>~/.ssh/config</h2>
+<h3>SSH Config (~/.ssh/config)</h3>
 <div class="highlight"><pre><span></span><code>Host dgx-spark
     HostName 192.168.1.xx
     User &lt;user-name&gt;
@@ -155,11 +155,11 @@ docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </s
     LocalForward 11434 localhost:11434
 </code></pre></div>
 
-<h2>SSH Tunnel</h2>
+<h3>SSH Tunnel</h3>
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-N<span class="w"> </span>-L<span class="w"> </span><span class="m">8000</span>:localhost:8000<span class="w"> </span>-L<span class="w"> </span><span class="m">12434</span>:localhost:12434<span class="w"> </span>user@spark-e123.local
 </code></pre></div>
 
-<h2>Example Roo Code configuration for vLLM:</h2>
+<h3>Example Roo Code configuration for vLLM</h3>
 <ul>
 <li>API Provider: <code>OpenAI Compatible</code></li>
 <li>Base URL: <code>http://localhost:8000/v1</code></li>
@@ -169,7 +169,7 @@ docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </s
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./dgx_spark.html">posted at 00:00</a>
+                    <a href="./dgx_spark_finetuning.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/ai.html" rel="tag">AI</a>
                 </div>
             </article>
@@ -183,5 +183,30 @@ docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </s
         </div>
         <div class="clear"></div>
     </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
 </body>
 </html>

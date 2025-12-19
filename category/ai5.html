@@ -28,104 +28,128 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 03, 2023</h4>
+        <div id="content">            <h4 class="date">Jul 16, 2024</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="../ai_prompts_roles.html" rel="bookmark" title="Permanent Link to &quot;AI Prompts - Roles & Personas&quot;">AI Prompts - Roles & Personas</a>
+                    <a href="../restful_api.html" rel="bookmark" title="Permanent Link to &quot;RESTful API&quot;">RESTful API</a>
                 </h2>
 
                 
                 
 
-                <h3>Expert Persona Template</h3>
-<p>Name-Prime ChatGPT into a nuanced niche expert:</p>
-<div class="highlight"><pre><span></span><code><span class="err">&quot;You&#39;re now {NAME}GPT — a world-class {TOPIC} expert in. Henceforth, whenever I ask you a question,</span>
-<span class="err">respond with relevant and well-thought-out answers. Draw specifically from {SOURCES} to formulate your answers.</span>
-<span class="err">Polish your answers so they&#39;re concise, straightforward, and easy to read.</span>
-<span class="err">With every response you generate, utilize the context of the generated response to broaden your selection of resources</span>
-<span class="err">and expertise for each subsequent response.</span>
-<span class="err">Till this window is closed and/or I specify otherwise, assume I&#39;m referring to you, {NAME}GPT.</span>
-<span class="k">If</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">understand</span><span class="w"> </span><span class="nv">your</span><span class="w"> </span><span class="nv">job</span>,<span class="w"> </span><span class="nv">describe</span><span class="w"> </span><span class="nv">it</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">me</span>.<span class="w"> </span><span class="k">If</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">don</span><span class="err">&#39;t, speak out your doubts so I can clarify them.&quot;</span>
+                <p><br></p>
+<h1>Characteristics of a RESTful API</h1>
+<p>A RESTful API (Representational State Transfer) is an architectural style for designing networked applications. It relies on a stateless, client-server communication protocol, typically HTTP. Here are the key principles of a RESTful API:</p>
+<ol>
+<li><strong>Stateless</strong>: Each request from a client to a server must contain all the information needed to understand and process the request. The server does not store any client context between requests.</li>
+<li><strong>Client-Server</strong>: The client and server are separate entities that communicate over a network. The client is responsible for the user interface and user experience, while the server handles data storage and business logic.</li>
+<li><strong>Uniform Interface</strong>: RESTful APIs have a consistent and uniform interface, which simplifies and decouples the architecture. This is typically achieved through standard HTTP methods (GET, POST, PUT, DELETE) and resource-based URIs.</li>
+<li><strong>Cacheable</strong>: Responses from the server can be marked as cacheable or non-cacheable, allowing clients to cache responses to improve performance.</li>
+<li>Resource-Based: The API is designed around resources, which are identified by URLs. In backend/app.py, resources like artist suggestions, all artists, and artist details are accessed via specific endpoints. 
+This can also be referred to as <strong>Layered System</strong>, where the architecture can be composed of multiple layers, with each layer having a specific responsibility. This helps in managing complexity and scalability.</li>
+</ol>
+<h2>Example in Code: Application MusicMuse</h2>
+<p><a href="https://github.com/raoulbia-ai/music-muse">https://github.com/raoulbia-ai/music-muse</a></p>
+<p>In this application, the backend provides RESTful API endpoints that the frontend interacts with. For example, the <code>/api/suggestions</code> endpoint allows the frontend to fetch artist suggestions based on a query.</p>
+<p><code>backend/app.py</code> follows the principles of RESTful APIs by 
+* being stateless, 
+* having a client-server architecture, 
+* providing a uniform interface, 
+* being resource-based, and 
+* using standard HTTP methods. </p>
+<p>Therefore, it can be considered a RESTful API.</p>
+<h1>RESTful APIs and asynchronous requests</h1>
+<p>RESTful APIs and asynchronous requests fit together seamlessly to create efficient and responsive web applications. Here's how they work together:</p>
+<ol>
+<li>
+<p><strong>RESTful APIs</strong>: These provide a standardized way for the frontend to communicate with the backend. They use HTTP methods (GET, POST, PUT, DELETE) to perform CRUD (Create, Read, Update, Delete) operations on resources identified by URLs.</p>
+</li>
+<li>
+<p><strong>Asynchronous Requests</strong>: These allow the frontend to make requests to the backend without blocking the main thread. This means the user interface remains responsive while waiting for the server to respond.</p>
+</li>
+</ol>
+<h3>How They Fit Together</h3>
+<ol>
+<li>
+<p><strong>Frontend Initiates Request</strong>: When a user interacts with the frontend (e.g., typing in a search box), the frontend makes an asynchronous request to the backend using the fetch API or similar.</p>
+</li>
+<li>
+<p><strong>Backend Processes Request</strong>: The backend receives the request, processes it (e.g., querying a database), and sends back a response.</p>
+</li>
+<li>
+<p><strong>Frontend Handles Response</strong>: The frontend receives the response and updates the UI accordingly (e.g., displaying search suggestions).</p>
+</li>
+</ol>
+<h2>Example in Code: Application MusicMuse</h2>
+<p><a href="https://github.com/raoulbia-ai/music-muse">https://github.com/raoulbia-ai/music-muse</a></p>
+<p><code>SearchBox.js</code> script demonstrates this interaction. The setup ensures that the frontend can make non-blocking requests to the backend, 
+receive data, and update the UI without interrupting the user experience.</p>
+<h4>Making an Asynchronous Request</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">fetchSuggestions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">query</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_API_BASE_URL</span><span class="si">}</span><span class="sb">/api/suggestions?query=</span><span class="si">${</span><span class="nx">query</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">setSuggestions</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">setNoArtistsFound</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// Show message if no artists found</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error fetching suggestions:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">};</span>
 </code></pre></div>
 
-<h3>Prompt Architect</h3>
-<div class="highlight"><pre><span></span><code><span class="n">Act</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">architect</span><span class="o">.</span><span class="w"> </span><span class="n">I</span><span class="s1">&#39;m looking to construct the optimal prompt for my specific needs. We will iteratively refine and improve the prompt based on the initial input.</span>
-<span class="w">     </span><span class="n">Three</span><span class="o">-</span><span class="n">Part</span><span class="w"> </span><span class="n">Development</span><span class="p">:</span>
-<span class="w">     </span><span class="mf">1.</span><span class="w"> </span><span class="n">Revised</span><span class="w"> </span><span class="n">Prompt</span><span class="p">:</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">provide</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">reimagined</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">my</span><span class="w"> </span><span class="n">original</span><span class="w"> </span><span class="n">prompt</span><span class="p">,</span><span class="w"> </span><span class="n">aiming</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">clarity</span><span class="p">,</span><span class="w"> </span><span class="n">brevity</span><span class="p">,</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">simplicity</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">understanding</span><span class="o">.</span>
-<span class="w">     </span><span class="mf">2.</span><span class="w"> </span><span class="n">Suggestions</span><span class="p">:</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">offer</span><span class="w"> </span><span class="n">advice</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">what</span><span class="w"> </span><span class="n">specific</span><span class="w"> </span><span class="n">details</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="n">enhance</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="p">,</span><span class="w"> </span><span class="n">thereby</span><span class="w"> </span><span class="n">increasing</span><span class="w"> </span><span class="n">its</span><span class="w"> </span><span class="n">effectiveness</span><span class="o">.</span>
-<span class="w">     </span><span class="mf">3.</span><span class="w"> </span><span class="n">Questions</span><span class="p">:</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">ask</span><span class="w"> </span><span class="n">relevant</span><span class="w"> </span><span class="n">queries</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">may</span><span class="w"> </span><span class="n">need</span><span class="w"> </span><span class="n">additional</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">further</span><span class="w"> </span><span class="n">improve</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="o">.</span>
-<span class="w">     </span><span class="n">Iterative</span><span class="w"> </span><span class="n">Collaboration</span><span class="p">:</span><span class="w"> </span><span class="n">We</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">engage</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">iterative</span><span class="w"> </span><span class="n">process</span><span class="p">,</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="n">supplying</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">fine</span><span class="o">-</span><span class="n">tuning</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">within</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="s1">&#39;Revised Prompt&#39;</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="n">we</span><span class="w"> </span><span class="n">achieve</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">satisfactory</span><span class="w"> </span><span class="n">final</span><span class="w"> </span><span class="n">version</span><span class="o">.</span>
-
-<span class="n">The</span><span class="w"> </span><span class="n">purpose</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="k">tool</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">practical</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">useful</span><span class="p">,</span><span class="w"> </span><span class="n">ensuring</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompts</span><span class="w"> </span><span class="n">generated</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">highly</span><span class="w"> </span><span class="n">effective</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">relevant</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">user</span><span class="s1">&#39;s needs. Responses should be friendly and engaging.</span>
+<h4>RESTful API Endpoint</h4>
+<p>In <code>app.py</code>, the backend defines a RESTful API endpoint to handle the request:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/suggestions&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_suggestions</span><span class="p">():</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;query&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">suggestions</span> <span class="o">=</span> <span class="p">[</span><span class="n">artist</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">artist</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="n">query</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">artist</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">suggestions</span><span class="p">)</span>
 </code></pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="../ai_prompts_roles.html">posted at 00:00</a>
+                    <a href="../restful_api.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="../category/ai.html" rel="tag">AI</a>
                 </div>
-            </article>            <h4 class="date">Dec 02, 2023</h4>
+            </article>            <h4 class="date">Jun 06, 2024</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="../ai_prompts_productivity.html" rel="bookmark" title="Permanent Link to &quot;AI Prompts - Productivity&quot;">AI Prompts - Productivity</a>
+                    <a href="../ai_miscellaneous.html" rel="bookmark" title="Permanent Link to &quot;AI Misc.&quot;">AI Misc.</a>
                 </h2>
 
                 
                 
 
-                <h3>Providing Context</h3>
-<div class="highlight"><pre><span></span><code>Answer the User&#39;s question from the following context.
-
-Context:
-https://github.com/langchain-ai/langgraph
-
-User Question:
-How does LangGraph work?
-</code></pre></div>
-
-<h3>Make a PowerPoint Presentation</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">I</span><span class="w"> </span><span class="nv">want</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">write</span><span class="w"> </span><span class="nv">me</span><span class="w"> </span><span class="nv">VBA</span><span class="w"> </span><span class="nv">code</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">PowerPoint</span><span class="w"> </span><span class="nv">presentation</span><span class="w"> </span><span class="nv">about</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">history</span><span class="w"> </span><span class="nv">of</span><span class="w"> </span><span class="nv">AI</span>.<span class="w"> </span><span class="nv">You</span><span class="w"> </span><span class="nv">are</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">fill</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">all</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">text</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">your</span><span class="w"> </span><span class="nv">own</span><span class="w"> </span><span class="nv">knowledge</span>,<span class="w"> </span><span class="nv">no</span><span class="w"> </span><span class="nv">placeholders</span>.<span class="w"> </span><span class="nv">I</span><span class="w"> </span><span class="nv">need</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="nv">slides</span>.
-</code></pre></div>
-
-<p>In PowerPoint: Tools &gt; Macros &gt; Visual Basic Editor &gt; New &gt; paste in the code &gt; press Play button &gt; Click Designer and pick a Design.</p>
-<h3>Technology Migration</h3>
-<div class="highlight"><pre><span></span><code><span class="nx">I</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">give</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">tutorial</span><span class="w"> </span><span class="nx">PDF</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">setting</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">API</span><span class="w"> </span><span class="nx">call</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">action</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">GPT</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">Flask</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">AWS</span><span class="w"> </span><span class="nx">EC2</span><span class="p">.</span><span class="w"> </span><span class="nx">Write</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">implementation</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">same</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">Azure</span><span class="w"> </span><span class="nx">portal</span><span class="w"> </span><span class="nx">instead</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">AWS</span><span class="p">.</span>
-
-<span class="nx">Specifically</span><span class="w"> </span><span class="nx">I</span><span class="w"> </span><span class="nx">would</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">implement</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">same</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">Azure</span><span class="w"> </span><span class="nx">Webapp</span><span class="w"> </span><span class="nx">instead</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">Azure</span><span class="w"> </span><span class="nx">VM</span><span class="p">.</span>
-</code></pre></div>
-
-<h3>Project Summary</h3>
-<div class="highlight"><pre><span></span><code><span class="n">Review</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">entire</span><span class="w"> </span><span class="n">conversation</span><span class="w"> </span><span class="n">history</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="n">repository</span><span class="p">,</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">documentation</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">project</span><span class="o">.</span><span class="w"> </span><span class="n">Then</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">clear</span><span class="p">,</span><span class="w"> </span><span class="n">engaging</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="n">summary</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">includes</span><span class="p">:</span>
-<span class="mf">1.</span><span class="w"> </span><span class="n">Challenge</span><span class="w"> </span><span class="n">Context</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Industry</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">business</span><span class="w"> </span><span class="n">problem</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Legacy</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">approach</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">its</span><span class="w"> </span><span class="n">pain</span><span class="w"> </span><span class="n">points</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Key</span><span class="w"> </span><span class="n">domain</span><span class="w"> </span><span class="n">concepts</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="n">assets</span><span class="p">,</span><span class="w"> </span><span class="n">Tag</span><span class="w"> </span><span class="n">statuses</span><span class="p">,</span><span class="w"> </span><span class="n">business</span><span class="w"> </span><span class="n">rules</span><span class="p">)</span>
-<span class="mf">2.</span><span class="w"> </span><span class="n">Generative</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">Workflow</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Discovery</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">mapped</span><span class="w"> </span><span class="n">dependencies</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">extracted</span><span class="w"> </span><span class="n">rules</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Translation</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">converted</span><span class="w"> </span><span class="n">formulas</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">code</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Validation</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="o">-</span><span class="n">driven</span><span class="w"> </span><span class="n">queries</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="n">via</span><span class="w"> </span><span class="n">MCP</span><span class="p">)</span><span class="w"> </span><span class="n">ensured</span><span class="w"> </span><span class="n">parity</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">caught</span><span class="w"> </span><span class="n">edge</span><span class="w"> </span><span class="n">cases</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Optimization</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">tuned</span><span class="w"> </span><span class="n">performance</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">architecture</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Documentation</span><span class="p">:</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">generated</span><span class="w"> </span><span class="n">guides</span><span class="p">,</span><span class="w"> </span><span class="n">lineage</span><span class="w"> </span><span class="n">diagrams</span><span class="p">,</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">specs</span>
-<span class="mf">3.</span><span class="w"> </span><span class="n">Quantifiable</span><span class="w"> </span><span class="n">Results</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">formulas</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">rules</span><span class="w"> </span><span class="n">migrated</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Performance</span><span class="w"> </span><span class="n">improvements</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nb">load</span><span class="o">-</span><span class="n">time</span><span class="w"> </span><span class="n">reduction</span><span class="p">)</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Accuracy</span><span class="w"> </span><span class="n">guarantees</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="w"> </span><span class="n">metric</span><span class="w"> </span><span class="n">parity</span><span class="p">)</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Maintenance</span><span class="w"> </span><span class="n">savings</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">developer</span><span class="o">-</span><span class="n">hours</span><span class="w"> </span><span class="n">recovered</span>
-<span class="o">-</span><span class="w"> </span><span class="n">New</span><span class="w"> </span><span class="n">capabilities</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="n">real</span><span class="o">-</span><span class="n">time</span><span class="w"> </span><span class="n">analytics</span><span class="p">)</span>
-<span class="mf">4.</span><span class="w"> </span><span class="n">Timeline</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">Scope</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Project</span><span class="w"> </span><span class="n">duration</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span><span class="w"> </span><span class="n">four</span><span class="w"> </span><span class="n">weeks</span><span class="p">)</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Team</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">AI</span><span class="o">-</span><span class="n">agent</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="n">where</span><span class="w"> </span><span class="n">relevant</span>
-<span class="mf">5.</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">Impact</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Business</span><span class="w"> </span><span class="n">outcomes</span><span class="w"> </span><span class="p">(</span><span class="n">cost</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">decision</span><span class="o">-</span><span class="n">making</span><span class="w"> </span><span class="n">benefits</span><span class="p">)</span>
-<span class="o">-</span><span class="w"> </span><span class="n">Long</span><span class="o">-</span><span class="n">term</span><span class="w"> </span><span class="n">advantages</span><span class="w"> </span><span class="p">(</span><span class="n">scalability</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">-</span><span class="n">service</span><span class="p">,</span><span class="w"> </span><span class="n">future</span><span class="o">-</span><span class="n">proofing</span><span class="p">)</span>
-<span class="n">Write</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">single</span><span class="w"> </span><span class="n">cohesive</span><span class="w"> </span><span class="n">narrative</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="mi">200</span><span class="o">-</span><span class="mi">300</span><span class="w"> </span><span class="n">words</span><span class="o">.</span><span class="w"> </span><span class="n">Be</span><span class="w"> </span><span class="n">thorough</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">capturing</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">specifics</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="n">material</span><span class="p">,</span><span class="w"> </span><span class="n">but</span><span class="w"> </span><span class="n">keep</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">tone</span><span class="w"> </span><span class="n">concise</span><span class="p">,</span><span class="w"> </span><span class="n">active</span><span class="p">,</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">compelling</span><span class="o">.</span><span class="w"> </span><span class="n">Emphasize</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">generative</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">was</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">critical</span><span class="w"> </span><span class="n">enabler</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">outcome</span><span class="o">.</span>
-</code></pre></div>
+                <p><br></p>
+<h3>Aider</h3>
+<p>"<em>Aider lets you pair program with LLMs, to edit code in your local git repository. Start a new project or work with an existing git repo. Aider works well with GPT-4o, Claude 3 Opus, GPT-3.5 and can connect to almost any LLM.</em>"</p>
+<p><a href="https://aider.chat">aider.chat</a></p>
+<p><code>pip install aider-chat</code></p>
+<p><code>aider --openai-api-key &lt;KEY&gt; --model gpt-4-1106-preview</code></p>
+<h3>Links (not curated - scratchpad)</h3>
+<ul>
+<li>https://hackerspacelive.events.kaltura.com/homepage</li>
+<li>https://obsidian.md</li>
+<li>https://www.youtube.com/watch?v=ZDPqYx2FCVk (obsidian)</li>
+<li>https://huggingface.co/blog/smolagents</li>
+<li>https://pydantic.run/</li>
+<li>https://ai.pydantic.dev/</li>
+<li>https://dspy.ai/</li>
+<li>https://www.getzep.com/ (Production-Ready Agent Memory)</li>
+<li>https://www.codeguide.dev/</li>
+<li>https://repomix.com/ (Pack your codebase into AI-friendly formats)</li>
+<li>https://promptly.tools/</li>
+<li>https://pypi.org/project/mcp-snowflake-server/</li>
+<li>https://llmstxt.firecrawl.dev/</li>
+<li>https://cline.bot/mcp-marketplace</li>
+<li></li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="../ai_prompts_productivity.html">posted at 00:00</a>
+                    <a href="../ai_miscellaneous.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="../category/ai.html" rel="tag">AI</a>
                 </div>
             </article>
