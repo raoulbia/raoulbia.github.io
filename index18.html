@@ -26,165 +26,331 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 24, 2017</h4>
+        <div id="content">            <h4 class="date">Dec 03, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./kafka.html" rel="bookmark" title="Permanent Link to &quot;Kafka Cheatsheet&quot;">Kafka Cheatsheet</a>
+                    <a href="./vagrant_vpn.html" rel="bookmark" title="Permanent Link to &quot;Vagrant VM with VPN&quot;">Vagrant VM with VPN</a>
                 </h2>
 
                 
                 
 
-                <h3>Terminology</h3>
+                <h2>Step-by-Step Instructions to Set Up a VM to Bypass Zscaler Restrictions</h2>
+<h4>1. <strong>Create a DigitalOcean Droplet with Outline VPN Manager</strong></h4>
+<ol>
+<li>Set up a new DigitalOcean droplet.</li>
+<li>Install Outline VPN Manager to manage the Shadowsocks server. Follow the official Outline installation guide for setup.</li>
+<li>Note the public IP address of your DigitalOcean server.</li>
+</ol>
+<h4>2. <strong>Install and Configure Shadowsocks on the DigitalOcean Server</strong></h4>
+<ol>
+<li>Install Shadowsocks on the server:</li>
+</ol>
+<p><code>sudo apt update
+   sudo apt install shadowsocks-libev</code></p>
+<ol>
+<li>Edit the default Shadowsocks configuration (<code>/etc/shadowsocks-libev/config.json</code>) to use port <code>443</code> and your custom password:</li>
+</ol>
+<p><code>{
+     "server": "0.0.0.0",
+     "server_port": 443,
+     "password": "your-secure-password",
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"
+   }</code></p>
+<ol>
+<li>Restart the Shadowsocks server:</li>
+</ol>
+<p><code>sudo systemctl restart shadowsocks-libev</code></p>
+<ol>
+<li>Ensure that port <code>443</code> is open on the DigitalOcean server by allowing it through the firewall:</li>
+</ol>
+<p><code>sudo ufw allow 443/tcp
+   sudo ufw allow 443/udp</code></p>
+<h4>3. <strong>Configure Shadowsocks Client on the Vagrant Guest VM</strong></h4>
+<ol>
+<li>Install Shadowsocks on the Vagrant guest VM:</li>
+</ol>
+<p><code>sudo apt update
+   sudo apt install shadowsocks-libev</code></p>
+<ol>
+<li>Create the Shadowsocks client configuration (<code>/etc/shadowsocks-libev/config.json</code>) to connect to the DigitalOcean server:</li>
+</ol>
+<p><code>{
+     "server": "your-digital-ocean-server-ip",
+     "server_port": 443,
+     "local_port": 1080,
+     "password": "your-secure-password",
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"
+   }</code></p>
+<ol>
+<li>Start the Shadowsocks client on the Vagrant VM:</li>
+</ol>
+<p><code>ss-local -c /etc/shadowsocks-libev/config.json -v</code></p>
+<ol>
+<li>Ensure the Vagrant VM is using <strong>Bridged Adapter</strong> to allow direct internet access and connection to the DigitalOcean server.</li>
+</ol>
+<h4>4. <strong>Configure the Vagrant VM or Browser to Use the SOCKS Proxy</strong></h4>
+<ol>
+<li>Set the system or application (e.g., web browser) to use <code>localhost:1080</code> as the SOCKS5 proxy.</li>
+<li>For Firefox:</li>
+<li>Go to <strong>Preferences</strong> → <strong>Network Settings</strong>.</li>
+<li>Set <strong>SOCKS Host</strong> to <code>localhost</code> and port to <code>1080</code>.</li>
+<li>Ensure <strong>SOCKS v5</strong> is selected.</li>
+</ol>
+<h4>5. <strong>Test the Connection</strong></h4>
+<ol>
+<li>Verify that traffic is routed through the Shadowsocks proxy by browsing or using:</li>
+</ol>
+<p><code>curl --socks5 localhost:1080 http://example.com</code></p>
+<ol>
+<li>Ensure that you can bypass Zscaler restrictions and access unrestricted internet.</li>
+</ol>
+<h4>Summary:</h4>
 <ul>
-<li>A Kafka cluster is a group of Kafka brokers.</li>
-<li>A Kafka broker allows consumers to fetch messages by topic, partition and offset.</li>
-<li>Kafka brokers can create a Kafka cluster by sharing information between each other directly or indirectly using Zookeeper.</li>
+<li>DigitalOcean droplet runs <strong>Outline VPN Manager</strong> and Shadowsocks on <strong>port 443</strong>.</li>
+<li><strong>Vagrant guest VM</strong> connects via Shadowsocks client using <code>ss-local</code> with port <code>443</code>.</li>
+<li><strong>Bridged Adapter</strong> mode is essential for proper networking in the VM.</li>
+<li>SOCKS5 proxy runs locally on <code>localhost:1080</code> to bypass restrictions.</li>
 </ul>
-<h3>Installation</h3>
-<ul>
+<p>This setup allows you to route traffic through your DigitalOcean server, effectively bypassing Zscaler restrictions.</p>
+<h2>Updated Step-by-Step Solution for Bypassing Zscaler Using the Vagrant Guest VM</h2>
+<p>Since you want to use <strong>Firefox on the Vagrant guest VM</strong> to bypass restrictions without relying on any executable files on the Windows host, we’ll configure the VM and Firefox to directly route traffic through the Shadowsocks proxy.</p>
+<h4>Step 1: Ensure Shadowsocks is Set Up on the DigitalOcean Server</h4>
+<p>Make sure your <strong>DigitalOcean server</strong> is configured and running properly.</p>
+<ol>
+<li><strong>DigitalOcean Server Shadowsocks Configuration (<code>/etc/shadowsocks-libev/config.json</code>):</strong></li>
+</ol>
+<p><code>{
+     "server": "0.0.0.0",
+     "server_port": 443,            // Running on port 443 to avoid network restrictions
+     "password": "your-secure-password",
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"
+   }</code></p>
+<ol>
+<li><strong>Restart the Shadowsocks server</strong> on the DigitalOcean droplet:</li>
+</ol>
+<p><code>sudo systemctl restart shadowsocks-libev</code></p>
+<h4>Step 2: Set Up Shadowsocks on the Vagrant Guest VM</h4>
+<p>Ensure the Shadowsocks client is installed and running on the <strong>guest VM</strong>.</p>
+<ol>
+<li><strong>Install Shadowsocks on the Guest VM</strong>:</li>
+</ol>
+<p><code>sudo apt update
+   sudo apt install shadowsocks-libev</code></p>
+<ol>
+<li><strong>Create or update the client configuration file (<code>/etc/shadowsocks-libev/config.json</code>)</strong>:</li>
+</ol>
+<p><code>{
+     "server": "your-digital-ocean-server-ip",   // The public IP of your DigitalOcean server
+     "server_port": 443,                         // Port 443 to avoid network restrictions
+     "local_port": 1080,                         // The local SOCKS5 proxy port
+     "password": "your-secure-password",         // Same as on the server
+     "timeout": 60,
+     "method": "chacha20-ietf-poly1305"          // Same encryption method as the server
+   }</code></p>
+<ol>
+<li><strong>Start the Shadowsocks client</strong> on the guest VM:</li>
+</ol>
+<p><code>ss-local -c /etc/shadowsocks-libev/config.json -v</code></p>
+<p>This command starts the Shadowsocks SOCKS5 proxy on <code>localhost:1080</code> on your VM.</p>
+<h4>Step 3: Configure Firefox on the Guest VM to Use the SOCKS Proxy</h4>
+<ol>
+<li><strong>Open Firefox</strong> on the Vagrant guest VM.</li>
+<li>Go to <strong>Preferences</strong> → Scroll down to <strong>Network Settings</strong> → Click <strong>Settings</strong>.</li>
+<li><strong>Set up the SOCKS Proxy</strong>:</li>
+<li>Choose <strong>Manual proxy configuration</strong>.</li>
+<li>Under <strong>SOCKS Host</strong>, enter <code>localhost</code> and set the port to <code>1080</code>.</li>
+<li>Select <strong>SOCKS v5</strong> as the protocol.</li>
+<li>Check the box for <strong>Proxy DNS when using SOCKS v5</strong>.</li>
+</ol>
+<p><img alt="Firefox Proxy Settings" src="https://support.mozilla.org/en-US/kb/connection-settings-firefox/windows-firefox-proxy-settings-windows.png"> (Example of Firefox manual proxy settings).</p>
+<ol>
+<li><strong>Save</strong> the settings.</li>
+</ol>
+<p>Now, all traffic from Firefox will be routed through the SOCKS5 proxy running on your Vagrant guest VM, which connects to your DigitalOcean Shadowsocks server. This should bypass any Zscaler restrictions.</p>
+<h4>Step 4: Test the Setup</h4>
+<ol>
+<li>Open Firefox on the guest VM and visit a website that is typically restricted by Zscaler.</li>
+<li>Ensure the site loads, confirming that the traffic is routed through your DigitalOcean server and bypassing Zscaler.</li>
+</ol>
+<h3>Additional Steps (If Needed)</h3>
+<h4>Disable Ethernet on Host to Prevent Automatic Connection</h4>
+<p>Since your <strong>office screens automatically connect to Ethernet</strong>, you can disable the Ethernet interface temporarily on the <strong>Windows host</strong> to force all traffic through your guest VM.</p>
+<ol>
+<li>On your <strong>Windows host</strong>, disable Ethernet:</li>
+<li>Press <code>Win + R</code>, type <code>ncpa.cpl</code>, and press <strong>Enter</strong>.</li>
+<li>Right-click on the <strong>Ethernet</strong> adapter and choose <strong>Disable</strong>.</li>
+</ol>
+<p>This will prevent the automatic Ethernet connection when using office screens, forcing your internet traffic through the Vagrant guest VM.</p>
+<h4>Summary of Steps:</h4>
+<ol>
+<li><strong>DigitalOcean Server</strong>:</li>
 <li>
-<p>Download and Setup Java 8 JDK: <code>sudo apt install openjdk-8-jdk</code></p>
+<p>Ensure Shadowsocks is running on port <code>443</code>.</p>
 </li>
 <li>
-<p>Download &amp; Extract the Kafka binaries from https://kafka.apache.org/downloads</p>
+<p><strong>Vagrant Guest VM</strong>:</p>
+</li>
+<li>Start Shadowsocks with <code>ss-local</code> on <code>localhost:1080</code>.</li>
+<li>
+<p>Configure Firefox to use <code>localhost:1080</code> as a SOCKS5 proxy.</p>
 </li>
 <li>
-<p>Try Kafka commands using bin/kafka-topics.sh (for example)</p>
+<p><strong>Test</strong>: Open restricted sites in Firefox on the guest VM to confirm Zscaler is bypassed.</p>
 </li>
-<li>
-<p>add to <code>~/.bashrc</code>:  <code>export PATH=/home/vagrant/kafka_2.12-2.8.0/bin:$PATH</code></p>
-</li>
-<li>
-<p>Edit Zookeeper &amp; Kafka configs in <code>kafka_2.12-2.8.0/config</code></p>
-<ul>
-<li>
-<p>zookeeper.properties: <code>dataDir=/home/vagrant/kafka_2.12-2.8.0/data/zookeeper</code></p>
-</li>
-<li>
-<p>server.properties: <code>log.dirs=/home/vagrant/kafka_2.12-2.8.0/data/kafka</code></p>
-</li>
-</ul>
-</li>
-</ul>
-<h3>Start Zookeeper, Kafka Server and Kafka Connect</h3>
-<ul>
-<li>Pre-requisite: Kafka aded to PATH</li>
-<li>Only when Zookeeper is up and running you can start a Kafka server (that will connect to Zookeeper).</li>
-</ul>
-<div class="highlight"><pre><span></span><code>zookeeper-server-start.sh<span class="w"> </span>config/zookeeper.properties
-kafka-server-start.sh<span class="w"> </span>config/server.properties
-connect-distributed.sh<span class="w"> </span>config/connect-distributed.properties
-</code></pre></div>
-
-<h3>Topics</h3>
-<div class="highlight"><pre><span></span><code>kafka-topics.sh --zookeeper localhost:2181 --create --topic &quot;gtfs&quot; --partitions 1 --replication-factor 1
-kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list
-kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;g.*&#39;
-kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;.*ksql.*&#39;
-</code></pre></div>
-
-<h3>Producers</h3>
-<div class="highlight"><pre><span></span><code>kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic topic_name
-</code></pre></div>
-
-<p>Piping a JSON file into a Topic:</p>
-<div class="highlight"><pre><span></span><code>file_name.json | kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic topic_name
-</code></pre></div>
-
-<h3>Consumers</h3>
-<p>This tool helps to read data from Kafka topics and outputs it to standard output.</p>
-<div class="highlight"><pre><span></span><code>kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --from-beginning --property print.key=true --property key.separator=&quot;-&quot; --property print.timestamp=true
-</code></pre></div>
-
-<h3>Faust</h3>
-<p>Note: append -p 6067 to the line below to use a different port.</p>
-<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>script.py<span class="w"> </span>worker<span class="w"> </span>
-</code></pre></div>
-
-<h3>Other Useful Commands</h3>
-<ul>
-<li><code>kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list</code></li>
-<li><code>kafka-consumer-groups.sh  --list --bootstrap-server localhost:9092</code></li>
-<li><code>zookeeper-shell.sh localhost:2181 ls /brokers/ids</code> to list active brokers. </li>
-</ul>
+</ol>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./kafka.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/kafka.html" rel="tag">Kafka</a>
+                    <a href="./vagrant_vpn.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
                 </div>
-            </article>            <h4 class="date">Nov 23, 2017</h4>
+            </article>            <h4 class="date">Dec 02, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./kafka_connect.html" rel="bookmark" title="Permanent Link to &quot;Kafka Connect Cheatsheet&quot;">Kafka Connect Cheatsheet</a>
+                    <a href="./Linux.html" rel="bookmark" title="Permanent Link to &quot;Linux&quot;">Linux</a>
                 </h2>
 
                 
                 
 
-                <h3>Connectors</h3>
-<p>In this demonstration we're going to make use of the Kafka Connect API.</p>
-<p><a href="https://docs.confluent.io/current/connect/references/restapi.html">See the documentation for more information on any of these actions</a>.</p>
-<p>To get a list of connectors that are loaded in to the Kafka Connect cluster</p>
-<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8083</span><span class="o">/</span><span class="n">connector</span><span class="o">-</span><span class="n">plugins</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="k">tool</span>
+                <h4>Useful Commands</h4>
+<ul>
+<li><code>sudo tar -xvf package_file.tar.gz</code></li>
+<li><code>sudo dpkg -i package_file.deb</code></li>
+<li><code>cat /etc/*release</code></li>
+<li><code>echo $XDG_CURRENT_DESKTOP</code></li>
+<li><code>sudo find ~/ -name rdflib</code></li>
+<li><code>sudo find / -name "*.cls"</code></li>
+<li><code>dpkg -L jenkins</code> will help you find what files does a package install</li>
+<li><code>ps -a</code> or <code>sudo lsof -t -i:8888</code> then <code>kill -9 (processID)</code></li>
+<li>make script executable: <code>sudo chmod +x script.sh</code></li>
+<li>symbolic link: <code>sudo ln -s confluent-6.1.1/ confluent</code></li>
+<li>list files by name in ascending order of size</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nx">find</span><span class="w"> </span><span class="o">/</span><span class="nx">home</span><span class="o">/</span><span class="nx">vagrant</span><span class="o">/</span><span class="nx">miniconda3</span><span class="o">/</span><span class="nx">envs</span><span class="o">/</span><span class="nx">llamacpp</span><span class="o">-</span><span class="nx">dev</span><span class="o">/</span><span class="nx">lib</span><span class="o">/</span><span class="nx">python3</span><span class="m m-Double">.11</span><span class="o">/</span><span class="nx">site</span><span class="o">-</span><span class="nx">packages</span><span class="o">/</span><span class="nx">gguf_modeldb</span><span class="o">/</span><span class="nx">gguf_models</span><span class="w"> </span><span class="o">-</span><span class="k">type</span><span class="w"> </span><span class="nx">f</span><span class="w"> </span><span class="o">-</span><span class="nx">name</span><span class="w"> </span><span class="s">&quot;*.gguf&quot;</span><span class="w"> </span><span class="o">-</span><span class="nx">exec</span><span class="w"> </span><span class="nx">du</span><span class="w"> </span><span class="o">-</span><span class="nx">sh</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">sort</span><span class="w"> </span><span class="o">-</span><span class="nx">h</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">awk</span><span class="w"> </span><span class="err">&#39;</span><span class="p">{</span><span class="w"> </span><span class="nx">file</span><span class="p">=</span><span class="err">$</span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="nx">sub</span><span class="p">(</span><span class="s">&quot;.*/&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span><span class="w"> </span><span class="nx">print</span><span class="w"> </span><span class="err">$</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="p">}</span><span class="err">&#39;</span>
 </code></pre></div>
 
-<h4>Viewing Connectors</h4>
-<p>First, we can view connector-plugins:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8083/connector-plugins<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>json.tool
+<ul>
+<li>delete any file in the specified directory that starts with "mixtral"</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nx">find</span><span class="w"> </span><span class="o">/</span><span class="nx">home</span><span class="o">/</span><span class="nx">vagrant</span><span class="o">/</span><span class="nx">miniconda3</span><span class="o">/</span><span class="nx">envs</span><span class="o">/</span><span class="nx">llamacpp</span><span class="o">-</span><span class="nx">dev</span><span class="o">/</span><span class="nx">lib</span><span class="o">/</span><span class="nx">python3</span><span class="m m-Double">.11</span><span class="o">/</span><span class="nx">site</span><span class="o">-</span><span class="nx">packages</span><span class="o">/</span><span class="nx">gguf_modeldb</span><span class="o">/</span><span class="nx">gguf_models</span><span class="w"> </span><span class="o">-</span><span class="k">type</span><span class="w"> </span><span class="nx">f</span><span class="w"> </span><span class="o">-</span><span class="nx">name</span><span class="w"> </span><span class="s">&quot;mixtral*&quot;</span><span class="w"> </span><span class="o">-</span><span class="nx">exec</span><span class="w"> </span><span class="nx">rm</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="err">\</span><span class="p">;</span>
 </code></pre></div>
 
-<h4>Create a Connector</h4>
-<p>Lets create a connector. We'll dive into more details on how this works later.</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
-<span class="s1">    &quot;name&quot;: &quot;first-connector&quot;,</span>
-<span class="s1">    &quot;config&quot;: {</span>
-<span class="s1">        &quot;connector.class&quot;: &quot;FileStreamSource&quot;,</span>
-<span class="s1">        &quot;tasks.max&quot;: 1,</span>
-<span class="s1">        &quot;file&quot;: &quot;/var/log/journal/confluent-kafka-connect.service.log&quot;,</span>
-<span class="s1">        &quot;topic&quot;: &quot;kafka-connect-logs&quot;</span>
-<span class="s1">    }</span>
-<span class="s1">  }&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>http://localhost:8083/connectors
+<h4>Handy Tools</h4>
+<ul>
+<li><a href="https://fishshell.com/">Fish</a>: <code>sudo apt-get install fish</code></li>
+<li><a href="https://linuxize.com/post/getting-started-with-tmux/">Tmux</a>: <code>sudo apt-get install tmux</code></li>
+</ul>
+<h4>Pip install problems</h4>
+<div class="highlight"><pre><span></span><code>sudo apt-get install aptitude
+sudo aptitude install ...
 </code></pre></div>
 
-<h4>List connectors</h4>
-<p>We can list all configured connectors with:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8083/connectors<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>json.tool
+<h4>tmux Sessions</h4>
+<ul>
+<li><code>tmux new -s session_name</code> new session</li>
+<li><code>tmux a -t session_name</code> attach</li>
+<li><code>ctrl + b</code> then <code>d</code> detach</li>
+<li><code>ctrl + b</code> then 'x' terminate session</li>
+<li><code>ctrl + b</code> then <code>(</code> move between sessions</li>
+<li><code>ctrl + b</code> the 'c` to make a new tab in an existing session</li>
+<li><code>ctrl + b</code> then the number of the tab e.g. <code>0</code> or <code>1</code> to move between tab</li>
+<li><code>htop</code> + Enter to see running processes (create new tab inside session)</li>
+</ul>
+<h4>File Handling</h4>
+<ul>
+<li><code>tar xzvf archive_name.tar.gz</code> to uncompress tar.gz file</li>
+<li><code>tar xjvf archive_name.tar.bz2</code> to uncompress tar.bz2 file</li>
+<li><code>less file.csv</code> to open file</li>
+<li><code>q + enter</code> to close and exit</li>
+<li><code>zcat file.tsv.gz | more</code> to view fcompressed gz file</li>
+<li><code>zcat file.tsv.gz | grep "pattern match"</code> to find string</li>
+<li><code>cat -vet file</code> to see hidden chars</li>
+<li><code>uniq -d file.txt</code> to get duplicate lines</li>
+<li><code>cat gene2refseq | awk '{if ($1==6239) print $0}' | head</code></li>
+</ul>
+<h4>Packages</h4>
+<ul>
+<li>To see packages and their size <code>conda clean --all</code></li>
+<li>To clean up <code>du -sh */</code></li>
+<li>
+<p>To remove package</p>
+<div class="highlight"><pre><span></span><code>sudo apt-get remove r-base
+sudo apt-get purge texlive*
 </code></pre></div>
 
-<p>You can see our connector in the list.</p>
-<h4>Detailing connectors</h4>
-<p>Let's list details on our connector:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8083/connectors/first-connector<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>json.tool
+</li>
+<li>
+<p>To reinstall package</p>
+<div class="highlight"><pre><span></span><code><span class="nx">sudo</span><span class="w"> </span><span class="nx">apt</span><span class="o">-</span><span class="nx">get</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="o">--</span><span class="nx">reinstall</span><span class="w"> </span><span class="nx">package_name</span>
 </code></pre></div>
 
-<h4>Pausing connectors</h4>
-<p>Sometimes its desirable to pause or restart connectors:</p>
-<p>To view status:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8083/connectors/first-connector/status<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>json.tool
+</li>
+<li>
+<p><code>dpkg -l | grep miktex</code> to see what's installed</p>
+</li>
+<li><code>dpkg -L package-name</code> to list files installed by some package</li>
+<li><code>dpkg -l | grep package_name</code> to see if package is installed</li>
+</ul>
+<h4>Show git branch name in Terminal</h4>
+<p>Add this to <code>.bashrc</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">force_color_prompt</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">color_prompt</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">parse_git_branch</span><span class="p">()</span> <span class="p">{</span>
+<span class="n">git</span> <span class="n">branch</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;/^[^*]/d&#39;</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;s/* \(.*\)/(</span><span class="se">\1</span><span class="s1">)/&#39;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">[</span> <span class="s2">&quot;$color_prompt&quot;</span> <span class="o">=</span> <span class="n">yes</span> <span class="p">];</span> <span class="n">then</span>
+<span class="n">PS1</span><span class="o">=</span><span class="s1">&#39;${debian_chroot:+($debian_chroot)}\[</span><span class="se">\033</span><span class="s1">[01;32m\]\u@\h\[</span><span class="se">\033</span><span class="s1">[00m\]:\[</span><span class="se">\033</span><span class="s1">[01;34m\]\w\[</span><span class="se">\033</span><span class="s1">[01;31m\]$(parse_git_branch)\[</span><span class="se">\033</span><span class="s1">[00m\]\$ &#39;</span>
+<span class="k">else</span>
+<span class="n">PS1</span><span class="o">=</span><span class="s1">&#39;${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ &#39;</span>
+<span class="n">fi</span>
+<span class="n">unset</span> <span class="n">color_prompt</span> <span class="n">force_color_prompt</span>
 </code></pre></div>
 
-<p>To pause:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://localhost:8083/connectors/first-connector/pause<span class="w"> </span>
-</code></pre></div>
-
-<p>To restart (note this is a POST command!):</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8083/connectors/first-connector/restart
-</code></pre></div>
-
-<h4>Deleting connectors</h4>
-<p>Finally, to delete your connector:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span>http://localhost:8083/connectors/first-connector
-</code></pre></div>
+<p><br></p>
+<h4><code>apt-get</code> vs. <code>pip install</code> vs. <code>conda install</code></h4>
+<ul>
+<li><code>apt-get</code> installs a (python) package/module system-wide.</li>
+<li><code>pip</code> installs module in venv only.</li>
+<li>If using <code>pip install</code> after activating the venv, module will be installed into that venv only.</li>
+<li><code>pip</code> installs a package/module within any environment.</li>
+<li><code>conda</code> installs module/package within conda environments.</li>
+</ul>
+<h4>Pip Cache</h4>
+<ul>
+<li><code>pip config set global.cache-dir false</code></li>
+<li><code>pip install NAME --no-cache-dir</code> e.g. <code>pip --no-cache-dir install scipy</code></li>
+<li><code>sudo rm -R ~/.cache/pipenv</code> and <code>sudo rm -R ~/.cache/pip</code></li>
+</ul>
+<h4>Misc.</h4>
+<ul>
+<li><a href="https://acethecloud.com/blog/linux-commands-for-sre/">100 Linux commands</a></li>
+<li>change nvidia gamma settings: <code>udo nano ~/.nvidia-settings-rc</code></li>
+<li><code>df -h</code> check disk space</li>
+<li><a href="https://itsfoss.com/how-to-find-the-process-id-of-a-program-and-kill-it-quick-tip/">kill process</a></li>
+<li><code>rm file</code> to remove file</li>
+<li><code>rm -r dirName</code> to remove directory</li>
+<li><code>ln -s /opt/robomongo/bin/robomongo ~/robomongo_lnk</code> to make a shortcut/alias</li>
+<li><code>pip list --local</code> to list installed packages in a given venv</li>
+<li>about the double dash <code>--</code><ul>
+<li>Almost all short options have a corresponding long option; <code>rm -f</code> is equivalent to <code>rm --force</code>.</li>
+<li>Many long options, though, have no corresponding short option.</li>
+</ul>
+</li>
+<li><a href="http://askubuntu.com/questions/739297/how-to-install-robomongo-ubuntu-system-please-let-me-know/781793">About the usr/bin directory</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-18-04">Increase Digitalocean memory</a></li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./kafka_connect.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/kafka.html" rel="tag">Kafka</a>
+                    <a href="./Linux.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
                 </div>
             </article>
 
@@ -195,7 +361,7 @@ kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;.*ksql.*&#39;
 
                     <a href="./index19.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 18 of 31</span>
+                    <span>Page 18 of 34</span>
                 </div>
 
             <div class="clear"></div>

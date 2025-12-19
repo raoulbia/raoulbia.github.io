@@ -26,284 +26,197 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 25, 2017</h4>
+        <div id="content">            <h4 class="date">Dec 04, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./software.html" rel="bookmark" title="Permanent Link to &quot;Software&quot;">Software</a>
+                    <a href="./conda.html" rel="bookmark" title="Permanent Link to &quot;Conda&quot;">Conda</a>
                 </h2>
 
                 
                 
 
-                <h3>PostgreSQL</h3>
-<p><a href="https://www.postgresql.org/download/linux/ubuntu/">Download PostgreSQL</a></p>
-<p><a href="https://linuxhint.com/best_gui_clients_postgresql_ubuntu/#:~:text=pgAdmin,Windows%20and%20Mac%20OS%20X.">Install pgAdmin</a></p>
-<h4>Running multiple versions of PostgreSQL</h4>
-<p>Check the config files to see which version is on which port:</p>
-<p><code>grep -H '^port' /etc/postgresql/*/main/postgresql.conf</code></p>
-<p>sample output:</p>
-<div class="highlight"><pre><span></span><code>/etc/postgresql/10/main/postgresql.conf:port = 5432 
-/etc/postgresql/13/main/postgresql.conf:port = 5433 
+                <h3>Issues with SSL Cert</h3>
+<div class="highlight"><pre><span></span><code>pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org certifi
+pip install pip-system-certs
 </code></pre></div>
 
-<h4>Restart Postgres</h4>
-<div class="highlight"><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">postgresql</span><span class="w"> </span><span class="n">reload</span>
-<span class="n">sudo</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">postgresql</span><span class="w"> </span><span class="n">start</span>
-</code></pre></div>
-
-<h4>Hostname</h4>
-<p>PostgreSQL, what is the hostname address of my default database?</p>
-<p>If you're connecting from the same machine, use localhost</p>
-<h4>Connection String</h4>
-<p>You can provide your username and password directly in the connection URI provided to psql:</p>
-<p><code>psql postgresql://username:password@localhost:5432/mydb</code></p>
-<h4>Useful Commands</h4>
+<h3>Conda</h3>
 <ul>
-<li>To establish a connection : <code>sudo su - postgres</code></li>
-<li>To open a postgress prompt using the command: <code>psql</code></li>
-<li>To see details of the connection: <code>\conninfo</code></li>
-<li>To view the databases in our PostgreSQL instance: <code>\list</code></li>
-<li><code>CREATE DATABASE dbname;</code></li>
-<li><code>DROP DATABASE dbname;</code></li>
+<li><code>conda create --name &lt;name&gt; python=3.8 -y</code></li>
+<li><code>conda activate &lt;name&gt;</code></li>
+<li><code>pip install ipykernel</code></li>
+<li><code>python -m ipykernel install --user --name=&lt;name&gt;</code></li>
+<li><code>conda env remove --name &lt;name&gt;</code></li>
+<li><code>conda env list</code></li>
+<li><code>conda update</code></li>
+<li><code>conda install --yes --file requirements.txt</code></li>
+<li><code>jupyter kernelspec list</code></li>
+<li><code>conda install --channel=conda-forge nb_conda_kernels</code></li>
 </ul>
-<h3>R and RStudio</h3>
-<h4>Uninstall previous R installation</h4>
-<div class="highlight"><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">save</span>
-<span class="n">pkgList</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">installed.packages</span><span class="p">(</span><span class="n">priority</span><span class="o">=</span><span class="s">&#39;NA&#39;</span><span class="p">)</span>
-<span class="nf">remove.packages</span><span class="p">(</span><span class="n">pkgList</span><span class="p">)</span>
-<span class="nf">q</span><span class="p">()</span>
-<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="o">-</span><span class="n">get</span><span class="w"> </span><span class="n">remove</span><span class="w"> </span><span class="o">--</span><span class="n">purge</span><span class="w"> </span><span class="n">r</span><span class="o">-</span><span class="n">cran</span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="o">-</span><span class="n">base</span><span class="o">*</span>
+<h4>Specific venvs</h4>
+<ul>
+<li>Geopandas: <code>conda create --name=gtfs_graph python=3.8 geopandas scipy --channel=conda-forge</code></li>
+</ul>
+<h4>Venv</h4>
+<div class="highlight"><pre><span></span><code>apt-get install python3-venv
+python -m venv .env
+source .env/bin/activate
 </code></pre></div>
 
-<h4>Install on Ubuntu 20.04 (Focal Fossa)</h4>
-<p>Save and run the script below (<a href="https://gist.github.com/mGalarnyk/41c887e921e712baf86fecc507b3afc7">source</a>).</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Install R + RStudio on Ubuntu 20 Focal</span>
-<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="o">-</span><span class="n">key</span><span class="w"> </span><span class="n">adv</span><span class="w"> </span><span class="o">--</span><span class="n">keyserver</span><span class="w"> </span><span class="n">keyserver</span><span class="o">.</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">com</span><span class="w"> </span><span class="o">--</span><span class="n">recv</span><span class="o">-</span><span class="n">keys</span><span class="w"> </span><span class="n">E298A3A825C0D65DF</span><span class="o">&gt;</span>
-<span class="n">sudo</span><span class="w"> </span><span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span><span class="w"> </span><span class="s1">&#39;deb https://cloud.r-project.org/bin/linux/ubuntu focal&gt;</span>
-<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="n">update</span>
-<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">r</span><span class="o">-</span><span class="n">base</span><span class="w"> </span><span class="n">r</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span><span class="n">gdebi</span><span class="o">-</span><span class="n">core</span>
-
-<span class="c1"># next line required for kableExtra</span>
-<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">libcurl4</span><span class="o">-</span><span class="n">openssl</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span><span class="n">openssl</span><span class="w"> </span><span class="n">libssl</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span><span class="n">openssh</span><span class="o">-</span><span class="n">client</span><span class="w"> </span><span class="n">libxml2</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span>
-
-<span class="c1"># next line required for RcppArmadillo</span>
-<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">liblapack</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span>
-
-<span class="c1"># install Latex for RMarkdown</span>
-<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">texlive</span><span class="w"> </span><span class="n">texstudio</span><span class="w"> </span><span class="n">texlive</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">recommended</span><span class="w"> </span><span class="n">texlive</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">extra</span>
-
-<span class="c1"># Download and Install RStudio</span>
-<span class="n">wget</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download1</span><span class="o">.</span><span class="n">rstudio</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">desktop</span><span class="o">/</span><span class="n">bionic</span><span class="o">/</span><span class="n">amd64</span><span class="o">/</span><span class="n">rstudio</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">1103</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span>
-<span class="n">sudo</span><span class="w"> </span><span class="n">gdebi</span><span class="w"> </span><span class="n">rstudio</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">1103</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span>
-<span class="n">rm</span><span class="w"> </span><span class="n">rstudio</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">1103</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span>
-</code></pre></div>
-
-<h4>List of Useful Packages</h4>
-<p><code>install.packages((c("tidyverse", "ggplot2", "ggthemes", "kableExtra", "rbenchmark", "inline", "data.table", "RcppArmadillo"))</code></p>
-<h3>Docker</h3>
+<h4>Windows VSC Venv</h4>
 <ul>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04">Install Docker on Ubuntu-16-04</a></li>
-<li><a href="https://www.udemy.com/docker-mastery/">Docker Mastery: The Complete Toolset From a Docker Captain</a>:</li>
+<li>To create: <code>python -m venv .venv</code></li>
+<li>To activate: <code>.venv\Scripts\activate</code></li>
 </ul>
-<p>Docker</p>
+<h4>Pipenv</h4>
+<p>Install</p>
 <ul>
-<li>get relevant <code>curl</code> line from <a href="https://get.docker.com/">here</a>.
-    Note: this will figure out which version to get for your particular Linux OS</li>
-<li>run shell script (next line in the above link)</li>
-<li><code>sudo usermod -aG docker vagrant</code></li>
-<li><code>docker version</code> to test</li>
+<li><code>sudo apt-get update</code></li>
+<li><code>sudo apt install python3-pip</code></li>
+<li><code>pip3 install pipenv</code></li>
+<li><code>pipenv --python 3.6</code></li>
 </ul>
-<p>Docker Machine</p>
+<p>Useful commands</p>
 <ul>
-<li>get the lines from <a href="https://github.com/docker/machine/releases">https://github.com/docker/machine/releases</a></li>
-</ul>
-<p>Docker Compose</p>
-<ul>
-<li>get lines for latest release <a href="https://github.com/docker/compose/releases">here</a></li>
-<li><code>sudo -i</code> then paste the lines</li>
-<li><code>docker-compse version</code> to test</li>
-</ul>
-<p><br></p>
-<h3>Pycharm</h3>
-<h4>Install</h4>
-<div class="highlight"><pre><span></span><code><span class="o">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">openjdk</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="n">jdk</span>
-<span class="o">$</span><span class="w"> </span><span class="n">java</span><span class="w"> </span><span class="o">-</span><span class="n">version</span>
-<span class="o">$</span><span class="w"> </span><span class="n">wget</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">jetbrains</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">pycharm</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="mf">2018.3</span><span class="o">.</span><span class="mf">4.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
-<span class="o">$</span><span class="w"> </span><span class="n">tar</span><span class="w"> </span><span class="o">-</span><span class="n">xvf</span><span class="w"> </span><span class="n">pycharm</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="mf">2018.3</span><span class="o">.</span><span class="mf">4.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
-<span class="o">$</span><span class="w"> </span><span class="n">cd</span><span class="w"> </span><span class="n">pycharm</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="mf">2018.3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">bin</span>
-<span class="o">$</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="n">pycharm</span><span class="o">.</span><span class="n">sh</span>
-</code></pre></div>
-
-<h4>pytest</h4>
-<p>Edit Configuration &gt;&gt; Additional arguments &gt;&gt; <code>-p no:logging -s</code></p>
-<h4>environment variables</h4>
-<ul>
-<li><a href="https://stackoverflow.com/questions/42708389/how-to-set-environment-variables-in-pycharm">about setting environment variable e.g. DATA_HOME</a></li>
-</ul>
-<h4>Conda Executable Path on Windows</h4>
-<div class="highlight"><pre><span></span><code>C:\Users\&lt;USER&gt;\AppData\Local\miniconda3\condabin
-</code></pre></div>
-
-<p><br></p>
-<h3>Jupyter (via Docker)</h3>
-<ul>
-<li><a href="https://towardsdatascience.com/how-to-setup-your-jupyterlab-project-environment-74909dade29b">How to Setup Your JupyterLab Project Environment</a></li>
-</ul>
-<p><br></p>
-<h3>RoboMongo</h3>
-<ul>
-<li><a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/">Install MongoDB Community Edition on Ubuntu</a></li>
-<li><a href="https://robomongo.org/download">Robo 3T: the hobbyist GUI</a></li>
-<li><a href="https://gist.github.com/abdallahokasha/37911a64ad289487387e2d1a144604ae">Install Robo3t On Ubuntu 18.04</a></li>
-<li><code>mongoimport --db naptan --collection naptan --file test.json --jsonArray</code></li>
-</ul>
-<h3>NodeJS</h3>
-<ul>
-<li>npm install xml-stream, xml2js</li>
-<li>node myfile.js</li>
-</ul>
-<h4>NodeJS XML to JSON</h4>
-<div class="highlight"><pre><span></span><code><span class="k">var</span><span class="w"> </span><span class="n">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
-<span class="k">var</span><span class="w"> </span><span class="n">xml2js</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;xml2js&#39;</span><span class="p">);</span>
-<span class="k">var</span><span class="w"> </span><span class="n">util</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;util&#39;</span><span class="p">);</span>
-
-<span class="k">var</span><span class="w"> </span><span class="n">parser</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">xml2js</span><span class="o">.</span><span class="n">Parser</span><span class="p">();</span>
-
-<span class="n">fs</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s1">&#39;NaPTAN_2018_11_08.xml&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">function</span><span class="p">(</span><span class="n">err</span><span class="p">,</span><span class="n">data</span><span class="p">){</span>
-<span class="w">    </span><span class="n">parser</span><span class="o">.</span><span class="n">parseString</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">function</span><span class="p">(</span><span class="n">err</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">){</span>
-
-<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"> </span><span class="bp">true</span><span class="p">));</span>
-
-<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">toString</span><span class="p">(),</span><span class="w"> </span><span class="n">function</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="o">//</span><span class="w">     </span><span class="k">if</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="o">//</span><span class="w">         </span><span class="k">return</span><span class="w"> </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">err</span><span class="p">);</span>
-<span class="w">        </span><span class="o">//</span><span class="w">     </span><span class="p">}</span>
-<span class="w">        </span><span class="o">//</span><span class="w">     </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;The file was saved!&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="p">});</span>
-
-<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="nb">convert</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">JSON</span><span class="w"> </span><span class="n">string</span>
-<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JSON</span><span class="o">.</span><span class="n">stringify</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span>
-
-<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="n">save</span><span class="w"> </span><span class="n">JSON</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">file</span>
-<span class="w">        </span><span class="n">fs</span><span class="o">.</span><span class="n">writeFileSync</span><span class="p">(</span><span class="s1">&#39;test.json&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">json</span><span class="p">);</span>
-
-<span class="w">    </span><span class="p">});</span>
-<span class="p">});</span>
-</code></pre></div>
-
-<h4></h4>
-<h3>GloVe for Python</h3>
-<ul>
-<li><code>-e git+git@github.com:maciejkula/glove-python.git#egg=glove</code></li>
-<li>dependencies</li>
-<li><code>pip install Cython</code></li>
-<li><code>sudo apt-get install python3-dev</code></li>
-</ul>
-<p><br></p>
-<h4>Jena</h4>
-<div class="highlight"><pre><span></span><code>wget http://mirrors.whoishostingthis.com/apache/jena/binaries/apache-jena-3.1.1.tar.gz
-tar -zxvf
-</code></pre></div>
-
-<p><br></p>
-<h4>Fuseki 2 (requires JDK 8)</h4>
-<div class="highlight"><pre><span></span><code>wget http://mirrors.whoishostingthis.com/apache/jena/binaries/apache-jena-fuseki-2.4.1.tar.gz
-tar -zxvf
-sudo add-apt-repository ppa:webupd8team/java
-sudo apt-get update
-sudo apt-get install oracle-java8-installer
-</code></pre></div>
-
-<p>To test fuseki server</p>
-<div class="highlight"><pre><span></span><code>~/apache-jena-fuseki-2.4.1/fuseki-server --update --loc=angioexplain /angioexplain
-</code></pre></div>
-
-<p>Open browser and got to <code>localhost:3030</code></p>
-<p><br></p>
-<h4>Miniconda3</h4>
-<div class="highlight"><pre><span></span><code>wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh
-</code></pre></div>
-
-<p>then add below line to <code>.bashrc</code>, restart terminal and check installation with <code>conda -V</code>.</p>
-<p><code>export PATH="/home/username/miniconda3/bin:$PATH"</code></p>
-<h4>Misc.</h4>
-<ul>
-<li>
-<p><code>sudo apt-get install terminator</code></p>
-</li>
-<li>
-<p>VSCode Run(Compile): Shit+Ctrl+B </p>
-</li>
-<li>
-<p>to view a .gv GraphViz file (will crate a pdf)</p>
-<p>f = Source.from_file('file-name.gv')
-f.render()</p>
-</li>
+<li><code>pipenv install -r requirements.txt</code></li>
+<li><code>pipenv shell</code> to create new env; load/activate existing env, load .env variables</li>
+<li><code>pipenv update</code> can be used to install base dependencies</li>
+<li><code>pip install ...</code></li>
+<li><code>pipenv sync</code> will use <code>Pipfile</code> if present</li>
+<li><code>pipenv graph</code></li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./software.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
+                    <a href="./conda.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/virtual-environments.html" rel="tag">Virtual Environments</a>
                 </div>
-            </article>            <h4 class="date">Nov 24, 2017</h4>
+            </article>            <h4 class="date">Dec 03, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./databases.html" rel="bookmark" title="Permanent Link to &quot;Databases&quot;">Databases</a>
+                    <a href="./Vagrant VM.html" rel="bookmark" title="Permanent Link to &quot;Vagrant VM&quot;">Vagrant VM</a>
                 </h2>
 
                 
                 
 
-                <h3>Postgres</h3>
-<h4>install postgres and postgis</h4>
-<div class="highlight"><pre><span></span><code>$<span class="w">  </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>postgis<span class="w"> </span>postgresql-13-postgis-3
-$<span class="w"> </span>sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql
-<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \password postgres</span>
-<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \q</span>
+                <h4>Useful Links</h4>
+<ul>
+<li><a href="https://www.gis-blog.com/osgeo-live-the-best-open-source-gis-ready-to-use-package/">OSGeo-Live</a></li>
+<li><a href="https://releases.ubuntu.com/20.04/">Ubuntu 20.04 ISO</a></li>
+<li><a href="https://blog.engineyard.com/building-a-vagrant-box">Building a Vagrant Box from Start to Finish</a></li>
+<li><a href="https://www.abhishek-tiwari.com/creating-a-new-vagrant-base-box-from-an-existing-vm/">Creating a new Vagrant base box from an existing VM</a></li>
+</ul>
+<h4>Pre-requisites</h4>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-16-04">Git</a></li>
+<li><a href="http://docs.vagrantup.com/v2/installation/index.html">Vagrant</a> </li>
+<li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>.</li>
+</ul>
+<h4>Shared Folders</h4>
+<p><strong>NEW</strong></p>
+<p>On Windows Host, add this to Vagrantfile:</p>
+<p><code>config.vm.synced_folder "C:/Users/ABCD123/OneDrive - XY/Documents/workproducts-vagrant/linux_mint", "/host_project"</code></p>
+<p><strong>OLD</strong></p>
+<p>Vagrantfile: <code>config.vm.synced_folder HOST GUEST</code></p>
+<p>where HOST = <code>"/home/raoulbia/DEV/vagrant_mint"</code> and GUEST = <code>"/vagrant"</code></p>
+<p>e.g.   <code>config.vm.synced_folder "/home/raoulbia/DEV/vagrant_ubuntu", "/vagrant"</code></p>
+<div class="highlight"><pre><span></span><code>config.vm.synced_folder<span class="w"> </span><span class="s2">&quot;.&quot;</span>,<span class="w"> </span><span class="s2">&quot;/vmtest_kafka&quot;</span>
 </code></pre></div>
 
-<p>check installed version(s): <code>dpkg -l | grep postgres</code></p>
-<h4>postgres user authentication error</h4>
-<p><code>sudo nano /etc/postgresql/13/main/pg_hba.conf</code></p>
-<p>CHANGE FROM</p>
-<p><code>local   all     postgres     peer</code></p>
-<p>TO</p>
-<p><code>local   all      postgres    trusted</code></p>
-<p>then 
-sudo service postgresql restart</p>
-<h4>run in pgadmin4</h4>
-<p><code>CREATE EXTENSION postgis;</code></p>
+<h4>Vagrant Box</h4>
+<p>Assuming you want to share the directory in which <code>Vagrantfile</code> is located and that directory is named <code>vmtest_kafka</code>. 
+First add your share directory in the VM Box (Devices &gt; Shared Folders) and click "Make Permanent".
+Whatever you name your share here will be the name you will need to use when mounting in the vm guest OS e.g. <code>vmtest_kafka</code>. 
+Next on the the guset OS make a directory to use for your mount preferably in your home directory e.g. <code>mkdir ~/shared</code>.</p>
+<div class="highlight"><pre><span></span><code>sudo usermod -a -G vboxsf vagrant
+mkdir ~/shared
+sudo mount -t vboxsf vmtest_kafka ~/shared
+</code></pre></div>
+
+<ul>
+<li><code>sudo nano ~/.profile</code> and add the line: <code>sudo mount -t vboxsf vmtest_kafka ~/shared</code></li>
+<li>Set directory permissions on HOST: <code>chmod 777 -R vmtest_kafka/</code></li>
+</ul>
+<h4>Desktop size issue</h4>
+<div class="highlight"><pre><span></span><code><span class="n">vagrant</span><span class="w"> </span><span class="n">plugin</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">--</span><span class="n">plugin</span><span class="o">-</span><span class="n">clean</span><span class="o">-</span><span class="n">sources</span><span class="w"> </span><span class="o">--</span><span class="n">plugin</span><span class="o">-</span><span class="n">source</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">rubygems</span><span class="o">.</span><span class="n">org</span><span class="w"> </span><span class="n">vagrant</span><span class="o">-</span><span class="n">vbguest</span>
+<span class="n">vagrant</span><span class="w"> </span><span class="n">up</span>
+<span class="n">vagrant</span><span class="w"> </span><span class="n">vbguest</span><span class="w"> </span><span class="o">--</span><span class="n">do</span><span class="w"> </span><span class="n">install</span>
+<span class="n">vagrant</span><span class="w"> </span><span class="n">reload</span>
+</code></pre></div>
+
+<h4>Increase Vagrant Box Size</h4>
+<p><strong>NEW</strong></p>
+<p><code>vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-disksize</code></p>
+<div class="highlight"><pre><span></span><code><span class="nv">Vagrant</span>.<span class="nv">configure</span><span class="ss">(</span><span class="s2">&quot;2&quot;</span><span class="ss">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="nv">config</span><span class="o">|</span>
+<span class="w">  </span>#<span class="w"> </span><span class="nv">Your</span><span class="w"> </span><span class="nv">existing</span><span class="w"> </span><span class="nv">configurations</span><span class="w"> </span><span class="nv">like</span><span class="w"> </span><span class="nv">VM</span><span class="w"> </span><span class="nv">box</span>
+<span class="w">  </span><span class="nv">config</span>.<span class="nv">vm</span>.<span class="nv">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;npalm/mint17-amd64-cinnamon&quot;</span>
+
+<span class="w">  </span>#<span class="w"> </span><span class="nv">Plugin</span><span class="w"> </span><span class="nv">configuration</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">increase</span><span class="w"> </span><span class="nv">disk</span><span class="w"> </span><span class="nv">size</span>
+<span class="w">  </span><span class="nv">config</span>.<span class="nv">disksize</span>.<span class="nv">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;50GB&#39;</span>
+
+<span class="w">  </span>#<span class="w"> </span><span class="nv">Any</span><span class="w"> </span><span class="nv">other</span><span class="w"> </span><span class="nv">configurations</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p><strong>OLD</strong></p>
+<p>Note: it may be easier to just grab a box that has a large size. See above.</p>
+<ol>
+<li>
+<p>Clone &amp; Resize</p>
+<p>on Linux</p>
+<div class="highlight"><pre><span></span><code>VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vmdk&quot; &quot;/home/baba/VirtualBox VMs/my_box/box.vdi&quot; --format vdi
+VBoxManage modifyhd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; --resize 131072
+VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/home/baba/VirtualBox VMs/my_box/box-resized.vmdk&quot; --format vmdk
+</code></pre></div>
+
+<p>on Window: same steps as below but first run this:</p>
+<div class="highlight"><pre><span></span><code>set PATH=%PATH%;&quot;C:\Program Files\Oracle\VirtualBox&quot;
+</code></pre></div>
+
+</li>
+<li>
+<p>Allocate space</p>
+<p>The newly created disk space is unallocated at this stage. Follow these steps next:</p>
 <ul>
 <li>
-<p>http://www.orbital.co.ke:8080/opengeo-docs/dataadmin/pgGettingStarted/shp2pgsql.html</p>
+<p><a href="http://www.gitshah.com/2013/05/how-to-fix-out-of-space-problem-for.html?m=1">getting Gparted</a></p>
 </li>
 <li>
-<p>test: <code>psql -U postgres -d &lt;DBNAME&gt; -c "SELECT postgis_version()"</code></p>
-</li>
-<li>
-<p>syntax: <code>shp2pgsql -I -s &lt;SRID&gt; &lt;PATH/TO/SHAPEFILE&gt; &lt;SCHEMA&gt;.&lt;DBTABLE&gt; | psql -U postgres -d &lt;DBNAME&gt;</code></p>
-</li>
-<li>
-<p>example: <code>shp2pgsql -I -s 4326  dublinbus/Dublin_Bus.shp  shp_dublinbus | psql -U postgres -d dublinbus</code></p>
+<p><a href="https://www.youtube.com/watch?v=cDgUwWkvuIY">changing partitions using Gparted (Video)</a></p>
 </li>
 </ul>
-<h3>Utilities: ogr2ogr</h3>
+</li>
+</ol>
+<p>see also <a href="https://gist.github.com/christopher-hopper/9755310">Resize a Hard Disk for a Virtual Machine</a></p>
+<h4>Create Global Variable for use in Python Scripts</h4>
+<p>In <code>~/.profile</code>add</p>
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="n">TOMOE_DATA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">ownCloud</span><span class="o">/</span><span class="n">tomoe</span><span class="o">-</span><span class="n">data</span>
+<span class="k">export</span><span class="w"> </span><span class="n">KG_OUTPUT_DIR</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">vmtest</span><span class="o">/</span><span class="n">tomoe</span><span class="o">/</span><span class="n">wp</span><span class="o">-</span><span class="n">tomoe</span><span class="o">-</span><span class="n">playground</span><span class="o">/</span><span class="n">local</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">kg</span>
+</code></pre></div>
+
+<h4>Useful Vagrant commands</h4>
 <ul>
-<li>https://gis.stackexchange.com/questions/65917/can-i-append-to-different-tables-using-ogr2ogr</li>
-<li>https://www.bostongis.com/PrinterFriendly.aspx?content_name=ogr_cheatsheet</li>
-<li>https://www.mankier.com/1/ogr2ogr</li>
+<li><code>config.vm.box = "file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box"</code></li>
+<li><code>VBoxClient --clipboard</code></li>
+<li><code>vagrant global-status</code></li>
+<li><code>set PATH=%PATH%;"C:\Program Files\Oracle\VirtualBox"</code></li>
+<li><code>vboxmanage list vms</code></li>
+<li><code>vagrant init file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box</code></li>
 </ul>
-<h4>geojson to shp</h4>
-<p><code>ogr2ogr -f "ESRI Shapefile" destination_data.shp "dcc_public_bin_locations.geojson"</code></p>
+<h4>Misc. Links</h4>
+<ul>
+<li><a href="https://github.com/hashicorp/vagrant/issues/5186">Warning: Authentication failure. Retrying... " after packaging box</a></li>
+<li><a href="https://jeremykendall.net/2013/08/09/vagrant-synced-folders-permissions/">vagrant-synced-folders-permissions</a></li>
+<li><a href="https://stackoverflow.com/questions/35807568/vagrant-synced-folder-permissions">vagrant-synced-folders-permissions SO</a></li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./databases.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
+                    <a href="./Vagrant VM.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
                 </div>
             </article>
 
@@ -314,7 +227,7 @@ sudo service postgresql restart</p>
 
                     <a href="./index18.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 17 of 31</span>
+                    <span>Page 17 of 34</span>
                 </div>
 
             <div class="clear"></div>

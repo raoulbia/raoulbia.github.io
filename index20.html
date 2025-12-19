@@ -26,246 +26,151 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 19, 2017</h4>
+        <div id="content">            <h4 class="date">Nov 24, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./sql.html" rel="bookmark" title="Permanent Link to &quot;SQL&quot;">SQL</a>
+                    <a href="./databases.html" rel="bookmark" title="Permanent Link to &quot;Databases&quot;">Databases</a>
                 </h2>
 
                 
                 
 
-                <h3>Advanced SQL – Window Functions (LinkedIn Learning)</h3>
-<h4>Blank OVER()</h4>
+                <h3>Postgres</h3>
+<h4>install postgres and postgis</h4>
+<div class="highlight"><pre><span></span><code>$<span class="w">  </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>postgis<span class="w"> </span>postgresql-13-postgis-3
+$<span class="w"> </span>sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql
+<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \password postgres</span>
+<span class="nv">postgres</span><span class="o">=</span><span class="c1"># \q</span>
+</code></pre></div>
+
+<p>check installed version(s): <code>dpkg -l | grep postgres</code></p>
+<h4>postgres user authentication error</h4>
+<p><code>sudo nano /etc/postgresql/13/main/pg_hba.conf</code></p>
+<p>CHANGE FROM</p>
+<p><code>local   all     postgres     peer</code></p>
+<p>TO</p>
+<p><code>local   all      postgres    trusted</code></p>
+<p>then 
+sudo service postgresql restart</p>
+<h4>run in pgadmin4</h4>
+<p><code>CREATE EXTENSION postgis;</code></p>
 <ul>
-<li>Blank OVER() clause will make the window consider the whole set</li>
-</ul>
-<h4>Filtering data</h4>
-<ul>
-<li>when using a subquery in a SELECT statement, and the sub-query contains a WHERE clause, then the WHERE clause must be duplicated in the main query (see 2.2 3:25)</li>
-<li>with WINDOW functions, it's enough to filter in the main query WHERE clause, and that data is all that the WINDOW funtions sees!</li>
-</ul>
-<h4>Non-correlated Subquery Example</h4>
-<ul>
-<li>Example of non-correlated subquery i.e. which will be executed only once - see 2.3 3:20</li>
-</ul>
-<h4>Dual Purpose of ORDER BY clause</h4>
-<ul>
-<li>see 2.3 3:45</li>
-<li>Aggregate and frame offset window functions are inherently order agnostic. For these, ORDER BY is used for defining frames that further limit the rows visible to the function </li>
-<li>For rank, row offset, and distribution window functions, ORDER BY defines how the function is evaluated.</li>
-</ul>
-<h4>Framing Rows and Ranging</h4>
-<ul>
-<li>UNBOUNDED PRECEDING, UNBOUNDED FOLLOWING, CURRENT ROW, 1 PRECEDING, 1 FOLLOWING etc</li>
 <li>
-<p>can be applied to ROWS, RANGES and GROUPS</p>
+<p>http://www.orbital.co.ke:8080/opengeo-docs/dataadmin/pgGettingStarted/shp2pgsql.html</p>
 </li>
 <li>
-<p>ROWS frame boundaries are specified using row position count</p>
-<ul>
-<li>e.g. one row, 20 row, or all the rows that either precede or follow the current one</li>
-<li>Row frames don't care what values are in these rows, they just count rows</li>
-<li>N PRECEDING and N FOLLOWING, point to any number of rows before or after the current one</li>
-</ul>
+<p>test: <code>psql -U postgres -d &lt;DBNAME&gt; -c "SELECT postgis_version()"</code></p>
 </li>
 <li>
-<p>RANGE frames are specified using value ranges that either precede or follow the current row </p>
-<ul>
-<li>regardless of how many rows they cover</li>
-<li>RANGE frames are data type dependent. </li>
-<li>Example: an integer range of 10 represents all rows that have a sorting value which is plus or minus 10 from the current rows value</li>
-<li>Value, NOT position</li>
-<li>CUREENT ROW for RANGE frames doesn't refer to the current row's position like it did with the ROWS frame. </li>
-<li>For RANGE, it refers to the current row's value, and that includes all rows that share the same value. </li>
-</ul>
+<p>syntax: <code>shp2pgsql -I -s &lt;SRID&gt; &lt;PATH/TO/SHAPEFILE&gt; &lt;SCHEMA&gt;.&lt;DBTABLE&gt; | psql -U postgres -d &lt;DBNAME&gt;</code></p>
 </li>
 <li>
-<p>GROUPS frames are defined using the number of peer groups following or preceding the current row's group. - see 3.1 05:51</p>
-<ul>
-<li>A peer group is a set of rows that share the same sorting values. </li>
-<li>So when evaluated for the second row in this partition, a group frame that begins with one PRECEDING and ends with one FOLLOWING, will cover all partition rows </li>
-</ul>
+<p>example: <code>shp2pgsql -I -s 4326  dublinbus/Dublin_Bus.shp  shp_dublinbus | psql -U postgres -d dublinbus</code></p>
 </li>
 </ul>
-<h4>The Window Clause</h4>
-<p><img alt="" src="img/the_window_clause.png"></p>
-<h4>Windows vs Group Aggregate Functions</h4>
+<h3>Utilities: ogr2ogr</h3>
 <ul>
-<li>Aggregate Window Functions are defined with the OVER clause. </li>
-<li>They see all the rows or row groups as defined by their window specification. </li>
-<li>They don't see individual rows within each row group. </li>
-<li>Aggregate Grouped Functions </li>
-<li>can be used in the HAVING, SELECT, and ORDER BY clauses. </li>
-<li>They see individual rows within each group, but they can't see any row groups other than their own</li>
+<li>https://gis.stackexchange.com/questions/65917/can-i-append-to-different-tables-using-ogr2ogr</li>
+<li>https://www.bostongis.com/PrinterFriendly.aspx?content_name=ogr_cheatsheet</li>
+<li>https://www.mankier.com/1/ogr2ogr</li>
 </ul>
-<p><img alt="" src="img/windows_vs_group_aggregate_functions.png"></p>
-<h4>RANK Window Functions</h4>
-<ul>
-<li>ORDER BY determines the basis for the rank and is mandatory. </li>
-<li>a rank of an expression is always relative to others within its partition</li>
-<li>Framing doesn't make sense for Rank functions</li>
-</ul>
-<h4>RANK vs DENSE_RANK</h4>
-<p><img alt="" src="img/rank_vs_dense_rank.png"></p>
-<h4>Ntile</h4>
-<ul>
-<li>Ntile segments a partition into as equal as possible n or less segments. </li>
-<li>Each segment is called a tile. Ntile assigns each row an integer number out of a monotonically increasing sequence
-  starting with one and ending either at N or the number of rows within the partition in case there are fewer of those.</li>
-</ul>
-<h3>Some Sample Queries</h3>
-<div class="highlight"><pre><span></span><code>SELECT train, dest, time FROM ( 
-  SELECT train, dest, time, 
-    RANK() OVER (PARTITION BY train ORDER BY time DESC) dest_rank
-    FROM traintable
-  ) where dest_rank = 1
-</code></pre></div>
-
-<p><br></p>
-<div class="highlight"><pre><span></span><code>select <span class="gs">* from PREDICATION where SUBJECT_SEMTYPE in (&#39;gngm&#39;) limit 10;</span>
-<span class="gs">select *</span> from ENTITY where SEMTYPE in (&#39;gngm&#39;) and GENE_ID &lt;&gt; &#39;&#39; limit 10;
-</code></pre></div>
-
-<p><br></p>
-<div class="highlight"><pre><span></span><code><span class="n">select</span><span class="w"> </span><span class="n">count</span><span class="p">([</span><span class="n">Incident</span><span class="w"> </span><span class="n">Type</span><span class="p">]),</span><span class="w"> </span><span class="p">[</span><span class="n">Incident</span><span class="w"> </span><span class="n">Type</span><span class="p">]</span>
-<span class="n">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">bat_2020</span><span class="p">]</span>
-<span class="n">Group</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="p">[</span><span class="n">Incident</span><span class="w"> </span><span class="n">Type</span><span class="p">]</span>
-</code></pre></div>
-
-<p><br></p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="nf">MIN</span><span class="w"> </span><span class="p">(</span><span class="o">[</span><span class="n">Created Date Time</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="ss">&quot;Min Date&quot;</span><span class="w"> </span><span class="p">,</span>
-<span class="w">       </span><span class="nf">MAX</span><span class="w"> </span><span class="p">(</span><span class="o">[</span><span class="n">Created Date Time</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="ss">&quot;Max Date&quot;</span><span class="w">  </span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">[</span><span class="n">dbo</span><span class="o">]</span><span class="p">.</span><span class="o">[</span><span class="n">bat_2020</span><span class="o">]</span>
-</code></pre></div>
-
-<h3>Useful commands</h3>
-<h4>Determine table column size</h4>
-<div class="highlight"><pre><span></span><code><span class="k">Select</span><span class="w">        </span><span class="nf">max</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="o">[</span><span class="n">number</span><span class="o">]</span><span class="p">))</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">[</span><span class="n">number</span><span class="o">]</span>
-<span class="w">              </span><span class="p">,</span><span class="nf">max</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="o">[</span><span class="n">u_opened_date</span><span class="o">]</span><span class="p">))</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">[</span><span class="n">u_opened_date</span><span class="o">]</span>
-<span class="w">              </span><span class="p">...</span>
-<span class="k">from</span><span class="w">   </span><span class="n">dbo</span><span class="p">.</span><span class="n">mytable</span>
-</code></pre></div>
-
-<h4>Insert from another table</h4>
-<p>To get the table details</p>
-<p><code>show create table ENTITY;</code> </p>
-<p>To create the new ENTITY2 table, copy/paste from the above output.</p>
-<p><code>insert into ENTITY2 select * from ENTITY where GENE_ID &lt;&gt; '';</code></p>
-<h4>See table columns and their data types</h4>
-<div class="highlight"><pre><span></span><code>SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS 
-  WHERE table_name = &#39;tbl_name&#39; AND COLUMN_NAME = &#39;col_name&#39;;
-</code></pre></div>
-
-<h4>Create DB</h4>
-<div class="highlight"><pre><span></span><code>GRANT ALL PRIVILEGES ON <span class="gs">*.*</span> TO &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;root&#39;;
-CREATE DATABASE dbname;
-USE dbname;
-</code></pre></div>
-
-<h4>Import from sql.gz file</h4>
-<div class="highlight"><pre><span></span><code><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">pv</span>
-<span class="n">zcat</span> <span class="n">filename</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">gz</span> <span class="o">|</span> <span class="n">pv</span> <span class="o">-</span><span class="n">cN</span> <span class="n">zcat</span> <span class="o">|</span> <span class="n">mysql</span> <span class="o">-</span><span class="n">u</span> <span class="n">root</span> <span class="o">-</span><span class="n">p</span> <span class="o">-</span><span class="n">f</span> <span class="o">-</span><span class="n">D</span> <span class="n">dbname</span> <span class="p">;</span>
-</code></pre></div>
-
-<h4>Get stats</h4>
-<div class="highlight"><pre><span></span><code><span class="n">SELECT</span> <span class="n">table_schema</span> <span class="s2">&quot;dbname&quot;</span><span class="p">,</span>
-        <span class="n">ROUND</span><span class="p">(</span><span class="n">SUM</span><span class="p">(</span><span class="n">data_length</span> <span class="o">+</span> <span class="n">index_length</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="s2">&quot;DB Size in MB&quot;</span> 
-<span class="n">FROM</span> <span class="n">information_schema</span><span class="o">.</span><span class="n">tables</span> 
-<span class="n">GROUP</span> <span class="n">BY</span> <span class="n">table_schema</span><span class="p">;</span> 
-</code></pre></div>
-
-<p>or (requires mysql v5.7+)</p>
-<div class="highlight"><pre><span></span><code>select table_schema, table_name, rows_fetched, rows_inserted, rows_updated, rows_deleted 
-    from sys.schema_table_statistics where table_schema=&#39;dbname&#39;;
-</code></pre></div>
-
-<p>or</p>
-<p><code>SHOW TABLE STATUS dbname;</code></p>
-<h4>Logging</h4>
-<ul>
-<li>start logging: <code>tee ./mylofile.log</code></li>
-<li>stop logging: <code>notee</code></li>
-</ul>
-<h4>Where is the table data stored?</h4>
-<ul>
-<li>it is specified in <code>my.cnf</code></li>
-<li>otherwise, the default location is <code>/var/lib/mysql/</code></li>
-</ul>
-<h4>Partition</h4>
-<div class="highlight"><pre><span></span><code><span class="n">alter</span> <span class="n">table</span> <span class="n">ENTITY</span> <span class="n">partition</span> <span class="n">by</span> <span class="nb">range</span><span class="p">(</span><span class="n">ENTITY_ID</span><span class="p">)(</span>
-<span class="n">partition</span> <span class="n">p0</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="p">(</span><span class="mi">250000000</span><span class="p">),</span>
-<span class="n">partition</span> <span class="n">p1</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="p">(</span><span class="mi">500000000</span><span class="p">),</span>
-<span class="n">partition</span> <span class="n">p2</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="p">(</span><span class="mi">750000000</span><span class="p">),</span>
-<span class="n">partition</span> <span class="n">p3</span> <span class="n">values</span> <span class="n">less</span> <span class="n">than</span> <span class="n">maxvalue</span>
-<span class="p">);</span>
-</code></pre></div>
-
-<h4>Set Primary Key</h4>
-<p><code>ALTER TABLE table_name ADD PRIMARY KEY (column_1, column_2);</code></p>
-<h4>Drop foreign key</h4>
-<div class="highlight"><pre><span></span><code><span class="n">ALTER</span> <span class="n">TABLE</span> <span class="n">ENTITY</span> <span class="n">DROP</span> <span class="n">FOREIGN</span> <span class="n">KEY</span> <span class="s1">&#39;ENTITY_ibfk_1&#39;</span><span class="p">;</span>
-<span class="n">Note</span><span class="p">:</span> <span class="n">would</span> <span class="n">this</span> <span class="n">be</span> <span class="n">better</span><span class="err">??</span>
-    <span class="n">ALTER</span> <span class="n">TABLE</span> <span class="n">foo</span> <span class="n">DISABLE</span> <span class="n">KEYS</span><span class="p">;</span>
-    <span class="n">do</span> <span class="n">stuff</span>
-    <span class="n">ALTER</span> <span class="n">TABLE</span> <span class="n">ENABLE</span> <span class="n">KEYS</span><span class="p">;</span>
-</code></pre></div>
-
-<h4>Increase buffer size for large import</h4>
-<div class="highlight"><pre><span></span><code><span class="err">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">nano</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">my</span><span class="p">.</span><span class="n">cnf</span>
-<span class="o">[</span><span class="n">mysqld</span><span class="o">]</span><span class="w"> </span><span class="n">innodb_buffer_pool_size</span><span class="o">=</span><span class="mi">228</span><span class="n">G</span>
-</code></pre></div>
-
-<h4>Error with MySQL: "The total number of locks exceeds the lock table size"</h4>
-<ul>
-<li><a href="https://dba.stackexchange.com/questions/27328/how-large-should-be-mysql-innodb-buffer-pool-size">see here</a></li>
-</ul>
-<h4>Misc. Mysql</h4>
-<ul>
-<li><code>$ mysql -u root -p</code></li>
-<li><code>$ sudo service mysql restart</code></li>
-<li><code>SHOW ENGINE INNODB STATUS;</code></li>
-<li><code>show table status like 'ENTITY'\G;</code> # number of rows in table</li>
-<li><code>SELECT ENTITY_ID, COUNT(*) c FROM ENTITY_GENE GROUP BY ENTITY_ID HAVING c &gt; 1;</code> # find duplicates</li>
-</ul>
-<h4>Install MySQL</h4>
-<ul>
-<li><a href="https://askubuntu.com/questions/750498/mysql-5-5-update-to-mysql-5-7">see here</a>
-and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-14-04">here</a></li>
-</ul>
-<h4>Resources</h4>
-<ul>
-<li><a href="https://towardsdatascience.com/ten-sql-concepts-you-should-know-for-data-science-interviews-7acf3e428185">Ten SQL Concepts </a></li>
-<li><a href="https://github.com/jamescalam/pysqlplus">pysqlplus</a></li>
-<li><a href="https://stackoverflow.com/questions/5136013/how-to-change-column-datatype-in-sql-database-without-losing-data/5136055">How to change column datatype in SQL</a></li>
-<li><a href="http://www.sqlfiddle.com/#!2/599d0/1">SQL Fiddle</a></li>
-<li><a href="https://www.a2hosting.com/kb/developer-corner/mysql/managing-mysql-databases-and-users-from-the-command-line">How to manage MySQL databases and users from the command line</a></li>
-<li><a href="https://www.linode.com/docs/databases/mysql/install-and-configure-mysql-workbench-on-ubuntu/">Install and Configure MySQL Workbench on Ubuntu 16.04</a></li>
-<li><a href="https://www.youtube.com/watch?v=iUjoPB27-iA">MySQL Partitioning</a></li>
-</ul>
+<h4>geojson to shp</h4>
+<p><code>ogr2ogr -f "ESRI Shapefile" destination_data.shp "dcc_public_bin_locations.geojson"</code></p>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./sql.html">posted at 00:00</a>
+                    <a href="./databases.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
                 </div>
-            </article>            <h4 class="date">Nov 19, 2017</h4>
+            </article>            <h4 class="date">Nov 24, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./sql_reference_queries.html" rel="bookmark" title="Permanent Link to &quot;SQL Reference Queries&quot;">SQL Reference Queries</a>
+                    <a href="./kafka.html" rel="bookmark" title="Permanent Link to &quot;Kafka Cheatsheet&quot;">Kafka Cheatsheet</a>
                 </h2>
 
                 
                 
 
-                <h3>Flavour: TSQL</h3>
+                <h3>Terminology</h3>
+<ul>
+<li>A Kafka cluster is a group of Kafka brokers.</li>
+<li>A Kafka broker allows consumers to fetch messages by topic, partition and offset.</li>
+<li>Kafka brokers can create a Kafka cluster by sharing information between each other directly or indirectly using Zookeeper.</li>
+</ul>
+<h3>Installation</h3>
+<ul>
+<li>
+<p>Download and Setup Java 8 JDK: <code>sudo apt install openjdk-8-jdk</code></p>
+</li>
+<li>
+<p>Download &amp; Extract the Kafka binaries from https://kafka.apache.org/downloads</p>
+</li>
+<li>
+<p>Try Kafka commands using bin/kafka-topics.sh (for example)</p>
+</li>
+<li>
+<p>add to <code>~/.bashrc</code>:  <code>export PATH=/home/vagrant/kafka_2.12-2.8.0/bin:$PATH</code></p>
+</li>
+<li>
+<p>Edit Zookeeper &amp; Kafka configs in <code>kafka_2.12-2.8.0/config</code></p>
+<ul>
+<li>
+<p>zookeeper.properties: <code>dataDir=/home/vagrant/kafka_2.12-2.8.0/data/zookeeper</code></p>
+</li>
+<li>
+<p>server.properties: <code>log.dirs=/home/vagrant/kafka_2.12-2.8.0/data/kafka</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Start Zookeeper, Kafka Server and Kafka Connect</h3>
+<ul>
+<li>Pre-requisite: Kafka aded to PATH</li>
+<li>Only when Zookeeper is up and running you can start a Kafka server (that will connect to Zookeeper).</li>
+</ul>
+<div class="highlight"><pre><span></span><code>zookeeper-server-start.sh<span class="w"> </span>config/zookeeper.properties
+kafka-server-start.sh<span class="w"> </span>config/server.properties
+connect-distributed.sh<span class="w"> </span>config/connect-distributed.properties
+</code></pre></div>
+
+<h3>Topics</h3>
+<div class="highlight"><pre><span></span><code>kafka-topics.sh --zookeeper localhost:2181 --create --topic &quot;gtfs&quot; --partitions 1 --replication-factor 1
+kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list
+kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;g.*&#39;
+kafka-topics.sh --zookeeper localhost:2181 --delete --topic &#39;.*ksql.*&#39;
+</code></pre></div>
+
+<h3>Producers</h3>
+<div class="highlight"><pre><span></span><code>kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic topic_name
+</code></pre></div>
+
+<p>Piping a JSON file into a Topic:</p>
+<div class="highlight"><pre><span></span><code>file_name.json | kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic topic_name
+</code></pre></div>
+
+<h3>Consumers</h3>
+<p>This tool helps to read data from Kafka topics and outputs it to standard output.</p>
+<div class="highlight"><pre><span></span><code>kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --from-beginning --property print.key=true --property key.separator=&quot;-&quot; --property print.timestamp=true
+</code></pre></div>
+
+<h3>Faust</h3>
+<p>Note: append -p 6067 to the line below to use a different port.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>script.py<span class="w"> </span>worker<span class="w"> </span>
+</code></pre></div>
+
+<h3>Other Useful Commands</h3>
+<ul>
+<li><code>kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --list</code></li>
+<li><code>kafka-consumer-groups.sh  --list --bootstrap-server localhost:9092</code></li>
+<li><code>zookeeper-shell.sh localhost:2181 ls /brokers/ids</code> to list active brokers. </li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./sql_reference_queries.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
+                    <a href="./kafka.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/kafka.html" rel="tag">Kafka</a>
                 </div>
             </article>
 
@@ -276,7 +181,7 @@ and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-mys
 
                     <a href="./index21.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 20 of 31</span>
+                    <span>Page 20 of 34</span>
                 </div>
 
             <div class="clear"></div>

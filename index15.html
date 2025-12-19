@@ -26,314 +26,495 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 03, 2017</h4>
+        <div id="content">            <h4 class="date">Jan 03, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./Vagrant VM.html" rel="bookmark" title="Permanent Link to &quot;Vagrant VM&quot;">Vagrant VM</a>
+                    <a href="./python_data_structures.html" rel="bookmark" title="Permanent Link to &quot;Python Data Structures&quot;">Python Data Structures</a>
                 </h2>
 
                 
                 
 
-                <h4>Useful Links</h4>
+                <p><br></p>
+<h3>Lists</h3>
+<h4>itemgetter</h4>
+<p>itemgetter on a list of tuples <code>[('P52564', 61), ('O15169', 44), ...]</code></p>
+<p><code>sorted(list(degrees), key=operator.itemgetter(1), reverse=True)[0:5]</code></p>
+<p>itemgetter on a dict</p>
+<p><code>sorted(pr.items(), key=operator.itemgetter(1), reverse=True)[0:5]</code></p>
+<h4>Compare items in two lists:</h4>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">rank_true</span><span class="p">,</span> <span class="n">rank_pred</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="n">pred</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">rank_true</span> <span class="o">==</span> <span class="n">rank_pred</span><span class="p">:</span>
+</code></pre></div>
+
+<h4>Print list items</h4>
+<p><code>print(*myList, sep='\n')</code></p>
+<h4>Convert a list of chars into proper list:</h4>
+<div class="highlight"><pre><span></span><code><span class="nb">list</span> <span class="o">=</span> <span class="s1">&#39;123; 456; 887&#39;</span>
+<span class="n">ls</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>List Comprehension: If/Else</h4>
+<div class="highlight"><pre><span></span><code><span class="n">rel_bin</span> <span class="o">=</span> <span class="p">[</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">y</span> <span class="o">==</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="n">x</span> <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="n">y</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">y</span> <span class="o">==</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">1</span>
+            <span class="k">else</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">2</span>
+            <span class="k">else</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span>
+            <span class="k">else</span> <span class="o">-</span><span class="mi">9</span> <span class="c1"># to catch any issues</span>
+            <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rel_bin_judge_1</span><span class="p">,</span> <span class="n">rel_bin_judge_2</span><span class="p">)]</span>
+</code></pre></div>
+
+<p><br></p>
+<h3>Dictionaries</h3>
+<h4>Counting</h4>
+<div class="highlight"><pre><span></span><code><span class="n">context_dic</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">query_results</span><span class="p">:</span>
+    <span class="n">context_dic</span><span class="p">[</span><span class="n">res</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div>
+
+<h4>Count distinct values in a dict key</h4>
 <ul>
-<li><a href="https://www.gis-blog.com/osgeo-live-the-best-open-source-gis-ready-to-use-package/">OSGeo-Live</a></li>
-<li><a href="https://releases.ubuntu.com/20.04/">Ubuntu 20.04 ISO</a></li>
-<li><a href="https://blog.engineyard.com/building-a-vagrant-box">Building a Vagrant Box from Start to Finish</a></li>
-<li><a href="https://www.abhishek-tiwari.com/creating-a-new-vagrant-base-box-from-an-existing-vm/">Creating a new Vagrant base box from an existing VM</a></li>
+<li><code>{value: len(list(freq)) for value, freq in groupby(sorted(schedule_rel_types))}</code></li>
 </ul>
-<h4>Pre-requisites</h4>
-<ul>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-16-04">Git</a></li>
-<li><a href="http://docs.vagrantup.com/v2/installation/index.html">Vagrant</a> </li>
-<li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>.</li>
-</ul>
-<h4>Shared Folders</h4>
-<p><strong>NEW</strong></p>
-<p>On Windows Host, add this to Vagrantfile:</p>
-<p><code>config.vm.synced_folder "C:/Users/ABCD123/OneDrive - XY/Documents/workproducts-vagrant/linux_mint", "/host_project"</code></p>
-<p><strong>OLD</strong></p>
-<p>Vagrantfile: <code>config.vm.synced_folder HOST GUEST</code></p>
-<p>where HOST = <code>"/home/raoulbia/DEV/vagrant_mint"</code> and GUEST = <code>"/vagrant"</code></p>
-<p>e.g.   <code>config.vm.synced_folder "/home/raoulbia/DEV/vagrant_ubuntu", "/vagrant"</code></p>
-<div class="highlight"><pre><span></span><code>config.vm.synced_folder<span class="w"> </span><span class="s2">&quot;.&quot;</span>,<span class="w"> </span><span class="s2">&quot;/vmtest_kafka&quot;</span>
+<h4>Count unique values using <code>Counter</code> class</h4>
+<div class="highlight"><pre><span></span><code><span class="n">d</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">co_occurrence_counts</span><span class="p">[</span><span class="s1">&#39;Gene_Gene&#39;</span><span class="p">][</span><span class="s1">&#39;ent_ab&#39;</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%i</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
 </code></pre></div>
 
-<h4>Vagrant Box</h4>
-<p>Assuming you want to share the directory in which <code>Vagrantfile</code> is located and that directory is named <code>vmtest_kafka</code>. 
-First add your share directory in the VM Box (Devices &gt; Shared Folders) and click "Make Permanent".
-Whatever you name your share here will be the name you will need to use when mounting in the vm guest OS e.g. <code>vmtest_kafka</code>. 
-Next on the the guset OS make a directory to use for your mount preferably in your home directory e.g. <code>mkdir ~/shared</code>.</p>
-<div class="highlight"><pre><span></span><code>sudo usermod -a -G vboxsf vagrant
-mkdir ~/shared
-sudo mount -t vboxsf vmtest_kafka ~/shared
+<p>see also <a href="https://stackoverflow.com/questions/16406329/python-dictionary-count-of-unique-values">dictionary count of unique values</a></p>
+<p><br></p>
+<h3>Named Tuples</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">=</span><span class="si">{1}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">k</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">]))</span>
+
+<span class="bp">self</span><span class="o">.</span><span class="n">Result</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Result&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="s1">&#39;entity&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">,</span>
+                                                       <span class="s1">&#39;precision&#39;</span><span class="p">,</span> <span class="s1">&#39;recall&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">))</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">elf</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Result</span><span class="p">(</span><span class="n">embedding</span><span class="o">=</span><span class="n">source</span><span class="p">,</span>
+                                          <span class="n">entity</span><span class="o">=</span><span class="n">entity</span><span class="p">,</span>
+                                          <span class="nb">type</span><span class="o">=</span><span class="nb">type</span><span class="p">,</span>
+                                          <span class="n">precision</span><span class="o">=</span><span class="n">precision</span><span class="p">,</span>
+                                          <span class="n">recall</span><span class="o">=</span><span class="n">recall</span><span class="p">,</span>
+                                          <span class="o">...</span>
+                                          <span class="p">))</span>
+<span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span>
+<span class="n">t_by_emb</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;embedding&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">t_by_emb_bio</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="s1">&#39;entity&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">t_by_emb_type</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">t_by_emb</span><span class="p">,</span> <span class="n">t_by_emb_bio</span><span class="p">,</span> <span class="n">t_by_emb_type</span> <span class="o">=</span> <span class="n">t_by_emb</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">t_by_emb_bio</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">t_by_emb_type</span><span class="o">.</span><span class="n">T</span>
 </code></pre></div>
 
-<ul>
-<li><code>sudo nano ~/.profile</code> and add the line: <code>sudo mount -t vboxsf vmtest_kafka ~/shared</code></li>
-<li>Set directory permissions on HOST: <code>chmod 777 -R vmtest_kafka/</code></li>
-</ul>
-<h4>Desktop size issue</h4>
-<div class="highlight"><pre><span></span><code><span class="n">vagrant</span><span class="w"> </span><span class="n">plugin</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">--</span><span class="n">plugin</span><span class="o">-</span><span class="n">clean</span><span class="o">-</span><span class="n">sources</span><span class="w"> </span><span class="o">--</span><span class="n">plugin</span><span class="o">-</span><span class="n">source</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">rubygems</span><span class="o">.</span><span class="n">org</span><span class="w"> </span><span class="n">vagrant</span><span class="o">-</span><span class="n">vbguest</span>
-<span class="n">vagrant</span><span class="w"> </span><span class="n">up</span>
-<span class="n">vagrant</span><span class="w"> </span><span class="n">vbguest</span><span class="w"> </span><span class="o">--</span><span class="n">do</span><span class="w"> </span><span class="n">install</span>
-<span class="n">vagrant</span><span class="w"> </span><span class="n">reload</span>
-</code></pre></div>
-
-<h4>Increase Vagrant Box Size</h4>
-<p><strong>NEW</strong></p>
-<p><code>vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-disksize</code></p>
-<div class="highlight"><pre><span></span><code><span class="nv">Vagrant</span>.<span class="nv">configure</span><span class="ss">(</span><span class="s2">&quot;2&quot;</span><span class="ss">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="nv">config</span><span class="o">|</span>
-<span class="w">  </span>#<span class="w"> </span><span class="nv">Your</span><span class="w"> </span><span class="nv">existing</span><span class="w"> </span><span class="nv">configurations</span><span class="w"> </span><span class="nv">like</span><span class="w"> </span><span class="nv">VM</span><span class="w"> </span><span class="nv">box</span>
-<span class="w">  </span><span class="nv">config</span>.<span class="nv">vm</span>.<span class="nv">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;npalm/mint17-amd64-cinnamon&quot;</span>
-
-<span class="w">  </span>#<span class="w"> </span><span class="nv">Plugin</span><span class="w"> </span><span class="nv">configuration</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">increase</span><span class="w"> </span><span class="nv">disk</span><span class="w"> </span><span class="nv">size</span>
-<span class="w">  </span><span class="nv">config</span>.<span class="nv">disksize</span>.<span class="nv">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;50GB&#39;</span>
-
-<span class="w">  </span>#<span class="w"> </span><span class="nv">Any</span><span class="w"> </span><span class="nv">other</span><span class="w"> </span><span class="nv">configurations</span>
-<span class="k">end</span>
-</code></pre></div>
-
-<p><strong>OLD</strong></p>
-<p>Note: it may be easier to just grab a box that has a large size. See above.</p>
-<ol>
-<li>
-<p>Clone &amp; Resize</p>
-<p>on Linux</p>
-<div class="highlight"><pre><span></span><code>VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vmdk&quot; &quot;/home/baba/VirtualBox VMs/my_box/box.vdi&quot; --format vdi
-VBoxManage modifyhd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; --resize 131072
-VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/home/baba/VirtualBox VMs/my_box/box-resized.vmdk&quot; --format vmdk
-</code></pre></div>
-
-<p>on Window: same steps as below but first run this:</p>
-<div class="highlight"><pre><span></span><code>set PATH=%PATH%;&quot;C:\Program Files\Oracle\VirtualBox&quot;
-</code></pre></div>
-
-</li>
-<li>
-<p>Allocate space</p>
-<p>The newly created disk space is unallocated at this stage. Follow these steps next:</p>
-<ul>
-<li>
-<p><a href="http://www.gitshah.com/2013/05/how-to-fix-out-of-space-problem-for.html?m=1">getting Gparted</a></p>
-</li>
-<li>
-<p><a href="https://www.youtube.com/watch?v=cDgUwWkvuIY">changing partitions using Gparted (Video)</a></p>
-</li>
-</ul>
-</li>
-</ol>
-<p>see also <a href="https://gist.github.com/christopher-hopper/9755310">Resize a Hard Disk for a Virtual Machine</a></p>
-<h4>Create Global Variable for use in Python Scripts</h4>
-<p>In <code>~/.profile</code>add</p>
-<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="n">TOMOE_DATA_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">ownCloud</span><span class="o">/</span><span class="n">tomoe</span><span class="o">-</span><span class="n">data</span>
-<span class="k">export</span><span class="w"> </span><span class="n">KG_OUTPUT_DIR</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">vmtest</span><span class="o">/</span><span class="n">tomoe</span><span class="o">/</span><span class="n">wp</span><span class="o">-</span><span class="n">tomoe</span><span class="o">-</span><span class="n">playground</span><span class="o">/</span><span class="n">local</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">kg</span>
-</code></pre></div>
-
-<h4>Useful Vagrant commands</h4>
-<ul>
-<li><code>config.vm.box = "file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box"</code></li>
-<li><code>VBoxClient --clipboard</code></li>
-<li><code>vagrant global-status</code></li>
-<li><code>set PATH=%PATH%;"C:\Program Files\Oracle\VirtualBox"</code></li>
-<li><code>vboxmanage list vms</code></li>
-<li><code>vagrant init file://C:/Users/BIAGIONIR/VirtualBox%20VMs/ubuntu-xenial-16.04-Covid19++.box</code></li>
-</ul>
-<h4>Misc. Links</h4>
-<ul>
-<li><a href="https://github.com/hashicorp/vagrant/issues/5186">Warning: Authentication failure. Retrying... " after packaging box</a></li>
-<li><a href="https://jeremykendall.net/2013/08/09/vagrant-synced-folders-permissions/">vagrant-synced-folders-permissions</a></li>
-<li><a href="https://stackoverflow.com/questions/35807568/vagrant-synced-folder-permissions">vagrant-synced-folders-permissions SO</a></li>
-</ul>
+<p><strong>Note</strong>: Named tuples are immutable, so you cannot manipulate them. If you want something mutable, you can use recordtype.
+<a href="https://stackoverflow.com/questions/31252939/changing-values-of-a-list-of-namedtuples">read more</a></p>
+<p><br></p>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./Vagrant VM.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
+                    <a href="./python_data_structures.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
                 </div>
-            </article>            <h4 class="date">Dec 03, 2017</h4>
+            </article>            <h4 class="date">Jan 02, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./vagrant_vpn.html" rel="bookmark" title="Permanent Link to &quot;Vagrant VM with VPN&quot;">Vagrant VM with VPN</a>
+                    <a href="./python.html" rel="bookmark" title="Permanent Link to &quot;Python&quot;">Python</a>
                 </h2>
 
                 
                 
 
-                <h2>Step-by-Step Instructions to Set Up a VM to Bypass Zscaler Restrictions</h2>
-<h4>1. <strong>Create a DigitalOcean Droplet with Outline VPN Manager</strong></h4>
-<ol>
-<li>Set up a new DigitalOcean droplet.</li>
-<li>Install Outline VPN Manager to manage the Shadowsocks server. Follow the official Outline installation guide for setup.</li>
-<li>Note the public IP address of your DigitalOcean server.</li>
-</ol>
-<h4>2. <strong>Install and Configure Shadowsocks on the DigitalOcean Server</strong></h4>
-<ol>
-<li>Install Shadowsocks on the server:</li>
-</ol>
-<p><code>sudo apt update
-   sudo apt install shadowsocks-libev</code></p>
-<ol>
-<li>Edit the default Shadowsocks configuration (<code>/etc/shadowsocks-libev/config.json</code>) to use port <code>443</code> and your custom password:</li>
-</ol>
-<p><code>{
-     "server": "0.0.0.0",
-     "server_port": 443,
-     "password": "your-secure-password",
-     "timeout": 60,
-     "method": "chacha20-ietf-poly1305"
-   }</code></p>
-<ol>
-<li>Restart the Shadowsocks server:</li>
-</ol>
-<p><code>sudo systemctl restart shadowsocks-libev</code></p>
-<ol>
-<li>Ensure that port <code>443</code> is open on the DigitalOcean server by allowing it through the firewall:</li>
-</ol>
-<p><code>sudo ufw allow 443/tcp
-   sudo ufw allow 443/udp</code></p>
-<h4>3. <strong>Configure Shadowsocks Client on the Vagrant Guest VM</strong></h4>
-<ol>
-<li>Install Shadowsocks on the Vagrant guest VM:</li>
-</ol>
-<p><code>sudo apt update
-   sudo apt install shadowsocks-libev</code></p>
-<ol>
-<li>Create the Shadowsocks client configuration (<code>/etc/shadowsocks-libev/config.json</code>) to connect to the DigitalOcean server:</li>
-</ol>
-<p><code>{
-     "server": "your-digital-ocean-server-ip",
-     "server_port": 443,
-     "local_port": 1080,
-     "password": "your-secure-password",
-     "timeout": 60,
-     "method": "chacha20-ietf-poly1305"
-   }</code></p>
-<ol>
-<li>Start the Shadowsocks client on the Vagrant VM:</li>
-</ol>
-<p><code>ss-local -c /etc/shadowsocks-libev/config.json -v</code></p>
-<ol>
-<li>Ensure the Vagrant VM is using <strong>Bridged Adapter</strong> to allow direct internet access and connection to the DigitalOcean server.</li>
-</ol>
-<h4>4. <strong>Configure the Vagrant VM or Browser to Use the SOCKS Proxy</strong></h4>
-<ol>
-<li>Set the system or application (e.g., web browser) to use <code>localhost:1080</code> as the SOCKS5 proxy.</li>
-<li>For Firefox:</li>
-<li>Go to <strong>Preferences</strong> → <strong>Network Settings</strong>.</li>
-<li>Set <strong>SOCKS Host</strong> to <code>localhost</code> and port to <code>1080</code>.</li>
-<li>Ensure <strong>SOCKS v5</strong> is selected.</li>
-</ol>
-<h4>5. <strong>Test the Connection</strong></h4>
-<ol>
-<li>Verify that traffic is routed through the Shadowsocks proxy by browsing or using:</li>
-</ol>
-<p><code>curl --socks5 localhost:1080 http://example.com</code></p>
-<ol>
-<li>Ensure that you can bypass Zscaler restrictions and access unrestricted internet.</li>
-</ol>
-<h4>Summary:</h4>
+                <p><br></p>
+<h4>Module Not Found with VSC</h4>
+<p><strong>Option 1</strong>
+Add this to <code>settings.json</code>:</p>
+<div class="highlight"><pre><span></span><code>&quot;terminal.integrated.env.windows&quot;:<span class="w"> </span>{&quot;PYTHONPATH&quot;:<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">workspaceFolder</span><span class="cp">}</span>&quot;}
+</code></pre></div>
+
+<p><br></p>
+<p><strong>Option 2</strong>
+Note: Below instructions were compiled while using the Lightning.Ai VSC IDE.</p>
+<p>If you want to import <code>load_keys.py</code> from any Python script in any subdirectory of the root, you can add the root directory to your PYTHONPATH.</p>
+<p><code>nano ~/.bashrc</code></p>
+<p>Add the following line at the end of the file, replacing /path/to/your/root/directory with the actual path to your root directory:</p>
+<p><code>export PYTHONPATH="${PYTHONPATH}:/teamspace/studios/this_studio"</code></p>
+<p>Save and close the file.</p>
+<p>Source your .bashrc file to apply the changes: <code>source ~/.bashrc</code></p>
+<p>make sure to cd into <code>rag</code> directory before running the script</p>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+<span class="w">     </span><span class="kn">from</span><span class="w"> </span><span class="nn">rag.load_keys</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="o">*</span>
+<span class="w">     </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;config module is available&quot;</span><span class="p">)</span>
+<span class="w"> </span><span class="k">except</span><span class="w"> </span><span class="n">ImportError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">e</span><span class="p">:</span>
+<span class="w">     </span><span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>How to Manage API Keys</h4>
+<p>Pre-requisite: <code>pip install python-dotenv</code></p>
+<p>Example config.py: </p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">llama_index.llms.openai</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">OpenAI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">llama_index.embeddings.openai</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">OpenAIEmbedding</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">load_dotenv</span><span class="p">,</span><span class="w"> </span><span class="n">find_dotenv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">load_dotenv</span><span class="p">(</span><span class="n">find_dotenv</span><span class="p">(),</span><span class="w"> </span><span class="n">override</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">OPENAI_API_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">)</span>
+<span class="n">COHERE_API_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;COHERE_API_KEY&quot;</span><span class="p">)</span>
+<span class="n">HF_TOKEN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;HUGGINGFACEHUB_API_TOKEN&quot;</span><span class="p">)</span>
+<span class="n">PINECONE_API_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;PINECONE_API_KEY&quot;</span><span class="p">)</span>
+<span class="n">PINECONE_ENV</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;PINECONE_ENV&quot;</span><span class="p">)</span>
+
+<span class="c1"># Initialize shared instances</span>
+<span class="n">llm_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-3.5-turbo&quot;</span><span class="p">)</span>
+<span class="n">embedding_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAIEmbedding</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;text-embedding-ada-002&quot;</span><span class="p">)</span>
+
+<span class="n">llm_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4&quot;</span><span class="p">)</span>
+<span class="n">embedding_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAIEmbedding</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;text-embedding-ada-002&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>All you have to do then is to import the desired API Key like so:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">config</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="p">(</span><span class="n">OPENAI_API_KEY</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                     </span><span class="n">PINECONE_API_KEY</span><span class="p">,</span><span class="w"> </span>
+<span class="w">             </span><span class="n">PINECONE_ENV</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">llm_instance</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">embedding_instance</span><span class="p">)</span>
+</code></pre></div>
+
+<p><br></p>
+<h4>File paths</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">Path</span>
+
+<span class="n">output_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;data&#39;</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;output&#39;</span><span class="c1">#self.output_dir = Path.cwd() / &#39;data&#39; / &#39;output&#39; / &#39;geojson&#39;</span>
+
+<span class="k">try</span><span class="p">:</span>
+<span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="w"> </span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">except</span><span class="w"> </span><span class="n">FileExistsError</span><span class="p">:</span>
+<span class="w"> </span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Folder already exists&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+<span class="w"> </span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Folder was created: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>mkdir if not exists</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">Path</span>
+
+<span class="n">TODAY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+<span class="n">outdir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="sa">f</span><span class="s2">&quot;outputs/</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">TODAY</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="c1">#.replace(&#39;-&#39;, &#39;&#39;)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">outdir</span><span class="p">):</span><span class="w">  </span>
+<span class="w">  </span><span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The new directory is created!&quot;</span><span class="p">)</span>
+<span class="n">outdir</span>
+</code></pre></div>
+
+<h4>limited FOR loop</h4>
+<p><code>for i, elem in zip(range(100), elems[::10])</code> where <code>[::10]</code> is every 10th</p>
+<h4>Query</h4>
 <ul>
-<li>DigitalOcean droplet runs <strong>Outline VPN Manager</strong> and Shadowsocks on <strong>port 443</strong>.</li>
-<li><strong>Vagrant guest VM</strong> connects via Shadowsocks client using <code>ss-local</code> with port <code>443</code>.</li>
-<li><strong>Bridged Adapter</strong> mode is essential for proper networking in the VM.</li>
-<li>SOCKS5 proxy runs locally on <code>localhost:1080</code> to bypass restrictions.</li>
+<li><code>pd.read_csv("file.csv").query("year==2000")</code></li>
+<li><code>df.query("delay_arrival == 'n/a' | delay_arrival == 'NO_DATA' ")</code></li>
 </ul>
-<p>This setup allows you to route traffic through your DigitalOcean server, effectively bypassing Zscaler restrictions.</p>
-<h2>Updated Step-by-Step Solution for Bypassing Zscaler Using the Vagrant Guest VM</h2>
-<p>Since you want to use <strong>Firefox on the Vagrant guest VM</strong> to bypass restrictions without relying on any executable files on the Windows host, we’ll configure the VM and Firefox to directly route traffic through the Shadowsocks proxy.</p>
-<h4>Step 1: Ensure Shadowsocks is Set Up on the DigitalOcean Server</h4>
-<p>Make sure your <strong>DigitalOcean server</strong> is configured and running properly.</p>
-<ol>
-<li><strong>DigitalOcean Server Shadowsocks Configuration (<code>/etc/shadowsocks-libev/config.json</code>):</strong></li>
-</ol>
-<p><code>{
-     "server": "0.0.0.0",
-     "server_port": 443,            // Running on port 443 to avoid network restrictions
-     "password": "your-secure-password",
-     "timeout": 60,
-     "method": "chacha20-ietf-poly1305"
-   }</code></p>
-<ol>
-<li><strong>Restart the Shadowsocks server</strong> on the DigitalOcean droplet:</li>
-</ol>
-<p><code>sudo systemctl restart shadowsocks-libev</code></p>
-<h4>Step 2: Set Up Shadowsocks on the Vagrant Guest VM</h4>
-<p>Ensure the Shadowsocks client is installed and running on the <strong>guest VM</strong>.</p>
-<ol>
-<li><strong>Install Shadowsocks on the Guest VM</strong>:</li>
-</ol>
-<p><code>sudo apt update
-   sudo apt install shadowsocks-libev</code></p>
-<ol>
-<li><strong>Create or update the client configuration file (<code>/etc/shadowsocks-libev/config.json</code>)</strong>:</li>
-</ol>
-<p><code>{
-     "server": "your-digital-ocean-server-ip",   // The public IP of your DigitalOcean server
-     "server_port": 443,                         // Port 443 to avoid network restrictions
-     "local_port": 1080,                         // The local SOCKS5 proxy port
-     "password": "your-secure-password",         // Same as on the server
-     "timeout": 60,
-     "method": "chacha20-ietf-poly1305"          // Same encryption method as the server
-   }</code></p>
-<ol>
-<li><strong>Start the Shadowsocks client</strong> on the guest VM:</li>
-</ol>
-<p><code>ss-local -c /etc/shadowsocks-libev/config.json -v</code></p>
-<p>This command starts the Shadowsocks SOCKS5 proxy on <code>localhost:1080</code> on your VM.</p>
-<h4>Step 3: Configure Firefox on the Guest VM to Use the SOCKS Proxy</h4>
-<ol>
-<li><strong>Open Firefox</strong> on the Vagrant guest VM.</li>
-<li>Go to <strong>Preferences</strong> → Scroll down to <strong>Network Settings</strong> → Click <strong>Settings</strong>.</li>
-<li><strong>Set up the SOCKS Proxy</strong>:</li>
-<li>Choose <strong>Manual proxy configuration</strong>.</li>
-<li>Under <strong>SOCKS Host</strong>, enter <code>localhost</code> and set the port to <code>1080</code>.</li>
-<li>Select <strong>SOCKS v5</strong> as the protocol.</li>
-<li>Check the box for <strong>Proxy DNS when using SOCKS v5</strong>.</li>
-</ol>
-<p><img alt="Firefox Proxy Settings" src="https://support.mozilla.org/en-US/kb/connection-settings-firefox/windows-firefox-proxy-settings-windows.png"> (Example of Firefox manual proxy settings).</p>
-<ol>
-<li><strong>Save</strong> the settings.</li>
-</ol>
-<p>Now, all traffic from Firefox will be routed through the SOCKS5 proxy running on your Vagrant guest VM, which connects to your DigitalOcean Shadowsocks server. This should bypass any Zscaler restrictions.</p>
-<h4>Step 4: Test the Setup</h4>
-<ol>
-<li>Open Firefox on the guest VM and visit a website that is typically restricted by Zscaler.</li>
-<li>Ensure the site loads, confirming that the traffic is routed through your DigitalOcean server and bypassing Zscaler.</li>
-</ol>
-<h3>Additional Steps (If Needed)</h3>
-<h4>Disable Ethernet on Host to Prevent Automatic Connection</h4>
-<p>Since your <strong>office screens automatically connect to Ethernet</strong>, you can disable the Ethernet interface temporarily on the <strong>Windows host</strong> to force all traffic through your guest VM.</p>
-<ol>
-<li>On your <strong>Windows host</strong>, disable Ethernet:</li>
-<li>Press <code>Win + R</code>, type <code>ncpa.cpl</code>, and press <strong>Enter</strong>.</li>
-<li>Right-click on the <strong>Ethernet</strong> adapter and choose <strong>Disable</strong>.</li>
-</ol>
-<p>This will prevent the automatic Ethernet connection when using office screens, forcing your internet traffic through the Vagrant guest VM.</p>
-<h4>Summary of Steps:</h4>
-<ol>
-<li><strong>DigitalOcean Server</strong>:</li>
+<h4>File Handling:</h4>
+<div class="highlight"><pre><span></span><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">dosomething</span><span class="p">()</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># remove if exists then write df to csv</span>
+<span class="n">f</span> <span class="o">=</span> <span class="s1">&#39;local-data/filename.csv&#39;</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Notes:</p>
+<ul>
+<li>Opening a file with this statement will handle file closing for you</li>
+<li>The <code>StringIO</code> and <code>cStringIO</code> modules are gone. </li>
+<li>Instead, import the <code>io</code> module and use <code>io.StringIO</code> for <strong>text</strong> and <code>io.BytesIO</code> for <strong>data</strong>.</li>
+<li>Calling <code>read()</code> reads through the entire file and leaves the read cursor at the end of the file (with nothing more to read).</li>
+<li>Once a file has been read, with <code>read()</code> you can use <code>seek(0)</code> to return the read cursor to the start of the file</li>
+<li>To check if a file exists or to overwrite an existing file:</li>
+</ul>
+<h4>Get index based on values in another column</h4>
+<div class="highlight"><pre><span></span><code><span class="n">id_in_top5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">df_ranked</span><span class="p">[</span><span class="n">rank_column</span><span class="p">][</span><span class="n">df_ranked</span><span class="p">[</span><span class="n">rank_column</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">])[::]</span>
+</code></pre></div>
+
+<p><br></p>
+<h3>Ranking</h3>
+<h4>Create rankings</h4>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;source&#39;</span><span class="p">)[</span><span class="s1">&#39;dist&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>Create a dummy rank</h4>
+<p>This was used for a list of 10 items where 1 to 5 is already ranked and we need to fill the remaining 5 <code>NaN</code> ranks with ranks 6 to 10.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">rank2rand</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col_to_modify</span><span class="p">):</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">existing_ranks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="n">col_to_modify</span><span class="p">]])</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;source_random&#39;</span><span class="p">]])</span>
+    <span class="n">updated_ranks</span> <span class="o">=</span> <span class="p">[</span><span class="nb">next</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span> <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">existing_ranks</span><span class="p">,</span> <span class="n">source</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">updated_ranks</span>
+</code></pre></div>
+
+<p><br></p>
+<h3>Lambda</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">transform</span><span class="p">():</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">2</span><span class="o">**</span><span class="n">x</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">transform</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
+</code></pre></div>
+
+<p>see also <a href="https://www.python-course.eu/python3_lambda.php">Lambda, filter, reduce and map</a></p>
+<h4>Lambda and dataframes: examples</h4>
+<p><code>df = df.apply(lambda x: x.astype(str).str.upper())</code></p>
+<p><code>df['Score'] = df['Score'].apply(lambda x: sigmoid(float(x)))</code></p>
+<p><code>df['string_id'] = df['string_id'].apply(lambda id_string: '9606.' + id_string)</code></p>
+<p><br></p>
+<h3>Misc.</h3>
+<h4><em>args &amp; </em>*kargs</h4>
+<ul>
+<li>*args refers to an undetermined number of positional arguments</li>
+<li>**kargs refers to an undetermined number of keyword arguments</li>
+</ul>
+<div class="highlight"><pre><span></span><code>def add_numbers(num0, num1, num2=2, num3=3):
+    outcome = num0 + num1 + num2 + num3
+    print(f&quot;num0={num0}, num1={num1}, num2={num2}, num3={num3}&quot;)
+    return outcome
+</code></pre></div>
+
+<p><a href="https://medium.com/better-programming/top-5-mistakes-you-make-when-declaring-functions-in-python-b7a0747711a4">read more</a></p>
+<h4>Remove zeros from numpy array</h4>
+<div class="highlight"><pre><span></span><code><span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># print(index)</span>
+    <span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+</code></pre></div>
+
+<p>see also <a href="https://towardsdatascience.com/top-4-numpy-functions-you-dont-know-about-probably-28fcd5d7174f">Top 4 Numpy Functions You Don’t Know About</a></p>
+<h4>double colon e.g. <code>[::3]</code></h4>
+<p><code>[::3]</code> just means that you have not specified any start or end indices for your slice (as in <code>seq[start:end:step]</code>).</p>
+<p>Since you have specified a step, 3, this will take every third entry of something starting at the first index.</p>
+<p>For example: <code>'123123123'[::3] &gt;&gt; '111'</code></p>
+<p>It can also be used to reverse a list using <code>[::-1]</code>:</p>
+<p><code>a[::-1]</code> does not reverse anything, it's just a new view on the same data, more specifically a mirror view.</p>
+<p>The method <code>a[::-1].sort()</code> operates on the mirrored image, implying that when sort moves left a smaller item in its
+ mirrored image, in reality it is moving it to the right in the real memory block of the a array. The mirrored view is
+ sorted in ascending order, the real data is sorted in descending order.
+ <a href="https://stackoverflow.com/questions/26984414/efficiently-sorting-a-numpy-array-in-descending-order">source</a></p>
+<h4>What does selection by <code>[:,None]</code> do?</h4>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">NP</span>
+<span class="o">&gt;&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">NP</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">a</span>
+<span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span>
+<span class="p">(</span><span class="mi">4</span><span class="p">,)</span>
+<span class="o">&gt;&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">a</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">a</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span>
+<span class="p">[[</span><span class="mi">1</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]]</span>
+</code></pre></div>
+
+<p>see also <a href="http://stackoverflow.com/questions/37867354/in-numpy-what-does-selection-by-none-do">here</a></p>
+<h4>About Relative Imports</h4>
+<ul>
+<li>In order to run a script that uses relative imports such as <code>from .build_corpus import BuildCorpus</code>,
+you must run the script from the <strong>parent</strong> directory using <code>-m</code> and <strong>without</strong> the <code>.py</code>
+e.g. <code>python -m cai_pytorch.pytorch</code></li>
+</ul>
+<h4>About Python Modules</h4>
+<ul>
+<li>When getting error: <code>module ... not found</code>: <a href="http://askubuntu.com/questions/470982/how-to-add-a-python-module-to-syspath">see here</a></li>
+<li>To prevent getting error <code>no module named...</code> resp. before importing a module from a different project make sure to run: 
+<code>$ python setup.py install</code></li>
+<li>How to get <code>import</code> of modules to work (<a href="http://stackoverflow.com/questions/36650163/cant-import-from-specific-folder-in-pycharm">source</a>)</li>
+<li>Modules are imported from a Python Package, not from a Directory. Therefore, instead of storing python scripts in a    directory, store them in a Python Package: right-click on your project directory, choose Python Package.</li>
+<li>Alternatively, in the existing directory, create an empty <code>__init__.py</code> file.</li>
+</ul>
+<h4>About Python Packages</h4>
+<p>To list installed packages</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pip</span>
+<span class="n">installed_packages</span> <span class="o">=</span> <span class="n">pip</span><span class="o">.</span><span class="n">get_installed_distributions</span><span class="p">()</span>
+<span class="n">installed_packages_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">==</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">installed_packages</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">installed_packages_list</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>Python Profiler for Debugging</h4>
+<ul>
 <li>
-<p>Ensure Shadowsocks is running on port <code>443</code>.</p>
+<p><a href="https://stackoverflow.com/questions/49262187/storing-the-link-prediction-score-in-a-matrix-form-using-networkx">cProfiler</a></p>
 </li>
 <li>
-<p><strong>Vagrant Guest VM</strong>:</p>
+<p>line profiler</p>
 </li>
-<li>Start Shadowsocks with <code>ss-local</code> on <code>localhost:1080</code>.</li>
+</ul>
+<p>Assumes you are using a shell script to run your program.</p>
+<p>Pre-requiste: <code>pip install line_profiler</code></p>
+<ol>
 <li>
-<p>Configure Firefox to use <code>localhost:1080</code> as a SOCKS5 proxy.</p>
+<p>change shell script as follows:</p>
+<div class="highlight"><pre><span></span><code>   #!/bin/bash -x
+
+   kernprof -lv my_script.py \
+   # time python3 my_script.py \
+   ...
+</code></pre></div>
+
 </li>
 <li>
-<p><strong>Test</strong>: Open restricted sites in Firefox on the guest VM to confirm Zscaler is bypassed.</p>
+<p>add <code>@profile</code> at the start of each function you want to profile</p>
+</li>
+<li>
+<p>execute shell script</p>
+</li>
+<li>
+<p>when done, reverse changes made in Steps 1. and 2.</p>
 </li>
 </ol>
+<h4><code>super()</code> with <code>__init__()</code></h4>
+<p><a href="https://stackoverflow.com/questions/576169/understanding-python-super-with-init-methods">Understanding Python super() with <strong>init</strong>() methods</a></p>
+<h4>About the Python import mechanism</h4>
+<ul>
+<li><a href="https://stackoverflow.com/questions/11536764/how-to-fix-attempted-relative-import-in-non-package-even-with-init-py">here</a></li>
+<li><a href="https://stackoverflow.com/questions/44834/can-someone-explain-all-in-python">and here</a></li>
+</ul>
+<h4>Time it</h4>
+<p>time a for loop:</p>
+<div class="highlight"><pre><span></span><code><span class="c">%%timeit -n 10</span>
+<span class="k">for</span><span class="w"> </span><span class="k">...</span><span class="c">:</span>
+<span class="w">  </span><span class="k">...</span>
+</code></pre></div>
+
+<p>general timing</p>
+<div class="highlight"><pre><span></span><code>testtime = datetime.now()
+...
+testtime = testtime.strftime(&quot;%H:%M&quot;)
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="o">...</span>
+<span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">t2r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;execution time </span><span class="si">{:.4f}</span><span class="s1"> mins&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t2r</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">60</span><span class="p">))</span>
+</code></pre></div>
+
+<h4>Logging &amp; Try/Except</h4>
+<ul>
+<li><a href="https://medium.com/better-programming/a-comprehensive-guide-to-handling-exceptions-in-python-7175f0ce81f7">A Comprehensive Guide to Handling Exceptions in Python</a></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">build_pathway_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">list</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__qualname__</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pathway</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Building Pathway Data Set&#39;</span><span class="p">)</span>
+            <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">dataset</span> <span class="o">=</span> <span class="n">PathwayDataset</span><span class="p">(</span><span class="nb">list</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">args</span><span class="p">)</span>
+            <span class="n">dataset</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">pathway_limit</span><span class="o">=</span><span class="n">pathway_limit</span><span class="p">)</span>
+            <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;finished in </span><span class="si">%5.2f</span><span class="s1"> s&#39;</span><span class="p">,</span> <span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;dataset will not be built&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exception</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">e</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">])))</span>
+        <span class="k">raise</span> <span class="n">e</span>
+</code></pre></div>
+
+<h4>Create a temporary file for unit tests:</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tomoe.io</span> <span class="kn">import</span> <span class="n">get_tomoe_local_data_dir</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="n">temp_path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;dist-graph-sampling&quot;</span><span class="p">)</span>
+
+ <span class="o">...</span>
+
+<span class="n">TOMOE_TEMP_FOLDER</span> <span class="o">=</span> <span class="n">get_tomoe_local_data_dir</span><span class="p">()</span>
+
+ <span class="o">...</span>
+<span class="n">triples_hg_csv_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="p">,</span> <span class="s1">&#39;triples.hg.csv.tsv&#39;</span><span class="p">)</span>
+<span class="n">triple_csv_to_hyperedge_csv</span><span class="p">(</span><span class="n">triples_csv_path</span><span class="p">,</span> <span class="n">triples_hg_csv_path</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">triples_hg_csv_path</span><span class="p">)</span><span class="o">.</span><span class="n">st_size</span> <span class="o">!=</span> <span class="mi">0</span>
+</code></pre></div>
+
+<h4>Variable assignemnt Gotchas</h4>
+<div class="highlight"><pre><span></span><code><span class="n">a</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">b</span><span class="o">=</span><span class="n">a</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mi">12</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>How to install Python 3.6 on Ubuntu 16.04 LTS</h4>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>add-apt-repository<span class="w"> </span>ppa:jonathonf/python-3.6
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3.6
+</code></pre></div>
+
+<p>may be needed:</p>
+<p><code>sudo apt-get install python3.6-gdbm</code> </p>
+<h4>Convert Python2 to Python3</h4>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>2to3
+2to3<span class="w"> </span>-n<span class="w"> </span>-w<span class="w"> </span>path/to/script/script_namae.py
+</code></pre></div>
+
+<p>Note: <code>-n</code> prevents backup files; <code>-w</code> instructs to write the conversion</p>
+<h4>SSLCert Error</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">requests.sessions</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">Session</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">requests.adapters</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">HTTPAdapter</span>
+
+<span class="c1"># Original function</span>
+<span class="n">original_send</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HTTPAdapter</span><span class="o">.</span><span class="n">send</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">patched_send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;verify&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">False</span><span class="w">  </span><span class="c1"># Disable SSL verification</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">original_send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="c1"># Patch the send method</span>
+<span class="n">HTTPAdapter</span><span class="o">.</span><span class="n">send</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">patched_send</span>
+</code></pre></div>
+
+<p><code>pip install --trusted-host pypi.org -r .\requirements.txt</code></p>
+<p><br></p>
+<h4>Misc</h4>
+<ul>
+<li><code>strip()</code> strips off the new line character</li>
+<li>Widen Pycharm console output for pandas DFs: <code>pd.set_option('display.expand_frame_repr', False)</code></li>
+<li>About <code>action="store_true"</code>: <a href="https://docs.python.org/2/howto/argparse.html">see here</a></li>
+<li><code>PYTHONPATH</code> is the module search path.</li>
+<li><code>PYTHONHOME</code> is used for the standard libraries,</li>
+</ul>
+<h4>Various Links</h4>
+<ul>
+<li><a href="http://zetcode.com/python/regularexpressions/">Python regular expressions</a></li>
+<li><a href="https://kate.io/blog/2017/08/22/weird-python-integers/">Weird Python Integers</a></li>
+<li><a href="https://stackoverflow.com/questions/34229363/converting-json-string-into-python-dictionary">json.dumps vs json.loads</a></li>
+<li><a href="https://joblib.readthedocs.io/en/latest/">py joblib tutorial</a> ( about parallelization )</li>
+<li><a href="https://medium.com/analytics-vidhya/top-10-nice-to-have-data-science-libraries-d155196710ef">Top 10 Nice-To-Have Data Science Libraries</a></li>
+<li><a href="https://towardsdatascience.com/how-to-analyse-100s-of-gbs-of-data-on-your-laptop-with-python-f83363dda94">How to analyse 100 GB of data on your laptop with Python</a></li>
+<li><a href="https://www.kaggle.com/learn/overview">Kaggle Learn</a></li>
+<li><a href="https://medium.com/better-programming/tips-and-tricks-for-handling-configuration-files-in-python-a9d7429aa50b">Tips and Tricks for Handling Configuration Files in Python</a></li>
+<li><a href="https://medium.com/better-programming/dont-fear-the-pickle-using-pickle-dump-and-pickle-load-5212f23dbbce">Don’t Fear the Pickle: Using pickle.dump and pickle.load</a></li>
+<li><a href="https://www.youtube.com/channel/UCFxcvyt2Ucq5IL0_1Njzqlg/playlists">Python Videos</a></li>
+<li><a href="https://towardsdatascience.com/15-data-science-books-you-should-read-6f6981e6b3d8">15 Data Science Books You Should Read</a></li>
+<li><a href="https://people.duke.edu/~ccc14/sta-663/index.html">Computational Statistics in Python</a></li>
+<li><a href="https://medium.com/better-programming/what-are-args-and-kwargs-in-python-6aaf9e3cad73">What Are <em>args and </em>*kwargs in Python?</a></li>
+<li><a href="https://medium.com/better-programming/introduction-to-functional-programming-in-python-3d26cd9cbfd7">Introduction to Functional Programming in Python</a> ( about <strong>call</strong>() )</li>
+<li><a href="https://towardsdatascience.com/making-python-programs-blazingly-fast-c1cd79bd1b32">Making Python Programs Blazingly Fast</a></li>
+<li><a href="https://levelup.gitconnected.com/handy-python-features-e33751ef98a8">Decorators and Functions in Python</a></li>
+<li><a href="https://medium.com/better-programming/decorators-in-python-72a1d578eac4">Decorators in Python</a></li>
+<li><a href="https://www.statsmodels.org/stable/index.html">Statistics in Python</a></li>
+<li><a href="https://towardsdatascience.com/reduce-memory-usage-and-make-your-python-code-faster-using-generators-bd79dbfeb4c">create iterators in a very pythonic manner</a></li>
+<li><a href="https://medium.com/dataseries/descriptive-statistics-with-python-75e2b1249e8d">Descriptive Statistics with Python</a></li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./vagrant_vpn.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
+                    <a href="./python.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
                 </div>
             </article>
 
@@ -344,7 +525,7 @@ VBoxManage clonehd &quot;/home/user/VirtualBox VMs/my_box/box.vdi&quot; &quot;/h
 
                     <a href="./index16.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 15 of 31</span>
+                    <span>Page 15 of 34</span>
                 </div>
 
             <div class="clear"></div>

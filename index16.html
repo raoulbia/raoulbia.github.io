@@ -26,184 +26,130 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 02, 2017</h4>
+        <div id="content">            <h4 class="date">Jan 01, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./Linux.html" rel="bookmark" title="Permanent Link to &quot;Linux&quot;">Linux</a>
+                    <a href="./pypi.html" rel="bookmark" title="Permanent Link to &quot;PyPi&quot;">PyPi</a>
                 </h2>
 
                 
                 
 
-                <h4>Useful Commands</h4>
+                <h4>Pre-requisites</h4>
 <ul>
-<li><code>sudo tar -xvf package_file.tar.gz</code></li>
-<li><code>sudo dpkg -i package_file.deb</code></li>
-<li><code>cat /etc/*release</code></li>
-<li><code>echo $XDG_CURRENT_DESKTOP</code></li>
-<li><code>sudo find ~/ -name rdflib</code></li>
-<li><code>sudo find / -name "*.cls"</code></li>
-<li><code>dpkg -L jenkins</code> will help you find what files does a package install</li>
-<li><code>ps -a</code> or <code>sudo lsof -t -i:8888</code> then <code>kill -9 (processID)</code></li>
-<li>make script executable: <code>sudo chmod +x script.sh</code></li>
-<li>symbolic link: <code>sudo ln -s confluent-6.1.1/ confluent</code></li>
-<li>list files by name in ascending order of size</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="nx">find</span><span class="w"> </span><span class="o">/</span><span class="nx">home</span><span class="o">/</span><span class="nx">vagrant</span><span class="o">/</span><span class="nx">miniconda3</span><span class="o">/</span><span class="nx">envs</span><span class="o">/</span><span class="nx">llamacpp</span><span class="o">-</span><span class="nx">dev</span><span class="o">/</span><span class="nx">lib</span><span class="o">/</span><span class="nx">python3</span><span class="m m-Double">.11</span><span class="o">/</span><span class="nx">site</span><span class="o">-</span><span class="nx">packages</span><span class="o">/</span><span class="nx">gguf_modeldb</span><span class="o">/</span><span class="nx">gguf_models</span><span class="w"> </span><span class="o">-</span><span class="k">type</span><span class="w"> </span><span class="nx">f</span><span class="w"> </span><span class="o">-</span><span class="nx">name</span><span class="w"> </span><span class="s">&quot;*.gguf&quot;</span><span class="w"> </span><span class="o">-</span><span class="nx">exec</span><span class="w"> </span><span class="nx">du</span><span class="w"> </span><span class="o">-</span><span class="nx">sh</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">sort</span><span class="w"> </span><span class="o">-</span><span class="nx">h</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">awk</span><span class="w"> </span><span class="err">&#39;</span><span class="p">{</span><span class="w"> </span><span class="nx">file</span><span class="p">=</span><span class="err">$</span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="nx">sub</span><span class="p">(</span><span class="s">&quot;.*/&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span><span class="w"> </span><span class="nx">print</span><span class="w"> </span><span class="err">$</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="p">}</span><span class="err">&#39;</span>
-</code></pre></div>
-
-<ul>
-<li>delete any file in the specified directory that starts with "mixtral"</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="nx">find</span><span class="w"> </span><span class="o">/</span><span class="nx">home</span><span class="o">/</span><span class="nx">vagrant</span><span class="o">/</span><span class="nx">miniconda3</span><span class="o">/</span><span class="nx">envs</span><span class="o">/</span><span class="nx">llamacpp</span><span class="o">-</span><span class="nx">dev</span><span class="o">/</span><span class="nx">lib</span><span class="o">/</span><span class="nx">python3</span><span class="m m-Double">.11</span><span class="o">/</span><span class="nx">site</span><span class="o">-</span><span class="nx">packages</span><span class="o">/</span><span class="nx">gguf_modeldb</span><span class="o">/</span><span class="nx">gguf_models</span><span class="w"> </span><span class="o">-</span><span class="k">type</span><span class="w"> </span><span class="nx">f</span><span class="w"> </span><span class="o">-</span><span class="nx">name</span><span class="w"> </span><span class="s">&quot;mixtral*&quot;</span><span class="w"> </span><span class="o">-</span><span class="nx">exec</span><span class="w"> </span><span class="nx">rm</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="err">\</span><span class="p">;</span>
-</code></pre></div>
-
-<h4>Handy Tools</h4>
-<ul>
-<li><a href="https://fishshell.com/">Fish</a>: <code>sudo apt-get install fish</code></li>
-<li><a href="https://linuxize.com/post/getting-started-with-tmux/">Tmux</a>: <code>sudo apt-get install tmux</code></li>
-</ul>
-<h4>Pip install problems</h4>
-<div class="highlight"><pre><span></span><code>sudo apt-get install aptitude
-sudo aptitude install ...
-</code></pre></div>
-
-<h4>tmux Sessions</h4>
-<ul>
-<li><code>tmux new -s session_name</code> new session</li>
-<li><code>tmux a -t session_name</code> attach</li>
-<li><code>ctrl + b</code> then <code>d</code> detach</li>
-<li><code>ctrl + b</code> then 'x' terminate session</li>
-<li><code>ctrl + b</code> then <code>(</code> move between sessions</li>
-<li><code>ctrl + b</code> the 'c` to make a new tab in an existing session</li>
-<li><code>ctrl + b</code> then the number of the tab e.g. <code>0</code> or <code>1</code> to move between tab</li>
-<li><code>htop</code> + Enter to see running processes (create new tab inside session)</li>
-</ul>
-<h4>File Handling</h4>
-<ul>
-<li><code>tar xzvf archive_name.tar.gz</code> to uncompress tar.gz file</li>
-<li><code>tar xjvf archive_name.tar.bz2</code> to uncompress tar.bz2 file</li>
-<li><code>less file.csv</code> to open file</li>
-<li><code>q + enter</code> to close and exit</li>
-<li><code>zcat file.tsv.gz | more</code> to view fcompressed gz file</li>
-<li><code>zcat file.tsv.gz | grep "pattern match"</code> to find string</li>
-<li><code>cat -vet file</code> to see hidden chars</li>
-<li><code>uniq -d file.txt</code> to get duplicate lines</li>
-<li><code>cat gene2refseq | awk '{if ($1==6239) print $0}' | head</code></li>
-</ul>
-<h4>Packages</h4>
-<ul>
-<li>To see packages and their size <code>conda clean --all</code></li>
-<li>To clean up <code>du -sh */</code></li>
 <li>
-<p>To remove package</p>
-<div class="highlight"><pre><span></span><code>sudo apt-get remove r-base
-sudo apt-get purge texlive*
-</code></pre></div>
-
+<p><code>pip install -U twine</code></p>
 </li>
 <li>
-<p>To reinstall package</p>
-<div class="highlight"><pre><span></span><code><span class="nx">sudo</span><span class="w"> </span><span class="nx">apt</span><span class="o">-</span><span class="nx">get</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="o">--</span><span class="nx">reinstall</span><span class="w"> </span><span class="nx">package_name</span>
+<p>in <code>~.pypirc</code> add <code>chmod 600 ~/.pypirc</code></p>
+</li>
+</ul>
+<h4>Deploy on PyPi</h4>
+<hr>
+<p><strong>Note</strong></p>
+<ul>
+<li>Make sure to update version information before deploying. 
+Files to update: <code>__init__.py</code> and <code>setup.py</code>.</li>
+<li>After deploying, don't forget to re-build the documentation at <a href="https://readthedocs.org/projects/shizen-gengo/builds">ReadTheDocs</a>.</li>
+</ul>
+<hr>
+<div class="highlight"><pre><span></span><code><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">rf</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">dist</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">setup</span><span class="o">.</span><span class="n">py</span><span class="w"> </span><span class="n">sdist</span>
+<span class="n">ls</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span>
+<span class="c1">#python setup.py check -r -s (obolete)</span>
+<span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">twine</span><span class="w"> </span><span class="n">check</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span>
+<span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w">  </span><span class="n">twine</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">dist</span><span class="o">/*</span>
 </code></pre></div>
 
-</li>
-<li>
-<p><code>dpkg -l | grep miktex</code> to see what's installed</p>
-</li>
-<li><code>dpkg -L package-name</code> to list files installed by some package</li>
-<li><code>dpkg -l | grep package_name</code> to see if package is installed</li>
+<h4>Misc.</h4>
+<ul>
+<li><a href="https://help.github.com/en/github/creating-cloning-and-archiving-repositories/licensing-a-repository">Licensing a repository
+</a></li>
 </ul>
-<h4>Show git branch name in Terminal</h4>
-<p>Add this to <code>.bashrc</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">force_color_prompt</span><span class="o">=</span><span class="n">yes</span>
-<span class="n">color_prompt</span><span class="o">=</span><span class="n">yes</span>
-<span class="n">parse_git_branch</span><span class="p">()</span> <span class="p">{</span>
-<span class="n">git</span> <span class="n">branch</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;/^[^*]/d&#39;</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;s/* \(.*\)/(</span><span class="se">\1</span><span class="s1">)/&#39;</span>
-<span class="p">}</span>
-<span class="k">if</span> <span class="p">[</span> <span class="s2">&quot;$color_prompt&quot;</span> <span class="o">=</span> <span class="n">yes</span> <span class="p">];</span> <span class="n">then</span>
-<span class="n">PS1</span><span class="o">=</span><span class="s1">&#39;${debian_chroot:+($debian_chroot)}\[</span><span class="se">\033</span><span class="s1">[01;32m\]\u@\h\[</span><span class="se">\033</span><span class="s1">[00m\]:\[</span><span class="se">\033</span><span class="s1">[01;34m\]\w\[</span><span class="se">\033</span><span class="s1">[01;31m\]$(parse_git_branch)\[</span><span class="se">\033</span><span class="s1">[00m\]\$ &#39;</span>
-<span class="k">else</span>
-<span class="n">PS1</span><span class="o">=</span><span class="s1">&#39;${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ &#39;</span>
-<span class="n">fi</span>
-<span class="n">unset</span> <span class="n">color_prompt</span> <span class="n">force_color_prompt</span>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="./pypi.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/pypi.html" rel="tag">PyPi</a>
+                </div>
+            </article>            <h4 class="date">Dec 05, 2017</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="./Git.html" rel="bookmark" title="Permanent Link to &quot;Git&quot;">Git</a>
+                </h2>
+
+                
+                
+
+                <h4>Push permission denied</h4>
+<div class="highlight"><pre><span></span><code><span class="n">ssh</span><span class="w"> </span><span class="o">-</span><span class="n">T</span><span class="w"> </span><span class="n">git</span><span class="nv">@github</span><span class="p">.</span><span class="n">com</span>
+<span class="n">eval</span><span class="w"> </span><span class="ss">&quot;$(ssh-agent -s)&quot;</span>
+<span class="n">ssh</span><span class="o">-</span><span class="k">add</span><span class="w"> </span><span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_raoulbia</span>
 </code></pre></div>
 
 <p><br></p>
-<h4><code>apt-get</code> vs. <code>pip install</code> vs. <code>conda install</code></h4>
+<h4>Set Origin URL with PAT token</h4>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">remote</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">&lt;</span><span class="n">repository</span><span class="o">-</span><span class="n">url</span><span class="o">&gt;</span>
+
+<span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">remote</span><span class="w"> </span><span class="k">set</span><span class="o">-</span><span class="n">url</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">username</span><span class="o">&gt;</span><span class="err">:</span><span class="o">&lt;</span><span class="n">PAT</span><span class="w"> </span><span class="n">TOKEN</span><span class="o">&gt;</span><span class="nv">@github</span><span class="p">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">repo</span><span class="o">-</span><span class="n">owner</span><span class="o">&gt;/&lt;</span><span class="n">repo</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="p">.</span><span class="n">git</span>
+</code></pre></div>
+
+<p>e.g. </p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">remote</span><span class="w"> </span><span class="k">set</span><span class="o">-</span><span class="n">url</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">PAT</span><span class="w"> </span><span class="n">TOKEN</span><span class="o">&gt;</span><span class="nv">@github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">raoulbia</span><span class="o">-</span><span class="n">ai</span><span class="o">/</span><span class="n">gpt</span><span class="o">-</span><span class="n">playground</span><span class="p">.</span><span class="n">git</span>
+</code></pre></div>
+
+<h4>Set / Change remote origin url</h4>
+<div class="highlight"><pre><span></span><code>git remote add origin &lt;remote repository URL&gt;
+
+git remote set-url origin &lt;remote repository url&gt;
+</code></pre></div>
+
+<h4>Remove dir from remote but keep local</h4>
+<div class="highlight"><pre><span></span><code><span class="n">echo</span> <span class="s1">&#39;.idea&#39;</span> <span class="o">&gt;&gt;</span> <span class="o">.</span><span class="n">gitignore</span>
+<span class="n">git</span> <span class="n">rm</span> <span class="o">-</span><span class="n">r</span> <span class="o">--</span><span class="n">cached</span> <span class="o">.</span><span class="n">idea</span><span class="o">/</span> <span class="c1"># Remove the file from the repository</span>
+<span class="n">git</span> <span class="n">add</span> <span class="o">.</span><span class="n">gitignore</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s1">&#39;remove dir from remote&#39;</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>
+</code></pre></div>
+
+<h4>Git Tagging</h4>
+<div class="highlight"><pre><span></span><code>git add GTFSR.py
+git commit -m &quot;GTFSRT script initial commit&quot;
+git tag -a GTFSRT_v1.0 -m &quot;original GTFSRT script&quot;
+git push origin master tag GTFSRT_v1.0
+</code></pre></div>
+
+<h4>Git commands</h4>
 <ul>
-<li><code>apt-get</code> installs a (python) package/module system-wide.</li>
-<li><code>pip</code> installs module in venv only.</li>
-<li>If using <code>pip install</code> after activating the venv, module will be installed into that venv only.</li>
-<li><code>pip</code> installs a package/module within any environment.</li>
-<li><code>conda</code> installs module/package within conda environments.</li>
+<li><code>git add -A</code></li>
+<li><code>git add .</code> to add a new file</li>
+<li><code>git remote -v</code></li>
+<li><code>git checkout --theirs PATH/FILE</code> if conflict: If solution is to accept remote/other-branch version</li>
+<li><code>git add -p</code> <a href="https://medium.com/@mc999/git-add-p-is-a-gamechanger-in-file-management-e4c879e89ab">read more</a></li>
+<li><code>git clone -b &lt;branch name&gt; &lt;rep url&gt;</code></li>
+<li><code>git add dir/*</code> to add new files or directories:</li>
+<li><code>git commit -m "update" $$ git push origin &lt;branch name&gt;</code></li>
+<li><code>git pull origin &lt;branch name&gt;</code></li>
+<li><code>git reset --hard origin/master</code></li>
+<li><code>git branch -a</code></li>
+<li><code>git remote show origin</code></li>
+<li><code>git checkout -- .</code> to remove all unstaged files in current working directory</li>
+<li><code>git branch -u origin/master</code> tell git that local branch (master) should compare itself to remote counterpart (origin/master)</li>
 </ul>
-<h4>Pip Cache</h4>
+<h4>Useful Links</h4>
 <ul>
-<li><code>pip config set global.cache-dir false</code></li>
-<li><code>pip install NAME --no-cache-dir</code> e.g. <code>pip --no-cache-dir install scipy</code></li>
-<li><code>sudo rm -R ~/.cache/pipenv</code> and <code>sudo rm -R ~/.cache/pip</code></li>
-</ul>
-<h4>Misc.</h4>
-<ul>
-<li><a href="https://acethecloud.com/blog/linux-commands-for-sre/">100 Linux commands</a></li>
-<li>change nvidia gamma settings: <code>udo nano ~/.nvidia-settings-rc</code></li>
-<li><code>df -h</code> check disk space</li>
-<li><a href="https://itsfoss.com/how-to-find-the-process-id-of-a-program-and-kill-it-quick-tip/">kill process</a></li>
-<li><code>rm file</code> to remove file</li>
-<li><code>rm -r dirName</code> to remove directory</li>
-<li><code>ln -s /opt/robomongo/bin/robomongo ~/robomongo_lnk</code> to make a shortcut/alias</li>
-<li><code>pip list --local</code> to list installed packages in a given venv</li>
-<li>about the double dash <code>--</code><ul>
-<li>Almost all short options have a corresponding long option; <code>rm -f</code> is equivalent to <code>rm --force</code>.</li>
-<li>Many long options, though, have no corresponding short option.</li>
-</ul>
-</li>
-<li><a href="http://askubuntu.com/questions/739297/how-to-install-robomongo-ubuntu-system-please-let-me-know/781793">About the usr/bin directory</a></li>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-18-04">Increase Digitalocean memory</a></li>
+<li><a href="https://stackoverflow.com/questions/4470523/create-a-branch-in-git-from-another-branch">Create a branch in Git from another branch</a></li>
+<li><a href="https://stackoverflow.com/questions/33101962/how-to-create-a-new-gitlab-repo-from-my-existing-local-git-repo-using-cli">How to create a new gitlab repo from my existing local git repo</a></li>
+<li><a href="https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/">Adding an existing project to GitHub using the command line</a></li>
+<li><a href="https://techbase.kde.org/Development/Git/Feature_Branch_Workflow">Feature_Branch_Workflow</a></li>
+<li><a href="https://stackoverflow.com/questions/67699/how-to-clone-all-remote-branches-in-git">How to clone all remote branches</a></li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./Linux.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
-                </div>
-            </article>            <h4 class="date">Dec 01, 2017</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="./ssh_keys.html" rel="bookmark" title="Permanent Link to &quot;SSH Keys&quot;">SSH Keys</a>
-                </h2>
-
-                
-                
-
-                <h4>Checking for existing keys</h4>
-<div class="highlight"><pre><span></span><code>ls -al ~/.ssh
-</code></pre></div>
-
-<h4>Generating a new key</h4>
-<div class="highlight"><pre><span></span><code><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="n">rsa</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="mi">4096</span><span class="w"> </span><span class="o">-</span><span class="n">C</span><span class="w"> </span><span class="ss">&quot;your_email@example.com&quot;</span>
-</code></pre></div>
-
-<p>or</p>
-<div class="highlight"><pre><span></span><code>ssh-keygen -t rsa -C &quot;some name&quot; -b 4096
-</code></pre></div>
-
-<h4>Adding a key</h4>
-<div class="highlight"><pre><span></span><code>eval $(ssh-agent -s)
-ssh-add ~/.ssh/id_rsa
-</code></pre></div>
-
-<h4>Copy the contents of the SSH key to your clipboard</h4>
-<div class="highlight"><pre><span></span><code>clip &lt; ~/.ssh/id_rsa.pub
-</code></pre></div>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="./ssh_keys.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
+                    <a href="./Git.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/git.html" rel="tag">Git</a>
                 </div>
             </article>
 
@@ -214,7 +160,7 @@ ssh-add ~/.ssh/id_rsa
 
                     <a href="./index17.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 16 of 31</span>
+                    <span>Page 16 of 34</span>
                 </div>
 
             <div class="clear"></div>

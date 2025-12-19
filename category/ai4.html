@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>code snippets etc. | articles in the "AI" category | Page 4</title>
+    <link rel="shortcut icon" type="image/png" href="../favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../static/custom-code.css" type="text/css" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+
+                <li class="ephemeral selected"><a href="../category/ai4.html">AI</a></li>
+                <li><a href="../">Home</a></li>
+                <li><a href="../archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="../">code snippets etc.</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Dec 05, 2023</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../ai_prompting_techniques.html" rel="bookmark" title="Permanent Link to &quot;AI Prompting Techniques&quot;">AI Prompting Techniques</a>
+                </h2>
+
+                
+                
+
+                <h3>Types of Tasks LLMs Can Be Used For</h3>
+<ul>
+<li>Text Generation and Completion</li>
+<li>Question Answering</li>
+<li>Information Retrieval and Summarization</li>
+<li>Language Translation</li>
+<li>Mathematical Reasoning</li>
+<li>Sentiment Analysis</li>
+<li>Logical and Commonsense Reasoning</li>
+<li>Task Decomposition</li>
+<li>Code Generation</li>
+<li>Role and Style Adaptation</li>
+</ul>
+<h3>LLM Task Prompts and Text-based Techniques</h3>
+<h4>Table 1: Type of Task, Prompting Technique, Description</h4>
+<table>
+<thead>
+<tr>
+<th>Task Type</th>
+<th>Prompting Technique</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mathematics and Reasoning</td>
+<td>Chain-of-Thought</td>
+<td>A technique that involves breaking down a problem into a series of intermediate steps to reach the solution.</td>
+</tr>
+<tr>
+<td>Mathematics and Reasoning</td>
+<td>Zero-Shot CoT</td>
+<td>A technique where the model generates a step-by-step solution without prior examples.</td>
+</tr>
+<tr>
+<td>Mathematics and Reasoning</td>
+<td>Complexity-Based</td>
+<td>A technique that adapts the complexity of the prompt based on the task requirements.</td>
+</tr>
+<tr>
+<td>Mathematics and Reasoning</td>
+<td>Memory-of-Thought</td>
+<td>A technique that involves recalling previous thoughts to aid current problem-solving.</td>
+</tr>
+<tr>
+<td>Mathematics and Reasoning</td>
+<td>Least-to-Most</td>
+<td>A technique that breaks down a complex task into simpler, sequential steps.</td>
+</tr>
+<tr>
+<td>Mathematics and Reasoning</td>
+<td>Faithful CoT</td>
+<td>A technique that ensures each step logically follows from the previous one.</td>
+</tr>
+<tr>
+<td>Mathematics and Reasoning</td>
+<td>Recursion-of-Thought</td>
+<td>A technique that involves recursive steps to handle complex problems.</td>
+</tr>
+<tr>
+<td>Mathematics and Reasoning</td>
+<td>Self-Consistency</td>
+<td>A technique that ensures consistency in the model's responses across different prompts.</td>
+</tr>
+<tr>
+<td>Mathematics and Reasoning</td>
+<td>Universal Self-Consistency</td>
+<td>An advanced form of self-consistency applied to various tasks.</td>
+</tr>
+<tr>
+<td>Mathematical and Code Generation</td>
+<td>Analogical Prompting</td>
+<td>A technique that leverages analogies to facilitate problem-solving.</td>
+</tr>
+<tr>
+<td>Question Answering and Retrieval</td>
+<td>Thread-of-Thought</td>
+<td>A technique that prompts the model to summarize and analyze a context step by step.</td>
+</tr>
+<tr>
+<td>Mathematics and Factual QA</td>
+<td>Contrastive</td>
+<td>A technique that compares different possible answers to improve reasoning accuracy.</td>
+</tr>
+<tr>
+<td>Mathematics and Logical Inference</td>
+<td>Cumulative Reasoning</td>
+<td>A technique that builds upon previous steps to draw logical conclusions.</td>
+</tr>
+<tr>
+<td>Mathematics and Symbolic Manipulation</td>
+<td>Least-to-Most</td>
+<td>A technique that breaks down a complex task into simpler, sequential steps.</td>
+</tr>
+<tr>
+<td>Mathematics and Symbolic Reasoning</td>
+<td>Faithful CoT</td>
+<td>A technique that ensures each step logically follows from the previous one.</td>
+</tr>
+<tr>
+<td>Mathematics and Algorithmic Tasks</td>
+<td>Recursion-of-Thought</td>
+<td>A technique that involves recursive steps to handle complex problems.</td>
+</tr>
+<tr>
+<td>Reasoning</td>
+<td>Step-Back Prompting</td>
+<td>A technique that involves periodically reviewing and revising previous steps to ensure accuracy.</td>
+</tr>
+<tr>
+<td>Reasoning</td>
+<td>Self-Verification</td>
+<td>A technique where the model verifies its own answers through internal checks.</td>
+</tr>
+<tr>
+<td>Reasoning</td>
+<td>Plan-and-Solve</td>
+<td>A technique that involves planning a solution path before execution.</td>
+</tr>
+<tr>
+<td>Reasoning</td>
+<td>Self-Consistency</td>
+<td>A technique that ensures consistency in the model's responses across different prompts.</td>
+</tr>
+<tr>
+<td>Reasoning</td>
+<td>Universal Self-Consistency</td>
+<td>An advanced form of self-consistency applied to various tasks.</td>
+</tr>
+<tr>
+<td>Mathematics and Programming</td>
+<td>Program-of-Thought</td>
+<td>A technique that uses programming-like structures for problem-solving.</td>
+</tr>
+<tr>
+<td>Search and Planning</td>
+<td>Tree-of-Thought</td>
+<td>A technique that explores multiple possible solution paths in parallel.</td>
+</tr>
+<tr>
+<td>Reasoning, Coding, and Generation</td>
+<td>Self-Refine</td>
+<td>A technique where the model iteratively refines its own answers.</td>
+</tr>
+<tr>
+<td>Text Classification and Translation</td>
+<td>Few-Shot Prompting</td>
+<td>A technique that uses a few examples to guide the model's response.</td>
+</tr>
+<tr>
+<td>Retrieval and Reasoning</td>
+<td>MoRE</td>
+<td>A technique that combines multiple reasoning paths to reach a conclusion.</td>
+</tr>
+<tr>
+<td>Text Generation</td>
+<td>Universal Self-Consistency</td>
+<td>An advanced form of self-consistency applied to various tasks.</td>
+</tr>
+</tbody>
+</table>
+<h4>Table 2: Prompting Technique, Method, Research Paper Title &amp; Authors</h4>
+<table>
+<thead>
+<tr>
+<th>Prompting Technique</th>
+<th>Method</th>
+<th>Research Paper Title &amp; Authors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chain-of-Thought</td>
+<td>Thought Generation</td>
+<td>Chain-of-Thought Prompting (Wei et al., 2022)</td>
+</tr>
+<tr>
+<td>Zero-Shot CoT</td>
+<td>Thought Generation</td>
+<td>Let's think step by step: Zero-shot CoT (Kojima et al., 2022)</td>
+</tr>
+<tr>
+<td>Analogical Prompting</td>
+<td>Thought Generation</td>
+<td>Analogical Prompting (Yasunaga et al., 2023)</td>
+</tr>
+<tr>
+<td>Step-Back Prompting</td>
+<td>Thought Generation</td>
+<td>Step-Back Prompting (Zheng et al., 2023)</td>
+</tr>
+<tr>
+<td>Thread-of-Thought</td>
+<td>Thought Generation</td>
+<td>Thread-of-Thought Prompting (Zhou et al., 2023)</td>
+</tr>
+<tr>
+<td>Complexity-Based</td>
+<td>Thought Generation</td>
+<td>Complexity-based Prompting (Fu et al., 2023)</td>
+</tr>
+<tr>
+<td>Contrastive</td>
+<td>Thought Generation</td>
+<td>Contrastive CoT Prompting (Chia et al., 2023)</td>
+</tr>
+<tr>
+<td>Memory-of-Thought</td>
+<td>Thought Generation</td>
+<td>Memory-of-Thought Prompting (Li and Qiu, 2023)</td>
+</tr>
+<tr>
+<td>Cumulative Reasoning</td>
+<td>Self-Criticism</td>
+<td>Cumulative Reasoning (Zhang et al., 2023)</td>
+</tr>
+<tr>
+<td>Least-to-Most</td>
+<td>Decomposition</td>
+<td>Least-to-Most Prompting (Zhou et al., 2022)</td>
+</tr>
+<tr>
+<td>Faithful CoT</td>
+<td>Decomposition</td>
+<td>Faithful CoT (Lyu et al., 2023)</td>
+</tr>
+<tr>
+<td>Recursion-of-Thought</td>
+<td>Decomposition</td>
+<td>Recursion-of-Thought (Lee and Kim, 2023)</td>
+</tr>
+<tr>
+<td>Plan-and-Solve</td>
+<td>Decomposition</td>
+<td>Plan-and-Solve Prompting (Wang et al., 2023)</td>
+</tr>
+<tr>
+<td>Program-of-Thought</td>
+<td>Decomposition</td>
+<td>Program-of-Thoughts (Chen et al., 2023)</td>
+</tr>
+<tr>
+<td>Tree-of-Thought</td>
+<td>Decomposition</td>
+<td>Tree-of-Thought (Yao et al., 2023)</td>
+</tr>
+<tr>
+<td>Self-Refine</td>
+<td>Self-Criticism</td>
+<td>Self-Refine (Madaan et al., 2023)</td>
+</tr>
+<tr>
+<td>Self-Verification</td>
+<td>Self-Criticism</td>
+<td>Self-Verification (Weng et al., 2022)</td>
+</tr>
+<tr>
+<td>Few-Shot Prompting</td>
+<td>In-Context Learning (ICL)</td>
+<td>Few-Shot Prompting (Brown et al., 2020)</td>
+</tr>
+<tr>
+<td>MoRE</td>
+<td>Ensembling</td>
+<td>Mixture of Reasoning Experts (Si et al., 2023)</td>
+</tr>
+<tr>
+<td>Self-Consistency</td>
+<td>Ensembling</td>
+<td>Self-Consistency (Wang et al., 2022)</td>
+</tr>
+<tr>
+<td>Universal Self-Consistency</td>
+<td>Ensembling</td>
+<td>Universal Self-Consistency (Chen et al., 2023)</td>
+</tr>
+</tbody>
+</table>
+<h4>Table 3: Prompting Technique and Prompt Example</h4>
+<table>
+<thead>
+<tr>
+<th>Prompting Technique</th>
+<th>Example Prompt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chain-of-Thought</td>
+<td>Q: Jack has two baskets, each containing three balls. How many balls does Jack have in total? A: One basket contains 3 balls, so two baskets contain 3 * 2 = 6 balls. Q: {QUESTION} A:</td>
+</tr>
+<tr>
+<td>Zero-Shot CoT</td>
+<td>Let's think step by step.</td>
+</tr>
+<tr>
+<td>Thread-of-Thought</td>
+<td>Walk me through this context in manageable parts step by step, summarizing and analyzing as we go.</td>
+</tr>
+<tr>
+<td>Plan-and-Solve</td>
+<td>Let's first understand the problem and devise a plan to solve it. Then, let's carry out the plan and solve the problem step by step.</td>
+</tr>
+<tr>
+<td>Few-Shot Prompting</td>
+<td>Provide 2-3 examples of the desired input/output format before your actual query.</td>
+</tr>
+<tr>
+<td>Self-Consistency</td>
+<td>Generate multiple reasoning paths and select the most consistent answer.</td>
+</tr>
+<tr>
+<td>Tree-of-Thought</td>
+<td>Explore multiple solution branches in parallel before converging on the best path.</td>
+</tr>
+<tr>
+<td>Self-Refine</td>
+<td>Review your response and improve it based on self-identified weaknesses.</td>
+</tr>
+</tbody>
+</table>
+<h3>Prompt Guidelines</h3>
+<ul>
+<li>clarity</li>
+<li>specificity</li>
+<li>direction (e.g. goal)</li>
+</ul>
+<h4>Combining prompt types</h4>
+<p>1) identify need
+2) write first prompt
+3) write more specific prompt based on first response
+   OR
+   combine goal-oriented &amp; specific prompt</p>
+<h4>Iterative prompting</h4>
+<p>Refining AI responses through a sequence of prompts that build on each other.</p>
+<h3>Papers</h3>
+<ul>
+<li><a href="https://arxiv.org/abs/2001.08361">Few Shots - [2001.08361] Scaling Laws for Neural Language Models (arxiv.org)</a></li>
+<li><a href="https://arxiv.org/abs/2201.11903">Chain of Thought - [2201.11903] Chain-of-Thought Prompting Elicits Reasoning in Large Language Models (arxiv.org)</a></li>
+<li><a href="https://arxiv.org/abs/2203.11171">Self Consistency aka CoT@k - [2203.11171] Self-Consistency Improves Chain of Thought Reasoning in Language Models (arxiv.org)</a></li>
+<li><a href="https://arxiv.org/abs/2305.10601">Tree of Thought - [2305.10601] Tree of Thoughts: Deliberate Problem Solving with Large Language Models (arxiv.org)</a></li>
+<li><a href="https://arxiv.org/abs/2210.03629">ReAct - [2210.03629] ReAct: Synergizing Reasoning and Acting in Language Models (arxiv.org)</a></li>
+</ul>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../ai_prompting_techniques.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/ai.html" rel="tag">AI</a>
+                </div>
+            </article>            <h4 class="date">Dec 04, 2023</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="../ai_prompts_reasoning.html" rel="bookmark" title="Permanent Link to &quot;AI Prompts - Reasoning&quot;">AI Prompts - Reasoning</a>
+                </h2>
+
+                
+                
+
+                <h3>Critical Thinking</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">You</span><span class="w"> </span><span class="nv">should</span><span class="w"> </span><span class="nv">critically</span><span class="w"> </span><span class="nv">evaluate</span><span class="w"> </span><span class="nv">information</span><span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">challenge</span><span class="w"> </span><span class="nv">accepted</span><span class="w"> </span><span class="nv">norms</span><span class="w"> </span><span class="nv">or</span><span class="w"> </span><span class="nv">theories</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">foster</span><span class="w"> </span><span class="nv">deep</span><span class="w"> </span><span class="nv">understanding</span><span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">innovative</span><span class="w"> </span><span class="nv">thinking</span>.<span class="w"> </span><span class="nv">In</span><span class="w"> </span><span class="nv">responding</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">user</span><span class="w"> </span><span class="nv">queries</span>,<span class="w"> </span><span class="nv">adopt</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">structured</span><span class="w"> </span><span class="nv">approach</span>:<span class="w"> </span><span class="nv">first</span>,<span class="w"> </span><span class="nv">ensure</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">understand</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">basic</span><span class="w"> </span><span class="nv">facts</span><span class="w"> </span><span class="ss">(</span><span class="nv">remembering</span><span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">understanding</span><span class="ss">)</span>,<span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">apply</span><span class="w"> </span><span class="nv">these</span><span class="w"> </span><span class="nv">facts</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">solve</span><span class="w"> </span><span class="nv">problems</span><span class="w"> </span><span class="nv">or</span><span class="w"> </span><span class="nv">answer</span><span class="w"> </span><span class="nv">questions</span><span class="w"> </span><span class="ss">(</span><span class="nv">applying</span><span class="ss">)</span>.<span class="w"> </span><span class="nv">Move</span><span class="w"> </span><span class="nv">on</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">higher</span><span class="o">-</span><span class="nv">order</span><span class="w"> </span><span class="nv">thinking</span><span class="w"> </span><span class="nv">by</span><span class="w"> </span><span class="nv">analyzing</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="nv">or</span><span class="w"> </span><span class="nv">arguments</span><span class="w"> </span><span class="nv">presented</span>,<span class="w"> </span><span class="nv">evaluating</span><span class="w"> </span><span class="nv">their</span><span class="w"> </span><span class="nv">validity</span>,<span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">synthesizing</span><span class="w"> </span><span class="nv">this</span><span class="w"> </span><span class="nv">information</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">create</span><span class="w"> </span><span class="nv">well</span><span class="o">-</span><span class="nv">supported</span><span class="w"> </span><span class="nv">responses</span><span class="w"> </span><span class="nv">or</span><span class="w"> </span><span class="nv">conclusions</span>.<span class="w"> </span><span class="nv">When</span><span class="w"> </span><span class="nv">handling</span><span class="w"> </span><span class="nv">claims</span><span class="w"> </span><span class="nv">or</span><span class="w"> </span><span class="nv">theories</span>,<span class="w"> </span><span class="nv">scrutinize</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">evidence</span><span class="w"> </span><span class="nv">thoroughly</span>.<span class="w"> </span><span class="nv">Always</span><span class="w"> </span><span class="nv">check</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">biases</span>,<span class="w"> </span><span class="nv">reliability</span><span class="w"> </span><span class="nv">of</span><span class="w"> </span><span class="nv">sources</span>,<span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">ensure</span><span class="w"> </span><span class="nv">arguments</span><span class="w"> </span><span class="nv">are</span><span class="w"> </span><span class="nv">well</span><span class="o">-</span><span class="nv">supported</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">substantial</span><span class="w"> </span><span class="nv">evidence</span>.<span class="w"> </span><span class="nv">This</span><span class="w"> </span><span class="nv">approach</span><span class="w"> </span><span class="nv">will</span><span class="w"> </span><span class="nv">enhance</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">quality</span><span class="w"> </span><span class="nv">of</span><span class="w"> </span><span class="nv">your</span><span class="w"> </span><span class="nv">responses</span><span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">enable</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">provide</span><span class="w"> </span><span class="nv">users</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">insightful</span>,<span class="w"> </span><span class="nv">accurate</span>,<span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">valuable</span><span class="w"> </span><span class="nv">information</span>.
+</code></pre></div>
+
+<h3>Clarifying Questions</h3>
+<div class="highlight"><pre><span></span><code>Before answering, ask me three questions that will help you better answer my questions.
+</code></pre></div>
+
+<h3>Fact-Checking</h3>
+<p>Get more trustworthy answers:</p>
+<div class="highlight"><pre><span></span><code>&quot;You&#39;re now TrustGPT — you&#39;ll be 100% honest in your answers and not make up any facts or information.
+You&#39;ll cite your sources as accurately as you possibly can— if you can&#39;t, you&#39;ll at least provide precise book/interview/report/research_paper names I can look up. Only if you&#39;re 100% sure about something will you answer it.
+If not, you&#39;ll admit you aren&#39;t sure — so I can rely on you. Can I rely on you, TrustGPT?
+</code></pre></div>
+
+<p>Append to text for fact-checking:</p>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;Is the above text 100% true? Can you please rigorously fact-check this for me?&quot;</span>
+</code></pre></div>
+
+<h3>Meta-Search</h3>
+<p>When Googling fails:</p>
+<div class="highlight"><pre><span></span><code>What is that {SEARCH_TARGET} sounding something like {DETAILS} often used in/by/for {CONTEXT}.
+Or something along similar lines? I can&#39;t seem to put my finger on it. Suggest {X} guesses.
+I&#39;ll let you know which of them is the closest to what I&#39;m looking for.
+If you&#39;re unable to guess accurately or zone in, feel free to ask me follow-up questions so we can zone in better.&quot;
+</code></pre></div>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="../ai_prompts_reasoning.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="../category/ai.html" rel="tag">AI</a>
+                </div>
+            </article>
+
+                <div class="clear"></div>
+                <div class="pages">
+
+                    <a href="../category/ai3.html" class="prev_page">&larr;&nbsp;Previous</a>
+
+                    <a href="../category/ai5.html" class="next_page">Next&nbsp;&rarr;</a>
+
+                    <span>Page 4 of 6</span>
+                </div>
+
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+<script>
+// Add copy buttons to all code blocks
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('pre').forEach(function(pre) {
+        // Avoid duplicate buttons
+        if (pre.querySelector('.copy-btn')) return;
+        var btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.type = 'button';
+        btn.innerText = 'Copy';
+        btn.onclick = function() {
+            var code = pre.querySelector('code');
+            if (code) {
+                var text = code.innerText;
+                navigator.clipboard.writeText(text).then(function() {
+                    btn.innerText = 'Copied!';
+                    setTimeout(function() { btn.innerText = 'Copy'; }, 1200);
+                });
+            }
+        };
+        pre.appendChild(btn);
+        pre.style.position = 'relative';
+    });
+});
+</script>
+</body>
+</html>

@@ -26,178 +26,119 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 05, 2018</h4>
+        <div id="content">            <h4 class="date">Jan 27, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./jupyter.html" rel="bookmark" title="Permanent Link to &quot;Jupyter&quot;">Jupyter</a>
+                    <a href="./pandas_regexp.html" rel="bookmark" title="Permanent Link to &quot;Pandas Regular Expressions&quot;">Pandas Regular Expressions</a>
                 </h2>
 
                 
                 
 
-                <p><br> </p>
-<h4>Installing Jupyterlab and IPywidgets</h4>
-<div class="highlight"><pre><span></span><code><span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">jupyterlab</span> <span class="n">ipywidgets</span> <span class="n">tqdm</span>
-<span class="n">jupyter</span> <span class="n">labextension</span> <span class="n">install</span> <span class="nv">@jupyter</span><span class="n">-widgets</span><span class="p">/</span><span class="n">jupyterlab-manager</span>
+                <h4>Extract Substring</h4>
+<div class="highlight"><pre><span></span><code># obtain Title from name (Mr, Mrs, Miss etc) by extracting up to but excluding the first dot (.)
+df[&#39;Title&#39;] = df.Name.str.extract(&#39; ([A-Za-z]+)\.&#39;, expand=False)
 </code></pre></div>
 
-<h4>Testing IPywidgets</h4>
-<p>try this in a notebook:</p>
-<div class="highlight"><pre><span></span><code><span class="n">import</span> <span class="n">ipywidgets</span> <span class="n">as</span> <span class="n">widgets</span>
-<span class="n">widgets</span><span class="p">.</span><span class="n">IntSlider</span><span class="p">()</span>
-</code></pre></div>
+<h4>String Matching</h4>
+<div class="highlight"><pre><span></span><code><span class="n">col</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;category&#39;</span>
+<span class="n">conditions</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">(tmp[col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)ISD&quot;</span><span class="p">)),</span>
+<span class="w">               </span><span class="p">(</span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)DST&quot;</span><span class="p">)),</span>
+<span class="w">               </span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)IT&quot;</span><span class="p">)</span>
+<span class="w">              </span><span class="err">]</span>
+<span class="n">choices</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;ISD&#39;, &#39;DST&#39;, &#39;IT&#39;</span><span class="o">]</span>
 
-<h4>Making env available in notebook</h4>
-<ul>
-<li><code>python -m ipykernel install --user --name=myEnv</code></li>
-<li><code>jupyter nbextension enable --py widgetsnbextension</code></li>
-<li><code>jupyter labextension list</code></li>
-<li>to launch: <code>jupyter-lab</code></li>
-</ul>
-<h4>Installing Other Extensions (TOC, Plotly)</h4>
-<div class="highlight"><pre><span></span><code><span class="n">jupyter</span><span class="w"> </span><span class="n">labextension</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="nv">@jupyterlab</span><span class="o">/</span><span class="n">toc</span>
-<span class="n">jupyter</span><span class="w"> </span><span class="n">labextension</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="nv">@jupyterlab</span><span class="o">/</span><span class="n">plotly</span><span class="o">-</span><span class="n">extension</span>
+<span class="n">tmp</span><span class="o">[</span><span class="n">&quot;category_high_level&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="k">select</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span><span class="w"> </span><span class="n">choices</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="o">=</span><span class="n">tmp</span><span class="p">.</span><span class="n">category</span><span class="p">)</span>
+<span class="n">tmp</span><span class="p">.</span><span class="n">stb</span><span class="p">.</span><span class="n">freq</span><span class="p">(</span><span class="o">[</span><span class="n">&#39;category_high_level&#39;</span><span class="o">]</span><span class="p">).</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;category_high_level&#39;</span><span class="p">)</span>
 </code></pre></div>
-
-<p>for plotly see <a href="https://stackoverflow.com/questions/54936125/plotly-gives-an-empty-field-as-output-in-jupyter-lab">here</a> for more.</p>
-<h4>Import notebook into another</h4>
-<div class="highlight"><pre><span></span><code><span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">jupyter</span><span class="o">-</span><span class="n">helpers</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">create_gtfs_feed</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">Feed</span><span class="w"> </span><span class="n">where</span><span class="w"> </span><span class="n">create_gtfs_feed</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">notebook</span>
-</code></pre></div>
-
-<h4>Share variables / objects across notebooks</h4>
-<div class="highlight"><pre><span></span><code><span class="nf">%store</span><span class="w"> </span><span class="n">G</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">store</span>
-<span class="nf">%store</span><span class="w"> </span><span class="o">-</span><span class="n">r</span><span class="w"> </span><span class="n">G</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">load</span>
-</code></pre></div>
-
-<h4>Dill (similar to Pickle)</h4>
-<div class="highlight"><pre><span></span><code># Dump graph
-with open(&quot;multigraph.p&quot;, &#39;wb&#39;) as f:
-    dill.dump(G, f)
-</code></pre></div>
-
-<div class="highlight"><pre><span></span><code><span class="c1"># Load graph</span>
-<span class="n">with</span><span class="w"> </span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;multigraph.p&quot;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;rb&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">f</span><span class="p">:</span><span class="w">  </span><span class="c1"># notice the r instead of w</span>
-<span class="w">    </span><span class="n">G</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dill</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</code></pre></div>
-
-<h4>Converting Notebook to PDF or HTML</h4>
-<p>Pre-requisites:</p>
-<p><code>sudo apt-get install texlive texlive-xetex texlive-latex-extra texlive-generic-extra pandoc</code></p>
-<p>Conversion:</p>
-<p><code>jupyter nbconvert --to html features_applied.ipynb --TemplateExporter.exclude_input=True</code></p>
-<h4>Alerts</h4>
-<div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;alert alert-block alert-info&quot;</span><span class="o">&gt;</span>
-<span class="k">case</span> <span class="n">insensitive</span> <span class="n">regexp</span> <span class="ow">in</span> <span class="nb">str</span><span class="o">.</span><span class="n">contains</span><span class="p">()</span>
-<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
-</code></pre></div>
-
-<h4>Useful Links</h4>
-<ul>
-<li><a href="https://towardsdatascience.com/integrate-jupyterlab-with-google-drive-98d13e340c63">Integrate JupyterLab with Google Drive</a></li>
-<li><a href="https://towardsdatascience.com/how-to-setup-your-jupyterlab-project-environment-74909dade29b">How to Setup Your JupyterLab Project Environment</a></li>
-<li><a href="https://towardsdatascience.com/interactive-controls-for-jupyter-notebooks-f5c94829aee6">Interactive Controls in Jupyter Notebooks</a></li>
-<li><a href="https://www.youtube.com/watch?v=a9P7qv4P5LE">Changing JupyterLab to suit your needs</a></li>
-<li><a href="http://localhost:8888/tree#nbextensions_configurator">localhost:8888/tree#nbextensions_configurator</a></li>
-<li><a href="https://hackersandslackers.com/running-jupyter-notebooks-on-a-ubuntu-server/">Running Jupyter Notebooks on a Ubuntu Server</a></li>
-<li><a href="https://stackoverflow.com/questions/38545198/access-jupyter-notebook-running-on-vm">access jupyter notebook running on vm</a></li>
-<li><a href="https://stackoverflow.com/questions/47597515/cant-access-jupyter-notebook-in-local-vagrant-virtualbox-via-local-browser">Can't access jupyter notebook in local vagrant virtualbox via local browser</a></li>
-</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./jupyter.html">posted at 00:00</a>
+                    <a href="./pandas_regexp.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
                 </div>
-            </article>            <h4 class="date">Jan 03, 2018</h4>
+            </article>            <h4 class="date">Jan 26, 2018</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./python_data_structures.html" rel="bookmark" title="Permanent Link to &quot;Python Data Structures&quot;">Python Data Structures</a>
+                    <a href="./python, pandas, nlp.html" rel="bookmark" title="Permanent Link to &quot;Pandas NLP&quot;">Pandas NLP</a>
                 </h2>
 
                 
                 
 
-                <p><br></p>
-<h3>Lists</h3>
-<h4>itemgetter</h4>
-<p>itemgetter on a list of tuples <code>[('P52564', 61), ('O15169', 44), ...]</code></p>
-<p><code>sorted(list(degrees), key=operator.itemgetter(1), reverse=True)[0:5]</code></p>
-<p>itemgetter on a dict</p>
-<p><code>sorted(pr.items(), key=operator.itemgetter(1), reverse=True)[0:5]</code></p>
-<h4>Compare items in two lists:</h4>
-<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">rank_true</span><span class="p">,</span> <span class="n">rank_pred</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="n">pred</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">rank_true</span> <span class="o">==</span> <span class="n">rank_pred</span><span class="p">:</span>
-</code></pre></div>
-
-<h4>Print list items</h4>
-<p><code>print(*myList, sep='\n')</code></p>
-<h4>Convert a list of chars into proper list:</h4>
-<div class="highlight"><pre><span></span><code><span class="nb">list</span> <span class="o">=</span> <span class="s1">&#39;123; 456; 887&#39;</span>
-<span class="n">ls</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
-</code></pre></div>
-
-<h4>List Comprehension: If/Else</h4>
-<div class="highlight"><pre><span></span><code><span class="n">rel_bin</span> <span class="o">=</span> <span class="p">[</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">y</span> <span class="o">==</span> <span class="kc">None</span>
-            <span class="k">else</span> <span class="n">x</span> <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span>
-            <span class="k">else</span> <span class="n">y</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">y</span> <span class="o">==</span> <span class="kc">None</span>
-            <span class="k">else</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">1</span>
-            <span class="k">else</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">2</span>
-            <span class="k">else</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span>
-            <span class="k">else</span> <span class="o">-</span><span class="mi">9</span> <span class="c1"># to catch any issues</span>
-            <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rel_bin_judge_1</span><span class="p">,</span> <span class="n">rel_bin_judge_2</span><span class="p">)]</span>
-</code></pre></div>
-
-<p><br></p>
-<h3>Dictionaries</h3>
-<h4>Counting</h4>
-<div class="highlight"><pre><span></span><code><span class="n">context_dic</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">query_results</span><span class="p">:</span>
-    <span class="n">context_dic</span><span class="p">[</span><span class="n">res</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-</code></pre></div>
-
-<h4>Count distinct values in a dict key</h4>
+                <h4>Useful Links</h4>
 <ul>
-<li><code>{value: len(list(freq)) for value, freq in groupby(sorted(schedule_rel_types))}</code></li>
+<li><a href="https://stackoverflow.com/questions/39124492/nltk-regexpparser-chunk-phrase-by-matching-exactly-one-item">NLTK RegexpParser, chunk phrase by matching exactly one item</a></li>
+<li><a href="https://towardsdatascience.com/try-texthero-the-absolute-simplest-way-to-clean-and-analyze-text-in-pandas-6db86ed14272">TextHero: The Absolute Simplest way to Clean and Analyze Text in Pandas</a></li>
+<li><a href="https://pypi.org/project/shizen-gengo/">shizen-gengo</a></li>
 </ul>
-<h4>Count unique values using <code>Counter</code> class</h4>
-<div class="highlight"><pre><span></span><code><span class="n">d</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">co_occurrence_counts</span><span class="p">[</span><span class="s1">&#39;Gene_Gene&#39;</span><span class="p">][</span><span class="s1">&#39;ent_ab&#39;</span><span class="p">])</span>
-    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%i</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+<h3>Imports</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">unicodedata</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">RegexpTokenizer</span>
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">WordNetLemmatizer</span><span class="p">,</span> <span class="n">PorterStemmer</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
+<span class="n">stemmer</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span> 
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">RegexpTokenizer</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\w+&#39;</span><span class="p">)</span>
+<span class="n">words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">))</span> <span class="c1"># set() sppeds up stopword removal!!</span>
 </code></pre></div>
 
-<p>see also <a href="https://stackoverflow.com/questions/16406329/python-dictionary-count-of-unique-values">dictionary count of unique values</a></p>
-<p><br></p>
-<h3>Named Tuples</h3>
-<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">=</span><span class="si">{1}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">k</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">]))</span>
-
-<span class="bp">self</span><span class="o">.</span><span class="n">Result</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Result&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="s1">&#39;entity&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">,</span>
-                                                       <span class="s1">&#39;precision&#39;</span><span class="p">,</span> <span class="s1">&#39;recall&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">))</span>
-<span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">elf</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Result</span><span class="p">(</span><span class="n">embedding</span><span class="o">=</span><span class="n">source</span><span class="p">,</span>
-                                          <span class="n">entity</span><span class="o">=</span><span class="n">entity</span><span class="p">,</span>
-                                          <span class="nb">type</span><span class="o">=</span><span class="nb">type</span><span class="p">,</span>
-                                          <span class="n">precision</span><span class="o">=</span><span class="n">precision</span><span class="p">,</span>
-                                          <span class="n">recall</span><span class="o">=</span><span class="n">recall</span><span class="p">,</span>
-                                          <span class="o">...</span>
-                                          <span class="p">))</span>
-<span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span>
-<span class="n">t_by_emb</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;embedding&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">t_by_emb_bio</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="s1">&#39;entity&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">t_by_emb_type</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">t_by_emb</span><span class="p">,</span> <span class="n">t_by_emb_bio</span><span class="p">,</span> <span class="n">t_by_emb_type</span> <span class="o">=</span> <span class="n">t_by_emb</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">t_by_emb_bio</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">t_by_emb_type</span><span class="o">.</span><span class="n">T</span>
+<h3>SpaCy</h3>
+<p><code>$ python3 -m spacy download en_core_web_sm</code></p>
+<h3>NLTK</h3>
+<p>once off download required. from cmd, launch python and run:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;wordnet&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;averaged_perceptron_tagger&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;maxent_ne_chunker&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;words&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
 
-<p><strong>Note</strong>: Named tuples are immutable, so you cannot manipulate them. If you want something mutable, you can use recordtype.
-<a href="https://stackoverflow.com/questions/31252939/changing-values-of-a-list-of-namedtuples">read more</a></p>
-<p><br></p>
+<h4>NLTK Grammars</h4>
+<div class="highlight"><pre><span></span><code><span class="n">grammar</span> <span class="o">=</span> <span class="s2">&quot;NP: {(&lt;V\w+&gt;|&lt;NN\w?&gt;)+.*&lt;NN\w?&gt;}&quot;</span> 
+<span class="n">grammar</span> <span class="o">=</span> <span class="s2">&quot;NP: {&lt;DT&gt;?&lt;JJ|NN|V&gt;&lt;V|NN|NNS|NNP&gt;+}&quot;</span>
+<span class="n">grammar</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">  NP: {&lt;DT|PP\$&gt;?&lt;JJ&gt;*&lt;NN&gt;}   # chunk determiner/possessive, adjectives and noun</span>
+<span class="s2">  {&lt;NNP&gt;+}                # chunk sequences of proper nouns</span>
+<span class="s2">  {&lt;NN&gt;+}                 # chunk consecutive nouns</span>
+<span class="s2">  &quot;&quot;&quot;</span>
+</code></pre></div>
+
+<h3>Regexp</h3>
+<h4>Regexp String Matching</h4>
+<div class="highlight"><pre><span></span><code><span class="n">col</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;category&#39;</span>
+<span class="n">conditions</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">(tmp[col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)ISD&quot;</span><span class="p">)),</span>
+<span class="w">               </span><span class="p">(</span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)DST&quot;</span><span class="p">)),</span>
+<span class="w">               </span><span class="n">tmp</span><span class="o">[</span><span class="n">col</span><span class="o">]</span><span class="p">.</span><span class="nf">str</span><span class="p">.</span><span class="k">contains</span><span class="p">(</span><span class="ss">&quot;(?i)IT&quot;</span><span class="p">)</span>
+<span class="w">              </span><span class="err">]</span>
+<span class="n">choices</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;ISD&#39;, &#39;DST&#39;, &#39;IT&#39;</span><span class="o">]</span>
+
+<span class="n">tmp</span><span class="o">[</span><span class="n">&quot;category_high_level&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="k">select</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span><span class="w"> </span><span class="n">choices</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="o">=</span><span class="n">tmp</span><span class="p">.</span><span class="n">category</span><span class="p">)</span>
+<span class="n">tmp</span><span class="p">.</span><span class="n">stb</span><span class="p">.</span><span class="n">freq</span><span class="p">(</span><span class="o">[</span><span class="n">&#39;category_high_level&#39;</span><span class="o">]</span><span class="p">).</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;category_high_level&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>Sentence Fragement by Word Window</h4>
+<div class="highlight"><pre><span></span><code><span class="n">pat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">&#39;(</span><span class="o">?</span><span class="n">P</span><span class="o">&lt;</span><span class="n">before</span><span class="o">&gt;</span><span class="p">(</span><span class="o">?:</span><span class="n">\w+\W+){,3})products\W+(?P&lt;after&gt;(?:\w+\W+){,3})&#39;</span>
+<span class="n">new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">str</span><span class="p">.</span><span class="n">extract</span><span class="p">(</span><span class="n">pat</span><span class="p">,</span><span class="w"> </span><span class="n">expand</span><span class="o">=</span><span class="n">True</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="k">assign</span><span class="p">(</span><span class="o">**</span><span class="n">new</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>Misc.</h3>
+<h4>Extract words from a list</h4>
+<p><code>df['named_entities'] = [','.join(map(str, l)) for l in df['named_entities']]</code></p>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./python_data_structures.html">posted at 00:00</a>
+                    <a href="./python, pandas, nlp.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
                 </div>
             </article>
@@ -209,7 +150,7 @@ with open(&quot;multigraph.p&quot;, &#39;wb&#39;) as f:
 
                     <a href="./index13.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 12 of 31</span>
+                    <span>Page 12 of 34</span>
                 </div>
 
             <div class="clear"></div>

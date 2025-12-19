@@ -26,165 +26,142 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Feb 20, 2018</h4>
+        <div id="content">            <h4 class="date">Jan 24, 2023</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./rmd.html" rel="bookmark" title="Permanent Link to &quot;RMD&quot;">RMD</a>
+                    <a href="./databricks_sparksql.html" rel="bookmark" title="Permanent Link to &quot;Databricks Spark SQL&quot;">Databricks Spark SQL</a>
                 </h2>
 
                 
                 
 
-                <h4>Useful Snippets</h4>
-<ul>
-<li>Footnote: <code>...some text.^[footnote]</code></li>
-</ul>
-<h4>Exploring Factor Combinations: Dual Boxplots</h4>
-<div class="highlight"><pre><span></span><code><span class="n">plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">SBA_Portion.groups</span><span class="o">:</span><span class="n">New</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">GrAppv</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
-<span class="w">  </span><span class="nf">geom_boxplot</span><span class="p">(</span><span class="n">lwd</span><span class="o">=</span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="n">outlier.size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
-<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SBA Guaranteed Portion : New Business&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">theme</span><span class="p">(</span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">10</span><span class="p">),</span>
-<span class="w">        </span><span class="c1"># axis.ticks.y = element_blank(),</span>
-<span class="w">        </span><span class="c1"># axis.text.y = element_blank(),</span>
-<span class="w">        </span><span class="n">axis.title.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">8</span><span class="p">),</span>
-<span class="w">        </span><span class="n">axis.title.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">8</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
-<span class="w">  </span><span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.5</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="m">0.2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4.5</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="m">0.2</span><span class="p">)</span>
-
-<span class="n">ggrob</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplotGrob</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span>
-<span class="nf">grid.arrange</span><span class="p">(</span><span class="n">ggrob</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+                <h4>Pandas to Spark</h4>
+<div class="highlight"><pre><span></span><code>df_spark = spark.createDataFrame(df_pandas)
 </code></pre></div>
 
-<h4>Histogram w/Optimum Bin Width</h4>
-<div class="highlight"><pre><span></span><code><span class="n">binw</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nf">IQR</span><span class="p">(</span><span class="n">statistic</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">statistic</span><span class="p">)</span><span class="o">^</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span>
+<h4>Pandas to Spark with Schema</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># create schema for your dataframe</span>
+<span class="n">schema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">([</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;CONTRACT_ID&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span> \
+                    <span class="p">,</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;CONTRACT_NAME&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span> \
+                    <span class="p">,</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;ACCOUNT&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span> \
+                    <span class="p">,</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;LINE_OF_BUSINESS&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span> \
+                    <span class="p">,</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;CLIENT_SHAREPOINT&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)])</span>
 
-<span class="nf">ggplot</span><span class="p">(</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">statistic</span><span class="p">),</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">statistic</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
-<span class="w">  </span><span class="nf">geom_histogram</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">..density..</span><span class="p">),</span>
-<span class="w">                 </span><span class="n">binwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">binw</span><span class="p">,</span>
-<span class="w">                 </span><span class="n">fill</span><span class="o">=</span><span class="s">&quot;darkred&quot;</span><span class="p">,</span>
-<span class="w">                 </span><span class="n">colour</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span>
-<span class="w">                 </span><span class="n">size</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
-<span class="w">  </span><span class="nf">geom_density</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">..density..</span><span class="p">),</span>
-<span class="w">               </span><span class="n">size</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
-<span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mean&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Density&quot;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">       </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Distribution of sample means&quot;</span><span class="p">)</span>
+<span class="c1"># Convert Pandas DataFrame to Spark DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">pandas_df</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">)</span>
 </code></pre></div>
 
-<h4>Related Links</h4>
+<h4>Create temp View</h4>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s2">&quot;tmp_vw&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>Pandas to Spark to Table</h4>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">StringType</span><span class="p">())</span>
+ <span class="o">.</span><span class="n">write</span>
+ <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="s2">&quot;schema_name.table_name&quot;</span><span class="p">))</span>
+</code></pre></div>
+
+<h4>Read CSV File</h4>
+<div class="highlight"><pre><span></span><code><span class="n">fpath</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;/mnt/userspace/custom_dataset/path-to-file/filename.csv&quot;&quot;&quot;</span>
+<span class="err">`</span><span class="n">df</span> <span class="o">=</span> <span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;header&#39;</span><span class="p">,</span> <span class="s1">&#39;true&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fpath</span><span class="p">))</span><span class="err">`</span>
+</code></pre></div>
+
+<h4>Read Parquet File</h4>
+<div class="highlight"><pre><span></span><code><span class="n">fpath</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;/mnt/userspace/custom_dataset/path-to-file/filename.parquet&quot;&quot;&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;parquet&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>Create Table from CSV File</h4>
+<div class="highlight"><pre><span></span><code><span class="n">DROP</span> <span class="n">TABLE</span> <span class="n">IF</span> <span class="n">EXISTS</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span> <span class="p">;</span>
+<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span>
+<span class="n">USING</span> <span class="n">csv</span>
+<span class="n">LOCATION</span> <span class="s2">&quot;/mnt/userspace/custom_dataset/bboggava/outbound_data/MACTOOLS/mac_config.csv&quot;</span>
+<span class="n">OPTIONS</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inferSchema</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>Subsetting DataFrame</h4>
 <ul>
-<li><a href="https://rpubs.com/raoulbia/slr">ggplot2 examples</a></li>
-<li><a href="https://stackoverflow.com/questions/1828742/rotating-axis-labels-in-r">SO: Rotating Axis labels</a></li>
-<li><a href="https://www.xspdf.com/resolution/52805925.html">How to calculate number of bins for a histogram</a></li>
+<li>Spark DataFrame: <code>df.where(df.GPI_NO == '12345').display()</code></li>
+<li>Pandas DataFrame: <code>df[df.GPI_NO == '12345'].sort_values(by='DAY_SPLY', ascending=False)</code></li>
 </ul>
-<h4>R: Other Links</h4>
-<ul>
-<li><a href="https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Notebooks-with-R-Markdown">Notebooks with R Markdown</a></li>
-</ul>
+<h4>Misc.</h4>
+<div class="highlight"><pre><span></span><code><span class="n">SHOW</span> <span class="n">COLUMNS</span> <span class="n">IN</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">DESCRIBE</span> <span class="n">TABLE</span> <span class="n">EXTENDED</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span>
+</code></pre></div>
+
+<p>Only for tables, NOT views:</p>
+<div class="highlight"><pre><span></span><code><span class="n">DESCRIBE</span> <span class="n">DETAIL</span> <span class="n">schema_name</span><span class="o">.</span><span class="n">table_name</span><span class="err">`</span> 
+</code></pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./rmd.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/rmd.html" rel="tag">RMD</a>
+                    <a href="./databricks_sparksql.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/databricks.html" rel="tag">Databricks</a>
                 </div>
-            </article>            <h4 class="date">Feb 19, 2018</h4>
+            </article>            <h4 class="date">Dec 24, 2022</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./C++.html" rel="bookmark" title="Permanent Link to &quot;C++&quot;">C++</a>
+                    <a href="./azure.html" rel="bookmark" title="Permanent Link to &quot;Azure&quot;">Azure</a>
                 </h2>
 
                 
                 
 
-                <h3>Useful C++ snippets</h3>
-<h4>useful headers</h4>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;typeinfo&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span><span class="c1"> # to use fabs() to get the absolute value of a double</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Rcpp.h&gt;</span>
-<span class="n">using</span><span class="w"> </span><span class="n">namespace</span><span class="w"> </span><span class="nn">Rcpp</span><span class="w"> </span><span class="p">;</span>
-<span class="n">using</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="p">;</span>
-</code></pre></div>
-
-<h4>ensure that R Studio console prints out decimals</h4>
-<div class="highlight"><pre><span></span><code><span class="nt">cout</span><span class="p">.</span><span class="nc">precision</span><span class="o">(</span><span class="nt">4</span><span class="o">)</span><span class="w"> </span><span class="o">;</span>
-<span class="nt">cout</span><span class="p">.</span><span class="nc">setf</span><span class="o">(</span><span class="nt">std</span><span class="p">::</span><span class="nd">ios</span><span class="p">::</span><span class="nd">fixed</span><span class="o">)</span><span class="w"> </span><span class="o">;</span>
-</code></pre></div>
-
-<h4>print statement</h4>
-<div class="highlight"><pre><span></span><code><span class="nx">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;x is of type: &quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="nx">typeid</span><span class="p">(</span><span class="nx">x</span><span class="p">).</span><span class="nx">name</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="nx">std</span><span class="o">::</span><span class="nx">endl</span><span class="w"> </span><span class="p">;</span>
-</code></pre></div>
-
-<div class="highlight"><pre><span></span><code><span class="o">/***</span><span class="w"> </span><span class="n">R</span><span class="w"> </span>
-#<span class="w"> </span><span class="n">Does</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">give</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">R</span><span class="o">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">weighted</span><span class="p">.</span><span class="nb">mean</span><span class="p">()</span><span class="w"> </span><span class="k">function</span>?
-<span class="n">all</span><span class="p">.</span><span class="n">equal</span><span class="p">(</span><span class="n">weighted_mean_cpp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">),</span><span class="w"> </span><span class="n">weighted</span><span class="p">.</span><span class="nb">mean</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">))</span>
-<span class="o">*/</span>
-</code></pre></div>
-
-<h4>Rcpp</h4>
+                <p><br></p>
+<h3>Using Key Vault Secrets in Azure Data Factory</h3>
+<p>Key Vault secrets can be used to securely manage connections to services such as NAS drives or Databricks.</p>
+<h4>NAS Drive Linked Service</h4>
 <ul>
-<li><a href="http://adv-r.had.co.nz/Rcpp.html">High performance functions with Rcpp</a></li>
-<li><a href="http://www.cplusplus.com/reference/stl/">STL Data Structures</a></li>
-<li><a href="http://www.cplusplus.com/reference/algorithm/">C++ <algorithm> header</a></li>
-<li><a href="http://www.cplusplus.com/reference/set/set/">Sets</a></li>
-<li><a href="https://www.boost.org/doc/">Boost C++ libraries</a></li>
+<li>Create a Service Account with priviliges to access a NAS drive</li>
+<li>create a new secret in KV with the password of the above Service Account</li>
+<li>use the secret, and the Service Account user name, in ADF when configuring a linked service for NAS drive</li>
+<li>use the linked service in an ADF Copy data activity</li>
 </ul>
-<h3>Rcpp, C++ and Visual Studio Code</h3>
+<h4>Databricks Linked Service</h4>
 <ul>
-<li>Including the header Rcpp.h only works if the code is executed / compiled from RStudio</li>
-<li>Compiling a pure cpp file without Rcpp export does NOT require an Rcpp header include. If you do yo will get 
-an error: <code>Rcpp.h: No such file or directory</code>.</li>
+<li>Generate a token in Databricks and take note of it</li>
+<li>create a new secret in KV with the above token</li>
+<li>use the secret in ADF when configuring a linked service for databricks</li>
+<li>use the linked service in an ADF Databricks notebook activity</li>
 </ul>
-<h4><code>task.json</code></h4>
-<div class="highlight"><pre><span></span><code>{
-<span class="w">  </span>&quot;version&quot;:<span class="w"> </span>&quot;2.0.0&quot;,
-<span class="w">  </span>&quot;tasks&quot;:<span class="w"> </span>[
-<span class="w">    </span>{
-<span class="w">      </span>&quot;type&quot;:<span class="w"> </span>&quot;shell&quot;,
-<span class="w">      </span>&quot;label&quot;:<span class="w"> </span>&quot;build&quot;,
-<span class="w">      </span>&quot;command&quot;:<span class="w"> </span>&quot;g++&quot;,
-<span class="w">      </span>&quot;args&quot;:<span class="w"> </span>[
-<span class="w">        </span>&quot;./MCQ/mcq1.cpp&quot;,
-<span class="w">        </span>&quot;-o&quot;,
-<span class="w">        </span>&quot;<span class="cp">${</span><span class="n">workspaceFolderBasename</span><span class="cp">}</span>&quot;
-<span class="w">      </span>],
-<span class="w">      </span>&quot;problemMatcher&quot;:<span class="w"> </span>[]
-<span class="w">    </span>},
-<span class="w">    </span>{
-<span class="w">      </span>&quot;type&quot;:<span class="w"> </span>&quot;shell&quot;,
-<span class="w">      </span>&quot;label&quot;:<span class="w"> </span>&quot;run&quot;,
-<span class="w">      </span>&quot;command&quot;:<span class="w"> </span>&quot;./<span class="cp">${</span><span class="n">workspaceFolderBasename</span><span class="cp">}</span>&quot;,
-<span class="w">      </span>&quot;dependsOn&quot;:<span class="w"> </span>[
-<span class="w">        </span>&quot;build&quot;
-<span class="w">      </span>],
-<span class="w">      </span>&quot;problemMatcher&quot;:<span class="w"> </span>[],
-<span class="w">      </span>&quot;group&quot;:<span class="w"> </span>{
-<span class="w">        </span>&quot;kind&quot;:<span class="w"> </span>&quot;build&quot;,
-<span class="w">        </span>&quot;isDefault&quot;:<span class="w"> </span>true
-<span class="w">      </span>}
-<span class="w">    </span>}
-<span class="w">  </span>]
-}
-</code></pre></div>
-
-<h4>C++ related Help Files</h4>
+<h3>Azure ARM</h3>
+<h4>Deploy via Powershell</h4>
 <ul>
-<li><code>?cxxfunction</code></li>
+<li><code>New-AzResourceGroup RG01 "South Central US"</code></li>
+<li><code>New-AzResourceGroupDeployment</code> adds a deployment to an existing resource group. (https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-9.3.0)</li>
 </ul>
-<h4>Links</h4>
+<h4>Useful Links</h4>
 <ul>
-<li><a href="http://www.cplusplus.com/reference/">C++ Reference</a></li>
-<li><a href="https://stackoverflow.com/questions/31339853/locating-downloading-header-files-r-h-and-rmath-for-c-interfacing-with-r">Locating/downloading header files R.h and Rmath for C interfacing with R</a></li>
-<li><a href="https://medium.com/techie-delight/data-structures-and-algorithms-problems-in-c-using-stl-7900a6ddb1d4">Data structures and algorithms problems in C++ using STL</a></li>
-<li><a href="https://medium.com/sisgrammers/stl-containers-in-c-a95d0b0aa45a">STL Containers in C++</a></li>
+<li>https://samcogan.com/deploying-resource-groups-with-arm-templates/</li>
+</ul>
+<p><br></p>
+<h3>Azure Fundamentals Exam (AZ-900)</h3>
+<ul>
+<li><a href="./drafts/azure_cloud_benefits_and_categories.html">Azure Cloud: Benefits and Categories</a></li>
+<li><a href="./drafts/azure_architectural_components.html">Azure Architectural Components</a></li>
+<li><a href="./drafts/azure_services.html">Azure Services</a></li>
+<li><a href="./drafts/azure_solutions.html">Azure Solutions</a></li>
+<li><a href="./drafts/azure_management_tools.html">Azure Management Tools</a></li>
+<li><a href="./drafts/azure_general_security.html">Azure General Security Features</a></li>
+<li><a href="./drafts/azure_network_security.html">Azure Network Security</a></li>
+<li><a href="./drafts/azure_identity_governance_privacy_compliance.html">Azure Identity, Governance, Privacy and Compliance Features</a></li>
+<li><a href="./drafts/azure_cost_management_and_sla.html">Azure Cost Management and SLA</a></li>
+</ul>
+<h3>Note about creating a Databricks Resource in Azure Portal</h3>
+<ul>
+<li>When creating a Databricks resource, Databricks will itself create a separate resource group (RG) with a storage account. This RG cannot be deleted via the porta;. See here for more: https://stackoverflow.com/questions/60694149/unable-to-remove-azure-databricks-managed-resource-group</li>
 </ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./C++.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/c.html" rel="tag">C++</a>
+                    <a href="./azure.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/azure.html" rel="tag">Azure</a>
                 </div>
             </article>
 
@@ -195,7 +172,7 @@ an error: <code>Rcpp.h: No such file or directory</code>.</li>
 
                     <a href="./index9.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 8 of 31</span>
+                    <span>Page 8 of 34</span>
                 </div>
 
             <div class="clear"></div>

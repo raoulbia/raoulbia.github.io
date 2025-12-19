@@ -26,280 +26,263 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Nov 23, 2017</h4>
+        <div id="content">            <h4 class="date">Dec 01, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./ksql.html" rel="bookmark" title="Permanent Link to &quot;KSql Cheatsheet&quot;">KSql Cheatsheet</a>
+                    <a href="./ssh_keys.html" rel="bookmark" title="Permanent Link to &quot;SSH Keys&quot;">SSH Keys</a>
                 </h2>
 
                 
                 
 
-                <h3>Installation</h3>
-<ul>
-<li>Download and Setup Java 8 JDK: <code>sudo apt install openjdk-8-jdk</code></li>
-<li>wget https://packages.confluent.io/archive/6.2/confluent-6.2.0.tar.gz</li>
-<li>tar -xvf confluent-6.2.0</li>
-<li><code>sudo ln -s confluent-6.2.0/ confluent</code></li>
-<li>add to <code>~/.bashrc</code>:</li>
-<li><code>export  export PATH=/opt/confluent/bin:$PATH</code> (or where ever the tar has been unzipped to.</li>
-<li><code>export CONFLUENT_HOME=/opt/confluent</code></li>
-</ul>
-<h3>Start KSql</h3>
-<div class="highlight"><pre><span></span><code>confluent<span class="w"> </span><span class="nb">local</span><span class="w"> </span>services<span class="w"> </span>ksql-server<span class="w"> </span>start
-confluent<span class="w"> </span><span class="nb">local</span><span class="w"> </span>services<span class="w"> </span>ksql-server<span class="w"> </span>status
+                <h4>Checking for existing keys</h4>
+<div class="highlight"><pre><span></span><code>ls -al ~/.ssh
 </code></pre></div>
 
-<h4>Topics</h4>
-<p>Note: By default KSql will show only new arriving data.</p>
-<p>Use <code>FROM BEGINNING</code> to see all existing data AND keep listening for new data.</p>
-<p>Also useful for checking that topic has a KEY!!</p>
-<ul>
-<li><code>print 'topic_name' FROM BEGINNING LIMIT 1;</code></li>
-</ul>
-<h4>auto.offset.reset</h4>
-<p>By default KSql <code>select</code> only shows new incoming data aka <code>current offset</code>. </p>
-<p>Must run command below (Only valid for current KSql session! Must re-issue each tme entering KSql prompt).</p>
-<div class="highlight"><pre><span></span><code>SET &#39;auto.offset.reset&#39;=&#39;earliest&#39; ;
+<h4>Generating a new key</h4>
+<div class="highlight"><pre><span></span><code><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="n">rsa</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="mi">4096</span><span class="w"> </span><span class="o">-</span><span class="n">C</span><span class="w"> </span><span class="ss">&quot;your_email@example.com&quot;</span>
 </code></pre></div>
 
-<p>to reset this setting:</p>
-<div class="highlight"><pre><span></span><code>UNSET &#39;auto.offset.reset&#39;;
+<p>or</p>
+<div class="highlight"><pre><span></span><code>ssh-keygen -t rsa -C &quot;some name&quot; -b 4096
 </code></pre></div>
 
-<h4>KSql CREATE TABLE (<a href="https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-table/">KSQL Syntax Reference</a> )</h4>
-<div class="highlight"><pre><span></span><code>create table GTFS_DELAYS_TABLE (id VARCHAR PRMARY KEY, delay INT, timestamp INT) WITH (KAFKA_TOPIC=&#39;gtfs-delays&#39;, VALUE_FORMAT=&#39;JSON&#39;) ;
-show tables ;
-describe GTFS_DELAYS_TABLE ;
+<h4>Adding a key</h4>
+<div class="highlight"><pre><span></span><code>eval $(ssh-agent -s)
+ssh-add ~/.ssh/id_rsa
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code>create<span class="w"> </span>table<span class="w"> </span>GTFS_TABLE<span class="w"> </span><span class="o">(</span><span class="w"> </span><span class="se">\</span>
-id<span class="w"> </span>VARCHAR<span class="w"> </span>PRIMARY<span class="w"> </span>KEY,<span class="w"> </span><span class="se">\</span>
-trip_update_trip_trip_id<span class="w"> </span>VARCHAR,<span class="w"> </span><span class="se">\</span>
-trip_update_trip_start_time<span class="w"> </span>VARCHAR,<span class="w"> </span><span class="se">\</span>
-trip_update_trip_start_date<span class="w"> </span>VARCHAR,<span class="se">\</span>
-trip_update_trip_schedule_relationship<span class="w"> </span>VARCHAR,<span class="w"> </span><span class="se">\</span>
-trip_update_trip_route_id<span class="w"> </span>VARCHAR,<span class="w"> </span><span class="se">\</span>
-trip_update_stop_time_update_stop_sequence<span class="w"> </span>INT,<span class="w"> </span><span class="se">\</span>
-trip_update_stop_time_update_departure_delay<span class="w"> </span>INT,<span class="w"> </span><span class="se">\</span>
-trip_update_stop_time_update_stop_id<span class="w"> </span>VARCHAR,<span class="w"> </span><span class="se">\</span>
-trip_update_stop_time_update_schedule_relationship<span class="w"> </span>VARCHAR,<span class="w"> </span><span class="se">\</span>
-trip_update_stop_time_update_arrival_delay<span class="w"> </span>INT<span class="w"> </span><span class="se">\</span>
-<span class="o">)</span><span class="w"> </span>WITH<span class="w"> </span><span class="o">(</span><span class="nv">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;GTFS_TOPIC&#39;</span>,<span class="w"> </span><span class="nv">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="o">)</span><span class="w"> </span><span class="p">;</span>
+<h4>Copy the contents of the SSH key to your clipboard</h4>
+<div class="highlight"><pre><span></span><code>clip &lt; ~/.ssh/id_rsa.pub
 </code></pre></div>
-
-<p>To persist the above table see below. </p>
-<div class="highlight"><pre><span></span><code>create table GTFS_TABLE2 AS select * from GTFS_TABLE ;
-</code></pre></div>
-
-<p>Before terminating a persistent table we must first terminate that query!</p>
-<div class="highlight"><pre><span></span><code>show queries ;
-terminate &lt;query_name&gt; ;
-drop table &lt;table_name&gt; ;
-</code></pre></div>
-
-<h4>KSql SELECT</h4>
-<div class="highlight"><pre><span></span><code>select trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence, trip_update_stop_time_update_departure_delay from GTFS_TABLE emit changes ;
-</code></pre></div>
-
-<div class="highlight"><pre><span></span><code>select trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence, sum(trip_update_stop_time_update_departure_delay) from GTFS_TABLE group by trip_update_trip_trip_id, trip_update_stop_time_update_stop_sequence emit changes ;
-</code></pre></div>
-
-<h4>KSql streams</h4>
-<p>KSql streams are used to interrogate the underlying data.</p>
-<div class="highlight"><pre><span></span><code>create stream users_stream (name VARCHAR, countrycode VARCHAR) WITH (KAFKA_TOPIC=&#39;USERS&#39;, VALUE_FORMAT=&#39;DELIMITED&#39;) ;
-list streams ;
-select name, countrycode from users_stream emit changes;
-select name, countrycode from users_stream emit changes limit 5;
-select countrycode, count(*) from users_stream group by countrycode;
-drop stream if exists users_stream ;
-drop stream if exists users_stream delete topic ;
-</code></pre></div>
-
-<div class="highlight"><pre><span></span><code><span class="nt">create</span><span class="w"> </span><span class="nt">stream</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="o">(</span><span class="nt">id</span><span class="w"> </span><span class="nt">VARCHAR</span><span class="o">,</span><span class="w"> </span><span class="nt">delay</span><span class="w"> </span><span class="nt">INT</span><span class="o">,</span><span class="w"> </span><span class="nt">timestamp</span><span class="w"> </span><span class="nt">INT</span><span class="o">)</span><span class="w"> </span><span class="nt">WITH</span><span class="w"> </span><span class="o">(</span><span class="nt">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;gtfs-delays&#39;</span><span class="o">,</span><span class="w"> </span><span class="nt">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">;</span>
-<span class="nt">describe</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="o">;</span>
-<span class="nt">select</span><span class="w"> </span><span class="nt">TIMESTAMPTOSTRING</span><span class="o">(</span><span class="nt">rowtime</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;dd/MMM HH:mm&#39;</span><span class="o">)</span><span class="w"> </span><span class="nt">as</span><span class="w"> </span><span class="nt">createtime</span><span class="o">,</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nt">from</span><span class="w"> </span><span class="nt">gtfs_delays_stream</span><span class="w"> </span><span class="nt">emit</span><span class="w"> </span><span class="nt">changes</span><span class="w"> </span><span class="nt">limit</span><span class="w"> </span><span class="nt">5</span><span class="o">;</span>
-</code></pre></div>
-
-<div class="highlight"><pre><span></span><code>create stream GTFS_STREAM ( \
-id VARCHAR, \
-trip_update STRUCT \
-    &lt; trip STRUCT \
-        &lt; trip_id VARCHAR, start_time VARCHAR, start_date VARCHAR, schedule_relationship VARCHAR, route_id VARCHAR&gt; \
-    &gt;,  \
-stop_time_update STRUCT &lt; stop_sequence INT, arrival STRUCT &lt; delay INT &gt;, stop_id VARCHAR, schedule_relationship VARCHAR &gt;
-) WITH (KAFKA_TOPIC=&#39;GTFS_TOPIC&#39;, VALUE_FORMAT=&#39;JSON&#39;) ;
-
-select * from GTFS_STREAM emit changes ;
-</code></pre></div>
-
-<h3>Other Useful Commands</h3>
-<ul>
-<li><code>kafka-consumer-groups.sh  --list --bootstrap-server localhost:9092</code></li>
-<li><code>zookeeper-shell.sh localhost:2181 ls /brokers/ids</code> to list active brokers. </li>
-</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./ksql.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/ksql.html" rel="tag">KSql</a>
+                    <a href="./ssh_keys.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
                 </div>
-            </article>            <h4 class="date">Nov 23, 2017</h4>
+            </article>            <h4 class="date">Nov 25, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./snowsql.html" rel="bookmark" title="Permanent Link to &quot;SnowSQL Cheatsheet&quot;">SnowSQL Cheatsheet</a>
+                    <a href="./software.html" rel="bookmark" title="Permanent Link to &quot;Software&quot;">Software</a>
                 </h2>
 
                 
                 
 
-                <h4>SnowSQL CLI Config file</h4>
-<p>The onfig file is located here: <code>/home/&lt;user&gt;/.snowsql</code>. This is where you configure custom connection parameters.</p>
-<p>In your config file you need to modify this line:</p>
-<p><code>log_file = ../snowsql_rt.log</code> to this <code>log_file = ~/.snowsql/snowsql_rt.log</code></p>
-<h4>Connect to Snowflake account with SnowSQL CLI</h4>
-<p><code>snowsql --accountname 123.north-europe.azure --username &lt;username&gt;</code></p>
-<p><code>snowsql -c my_connection</code></p>
-<h4>Bulk Loading from Local Source</h4>
-<p>Create the Employee table</p>
-<div class="highlight"><pre><span></span><code><span class="n">create</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">Employee</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">row_id</span><span class="w"> </span><span class="n">integer</span><span class="p">,</span>
-<span class="w">    </span><span class="n">first_name</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
-<span class="w">    </span><span class="n">last_name</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
-<span class="w">    </span><span class="n">city</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
-<span class="w">    </span><span class="n">state</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
-<span class="w">    </span><span class="n">hire_date</span><span class="w"> </span><span class="n">date</span><span class="p">,</span>
-<span class="w">    </span><span class="n">salary</span><span class="w"> </span><span class="n">integer</span>
-<span class="p">)</span>
+                <h3>PostgreSQL</h3>
+<p><a href="https://www.postgresql.org/download/linux/ubuntu/">Download PostgreSQL</a></p>
+<p><a href="https://linuxhint.com/best_gui_clients_postgresql_ubuntu/#:~:text=pgAdmin,Windows%20and%20Mac%20OS%20X.">Install pgAdmin</a></p>
+<h4>Running multiple versions of PostgreSQL</h4>
+<p>Check the config files to see which version is on which port:</p>
+<p><code>grep -H '^port' /etc/postgresql/*/main/postgresql.conf</code></p>
+<p>sample output:</p>
+<div class="highlight"><pre><span></span><code>/etc/postgresql/10/main/postgresql.conf:port = 5432 
+/etc/postgresql/13/main/postgresql.conf:port = 5433 
 </code></pre></div>
 
-<p>Some Employee queries</p>
-<div class="highlight"><pre><span></span><code>select * From Public.Employee
-drop table Employee
-truncate table Employee
+<h4>Restart Postgres</h4>
+<div class="highlight"><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">postgresql</span><span class="w"> </span><span class="n">reload</span>
+<span class="n">sudo</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">postgresql</span><span class="w"> </span><span class="n">start</span>
 </code></pre></div>
 
-<p>Create a File Format Object</p>
-<div class="highlight"><pre><span></span><code><span class="nx">create</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">replace</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">format</span><span class="w"> </span><span class="nx">employee_csv</span>
-<span class="w">  </span><span class="k">type</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">CSV</span><span class="err">&#39;</span>
-<span class="w">  </span><span class="nx">field_delimiter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="sc">&#39;,&#39;</span>
-<span class="w">  </span><span class="nx">skip_header</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<h4>Hostname</h4>
+<p>PostgreSQL, what is the hostname address of my default database?</p>
+<p>If you're connecting from the same machine, use localhost</p>
+<h4>Connection String</h4>
+<p>You can provide your username and password directly in the connection URI provided to psql:</p>
+<p><code>psql postgresql://username:password@localhost:5432/mydb</code></p>
+<h4>Useful Commands</h4>
+<ul>
+<li>To establish a connection : <code>sudo su - postgres</code></li>
+<li>To open a postgress prompt using the command: <code>psql</code></li>
+<li>To see details of the connection: <code>\conninfo</code></li>
+<li>To view the databases in our PostgreSQL instance: <code>\list</code></li>
+<li><code>CREATE DATABASE dbname;</code></li>
+<li><code>DROP DATABASE dbname;</code></li>
+</ul>
+<h3>R and RStudio</h3>
+<h4>Uninstall previous R installation</h4>
+<div class="highlight"><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">save</span>
+<span class="n">pkgList</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">installed.packages</span><span class="p">(</span><span class="n">priority</span><span class="o">=</span><span class="s">&#39;NA&#39;</span><span class="p">)</span>
+<span class="nf">remove.packages</span><span class="p">(</span><span class="n">pkgList</span><span class="p">)</span>
+<span class="nf">q</span><span class="p">()</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="o">-</span><span class="n">get</span><span class="w"> </span><span class="n">remove</span><span class="w"> </span><span class="o">--</span><span class="n">purge</span><span class="w"> </span><span class="n">r</span><span class="o">-</span><span class="n">cran</span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="o">-</span><span class="n">base</span><span class="o">*</span>
 </code></pre></div>
 
-<p>Create an internal Stage object</p>
-<div class="highlight"><pre><span></span><code>create or replace stage employee_stage
-  file_format = employee_csv;
+<h4>Install on Ubuntu 20.04 (Focal Fossa)</h4>
+<p>Save and run the script below (<a href="https://gist.github.com/mGalarnyk/41c887e921e712baf86fecc507b3afc7">source</a>).</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install R + RStudio on Ubuntu 20 Focal</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="o">-</span><span class="n">key</span><span class="w"> </span><span class="n">adv</span><span class="w"> </span><span class="o">--</span><span class="n">keyserver</span><span class="w"> </span><span class="n">keyserver</span><span class="o">.</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">com</span><span class="w"> </span><span class="o">--</span><span class="n">recv</span><span class="o">-</span><span class="n">keys</span><span class="w"> </span><span class="n">E298A3A825C0D65DF</span><span class="o">&gt;</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span><span class="w"> </span><span class="s1">&#39;deb https://cloud.r-project.org/bin/linux/ubuntu focal&gt;</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="n">update</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">r</span><span class="o">-</span><span class="n">base</span><span class="w"> </span><span class="n">r</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span><span class="n">gdebi</span><span class="o">-</span><span class="n">core</span>
+
+<span class="c1"># next line required for kableExtra</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">libcurl4</span><span class="o">-</span><span class="n">openssl</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span><span class="n">openssl</span><span class="w"> </span><span class="n">libssl</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span><span class="n">openssh</span><span class="o">-</span><span class="n">client</span><span class="w"> </span><span class="n">libxml2</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span>
+
+<span class="c1"># next line required for RcppArmadillo</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">liblapack</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span>
+
+<span class="c1"># install Latex for RMarkdown</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">texlive</span><span class="w"> </span><span class="n">texstudio</span><span class="w"> </span><span class="n">texlive</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">recommended</span><span class="w"> </span><span class="n">texlive</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">extra</span>
+
+<span class="c1"># Download and Install RStudio</span>
+<span class="n">wget</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download1</span><span class="o">.</span><span class="n">rstudio</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">desktop</span><span class="o">/</span><span class="n">bionic</span><span class="o">/</span><span class="n">amd64</span><span class="o">/</span><span class="n">rstudio</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">1103</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">gdebi</span><span class="w"> </span><span class="n">rstudio</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">1103</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span>
+<span class="n">rm</span><span class="w"> </span><span class="n">rstudio</span><span class="o">-</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">1103</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span>
 </code></pre></div>
 
-<p>Display the stages we have created</p>
-<div class="highlight"><pre><span></span><code><span class="k">show</span><span class="w"> </span><span class="nv">stages</span>
+<h4>List of Useful Packages</h4>
+<p><code>install.packages((c("tidyverse", "ggplot2", "ggthemes", "kableExtra", "rbenchmark", "inline", "data.table", "RcppArmadillo"))</code></p>
+<h3>Docker</h3>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04">Install Docker on Ubuntu-16-04</a></li>
+<li><a href="https://www.udemy.com/docker-mastery/">Docker Mastery: The Complete Toolset From a Docker Captain</a>:</li>
+</ul>
+<p>Docker</p>
+<ul>
+<li>get relevant <code>curl</code> line from <a href="https://get.docker.com/">here</a>.
+    Note: this will figure out which version to get for your particular Linux OS</li>
+<li>run shell script (next line in the above link)</li>
+<li><code>sudo usermod -aG docker vagrant</code></li>
+<li><code>docker version</code> to test</li>
+</ul>
+<p>Docker Machine</p>
+<ul>
+<li>get the lines from <a href="https://github.com/docker/machine/releases">https://github.com/docker/machine/releases</a></li>
+</ul>
+<p>Docker Compose</p>
+<ul>
+<li>get lines for latest release <a href="https://github.com/docker/compose/releases">here</a></li>
+<li><code>sudo -i</code> then paste the lines</li>
+<li><code>docker-compse version</code> to test</li>
+</ul>
+<p><br></p>
+<h3>Pycharm</h3>
+<h4>Install</h4>
+<div class="highlight"><pre><span></span><code><span class="o">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">openjdk</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="n">jdk</span>
+<span class="o">$</span><span class="w"> </span><span class="n">java</span><span class="w"> </span><span class="o">-</span><span class="n">version</span>
+<span class="o">$</span><span class="w"> </span><span class="n">wget</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">jetbrains</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">pycharm</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="mf">2018.3</span><span class="o">.</span><span class="mf">4.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<span class="o">$</span><span class="w"> </span><span class="n">tar</span><span class="w"> </span><span class="o">-</span><span class="n">xvf</span><span class="w"> </span><span class="n">pycharm</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="mf">2018.3</span><span class="o">.</span><span class="mf">4.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<span class="o">$</span><span class="w"> </span><span class="n">cd</span><span class="w"> </span><span class="n">pycharm</span><span class="o">-</span><span class="n">community</span><span class="o">-</span><span class="mf">2018.3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">bin</span>
+<span class="o">$</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="n">pycharm</span><span class="o">.</span><span class="n">sh</span>
 </code></pre></div>
 
-<p>See what's in the employee_stage</p>
-<div class="highlight"><pre><span></span><code><span class="n">list</span><span class="w"> </span><span class="nv">@employee_stage</span><span class="p">;</span>
+<h4>pytest</h4>
+<p>Edit Configuration &gt;&gt; Additional arguments &gt;&gt; <code>-p no:logging -s</code></p>
+<h4>environment variables</h4>
+<ul>
+<li><a href="https://stackoverflow.com/questions/42708389/how-to-set-environment-variables-in-pycharm">about setting environment variable e.g. DATA_HOME</a></li>
+</ul>
+<h4>Conda Executable Path on Windows</h4>
+<div class="highlight"><pre><span></span><code>C:\Users\&lt;USER&gt;\AppData\Local\miniconda3\condabin
 </code></pre></div>
 
-<p>Move the data in employee_stage to the employee table. Skip the entire file on any errors</p>
-<div class="highlight"><pre><span></span><code><span class="n">copy</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">employee</span>
-<span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="nv">@employee_stage</span>
-<span class="w">  </span><span class="n">on_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;skip_file&#39;</span><span class="p">;</span>
+<p><br></p>
+<h3>Jupyter (via Docker)</h3>
+<ul>
+<li><a href="https://towardsdatascience.com/how-to-setup-your-jupyterlab-project-environment-74909dade29b">How to Setup Your JupyterLab Project Environment</a></li>
+</ul>
+<p><br></p>
+<h3>RoboMongo</h3>
+<ul>
+<li><a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/">Install MongoDB Community Edition on Ubuntu</a></li>
+<li><a href="https://robomongo.org/download">Robo 3T: the hobbyist GUI</a></li>
+<li><a href="https://gist.github.com/abdallahokasha/37911a64ad289487387e2d1a144604ae">Install Robo3t On Ubuntu 18.04</a></li>
+<li><code>mongoimport --db naptan --collection naptan --file test.json --jsonArray</code></li>
+</ul>
+<h3>NodeJS</h3>
+<ul>
+<li>npm install xml-stream, xml2js</li>
+<li>node myfile.js</li>
+</ul>
+<h4>NodeJS XML to JSON</h4>
+<div class="highlight"><pre><span></span><code><span class="k">var</span><span class="w"> </span><span class="n">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+<span class="k">var</span><span class="w"> </span><span class="n">xml2js</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;xml2js&#39;</span><span class="p">);</span>
+<span class="k">var</span><span class="w"> </span><span class="n">util</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;util&#39;</span><span class="p">);</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">parser</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">xml2js</span><span class="o">.</span><span class="n">Parser</span><span class="p">();</span>
+
+<span class="n">fs</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s1">&#39;NaPTAN_2018_11_08.xml&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">function</span><span class="p">(</span><span class="n">err</span><span class="p">,</span><span class="n">data</span><span class="p">){</span>
+<span class="w">    </span><span class="n">parser</span><span class="o">.</span><span class="n">parseString</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">function</span><span class="p">(</span><span class="n">err</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">){</span>
+
+<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"> </span><span class="bp">true</span><span class="p">));</span>
+
+<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">toString</span><span class="p">(),</span><span class="w"> </span><span class="n">function</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="o">//</span><span class="w">     </span><span class="k">if</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="o">//</span><span class="w">         </span><span class="k">return</span><span class="w"> </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">err</span><span class="p">);</span>
+<span class="w">        </span><span class="o">//</span><span class="w">     </span><span class="p">}</span>
+<span class="w">        </span><span class="o">//</span><span class="w">     </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;The file was saved!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="p">});</span>
+
+<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="nb">convert</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">JSON</span><span class="w"> </span><span class="n">string</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JSON</span><span class="o">.</span><span class="n">stringify</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span>
+
+<span class="w">        </span><span class="o">//</span><span class="w"> </span><span class="n">save</span><span class="w"> </span><span class="n">JSON</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">file</span>
+<span class="w">        </span><span class="n">fs</span><span class="o">.</span><span class="n">writeFileSync</span><span class="p">(</span><span class="s1">&#39;test.json&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">json</span><span class="p">);</span>
+
+<span class="w">    </span><span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div>
 
-<p>Move the data in employee_stage to the employee table. Skip just the rows causing any errors</p>
-<div class="highlight"><pre><span></span><code><span class="n">copy</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">employee</span>
-<span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="nv">@employee_stage</span>
-<span class="w">  </span><span class="n">on_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;continue&#39;</span><span class="p">;</span>
+<h4></h4>
+<h3>GloVe for Python</h3>
+<ul>
+<li><code>-e git+git@github.com:maciejkula/glove-python.git#egg=glove</code></li>
+<li>dependencies</li>
+<li><code>pip install Cython</code></li>
+<li><code>sudo apt-get install python3-dev</code></li>
+</ul>
+<p><br></p>
+<h4>Jena</h4>
+<div class="highlight"><pre><span></span><code>wget http://mirrors.whoishostingthis.com/apache/jena/binaries/apache-jena-3.1.1.tar.gz
+tar -zxvf
 </code></pre></div>
 
-<p>Remove file from stage</p>
-<div class="highlight"><pre><span></span><code><span class="n">remove</span><span class="w"> </span><span class="nv">@employee_stage</span><span class="w"> </span><span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;.*.csv.gz&#39;</span><span class="p">;</span>
+<p><br></p>
+<h4>Fuseki 2 (requires JDK 8)</h4>
+<div class="highlight"><pre><span></span><code>wget http://mirrors.whoishostingthis.com/apache/jena/binaries/apache-jena-fuseki-2.4.1.tar.gz
+tar -zxvf
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
 </code></pre></div>
 
-<p>Create a table to hold all errors during ingestion (VIDEO 21 8:00)</p>
-<div class="highlight"><pre><span></span><code>create or replace table employee_errors as 
-select <span class="gs">* from table(validate(employee, job_id =&gt; &#39;019b04c4-0c52-f649-0001-3d6e0002d14e&#39;));</span>
-<span class="gs">select *</span> from employee_errors
+<p>To test fuseki server</p>
+<div class="highlight"><pre><span></span><code>~/apache-jena-fuseki-2.4.1/fuseki-server --update --loc=angioexplain /angioexplain
 </code></pre></div>
 
-<p>Describe file format</p>
-<div class="highlight"><pre><span></span><code>describe file format employee_csv
+<p>Open browser and got to <code>localhost:3030</code></p>
+<p><br></p>
+<h4>Miniconda3</h4>
+<div class="highlight"><pre><span></span><code>wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
 </code></pre></div>
 
-<h4>Storage Integration: Bulk Loading from External Source</h4>
-<p>Notes:</p>
+<p>then add below line to <code>.bashrc</code>, restart terminal and check installation with <code>conda -V</code>.</p>
+<p><code>export PATH="/home/username/miniconda3/bin:$PATH"</code></p>
+<h4>Misc.</h4>
 <ul>
 <li>
-<p>to verify STORAGE INTEGRATION made it to Azure, go to Azure AAD &gt; Entreprise applications &gt; you should see Snowflake </p>
+<p><code>sudo apt-get install terminator</code></p>
 </li>
 <li>
-<p>after creating STORAGE INTEGRATION, must authorize Snowflake in Access Control (IAM)
-  go to Storage Account &gt; Access Control (IAM) &gt; Add a role assignment &gt; "Storage Blob Data Contributor"
-  click +Select Members and search for Snowflake principal described above &gt; Select &gt; Review+Assign</p>
+<p>VSCode Run(Compile): Shit+Ctrl+B </p>
+</li>
+<li>
+<p>to view a .gv GraphViz file (will crate a pdf)</p>
+<p>f = Source.from_file('file-name.gv')
+f.render()</p>
 </li>
 </ul>
-<div class="highlight"><pre><span></span><code>SHOW FILE FORMATS
-SHOW TABLES
-SHOW STAGES
-
-// CLEAN UP
-USE ROLE ACCOUNTADMIN ;
-DROP INTEGRATION IF EXISTS AZURE_STORAGE ;
-DROP FILE FORMAT IF EXISTS CSV_FORMAT ;
-DROP STAGE IF EXISTS GTFS ;
-</code></pre></div>
-
-<p>Step 1: Create Table</p>
-<div class="highlight"><pre><span></span><code><span class="n">create</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">agency</span><span class="p">(</span>
-<span class="w">  </span><span class="n">agency_id</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span>
-<span class="w">  </span><span class="n">agency_name</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w">  </span>
-<span class="w">  </span><span class="n">agency_url</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span>
-<span class="w">  </span><span class="n">agency_timezone</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-<span class="p">);</span>
-</code></pre></div>
-
-<p>Step 2: Setup Storage Integration</p>
-<div class="highlight"><pre><span></span><code>USE ROLE ACCOUNTADMIN ;
-CREATE OR REPLACE STORAGE INTEGRATION AZURE_STORAGE
-  TYPE = EXTERNAL_STAGE
-  STORAGE_PROVIDER = AZURE
-  ENABLED = TRUE
-  AZURE_TENANT_ID = &lt; tenant id &gt;
-  STORAGE_ALLOWED_LOCATIONS = (&#39;*&#39;) ;
-
-GRANT USAGE ON INTEGRATION AZURE_STORAGE TO SYSADMIN ;
-
-DESCRIBE STORAGE INTEGRATION AZURE_STORAGE ;
-
-USE ROLE SYSADMIN ; -- De-esclate the role
-</code></pre></div>
-
-<p>Step 3: Setup File Format</p>
-<div class="highlight"><pre><span></span><code><span class="nx">create</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">replace</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">format</span><span class="w"> </span><span class="nx">csv_format</span>
-<span class="w">  </span><span class="k">type</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">CSV</span><span class="err">&#39;</span>
-<span class="w">  </span><span class="nx">field_delimiter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="sc">&#39;,&#39;</span>
-<span class="w">  </span><span class="nx">skip_header</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">  </span><span class="nx">null_if</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="err">&#39;</span><span class="nx">NULL</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">null</span><span class="err">&#39;</span><span class="p">)</span>
-<span class="w">  </span><span class="nx">empty_field_as_null</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">TRUE</span>
-<span class="w">  </span><span class="nx">compression</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">gzip</span><span class="w"> </span><span class="p">;</span>
-</code></pre></div>
-
-<p>Step 4: Set up Stage</p>
-<div class="highlight"><pre><span></span><code><span class="nt">create</span><span class="w"> </span><span class="nt">or</span><span class="w"> </span><span class="nt">replace</span><span class="w"> </span><span class="nt">stage</span><span class="w"> </span><span class="nt">gtfs</span>
-<span class="w">  </span><span class="nt">storage_integration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">AZURE_STORAGE</span>
-<span class="w">  </span><span class="nt">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;azure://&lt;container_name&gt;.blob.core.windows.net/gtfs &#39;</span>
-<span class="w">  </span><span class="nt">file_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">CSV_FORMAT</span><span class="w"> </span><span class="o">;</span>
-</code></pre></div>
-
-<p>Note: it can take an hour or two for Azure to create objects necessary for the integration</p>
-<div class="highlight"><pre><span></span><code><span class="n">list</span><span class="w"> </span><span class="nv">@gtfs</span><span class="w"> </span><span class="p">;</span>
-</code></pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./snowsql.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/databases.html" rel="tag">Databases</a>
+                    <a href="./software.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linux.html" rel="tag">Linux</a>
                 </div>
             </article>
 
@@ -310,7 +293,7 @@ USE ROLE SYSADMIN ; -- De-esclate the role
 
                     <a href="./index20.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 19 of 31</span>
+                    <span>Page 19 of 34</span>
                 </div>
 
             <div class="clear"></div>

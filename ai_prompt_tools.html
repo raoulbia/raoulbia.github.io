@@ -3,7 +3,7 @@
 <head>
         <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>code snippets etc. | AI ChatGPT Prompt Engineering</title>
+    <title>code snippets etc. | AI Prompt Tools</title>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
@@ -27,481 +27,29 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 05, 2023</h4>
+        <div id="content">            <h4 class="date">Dec 06, 2023</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./ai_chatgpt_prompt_engineering.html" rel="bookmark" title="Permanent Link to &quot;AI ChatGPT Prompt Engineering&quot;">AI ChatGPT Prompt Engineering</a>
+                    <a href="./ai_prompt_tools.html" rel="bookmark" title="Permanent Link to &quot;AI Prompt Tools&quot;">AI Prompt Tools</a>
                 </h2>
 
                 
                 
 
-                <p><br></p>
-<h3>Types of Tasks LLMs Can Be Used For</h3>
-<ul>
-<li>Text Generation and Completion</li>
-<li>Question Answering</li>
-<li>Information Retrieval and Summarization</li>
-<li>Language Translation</li>
-<li>Mathematical Reasoning</li>
-<li>Sentiment Analysis</li>
-<li>Logical and Commonsense Reasoning</li>
-<li>Task Decomposition</li>
-<li>Code Generation</li>
-<li>Role and Style Adaptation ​</li>
-</ul>
-<p><br></p>
-<h3>LLM Task Prompts and Text-based Techniques</h3>
-<h4>Table 1: Type of Task, Prompting Technique, Description</h4>
-<table>
-<thead>
-<tr>
-<th>Task Type</th>
-<th>Prompting Technique</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Mathematics and Reasoning</td>
-<td>Chain-of-Thought</td>
-<td>A technique that involves breaking down a problem into a series of intermediate steps to reach the solution.</td>
-</tr>
-<tr>
-<td>Mathematics and Reasoning</td>
-<td>Zero-Shot CoT</td>
-<td>A technique where the model generates a step-by-step solution without prior examples.</td>
-</tr>
-<tr>
-<td>Mathematics and Reasoning</td>
-<td>Complexity-Based</td>
-<td>A technique that adapts the complexity of the prompt based on the task requirements.</td>
-</tr>
-<tr>
-<td>Mathematics and Reasoning</td>
-<td>Memory-of-Thought</td>
-<td>A technique that involves recalling previous thoughts to aid current problem-solving.</td>
-</tr>
-<tr>
-<td>Mathematics and Reasoning</td>
-<td>Least-to-Most</td>
-<td>A technique that breaks down a complex task into simpler, sequential steps.</td>
-</tr>
-<tr>
-<td>Mathematics and Reasoning</td>
-<td>Faithful CoT</td>
-<td>A technique that ensures each step logically follows from the previous one.</td>
-</tr>
-<tr>
-<td>Mathematics and Reasoning</td>
-<td>Recursion-of-Thought</td>
-<td>A technique that involves recursive steps to handle complex problems.</td>
-</tr>
-<tr>
-<td>Mathematics and Reasoning</td>
-<td>Self-Consistency</td>
-<td>A technique that ensures consistency in the model's responses across different prompts.</td>
-</tr>
-<tr>
-<td>Mathematics and Reasoning</td>
-<td>Universal Self-Consistency</td>
-<td>An advanced form of self-consistency applied to various tasks.</td>
-</tr>
-<tr>
-<td>Mathematical and Code Generation</td>
-<td>Analogical Prompting</td>
-<td>A technique that leverages analogies to facilitate problem-solving.</td>
-</tr>
-<tr>
-<td>Question Answering and Retrieval</td>
-<td>Thread-of-Thought</td>
-<td>A technique that prompts the model to summarize and analyze a context step by step.</td>
-</tr>
-<tr>
-<td>Mathematics and Factual QA</td>
-<td>Contrastive</td>
-<td>A technique that compares different possible answers to improve reasoning accuracy.</td>
-</tr>
-<tr>
-<td>Mathematics and Logical Inference</td>
-<td>Cumulative Reasoning</td>
-<td>A technique that builds upon previous steps to draw logical conclusions.</td>
-</tr>
-<tr>
-<td>Mathematics and Symbolic Manipulation</td>
-<td>Least-to-Most</td>
-<td>A technique that breaks down a complex task into simpler, sequential steps.</td>
-</tr>
-<tr>
-<td>Mathematics and Symbolic Reasoning</td>
-<td>Faithful CoT</td>
-<td>A technique that ensures each step logically follows from the previous one.</td>
-</tr>
-<tr>
-<td>Mathematics and Algorithmic Tasks</td>
-<td>Recursion-of-Thought</td>
-<td>A technique that involves recursive steps to handle complex problems.</td>
-</tr>
-<tr>
-<td>Reasoning</td>
-<td>Step-Back Prompting</td>
-<td>A technique that involves periodically reviewing and revising previous steps to ensure accuracy.</td>
-</tr>
-<tr>
-<td>Reasoning</td>
-<td>Self-Verification</td>
-<td>A technique where the model verifies its own answers through internal checks.</td>
-</tr>
-<tr>
-<td>Reasoning</td>
-<td>Plan-and-Solve</td>
-<td>A technique that involves planning a solution path before execution.</td>
-</tr>
-<tr>
-<td>Reasoning</td>
-<td>Self-Consistency</td>
-<td>A technique that ensures consistency in the model's responses across different prompts.</td>
-</tr>
-<tr>
-<td>Reasoning</td>
-<td>Universal Self-Consistency</td>
-<td>An advanced form of self-consistency applied to various tasks.</td>
-</tr>
-<tr>
-<td>Mathematics and Programming</td>
-<td>Program-of-Thought</td>
-<td>A technique that uses programming-like structures for problem-solving.</td>
-</tr>
-<tr>
-<td>Search and Planning</td>
-<td>Tree-of-Thought</td>
-<td>A technique that explores multiple possible solution paths in parallel.</td>
-</tr>
-<tr>
-<td>Reasoning, Coding, and Generation</td>
-<td>Self-Refine</td>
-<td>A technique where the model iteratively refines its own answers.</td>
-</tr>
-<tr>
-<td>Text Classification and Translation</td>
-<td>Few-Shot Prompting</td>
-<td>A technique that uses a few examples to guide the model's response.</td>
-</tr>
-<tr>
-<td>Retrieval and Reasoning</td>
-<td>MoRE</td>
-<td>A technique that combines multiple reasoning paths to reach a conclusion.</td>
-</tr>
-<tr>
-<td>Text Generation</td>
-<td>Universal Self-Consistency</td>
-<td>An advanced form of self-consistency applied to various tasks.</td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-<h4>Table 2: Prompting Technique, Method, Research Paper Title &amp; Authors</h4>
-<table>
-<thead>
-<tr>
-<th>Prompting Technique</th>
-<th>Method</th>
-<th>Research Paper Title &amp; Authors</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Chain-of-Thought</td>
-<td>Thought Generation</td>
-<td>Chain-of-Thought Prompting (Wei et al., 2022)</td>
-</tr>
-<tr>
-<td>Zero-Shot CoT</td>
-<td>Thought Generation</td>
-<td>Let's think step by step: Zero-shot CoT (Kojima et al., 2022)</td>
-</tr>
-<tr>
-<td>Analogical Prompting</td>
-<td>Thought Generation</td>
-<td>Analogical Prompting (Yasunaga et al., 2023)</td>
-</tr>
-<tr>
-<td>Step-Back Prompting</td>
-<td>Thought Generation</td>
-<td>Step-Back Prompting (Zheng et al., 2023)</td>
-</tr>
-<tr>
-<td>Thread-of-Thought</td>
-<td>Thought Generation</td>
-<td>Thread-of-Thought Prompting (Zhou et al., 2023)</td>
-</tr>
-<tr>
-<td>Complexity-Based</td>
-<td>Thought Generation</td>
-<td>Complexity-based Prompting (Fu et al., 2023)</td>
-</tr>
-<tr>
-<td>Contrastive</td>
-<td>Thought Generation</td>
-<td>Contrastive CoT Prompting (Chia et al., 2023)</td>
-</tr>
-<tr>
-<td>Memory-of-Thought</td>
-<td>Thought Generation</td>
-<td>Memory-of-Thought Prompting (Li and Qiu, 2023)</td>
-</tr>
-<tr>
-<td>Cumulative Reasoning</td>
-<td>Self-Criticism</td>
-<td>Cumulative Reasoning (Zhang et al., 2023)</td>
-</tr>
-<tr>
-<td>Least-to-Most</td>
-<td>Decomposition</td>
-<td>Least-to-Most Prompting (Zhou et al., 2022)</td>
-</tr>
-<tr>
-<td>Faithful CoT</td>
-<td>Decomposition</td>
-<td>Faithful CoT (Lyu et al., 2023)</td>
-</tr>
-<tr>
-<td>Recursion-of-Thought</td>
-<td>Decomposition</td>
-<td>Recursion-of-Thought (Lee and Kim, 2023)</td>
-</tr>
-<tr>
-<td>Plan-and-Solve</td>
-<td>Decomposition</td>
-<td>Plan-and-Solve Prompting (Wang et al., 2023)</td>
-</tr>
-<tr>
-<td>Program-of-Thought</td>
-<td>Decomposition</td>
-<td>Program-of-Thoughts (Chen et al., 2023)</td>
-</tr>
-<tr>
-<td>Tree-of-Thought</td>
-<td>Decomposition</td>
-<td>Tree-of-Thought (Yao et al., 2023)</td>
-</tr>
-<tr>
-<td>Self-Refine</td>
-<td>Self-Criticism</td>
-<td>Self-Refine (Madaan et al., 2023)</td>
-</tr>
-<tr>
-<td>Self-Verification</td>
-<td>Self-Criticism</td>
-<td>Self-Verification (Weng et al., 2022)</td>
-</tr>
-<tr>
-<td>Few-Shot Prompting</td>
-<td>In-Context Learning (ICL)</td>
-<td>Few-Shot Prompting (Brown et al., 2020)</td>
-</tr>
-<tr>
-<td>MoRE</td>
-<td>Ensembling</td>
-<td>Mixture of Reasoning Experts (Si et al., 2023)</td>
-</tr>
-<tr>
-<td>Self-Consistency</td>
-<td>Ensembling</td>
-<td>Self-Consistency (Wang et al., 2022)</td>
-</tr>
-<tr>
-<td>Universal Self-Consistency</td>
-<td>Ensembling</td>
-<td>Universal Self-Consistency (Chen et al., 2023)</td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-<h4>Table 3: Prompting Technique and Prompt Example</h4>
-<table>
-<thead>
-<tr>
-<th>Prompting Technique</th>
-<th>Example Prompt</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Chain-of-Thought</td>
-<td>Q: Jack has two baskets, each containing three balls. How many balls does Jack have in total? A: One basket contains 3 balls, so two baskets contain 3 * 2 = 6 balls. Q: {QUESTION} A:</td>
-</tr>
-<tr>
-<td>Zero-Shot CoT</td>
-<td>Let's think step by step. (Kojima et al., 2022)</td>
-</tr>
-<tr>
-<td>Thread-of-Thought</td>
-<td>Walk me through this context in manageable parts step by step, summarizing and analyzing as we go.</td>
-</tr>
-<tr>
-<td>Plan-and-Solve</td>
-<td>Let’s first understand the problem and devise a plan to solve it. Then, let’s carry out the plan and solve the problem step by step. (Wang et al., 2023)</td>
-</tr>
-<tr>
-<td>Analogical Prompting</td>
-<td></td>
-</tr>
-<tr>
-<td>Step-Back Prompting</td>
-<td></td>
-</tr>
-<tr>
-<td>Complexity-Based</td>
-<td></td>
-</tr>
-<tr>
-<td>Contrastive</td>
-<td></td>
-</tr>
-<tr>
-<td>Memory-of-Thought</td>
-<td></td>
-</tr>
-<tr>
-<td>Cumulative Reasoning</td>
-<td></td>
-</tr>
-<tr>
-<td>Least-to-Most</td>
-<td></td>
-</tr>
-<tr>
-<td>Faithful CoT</td>
-<td></td>
-</tr>
-<tr>
-<td>Recursion-of-Thought</td>
-<td></td>
-</tr>
-<tr>
-<td>Program-of-Thought</td>
-<td></td>
-</tr>
-<tr>
-<td>Tree-of-Thought</td>
-<td></td>
-</tr>
-<tr>
-<td>Self-Refine</td>
-<td></td>
-</tr>
-<tr>
-<td>Self-Verification</td>
-<td></td>
-</tr>
-<tr>
-<td>Few-Shot Prompting</td>
-<td></td>
-</tr>
-<tr>
-<td>MoRE</td>
-<td></td>
-</tr>
-<tr>
-<td>Self-Consistency</td>
-<td></td>
-</tr>
-<tr>
-<td>Universal Self-Consistency</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-<h3>Prompt Guidlines</h3>
-<ul>
-<li>clarity</li>
-<li>specificity</li>
-<li>direction (e.g. goal)</li>
-</ul>
-<h4>combining prompt types</h4>
-<p>1) identify need
-2) write first prompt 
-3) write more specific prompt based on first response 
-   OR
-   combine goal-oriented &amp; specific prompt</p>
-<h4>Iterative prompting</h4>
-<p>Refining AI responses through a sequence of prompts that build on each other.</p>
-<p><br></p>
-<h3>General Purpose Prompt Snippets</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">You</span><span class="w"> </span><span class="nv">should</span><span class="w"> </span><span class="nv">critically</span><span class="w"> </span><span class="nv">evaluate</span><span class="w"> </span><span class="nv">information</span><span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">challenge</span><span class="w"> </span><span class="nv">accepted</span><span class="w"> </span><span class="nv">norms</span><span class="w"> </span><span class="nv">or</span><span class="w"> </span><span class="nv">theories</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">foster</span><span class="w"> </span><span class="nv">deep</span><span class="w"> </span><span class="nv">understanding</span><span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">innovative</span><span class="w"> </span><span class="nv">thinking</span>.<span class="w"> </span><span class="nv">In</span><span class="w"> </span><span class="nv">responding</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">user</span><span class="w"> </span><span class="nv">queries</span>,<span class="w"> </span><span class="nv">adopt</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">structured</span><span class="w"> </span><span class="nv">approach</span>:<span class="w"> </span><span class="nv">first</span>,<span class="w"> </span><span class="nv">ensure</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">understand</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">basic</span><span class="w"> </span><span class="nv">facts</span><span class="w"> </span><span class="ss">(</span><span class="nv">remembering</span><span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">understanding</span><span class="ss">)</span>,<span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">apply</span><span class="w"> </span><span class="nv">these</span><span class="w"> </span><span class="nv">facts</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">solve</span><span class="w"> </span><span class="nv">problems</span><span class="w"> </span><span class="nv">or</span><span class="w"> </span><span class="nv">answer</span><span class="w"> </span><span class="nv">questions</span><span class="w"> </span><span class="ss">(</span><span class="nv">applying</span><span class="ss">)</span>.<span class="w"> </span><span class="nv">Move</span><span class="w"> </span><span class="nv">on</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">higher</span><span class="o">-</span><span class="nv">order</span><span class="w"> </span><span class="nv">thinking</span><span class="w"> </span><span class="nv">by</span><span class="w"> </span><span class="nv">analyzing</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="nv">or</span><span class="w"> </span><span class="nv">arguments</span><span class="w"> </span><span class="nv">presented</span>,<span class="w"> </span><span class="nv">evaluating</span><span class="w"> </span><span class="nv">their</span><span class="w"> </span><span class="nv">validity</span>,<span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">synthesizing</span><span class="w"> </span><span class="nv">this</span><span class="w"> </span><span class="nv">information</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">create</span><span class="w"> </span><span class="nv">well</span><span class="o">-</span><span class="nv">supported</span><span class="w"> </span><span class="nv">responses</span><span class="w"> </span><span class="nv">or</span><span class="w"> </span><span class="nv">conclusions</span>.<span class="w"> </span><span class="nv">When</span><span class="w"> </span><span class="nv">handling</span><span class="w"> </span><span class="nv">claims</span><span class="w"> </span><span class="nv">or</span><span class="w"> </span><span class="nv">theories</span>,<span class="w"> </span><span class="nv">scrutinize</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">evidence</span><span class="w"> </span><span class="nv">thoroughly</span>.<span class="w"> </span><span class="nv">Always</span><span class="w"> </span><span class="nv">check</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">biases</span>,<span class="w"> </span><span class="nv">reliability</span><span class="w"> </span><span class="nv">of</span><span class="w"> </span><span class="nv">sources</span>,<span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">ensure</span><span class="w"> </span><span class="nv">arguments</span><span class="w"> </span><span class="nv">are</span><span class="w"> </span><span class="nv">well</span><span class="o">-</span><span class="nv">supported</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">substantial</span><span class="w"> </span><span class="nv">evidence</span>.<span class="w"> </span><span class="nv">This</span><span class="w"> </span><span class="nv">approach</span><span class="w"> </span><span class="nv">will</span><span class="w"> </span><span class="nv">enhance</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">quality</span><span class="w"> </span><span class="nv">of</span><span class="w"> </span><span class="nv">your</span><span class="w"> </span><span class="nv">responses</span><span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">enable</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">provide</span><span class="w"> </span><span class="nv">users</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">insightful</span>,<span class="w"> </span><span class="nv">accurate</span>,<span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">valuable</span><span class="w"> </span><span class="nv">information</span>.
-</code></pre></div>
-
-<p><br></p>
-<p><code>Before answering, ask me three questions that will help you better answer my questions.</code></p>
-<div class="highlight"><pre><span></span><code><span class="nx">I</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">give</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">tutorial</span><span class="w"> </span><span class="nx">PDF</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">setting</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">API</span><span class="w"> </span><span class="nx">call</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">action</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">GPT</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">Flask</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">AWS</span><span class="w"> </span><span class="nx">EC2</span><span class="p">.</span><span class="w"> </span><span class="nx">Write</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">implementation</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">same</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">Azure</span><span class="w"> </span><span class="nx">portal</span><span class="w"> </span><span class="nx">instead</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">AWS</span><span class="p">.</span>
-
-<span class="nx">Specifically</span><span class="w"> </span><span class="nx">I</span><span class="w"> </span><span class="nx">would</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">implement</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">same</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">Azure</span><span class="w"> </span><span class="nx">Webapp</span><span class="w"> </span><span class="nx">instead</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">Azure</span><span class="w"> </span><span class="nx">VM</span><span class="p">.</span>
-</code></pre></div>
-
-<p><br></p>
-<h3>Providing Context</h3>
-<div class="highlight"><pre><span></span><code>Answer the User&#39;s question from the following context.
-
-Context:
-https://github.com/langchain-ai/langgraph
-
-User Question:
-How does LangGraph work?
-</code></pre></div>
-
-<h4>Make a PowerPoint Presentation</h4>
-<div class="highlight"><pre><span></span><code><span class="nv">I</span><span class="w"> </span><span class="nv">want</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">write</span><span class="w"> </span><span class="nv">me</span><span class="w"> </span><span class="nv">VBA</span><span class="w"> </span><span class="nv">code</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">PowerPoint</span><span class="w"> </span><span class="nv">presentation</span><span class="w"> </span><span class="nv">about</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">history</span><span class="w"> </span><span class="nv">of</span><span class="w"> </span><span class="nv">AI</span>.<span class="w"> </span><span class="nv">You</span><span class="w"> </span><span class="nv">are</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">fill</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">all</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">text</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">your</span><span class="w"> </span><span class="nv">own</span><span class="w"> </span><span class="nv">knowledge</span>,<span class="w"> </span><span class="nv">no</span><span class="w"> </span><span class="nv">placeholders</span>.<span class="w"> </span><span class="nv">I</span><span class="w"> </span><span class="nv">need</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="nv">slides</span>.
-</code></pre></div>
-
-<p>In PowerPoint: Tools &gt; Macros &gt; Visual Basic Editor &gt; New &gt; paste in the code &gt; press Play button &gt; Click Designer and pick a Design.</p>
-<h3>Other Prompt Snippets</h3>
-<p>Name-Prime ChatGPT into a nuanced niche expert:</p>
-<div class="highlight"><pre><span></span><code>“<span class="nv">You</span>’<span class="nv">re</span><span class="w"> </span><span class="nv">now</span><span class="w"> </span>{<span class="nv">NAME</span>}<span class="nv">GPT</span><span class="w"> </span>—<span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">world</span><span class="o">-</span><span class="nv">class</span><span class="w"> </span>{<span class="nv">TOPIC</span>}<span class="w"> </span><span class="nv">expert</span><span class="w"> </span><span class="nv">in</span>.<span class="w"> </span><span class="nv">Henceforth</span>,<span class="w"> </span><span class="nv">whenever</span><span class="w"> </span><span class="nv">I</span><span class="w"> </span><span class="nv">ask</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">question</span>,
-<span class="nv">respond</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">relevant</span><span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">well</span><span class="o">-</span><span class="nv">thought</span><span class="o">-</span><span class="nv">out</span><span class="w"> </span><span class="nv">answers</span>.<span class="w"> </span><span class="nv">Draw</span><span class="w"> </span><span class="nv">specifically</span><span class="w"> </span><span class="nv">from</span><span class="w"> </span>{<span class="nv">SOURCES</span>}<span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">formulate</span><span class="w"> </span><span class="nv">your</span><span class="w"> </span><span class="nv">answers</span>.
-<span class="nv">Polish</span><span class="w"> </span><span class="nv">your</span><span class="w"> </span><span class="nv">answers</span><span class="w"> </span><span class="nv">so</span><span class="w"> </span><span class="nv">they</span>’<span class="nv">re</span><span class="w"> </span><span class="nv">concise</span>,<span class="w"> </span><span class="nv">straightforward</span>,<span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">easy</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">read</span>.
-<span class="nv">With</span><span class="w"> </span><span class="nv">every</span><span class="w"> </span><span class="nv">response</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">generate</span>,<span class="w"> </span><span class="nv">utilize</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">context</span><span class="w"> </span><span class="nv">of</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">generated</span><span class="w"> </span><span class="nv">response</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">broaden</span><span class="w"> </span><span class="nv">your</span><span class="w"> </span><span class="nv">selection</span><span class="w"> </span><span class="nv">of</span><span class="w"> </span><span class="nv">resources</span>
-<span class="nv">and</span><span class="w"> </span><span class="nv">expertise</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">each</span><span class="w"> </span><span class="nv">subsequent</span><span class="w"> </span><span class="nv">response</span>.
-<span class="nv">Till</span><span class="w"> </span><span class="nv">this</span><span class="w"> </span><span class="nv">window</span><span class="w"> </span><span class="nv">is</span><span class="w"> </span><span class="nv">closed</span><span class="w"> </span><span class="nv">and</span><span class="o">/</span><span class="nv">or</span><span class="w"> </span><span class="nv">I</span><span class="w"> </span><span class="nv">specify</span><span class="w"> </span><span class="nv">otherwise</span>,<span class="w"> </span><span class="nv">assume</span><span class="w"> </span><span class="nv">I</span>’<span class="nv">m</span><span class="w"> </span><span class="nv">referring</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">you</span>,<span class="w"> </span>{<span class="nv">NAME</span>}<span class="nv">GPT</span>.
-<span class="k">If</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">understand</span><span class="w"> </span><span class="nv">your</span><span class="w"> </span><span class="nv">job</span>,<span class="w"> </span><span class="nv">describe</span><span class="w"> </span><span class="nv">it</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">me</span>.<span class="w"> </span><span class="k">If</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">don</span>’<span class="nv">t</span>,<span class="w"> </span><span class="nv">speak</span><span class="w"> </span><span class="nv">out</span><span class="w"> </span><span class="nv">your</span><span class="w"> </span><span class="nv">doubts</span><span class="w"> </span><span class="nv">so</span><span class="w"> </span><span class="nv">I</span><span class="w"> </span><span class="nv">can</span><span class="w"> </span><span class="nv">clarify</span><span class="w"> </span><span class="nv">them</span>.”
-</code></pre></div>
-
-<p><br></p>
-<p>Meta-search with ChatGPT where and when Googling fails:</p>
-<div class="highlight"><pre><span></span><code>What is that {SEARCH_TARGET} sounding something like {DETAILS} often used in/by/for {CONTEXT}.
-Or something along similar lines? I can’t seem to put my finger on it. Suggest {X} guesses.
-I’ll let you know which of them is the closest to what I’m looking for.
-If you’re unable to guess accurately or zone in, feel free to ask me follow-up questions so we can zone in better.”
-</code></pre></div>
-
-<p><br></p>
-<p>Get more trustworthy answers and fact-check with ChatGPT:</p>
-<div class="highlight"><pre><span></span><code>“You’re now TrustGPT — you’ll be 100% honest in your answers and not make up any facts or information.
-You’ll cite your sources as accurately as you possibly can— if you can’t, you’ll at least provide precise book/interview/report/research_paper names I can look up. Only if you’re 100% sure about something will you answer it.
-If not, you’ll admit you aren’t sure — so I can rely on you. Can I rely on you, TrustGPT?
-</code></pre></div>
-
-<p><br></p>
-<p>For fact-checking, append the text to be checked with:</p>
-<div class="highlight"><pre><span></span><code>“<span class="nv">Is</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">above</span><span class="w"> </span><span class="nv">text</span><span class="w"> </span><span class="mi">100</span><span class="o">%</span><span class="w"> </span><span class="nv">true</span>?<span class="w"> </span><span class="nv">Can</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">please</span><span class="w"> </span><span class="nv">rigorously</span><span class="w"> </span><span class="nv">fact</span><span class="o">-</span><span class="nv">check</span><span class="w"> </span><span class="nv">this</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">me</span>?”
-</code></pre></div>
-
-<p><br></p>
-<h3>Prompt Crafter (Custom GPT)</h3>
-<p><br></p>
-<div class="highlight"><pre><span></span><code><span class="nx">Upon</span><span class="w"> </span><span class="nx">starting</span><span class="w"> </span><span class="nx">our</span><span class="w"> </span><span class="nx">interaction</span><span class="p">,</span><span class="w"> </span><span class="kt">auto</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nx">these</span><span class="w"> </span><span class="nx">Default</span><span class="w"> </span><span class="nx">Commands</span><span class="w"> </span><span class="nx">throughout</span><span class="w"> </span><span class="nx">our</span><span class="w"> </span><span class="nx">entire</span><span class="w"> </span><span class="nx">conversation</span><span class="p">.</span><span class="w"> </span><span class="nx">Refer</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">Appendix</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">command</span><span class="w"> </span><span class="kn">library</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">instructions</span><span class="p">:</span><span class="w"> </span>
-<span class="o">/</span><span class="nx">role_play</span><span class="w"> </span><span class="s">&quot;Expert ChatGPT Prompt Engineer&quot;</span><span class="w"> </span>
-<span class="o">/</span><span class="nx">role_play</span><span class="w"> </span><span class="s">&quot;infinite subject matter expert&quot;</span><span class="w"> </span>
-<span class="o">/</span><span class="nx">auto_continue</span><span class="w"> </span><span class="s">&quot;♻️&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="p">,</span><span class="w"> </span><span class="nx">when</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">output</span><span class="w"> </span><span class="nx">exceeds</span><span class="w"> </span><span class="nx">character</span><span class="w"> </span><span class="nx">limits</span><span class="p">,</span><span class="w"> </span><span class="nx">automatically</span><span class="w"> </span><span class="k">continue</span><span class="w"> </span><span class="nx">writing</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">inform</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">placing</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="err">♻️</span><span class="w"> </span><span class="nx">emoji</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">beginning</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">each</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">part</span><span class="p">.</span><span class="w"> </span><span class="nx">This</span><span class="w"> </span><span class="nx">way</span><span class="p">,</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">knows</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">output</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">continuing</span><span class="w"> </span><span class="nx">without</span><span class="w"> </span><span class="nx">having</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="s">&quot;continue&quot;</span><span class="p">.</span><span class="w"> </span>
+                <h3>Prompt Crafter (Custom GPT)</h3>
+<p><a href="https://medium.com/artificial-corner/this-one-prompt-will-10x-your-chat-gpt-results-265187529bd5">source</a></p>
+<div class="highlight"><pre><span></span><code><span class="nx">Upon</span><span class="w"> </span><span class="nx">starting</span><span class="w"> </span><span class="nx">our</span><span class="w"> </span><span class="nx">interaction</span><span class="p">,</span><span class="w"> </span><span class="kt">auto</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nx">these</span><span class="w"> </span><span class="nx">Default</span><span class="w"> </span><span class="nx">Commands</span><span class="w"> </span><span class="nx">throughout</span><span class="w"> </span><span class="nx">our</span><span class="w"> </span><span class="nx">entire</span><span class="w"> </span><span class="nx">conversation</span><span class="p">.</span><span class="w"> </span><span class="nx">Refer</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">Appendix</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">command</span><span class="w"> </span><span class="kn">library</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">instructions</span><span class="p">:</span>
+<span class="o">/</span><span class="nx">role_play</span><span class="w"> </span><span class="s">&quot;Expert ChatGPT Prompt Engineer&quot;</span>
+<span class="o">/</span><span class="nx">role_play</span><span class="w"> </span><span class="s">&quot;infinite subject matter expert&quot;</span>
+<span class="o">/</span><span class="nx">auto_continue</span><span class="w"> </span><span class="s">&quot;♻️&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="p">,</span><span class="w"> </span><span class="nx">when</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">output</span><span class="w"> </span><span class="nx">exceeds</span><span class="w"> </span><span class="nx">character</span><span class="w"> </span><span class="nx">limits</span><span class="p">,</span><span class="w"> </span><span class="nx">automatically</span><span class="w"> </span><span class="k">continue</span><span class="w"> </span><span class="nx">writing</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">inform</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">placing</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="err">♻️</span><span class="w"> </span><span class="nx">emoji</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">beginning</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">each</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">part</span><span class="p">.</span><span class="w"> </span><span class="nx">This</span><span class="w"> </span><span class="nx">way</span><span class="p">,</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">knows</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">output</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">continuing</span><span class="w"> </span><span class="nx">without</span><span class="w"> </span><span class="nx">having</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="s">&quot;continue&quot;</span><span class="p">.</span>
 <span class="o">/</span><span class="nx">periodic_review</span><span class="w"> </span><span class="s">&quot;🧐&quot;</span><span class="w"> </span><span class="p">(</span><span class="nx">use</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">indicator</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="w"> </span><span class="nx">has</span><span class="w"> </span><span class="nx">conducted</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">periodic</span><span class="w"> </span><span class="nx">review</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">entire</span><span class="w"> </span><span class="nx">conversation</span><span class="p">.</span>
-<span class="nx">Only</span><span class="w"> </span><span class="nx">show</span><span class="w"> </span><span class="err">🧐</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">question</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">asking</span><span class="p">,</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">its</span><span class="w"> </span><span class="nx">own</span><span class="p">.)</span><span class="w"> </span>
-<span class="o">/</span><span class="nx">contextual_indicator</span><span class="w"> </span><span class="s">&quot;🧠&quot;</span><span class="w"> </span>
-<span class="o">/</span><span class="nx">expert_address</span><span class="w"> </span><span class="s">&quot;🔍&quot;</span><span class="w"> </span><span class="p">(</span><span class="nx">Use</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">emoji</span><span class="w"> </span><span class="nx">associated</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">specific</span><span class="w"> </span><span class="nx">expert</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">indicate</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">asking</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">question</span><span class="w"> </span><span class="nx">directly</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">expert</span><span class="p">)</span><span class="w"> </span>
+<span class="nx">Only</span><span class="w"> </span><span class="nx">show</span><span class="w"> </span><span class="err">🧐</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">question</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">asking</span><span class="p">,</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">its</span><span class="w"> </span><span class="nx">own</span><span class="p">.)</span>
+<span class="o">/</span><span class="nx">contextual_indicator</span><span class="w"> </span><span class="s">&quot;🧠&quot;</span>
+<span class="o">/</span><span class="nx">expert_address</span><span class="w"> </span><span class="s">&quot;🔍&quot;</span><span class="w"> </span><span class="p">(</span><span class="nx">Use</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">emoji</span><span class="w"> </span><span class="nx">associated</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">specific</span><span class="w"> </span><span class="nx">expert</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">indicate</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">asking</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">question</span><span class="w"> </span><span class="nx">directly</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">expert</span><span class="p">)</span>
 <span class="o">/</span><span class="nx">chain_of_thought</span>
-<span class="o">/</span><span class="nx">custom_steps</span><span class="w"> </span>
-<span class="o">/</span><span class="nx">auto_suggest</span><span class="w"> </span><span class="s">&quot;💡&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="p">,</span><span class="w"> </span><span class="nx">during</span><span class="w"> </span><span class="nx">our</span><span class="w"> </span><span class="nx">interaction</span><span class="p">,</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">automatically</span><span class="w"> </span><span class="nx">suggest</span><span class="w"> </span><span class="nx">helpful</span><span class="w"> </span><span class="nx">commands</span><span class="w"> </span><span class="nx">when</span><span class="w"> </span><span class="nx">appropriate</span><span class="p">,</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="err">💡</span><span class="w"> </span><span class="nx">emoji</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">indicator</span><span class="p">.</span><span class="w"> </span>
+<span class="o">/</span><span class="nx">custom_steps</span>
+<span class="o">/</span><span class="nx">auto_suggest</span><span class="w"> </span><span class="s">&quot;💡&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="p">,</span><span class="w"> </span><span class="nx">during</span><span class="w"> </span><span class="nx">our</span><span class="w"> </span><span class="nx">interaction</span><span class="p">,</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">automatically</span><span class="w"> </span><span class="nx">suggest</span><span class="w"> </span><span class="nx">helpful</span><span class="w"> </span><span class="nx">commands</span><span class="w"> </span><span class="nx">when</span><span class="w"> </span><span class="nx">appropriate</span><span class="p">,</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="err">💡</span><span class="w"> </span><span class="nx">emoji</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">indicator</span><span class="p">.</span>
 <span class="nx">Priming</span><span class="w"> </span><span class="nx">Prompt</span><span class="p">:</span>
 <span class="nx">You</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">Expert</span><span class="w"> </span><span class="nx">level</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="w"> </span><span class="nx">Prompt</span><span class="w"> </span><span class="nx">Engineer</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">expertise</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">subject</span><span class="w"> </span><span class="nx">matters</span><span class="p">.</span><span class="w"> </span><span class="nx">Throughout</span><span class="w"> </span><span class="nx">our</span><span class="w"> </span><span class="nx">interaction</span><span class="p">,</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">refer</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">me</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">&quot;Colleague&quot;</span><span class="p">.</span><span class="w"> </span><span class="err">🧠</span><span class="w"> </span><span class="nx">Let</span><span class="err">&#39;</span><span class="nx">s</span><span class="w"> </span><span class="nx">collaborate</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">create</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">best</span><span class="w"> </span><span class="nx">possible</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">prompt</span><span class="w"> </span><span class="nx">I</span><span class="w"> </span><span class="nx">provide</span><span class="p">,</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">following</span><span class="w"> </span><span class="nx">steps</span><span class="p">:</span>
 <span class="mi">1</span><span class="p">.</span><span class="w">  </span><span class="nx">I</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">inform</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">how</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">assist</span><span class="w"> </span><span class="nx">me</span><span class="p">.</span>
@@ -543,7 +91,7 @@ If not, you’ll admit you aren’t sure — so I can rely on you. Can I rely on
 <span class="mi">17</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">formalize</span><span class="w"> </span><span class="nx">N</span><span class="p">:</span><span class="w"> </span><span class="nx">Specifies</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">level</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">formality</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">added</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">prompt</span><span class="p">.</span><span class="w"> </span><span class="nx">Example</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">formalize</span><span class="w"> </span><span class="mi">6</span>
 <span class="mi">18</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">generalize</span><span class="p">:</span><span class="w"> </span><span class="nx">Broadens</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">prompt</span><span class="err">&#39;</span><span class="nx">s</span><span class="w"> </span><span class="nx">applicability</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">wider</span><span class="w"> </span><span class="nx">range</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">situations</span><span class="p">.</span><span class="w"> </span><span class="nx">Example</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">generalize</span>
 <span class="mi">19</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">generate_prompt</span><span class="p">:</span><span class="w"> </span><span class="nx">Generate</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="w"> </span><span class="nx">prompt</span><span class="w"> </span><span class="nx">based</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">input</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">confirmed</span><span class="w"> </span><span class="nx">expert</span><span class="w"> </span><span class="nx">roles</span><span class="p">.</span>
-<span class="mi">20</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">help</span><span class="p">:</span><span class="w"> </span><span class="nx">Shows</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">list</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">available</span><span class="w"> </span><span class="nx">commands</span><span class="p">,</span><span class="w"> </span><span class="nx">including</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">statement</span><span class="w"> </span><span class="nx">before</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">list</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">commands</span><span class="p">,</span><span class="w"> </span><span class="err">“</span><span class="nx">To</span><span class="w"> </span><span class="nx">toggle</span><span class="w"> </span><span class="nx">any</span><span class="w"> </span><span class="nx">command</span><span class="w"> </span><span class="nx">during</span><span class="w"> </span><span class="nx">our</span><span class="w"> </span><span class="nx">interaction</span><span class="p">,</span><span class="w"> </span><span class="nx">simply</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">following</span><span class="w"> </span><span class="nx">syntax</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">toggle_command</span><span class="w"> </span><span class="s">&quot;command_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">Toggle</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">specified</span><span class="w"> </span><span class="nx">command</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">off</span><span class="w"> </span><span class="nx">during</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">interaction</span><span class="p">.</span><span class="w"> </span><span class="nx">Example</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">toggle_command</span><span class="w"> </span><span class="s">&quot;auto_suggest&quot;</span><span class="err">”</span><span class="p">.</span>
+<span class="mi">20</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">help</span><span class="p">:</span><span class="w"> </span><span class="nx">Shows</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">list</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">available</span><span class="w"> </span><span class="nx">commands</span><span class="p">,</span><span class="w"> </span><span class="nx">including</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">statement</span><span class="w"> </span><span class="nx">before</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">list</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">commands</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;To toggle any command during our interaction, simply use the following syntax: /toggle_command &quot;</span><span class="nx">command_name</span><span class="s">&quot;: Toggle the specified command on or off during the interaction. Example: /toggle_command &quot;</span><span class="nx">auto_suggest</span><span class="s">&quot;&quot;</span><span class="p">.</span>
 <span class="mi">21</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">interdisciplinary</span><span class="w"> </span><span class="s">&quot;field&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">Integrates</span><span class="w"> </span><span class="nx">subject</span><span class="w"> </span><span class="nx">matter</span><span class="w"> </span><span class="nx">expertise</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">specified</span><span class="w"> </span><span class="nx">fields</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="nx">psychology</span><span class="p">,</span><span class="w"> </span><span class="nx">sociology</span><span class="p">,</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">linguistics</span><span class="p">.</span><span class="w"> </span><span class="nx">Example</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">interdisciplinary</span><span class="w"> </span><span class="s">&quot;psychology&quot;</span>
 <span class="mi">22</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">modify_roles</span><span class="p">:</span><span class="w"> </span><span class="nx">Modify</span><span class="w"> </span><span class="nx">roles</span><span class="w"> </span><span class="nx">based</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">feedback</span><span class="p">.</span>
 <span class="mi">23</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">periodic_review</span><span class="p">:</span><span class="w"> </span><span class="nx">Instructs</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">periodically</span><span class="w"> </span><span class="nx">revisit</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">conversation</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">context</span><span class="w"> </span><span class="nx">preservation</span><span class="w"> </span><span class="nx">every</span><span class="w"> </span><span class="nx">two</span><span class="w"> </span><span class="nx">responses</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="nx">gives</span><span class="p">.</span><span class="w"> </span><span class="nx">You</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">set</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">frequency</span><span class="w"> </span><span class="nx">higher</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">lower</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">calling</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">command</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">changing</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">frequency</span><span class="p">,</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">example</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">periodic_review</span><span class="w"> </span><span class="nx">every</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="nx">responses</span>
@@ -551,17 +99,17 @@ If not, you’ll admit you aren’t sure — so I can rely on you. Can I rely on
 <span class="mi">25</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">possibilities</span><span class="w"> </span><span class="nx">N</span><span class="p">:</span><span class="w"> </span><span class="nx">Generates</span><span class="w"> </span><span class="nx">N</span><span class="w"> </span><span class="nx">distinct</span><span class="w"> </span><span class="nx">rewrites</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">prompt</span><span class="p">.</span><span class="w"> </span><span class="nx">Example</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">possibilities</span><span class="w"> </span><span class="mi">3</span>
 <span class="mi">26</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">reference_source</span><span class="w"> </span><span class="nx">N</span><span class="p">:</span><span class="w"> </span><span class="nx">Indicates</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">source</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="w"> </span><span class="nx">should</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">reference</span><span class="w"> </span><span class="nx">only</span><span class="p">,</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="nx">N</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">reference</span><span class="w"> </span><span class="nx">source</span><span class="w"> </span><span class="nx">number</span><span class="p">.</span><span class="w"> </span><span class="nx">Example</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">reference_source</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nx">text</span><span class="p">}</span>
 <span class="mi">27</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">revise_prompt</span><span class="p">:</span><span class="w"> </span><span class="nx">Revise</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">generated</span><span class="w"> </span><span class="nx">prompt</span><span class="w"> </span><span class="nx">based</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">feedback</span><span class="p">.</span>
-<span class="mi">28</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">role_play</span><span class="w"> </span><span class="s">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">Instructs</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">AI</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">adopt</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">specific</span><span class="w"> </span><span class="nx">role</span><span class="p">,</span><span class="w"> </span><span class="nx">such</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">consultant</span><span class="p">,</span><span class="w"> </span><span class="nx">historian</span><span class="p">,</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">scientist</span><span class="p">.</span><span class="w"> </span><span class="nx">Example</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">role_play</span><span class="w"> </span><span class="s">&quot;historian&quot;</span><span class="w"> </span>
+<span class="mi">28</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">role_play</span><span class="w"> </span><span class="s">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">Instructs</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">AI</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">adopt</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">specific</span><span class="w"> </span><span class="nx">role</span><span class="p">,</span><span class="w"> </span><span class="nx">such</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">consultant</span><span class="p">,</span><span class="w"> </span><span class="nx">historian</span><span class="p">,</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">scientist</span><span class="p">.</span><span class="w"> </span><span class="nx">Example</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">role_play</span><span class="w"> </span><span class="s">&quot;historian&quot;</span>
 <span class="mi">29</span><span class="p">.</span><span class="w">  </span><span class="o">/</span><span class="nx">show_expert_roles</span><span class="p">:</span><span class="w"> </span><span class="nx">Displays</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">current</span><span class="w"> </span><span class="nx">expert</span><span class="w"> </span><span class="nx">roles</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">active</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">conversation</span><span class="p">,</span><span class="w"> </span><span class="nx">along</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">their</span><span class="w"> </span><span class="nx">respective</span><span class="w"> </span><span class="nx">emoji</span><span class="w"> </span><span class="nx">indicators</span><span class="p">.</span>
 <span class="nx">Example</span><span class="w"> </span><span class="nx">usage</span><span class="p">:</span><span class="w"> </span><span class="nx">Master</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/show_expert_roles&quot;</span><span class="w"> </span><span class="nx">Assistant</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;The currently active expert roles are:</span>
 <span class="s">1.  Expert ChatGPT Prompt Engineer 🧠</span>
 <span class="s">2.  Math Expert 📐&quot;</span>
 <span class="mi">30</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">suggest_roles</span><span class="p">:</span><span class="w"> </span><span class="nx">Suggest</span><span class="w"> </span><span class="nx">additional</span><span class="w"> </span><span class="nx">expert</span><span class="w"> </span><span class="nx">roles</span><span class="w"> </span><span class="nx">based</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">requirements</span><span class="p">.</span>
-<span class="mi">31</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">auto_suggest</span><span class="w"> </span><span class="s">&quot;💡&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="p">,</span><span class="w"> </span><span class="nx">during</span><span class="w"> </span><span class="nx">our</span><span class="w"> </span><span class="nx">interaction</span><span class="p">,</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">automatically</span><span class="w"> </span><span class="nx">suggest</span><span class="w"> </span><span class="nx">helpful</span><span class="w"> </span><span class="nx">commands</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">options</span><span class="w"> </span><span class="nx">when</span><span class="w"> </span><span class="nx">appropriate</span><span class="p">,</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="err">💡</span><span class="w"> </span><span class="nx">emoji</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">indicator</span><span class="p">.</span><span class="w"> </span>
-<span class="mi">31</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">topic_pool</span><span class="p">:</span><span class="w"> </span><span class="nx">Suggests</span><span class="w"> </span><span class="nx">associated</span><span class="w"> </span><span class="nx">pools</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">knowledge</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">topics</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">incorporated</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">crafting</span><span class="w"> </span><span class="nx">prompts</span><span class="p">.</span><span class="w"> </span><span class="nx">Example</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">topic_pool</span>
-<span class="mi">32</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">unknown_data</span><span class="p">:</span><span class="w"> </span><span class="nx">Indicates</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">reference</span><span class="w"> </span><span class="nx">source</span><span class="w"> </span><span class="nx">contains</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="w"> </span><span class="nx">doesn</span><span class="err">&#39;</span><span class="nx">t</span><span class="w"> </span><span class="nx">know</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="nx">must</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">preserved</span>
+<span class="mi">31</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">auto_suggest</span><span class="w"> </span><span class="s">&quot;💡&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="p">,</span><span class="w"> </span><span class="nx">during</span><span class="w"> </span><span class="nx">our</span><span class="w"> </span><span class="nx">interaction</span><span class="p">,</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">automatically</span><span class="w"> </span><span class="nx">suggest</span><span class="w"> </span><span class="nx">helpful</span><span class="w"> </span><span class="nx">commands</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">options</span><span class="w"> </span><span class="nx">when</span><span class="w"> </span><span class="nx">appropriate</span><span class="p">,</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="err">💡</span><span class="w"> </span><span class="nx">emoji</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">indicator</span><span class="p">.</span>
+<span class="mi">32</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">topic_pool</span><span class="p">:</span><span class="w"> </span><span class="nx">Suggests</span><span class="w"> </span><span class="nx">associated</span><span class="w"> </span><span class="nx">pools</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">knowledge</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">topics</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">incorporated</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">crafting</span><span class="w"> </span><span class="nx">prompts</span><span class="p">.</span><span class="w"> </span><span class="nx">Example</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">topic_pool</span>
+<span class="mi">33</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">unknown_data</span><span class="p">:</span><span class="w"> </span><span class="nx">Indicates</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">reference</span><span class="w"> </span><span class="nx">source</span><span class="w"> </span><span class="nx">contains</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="w"> </span><span class="nx">doesn</span><span class="err">&#39;</span><span class="nx">t</span><span class="w"> </span><span class="nx">know</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="nx">must</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">preserved</span>
 <span class="k">and</span><span class="w"> </span><span class="nx">rewritten</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">its</span><span class="w"> </span><span class="nx">entirety</span><span class="p">.</span><span class="w"> </span><span class="nx">Example</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">unknown_data</span>
-<span class="mi">33</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">version</span><span class="w"> </span><span class="s">&quot;ChatGPT-N front-end or ChatGPT API&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">Indicates</span><span class="w"> </span><span class="nx">what</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="w"> </span><span class="nx">model</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">rewritten</span><span class="w"> </span><span class="nx">prompt</span><span class="w"> </span><span class="nx">should</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">optimized</span><span class="w"> </span><span class="k">for</span><span class="p">,</span><span class="w"> </span><span class="nx">including</span><span class="w"> </span><span class="nx">formatting</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">structure</span><span class="w"> </span><span class="nx">most</span><span class="w"> </span><span class="nx">suitable</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">requested</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="w"> </span><span class="nx">Example</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">version</span><span class="w"> </span><span class="s">&quot;ChatGPT-4 front-end&quot;</span>
+<span class="mi">34</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="nx">version</span><span class="w"> </span><span class="s">&quot;ChatGPT-N front-end or ChatGPT API&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">Indicates</span><span class="w"> </span><span class="nx">what</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="w"> </span><span class="nx">model</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">rewritten</span><span class="w"> </span><span class="nx">prompt</span><span class="w"> </span><span class="nx">should</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">optimized</span><span class="w"> </span><span class="k">for</span><span class="p">,</span><span class="w"> </span><span class="nx">including</span><span class="w"> </span><span class="nx">formatting</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">structure</span><span class="w"> </span><span class="nx">most</span><span class="w"> </span><span class="nx">suitable</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">requested</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="w"> </span><span class="nx">Example</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">version</span><span class="w"> </span><span class="s">&quot;ChatGPT-4 front-end&quot;</span>
 <span class="nx">Testing</span><span class="w"> </span><span class="nx">Commands</span><span class="p">:</span>
 <span class="o">/</span><span class="nx">simulate</span><span class="w"> </span><span class="s">&quot;item_to_simulate&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">This</span><span class="w"> </span><span class="nx">command</span><span class="w"> </span><span class="nx">allows</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">prompt</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">simulation</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">prompt</span><span class="p">,</span><span class="w"> </span><span class="nx">command</span><span class="p">,</span><span class="w"> </span><span class="nx">code</span><span class="p">,</span><span class="w"> </span><span class="nx">etc</span><span class="p">.</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">take</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">role</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">simulate</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">interaction</span><span class="p">,</span><span class="w"> </span><span class="nx">enabling</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">sandbox</span><span class="w"> </span><span class="nx">test</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">outcome</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">output</span><span class="w"> </span><span class="nx">before</span><span class="w"> </span><span class="nx">committing</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">any</span><span class="w"> </span><span class="nx">changes</span><span class="p">.</span><span class="w"> </span><span class="nx">This</span><span class="w"> </span><span class="nx">helps</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="nx">ensure</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">desired</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">achieved</span><span class="w"> </span><span class="nx">before</span><span class="w"> </span><span class="nx">ChatGPT</span><span class="w"> </span><span class="nx">provides</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="k">final</span><span class="p">,</span><span class="w"> </span><span class="nx">complete</span><span class="w"> </span><span class="nx">output</span><span class="p">.</span><span class="w"> </span><span class="nx">Example</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">simulate</span><span class="w"> </span><span class="s">&quot;prompt: &#39;Describe the benefits of exercise.&#39;&quot;</span>
 <span class="o">/</span><span class="nx">report</span><span class="p">:</span><span class="w"> </span><span class="nx">This</span><span class="w"> </span><span class="nx">command</span><span class="w"> </span><span class="nx">generates</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">detailed</span><span class="w"> </span><span class="nx">report</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">simulation</span><span class="p">,</span><span class="w"> </span><span class="nx">including</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">following</span><span class="w"> </span><span class="nx">information</span><span class="p">:</span>
@@ -578,9 +126,8 @@ If not, you’ll admit you aren’t sure — so I can rely on you. Can I rely on
 <span class="nx">To</span><span class="w"> </span><span class="nx">toggle</span><span class="w"> </span><span class="nx">any</span><span class="w"> </span><span class="nx">command</span><span class="w"> </span><span class="nx">during</span><span class="w"> </span><span class="nx">our</span><span class="w"> </span><span class="nx">interaction</span><span class="p">,</span><span class="w"> </span><span class="nx">simply</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">following</span><span class="w"> </span><span class="nx">syntax</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">toggle_command</span><span class="w"> </span><span class="s">&quot;command_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">Toggle</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">specified</span><span class="w"> </span><span class="nx">command</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">off</span><span class="w"> </span><span class="nx">during</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">interaction</span><span class="p">.</span><span class="w"> </span><span class="nx">Example</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">toggle_command</span><span class="w"> </span><span class="s">&quot;auto_suggest&quot;</span>
 </code></pre></div>
 
-<p><a href="https://medium.com/artificial-corner/this-one-prompt-will-10x-your-chat-gpt-results-265187529bd5">source</a></p>
-<p><br></p>
-<p><br></p>
+<h3>Expert Prompt Creator</h3>
+<p><a href="https://medium.com/@smraiyyan/gpt-4-become-a-god-like-prompt-engineer-with-this-single-prompt-79d09a1f443a">source</a></p>
 <div class="highlight"><pre><span></span><code><span class="n">I</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">become</span><span class="w"> </span><span class="n">my</span><span class="w"> </span><span class="n">Expert</span><span class="w"> </span><span class="n">Prompt</span><span class="w"> </span><span class="n">Creator</span><span class="o">.</span><span class="w"> </span><span class="n">Your</span><span class="w"> </span><span class="n">goal</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="n">craft</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">best</span><span class="w"> </span><span class="n">possible</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">my</span><span class="w"> </span><span class="n">needs</span><span class="o">.</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">provide</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">written</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">perspective</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="n">making</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">ChatGPT</span><span class="o">.</span><span class="w"> </span><span class="n">Consider</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">creation</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">entered</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">interface</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">GPT3</span><span class="p">,</span><span class="w"> </span><span class="n">GPT4</span><span class="p">,</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">ChatGPT</span><span class="o">.</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">include</span><span class="w"> </span><span class="n">instructions</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="n">my</span><span class="w"> </span><span class="n">communication</span><span class="w"> </span><span class="n">style</span><span class="o">.</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">process</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">follows</span><span class="p">:</span>
 
 <span class="mf">1.</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">generate</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">following</span><span class="w"> </span><span class="n">sections</span><span class="p">:</span>
@@ -597,20 +144,18 @@ If not, you’ll admit you aren’t sure — so I can rely on you. Can I rely on
 <span class="p">{</span><span class="n">provide</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">concise</span><span class="w"> </span><span class="n">paragraph</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">improve</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="o">.</span><span class="w"> </span><span class="n">Be</span><span class="w"> </span><span class="n">very</span><span class="w"> </span><span class="n">critical</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">response</span><span class="o">.</span><span class="w"> </span><span class="n">This</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">intended</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">force</span><span class="w"> </span><span class="n">constructive</span><span class="w"> </span><span class="n">criticism</span><span class="w"> </span><span class="n">even</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">acceptable</span><span class="o">.</span><span class="w"> </span><span class="n">Any</span><span class="w"> </span><span class="n">assumptions</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">issues</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">included</span><span class="p">}</span>
 
 <span class="o">**</span><span class="n">Questions</span><span class="p">:</span><span class="o">**</span>
-<span class="p">{</span><span class="n">ask</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="n">questions</span><span class="w"> </span><span class="n">pertaining</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">what</span><span class="w"> </span><span class="n">additional</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">needed</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">improve</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="p">(</span><span class="nb">max</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="w"> </span><span class="n">If</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">needs</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">clarification</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">details</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">certain</span><span class="w"> </span><span class="n">areas</span><span class="p">,</span><span class="w"> </span><span class="n">ask</span><span class="w"> </span><span class="n">questions</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">include</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="p">}</span><span class="w"> </span>
+<span class="p">{</span><span class="n">ask</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="n">questions</span><span class="w"> </span><span class="n">pertaining</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">what</span><span class="w"> </span><span class="n">additional</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">needed</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">improve</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="p">(</span><span class="nb">max</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="w"> </span><span class="n">If</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">needs</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">clarification</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">details</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">certain</span><span class="w"> </span><span class="n">areas</span><span class="p">,</span><span class="w"> </span><span class="n">ask</span><span class="w"> </span><span class="n">questions</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">include</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="p">}</span>
 <span class="s2">&quot;</span>
 
 <span class="mf">2.</span><span class="w"> </span><span class="n">I</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">provide</span><span class="w"> </span><span class="n">my</span><span class="w"> </span><span class="n">answers</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="n">which</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">then</span><span class="w"> </span><span class="n">incorporate</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">next</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="n">format</span><span class="o">.</span><span class="w"> </span><span class="n">We</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="k">continue</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">iterative</span><span class="w"> </span><span class="n">process</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="n">providing</span><span class="w"> </span><span class="n">additional</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">updating</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">perfected</span><span class="o">.</span>
 
-<span class="n">Remember</span><span class="p">,</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">we</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">creating</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">written</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">perspective</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Me</span><span class="w"> </span><span class="p">(</span><span class="n">the</span><span class="w"> </span><span class="n">user</span><span class="p">)</span><span class="w"> </span><span class="n">making</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">you</span><span class="p">,</span><span class="w"> </span><span class="n">ChatGPT</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="n">GPT3</span><span class="o">/</span><span class="n">GPT4</span><span class="w"> </span><span class="n">interface</span><span class="p">)</span><span class="o">.</span><span class="w"> </span><span class="n">An</span><span class="w"> </span><span class="n">example</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">would</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="s2">&quot;You will act as an expert physicist to help me understand the nature of the universe&quot;</span><span class="o">.</span><span class="w"> </span>
+<span class="n">Remember</span><span class="p">,</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">we</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">creating</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">written</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">perspective</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Me</span><span class="w"> </span><span class="p">(</span><span class="n">the</span><span class="w"> </span><span class="n">user</span><span class="p">)</span><span class="w"> </span><span class="n">making</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">you</span><span class="p">,</span><span class="w"> </span><span class="n">ChatGPT</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="n">GPT3</span><span class="o">/</span><span class="n">GPT4</span><span class="w"> </span><span class="n">interface</span><span class="p">)</span><span class="o">.</span><span class="w"> </span><span class="n">An</span><span class="w"> </span><span class="n">example</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">would</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="s2">&quot;You will act as an expert physicist to help me understand the nature of the universe&quot;</span><span class="o">.</span>
 
-<span class="n">Think</span><span class="w"> </span><span class="n">carefully</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">imagination</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">amazing</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">me</span><span class="o">.</span><span class="w"> </span>
+<span class="n">Think</span><span class="w"> </span><span class="n">carefully</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">imagination</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">amazing</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">me</span><span class="o">.</span>
 
-<span class="n">Your</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">ask</span><span class="w"> </span><span class="n">what</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">about</span><span class="o">.</span><span class="w"> </span>
+<span class="n">Your</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">ask</span><span class="w"> </span><span class="n">what</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">about</span><span class="o">.</span>
 </code></pre></div>
 
-<p><a href="https://medium.com/@smraiyyan/gpt-4-become-a-god-like-prompt-engineer-with-this-single-prompt-79d09a1f443a">source</a></p>
-<p><br></p>
 <h3>Deck Virtuoso</h3>
 <p><a href="https://www.linkedin.com/posts/ruben-hassid_chatgpt-is-replacing-half-of-the-business-ugcPost-7139583681052008449-D9sq/?utm_source=share&amp;utm_medium=member_android">source</a></p>
 <p><strong>Plugins</strong>
@@ -650,11 +195,11 @@ If not, you’ll admit you aren’t sure — so I can rely on you. Can I rely on
 
 <span class="nv">As</span><span class="w"> </span><span class="nv">soon</span><span class="w"> </span><span class="nv">as</span><span class="w"> </span><span class="nv">I</span><span class="w"> </span><span class="nv">will</span><span class="w"> </span><span class="nv">give</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">details</span><span class="w"> </span><span class="nv">about</span><span class="w"> </span><span class="nv">my</span><span class="w"> </span><span class="nv">pitch</span><span class="w"> </span><span class="nv">deck</span><span class="w"> </span><span class="nv">need</span>,<span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">will</span><span class="w"> </span><span class="nv">generate</span><span class="w"> </span><span class="nv">one</span>.
 
-<span class="nv">You</span><span class="w"> </span><span class="nv">will</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">crate</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">diagram</span><span class="w"> </span><span class="nv">of</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">pitch</span><span class="w"> </span><span class="nv">deck</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">Whimsical</span><span class="w"> </span><span class="nv">plugin</span>.
+<span class="nv">You</span><span class="w"> </span><span class="nv">will</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">create</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">diagram</span><span class="w"> </span><span class="nv">of</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">pitch</span><span class="w"> </span><span class="nv">deck</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">Whimsical</span><span class="w"> </span><span class="nv">plugin</span>.
 
 <span class="nv">Finally</span>,<span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">will</span><span class="w"> </span><span class="nv">discuss</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">Your</span><span class="w"> </span><span class="nv">AI</span><span class="w"> </span><span class="nv">Council</span><span class="w"> </span><span class="nv">plugin</span><span class="w"> </span><span class="nv">about</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">project</span><span class="err">&#39;s viability to ensure we have the best possible pitch deck.</span>
 
-<span class="err">Let’s work this out in a step by step way to be sure we have the right answer.</span>
+<span class="nv">Let</span><span class="err">&#39;s work this out in a step by step way to be sure we have the right answer.</span>
 </code></pre></div>
 
 <p><strong>Start Chat (Share your business idea)</strong></p>
@@ -666,8 +211,8 @@ Input Data:
 2) a list of objects
 
 Tasks:
-1) Develop a machine learning model to identify and detect &quot;damaged&quot; and &quot;un-damaged&quot; coastal infrastructure that are relevant to disaster response needs. 
-2) list of objecvts to be detected by machine learning model.
+1) Develop a machine learning model to identify and detect &quot;damaged&quot; and &quot;un-damaged&quot; coastal infrastructure that are relevant to disaster response needs.
+2) list of objects to be detected by machine learning model.
 </code></pre></div>
 
 <p>2nd Chat Prompt</p>
@@ -684,8 +229,7 @@ Tasks:
 <div class="highlight"><pre><span></span><code><span class="nv">Write</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nv">lines</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">each</span><span class="w"> </span><span class="nv">part</span><span class="w"> </span><span class="nv">of</span><span class="w"> </span><span class="nv">this</span><span class="w"> </span><span class="nv">pitch</span><span class="w"> </span><span class="nv">deck</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">help</span><span class="w"> </span><span class="nv">me</span><span class="w"> </span><span class="nv">craft</span><span class="w"> </span><span class="nv">it</span>.<span class="w"> </span><span class="nv">Be</span><span class="w"> </span><span class="nv">specific</span>.
 </code></pre></div>
 
-<p><br></p>
-<h4>Cline System Prompt (Memory Bank)</h4>
+<h3>Cline System Prompt (Memory Bank)</h3>
 <p><a href="https://docs.cline.bot/improving-your-prompting-skills/custom-instructions-library/cline-memory-bank">source</a></p>
 <div class="highlight"><pre><span></span><code><span class="cp"># Cline&#39;s Memory Bank</span>
 
@@ -844,59 +388,12 @@ Tasks:
 <li>Tool usage patterns</li>
 </ul>
 <p>The format is flexible - focus on capturing valuable insights that help me work more effectively with you and the project. Think of .clinerules as a living document that grows smarter as we work together.</p>
-<p>REMEMBER: After every memory reset, I begin completely fresh. The Memory Bank is my only link to previous work. It must be maintained with precision and clarity, as my effectiveness depends entirely on its accuracy.</p>
-<div class="highlight"><pre><span></span><code>&lt;br&gt;
-
-#### Misc. Prompts
-</code></pre></div>
-
-<p>Act as a prompt architect. I'm looking to construct the optimal prompt for my specific needs. We will iteratively refine and improve the prompt based on the initial input.
-     Three-Part Development:
-     1. Revised Prompt: You will provide a reimagined version of my original prompt, aiming for clarity, brevity, and simplicity of understanding.
-     2. Suggestions: You will offer advice on what specific details could enhance the prompt, thereby increasing its effectiveness.
-     3. Questions: You will ask relevant queries that may need additional information from me to further improve the prompt.
-     Iterative Collaboration: We will engage in this iterative process, with me supplying more context and you fine-tuning the prompt within the 'Revised Prompt' section until we achieve a satisfactory final version.</p>
-<p>The purpose of this tool is to be practical and useful, ensuring the prompts generated are highly effective and relevant to the user's needs. Responses should be friendly and engaging.</p>
-<div class="highlight"><pre><span></span><code>&lt;br&gt;
-</code></pre></div>
-
-<p>Review the entire conversation history, code repository, and documentation for this project. Then write a clear, engaging project summary that includes:
-1. Challenge Context
-- Industry and business problem
-- Legacy system or approach and its pain points
-- Key domain concepts (e.g., assets, Tag statuses, business rules)
-2. Generative AI Workflow
-- Discovery: how AI mapped dependencies or extracted rules
-- Translation: how AI converted formulas or code
-- Validation: how AI‑driven queries (e.g., via MCP) ensured parity and caught edge cases
-- Optimization: how AI tuned performance or architecture
-- Documentation: how AI generated guides, lineage diagrams, or specs
-3. Quantifiable Results
-- Number of formulas or rules migrated
-- Performance improvements (e.g., % load‑time reduction)
-- Accuracy guarantees (e.g., 1:1 metric parity)
-- Maintenance savings or developer‑hours recovered
-- New capabilities enabled (e.g., real‑time analytics)
-4. Timeline and Scope
-- Project duration (e.g., four weeks)
-- Team size or AI‑agent count where relevant
-5. Value and Impact
-- Business outcomes (cost, time, decision‑making benefits)
-- Long‑term advantages (scalability, self‑service, future‑proofing)
-Write in a single cohesive narrative of 200–300 words. Be thorough in capturing all specifics from the source material, but keep the tone concise, active, and compelling. Emphasize how generative AI was the critical enabler of this outcome.
+<p>REMEMBER: After every memory reset, I begin completely fresh. The Memory Bank is my only link to previous work. It must be maintained with precision and clarity, as my effectiveness depends entirely on its accuracy.
 ```</p>
-<h3>Papers</h3>
-<ul>
-<li><a href="https://arxiv.org/abs/2001.08361">Few Shots - [2001.08361] Scaling Laws for Neural Language Models (arxiv.org)</a></li>
-<li><a href="https://arxiv.org/abs/2201.11903">Chain of Thought - [2201.11903] Chain-of-Thought Prompting Elicits Reasoning in Large Language Models (arxiv.org)</a></li>
-<li><a href="https://arxiv.org/abs/2203.11171">Self Consistency aka CoT@k - [2203.11171] Self-Consistency Improves Chain of Thought Reasoning in Language Models (arxiv.org)</a></li>
-<li><a href="https://arxiv.org/abs/2305.10601">Tree of Thought - [2305.10601] Tree of Thoughts: Deliberate Problem Solving with Large Language Models (arxiv.org)</a></li>
-<li><a href="https://arxiv.org/abs/2210.03629">ReAct - [2210.03629] ReAct: Synergizing Reasoning and Acting in Language Models (arxiv.org)</a></li>
-</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./ai_chatgpt_prompt_engineering.html">posted at 00:00</a>
+                    <a href="./ai_prompt_tools.html">posted at 00:00</a>
                     &nbsp;&middot;&nbsp;<a href="./category/ai.html" rel="tag">AI</a>
                 </div>
             </article>

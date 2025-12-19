@@ -26,114 +26,60 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Aug 04, 2017</h4>
+        <div id="content">            <h4 class="date">Oct 01, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./python, rdflib.html" rel="bookmark" title="Permanent Link to &quot;RDFLib Graph Object&quot;">RDFLib Graph Object</a>
+                    <a href="./linear_algebra.html" rel="bookmark" title="Permanent Link to &quot;Linear Algebra&quot;">Linear Algebra</a>
                 </h2>
 
                 
                 
 
-                <p>On this page I keep snippets of code I have found useful when working with the
-<a href="https://rdflib.readthedocs.io/en/stable/">RDFLib library</a>. Specifically, the code snippets show how to</p>
+                <p>On this page I keep some notes abbout GloVe and word2vec word embeddings. It's work in progress...</p>
+<h4>Matrix Factorization</h4>
 <ul>
-<li>load a triple (.n3) or quad (.nq) file RDFLib graph object</li>
-<li>read from an RDFLib graph object</li>
+<li>refers to decomposing matrices into their constituent parts</li>
+<li>makes it easier to calculate more complex matrix operations</li>
+<li>A common analogy for matrix decomposition is the factoring of numbers, such as the factoring of 10 into 2 x 5. 
+  For this reason, matrix decomposition is also called matrix factorization. Like factoring real values, there are many 
+  ways to decompose a matrix, hence there are a range of different matrix decomposition techniques.</li>
+<li>Matrix factorization methods such as Latent Semantic Analysis (LSA) use low-rank approximations to decompose large 
+  matrices capturing statistical information about a corpus. 
+  (<a href="">source</a>https://blog.acolyer.org/2016/04/22/glove-global-vectors-for-word-representation/)</li>
+<li>Common methods: QR, SVD, LU (see Resources below)</li>
 </ul>
-<h5>Loading a triple/quad file into an RDFLib object</h5>
-<div class="highlight"><pre><span></span><code><span class="n">g</span> <span class="o">=</span> <span class="n">rdflib</span><span class="o">.</span><span class="n">ConjunctiveGraph</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">input_kg_dir_path</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">f_extension</span><span class="p">)):</span>
-        <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_kg_dir_path</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
-        <span class="c1"># read each kg file and build a graph</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;reading </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">g</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">rdflib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">guess_format</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-<span class="k">return</span> <span class="n">g</span>
-</code></pre></div>
-
-<h5>Reading an RDFLib graph object</h5>
-<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entity_list</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">entity_list</span><span class="p">)</span>
-    <span class="n">query_results</span> <span class="o">=</span> <span class="n">angio_kg</span><span class="o">.</span><span class="n">query</span><span class="p">(</span> <span class="c1"># is an rdflib conjunctive raph object which has a parse method</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;SELECT DISTINCT ?g</span>
-<span class="sd">        {GRAPH ?g {</span>
-<span class="sd">              {&lt;%s&gt; ?p ?o}</span>
-<span class="sd">              UNION {?s ?p &lt;%s&gt;}</span>
-<span class="sd">         }}&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">entity</span><span class="p">))</span>
-</code></pre></div>
+<h4>Resources</h4>
+<ul>
+<li><a href="https://machinelearningmastery.com/introduction-to-matrix-decompositions-for-machine-learning/">A Gentle Introduction to Matrix Factorization for Machine Learning</a></li>
+<li><a href="https://stepik.org/lesson/8513/step/1?unit=1609">Linear Algebra: Problems and Methods (Stepik)</a></li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./python, rdflib.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/python.html" rel="tag">Python</a>
+                    <a href="./linear_algebra.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/linear-algebra.html" rel="tag">Linear Algebra</a>
                 </div>
-            </article>            <h4 class="date">Jul 02, 2017</h4>
+            </article>            <h4 class="date">Sep 04, 2017</h4>
 
             <article class="post">
                 <h2 class="title">
-                    <a href="./graph_problems.html" rel="bookmark" title="Permanent Link to &quot;Graph Problems&quot;">Graph Problems</a>
+                    <a href="./time_series.html" rel="bookmark" title="Permanent Link to &quot;Time Series&quot;">Time Series</a>
                 </h2>
 
                 
                 
 
-                <h4>Vertex Cover</h4>
+                <h3>Python</h3>
 <ul>
-<li>A vertex cover is a <strong>subset of the vertices</strong> such that
-each edge in the graph is incident to at least one vertex in
-the subset. </li>
+<li><a href="https://gist.github.com/raoulbia/0d6b8bdc06b6abe2959aaefabb59221b">gist: How to group data by time intervals in Python Pandas</a></li>
 </ul>
-<p><img alt="" src="img/vertex-cover.png"></p>
-<ul>
-<li>The Minimum Vertex Cover problem seeks to
-find a cover with a <strong>minimum number of vertices in the
-subset</strong>.</li>
-</ul>
-<p><img alt="" src="img/min-vertex-cover.png"></p>
-<p><br></p>
-<ul>
-<li>
-<p>Approximation Algorithm</p>
-<div class="highlight"><pre><span></span><code><span class="n">C</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">empty</span><span class="w"> </span><span class="n">set</span>
-<span class="n">While</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">empty</span>
-<span class="w">    </span><span class="p">{</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">}</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="n">edge</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">E</span>
-<span class="w">    </span><span class="n">add</span><span class="w"> </span><span class="p">{</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">}</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">C</span>
-<span class="w">    </span><span class="n">remove</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">edges</span><span class="w"> </span><span class="n">incident</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">u</span><span class="p">,</span><span class="n">v</span>
-<span class="n">return</span><span class="w"> </span><span class="n">C</span>
-</code></pre></div>
-
-</li>
-<li>
-<p><a href="https://nbviewer.jupyter.org/github/raoulbia/jupyter-notebooks/blob/master/vertex_cover_linear-programming_and_approximation-algorithm.ipynb?flush_cache=true" title="target=&quot;_blank">Solving Vertex Cover with Linear Programming and with Approximation Algorithm</a></p>
-</li>
-</ul>
-<p><br></p>
-<h4>Max Cut</h4>
-<ul>
-<li>
-<p>Partition set of vertices into two sets such that the number of edges between the two sets
-(considered to be severed by the cut), is a large as possible. </p>
-</li>
-<li>
-<p>In the example below vertices 2 and 3 are in one set and
-vertices 1, 4, and 5 are in the other, with a maximum cut value of 5. </p>
-</li>
-</ul>
-<p><img alt="" src="img/max-cut.png"></p>
-<h4>Travelling Salesman problem</h4>
-<ul>
-<li><a href="https://nbviewer.jupyter.org/github/raoulbia/jupyter-notebooks/blob/master/Graph_Traversal_TSP_Approximation_Warehouse.ipynb?flush_cache=true" title="target=&quot;_blank">TSP_Approximation_Warehouse.ipynb</a></li>
-</ul>
+<h3>R</h3>
                 <div class="clear"></div>
 
                 <div class="info">
-                    <a href="./graph_problems.html">posted at 00:00</a>
-                    &nbsp;&middot;&nbsp;<a href="./category/graph-problems.html" rel="tag">Graph Problems</a>
+                    <a href="./time_series.html">posted at 00:00</a>
+                    &nbsp;&middot;&nbsp;<a href="./category/time-series.html" rel="tag">Time Series</a>
                 </div>
             </article>
 
@@ -144,7 +90,7 @@ vertices 1, 4, and 5 are in the other, with a maximum cut value of 5. </p>
 
                     <a href="./index28.html" class="next_page">Next&nbsp;&rarr;</a>
 
-                    <span>Page 27 of 31</span>
+                    <span>Page 27 of 34</span>
                 </div>
 
             <div class="clear"></div>
