@@ -1,5 +1,5 @@
 Title: Linux
-Date: 2025-10-01
+Date: 2025-09-01
 Category: Linux
 Slug: Linux
 Summary: Linux

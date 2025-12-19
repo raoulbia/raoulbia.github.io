@@ -1,5 +1,5 @@
 Title: AI Misc.
-Date: 2025-11-08
+Date: 2025-10-08
 Category: AI
 Slug: ai_miscellaneous
 Summary: AI Misc.
