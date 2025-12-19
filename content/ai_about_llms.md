@@ -1,5 +1,5 @@
 Title: AI About LLMs
-Date: 2024-01-01
+Date: 2025-11-07
 Category: AI
 Slug: ai_about_llms
 Summary: AI About LLMs
