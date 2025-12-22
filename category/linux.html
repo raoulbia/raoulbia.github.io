@@ -38,41 +38,7 @@
                 
                 
 
-                <h3>Accessing Windows Files from WSL</h3>
-<p>Windows drives are mounted under <code>/mnt/</code> in WSL. Your C: drive is at <code>/mnt/c/</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Navigate to Windows user directory</span>
-<span class="nb">cd</span><span class="w"> </span>/mnt/c/Users/your-username/Documents
-
-<span class="c1"># List files</span>
-ls<span class="w"> </span>-la
-</code></pre></div>
-
-<h3>Opening Windows File Explorer from WSL</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Open Explorer at current WSL directory</span>
-explorer.exe<span class="w"> </span>.
-</code></pre></div>
-
-<h3>Accessing WSL Files from Windows</h3>
-<p>In Windows File Explorer, navigate to:</p>
-<div class="highlight"><pre><span></span><code>\\wsl$\
-</code></pre></div>
-
-<p>This shows all installed WSL distributions and their file systems.</p>
-<h3>Create Shortcuts with Symbolic Links</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Create a symlink to quickly access Windows folders</span>
-ln<span class="w"> </span>-s<span class="w"> </span>/mnt/c/Users/your-username/workproducts<span class="w"> </span>~/winwork
-
-<span class="c1"># Now just use</span>
-<span class="nb">cd</span><span class="w"> </span>~/winwork
-</code></pre></div>
-
-<h3>Performance Tips</h3>
-<ul>
-<li><strong>Keep project files in WSL filesystem</strong> (<code>/home/...</code>) for best performance</li>
-<li><strong>Avoid heavy I/O across filesystems</strong> - accessing <code>/mnt/c/</code> is slower than native WSL paths</li>
-<li><strong>Use WSL 2</strong> for better file system performance with Linux-native filesystems</li>
-</ul>
-<h3>Common Paths</h3>
+                <h3>Common Paths</h3>
 <table>
 <thead>
 <tr>
@@ -95,6 +61,36 @@ ln<span class="w"> </span>-s<span class="w"> </span>/mnt/c/Users/your-username/w
 </tr>
 </tbody>
 </table>
+<h3>Accessing Windows Files from WSL</h3>
+<p>Windows drives are mounted under <code>/mnt/</code> in WSL. Your C: drive is at <code>/mnt/c/</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Navigate to Windows user directory</span>
+<span class="nb">cd</span><span class="w"> </span>/mnt/c/Users/your-username/Documents
+
+<span class="c1"># List files</span>
+ls<span class="w"> </span>-la
+</code></pre></div>
+
+<h3>Opening Windows File Explorer from WSL</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Open Explorer at current WSL directory</span>
+explorer.exe<span class="w"> </span>.
+</code></pre></div>
+
+<h3>Accessing WSL Files from Windows</h3>
+<p>In Windows File Explorer, type <code>\\wsl$\</code> in the address bar. This shows all installed WSL distributions and their file systems.</p>
+<h3>Create Shortcuts with Symbolic Links</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a symlink to quickly access Windows folders</span>
+ln<span class="w"> </span>-s<span class="w"> </span>/mnt/c/Users/your-username/workproducts<span class="w"> </span>~/winwork
+
+<span class="c1"># Now just use</span>
+<span class="nb">cd</span><span class="w"> </span>~/winwork
+</code></pre></div>
+
+<h3>Performance Tips</h3>
+<ul>
+<li><strong>Keep project files in WSL filesystem</strong> (<code>/home/...</code>) for best performance</li>
+<li><strong>Avoid heavy I/O across filesystems</strong> - accessing <code>/mnt/c/</code> is slower than native WSL paths</li>
+<li><strong>Use WSL 2</strong> for better file system performance with Linux-native filesystems</li>
+</ul>
                 <div class="clear"></div>
 
                 <div class="info">
