@@ -77,13 +77,14 @@ pre .highlight * {
 }
 
 /* Inline code styling */
-p code, li code {
-    background: rgba(148, 163, 184, 0.1);
+p code, li code, td code, th code {
+    background: rgba(15, 23, 42, 0.08);
     color: #0f172a;
     padding: 0.25em 0.5em;
     border-radius: 4px;
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    font-size: 0.9em;
+    border: 1px solid rgba(15, 23, 42, 0.15);
+    font-size: 0.85em;
+    font-weight: 500;
 }
 
 /* Copy button styling */
