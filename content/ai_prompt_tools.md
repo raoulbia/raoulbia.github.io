@@ -1,8 +1,16 @@
-Title: AI Prompt Tools
+Title: AI Prompt Tools & Misc.
 Date: 2025-11-06
 Category: AI
 Slug: ai_prompt_tools
 Summary: Advanced prompt systems and tools for ChatGPT and AI assistants
+
+<br>
+
+### 15 Prompts (reddit)
+
+* [These 15 prompts save me 10-15 hours every week.](https://www.reddit.com/r/ChatGPT/comments/1qblp9j/i_save_every_great_chatgpt_prompt_i_find_here_are/?share_id=HbEAaUBfkniCrB51MQ3nB&utm_content=2)
+
+<br>
 
 ### Prompt Crafter (Custom GPT)
 
